@@ -9,13 +9,19 @@ class CountGetter:
 
     def __init__(self, output_file: str) -> None:
         """
-
+        CountGetter is intended to get counts of various things; currently it is able to
+        count papers (from any dataset correctly configured, so it can count AI papers,
+        AI papers in top conferences, etc.) and AI patents (from Dimensions and 1790 jointly).
         :type output_file: str
         """
         self.output_file = output_file
         self.regex_dict = {}
 
     def get_regex(self) -> None:
+        """
+        Pulling the regular expressions used to find papers and patents through means other than GRID.
+        :return:
+        """
         regex_query = """SELECT CSET_id, regex FROM `gcp-cset-projects.high_resolution_entities.organizations`"""
         client = bigquery.Client()
         query_job = client.query(regex_query)
@@ -25,6 +31,14 @@ class CountGetter:
                 self.regex_dict[regex_result.CSET_id] = regex_result.regex
 
     def run_query_papers(self, table_name: str, field_name: str, test: bool = False) -> list:
+        """
+        Running a query to find paper counts using regex for papers missing GRID. This query combines
+        this data with preexisting paper counts already identified using SQL for papers that have GRID.
+        :param table_name: The table to look for papers in
+        :param field_name: The json field name
+        :param test: False if not running as a unit test
+        :return:
+        """
         companies_query = f"""SELECT CSET_id, grid, {field_name}
                                 FROM `gcp-cset-projects.ai_companies_visualization.visualization_data`"""
         if test:
@@ -53,6 +67,11 @@ class CountGetter:
         return companies
 
     def run_query_patents(self, companies: list) -> list:
+        """
+        Running a query to find AI patent counts using both Dimensions and 1790 for papers with and without GRID.
+        :param companies: The list of company entries with CSET ids that we want to count patents for
+        :return:
+        """
         for company in companies:
             if company["CSET_id"] in self.regex_dict:
                 regex_to_use = rf"r'(?i){self.regex_dict[company['CSET_id']]}'"
@@ -165,6 +184,11 @@ class CountGetter:
         return companies
 
     def write_output(self, companies: list) -> None:
+        """
+        Write output to jsonl
+        :param companies: The list of company data to write out
+        :return:
+        """
         out = open(self.output_file, "w")
         for row in companies:
             out.write(json.dumps(row) + "\n")

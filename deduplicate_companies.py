@@ -3,13 +3,25 @@ from collections import Counter
 import argparse
 import json
 
+
 def get_companies():
+    """
+    Pulling the companies we want to clean
+    :return:
+    """
     query = """SELECT * FROM high_resolution_entities.organizations_tmp"""
     client = bigquery.Client()
     companies = client.query(query)
     return companies
 
+
 def clean_location(current_location, location):
+    """
+    Cleaning the location field
+    :param current_location: Location of the entry we're looking at
+    :param location: Location of the main entry for this identifier
+    :return:
+    """
     current_country = current_location["country"]
     country = location["country"]
     # we want 2-character country codes because they're more common and we want consistency, swap if we don't have them
@@ -20,7 +32,14 @@ def clean_location(current_location, location):
         print(current_location, location)
     return current_location
 
+
 def clean_website(current_website, website):
+    """
+    Cleaning the website field
+    :param current_website: Website of the entry we're looking at
+    :param website: Website of the main entry for this identifier
+    :return:
+    """
     if "https" in website and "https" not in current_website:
         current_website = website
     elif "http" in website and "http" not in current_website:
@@ -29,14 +48,28 @@ def clean_website(current_website, website):
     # most of the differences are with/without ending slashes or /us or .com vs. .co.uk
     return current_website
 
+
 def clean_aliases(current_aliases, aliases):
+    """
+    Cleaning the alias field. Main goal here is to include all aliases for the identifier.
+    :param current_aliases: Aliases of the entry we're looking at
+    :param aliases: Aliases of the main entry for this identifier
+    :return:
+    """
     current_aliases = set([(al["alias"], al["alias_language"]) for al in current_aliases])
     aliases = set([(al["alias"], al["alias_language"]) for al in aliases])
     all_aliases = current_aliases.union(aliases)
     final_aliases = [{"alias_language": val[1], "alias": val[0]} for val in all_aliases]
     return final_aliases
 
+
 def clean_parents(current_parents_dup, parents_dup):
+    """
+    Cleaning the alias field. Main goal here is to include all parents for the identifier.
+    :param current_parents_dup: Parents of the entry we're looking at
+    :param parents_dup: Parents of the main entry for this identifier
+    :return:
+    """
     current_parents = set([(par["parent_acquisition"], par["parent_name"].lower(), par["parent_id"])
                            for par in current_parents_dup])
     parents = set([(par["parent_acquisition"], par["parent_name"].lower(), par["parent_id"]) for par in parents_dup])
@@ -69,7 +102,15 @@ def clean_parents(current_parents_dup, parents_dup):
         final_parents = temp_parents
     return final_parents
 
+
 def clean_permid(name, current_permid, permid):
+    """
+    Cleaning the permid. This is a bit more manual because some of them had two and we have to decide which to use.
+    :param name: Company name, so we can make manual decisions
+    :param current_permid: Permid of the entry we're looking at
+    :param permid: Permid of the main entry for this identifier
+    :return:
+    """
     permid_dict = {"roivant sciences": [5057747992, 5044178170],
                    "lockheed martin": [5000069094],
                    "osram": [5000600974, 5038081272],
@@ -77,7 +118,7 @@ def clean_permid(name, current_permid, permid):
                    "schlumberger": [4295904888],
                    "symantec": [4295908065],
                    "kitty hawk": [4295906929, 5042004482]
-                    }
+                   }
     if current_permid != permid:
         if current_permid is None:
             current_permid = permid
@@ -96,6 +137,12 @@ def clean_permid(name, current_permid, permid):
 
 
 def clean_market(current_market_dup, market_dup):
+    """
+    Cleaning the alias field. Main goal here is to include all markets for the identifier.
+    :param current_market_dup: Markets of the entry we're looking at
+    :param market_dup: Markets of the main entry for this identifier
+    :return:
+    """
     current_market = set([(mar["exchange"], mar["ticker"]) for mar in current_market_dup])
     market = set([(mar["exchange"], mar["ticker"]) for mar in market_dup])
     all_market = current_market.union(market)
@@ -104,6 +151,12 @@ def clean_market(current_market_dup, market_dup):
 
 
 def clean_crunchbase(current_crunchbase, crunchbase):
+    """
+    Cleaning the crunchbase field. Basically we just want to get nicer urls here.
+    :param current_crunchbase: Crunchbase of the entry we're looking at
+    :param crunchbase: Crunchbase of the main entry for this identifier
+    :return:
+    """
     # we're only going to swap urls if we can get an ODM url; otherwise the difference is meh
     if "odm_csv" in crunchbase["crunchbase_url"] and "odm_csv" not in current_crunchbase["crunchbase_url"]:
         if crunchbase["crunchbase_uuid"] == current_crunchbase["crunchbase_uuid"]:
@@ -114,11 +167,23 @@ def clean_crunchbase(current_crunchbase, crunchbase):
 
 
 def clean_grid(current_grid_dup, grid_dup):
+    """
+    Cleaning the alias field. Main goal here is to include all grids for the identifier.
+    :param current_grid_dup: Grids of the entry we're looking at
+    :param grid_dup: Grids of the main entry for this identifier
+    :return:
+    """
     current_grid = set(current_grid_dup)
     return list(current_grid.union(set(grid_dup)))
 
 
 def clean_no_grid(current_no_grid, no_grid):
+    """
+    Cleaning the no_grid field (now regex, but this cleanup was done before!) We want the more informative one.
+    :param current_no_grid: No_grid of the entry we're looking at
+    :param no_grid: No_grid of the main entry for this identifier
+    :return:
+    """
     if current_no_grid == "":
         current_no_grid = None
     if no_grid is not None and current_no_grid != no_grid:
@@ -132,6 +197,12 @@ def clean_no_grid(current_no_grid, no_grid):
 
 
 def clean_comment(current_comment, comment):
+    """
+    Cleaning comment. Basically, if one is blank, pick the other
+    :param current_comment: Comment of the entry we're looking at
+    :param comment: Comment of the main entry for this identifier
+    :return:
+    """
     if current_comment is None and comment != "":
         current_comment = comment
     if current_comment == "":
@@ -140,6 +211,12 @@ def clean_comment(current_comment, comment):
 
 
 def clean_companies(companies):
+    """
+    Cleaning the whole list of companies. Add new entries. If an entry is a duplicate, go through all the cleaning steps,
+     plus do some of the simple basically-in-line cleaning of fields.
+    :param companies: The list of companies to clean
+    :return:
+    """
     company_dict = {}
     for company in companies:
         # if it's our first copy of a company, just add it
@@ -178,6 +255,7 @@ def clean_companies(companies):
             if current_company_entry["comment"] != company["comment"]:
                 current_company_entry["comment"] = clean_comment(current_company_entry["comment"], company["comment"])
     return company_dict
+
 
 def main():
     parser = argparse.ArgumentParser()

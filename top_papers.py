@@ -16,7 +16,10 @@ def main() -> None:
         return
     paper_finder = CountGetter(args.output_file)
     paper_finder.get_regex()
+    # These are the only two lines that make this different from running AI pubs
+    # We select from a different table
     table_name = "ai_companies_visualization.pubs_in_top_conferences_no_grid"
+    # And we write out our data to a different variable
     companies = paper_finder.run_query_papers(table_name, "ai_pubs_in_top_conferences")
     paper_finder.write_output(companies)
 
