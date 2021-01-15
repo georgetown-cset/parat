@@ -1,0 +1,17 @@
+[
+      {
+        "mode": "REQUIRED",
+        "name": "CSET_id",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "ai_pubs",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "ai_patents",
+        "type": "INTEGER"
+      }
+  ]
