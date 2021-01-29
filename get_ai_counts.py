@@ -74,35 +74,25 @@ class CountGetter:
         """
         for company in companies:
             if company["CSET_id"] in self.regex_dict:
-                regex_to_use = rf"r'(?i){self.regex_dict[company['CSET_id']]}'"
+                # regex_to_use = rf"r'(?i){self.regex_dict[company['CSET_id']]}'"
                 query = f"""WITH
                               -- First we pull all the CSET ids and their associated grids
-                              id_grid AS ((
-                                  -- Getting all grids associated with CSET ids for a organizations
-                                SELECT
-                                  id,
-                                  grid,
-                                  -- There aren't regexes in this dataset, but we still want to pull grids so we include it anyway
-                                  NULL AS regex
-                                FROM
-                                  -- from either the identifier_grid table
-                                  ai_companies_draft_052020.identifiers_grid_augmented)
-                              UNION DISTINCT (
-                                SELECT
-                                  DISTINCT CSET_id AS id,
-                                  grids,
-                                  {regex_to_use} AS regex
-                                FROM
-                                  -- or from the organizations table
-                                  `gcp-cset-projects.high_resolution_entities.organizations`
-                                  -- Adding in the associated grids
-                                CROSS JOIN
-                                  UNNEST(grid) AS grids )),
+                              id_grid AS (
+                              SELECT
+                                DISTINCT CSET_id AS id,
+                                grids,
+                                regex
+                              FROM
+                                -- from the organizations table
+                                `gcp-cset-projects.high_resolution_entities.organizations`
+                                -- Adding in the associated grids
+                              CROSS JOIN
+                                UNNEST(grid) AS grids ),
                               -- Then we get the data for the specific CSET id we want
                               specific_id_grid AS (
                               SELECT
                                 id,
-                                grid,
+                                grids,
                                 regex
                               FROM
                                 id_grid
@@ -139,43 +129,43 @@ class CountGetter:
                                 -- Adding in the patent assignees so we can search them with regex later
                               CROSS JOIN
                                 UNNEST(Assignees) AS assignee)
-                            -- Now we want to combine the AI patents from Dimensions' current assignees, the AI patents from Dimensions' original assignees,
-                            -- And the AI patents from 1790 analytics. We use simple_family_id as our unit of counting
+                              -- Now we want to combine the AI patents from Dimensions' current assignees, the AI patents from Dimensions' original assignees,
+                              -- And the AI patents from 1790 analytics. We use simple_family_id as our unit of counting
                             SELECT
                               DISTINCT Simple_family_id
                             FROM
-                            -- Get our specific grid ids
+                              -- Get our specific grid ids
                               specific_id_grid
                             INNER JOIN
-                            -- Get all the AI patents with current assignees who have those grids
+                              -- Get all the AI patents with current assignees who have those grids
                               ai_pats_dimensions_curr
                             ON
-                              specific_id_grid.grid = ai_pats_dimensions_curr.current_grid_id
+                              specific_id_grid.grids = ai_pats_dimensions_curr.current_grid_id
                             UNION DISTINCT
                             SELECT
                               DISTINCT Simple_family_id
                             FROM
-                            -- Get our specific grid ids
+                              -- Get our specific grid ids
                               specific_id_grid
                             INNER JOIN
-                            -- Get all the AI patents with original assignees who have those grids
+                              -- Get all the AI patents with original assignees who have those grids
                               ai_pats_dimensions_orig
                             ON
-                              specific_id_grid.grid = ai_pats_dimensions_orig.original_grid_id
+                              specific_id_grid.grids = ai_pats_dimensions_orig.original_grid_id
                             UNION DISTINCT
                             SELECT
                               DISTINCT Simple_family_ID
                             FROM
-                            -- Get all 1790 patents
+                              -- Get all 1790 patents
                               ai_pats_1790
                             LEFT JOIN
-                            -- Get our specific grid id and regex
+                              -- Get our specific grid id and regex
                               specific_id_grid
                             ON
                               ai_pats_1790.id = specific_id_grid.id
                               -- Narrow to only the patents whose assignee matches the company regex
                             WHERE
-                              REGEXP_CONTAINS(assignee, specific_id_grid.regex)"""
+                              REGEXP_CONTAINS(LOWER(assignee), specific_id_grid.regex)"""
                 results = pd.read_gbq(query, project_id='gcp-cset-projects')
                 company["ai_patents"] = int(results["Simple_family_id"].count())
             else:

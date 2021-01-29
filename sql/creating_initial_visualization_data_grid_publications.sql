@@ -9,6 +9,7 @@ SELECT
   CSET_id,
   name,
   location.country AS country,
+  permid,
   website,
   market,
   crunchbase,

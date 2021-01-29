@@ -16,23 +16,27 @@ You should have at least BQ reader permissions.
 ## What is in the workspace
 
 * SQL (see order to run below)
-* Schemas for the two tables that need to be loaded to BigQuery
+* Schemas for the three tables that need to be loaded to BigQuery.
+* A Python script to aggregate our initial organization list into parent organizations. This can be run on any organization list.  
 * Python scripts for getting AI paper/patent counts and top conference paper counts
 * A Python script used to do a one time clean up/deduplication for the initial company data in the visualization
-* Unit tests for the Python script to get counts.
+* Unit tests for the Python script to get counts. As the same functions are used in the
+script to get top conference papers, these tests will work for both.
 
 ## Tasks to build visualization
 
 1. [selecting_grid_ai_publications.sql](sql/selecting_grid_ai_publications.sql)
-2. [creating_initial_visualization_data_grid_publications.sql](sql/creating_initial_visualization_data_grid_publications.sql)
-3. [selecting_no_grid_ai_publications.sql](sql/selecting_no_grid_ai_publications.sql)
-4. [selecting_grid_ai_patents_current_assignee.sql](sql/selecting_grid_ai_patents_current_assignee.sql)
-5. [sselecting_grid_ai_patents_original_assignee.sql](sql/selecting_grid_ai_patents_original_assignee.sql)
-6. `python3 get_ai_counts.py ai_counts.jsonl` 
-7. Upload `ai_counts.jsonl` to `ai_companies_visualization.paper_patent_counts`
-8. [adding_paper_patent_data.sql](sql/adding_paper_patent_data.sql)
-9. [pulling_publication_counts_in_top_ai_publications_grid.sql](sql/pulling_publication_counts_in_top_ai_publications_grid.sql)
-10. [adding_grid_ai_pubs_in_top_conferences_to_visualization.sql](sql/adding_grid_ai_pubs_in_top_conferences_to_visualization.sql)
-11. `python3 top_papers.py top_paper_counts.jsonl`
-12. Upload `top_paper_counts.jsonl` to `ai_companies_visualization.top_paper_counts`
-13. [adding_top_paper_counts.sql](sql/adding_top_paper_counts.sql)
+2. `python3 aggregate_organizations.py aggregated_organizations.jsonl`
+3. Update `aggregated_organizations.jsonl` to `high_resolution_entities.organizations` using the [aggregated_organizations_schema](schemas/aggregated_organizations_schema.json)   
+4. [creating_initial_visualization_data_grid_publications.sql](sql/creating_initial_visualization_data_grid_publications.sql)
+5. [selecting_no_grid_ai_publications.sql](sql/selecting_no_grid_ai_publications.sql)
+6. [selecting_grid_ai_patents_current_assignee.sql](sql/selecting_grid_ai_patents_current_assignee.sql)
+7. [sselecting_grid_ai_patents_original_assignee.sql](sql/selecting_grid_ai_patents_original_assignee.sql)
+8. `python3 get_ai_counts.py ai_counts.jsonl` 
+9. Upload `ai_counts.jsonl` to `ai_companies_visualization.paper_patent_counts` using the [counts_schema](schemas/counts_schema.json)
+10. [adding_paper_patent_data.sql](sql/adding_paper_patent_data.sql)
+11. [pulling_publication_counts_in_top_ai_publications_grid.sql](sql/pulling_publication_counts_in_top_ai_publications_grid.sql)
+12. [adding_grid_ai_pubs_in_top_conferences_to_visualization.sql](sql/adding_grid_ai_pubs_in_top_conferences_to_visualization.sql)
+13. `python3 top_papers.py top_paper_counts.jsonl`
+14. Upload `top_paper_counts.jsonl` to `ai_companies_visualization.top_paper_counts` using the [top_papers_schema](schemas/top_papers_schema.json)
+15. [adding_top_paper_counts.sql](sql/adding_top_paper_counts.sql)
