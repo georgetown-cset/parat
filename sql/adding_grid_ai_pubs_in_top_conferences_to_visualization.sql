@@ -1,3 +1,5 @@
+-- Add the publications in top conferences to our visualization data, if they have a grid.
+-- We'll add the other ones later!
 CREATE OR REPLACE TABLE
   ai_companies_visualization.visualization_data AS
 -- Pull the grid and paper ids for all top conference publications with grid

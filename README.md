@@ -22,6 +22,7 @@ You should have at least BQ reader permissions.
 * A Python script used to do a one time clean up/deduplication for the initial company data in the visualization
 * Unit tests for the Python script to get counts. As the same functions are used in the
 script to get top conference papers, these tests will work for both.
+* A unit test for the Python script to aggregate our initial organization list.
 
 ## Tasks to build visualization
 
@@ -31,7 +32,7 @@ script to get top conference papers, these tests will work for both.
 4. [creating_initial_visualization_data_grid_publications.sql](sql/creating_initial_visualization_data_grid_publications.sql)
 5. [selecting_no_grid_ai_publications.sql](sql/selecting_no_grid_ai_publications.sql)
 6. [selecting_grid_ai_patents_current_assignee.sql](sql/selecting_grid_ai_patents_current_assignee.sql)
-7. [sselecting_grid_ai_patents_original_assignee.sql](sql/selecting_grid_ai_patents_original_assignee.sql)
+7. [selecting_grid_ai_patents_original_assignee.sql](sql/selecting_grid_ai_patents_original_assignee.sql)
 8. `python3 get_ai_counts.py ai_counts.jsonl` 
 9. Upload `ai_counts.jsonl` to `ai_companies_visualization.paper_patent_counts` using the [counts_schema](schemas/counts_schema.json)
 10. [adding_paper_patent_data.sql](sql/adding_paper_patent_data.sql)
@@ -40,3 +41,4 @@ script to get top conference papers, these tests will work for both.
 13. `python3 top_papers.py top_paper_counts.jsonl`
 14. Upload `top_paper_counts.jsonl` to `ai_companies_visualization.top_paper_counts` using the [top_papers_schema](schemas/top_papers_schema.json)
 15. [adding_top_paper_counts.sql](sql/adding_top_paper_counts.sql)
+16. [omitting_companies.sql](sql/omitting_companies.sql)

@@ -4,11 +4,15 @@
 
 CREATE OR REPLACE TABLE
   ai_companies_visualization.visualization_data AS
-  -- Pulling all the columns we care about that are already in the organizations table, plus ai_pubs
+  -- Pulling all the columns we care about that are already in the aggregated organizations table, plus ai_pubs
 SELECT
   CSET_id,
   name,
   location.country AS country,
+  aliases,
+  parent,
+  children,
+  non_agg_children,
   permid,
   website,
   market,
@@ -16,7 +20,7 @@ SELECT
   grid,
   ai_pubs
 FROM
-  `gcp-cset-projects.high_resolution_entities.organizations` AS orgs
+  `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
 LEFT JOIN (
     -- Getting the count of publications
   SELECT
@@ -36,7 +40,7 @@ LEFT JOIN (
           grids
         FROM
           -- or from the organizations table
-          `gcp-cset-projects.high_resolution_entities.organizations`,
+          `gcp-cset-projects.high_resolution_entities.aggregated_organizations`,
           UNNEST(grid) AS grids)) AS id_grid
     INNER JOIN (
         -- Pulling all the papers with any of the given GRIDs as affiliates

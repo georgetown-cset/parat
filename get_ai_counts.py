@@ -1,6 +1,7 @@
 import argparse
 import pandas as pd
 import json
+from collections import defaultdict
 
 from google.cloud import bigquery
 
@@ -15,20 +16,22 @@ class CountGetter:
         :type output_file: str
         """
         self.output_file = output_file
-        self.regex_dict = {}
+        self.regex_dict = defaultdict(list)
 
     def get_regex(self) -> None:
         """
         Pulling the regular expressions used to find papers and patents through means other than GRID.
         :return:
         """
-        regex_query = """SELECT CSET_id, regex FROM `gcp-cset-projects.high_resolution_entities.organizations`"""
+        regex_query = """SELECT CSET_id, regex FROM
+                            `gcp-cset-projects.high_resolution_entities.aggregated_organizations`"""
         client = bigquery.Client()
         query_job = client.query(regex_query)
         regexes = query_job.result()
         for regex_result in regexes:
             if regex_result.regex:
-                self.regex_dict[regex_result.CSET_id] = regex_result.regex
+                for regex in regex_result.regex:
+                    self.regex_dict[regex_result.CSET_id].append(regex)
 
     def run_query_papers(self, table_name: str, field_name: str, test: bool = False) -> list:
         """
@@ -58,9 +61,15 @@ class CountGetter:
                         # in this case, it has a grid but it's AI publication count is 0
                         row_dict[field_name] = 0
                 else:
-                    regex_to_use = rf"r'(?i){self.regex_dict[row['CSET_id']]}'"
+                    regexes = self.regex_dict[row['CSET_id']]
+                    regex_to_use = rf"r'(?i){regexes[0]}'"
                     query = f"SELECT merged_id, org_names FROM `{table_name}`" \
                             f" WHERE regexp_contains(org_names, {regex_to_use}) "
+                    # if we have more than one regex for an org, include all of them
+                    if len(regexes) > 1:
+                        for regex in regexes[1:]:
+                            regex_to_use = rf"r'(?i){regex}'"
+                            query += f"""OR regexp_contains(org_names, {regex_to_use}) """
                     results = pd.read_gbq(query, project_id='gcp-cset-projects')
                     row_dict[field_name] = int(results["merged_id"].nunique())
             companies.append(row_dict)
@@ -81,19 +90,21 @@ class CountGetter:
                               SELECT
                                 DISTINCT CSET_id AS id,
                                 grids,
-                                regex
+                                regexes
                               FROM
-                                -- from the organizations table
-                                `gcp-cset-projects.high_resolution_entities.organizations`
+                                -- from the aggregated organizations table
+                                `gcp-cset-projects.high_resolution_entities.aggregated_organizations`
                                 -- Adding in the associated grids
                               CROSS JOIN
-                                UNNEST(grid) AS grids ),
+                                UNNEST(grid) AS grids
+                              CROSS JOIN
+                                UNNEST(regex) as regexes),
                               -- Then we get the data for the specific CSET id we want
                               specific_id_grid AS (
                               SELECT
                                 id,
                                 grids,
-                                regex
+                                regexes
                               FROM
                                 id_grid
                                 -- The specific CSET id goes here
@@ -165,7 +176,7 @@ class CountGetter:
                               ai_pats_1790.id = specific_id_grid.id
                               -- Narrow to only the patents whose assignee matches the company regex
                             WHERE
-                              REGEXP_CONTAINS(LOWER(assignee), specific_id_grid.regex)"""
+                              REGEXP_CONTAINS(LOWER(assignee), specific_id_grid.regexes)"""
                 results = pd.read_gbq(query, project_id='gcp-cset-projects')
                 company["ai_patents"] = int(results["Simple_family_id"].count())
             else:
