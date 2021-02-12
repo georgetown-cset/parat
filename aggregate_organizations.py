@@ -27,6 +27,12 @@ class Organization:
         self.parent = []
 
     def add_location(self, city, province_state, country):
+        if city == "":
+            city = None
+        if province_state == "":
+            province_state = None
+        if country == "":
+            country = None
         if city is not None or province_state is not None or country is not None:
             self.location = {"city": city, "province_state": province_state, "country": country}
 
@@ -35,13 +41,17 @@ class Organization:
             self.website = website
 
     def add_alias(self, alias_language, alias):
+        if alias_language == "":
+            alias_language = None
+        if alias == "":
+            alias = None
         if alias_language is not None or alias is not None:
             alias_val = {"alias_language": alias_language, "alias": alias}
             if alias_val not in self.aliases:
                 self.aliases.append(alias_val)
 
     def add_permid(self, permid):
-        if permid is not None and permid not in self.permid:
+        if permid is not None and permid != "" and permid not in self.permid:
             self.permid.append(permid)
 
     def add_market(self, exchange, ticker):
@@ -51,13 +61,17 @@ class Organization:
                 self.market.append(market)
 
     def add_crunchbase(self, uuid, url):
+        if uuid == "":
+            uuid = None
+        if url == "":
+            url = None
         if uuid is not None or url is not None:
             crunchbase = {"crunchbase_uuid": uuid, "crunchbase_url": url}
             if crunchbase not in self.crunchbase:
                 self.crunchbase.append(crunchbase)
 
     def add_grid(self, grid):
-        if grid is not None and grid not in self.grid:
+        if grid is not None and grid != "" and grid not in self.grid:
             self.grid.append(grid)
 
     def add_regex(self, regex):
@@ -83,9 +97,16 @@ class Organization:
             self.non_agg_children.append(child)
 
     def add_parent(self, parent_acquisition, parent_name, parent_id):
+        if parent_name == "":
+            parent_name = None
         if parent_acquisition is not None or parent_name is not None or parent_id is not None:
             parent = {"parent_acquisition": parent_acquisition, "parent_name": parent_name, "parent_id": parent_id}
             if parent not in self.parent:
+                # Don't want to add a new parent if we already have the parent id in parent
+                # Even if acquisition/name info doesn't match
+                for parent in self.parent:
+                    if parent_id == parent["parent_id"]:
+                        return
                 self.parent.append(parent)
 
 
@@ -115,12 +136,21 @@ class OrganizationAggregator:
         self.full_aggregate_child_to_parent = self.aggregate_parents(self.full_aggregate_child_to_parent, True)
 
     def aggregate_parents(self, child_mapping_dict, roll_up):
+        """
+        The goal here is to create a dictionary mapping child organizations to their ultimate parent organization
+        We have two ways to do this; one way where we include exceptions where some organizations are not rolled up
+        And another where there are no exceptions and all organizations are rolled up
+        We use both because we want to ultimately have a list of both the children and the non-aggregated children
+        :param child_mapping_dict: The dictionary mapping orgs to parents
+        :param roll_up: Are we rolling up everything?
+        :return:
+        """
         for child in child_mapping_dict:
             # some children have multiple parents. These must be handled separately
             if len(child_mapping_dict[child]) > 1:
                 new_parent = child
                 for parent in child_mapping_dict[child]:
-                    # if we are using the no-roll-up list
+                    # if we are using the no_roll_up list to check which orgs do not get rolled up
                     # first, check if this parent is one that shouldn't be rolled up
                     # if it is, we know it's the ultimate parent -- select it and move on
                     if not roll_up and parent in no_roll_up:
@@ -141,10 +171,10 @@ class OrganizationAggregator:
                 child_mapping_dict[child] = new_parent
             else:
                 parent = child_mapping_dict[child][0]
-            # if the child's parent is also a child
-            if parent in child_mapping_dict:
-                # set its parent to its parent's parent
-                child_mapping_dict[child] = child_mapping_dict[parent]
+                # if the child's parent is also a child
+                if parent in child_mapping_dict:
+                    # set its parent to its parent's parent
+                    child_mapping_dict[child] = child_mapping_dict[parent]
         return child_mapping_dict
 
     def get_organizations(self):
@@ -230,7 +260,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("output_file", type=str, help="A jsonl file for writing output data to create new tables")
     args = parser.parse_args()
-    if "jsonl" not in args.output_file:
+    if not args.output_file.endswith(".jsonl"):
         parser.print_help()
     aggregator = OrganizationAggregator()
     aggregator.get_parents()

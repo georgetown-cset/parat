@@ -1,3 +1,11 @@
+-- Pulling every AI-associated publication id that is not linked to GRID
+-- We're going to combine every single organization it is linked to into one name so that
+-- We only get one row per publication id and we can just do a regex query on the organization name
+-- We want this because when we count non-GRID AI publications later on, our count will be "for each organization with
+-- our regex matched in its name, how many publication ids are there associated to it?" This means publications will get
+-- counted for multiple organizations if they have affiliates from all of those organizations, but they'll only get
+-- counted once for each organization who they have an author from. So a publication had two authors from Google and one
+-- from IBM, it would increase Google's count by 1 and IBM's count by 1.
 CREATE OR REPLACE TABLE
   ai_companies_visualization.no_grid_ai_publications AS
 SELECT

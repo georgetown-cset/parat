@@ -21,14 +21,16 @@ FROM (
       Simple_family_id, CONCAT(Publication_country, "-", Publication_number, "-", Publication_type) as patent_id
     FROM
       gcp-cset-projects.1790_patents.1790_ai_patents_all_quantitative_information) as all_ai
-      LEFT JOIN
-      (SELECT
-      -- Joining in the current assignee grid ids from dimensions
-      id, curr.grid_id as current_grid_id FROM
-
-        `gcp-cset-projects.gcp_cset_digital_science.dimensions_patents_latest`, UNNEST(current_assignee) as curr) as patents_orig
-        ON all_ai.patent_id = patents_orig.id
-      )
+      LEFT JOIN (
+          SELECT
+            -- Joining in the current assignee grid ids from dimensions
+            id,
+            curr.grid_id AS current_grid_id
+          FROM
+            `gcp-cset-projects.gcp_cset_digital_science.dimensions_patents_latest`,
+            UNNEST(current_assignee) AS curr) AS patents_orig
+        ON
+          all_ai.patent_id = patents_orig.id )
   GROUP BY
     current_grid_id,
     Simple_family_id) ai_pats

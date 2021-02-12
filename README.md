@@ -28,7 +28,7 @@ script to get top conference papers, these tests will work for both.
 
 1. [selecting_grid_ai_publications.sql](sql/selecting_grid_ai_publications.sql)
 2. `python3 aggregate_organizations.py aggregated_organizations.jsonl`
-3. Update `aggregated_organizations.jsonl` to `high_resolution_entities.organizations` using the [aggregated_organizations_schema](schemas/aggregated_organizations_schema.json)   
+3. Replace `high_resolution_entities.organizations` with the data from `aggregated_organizations.jsonl` using the [aggregated_organizations_schema](schemas/aggregated_organizations_schema.json)   
 4. [creating_initial_visualization_data_grid_publications.sql](sql/creating_initial_visualization_data_grid_publications.sql)
 5. [selecting_no_grid_ai_publications.sql](sql/selecting_no_grid_ai_publications.sql)
 6. [selecting_grid_ai_patents_current_assignee.sql](sql/selecting_grid_ai_patents_current_assignee.sql)
@@ -42,3 +42,4 @@ script to get top conference papers, these tests will work for both.
 14. Upload `top_paper_counts.jsonl` to `ai_companies_visualization.top_paper_counts` using the [top_papers_schema](schemas/top_papers_schema.json)
 15. [adding_top_paper_counts.sql](sql/adding_top_paper_counts.sql)
 16. [omitting_companies.sql](sql/omitting_companies.sql)
+17. [omit_by_rule.sql]
