@@ -135,14 +135,14 @@ class OrganizationAggregator:
         self.child_to_parent = self.aggregate_parents(self.child_to_parent, False)
         self.full_aggregate_child_to_parent = self.aggregate_parents(self.full_aggregate_child_to_parent, True)
 
-    def aggregate_parents(self, child_mapping_dict, roll_up):
+    def aggregate_parents(self, child_mapping_dict, roll_up_everything):
         """
         The goal here is to create a dictionary mapping child organizations to their ultimate parent organization
         We have two ways to do this; one way where we include exceptions where some organizations are not rolled up
         And another where there are no exceptions and all organizations are rolled up
         We use both because we want to ultimately have a list of both the children and the non-aggregated children
         :param child_mapping_dict: The dictionary mapping orgs to parents
-        :param roll_up: Are we rolling up everything?
+        :param roll_up_everything: Are we rolling up everything?
         :return:
         """
         for child in child_mapping_dict:
@@ -153,7 +153,7 @@ class OrganizationAggregator:
                     # if we are using the no_roll_up list to check which orgs do not get rolled up
                     # first, check if this parent is one that shouldn't be rolled up
                     # if it is, we know it's the ultimate parent -- select it and move on
-                    if not roll_up and parent in no_roll_up:
+                    if not roll_up_everything and parent in no_roll_up:
                         new_parent = [parent]
                         break
                     # if the parent still has a parent
