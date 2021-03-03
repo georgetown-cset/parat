@@ -2,16 +2,59 @@
       {
         "mode": "REQUIRED",
         "name": "CSET_id",
-        "type": "INTEGER"
+        "type": "INTEGER",
+        "description": "The CSET_id for a company."
       },
       {
         "mode": "REQUIRED",
         "name": "ai_pubs",
-        "type": "INTEGER"
+        "type": "INTEGER",
+        "description": "The total count of AI publications for that company"
+      },
+      {
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "year",
+            "type": "INTEGER",
+            "description": "Year when papers were published."
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "ai_pubs",
+            "type": "INTEGER",
+            "description": "Count of papers published in that year."
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "ai_pubs_by_year",
+        "type": "RECORD",
+        "description": "Number of AI publications published, by year, by a given company."
       },
       {
         "mode": "REQUIRED",
         "name": "ai_patents",
-        "type": "INTEGER"
+        "type": "INTEGER",
+        "description": "The total count of AI patents for that company."
+      },
+      {
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "priority_year",
+            "type": "INTEGER",
+            "description": "Priority year of patent family."
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "ai_patents",
+            "type": "INTEGER",
+            "description": "Count of patent families in that year."
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "ai_patents_by_year",
+        "type": "RECORD",
+        "description": "Number of AI patent families, by year, by a given company."
       }
-  ]
+]

@@ -17,7 +17,8 @@ class Organization:
         self.aliases = []
         self.permid = []
         self.market = []
-        self.crunchbase = []
+        self.crunchbase = {}
+        self.child_crunchbase = []
         self.grid = []
         self.regex = []
         self.bgov_id = []
@@ -66,9 +67,20 @@ class Organization:
         if url == "":
             url = None
         if uuid is not None or url is not None:
+            # We're not worried about matching here because there's only one parent
+            # The parent crunchbase should always get added
+            self.crunchbase = {"crunchbase_uuid": uuid, "crunchbase_url": url}
+
+    def add_child_crunchbase(self, uuid, url):
+        if uuid == "":
+            uuid = None
+        if url == "":
+            url = None
+        if uuid is not None or url is not None:
             crunchbase = {"crunchbase_uuid": uuid, "crunchbase_url": url}
-            if crunchbase not in self.crunchbase:
-                self.crunchbase.append(crunchbase)
+            # We don't want it in our list and we don't want it to match the parent
+            if crunchbase not in self.child_crunchbase and crunchbase != self.crunchbase:
+                self.child_crunchbase.append(crunchbase)
 
     def add_grid(self, grid):
         if grid is not None and grid != "" and grid not in self.grid:
@@ -104,8 +116,8 @@ class Organization:
             if parent not in self.parent:
                 # Don't want to add a new parent if we already have the parent id in parent
                 # Even if acquisition/name info doesn't match
-                for parent in self.parent:
-                    if parent_id == parent["parent_id"]:
+                for current_parent in self.parent:
+                    if parent_id == current_parent["parent_id"]:
                         return
                 self.parent.append(parent)
 
@@ -224,7 +236,11 @@ class OrganizationAggregator:
         org_info = self.organization_dict[org_id]
         for permid in org["permid"]:
             org_info.add_permid(permid)
-        org_info.add_crunchbase(org["crunchbase"]["crunchbase_uuid"], org["crunchbase"]["crunchbase_url"])
+        # We add crunchbase as a child if it's a child org; otherwise we add it as a primary crunchbase
+        if org["CSET_id"] in self.child_to_parent:
+            org_info.add_child_crunchbase(org["crunchbase"]["crunchbase_uuid"], org["crunchbase"]["crunchbase_url"])
+        else:
+            org_info.add_crunchbase(org["crunchbase"]["crunchbase_uuid"], org["crunchbase"]["crunchbase_url"])
         for grid in org["grid"]:
             org_info.add_grid(grid)
         org_info.add_regex(org["regex"])
@@ -249,10 +265,10 @@ class OrganizationAggregator:
                   "location": org_info.location, "website": org_info.website,
                   "aliases": org_info.aliases, "parent": org_info.parent,
                   "permid": org_info.permid, "market": org_info.market,
-                  "crunchbase": org_info.crunchbase, "grid": org_info.grid,
-                  "regex": org_info.regex, "BGOV_id": org_info.bgov_id,
-                  "comment": org_info.comment, "children": org_info.children,
-                  "non_agg_children": org_info.non_agg_children}
+                  "crunchbase": org_info.crunchbase, "child_crunchbase": org_info.child_crunchbase,
+                  "grid": org_info.grid, "regex": org_info.regex,
+                  "BGOV_id": org_info.bgov_id, "comment": org_info.comment,
+                  "children": org_info.children, "non_agg_children": org_info.non_agg_children}
             out.write(json.dumps(js, ensure_ascii=False) + "\n")
         out.close()
 

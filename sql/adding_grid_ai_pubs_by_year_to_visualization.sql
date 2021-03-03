@@ -1,7 +1,5 @@
--- This query pulls the initial visualization data for the table that doesn't have to be compiled (as it's already
--- available in the organizations table) and adds in the GRID-based AI publication counts.
-
-
+-- Adding GRID-only AI publication data by year to the visualization table
+-- This uses the same mechanism as adding GRID-only AI publication counts; we're just doing it on a by-year basis
 CREATE OR REPLACE TABLE
   ai_companies_visualization.visualization_data AS
 WITH
@@ -9,11 +7,12 @@ WITH
     -- Pulling all the papers with any of the given GRIDs as affiliates
   SELECT
     Grid_ID,
-    merged_id
+    merged_id,
+    year
   FROM
     ai_companies_visualization.grid_ai_publications),
   organization_grids AS (
-  -- Getting all grids associated with any CSET id for an organization
+    -- Getting all grids associated with any CSET id for an organization
   SELECT
     DISTINCT CSET_id AS id,
     grids
@@ -37,6 +36,7 @@ WITH
     -- Getting the count of publications
   SELECT
     id,
+    year,
     COUNT(DISTINCT merged_id) AS ai_pubs
   FROM ( id_grid
     INNER JOIN
@@ -44,26 +44,30 @@ WITH
     ON
       id_grid.grid = aipubs.Grid_ID )
   GROUP BY
-    id)
-  -- Pulling all the columns we care about that are already in the aggregated organizations table, plus ai_pubs
+    id,
+    year),
+  -- Aggregating the by-year data so it's all in one field
+  by_year AS (
+  SELECT
+    CSET_id,
+    ARRAY_AGG(STRUCT(year,
+        ai_pubs)
+    ORDER BY
+      year) AS ai_pubs_by_year
+  FROM
+    `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
+  LEFT JOIN
+    gridtable
+  ON
+    orgs.CSET_id = gridtable.id
+  GROUP BY
+    CSET_id)
 SELECT
-  CSET_id,
-  name,
-  location.country AS country,
-  aliases,
-  parent,
-  children,
-  non_agg_children,
-  permid,
-  website,
-  market,
-  crunchbase,
-  child_crunchbase,
-  grid,
-  ai_pubs
+  viz.*,
+  ai_pubs_by_year
 FROM
-  `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
+  `gcp-cset-projects.ai_companies_visualization.visualization_data` AS viz
 LEFT JOIN
-  gridtable
+  by_year
 ON
-  orgs.CSET_id = gridtable.id
+  viz.CSET_id = by_year.CSET_id
