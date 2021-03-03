@@ -49,7 +49,7 @@ script to get top conference papers, these tests will work for both.
 21. [adding_grid_total_publications_to_visualization.sql](sql/adding_grid_total_publications_to_visualization.sql)
 22. [adding_grid_ai_pubs_by_year_to_visualization.sql](sql/adding_grid_ai_pubs_by_year_to_visualization.sql)
 23. `python3 all_papers.py all_paper_counts.jsonl`
-24. Upload `all_paper_counts.jsonl` to `ai_companies_visualization.all_paper_counts` using the [all_papers_schema](schemas/all_papers_schema.json)
+24. Upload `all_paper_counts.jsonl` to `ai_companies_visualization.total_paper_counts` using the [all_papers_schema](schemas/all_papers_schema.json)
 25. [adding_all_paper_counts.sql](sql/adding_all_paper_counts.sql)
 26. [omitting_companies.sql](sql/omitting_companies.sql)
 27. [omit_by_rule.sql](sql/omit_by_rule.sql)
