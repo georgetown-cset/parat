@@ -27,7 +27,7 @@
           }
         ],
         "mode": "REPEATED",
-        "name": "all_pubs_year",
+        "name": "all_pubs_by_year",
         "type": "RECORD",
         "description": "All publications by a given company by year."
       }
