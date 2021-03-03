@@ -15,7 +15,8 @@ class TestOrganization(unittest.TestCase):
         self.assertEqual(org.aliases, [])
         self.assertEqual(org.permid, [])
         self.assertEqual(org.market, [])
-        self.assertEqual(org.crunchbase, [])
+        self.assertEqual(org.crunchbase, {})
+        self.assertEqual(org.child_crunchbase, [])
         self.assertEqual(org.grid, [])
         self.assertEqual(org.regex, [])
         self.assertEqual(org.bgov_id, [])
@@ -79,18 +80,37 @@ class TestOrganization(unittest.TestCase):
 
     def test_add_crunchbase(self):
         org = aggregate_organizations.Organization(1, "test")
-        org.add_crunchbase("5e300309-92e8-b336-d832-a65581e14b60", "https://www.crunchbase.com/organization/popily")
-        self.assertEqual(org.crunchbase[0], {"crunchbase_uuid": "5e300309-92e8-b336-d832-a65581e14b60",
-                                         "crunchbase_url": "https://www.crunchbase.com/organization/popily"})
-        self.assertEqual(len(org.crunchbase), 1)
+        org.add_crunchbase("5e300309-92e8-b336-d832-a65581e14b60",
+                           "https://www.crunchbase.com/organization/popily")
+        self.assertEqual(org.crunchbase, {"crunchbase_uuid": "5e300309-92e8-b336-d832-a65581e14b60",
+                                          "crunchbase_url": "https://www.crunchbase.com/organization/popily"})
+        other_org = aggregate_organizations.Organization(2, "test_2")
+        other_org.add_crunchbase(None, None)
+        self.assertEqual(other_org.crunchbase, {})
+
+    def test_add_child_crunchbase(self):
+        org = aggregate_organizations.Organization(1, "test")
+        org.add_child_crunchbase("5e300309-92e8-b336-d832-a65581e14b60",
+                                 "https://www.crunchbase.com/organization/popily")
+        self.assertEqual(org.child_crunchbase[0], {"crunchbase_uuid": "5e300309-92e8-b336-d832-a65581e14b60",
+                                                   "crunchbase_url": "https://www.crunchbase.com/organization/popily"})
+        self.assertEqual(len(org.child_crunchbase), 1)
         # Don't add a duplicate entry!
-        org.add_crunchbase("5e300309-92e8-b336-d832-a65581e14b60", "https://www.crunchbase.com/organization/popily")
-        self.assertEqual(len(org.crunchbase), 1)
+        org.add_child_crunchbase("5e300309-92e8-b336-d832-a65581e14b60",
+                                 "https://www.crunchbase.com/organization/popily")
+        self.assertEqual(len(org.child_crunchbase), 1)
         # Do add a new one
-        org.add_crunchbase("36b559b0-5ba8-4927-a925-59edbee1191d", "https://www.crunchbase.com/organization/eneos")
-        self.assertEqual(org.crunchbase[1], {"crunchbase_uuid": "36b559b0-5ba8-4927-a925-59edbee1191d",
-                                         "crunchbase_url": "https://www.crunchbase.com/organization/eneos"})
-        self.assertEqual(len(org.crunchbase), 2)
+        org.add_child_crunchbase("36b559b0-5ba8-4927-a925-59edbee1191d",
+                                 "https://www.crunchbase.com/organization/eneos")
+        self.assertEqual(org.child_crunchbase[1], {"crunchbase_uuid": "36b559b0-5ba8-4927-a925-59edbee1191d",
+                                                   "crunchbase_url": "https://www.crunchbase.com/organization/eneos"})
+        self.assertEqual(len(org.child_crunchbase), 2)
+        # Don't add an entry if it's in the main crunchbase
+        org.add_crunchbase("d77ea3aa-88f2-6a24-eff2-fec8333283d4",
+                           "https://www.crunchbase.com/organization/algorithmia")
+        org.add_child_crunchbase("d77ea3aa-88f2-6a24-eff2-fec8333283d4",
+                                 "https://www.crunchbase.com/organization/algorithmia")
+        self.assertEqual(len(org.child_crunchbase), 2)
 
     def test_add_grid(self):
         org = aggregate_organizations.Organization(1, "test")
@@ -176,8 +196,6 @@ class TestOrganization(unittest.TestCase):
         org.add_child("test match", 8)
         self.assertEqual(org.non_agg_children[1], {"child_name": "test match", "child_id": 8})
         self.assertEqual(len(org.non_agg_children), 2)
-
-
 
 
 class TestOrganizationAggregator(unittest.TestCase):

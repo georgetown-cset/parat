@@ -17,7 +17,8 @@ class TestAICounts(unittest.TestCase):
         # the values in the dict are the correct type
         for key_val in count_getter.regex_dict.keys():
             self.assertEqual(type(key_val), int)
-            self.assertEqual(type(count_getter.regex_dict[key_val]), str)
+            # we allow multiple regexes, so we have a list
+            self.assertEqual(type(count_getter.regex_dict[key_val]), list)
 
     def test_run_query_papers(self):
         count_getter = CountGetter("test.jsonl")

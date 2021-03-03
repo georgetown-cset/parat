@@ -18,9 +18,9 @@ def main() -> None:
     paper_finder.get_regex()
     # These are the only two lines that make this different from running AI pubs
     # We select from a different table
-    table_name = "ai_companies_visualization.pubs_in_top_conferences_no_grid"
+    table_name = "ai_companies_visualization.no_grid_all_publications"
     # And we write out our data to a different variable
-    companies = paper_finder.run_query_papers(table_name, "ai_pubs_in_top_conferences", by_year=True)
+    companies = paper_finder.run_query_papers(table_name, "all_pubs", by_year=True)
     paper_finder.write_output(companies)
 
 

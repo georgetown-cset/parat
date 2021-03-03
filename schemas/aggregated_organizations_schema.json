@@ -130,10 +130,30 @@
         "description": "The Crunchbase URL, which can also be used to location the company in the Crunchbase UI."
       }
     ],
-    "mode": "REPEATED",
+    "mode": "NULLABLE",
     "name": "crunchbase",
     "type": "RECORD",
     "description": "The Crunchbase URL and UUID for the company, from the Open Data Map."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "crunchbase_uuid",
+        "type": "STRING",
+        "description": "The unique Crunchbase UUID for the company."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "crunchbase_url",
+        "type": "STRING",
+        "description": "The Crunchbase URL, which can also be used to location the company in the Crunchbase UI."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "child_crunchbase",
+    "type": "RECORD",
+    "description": "The Crunchbase URLs and UUIDs for any aggregated children, from the Open Data Map."
   },
   {
     "mode": "REPEATED",

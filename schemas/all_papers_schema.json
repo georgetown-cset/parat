@@ -7,9 +7,9 @@
       },
       {
         "mode": "REQUIRED",
-        "name": "ai_pubs_in_top_conferences",
+        "name": "all_pubs",
         "type": "INTEGER",
-        "description": "Count of AI papers in top conferences."
+        "description": "Count of all papers published by a company"
       },
       {
         "fields": [
@@ -21,14 +21,14 @@
           },
           {
             "mode": "NULLABLE",
-            "name": "ai_pubs_in_top_conferences",
+            "name": "all_pubs",
             "type": "INTEGER",
-            "description": "Count of AI papers in top conferences published in that year."
+            "description": "Count of all papers published by the company in that year."
           }
         ],
         "mode": "REPEATED",
-        "name": "ai_pubs_in_top_conferences_by_year",
+        "name": "all_pubs_by_year",
         "type": "RECORD",
-        "description": "AI publications in top conferences by year."
+        "description": "All publications by a given company by year."
       }
-  ]
+]

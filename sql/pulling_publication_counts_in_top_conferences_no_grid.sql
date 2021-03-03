@@ -5,7 +5,8 @@ WITH
   sources AS (
   SELECT
     merged_id,
-    source_title
+    source_title,
+    year
   FROM
     `gcp-cset-projects.gcp_cset_links_v2.corpus_merged`
   WHERE
@@ -65,7 +66,8 @@ WITH
   -- We're aggregating with ^ because it doesn't show up in the org names. This doesn't matter much because we're just searching with regex, but we don't want to introduce anything.
     STRING_AGG(raw_org_name, "^") AS org_names,
     sources.merged_id,
-    grid_id
+    grid_id,
+    year
   FROM
     sources
   INNER JOIN
@@ -74,11 +76,13 @@ WITH
     sources.merged_id = affils.merged_id
   GROUP BY
     grid_id,
-    sources.merged_id)
+    sources.merged_id,
+    year)
  -- Now we take out the GRIDS and only include the rows where the GRIDs are null.
 SELECT
   merged_id,
-  org_names
+  org_names,
+  year
 FROM
   papers_grouped_by_grid
 WHERE
