@@ -13,8 +13,6 @@ WITH
     `gcp-cset-projects.ai_companies_visualization.visualization_data`
     -- We're left joining instead of cross joining because we WANT to include nulls
   LEFT JOIN
-    UNNEST(crunchbase) AS crunch
-  LEFT JOIN
     UNNEST(market) AS mark
   WHERE
   -- Our exclusion rules
@@ -23,10 +21,10 @@ WITH
     ai_pubs = 0
     AND ai_patents = 0
     AND ai_pubs_in_top_conferences = 0
-    AND (crunch.crunchbase_uuid IS NULL
-      OR crunch.crunchbase_uuid = "")
-    AND (crunch.crunchbase_url IS NULL
-      OR crunch.crunchbase_url = "") )
+    AND (crunchbase.crunchbase_uuid IS NULL
+      OR crunchbase.crunchbase_uuid = "")
+    AND (crunchbase.crunchbase_url IS NULL
+      OR crunchbase.crunchbase_url = "") )
 SELECT
   *
 FROM
