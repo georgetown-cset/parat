@@ -56,6 +56,7 @@ def clean(refresh_images: bool) -> None:
                     country_obj = pycountry.countries.get(alpha_3=country)
                 js["country"] = country_obj.name
             js["local_logo"] = retrieve_image(js["logo_url"], js["name"], refresh_images)
+            js["stage"] = js["stage"] if js["stage"] else "Unknown"
             rows.append(js)
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
