@@ -55,10 +55,11 @@ const IndexPage = () => {
   )
 };
 
+// much thanks due to the examples here https://material-ui.com/components/tables/
 const headCells = [
   { id: "name", numeric: false, disablePadding: true, label: "Company Name" },
   { id: "country", numeric: false, disablePadding: false, label: "Country" },
-  { id: "size", numeric: false, disablePadding: false, label: "Company Size" },
+  { id: "stage", numeric: false, disablePadding: false, label: "Company Size" },
   { id: "ai_pubs", numeric: true, disablePadding: false, label: "# AI Publications" },
   { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "# AI Publications in Top Conferences" },
   { id: "ai_patents", numeric: true, disablePadding: false, label: "# Patents" },
@@ -122,7 +123,7 @@ function Row(props) {
           {row.name}
         </TableCell>
         <TableCell align="right">{row.country}</TableCell>
-        <TableCell align="right">Big</TableCell>
+        <TableCell align="right">{row.stage}</TableCell>
         <TableCell align="right">{row.ai_pubs}</TableCell>
         <TableCell align="right">{row.ai_pubs_in_top_conferences}</TableCell>
         <TableCell align="right">{row.ai_patents}</TableCell>
@@ -132,10 +133,10 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                Detail
+                {row.name}
               </Typography>
               <Typography variant="p" gutterBottom component="div">
-                Lorem ipsum
+                {row.short_description}
               </Typography>
             </Box>
           </Collapse>
@@ -149,11 +150,11 @@ Row.propTypes = {
   row: PropTypes.shape({
     name: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
-    //size: PropTypes.string.isRequired,
+    stage: PropTypes.string.isRequired,
     ai_pubs: PropTypes.number.isRequired,
     ai_pubs_in_top_conferences: PropTypes.number.isRequired,
     ai_patents: PropTypes.number.isRequired,
-    //description: PropTypes.string.isRequired,
+    short_description: PropTypes.string.isRequired,
   }).isRequired,
 };
 
