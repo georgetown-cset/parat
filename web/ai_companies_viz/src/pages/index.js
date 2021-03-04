@@ -35,21 +35,23 @@ const IndexPage = () => {
         data: [65, 59, 80]
       }
     ]
-};
+  };
   const options = {
     scales: {
-        yAxes: [{
-            display: true,
-            ticks: {
-                suggestedMin: 0
-            }
-        }]
+      yAxes: [{
+        display: true,
+        ticks: {
+            suggestedMin: 0
+        }
+      }]
     }
-};
+  };
   return (
     <main style={pageStyles}>
       Hello world. This is a graph.
-      <Bar data={data} options={options} style={{height: "400px"}}/>
+      <div id="foo" style={{width: "30%"}}>
+        <Bar data={data} options={options}/>
+      </div>
       <CollapsibleTable/>
     </main>
   )
@@ -114,15 +116,13 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow style={{borderBottom: "unset"}}>
+      <TableRow style={{borderBottom: "unset", cursor: "pointer"}} onClick={() => setOpen(!open)}>
         <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+          <IconButton aria-label="expand row" size="small">
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
-        </TableCell>
+        <TableCell component="th" scope="row">{row.name}</TableCell>
         <TableCell align="right">{row.country}</TableCell>
         <TableCell align="right">{row.stage}</TableCell>
         <TableCell align="right">{row.ai_pubs}</TableCell>
@@ -155,7 +155,6 @@ Row.propTypes = {
     ai_pubs: PropTypes.number.isRequired,
     ai_pubs_in_top_conferences: PropTypes.number.isRequired,
     ai_patents: PropTypes.number.isRequired,
-    short_description: PropTypes.string.isRequired,
   }).isRequired,
 };
 
