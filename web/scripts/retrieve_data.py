@@ -33,11 +33,11 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     company_name = company_name.lower()
     for from_char, to_char in cleanup.items():
         company_name = company_name.replace(from_char, to_char)
-    img_name = os.path.join(web_src_dir, "images", company_name+".png")
+    img_name = company_name+".png"
     if refresh_images:
         response = requests.get(url)
         if response.status_code == 200:
-            Image.open(BytesIO(response.content)).save(img_name)
+            Image.open(BytesIO(response.content)).save(os.path.join(web_src_dir, "images", img_name))
         else:
             print("Download failed for "+url)
             return None

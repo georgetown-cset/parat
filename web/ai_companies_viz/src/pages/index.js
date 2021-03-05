@@ -118,9 +118,9 @@ function Row(props) {
     <React.Fragment>
       <TableRow style={{borderBottom: "unset", cursor: "pointer"}} onClick={() => setOpen(!open)}>
         <TableCell>
-          <IconButton aria-label="expand row" size="small">
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
+          {row.local_logo === null ? <span>Hi</span> :
+            <img src={require("../images/" + row.local_logo)} style={{height: "30px"}}/>
+          }
         </TableCell>
         <TableCell component="th" scope="row">{row.name}</TableCell>
         <TableCell align="right">{row.country}</TableCell>
