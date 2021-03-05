@@ -64,6 +64,23 @@ WITH
   GROUP BY
     org_uuid ),
   -- Now we convert numbers to stage names!
+  add_employees AS (
+  SELECT
+    org_uuid,
+    CASE
+      WHEN employee_count = "10000+" THEN 2
+      WHEN employee_count = "5001-10000" THEN 2
+      WHEN employee_count = "1001-5000" THEN 2
+    ELSE
+    stage_num
+  END
+    AS stage_num
+  FROM
+    combine_stages
+  LEFT JOIN
+    gcp_cset_crunchbase.organizations orgs
+  ON
+    combine_stages.org_uuid = orgs.uuid ),
   stage_name AS (
   SELECT
     org_uuid,
@@ -76,13 +93,14 @@ WITH
   END
     AS stage
   FROM
-    combine_stages )
+    add_employees )
   -- Put all of our data together and add it to the visualization table
 SELECT
   visualization.*,
   short_description,
   logo_url,
   CASE
+    WHEN ARRAY_LENGTH(market) > 0 THEN "Mature"
     WHEN stage IS NOT NULL THEN stage
   ELSE
   NULL
