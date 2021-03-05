@@ -2,6 +2,7 @@ import { Bar } from "react-chartjs-2";
 import React, { useEffect } from "react";
 import pageStyles from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
+import Autocomplete from "@material-ui/lab/Autocomplete"
 import Box from "@material-ui/core/Box";
 import Button from '@material-ui/core/Button';
 import Collapse from "@material-ui/core/Collapse";
@@ -14,8 +15,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import PropTypes from "prop-types";
@@ -100,13 +103,14 @@ const headCells = [
   { id: "name", numeric: false, disablePadding: true, label: "Company Name" },
   { id: "country", numeric: false, disablePadding: false, label: "Country" },
   { id: "stage", numeric: false, disablePadding: false, label: "Company Stage" },
-  { id: "ai_pubs", numeric: true, disablePadding: false, label: "# AI Publications" },
-  { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "# AI Publications in Top Conferences" },
-  { id: "ai_patents", numeric: true, disablePadding: false, label: "# Patents" },
+  { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Publications" },
+  { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "AI Publications in Top Conferences" },
+  { id: "ai_patents", numeric: true, disablePadding: false, label: "Patents" },
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort } = props;
+  const { classes, order, orderBy, onRequestSort, onFilterRows } = props;
+  const companyNames = company_data.map(company => company.name).sort();
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -114,29 +118,47 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell/>
         {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.id.startsWith("ai_") ? "right" : "left"}
-            width={headCell.id === "name" ? "30%" : ""}
-            padding={headCell.disablePadding ? "none" : "default"}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
+            headCell.id === "name" ?
+              <TableCell
+                key={headCell.id}
+                align={"left"}
+                width={headCell.id === "name" ? "30%" : ""}
+                padding={headCell.disablePadding ? "none" : "default"}
+                colSpan={2}
+              >
+                <Autocomplete
+                  id="company-name-search"
+                  options={companyNames}
+                  style={{ width: 300, marginLeft:"20px" }}
+                  size="small"
+                  renderInput={(params) => <TextField {...params} label="Company Name"/>}
+                  onChange={onFilterRows}
+                 />
+              </TableCell>
+              :
+              <TableCell
+                key={headCell.id}
+                align={headCell.id.startsWith("ai_") ? "right" : "left"}
+                width={headCell.id === "name" ? "30%" : ""}
+                padding={headCell.disablePadding ? "none" : "default"}
+                sortDirection={orderBy === headCell.id ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : "asc"}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  {headCell.label}
+                  {orderBy === headCell.id ? (
+                    <span className={classes.visuallyHidden}>
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </span>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
+                  ) : null}
+                </TableSortLabel>
+              </TableCell>
+          ))
+        }
       </TableRow>
     </TableHead>
   );
@@ -156,7 +178,7 @@ function Row(props) {
     <React.Fragment>
       <TableRow style={{borderBottom: "unset", cursor: "pointer"}} onClick={() => setOpen(!open)}>
         <TableCell>
-          {row.local_logo === null ? <span>Hi</span> :
+          {row.local_logo !== null &&
             <img src={require("../images/" + row.local_logo)} style={{height: "30px"}}/>
           }
         </TableCell>
@@ -232,6 +254,7 @@ const CollapsibleTable = () => {
   const [order, setOrder] = React.useState("desc");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [data, setData] = React.useState(company_data.slice(0));
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -246,6 +269,14 @@ const CollapsibleTable = () => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
+  };
+
+  const handleFilterRows = (event, name) => {
+    if(name === undefined || name === null || name === ""){
+      setData(company_data.slice(0));
+    } else {
+      setData(company_data.slice(0).filter(datum => datum.name === name));
+    }
   };
 
   function descendingComparator(a, b, orderBy) {
@@ -283,9 +314,10 @@ const CollapsibleTable = () => {
             order={order}
             orderBy={orderBy}
             onRequestSort={handleRequestSort}
+            onFilterRows={handleFilterRows}
           />
           <TableBody>
-            {stableSort(company_data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            {stableSort(data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
               return (<Row key={row.name} row={row} />)
             })}
@@ -295,7 +327,7 @@ const CollapsibleTable = () => {
       <TablePagination
         rowsPerPageOptions={[10, 20, 100]}
         component="div"
-        count={company_data.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
