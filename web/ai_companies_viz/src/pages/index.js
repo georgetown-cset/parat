@@ -1,10 +1,10 @@
 import { Bar } from "react-chartjs-2";
-import React from "react";
+import React, { useEffect } from "react";
 import pageStyles from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import Button from '@material-ui/core/Button';
 import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -20,8 +20,17 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import PropTypes from "prop-types";
 
 import {company_data} from "./data"
+import cset_logo from "../images/cset_logo.svg";
+import "../styles/styles.css";
+
 
 const IndexPage = () => {
+
+  useEffect(() => {
+    document.title = "CSET AI Companies Tracker";
+    document.documentElement.lang = "en";
+  }, []);
+
   const data = {
     labels: ["A", "B", "C"],
     datasets: [
@@ -47,12 +56,40 @@ const IndexPage = () => {
     }
   };
   return (
-    <main style={pageStyles}>
-      Hello world. This is a graph.
-      <div id="foo" style={{width: "30%"}}>
-        <Bar data={data} options={options}/>
+    <main>
+      <div id="toolbar" style={{"margin": "20px"}}>
+        <a href={"https://cset.georgetown.edu"} target="_blank" title="Link to CSET website, cset.georgetown.edu">
+          <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
+        </a>
+        <Button variant="contained"
+                color="primary"
+                style={{"float": "right"}}
+                href="tbd"
+                target="_blank">
+          Questions and Submissions
+        </Button>
       </div>
-      <CollapsibleTable/>
+      <div id="project-description" style={{"margin": "50px 100px"}}>
+        <div id="description-header" style={{"marginBottom": "30px"}}>
+          <Typography variant={"h4"} gutterBottom>AI Companies Tracker</Typography>
+          <Typography variant={"h6"} gutterBottom>By Zachary Arnold and Rebecca Gelles</Typography>
+          <Typography variant={"subtitle2"} gutterBottom>Web design by Jennifer Melot</Typography>
+        </div>
+        <Typography variant={"body1"} paragraph>
+        The AI Companies Tracker is ... link to relevant reports ... link to export
+        </Typography>
+        <Typography variant={"body2"} paragraph>
+          The authors would like to thank...
+        </Typography>
+      </div>
+      <div id="graph_container" style={{"backgroundColor": "#FFFFFF", "padding": "10px 10px"}}>
+        <div style={{width: "30%"}}>
+          <Bar data={data} options={options}/>
+        </div>
+        <div style={{"padding": "10px 50px"}}>
+          <CollapsibleTable/>
+        </div>
+      </div>
     </main>
   )
 };
@@ -186,7 +223,7 @@ const useStyles = makeStyles((theme) => ({
 const CollapsibleTable = () => {
   const classes = useStyles();
   const [orderBy, setOrderBy] = React.useState("ai_pubs");
-  const [order, setOrder] = React.useState("asc");
+  const [order, setOrder] = React.useState("desc");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
