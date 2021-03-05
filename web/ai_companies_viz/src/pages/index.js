@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Button from '@material-ui/core/Button';
 import Collapse from "@material-ui/core/Collapse";
+import Link from "@material-ui/core/Link";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -117,7 +118,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.id === "name" ? "left" : "right"}
+            align={headCell.id.startsWith("ai_") ? "right" : "left"}
             width={headCell.id === "name" ? "30%" : ""}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -160,19 +161,24 @@ function Row(props) {
           }
         </TableCell>
         <TableCell component="th" scope="row">{row.name}</TableCell>
-        <TableCell align="right">{row.country}</TableCell>
-        <TableCell align="right">{row.stage}</TableCell>
+        <TableCell align="left">{row.country}</TableCell>
+        <TableCell align="left">{row.stage}</TableCell>
         <TableCell align="right">{row.ai_pubs}</TableCell>
         <TableCell align="right">{row.ai_pubs_in_top_conferences}</TableCell>
         <TableCell align="right">{row.ai_patents}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                {row.name}
-              </Typography>
+              <div>
+                <Typography variant="h6" gutterBottom component="div">
+                  <Link href={row.website} target="_blank">{row.name}</Link>
+                </Typography>
+                <Typography variant="subtitle2" gutterBottom component="div">
+                  {row.aliases}
+                </Typography>
+              </div>
               <Typography variant="p" gutterBottom component="div">
                 {row.short_description}
               </Typography>

@@ -55,7 +55,10 @@ def clean(refresh_images: bool) -> None:
                 if not country_obj:
                     country_obj = pycountry.countries.get(alpha_3=country)
                 js["country"] = country_obj.name
-            js["local_logo"] = retrieve_image(js["logo_url"], js["name"], refresh_images)
+            logo_url = js.pop("logo_url")
+            js["local_logo"] = retrieve_image(logo_url, js["name"], refresh_images)
+            aliases = js.pop("aliases")
+            js["aliases"] = f"aka: {', '.join([a['alias'].title() for a in aliases])}"
             js["stage"] = js["stage"] if js["stage"] else "Unknown"
             rows.append(js)
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
