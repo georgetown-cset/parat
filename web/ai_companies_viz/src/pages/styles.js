@@ -1,8 +1,9 @@
 // styles
 const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    backgroundColor: "#F9F9F9",
+    margin: 0,
+    padding: 0
 }
 const headingStyles = {
   marginTop: 0,
