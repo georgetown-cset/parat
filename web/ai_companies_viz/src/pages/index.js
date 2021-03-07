@@ -1,4 +1,4 @@
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import React, { useEffect } from "react";
 import pageStyles from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -62,7 +62,7 @@ const IndexPage = () => {
   return (
     <main>
       <div id="toolbar" style={{"margin": "20px"}}>
-        <a href={"https://cset.georgetown.edu"} target="_blank" title="Link to CSET website, cset.georgetown.edu">
+        <a href={"https://cset.georgetown.edu"} target="_blank" rel="noreferrer" title="Link to CSET website, cset.georgetown.edu">
           <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
         </a>
         <Button variant="contained"
@@ -173,6 +173,133 @@ EnhancedTableHead.propTypes = {
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  const pubs_data = {
+    labels: row.years,
+    datasets: [
+      {
+        label: "All Publications",
+        data: row.yearly_all_publications,
+        backgroundColor: "rgba(0,0,0,0)",
+        borderColor: "rgba(100,100,100,0.5)"
+      },
+      {
+        label: "All AI Publications",
+        data: row.yearly_ai_publications,
+        backgroundColor: "rgba(0,0,0,0)",
+        borderColor: "rgba(0,0,255,0.5)"
+      },
+    ]
+  };
+  const pubs_options = {
+    title: {
+      display: true,
+      text: "Publications by Year"
+    },
+    legend: {
+      position: "top",
+      labels: {
+        "boxWidth": 1
+      }
+    },
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          labelString: "# Publications",
+          display: true,
+        },
+        ticks: {
+            suggestedMin: 0
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          labelString: "Year",
+          display: true,
+        },
+      }]
+    }
+  };
+  const top_pubs_data = {
+    labels: row.years,
+    datasets: [
+      {
+        label: "Publications in top AI Conferences",
+        data: row.yearly_ai_pubs_top_conf,
+        backgroundColor: "rgba(0,0,0,0)",
+        borderColor: "rgba(0,0,255,0.5)"
+      },
+    ]
+  };
+  const top_pubs_options = {
+    title: {
+      display: true,
+      text: "Publications in Top AI Conferences by Year"
+    },
+    legend: {
+      position: "top",
+      labels: {
+        "boxWidth": 1
+      }
+    },
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          labelString: "# Publications",
+          display: true,
+        },
+        ticks: {
+            suggestedMin: 0
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          labelString: "Year",
+          display: true,
+        },
+      }]
+    }
+  };
+  const patents_data = {
+    labels: row.years,
+    datasets: [
+      {
+        label: "AI Patents",
+        data: row.yearly_ai_patents,
+        backgroundColor: "rgba(0,0,0,0)",
+        borderColor: "rgba(0,0,255,0.5)"
+      },
+    ]
+  };
+  const patents_options = {
+    title: {
+      display: true,
+      text: "AI Patents by Year"
+    },
+    legend: {
+      display: true,
+      position: "top",
+      labels: {
+        "boxWidth": 1
+      }
+    },
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          labelString: "# Patents",
+          display: true,
+        },
+        ticks: {
+            suggestedMin: 0
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          labelString: "Year",
+          display: true,
+        },
+      }]
+    }
+  };
 
   return (
     <React.Fragment>
@@ -194,20 +321,21 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <div>
+              <div>
                 <Typography variant="h6" gutterBottom component="div">
-                  <Link href={row.website} target="_blank">{row.name}</Link>
+                  <Link href={row.website} target="_blank" rel="noreferrer">{row.name}</Link>
                 </Typography>
                 <Typography variant="subtitle2" gutterBottom component="div">
                   {row.aliases}
                 </Typography>
                 {row.crunchbase.crunchbase_url &&
                   <Typography variant="subtitle2" gutterBottom component="div">
-                    Crunchbase: <Link href={row.crunchbase.crunchbase_url}>{row.crunchbase.crunchbase_uuid}</Link>
+                    <Link href={row.crunchbase.crunchbase_url} target="_blank" rel="noreferrer">Crunchbase</Link>
                   </Typography>
                 }
                 {row.grid_info &&
                   <Typography variant="subtitle2" gutterBottom component="div">
-                    GRID: <Link href={row.grid_info}>{row.grid_info}</Link>
+                    GRID: {row.grid_info}
                   </Typography>
                 }
                 {row.permid_info &&
@@ -229,6 +357,18 @@ function Row(props) {
               <Typography variant="p" gutterBottom component="div">
                 {row.short_description}
               </Typography>
+              </div>
+              <div>
+                <div style={{width: "33%", display: "inline-block"}}>
+                  <Line data={pubs_data} options={pubs_options}/>
+                </div>
+                <div style={{width: "33%", display: "inline-block"}}>
+                  <Line data={top_pubs_data} options={top_pubs_options}/>
+                </div>
+                <div style={{width: "33%", display: "inline-block"}}>
+                  <Line data={patents_data} options={patents_options}/>
+                </div>
+              </div>
             </Box>
           </Collapse>
         </TableCell>

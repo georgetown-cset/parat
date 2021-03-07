@@ -5,6 +5,7 @@ import pycountry
 import requests
 
 from PIL import Image
+from datetime import datetime
 from google.cloud import bigquery
 from io import BytesIO
 
@@ -41,7 +42,9 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
         else:
             print("Download failed for "+url)
             return None
-    return img_name
+    elif img_name in os.listdir(os.path.join(web_src_dir, "images")):
+        return img_name
+    return None
 
 def clean_parent(parents: list) -> str:
     if len(parents) == 0:
@@ -63,6 +66,7 @@ def clean_children(agg_children: list, non_agg_children: list) -> str:
 
 def clean(refresh_images: bool) -> None:
     rows = []
+    missing_all = set()
     with open(raw_data_fi) as f:
         for row in f:
             js = json.loads(row)
@@ -84,9 +88,27 @@ def clean(refresh_images: bool) -> None:
             js["permid_info"] = ", ".join([str(p) for p in permids])
             js["parent_info"] = clean_parent(js.pop("parent"))
             js["child_info"] = clean_children(js.pop("children"), js.pop("non_agg_children"))
+            js["years"] = list(range(2010, datetime.now().year))
+            all_pubs_by_year = {p["year"]: p["all_pubs"] for p in js.pop("all_pubs_by_year")}
+            js["yearly_all_publications"] = [0 if y not in all_pubs_by_year else all_pubs_by_year[y]
+                                             for y in js["years"]]
+            ai_pubs_by_year = {p["year"]: p["ai_pubs"] for p in js.pop("ai_pubs_by_year")}
+            js["yearly_ai_publications"] = [0 if y not in ai_pubs_by_year else ai_pubs_by_year[y]
+                                            for y in js["years"]]
+            for year_idx in range(len(js["years"])):
+                if js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]:
+                    missing_all.add(js["name"])
+            ai_patents_by_year = {p["priority_year"]: p["ai_patents"] for p in js.pop("ai_patents_by_year")}
+            js["yearly_ai_patents"] = [0 if y not in ai_patents_by_year else ai_patents_by_year[y]
+                                       for y in js["years"]]
+            ai_pubs_in_top_conf = {p["year"]: p["ai_pubs_in_top_conferences"]
+                                   for p in js.pop("ai_pubs_in_top_conferences_by_year")}
+            js["yearly_ai_pubs_top_conf"] = [0 if y not in ai_pubs_in_top_conf else ai_pubs_in_top_conf[y]
+                                             for y in js["years"]]
             rows.append(js)
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
+    print(f"missing all pubs years: {missing_all}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
