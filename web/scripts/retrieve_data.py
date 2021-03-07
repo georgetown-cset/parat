@@ -43,6 +43,24 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
             return None
     return img_name
 
+def clean_parent(parents: list) -> str:
+    if len(parents) == 0:
+        return None
+    return ", ".join([parent["parent_name"].title()+(" (Acquired)" if parent["parent_acquisition"] else "")
+                      for parent in parents])
+
+def clean_children(agg_children: list, non_agg_children: list) -> str:
+    has_agg = len(agg_children) > 0
+    has_non_agg = len(non_agg_children) > 0
+    if not (has_agg or has_non_agg):
+        return None
+    joined_agg_children = (f"Aggregated Children: {', '.join([c['child_name'].title() for c in agg_children])}"
+                           if has_agg else "")
+    joined_non_agg_children = ("Non-aggregated Children: "+
+                                ", ".join([c["child_name"].title() for c in non_agg_children]) if has_non_agg else "")
+    sep = "; " if has_agg and has_non_agg else ""
+    return f"{joined_agg_children}{sep}{joined_non_agg_children}"
+
 def clean(refresh_images: bool) -> None:
     rows = []
     with open(raw_data_fi) as f:
@@ -60,6 +78,12 @@ def clean(refresh_images: bool) -> None:
             aliases = js.pop("aliases")
             js["aliases"] = None if len(aliases) == 0 else f"aka: {', '.join([a['alias'].title() for a in aliases])}"
             js["stage"] = js["stage"] if js["stage"] else "Unknown"
+            grids = js.pop("grid")
+            js["grid_info"] = ", ".join(grids)
+            permids = js.pop("permid")
+            js["permid_info"] = ", ".join([str(p) for p in permids])
+            js["parent_info"] = clean_parent(js.pop("parent"))
+            js["child_info"] = clean_children(js.pop("children"), js.pop("non_agg_children"))
             rows.append(js)
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")

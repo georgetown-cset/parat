@@ -200,6 +200,31 @@ function Row(props) {
                 <Typography variant="subtitle2" gutterBottom component="div">
                   {row.aliases}
                 </Typography>
+                {row.crunchbase.crunchbase_url &&
+                  <Typography variant="subtitle2" gutterBottom component="div">
+                    Crunchbase: <Link href={row.crunchbase.crunchbase_url}>{row.crunchbase.crunchbase_uuid}</Link>
+                  </Typography>
+                }
+                {row.grid_info &&
+                  <Typography variant="subtitle2" gutterBottom component="div">
+                    GRID: <Link href={row.grid_info}>{row.grid_info}</Link>
+                  </Typography>
+                }
+                {row.permid_info &&
+                  <Typography variant="subtitle2" gutterBottom component="div">
+                    PermID: {row.permid_info}
+                  </Typography>
+                }
+                {row.parent_info &&
+                  <Typography variant="subtitle2" gutterBottom component="div">
+                    {row.parent_info}
+                  </Typography>
+                }
+                {row.child_info &&
+                  <Typography variant="subtitle2" gutterBottom component="div">
+                    {row.child_info}
+                  </Typography>
+                }
               </div>
               <Typography variant="p" gutterBottom component="div">
                 {row.short_description}
