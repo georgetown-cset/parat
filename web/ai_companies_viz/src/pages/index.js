@@ -507,9 +507,12 @@ function Row(props) {
             <Box margin={1}>
               <div style={{marginBottom: "10px"}}>
                 <div style={{width: "60%", display: "inline-block"}}>
-                  <Typography variant="h6" gutterBottom component="div">
+                  <div>
+                  <Typography variant="h6" gutterBottom component="span">
                     <Link href={row.website} target="_blank" rel="noreferrer">{row.name}</Link>
                   </Typography>
+                  {row.market && <span style={{paddingLeft: "10px", color: "#545454"}}>{row.market}</span>}
+                  </div>
                   <Typography variant="subtitle2" gutterBottom component="div">
                     {row.aliases}
                   </Typography>

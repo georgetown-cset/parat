@@ -65,6 +65,11 @@ def clean_children(agg_children: list, non_agg_children: list) -> str:
     sep = "; " if has_agg and has_non_agg else ""
     return f"{joined_agg_children}{sep}{joined_non_agg_children}"
 
+def clean_market(market_info: list) -> str:
+    if len(market_info) == 0:
+        return None
+    return ", ".join([f"{m['exchange'].upper()}:{m['ticker'].upper()}" for m in market_info])
+
 def clean(refresh_images: bool) -> None:
     rows = []
     missing_all = set()
@@ -106,6 +111,7 @@ def clean(refresh_images: bool) -> None:
                                    for p in js.pop("ai_pubs_in_top_conferences_by_year")}
             js["yearly_ai_pubs_top_conf"] = [0 if y not in ai_pubs_in_top_conf else ai_pubs_in_top_conf[y]
                                              for y in js["years"]]
+            js["market"] = clean_market(js.pop("market"))
             rows.append(js)
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
