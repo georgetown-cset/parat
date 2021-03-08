@@ -260,6 +260,10 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
+  function handleNameFilter(evt, name){
+    onFilterRows("name", [name]);
+  }
+
   return (
     <TableHead>
       <TableRow>
@@ -278,7 +282,7 @@ function EnhancedTableHead(props) {
                   style={{ width: 300, marginLeft:"20px" }}
                   size="small"
                   renderInput={(params) => <TextField {...params} label="Company Name"/>}
-                  onChange={onFilterRows}
+                  onChange={handleNameFilter}
                  />
               </TableCell>
               :
@@ -568,6 +572,11 @@ const CollapsibleTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(company_data.slice(0));
+  const [keyToSelected, setKeyToSelected] = React.useState({
+    "country": [],
+    "stage": [],
+    "name": []
+  });
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -584,12 +593,24 @@ const CollapsibleTable = () => {
     setOrderBy(property);
   };
 
-  const handleFilterRows = (event, name) => {
-    if(name === undefined || name === null || name === ""){
-      setData(company_data.slice(0));
-    } else {
-      setData(company_data.slice(0).filter(datum => datum.name === name));
+  const handleFilterRows = (key, filters) => {
+    const updatedKeyToSelected = {...keyToSelected};
+    updatedKeyToSelected[key] = filters;
+    setKeyToSelected(updatedKeyToSelected);
+
+    const filtered_data = [];
+    for(let datum of company_data) {
+      let include = true;
+      for (let key in updatedKeyToSelected) {
+        if ((updatedKeyToSelected[key].length !== 0) && !updatedKeyToSelected[key].includes(datum[key])) {
+          include = false;
+        }
+      }
+      if(include){
+        filtered_data.push(datum);
+      }
     }
+    setData(filtered_data);
   };
 
   function descendingComparator(a, b, orderBy) {
