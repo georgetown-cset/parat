@@ -29,12 +29,13 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
         "(": "",
         ")": "",
         "/": "_",
-        ".": ""
+        ".": "",
+        "!": ""
     }
     company_name = company_name.lower()
     for from_char, to_char in cleanup.items():
         company_name = company_name.replace(from_char, to_char)
-    img_name = company_name+".png"
+    img_name = company_name.strip()+".png"
     if refresh_images:
         response = requests.get(url)
         if response.status_code == 200:
@@ -70,7 +71,7 @@ def clean(refresh_images: bool) -> None:
     with open(raw_data_fi) as f:
         for row in f:
             js = json.loads(row)
-            js["name"] = js["name"].title()
+            js["name"] = js["name"].strip().title()
             country = js["country"]
             if country is not None:
                 country_obj = pycountry.countries.get(alpha_2=country)
