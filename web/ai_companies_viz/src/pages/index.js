@@ -35,30 +35,7 @@ const IndexPage = () => {
     document.documentElement.lang = "en";
   }, []);
 
-  const data = {
-    labels: ["A", "B", "C"],
-    datasets: [
-      {
-        label: "The Awesome Graph",
-        backgroundColor: ["rgba(255,99,132,0.2)", "rgba(155,99,132,0.2)", "rgba(55,99,132,0.2)"],
-        borderColor: ["rgba(255,99,132,1)", "rgba(155,99,132,1)", "rgba(55,99,132,1)"],
-        borderWidth: 1,
-        hoverBackgroundColor: ["rgba(255,99,132,0.4)", "rgba(155,99,132,0.4)", "rgba(55,99,132,0.4)"],
-        hoverBorderColor: ["rgba(255,99,132,1)", "rgba(155,99,132,1)", "rgba(55,99,132,1)"],
-        data: [65, 59, 80]
-      }
-    ]
-  };
-  const options = {
-    scales: {
-      yAxes: [{
-        display: true,
-        ticks: {
-            suggestedMin: 0
-        }
-      }]
-    }
-  };
+
   return (
     <main>
       <div id="toolbar" style={{"margin": "20px"}}>
@@ -86,17 +63,116 @@ const IndexPage = () => {
           The authors would like to thank...
         </Typography>
       </div>
-      <div id="graph_container" style={{"backgroundColor": "#FFFFFF", "padding": "10px 10px"}}>
-        <div style={{width: "30%"}}>
-          <Bar data={data} options={options}/>
-        </div>
-        <div style={{"padding": "10px 50px"}}>
-          <CollapsibleTable/>
-        </div>
-      </div>
+      <DataContainer data={company_data}/>
     </main>
   )
 };
+
+function DataContainer(props) {
+  const data = props;
+  const [pubtype_to_bins, setPubtypeToBins] = React.useState(updateSummaryGraphData());
+
+  const ai_pubs_data = {
+    labels: pubtype_to_bins["ai_pubs"]["labels"],
+    datasets: [
+      {
+        label: "Pubs",
+        backgroundColor: "rgba(255,99,132,0.2)",
+        borderColor: "rgba(255,99,132,1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        hoverBorderColor: "rgba(255,99,132,1)",
+        data: pubtype_to_bins["ai_pubs"]["counts"]
+      }
+    ]
+  };
+  const top_ai_pubs_data = {
+    labels: pubtype_to_bins["ai_pubs_in_top_conferences"]["labels"],
+    datasets: [
+      {
+        label: "Top pubs",
+        backgroundColor: "rgba(255,99,132,0.2)",
+        borderColor: "rgba(255,99,132,1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        hoverBorderColor: "rgba(255,99,132,1)",
+        data: pubtype_to_bins["ai_pubs_in_top_conferences"]["ai_pubs_in_top_conferences"]
+      }
+    ]
+  };
+  const ai_patents_data = {
+    labels: pubtype_to_bins["ai_pubs"]["labels"],
+    datasets: [
+      {
+        label: "AI patents",
+        backgroundColor: "rgba(255,99,132,0.2)",
+        borderColor: "rgba(255,99,132,1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        hoverBorderColor: "rgba(255,99,132,1)",
+        data: pubtype_to_bins["ai_patents"]["counts"]
+      }
+    ]
+  };
+  const options = {
+    scales: {
+      yAxes: [{
+        display: true,
+        ticks: {
+            suggestedMin: 0
+        }
+      }]
+    }
+  };
+
+  function updateSummaryGraphData(){
+    const pubtype_to_bins_update = {};
+    for(let key of ["ai_pubs", "ai_pubs_in_top_conferences", "ai_patents"]) {
+      const rel_data = [];
+      for (let company_info of company_data) {
+        rel_data.push(company_info[key]);
+      }
+      const max = Math.max(...rel_data);
+      const min = Math.min(...rel_data);
+      const num_bins = Math.round(Math.pow(rel_data.length, 1/3));
+      const bin_size = Math.round((max - min) / num_bins);
+      const bin_counts = [];
+      const bin_labels = [];
+      for (let i = 0; i < num_bins; i++) {
+        bin_counts.push(0);
+        bin_labels.push((bin_size * i) + "-" + (bin_size * (i + 1) - 1));
+      }
+      for (let amt of rel_data) {
+        const bin_idx = Math.floor(amt / bin_size);
+        bin_counts[bin_idx] += 1;
+      }
+      pubtype_to_bins_update[key] = {
+        "counts": bin_counts,
+        "labels": bin_labels
+      }
+    }
+    return pubtype_to_bins_update;
+  }
+
+  return (
+    <div id="graph_container" style={{"backgroundColor": "#FFFFFF", "padding": "10px 10px"}}>
+      <div id="summary-bars">
+        <div style={{width: "30%", display: "inline-block"}}>
+          <Bar data={ai_pubs_data} options={options}/>
+        </div>
+        <div style={{width: "30%", display: "inline-block"}}>
+          <Bar data={top_ai_pubs_data} options={options}/>
+        </div>
+        <div style={{width: "30%", display: "inline-block"}}>
+          <Bar data={ai_patents_data} options={options}/>
+        </div>
+      </div>
+      <div style={{"padding": "10px 50px"}}>
+        <CollapsibleTable/>
+      </div>
+    </div>
+  )
+}
 
 // much thanks due to the examples here https://material-ui.com/components/tables/
 const headCells = [
@@ -173,6 +249,7 @@ EnhancedTableHead.propTypes = {
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+
   const pubs_data = {
     labels: row.years,
     datasets: [
