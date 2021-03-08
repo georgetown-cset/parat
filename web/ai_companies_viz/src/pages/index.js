@@ -53,7 +53,7 @@ const IndexPage = () => {
       <div id="project-description" style={{"margin": "50px 100px"}}>
         <div id="description-header" style={{"marginBottom": "30px"}}>
           <Typography variant={"h4"} gutterBottom>AI Companies Tracker</Typography>
-          <Typography variant={"h6"} gutterBottom>By Zachary Arnold and Rebecca Gelles</Typography>
+          <Typography variant={"h6"} gutterBottom>By Zach & Rebecca</Typography>
           <Typography variant={"subtitle2"} gutterBottom>Web design by Jennifer Melot</Typography>
         </div>
         <Typography variant={"body1"} paragraph>
@@ -220,7 +220,6 @@ function DataContainer(props) {
         "labels": bin_labels
       }
     }
-    alert(JSON.stringify(pubtype_to_bins_update))
     return pubtype_to_bins_update;
   }
 
@@ -467,43 +466,45 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              <div>
-              <div>
-                <Typography variant="h6" gutterBottom component="div">
-                  <Link href={row.website} target="_blank" rel="noreferrer">{row.name}</Link>
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom component="div">
-                  {row.aliases}
-                </Typography>
-                {row.crunchbase.crunchbase_url &&
-                  <Typography variant="subtitle2" gutterBottom component="div">
-                    <Link href={row.crunchbase.crunchbase_url} target="_blank" rel="noreferrer">Crunchbase</Link>
+              <div style={{marginBottom: "10px"}}>
+                <div style={{width: "60%", display: "inline-block"}}>
+                  <Typography variant="h6" gutterBottom component="div">
+                    <Link href={row.website} target="_blank" rel="noreferrer">{row.name}</Link>
                   </Typography>
-                }
-                {row.grid_info &&
                   <Typography variant="subtitle2" gutterBottom component="div">
-                    GRID: {row.grid_info}
+                    {row.aliases}
                   </Typography>
-                }
-                {row.permid_info &&
-                  <Typography variant="subtitle2" gutterBottom component="div">
-                    PermID: {row.permid_info}
+                  <Typography variant="p" gutterBottom component="div" style={{marginTop: "10px"}}>
+                    {row.short_description}
                   </Typography>
-                }
-                {row.parent_info &&
-                  <Typography variant="subtitle2" gutterBottom component="div">
-                    {row.parent_info}
-                  </Typography>
-                }
-                {row.child_info &&
-                  <Typography variant="subtitle2" gutterBottom component="div">
-                    {row.child_info}
-                  </Typography>
-                }
-              </div>
-              <Typography variant="p" gutterBottom component="div">
-                {row.short_description}
-              </Typography>
+                </div>
+                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", backgroundColor: "#fffff9", padding: "10px 20px"}}>
+                  {row.crunchbase.crunchbase_url &&
+                    <Typography variant="subtitle2" gutterBottom component="div">
+                      <Link href={row.crunchbase.crunchbase_url} target="_blank" rel="noreferrer">Crunchbase</Link>
+                    </Typography>
+                  }
+                  {row.grid_info &&
+                    <Typography variant="subtitle2" gutterBottom component="div">
+                      GRID: {row.grid_info}
+                    </Typography>
+                  }
+                  {row.permid_info &&
+                    <Typography variant="subtitle2" gutterBottom component="div">
+                      PermID: {row.permid_info}
+                    </Typography>
+                  }
+                  {row.parent_info &&
+                    <Typography variant="subtitle2" gutterBottom component="div">
+                      {row.parent_info}
+                    </Typography>
+                  }
+                  {row.child_info &&
+                    <Typography variant="subtitle2" gutterBottom component="div">
+                      {row.child_info}
+                    </Typography>
+                  }
+                </div>
               </div>
               <div>
                 <div style={{width: "33%", display: "inline-block"}}>
