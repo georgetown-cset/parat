@@ -202,16 +202,17 @@ function DataContainer(props) {
       }
       const max = Math.max(...rel_data);
       const min = Math.min(...rel_data);
-      const num_bins = Math.round(Math.pow(rel_data.length, 1/3));
-      const bin_size = Math.round((max - min) / num_bins);
+      const num_bins = 11;//Math.round(Math.pow(rel_data.length, 1/3));
+      const bin_size = 100;//Math.round((max - min) / num_bins);
       const bin_counts = [];
       const bin_labels = [];
       for (let i = 0; i < num_bins; i++) {
         bin_counts.push(0);
         bin_labels.push((bin_size * i) + "-" + (bin_size * (i + 1) - 1));
       }
+      bin_labels[bin_labels.length-1] += "+";
       for (let amt of rel_data) {
-        const bin_idx = Math.floor(amt / bin_size);
+        const bin_idx = Math.min(Math.floor(amt / bin_size), num_bins-1);
         bin_counts[bin_idx] += 1;
       }
       pubtype_to_bins_update[key] = {
@@ -219,6 +220,7 @@ function DataContainer(props) {
         "labels": bin_labels
       }
     }
+    alert(JSON.stringify(pubtype_to_bins_update))
     return pubtype_to_bins_update;
   }
 
