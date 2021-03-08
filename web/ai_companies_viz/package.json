@@ -19,6 +19,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "chart.js": "^2.9.4",
     "gatsby": "^2.32.3",
+    "gatsby-plugin-manifest": "^3.0.0",
     "plotly.js": "^1.58.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
