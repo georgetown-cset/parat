@@ -96,7 +96,7 @@ function DataContainer(props) {
         borderWidth: 1,
         hoverBackgroundColor: "rgba(255,99,132,0.4)",
         hoverBorderColor: "rgba(255,99,132,1)",
-        data: pubtype_to_bins["ai_pubs_in_top_conferences"]["ai_pubs_in_top_conferences"]
+        data: pubtype_to_bins["ai_pubs_in_top_conferences"]["counts"]
       }
     ]
   };
@@ -114,12 +114,80 @@ function DataContainer(props) {
       }
     ]
   };
-  const options = {
+  const ai_pubs_options = {
+    title: {
+      display: true,
+      text: "Company AI Publication Counts"
+    },
+    legend: {
+      position: "top",
+      labels: {
+        "boxWidth": 1
+      }
+    },
     scales: {
       yAxes: [{
-        display: true,
-        ticks: {
-            suggestedMin: 0
+        scaleLabel: {
+          labelString: "# Companies",
+          display: true,
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          labelString: "# Publications",
+          display: true,
+        }
+      }]
+    }
+  };
+  const top_ai_pubs_options = {
+    title: {
+      display: true,
+      text: "Company AI Publications in Top Conferences Counts"
+    },
+    legend: {
+      position: "top",
+      labels: {
+        "boxWidth": 1
+      }
+    },
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          labelString: "# Companies",
+          display: true,
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          labelString: "# Publications",
+          display: true,
+        }
+      }]
+    }
+  };
+  const ai_patents_options = {
+    title: {
+      display: true,
+      text: "Company AI Patents Counts"
+    },
+    legend: {
+      position: "top",
+      labels: {
+        "boxWidth": 1
+      }
+    },
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          labelString: "# Companies",
+          display: true,
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          labelString: "# Patents",
+          display: true,
         }
       }]
     }
@@ -156,15 +224,15 @@ function DataContainer(props) {
 
   return (
     <div id="graph_container" style={{"backgroundColor": "#FFFFFF", "padding": "10px 10px"}}>
-      <div id="summary-bars">
-        <div style={{width: "30%", display: "inline-block"}}>
-          <Bar data={ai_pubs_data} options={options}/>
+      <div id="summary-bars" style={{"padding": "10px 50px"}}>
+        <div style={{width: "33%", display: "inline-block"}}>
+          <Bar data={ai_pubs_data} options={ai_pubs_options}/>
         </div>
-        <div style={{width: "30%", display: "inline-block"}}>
-          <Bar data={top_ai_pubs_data} options={options}/>
+        <div style={{width: "33%", display: "inline-block"}}>
+          <Bar data={top_ai_pubs_data} options={top_ai_pubs_options}/>
         </div>
-        <div style={{width: "30%", display: "inline-block"}}>
-          <Bar data={ai_patents_data} options={options}/>
+        <div style={{width: "33%", display: "inline-block"}}>
+          <Bar data={ai_patents_data} options={ai_patents_options}/>
         </div>
       </div>
       <div style={{"padding": "10px 50px"}}>
