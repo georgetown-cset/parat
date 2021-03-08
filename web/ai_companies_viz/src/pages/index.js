@@ -256,6 +256,8 @@ const headCells = [
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort, onFilterRows } = props;
   const companyNames = company_data.map(company => company.name).sort();
+  const countries = [... new Set(company_data.map(company => company.country).filter(c => c !== null))].sort();
+  const stages = [... new Set(company_data.map(company => company.stage).filter(c => c !== null))].sort();
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -264,33 +266,66 @@ function EnhancedTableHead(props) {
     onFilterRows("name", [name]);
   }
 
+  function handleCountryFilter(evt, name){
+    onFilterRows("country", [name]);
+  }
+
+  function handleStageFilter(evt, name){
+    onFilterRows("stage", [name]);
+  }
+
   return (
     <TableHead>
       <TableRow>
+        <TableCell
+          key={"name"}
+          align={"left"}
+          width={"20%"}
+          padding={"none"}
+          colSpan={2}
+        >
+          <Autocomplete
+            id="company-name-search"
+            options={companyNames}
+            style={{ width: 300, marginLeft:"20px" }}
+            size="small"
+            renderInput={(params) => <TextField {...params} label="Company Name"/>}
+            onChange={handleNameFilter}
+           />
+        </TableCell>
+        <TableCell
+          key={"country"}
+          align={"left"}
+          padding={"none"}
+        >
+          <Autocomplete
+            id="country-search"
+            options={countries}
+            style={{ width: 300, marginLeft:"20px" }}
+            size="small"
+            renderInput={(params) => <TextField {...params} label="Country"/>}
+            onChange={handleCountryFilter}
+           />
+        </TableCell>
+        <TableCell
+          key={"stage"}
+          align={"left"}
+          padding={"none"}
+        >
+          <Autocomplete
+            id="stage-search"
+            options={stages}
+            style={{ width: 300, marginLeft:"20px" }}
+            size="small"
+            renderInput={(params) => <TextField {...params} label="Stage"/>}
+            onChange={handleStageFilter}
+           />
+        </TableCell>
         {headCells.map((headCell) => (
-            headCell.id === "name" ?
+            headCell.id.startsWith("ai_") &&
               <TableCell
                 key={headCell.id}
-                align={"left"}
-                width={headCell.id === "name" ? "30%" : ""}
-                padding={headCell.disablePadding ? "none" : "default"}
-                colSpan={2}
-              >
-                <Autocomplete
-                  id="company-name-search"
-                  options={companyNames}
-                  style={{ width: 300, marginLeft:"20px" }}
-                  size="small"
-                  renderInput={(params) => <TextField {...params} label="Company Name"/>}
-                  onChange={handleNameFilter}
-                 />
-              </TableCell>
-              :
-              <TableCell
-                key={headCell.id}
-                align={headCell.id.startsWith("ai_") ? "right" : "left"}
-                width={headCell.id === "name" ? "30%" : ""}
-                padding={headCell.disablePadding ? "none" : "default"}
+                align={"right"}
                 sortDirection={orderBy === headCell.id ? order : false}
               >
                 <TableSortLabel
@@ -302,7 +337,7 @@ function EnhancedTableHead(props) {
                   {orderBy === headCell.id ? (
                     <span className={classes.visuallyHidden}>
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </span>
+                  </span>
                   ) : null}
                 </TableSortLabel>
               </TableCell>
@@ -594,8 +629,9 @@ const CollapsibleTable = () => {
   };
 
   const handleFilterRows = (key, filters) => {
+    const clean_filters = filters.filter(k => (k !== null) && (k !== ""));
     const updatedKeyToSelected = {...keyToSelected};
-    updatedKeyToSelected[key] = filters;
+    updatedKeyToSelected[key] = clean_filters;
     setKeyToSelected(updatedKeyToSelected);
 
     const filtered_data = [];
