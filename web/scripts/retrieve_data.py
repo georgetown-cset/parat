@@ -54,17 +54,10 @@ def clean_parent(parents: list) -> str:
     return "Parents: "+(", ".join([parent["parent_name"].title()+(" (Acquired)" if parent["parent_acquisition"] else "")
                       for parent in parents]))
 
-def clean_children(agg_children: list, non_agg_children: list) -> str:
-    has_agg = len(agg_children) > 0
-    has_non_agg = len(non_agg_children) > 0
-    if not (has_agg or has_non_agg):
+def clean_children(children: list) -> str:
+    if len(children) == 0:
         return None
-    joined_agg_children = (f"Aggregated Children: {', '.join([c['child_name'].title() for c in agg_children])}"
-                           if has_agg else "")
-    joined_non_agg_children = ("Non-aggregated Children: "+
-                                ", ".join([c["child_name"].title() for c in non_agg_children]) if has_non_agg else "")
-    sep = "; " if has_agg and has_non_agg else ""
-    return f"{joined_agg_children}{sep}{joined_non_agg_children}"
+    return  ", ".join([c["child_name"].title() for c in children])
 
 def clean_market(market_info: list) -> str:
     if len(market_info) == 0:
@@ -94,7 +87,8 @@ def clean(refresh_images: bool) -> None:
             permids = js.pop("permid")
             js["permid_info"] = ", ".join([str(p) for p in permids])
             js["parent_info"] = clean_parent(js.pop("parent"))
-            js["child_info"] = clean_children(js.pop("children"), js.pop("non_agg_children"))
+            js["agg_child_info"] = clean_children(js.pop("children"))
+            js["unagg_child_info"] = clean_children(js.pop("non_agg_children"))
             js["years"] = list(range(2010, datetime.now().year))
             all_pubs_by_year = {p["year"]: p["all_pubs"] for p in js.pop("all_pubs_by_year")}
             js["yearly_all_publications"] = [0 if y not in all_pubs_by_year else all_pubs_by_year[y]

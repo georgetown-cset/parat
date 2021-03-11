@@ -359,6 +359,7 @@ EnhancedTableHead.propTypes = {
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  const [linkageVisible, setLinkageVisible] = React.useState(false);
 
   const pubs_data = {
     labels: row.years,
@@ -488,6 +489,16 @@ function Row(props) {
     }
   };
 
+  function toggleLinkageVisibility(e){
+    const newVisibility = !linkageVisible;
+    if(newVisibility){
+      e.target.innerHTML="Hide Linkages";
+    } else{
+      e.target.innerHTML="Show Linkages";
+    }
+    setLinkageVisible(newVisibility);
+  }
+
   return (
     <React.Fragment>
       <TableRow style={{borderBottom: "unset", cursor: "pointer"}} onClick={() => setOpen(!open)}>
@@ -522,31 +533,51 @@ function Row(props) {
                     {row.short_description}
                   </Typography>
                 </div>
-                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", backgroundColor: "#fffff9", padding: "10px 20px"}}>
-                  {row.crunchbase.crunchbase_url &&
-                    <Typography variant="subtitle2" gutterBottom component="div">
-                      <Link href={row.crunchbase.crunchbase_url} target="_blank" rel="noreferrer">Crunchbase</Link>
+                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", padding: "10px 20px"}}>
+                  <div class="button-toolbar" style={{marginBottom: "10px", textAlign: "center"}}>
+                    <Button variant="contained" color="primary" size="small"
+                            style={{marginRight: "10px"}} onClick={toggleLinkageVisibility}>
+                      Show Linkages
+                    </Button>
+                    {row.crunchbase.crunchbase_url &&
+                      <Link href={row.crunchbase.crunchbase_url} target="_blank" rel="noreferrer">
+                        <Button variant="contained" color="secondary" size="small">View on Crunchbase</Button>
+                      </Link>
+                    }
+                  </div>
+                  {linkageVisible &&
+                  <div>
+                    {row.grid_info &&
+                    <Typography variant="body2" gutterBottom component="p">
+                      <span style={{fontWeight: "bold"}}>GRID:</span> {row.grid_info}
                     </Typography>
-                  }
-                  {row.grid_info &&
-                    <Typography variant="subtitle2" gutterBottom component="div">
-                      GRID: {row.grid_info}
+                    }
+                    {row.permid_info &&
+                    <Typography variant="body2" gutterBottom component="p">
+                      <span style={{fontWeight: "bold"}}>PermID:</span> {row.permid_info}
                     </Typography>
-                  }
-                  {row.permid_info &&
-                    <Typography variant="subtitle2" gutterBottom component="div">
-                      PermID: {row.permid_info}
+                    }
+                    {row.parent_info &&
+                    <Typography variant="body2" gutterBottom component="p">
+                      <span style={{fontWeight: "bold"}}>Parents:</span> {row.parent_info}
                     </Typography>
-                  }
-                  {row.parent_info &&
-                    <Typography variant="subtitle2" gutterBottom component="div">
-                      {row.parent_info}
+                    }
+                    {row.agg_child_info &&
+                    <Typography variant="body2" gutterBottom component="p">
+                      <span style={{fontWeight: "bold"}}>Included Subsidiaries:</span> {row.agg_child_info}
                     </Typography>
-                  }
-                  {row.child_info &&
-                    <Typography variant="subtitle2" gutterBottom component="div">
-                      {row.child_info}
+                    }
+                    {row.unagg_child_info &&
+                    <Typography variant="body2" gutterBottom component="p">
+                      <span style={{fontWeight: "bold"}}>Excluded Subsidiaries:</span> {row.unagg_child_info}
                     </Typography>
+                    }
+                    {!(row.grid_info || row.permid_info || row.parent_info || row.agg_child_info || row.unagg_child_info) &&
+                    <Typography variant="body2" gutterBottom component="p" style={{textAlign: "center"}}>
+                      No linkage information available.
+                    </Typography>
+                    }
+                  </div>
                   }
                 </div>
               </div>
