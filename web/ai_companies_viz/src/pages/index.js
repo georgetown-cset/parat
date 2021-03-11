@@ -267,11 +267,11 @@ function EnhancedTableHead(props) {
   }
 
   function handleCountryFilter(evt, name){
-    onFilterRows("country", [name]);
+    onFilterRows("country", [...name]);
   }
 
   function handleStageFilter(evt, name){
-    onFilterRows("stage", [name]);
+    onFilterRows("stage", [...name]);
   }
 
   return (
@@ -299,6 +299,7 @@ function EnhancedTableHead(props) {
           padding={"none"}
         >
           <Autocomplete
+            multiple
             id="country-search"
             options={countries}
             style={{ width: 300, marginLeft:"20px" }}
@@ -313,6 +314,7 @@ function EnhancedTableHead(props) {
           padding={"none"}
         >
           <Autocomplete
+            multiple
             id="stage-search"
             options={stages}
             style={{ width: 300, marginLeft:"20px" }}

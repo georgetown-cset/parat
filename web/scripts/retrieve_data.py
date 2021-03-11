@@ -40,6 +40,7 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
         response = requests.get(url)
         if response.status_code == 200:
             Image.open(BytesIO(response.content)).save(os.path.join(web_src_dir, "images", img_name))
+            return img_name
         else:
             print("Download failed for "+url)
             return None
