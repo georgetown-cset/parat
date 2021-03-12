@@ -64,6 +64,25 @@ def clean_market(market_info: list) -> str:
         return None
     return ", ".join([f"{m['exchange'].upper()}:{m['ticker'].upper()}" for m in market_info])
 
+def add_ranks(rows: list) -> None:
+    """
+    Mutates `rows`
+    :param rows:
+    :return:
+    """
+    for key in ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"]:
+        curr_rank = 0
+        curr_value = 100000000000
+        rows.sort(key=lambda r: -1*r[key])
+        for idx, row in enumerate(rows):
+            if row[key] < curr_value:
+                curr_rank = idx+1
+                curr_value = row[key]
+            row[key] = {
+                "value": row[key],
+                "rank": curr_rank
+            }
+
 def clean(refresh_images: bool) -> None:
     rows = []
     missing_all = set()
@@ -108,6 +127,7 @@ def clean(refresh_images: bool) -> None:
                                              for y in js["years"]]
             js["market"] = clean_market(js.pop("market"))
             rows.append(js)
+    add_ranks(rows)
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
     print(f"missing all pubs years: {missing_all}")

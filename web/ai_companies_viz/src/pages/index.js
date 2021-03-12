@@ -198,22 +198,25 @@ function DataContainer(props) {
     for(let key of ["ai_pubs", "ai_pubs_in_top_conferences", "ai_patents"]) {
       const rel_data = [];
       for (let company_info of company_data) {
-        rel_data.push(company_info[key]);
+        rel_data.push(company_info[key]["value"]);
       }
       const max = Math.max(...rel_data);
       const min = Math.min(...rel_data);
       const num_bins = 11;//Math.round(Math.pow(rel_data.length, 1/3));
-      const bin_size = 100;//Math.round((max - min) / num_bins);
+      const bin_size = 10;//Math.round((max - min) / num_bins);
       const bin_counts = [];
       const bin_labels = [];
       for (let i = 0; i < num_bins; i++) {
         bin_counts.push(0);
         bin_labels.push((bin_size * i) + "-" + (bin_size * (i + 1) - 1));
       }
-      bin_labels[bin_labels.length-1] += "+";
+      bin_labels[bin_labels.length-1] = "100+";
+      bin_labels[0] = "1-9";
       for (let amt of rel_data) {
-        const bin_idx = Math.min(Math.floor(amt / bin_size), num_bins-1);
-        bin_counts[bin_idx] += 1;
+        if(amt > 0) {
+          const bin_idx = Math.min(Math.floor(amt / bin_size), num_bins - 1);
+          bin_counts[bin_idx] += 1;
+        }
       }
       pubtype_to_bins_update[key] = {
         "counts": bin_counts,
@@ -250,7 +253,7 @@ const headCells = [
   { id: "stage", numeric: false, disablePadding: false, label: "Company Stage" },
   { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Publications" },
   { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "AI Publications in Top Conferences" },
-  { id: "ai_patents", numeric: true, disablePadding: false, label: "Patents" },
+  { id: "ai_patents", numeric: true, disablePadding: false, label: "AI Patents" },
 ];
 
 function EnhancedTableHead(props) {
@@ -287,7 +290,7 @@ function EnhancedTableHead(props) {
           <Autocomplete
             id="company-name-search"
             options={companyNames}
-            style={{ width: 300, marginLeft:"20px" }}
+            style={{ minWidth: "300px", marginLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Company Name"/>}
             onChange={handleNameFilter}
@@ -510,9 +513,18 @@ function Row(props) {
         <TableCell component="th" scope="row">{row.name}</TableCell>
         <TableCell align="left">{row.country}</TableCell>
         <TableCell align="left">{row.stage}</TableCell>
-        <TableCell align="right">{row.ai_pubs}</TableCell>
-        <TableCell align="right">{row.ai_pubs_in_top_conferences}</TableCell>
-        <TableCell align="right">{row.ai_patents}</TableCell>
+        <TableCell align="right">
+          <div style={{marginRight: "5px", display:"inline-block"}}>{row.ai_pubs.value}</div>
+          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right"}}>#{row.ai_pubs.rank}</div>
+        </TableCell>
+        <TableCell align="right">
+          <div style={{marginRight: "5px", display:"inline-block"}}>{row.ai_pubs_in_top_conferences.value}</div>
+          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right"}}>#{row.ai_pubs_in_top_conferences.rank}</div>
+        </TableCell>
+        <TableCell align="right">
+          <div style={{marginRight: "5px", display:"inline-block"}}>{row.ai_patents.value}</div>
+          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right"}}>#{row.ai_patents.rank}</div>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
@@ -686,10 +698,10 @@ const CollapsibleTable = () => {
   };
 
   function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
+    if (b[orderBy]["value"] < a[orderBy]["value"]) {
       return -1;
     }
-    if (b[orderBy] > a[orderBy]) {
+    if (b[orderBy]["value"] > a[orderBy]["value"]) {
       return 1;
     }
     return 0;
@@ -706,7 +718,7 @@ const CollapsibleTable = () => {
     stabilizedThis.sort((a, b) => {
       const order = comparator(a[0], b[0]);
       if (order !== 0) return order;
-      return a[1] - b[1];
+      return a[1]["value"] - b[1]["value"];
     });
     return stabilizedThis.map((el) => el[0]);
   }
