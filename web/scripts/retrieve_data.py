@@ -116,7 +116,7 @@ def clean(refresh_images: bool) -> None:
             js["yearly_ai_publications"] = [0 if y not in ai_pubs_by_year else ai_pubs_by_year[y]
                                             for y in js["years"]]
             for year_idx in range(len(js["years"])):
-                if js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]:
+                if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
                     missing_all.add(js["name"])
             ai_patents_by_year = {p["priority_year"]: p["ai_patents"] for p in js.pop("ai_patents_by_year")}
             js["yearly_ai_patents"] = [0 if y not in ai_patents_by_year else ai_patents_by_year[y]
