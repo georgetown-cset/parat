@@ -192,7 +192,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const [linkageVisible, setLinkageVisible] = React.useState(false);
-  const [linkageBorder, setLinkageBorder] = React.useState(false);
+  const [linkageElevation, setLinkageElevation] = React.useState(0);
 
   const pubs_data = {
     labels: row.years,
@@ -326,10 +326,10 @@ function Row(props) {
     const newVisibility = !linkageVisible;
     if(newVisibility){
       e.target.innerHTML="Hide Linkages";
-      setLinkageBorder("1px black dashed");
+      setLinkageElevation(2);
     } else{
       e.target.innerHTML="Show Linkages";
-      setLinkageBorder("");
+      setLinkageElevation(0);
     }
     setLinkageVisible(newVisibility);
   }
@@ -359,7 +359,7 @@ function Row(props) {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0}} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <div style={{marginBottom: "10px"}}>
@@ -377,7 +377,8 @@ function Row(props) {
                     {row.short_description}
                   </Typography>
                 </div>
-                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", padding: "10px 20px", border: linkageBorder}}>
+                <div style={{width: "35%", display: "inline-block", verticalAlign:"top"}}>
+                  <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
                   <div class="button-toolbar" style={{marginBottom: "10px", textAlign: "center"}}>
                     <Button variant="contained" color="primary" size="small"
                             style={{marginRight: "10px"}} onClick={toggleLinkageVisibility}>
@@ -423,6 +424,7 @@ function Row(props) {
                     }
                   </div>
                   }
+                  </Paper>
                 </div>
               </div>
               <div>
