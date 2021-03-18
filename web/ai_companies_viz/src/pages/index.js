@@ -18,9 +18,6 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import SearchIcon from "@material-ui/icons/Search";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import PropTypes from "prop-types";
 
 import {company_data} from "./data"
@@ -60,7 +57,7 @@ const IndexPage = () => {
         The AI Companies Tracker is ... link to relevant reports ... link to export
         </Typography>
         <Typography variant={"body2"} paragraph>
-          The authors would like to thank...
+          The authors would like to thank... Ben Murphy and Yanqi Ding.
         </Typography>
       </div>
       <DataContainer data={company_data}/>
@@ -277,6 +274,12 @@ function EnhancedTableHead(props) {
     onFilterRows("stage", [...name]);
   }
 
+    const [value, setValue] = React.useState([20, 37]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <TableHead>
       <TableRow>
@@ -320,7 +323,7 @@ function EnhancedTableHead(props) {
             multiple
             id="stage-search"
             options={stages}
-            style={{ minWidth: 300, marginLeft:"20px" }}
+            style={{ marginLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Stage"/>}
             onChange={handleStageFilter}
@@ -331,7 +334,7 @@ function EnhancedTableHead(props) {
               <TableCell
                 key={headCell.id}
                 align={"left"}
-                style={{ width: 100 }}
+                style={{ width: 150 }}
                 sortDirection={orderBy === headCell.id ? order : false}
               >
                 <TableSortLabel
@@ -347,6 +350,7 @@ function EnhancedTableHead(props) {
                   </span>
                   ) : null}
                 </TableSortLabel>
+
               </TableCell>
           ))
         }
