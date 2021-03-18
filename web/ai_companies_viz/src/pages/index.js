@@ -695,6 +695,7 @@ const CollapsibleTable = () => {
       }
     }
     setData(filtered_data);
+    setPage(0);
   };
 
   function descendingComparator(a, b, orderBy) {
