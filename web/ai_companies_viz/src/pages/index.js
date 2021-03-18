@@ -1,6 +1,5 @@
 import { Bar, Line } from "react-chartjs-2";
 import React, { useEffect } from "react";
-import pageStyles from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import Box from "@material-ui/core/Box";
@@ -60,7 +59,7 @@ const IndexPage = () => {
           The authors would like to thank... Ben Murphy and Yanqi Ding.
         </Typography>
       </div>
-      <div style={{"padding": "10px 50px"}}>
+      <div style={{"padding": "10px 50px", backgroundColor: "#FFFFFF"}}>
         <CollapsibleTable/>
       </div>
     </main>
@@ -193,6 +192,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const [linkageVisible, setLinkageVisible] = React.useState(false);
+  const [linkageBorder, setLinkageBorder] = React.useState(false);
 
   const pubs_data = {
     labels: row.years,
@@ -326,8 +326,10 @@ function Row(props) {
     const newVisibility = !linkageVisible;
     if(newVisibility){
       e.target.innerHTML="Hide Linkages";
+      setLinkageBorder("1px black dashed");
     } else{
       e.target.innerHTML="Show Linkages";
+      setLinkageBorder("");
     }
     setLinkageVisible(newVisibility);
   }
@@ -375,7 +377,7 @@ function Row(props) {
                     {row.short_description}
                   </Typography>
                 </div>
-                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", padding: "10px 20px"}}>
+                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", padding: "10px 20px", border: linkageBorder}}>
                   <div class="button-toolbar" style={{marginBottom: "10px", textAlign: "center"}}>
                     <Button variant="contained" color="primary" size="small"
                             style={{marginRight: "10px"}} onClick={toggleLinkageVisibility}>
