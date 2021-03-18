@@ -290,7 +290,7 @@ function EnhancedTableHead(props) {
           <Autocomplete
             id="company-name-search"
             options={companyNames}
-            style={{ minWidth: "300px", marginLeft:"20px" }}
+            style={{ minWidth: "400px", marginLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Company Name"/>}
             onChange={handleNameFilter}
@@ -305,7 +305,7 @@ function EnhancedTableHead(props) {
             multiple
             id="country-search"
             options={countries}
-            style={{ width: 300, marginLeft:"20px" }}
+            style={{ minWidth: 300, marginLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Country"/>}
             onChange={handleCountryFilter}
@@ -320,7 +320,7 @@ function EnhancedTableHead(props) {
             multiple
             id="stage-search"
             options={stages}
-            style={{ width: 300, marginLeft:"20px" }}
+            style={{ minWidth: 300, marginLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Stage"/>}
             onChange={handleStageFilter}
@@ -330,13 +330,15 @@ function EnhancedTableHead(props) {
             headCell.id.startsWith("ai_") &&
               <TableCell
                 key={headCell.id}
-                align={"right"}
+                align={"left"}
+                style={{ width: 100 }}
                 sortDirection={orderBy === headCell.id ? order : false}
               >
                 <TableSortLabel
                   active={orderBy === headCell.id}
                   direction={orderBy === headCell.id ? order : "asc"}
                   onClick={createSortHandler(headCell.id)}
+                  style={{margin: "0 0 0 10px"}}
                 >
                   {headCell.label}
                   {orderBy === headCell.id ? (
@@ -514,16 +516,16 @@ function Row(props) {
         <TableCell align="left">{row.country}</TableCell>
         <TableCell align="left">{row.stage}</TableCell>
         <TableCell align="right">
-          <div style={{marginRight: "5px", display:"inline-block"}}>{row.ai_pubs.value}</div>
-          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right"}}>#{row.ai_pubs.rank}</div>
+          <div style={{marginRight: "5px", display:"inline-block", color:"hsl(19, 85%, "+(row.ai_pubs.frac_of_max*62)+"%)"}}>{row.ai_pubs.value}</div>
+          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right", marginRight: "20px"}}>#{row.ai_pubs.rank}</div>
         </TableCell>
         <TableCell align="right">
-          <div style={{marginRight: "5px", display:"inline-block"}}>{row.ai_pubs_in_top_conferences.value}</div>
-          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right"}}>#{row.ai_pubs_in_top_conferences.rank}</div>
+          <div style={{marginRight: "5px", display:"inline-block", color:"hsl(19, 85%, "+(row.ai_pubs_in_top_conferences.frac_of_max*62)+"%)"}}>{row.ai_pubs_in_top_conferences.value}</div>
+          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right", marginRight: "20px"}}>#{row.ai_pubs_in_top_conferences.rank}</div>
         </TableCell>
         <TableCell align="right">
-          <div style={{marginRight: "5px", display:"inline-block"}}>{row.ai_patents.value}</div>
-          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right"}}>#{row.ai_patents.rank}</div>
+          <div style={{marginRight: "5px", display:"inline-block", color:"hsl(19, 85%, "+(row.ai_patents.frac_of_max*62)+"%)"}}>{row.ai_patents.value}</div>
+          <div style={{color: "darkgrey", width: "30px", display:"inline-block", textAlign: "right", marginRight: "20px"}}>#{row.ai_patents.rank}</div>
         </TableCell>
       </TableRow>
       <TableRow>
@@ -674,6 +676,7 @@ const CollapsibleTable = () => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
+    setPage(0);
   };
 
   const handleFilterRows = (key, filters) => {

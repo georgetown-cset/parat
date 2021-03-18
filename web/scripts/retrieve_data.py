@@ -1,5 +1,6 @@
 import argparse
 import json
+import math
 import os
 import pycountry
 import requests
@@ -64,24 +65,28 @@ def clean_market(market_info: list) -> str:
         return None
     return ", ".join([f"{m['exchange'].upper()}:{m['ticker'].upper()}" for m in market_info])
 
-def add_ranks(rows: list) -> None:
+def add_ranks(rows: list, metrics: list) -> None:
     """
     Mutates `rows`
     :param rows:
+    :param metrics:
     :return:
     """
-    for key in ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"]:
+    for metric in metrics:
         curr_rank = 0
         curr_value = 100000000000
-        rows.sort(key=lambda r: -1*r[key])
+        rows.sort(key=lambda r: -1*r[metric])
+        max_metric = math.log(max([r[metric] for r in rows])+1, 2)
         for idx, row in enumerate(rows):
-            if row[key] < curr_value:
+            if row[metric] < curr_value:
                 curr_rank = idx+1
-                curr_value = row[key]
-            row[key] = {
-                "value": row[key],
-                "rank": curr_rank
+                curr_value = row[metric]
+            row[metric] = {
+                "value": row[metric],
+                "rank": curr_rank,
+                "frac_of_max": math.log(row[metric]+1, 2)/max_metric
             }
+
 
 def clean(refresh_images: bool) -> None:
     rows = []
@@ -127,7 +132,7 @@ def clean(refresh_images: bool) -> None:
                                              for y in js["years"]]
             js["market"] = clean_market(js.pop("market"))
             rows.append(js)
-    add_ranks(rows)
+    add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
     print(f"missing all pubs years: {missing_all}")
