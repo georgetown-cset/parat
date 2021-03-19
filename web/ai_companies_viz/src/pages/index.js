@@ -1,4 +1,4 @@
-import { Line } from "react-chartjs-2";
+import { Line, defaults } from "react-chartjs-2";
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete"
@@ -23,6 +23,9 @@ import "chartjs-plugin-annotation";
 import {company_data} from "../static_data/data.js"
 import cset_logo from "../images/cset_logo.svg";
 import "../styles/styles.css";
+
+// https://sevketyalcin.com/blog/responsive-charts-using-Chart.js-and-react-chartjs-2/
+defaults.global.maintainAspectRatio = false;
 
 
 const IndexPage = () => {
@@ -503,13 +506,13 @@ function Row(props) {
                 </div>
               </div>
               <div style={{textAlign: "center"}}>
-                <div style={{width: "33%", display: "inline-block"}}>
+                <div style={{width: "33%", display: "inline-block", height: "100%", minHeight: "250px", minWidth: "300px"}}>
                   <Line data={pubs_data} options={pubs_options}/>
                 </div>
-                <div style={{width: "33%", display: "inline-block"}}>
+                <div style={{width: "33%", display: "inline-block", height: "100%", minHeight: "250px", minWidth: "300px"}}>
                   <Line data={top_pubs_data} options={top_pubs_options}/>
                 </div>
-                <div style={{width: "33%", display: "inline-block"}}>
+                <div style={{width: "33%", display: "inline-block", height: "100%", minHeight: "250px", minWidth: "300px"}}>
                   <Line data={patents_data} options={patents_options}/>
                 </div>
               </div>
