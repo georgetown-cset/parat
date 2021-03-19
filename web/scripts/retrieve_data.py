@@ -1,15 +1,20 @@
 import argparse
+import csv
 import json
+import math
 import os
 import pycountry
+import re
 import requests
 
 from PIL import Image
+from datetime import datetime
 from google.cloud import bigquery
 from io import BytesIO
 
 raw_data_dir = "raw_data"
 raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
+supplemental_descriptions = os.path.join(raw_data_dir, "supplemental_company_descriptions.csv")
 web_src_dir = os.path.join("ai_companies_viz", "src")
 image_dir = os.path.join(raw_data_dir, "logos")
 
@@ -28,27 +33,92 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
         "(": "",
         ")": "",
         "/": "_",
-        ".": ""
+        ".": "",
+        "!": ""
     }
     company_name = company_name.lower()
     for from_char, to_char in cleanup.items():
         company_name = company_name.replace(from_char, to_char)
-    img_name = company_name+".png"
+    img_name = company_name.strip()+".png"
     if refresh_images:
         response = requests.get(url)
         if response.status_code == 200:
             Image.open(BytesIO(response.content)).save(os.path.join(web_src_dir, "images", img_name))
+            return img_name
         else:
             print("Download failed for "+url)
             return None
-    return img_name
+    elif img_name in os.listdir(os.path.join(web_src_dir, "images")):
+        return img_name
+    return None
+
+def clean_parent(parents: list) -> str:
+    if len(parents) == 0:
+        return None
+    return "Parents: "+(", ".join([parent["parent_name"].title()+(" (Acquired)" if parent["parent_acquisition"] else "")
+                      for parent in parents]))
+
+def clean_children(children: list) -> str:
+    if len(children) == 0:
+        return None
+    return  ", ".join([c["child_name"].title() for c in children])
+
+def clean_market(market_info: list) -> str:
+    if len(market_info) == 0:
+        return None
+    return ", ".join([f"{m['exchange'].upper()}:{m['ticker'].upper()}" for m in market_info])
+
+def add_ranks(rows: list, metrics: list) -> None:
+    """
+    Mutates `rows`
+    :param rows:
+    :param metrics:
+    :return:
+    """
+    for metric in metrics:
+        curr_rank = 0
+        curr_value = 100000000000
+        rows.sort(key=lambda r: -1*r[metric])
+        max_metric = math.log(max([r[metric] for r in rows])+1, 2)
+        for idx, row in enumerate(rows):
+            if row[metric] < curr_value:
+                curr_rank = idx+1
+                curr_value = row[metric]
+            row[metric] = {
+                "value": row[metric],
+                "rank": curr_rank,
+                "frac_of_max": math.log(row[metric]+1, 2)/max_metric
+            }
+
+def add_supplemental_descriptions(rows: list) -> None:
+    name_to_desc_info = {}
+    # map keys from csv to keys for javascript
+    desc_info = {
+        "wikipedia_description": "wikipedia_description",
+        "wikipedia_description_link": "wikipedia_link",
+        "company_description": "company_site_description",
+        "company_description_link": "company_site_link",
+        "retrieval_date": "description_retrieval_date"
+    }
+    with open(supplemental_descriptions) as f:
+        for row in csv.DictReader(f):
+            company_name = row["company_name"]
+            name_to_desc_info[company_name] = {desc_info[k]: row[k].strip() for k in desc_info}
+            wiki_description = name_to_desc_info[company_name]["wikipedia_description"]
+            name_to_desc_info[company_name]["wikipedia_description"] = re.sub(r"\[\d+\]", "", wiki_description)
+    for row in rows:
+        company_name = row["name"].strip().lower()
+        if company_name in name_to_desc_info:
+            row.update(name_to_desc_info[company_name])
+
 
 def clean(refresh_images: bool) -> None:
     rows = []
+    missing_all = set()
     with open(raw_data_fi) as f:
         for row in f:
             js = json.loads(row)
-            js["name"] = js["name"].title()
+            js["name"] = js["name"].strip().title()
             country = js["country"]
             if country is not None:
                 country_obj = pycountry.countries.get(alpha_2=country)
@@ -58,11 +128,40 @@ def clean(refresh_images: bool) -> None:
             logo_url = js.pop("logo_url")
             js["local_logo"] = retrieve_image(logo_url, js["name"], refresh_images)
             aliases = js.pop("aliases")
-            js["aliases"] = f"aka: {', '.join([a['alias'].title() for a in aliases])}"
+            js["aliases"] = None if len(aliases) == 0 else f"aka: {', '.join([a['alias'].title() for a in aliases])}"
             js["stage"] = js["stage"] if js["stage"] else "Unknown"
+            grids = js.pop("grid")
+            js["grid_info"] = ", ".join(grids)
+            permids = js.pop("permid")
+            js["permid_info"] = ", ".join([str(p) for p in permids])
+            js["parent_info"] = clean_parent(js.pop("parent"))
+            js["agg_child_info"] = clean_children(js.pop("children"))
+            js["unagg_child_info"] = clean_children(js.pop("non_agg_children"))
+            js["years"] = list(range(2010, datetime.now().year+1))
+            all_pubs_by_year = {p["year"]: p["all_pubs"] for p in js.pop("all_pubs_by_year")}
+            js["yearly_all_publications"] = [0 if y not in all_pubs_by_year else all_pubs_by_year[y]
+                                             for y in js["years"]]
+            ai_pubs_by_year = {p["year"]: p["ai_pubs"] for p in js.pop("ai_pubs_by_year")}
+            js["yearly_ai_publications"] = [0 if y not in ai_pubs_by_year else ai_pubs_by_year[y]
+                                            for y in js["years"]]
+            for year_idx in range(len(js["years"])):
+                if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
+                    missing_all.add(js["name"])
+            ai_patents_by_year = {p["priority_year"]: p["ai_patents"] for p in js.pop("ai_patents_by_year")}
+            js["yearly_ai_patents"] = [0 if y not in ai_patents_by_year else ai_patents_by_year[y]
+                                       for y in js["years"]]
+            ai_pubs_in_top_conf = {p["year"]: p["ai_pubs_in_top_conferences"]
+                                   for p in js.pop("ai_pubs_in_top_conferences_by_year")}
+            js["yearly_ai_pubs_top_conf"] = [0 if y not in ai_pubs_in_top_conf else ai_pubs_in_top_conf[y]
+                                             for y in js["years"]]
+            js["market"] = clean_market(js.pop("market"))
+            js["crunchbase_description"] = js.pop("short_description")
             rows.append(js)
+    add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
+    add_supplemental_descriptions(rows)
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
+    print(f"missing all pubs years: {missing_all}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
