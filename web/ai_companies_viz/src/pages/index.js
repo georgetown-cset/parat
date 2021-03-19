@@ -178,8 +178,8 @@ function EnhancedTableHead(props) {
             headCell.id.startsWith("ai_") &&
               <TableCell
                 key={headCell.id}
-                align={"left"}
-                style={{ width: 150 }}
+                align={"center"}
+                style={{ width: 150, verticalAlign: "bottom" }}
                 sortDirection={orderBy === headCell.id ? order : false}
               >
                 <TableSortLabel
