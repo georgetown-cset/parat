@@ -2,7 +2,6 @@ import { Line } from "react-chartjs-2";
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import Box from "@material-ui/core/Box";
 import Button from '@material-ui/core/Button';
 import Collapse from "@material-ui/core/Collapse";
 import Link from "@material-ui/core/Link";
@@ -21,7 +20,7 @@ import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
 import "chartjs-plugin-annotation";
 
-import {company_data} from "./data"
+import {company_data} from "../static_data/data.js"
 import cset_logo from "../images/cset_logo.svg";
 import "../styles/styles.css";
 
@@ -31,6 +30,7 @@ const IndexPage = () => {
   useEffect(() => {
     document.title = "CSET AI Companies Tracker";
     document.documentElement.lang = "en";
+    document.getElementById("table-container").style.visibility="visible";
   }, []);
 
 
@@ -61,7 +61,7 @@ const IndexPage = () => {
           The authors would like to thank... Ben Murphy and Yanqi Ding.
         </Typography>
       </div>
-      <div style={{"padding": "10px 50px", backgroundColor: "#FFFFFF"}}>
+      <div style={{"padding": "10px 50px", backgroundColor: "#FFFFFF", visibility: "hidden"}} id="table-container">
         <CollapsibleTable/>
       </div>
     </main>
@@ -132,14 +132,13 @@ function EnhancedTableHead(props) {
         <TableCell
           key={"name"}
           align={"left"}
-          width={"20%"}
           padding={"none"}
           colSpan={2}
         >
           <Autocomplete
             id="company-name-search"
             options={companyNames}
-            style={{ minWidth: "400px", marginLeft:"20px" }}
+            style={{ minWidth: "200px", paddingLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Company Name"/>}
             onChange={handleNameFilter}
@@ -154,7 +153,7 @@ function EnhancedTableHead(props) {
             multiple
             id="country-search"
             options={countries}
-            style={{ minWidth: "150px", marginLeft:"20px" }}
+            style={{ minWidth: "150px", paddingLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Country"/>}
             onChange={handleCountryFilter}
@@ -169,7 +168,7 @@ function EnhancedTableHead(props) {
             multiple
             id="stage-search"
             options={stages}
-            style={{ marginLeft:"20px" }}
+            style={{ minWidth: "70px", paddingLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Stage"/>}
             onChange={handleStageFilter}
@@ -180,14 +179,14 @@ function EnhancedTableHead(props) {
               <TableCell
                 key={headCell.id}
                 align={"center"}
-                style={{ width: 150, verticalAlign: "bottom" }}
+                style={{ width: "150px", verticalAlign: "bottom" }}
                 sortDirection={orderBy === headCell.id ? order : false}
               >
                 <TableSortLabel
                   active={orderBy === headCell.id}
                   direction={orderBy === headCell.id ? order : "asc"}
                   onClick={createSortHandler(headCell.id)}
-                  style={{margin: "0 0 0 10px"}}
+                  style={{padding: "0 0 0 10px"}}
                 >
                   {headCell.label}
                   {orderBy === headCell.id ? (
@@ -423,7 +422,7 @@ function Row(props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0}} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
+            <div style={{padding: "10px"}}>
               <div style={{marginBottom: "10px"}}>
                 <div style={{width: "60%", display: "inline-block"}}>
                   <div>
@@ -517,7 +516,7 @@ function Row(props) {
               <Typography variant="subtitle2" gutterBottom component="p" style={{textAlign: "right", fontSize: "90%"}}>
                 Grey shaded regions of the graphs contain partial data.
               </Typography>
-            </Box>
+            </div>
           </Collapse>
         </TableCell>
       </TableRow>
@@ -646,7 +645,7 @@ const CollapsibleTable = () => {
   }
 
   return (
-    <div>
+    <div style={{minWidth: "800px", margin:"10px 1% 20px 1%", textAlign: "center"}}>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
           <EnhancedTableHead
