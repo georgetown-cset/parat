@@ -43,6 +43,7 @@ WITH
       aipubs
     ON
       id_grid.grid = aipubs.Grid_ID )
+   WHERE year IS NOT NULL
   GROUP BY
     id,
     year),
@@ -64,7 +65,7 @@ WITH
     CSET_id)
 SELECT
   viz.*,
-  ai_pubs_by_year
+  ai_pubs_by_year,
 FROM
   `gcp-cset-projects.ai_companies_visualization.visualization_data` AS viz
 LEFT JOIN

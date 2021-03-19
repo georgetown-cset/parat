@@ -42,6 +42,8 @@ WITH
     COUNT(DISTINCT merged_id) AS ai_pubs_in_top_conferences
   FROM
     pubs_by_organization
+  WHERE
+    year IS NOT NULL
   GROUP BY
     CSET_id, year),
 -- Aggregate the by year data into an array

@@ -1,64 +1,74 @@
--- Add the total publications by year to our visualization data, if they have a grid.
--- We'll add the other ones later!
+-- Adding GRID-only total publication data by year to the visualization table
+-- This uses the same mechanism as adding GRID-only total publication counts; we're just doing it on a by-year basis
 CREATE OR REPLACE TABLE
   ai_companies_visualization.visualization_data AS
--- Pull the grid and paper ids for all publications with grid
 WITH
-  all_pubs AS (
+  allpubs AS (
+    -- Pulling all the papers with any of the given GRIDs as affiliates
   SELECT
-    grid_id,
+    Grid_ID,
     merged_id,
     year
   FROM
-    `gcp-cset-projects.ai_companies_visualization.grid_all_publications`),
-  -- Pull the grids and CSET organization ids for all organizations
+    ai_companies_visualization.grid_all_publications),
   organization_grids AS (
+    -- Getting all grids associated with any CSET id for an organization
   SELECT
-    CSET_id,
+    DISTINCT CSET_id AS id,
     grids
   FROM
-    `gcp-cset-projects.ai_companies_visualization.visualization_data`
-  -- Unnest the grids so we can link them to the paper data
-  CROSS JOIN
+    -- From either the organizations table
+    `gcp-cset-projects.high_resolution_entities.aggregated_organizations`,
     UNNEST(grid) AS grids),
-  -- Link the publication data to the CSET organization ids of the org it was published by, using its GRID
-  pubs_by_organization AS (
+  id_grid AS ( (
+    SELECT
+      id,
+      grid
+    FROM
+      -- or from the identifier_grid table
+      ai_companies_identification.identifiers_grid_augmented)
+  UNION DISTINCT
   SELECT
-    CSET_id,
-    grids,
-    merged_id,
-    year
+    *
   FROM
-    organization_grids
-  INNER JOIN
-    all_pubs
-  ON
-    grids=grid_id),
-  -- Count all the papers in top conferences for any given CSET organization id, keeping it separate by year
-  paper_counts AS (
+    organization_grids),
+  gridtable AS (
+    -- Getting the count of publications
   SELECT
-    CSET_id,
+    id,
     year,
     COUNT(DISTINCT merged_id) AS all_pubs
-  FROM
-    pubs_by_organization
+  FROM ( id_grid
+    INNER JOIN
+      allpubs
+    ON
+      id_grid.grid = allpubs.Grid_ID )
+   WHERE year IS NOT NULL
   GROUP BY
-    CSET_id, year),
--- Aggregate the by year data into an array
-by_year as (
+    id,
+    year),
+  -- Aggregating the by-year data so it's all in one field
+  by_year AS (
+  SELECT
+    CSET_id,
+    ARRAY_AGG(STRUCT(year,
+        all_pubs)
+    ORDER BY
+      year) AS all_pubs_by_year
+  FROM
+    `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
+  LEFT JOIN
+    gridtable
+  ON
+    orgs.CSET_id = gridtable.id
+  GROUP BY
+    CSET_id)
 SELECT
-CSET_id,
-ARRAY_AGG(STRUCT(year, all_pubs)
-ORDER BY year) as all_pubs_by_year
-FROM paper_counts
-GROUP BY CSET_id)
--- Link the results back to the full visualization data table using the CSET organization id
-SELECT
-  visualization_data.*,
-  all_pubs_by_year
+  viz.*,
+  all_pubs_by_year,
 FROM
-  ai_companies_visualization.visualization_data
+  `gcp-cset-projects.ai_companies_visualization.visualization_data` AS viz
 LEFT JOIN
   by_year
 ON
-  visualization_data.CSET_id = by_year.CSET_id
+  viz.CSET_id = by_year.CSET_id

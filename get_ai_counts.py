@@ -59,15 +59,11 @@ class CountGetter:
                 # Check if there's by year data already; if so, add it
                 if row[field_name_by_year] and row[field_name_by_year][0]["year"] is not None:
                     row_dict[field_name_by_year] = row[field_name_by_year]
-            # if we don't already have the publication count but we do have a regex to find it
-            if not row[field_name]:
+            # if we don't have a grid to find the publication count but we do have a regex to find it
+            if not row["grid"]:
                 if row["CSET_id"] not in self.regex_dict:
-                    # if it's not in the regex_dict or in ai_pubs but also has no grid, that's bad
-                    if not row["grid"]:
-                        print(row["CSET_id"])
-                    else:
-                        # in this case, it has a grid but it's AI publication count is 0
-                        row_dict[field_name] = 0
+                    # if it's not in the regex_dict but also has no grid, that's bad
+                    print(row["CSET_id"])
                 else:
                     regexes = self.regex_dict[row['CSET_id']]
                     regex_to_use = rf"r'(?i){regexes[0]}'"
@@ -86,6 +82,9 @@ class CountGetter:
                     # if we don't have total data, we won't have by_year either
                     if by_year:
                         row_dict[field_name_by_year] = self.run_query_papers_by_year(table_name, field_name, regexes)
+            elif not row[field_name]:
+                # if we have a grid but don't have any papers, set that to be true
+                row_dict[field_name] = 0
             companies.append(row_dict)
         return companies
 
