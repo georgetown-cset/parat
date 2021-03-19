@@ -503,14 +503,14 @@ function Row(props) {
                   </Paper>
                 </div>
               </div>
-              <div>
-                <div style={{width: "33%", display: "inline-block"}}>
+              <div style={{textAlign: "center"}}>
+                <div style={{width: "32%", display: "inline-block"}}>
                   <Line data={pubs_data} options={pubs_options}/>
                 </div>
-                <div style={{width: "33%", display: "inline-block"}}>
+                <div style={{width: "32%", display: "inline-block"}}>
                   <Line data={top_pubs_data} options={top_pubs_options}/>
                 </div>
-                <div style={{width: "33%", display: "inline-block"}}>
+                <div style={{width: "32%", display: "inline-block"}}>
                   <Line data={patents_data} options={patents_options}/>
                 </div>
               </div>
