@@ -118,6 +118,13 @@ function EnhancedTableHead(props) {
     onFilterRows("sliders", maxSliders);
   }
 
+  function valueLabelFormat(value) {
+    if(value === maxSliderValue){
+      return maxSliderValue+"+"
+    }
+    return value
+  }
+
   return (
     <TableHead>
       <TableRow>
@@ -192,6 +199,7 @@ function EnhancedTableHead(props) {
                   value={sliderValues[headCell.id]}
                   onChange={(evt, newRange) => handleSliderChange(evt, newRange, headCell.id)}
                   valueLabelDisplay="auto"
+                  valueLabelFormat={valueLabelFormat}
                   aria-labelledby="range-slider"
                 />
               </TableCell>
