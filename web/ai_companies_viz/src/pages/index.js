@@ -419,7 +419,7 @@ function Row(props) {
                   </Typography>
                   }
                 </div>
-                <div style={{width: "35%", display: "inline-block", verticalAlign:"top"}}>
+                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
                   <div class="button-toolbar" style={{marginBottom: "10px", textAlign: "center"}}>
                     <Button variant="contained" color="primary" size="small"
