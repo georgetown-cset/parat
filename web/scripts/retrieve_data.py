@@ -137,7 +137,7 @@ def clean(refresh_images: bool) -> None:
             js["parent_info"] = clean_parent(js.pop("parent"))
             js["agg_child_info"] = clean_children(js.pop("children"))
             js["unagg_child_info"] = clean_children(js.pop("non_agg_children"))
-            js["years"] = list(range(2010, datetime.now().year))
+            js["years"] = list(range(2010, datetime.now().year+1))
             all_pubs_by_year = {p["year"]: p["all_pubs"] for p in js.pop("all_pubs_by_year")}
             js["yearly_all_publications"] = [0 if y not in all_pubs_by_year else all_pubs_by_year[y]
                                              for y in js["years"]]

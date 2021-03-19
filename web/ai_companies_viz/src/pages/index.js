@@ -19,6 +19,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
+import "chartjs-plugin-annotation";
 
 import {company_data} from "./data"
 import cset_logo from "../images/cset_logo.svg";
@@ -266,7 +267,18 @@ function Row(props) {
           display: true,
         },
       }]
-    }
+    },
+    annotation: {
+      annotations: [{
+         type: "box",
+         yScaleID: "y-axis-0",
+         xScaleID: "x-axis-0",
+         xMin: new Date().getFullYear()-1,
+         xMax: new Date().getFullYear(),
+         backgroundColor: "rgba(100,100,100,0.1)",
+         borderColor: "rgba(0,0,0,0)"
+      }]
+   }
   };
   const top_pubs_data = {
     labels: row.years,
@@ -306,7 +318,18 @@ function Row(props) {
           display: true,
         },
       }]
-    }
+    },
+    annotation: {
+      annotations: [{
+         type: "box",
+         yScaleID: "y-axis-0",
+         xScaleID: "x-axis-0",
+         xMin: new Date().getFullYear()-1,
+         xMax: new Date().getFullYear(),
+         backgroundColor: "rgba(100,100,100,0.1)",
+         borderColor: "rgba(0,0,0,0)"
+      }]
+   }
   };
   const patents_data = {
     labels: row.years,
@@ -316,7 +339,7 @@ function Row(props) {
         data: row.yearly_ai_patents,
         backgroundColor: "rgba(0,0,0,0)",
         borderColor: "rgba(0,0,255,0.5)"
-      },
+      }
     ]
   };
   const patents_options = {
@@ -347,7 +370,18 @@ function Row(props) {
           display: true,
         },
       }]
-    }
+    },
+    annotation: {
+      annotations: [{
+         type: "box",
+         yScaleID: "y-axis-0",
+         xScaleID: "x-axis-0",
+         xMin: new Date().getFullYear()-3,
+         xMax: new Date().getFullYear(),
+         backgroundColor: "rgba(100,100,100,0.1)",
+         borderColor: "rgba(0,0,0,0)"
+      }]
+   }
   };
 
   function toggleLinkageVisibility(e){
@@ -480,6 +514,9 @@ function Row(props) {
                   <Line data={patents_data} options={patents_options}/>
                 </div>
               </div>
+              <Typography variant="subtitle2" gutterBottom component="p" style={{textAlign: "right", fontSize: "90%"}}>
+                Grey shaded regions of the graphs contain partial data.
+              </Typography>
             </Box>
           </Collapse>
         </TableCell>
