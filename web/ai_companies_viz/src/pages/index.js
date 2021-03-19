@@ -6,6 +6,7 @@ import Box from "@material-ui/core/Box";
 import Button from '@material-ui/core/Button';
 import Collapse from "@material-ui/core/Collapse";
 import Link from "@material-ui/core/Link";
+import Slider from "@material-ui/core/Slider";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -81,6 +82,12 @@ function EnhancedTableHead(props) {
   const companyNames = company_data.map(company => company.name).sort();
   const countries = [... new Set(company_data.map(company => company.country).filter(c => c !== null))].sort();
   const stages = [... new Set(company_data.map(company => company.stage).filter(c => c !== null))].sort();
+  const maxSliderValue = 100;
+  const [sliderValues, setSliderValues] = React.useState({
+    "ai_pubs": [0, maxSliderValue],
+    "ai_pubs_in_top_conferences": [0, maxSliderValue],
+    "ai_patents": [0, maxSliderValue]
+  });
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -97,11 +104,19 @@ function EnhancedTableHead(props) {
     onFilterRows("stage", [...name]);
   }
 
-    const [value, setValue] = React.useState([20, 37]);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  function handleSliderChange(evt, newRange, metric) {
+    const updatedSliders = {...sliderValues};
+    updatedSliders[metric] = newRange;
+    setSliderValues(updatedSliders);
+    // hackily, replace the "max" value with a very large value in the version of the
+    // dict we send to onFilterRows
+    const maxSliders = {};
+    for(let key in updatedSliders){
+      maxSliders[key] = [updatedSliders[key][0],
+        updatedSliders[key][1] === maxSliderValue ? 100000000 : updatedSliders[key][1]];
+    }
+    onFilterRows("sliders", maxSliders);
+  }
 
   return (
     <TableHead>
@@ -173,7 +188,12 @@ function EnhancedTableHead(props) {
                   </span>
                   ) : null}
                 </TableSortLabel>
-
+                <Slider
+                  value={sliderValues[headCell.id]}
+                  onChange={(evt, newRange) => handleSliderChange(evt, newRange, headCell.id)}
+                  valueLabelDisplay="auto"
+                  aria-labelledby="range-slider"
+                />
               </TableCell>
           ))
         }
@@ -489,11 +509,7 @@ const CollapsibleTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(company_data.slice(0));
-  const [keyToSelected, setKeyToSelected] = React.useState({
-    "country": [],
-    "stage": [],
-    "name": []
-  });
+  const [keyToSelected, setKeyToSelected] = React.useState({});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -512,7 +528,10 @@ const CollapsibleTable = () => {
   };
 
   const handleFilterRows = (key, filters) => {
-    const clean_filters = filters.filter(k => (k !== null) && (k !== ""));
+    let clean_filters = filters;
+    if(key !== "sliders") {
+      const clean_filters = filters.filter(k => (k !== null) && (k !== ""));
+    }
     const updatedKeyToSelected = {...keyToSelected};
     updatedKeyToSelected[key] = clean_filters;
     setKeyToSelected(updatedKeyToSelected);
@@ -521,7 +540,15 @@ const CollapsibleTable = () => {
     for(let datum of company_data) {
       let include = true;
       for (let key in updatedKeyToSelected) {
-        if ((updatedKeyToSelected[key].length !== 0) && !updatedKeyToSelected[key].includes(datum[key])) {
+        if(key === "sliders"){
+          for (let metric in updatedKeyToSelected["sliders"]){
+            const min_and_max = updatedKeyToSelected["sliders"][metric];
+            if ((datum[metric]["value"] < min_and_max[0]) || (datum[metric]["value"] > min_and_max[1])){
+              include = false;
+            }
+          }
+        }
+        else if ((updatedKeyToSelected[key].length !== 0) && !updatedKeyToSelected[key].includes(datum[key])) {
           include = false;
         }
       }
