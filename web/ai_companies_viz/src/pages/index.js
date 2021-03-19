@@ -1,4 +1,4 @@
-import { Bar, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete"
@@ -81,8 +81,8 @@ const headCells = [
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort, onFilterRows } = props;
   const companyNames = company_data.map(company => company.name).sort();
-  const countries = [... new Set(company_data.map(company => company.country).filter(c => c !== null))].sort();
-  const stages = [... new Set(company_data.map(company => company.stage).filter(c => c !== null))].sort();
+  const countries = [...new Set(company_data.map(company => company.country).filter(c => c !== null))].sort();
+  const stages = [...new Set(company_data.map(company => company.stage).filter(c => c !== null))].sort();
   const maxSliderValue = 100;
   const [sliderValues, setSliderValues] = React.useState({
     "ai_pubs": [0, maxSliderValue],
@@ -401,7 +401,7 @@ function Row(props) {
       <TableRow style={{borderBottom: "unset", cursor: "pointer"}} onClick={() => setOpen(!open)}>
         <TableCell>
           {row.local_logo !== null &&
-            <img src={require("../images/" + row.local_logo)} style={{height: "30px"}}/>
+            <img src={require("../images/" + row.local_logo)} style={{height: "30px"}} alt={row.name}/>
           }
         </TableCell>
         <TableCell component="th" scope="row">{row.name}</TableCell>
@@ -455,7 +455,7 @@ function Row(props) {
                 </div>
                 <div style={{width: "35%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
-                  <div class="button-toolbar" style={{marginBottom: "10px", textAlign: "center"}}>
+                  <div style={{marginBottom: "10px", textAlign: "center"}}>
                     <Button variant="contained" color="primary" size="small"
                             style={{marginRight: "10px"}} onClick={toggleLinkageVisibility}>
                       Show Linkages
@@ -530,9 +530,9 @@ Row.propTypes = {
     name: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
     stage: PropTypes.string.isRequired,
-    ai_pubs: PropTypes.number.isRequired,
-    ai_pubs_in_top_conferences: PropTypes.number.isRequired,
-    ai_patents: PropTypes.number.isRequired,
+    ai_pubs: PropTypes.object.isRequired,
+    ai_pubs_in_top_conferences: PropTypes.object.isRequired,
+    ai_patents: PropTypes.object.isRequired,
   }).isRequired,
 };
 
@@ -589,7 +589,7 @@ const CollapsibleTable = () => {
   const handleFilterRows = (key, filters) => {
     let clean_filters = filters;
     if(key !== "sliders") {
-      const clean_filters = filters.filter(k => (k !== null) && (k !== ""));
+      clean_filters = filters.filter(k => (k !== null) && (k !== ""));
     }
     const updatedKeyToSelected = {...keyToSelected};
     updatedKeyToSelected[key] = clean_filters;
