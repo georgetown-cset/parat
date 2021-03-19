@@ -1,8 +1,10 @@
 import argparse
+import csv
 import json
 import math
 import os
 import pycountry
+import re
 import requests
 
 from PIL import Image
@@ -12,6 +14,7 @@ from io import BytesIO
 
 raw_data_dir = "raw_data"
 raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
+supplemental_descriptions = os.path.join(raw_data_dir, "supplemental_company_descriptions.csv")
 web_src_dir = os.path.join("ai_companies_viz", "src")
 image_dir = os.path.join(raw_data_dir, "logos")
 
@@ -87,6 +90,27 @@ def add_ranks(rows: list, metrics: list) -> None:
                 "frac_of_max": math.log(row[metric]+1, 2)/max_metric
             }
 
+def add_supplemental_descriptions(rows: list) -> None:
+    name_to_desc_info = {}
+    # map keys from csv to keys for javascript
+    desc_info = {
+        "wikipedia_description": "wikipedia_description",
+        "wikipedia_description_link": "wikipedia_link",
+        "company_description": "company_site_description",
+        "company_description_link": "company_site_link",
+        "retrieval_date": "description_retrieval_date"
+    }
+    with open(supplemental_descriptions) as f:
+        for row in csv.DictReader(f):
+            company_name = row["company_name"]
+            name_to_desc_info[company_name] = {desc_info[k]: row[k].strip() for k in desc_info}
+            wiki_description = name_to_desc_info[company_name]["wikipedia_description"]
+            name_to_desc_info[company_name]["wikipedia_description"] = re.sub(r"\[\d+\]", "", wiki_description)
+    for row in rows:
+        company_name = row["name"].strip().lower()
+        if company_name in name_to_desc_info:
+            row.update(name_to_desc_info[company_name])
+
 
 def clean(refresh_images: bool) -> None:
     rows = []
@@ -131,8 +155,10 @@ def clean(refresh_images: bool) -> None:
             js["yearly_ai_pubs_top_conf"] = [0 if y not in ai_pubs_in_top_conf else ai_pubs_in_top_conf[y]
                                              for y in js["years"]]
             js["market"] = clean_market(js.pop("market"))
+            js["crunchbase_description"] = js.pop("short_description")
             rows.append(js)
     add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
+    add_supplemental_descriptions(rows)
     with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
     print(f"missing all pubs years: {missing_all}")

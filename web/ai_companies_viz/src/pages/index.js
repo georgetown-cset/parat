@@ -153,7 +153,7 @@ function EnhancedTableHead(props) {
             multiple
             id="country-search"
             options={countries}
-            style={{ minWidth: 300, marginLeft:"20px" }}
+            style={{ marginLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Country"/>}
             onChange={handleCountryFilter}
@@ -401,9 +401,23 @@ function Row(props) {
                   <Typography variant="subtitle2" gutterBottom component="div">
                     {row.aliases}
                   </Typography>
+                  {row.crunchbase_description && row.crunchbase_description.length > 0 &&
                   <Typography variant="p" gutterBottom component="div" style={{marginTop: "10px"}}>
-                    {row.short_description}
+                    "{row.crunchbase_description}" <span style={{fontSize: "75%", marginLeft: "10px"}}>Crunchbase</span>
                   </Typography>
+                  }
+                  {row.wikipedia_description && row.wikipedia_description.length > 0 &&
+                  <Typography variant="p" gutterBottom component="div" style={{marginTop: "10px"}}>
+                    "{row.wikipedia_description}"
+                    <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.wikipedia_link} target="blank" rel="noreferrer">Wikipedia</a>, retrieved {row.description_retrieval_date}</span>
+                  </Typography>
+                  }
+                  {row.company_site_description && row.company_site_description.length > 0 &&
+                  <Typography variant="p" gutterBottom component="div" style={{marginTop: "10px"}}>
+                    "{row.company_site_description}"
+                    <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.company_site_link} target="blank" rel="noreferrer">Homepage</a>, retrieved {row.description_retrieval_date}</span>
+                  </Typography>
+                  }
                 </div>
                 <div style={{width: "35%", display: "inline-block", verticalAlign:"top"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
