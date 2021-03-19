@@ -154,7 +154,7 @@ function EnhancedTableHead(props) {
             multiple
             id="country-search"
             options={countries}
-            style={{ marginLeft:"20px" }}
+            style={{ minWidth: "150px", marginLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Country"/>}
             onChange={handleCountryFilter}
@@ -436,18 +436,18 @@ function Row(props) {
                     {row.aliases}
                   </Typography>
                   {row.crunchbase_description && row.crunchbase_description.length > 0 &&
-                  <Typography variant="p" gutterBottom component="div" style={{marginTop: "10px"}}>
+                  <Typography variant="body2" gutterBottom component="div" style={{marginTop: "10px"}}>
                     "{row.crunchbase_description}" <span style={{fontSize: "75%", marginLeft: "10px"}}>Crunchbase</span>
                   </Typography>
                   }
                   {row.wikipedia_description && row.wikipedia_description.length > 0 &&
-                  <Typography variant="p" gutterBottom component="div" style={{marginTop: "10px"}}>
+                  <Typography variant="body2" gutterBottom component="div" style={{marginTop: "10px"}}>
                     "{row.wikipedia_description}"
                     <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.wikipedia_link} target="blank" rel="noreferrer">Wikipedia</a>, retrieved {row.description_retrieval_date}</span>
                   </Typography>
                   }
                   {row.company_site_description && row.company_site_description.length > 0 &&
-                  <Typography variant="p" gutterBottom component="div" style={{marginTop: "10px"}}>
+                  <Typography variant="body2" gutterBottom component="div" style={{marginTop: "10px"}}>
                     "{row.company_site_description}"
                     <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.company_site_link} target="blank" rel="noreferrer">Homepage</a>, retrieved {row.description_retrieval_date}</span>
                   </Typography>
@@ -504,13 +504,13 @@ function Row(props) {
                 </div>
               </div>
               <div style={{textAlign: "center"}}>
-                <div style={{width: "32%", display: "inline-block"}}>
+                <div style={{width: "33%", display: "inline-block"}}>
                   <Line data={pubs_data} options={pubs_options}/>
                 </div>
-                <div style={{width: "32%", display: "inline-block"}}>
+                <div style={{width: "33%", display: "inline-block"}}>
                   <Line data={top_pubs_data} options={top_pubs_options}/>
                 </div>
-                <div style={{width: "32%", display: "inline-block"}}>
+                <div style={{width: "33%", display: "inline-block"}}>
                   <Line data={patents_data} options={patents_options}/>
                 </div>
               </div>
