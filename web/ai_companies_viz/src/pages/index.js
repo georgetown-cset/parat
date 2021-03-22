@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 
@@ -48,7 +49,7 @@ const IndexPage = () => {
       </div>
       <div style={{padding: "10px 50px", backgroundColor: "#FFFFFF"}} id="table-container">
         {!isSSR && (
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <React.Suspense fallback={<div style={{textAlign: "center"}}><CircularProgress/></div>}>
             <CollapsibleTable/>
           </React.Suspense>
         )}
