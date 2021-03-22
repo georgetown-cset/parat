@@ -106,6 +106,19 @@ def add_supplemental_descriptions(rows: list) -> None:
             name_to_desc_info[company_name] = {desc_info[k]: row[k].strip() for k in desc_info}
             wiki_description = name_to_desc_info[company_name]["wikipedia_description"]
             name_to_desc_info[company_name]["wikipedia_description"] = re.sub(r"\[\d+\]", "", wiki_description)
+            wiki_link = name_to_desc_info[company_name]["wikipedia_link"]
+            if not (wiki_link and ("http" in wiki_link or ".org" in wiki_link)):
+                if wiki_description:
+                    print(f"{company_name} missing wiki link")
+                name_to_desc_info[company_name]["wikipedia_link"] = None
+                name_to_desc_info[company_name]["wikipedia_description"] = None
+            source_description = name_to_desc_info[company_name]["company_site_description"]
+            source_link = name_to_desc_info[company_name]["company_site_link"]
+            if  not (source_link and ("http" in source_link or ".com" in source_link)):
+                if source_description:
+                    print(f"{company_name} missing source link")
+                name_to_desc_info[company_name]["company_site_description"] = None
+                name_to_desc_info[company_name]["company_site_link"] = None
     for row in rows:
         company_name = row["name"].strip().lower()
         if company_name in name_to_desc_info:
@@ -159,7 +172,7 @@ def clean(refresh_images: bool) -> None:
             rows.append(js)
     add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
     add_supplemental_descriptions(rows)
-    with open(os.path.join(web_src_dir, "pages", "data.js"), mode="w") as out:
+    with open(os.path.join(web_src_dir, "static_data", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
     print(f"missing all pubs years: {missing_all}")
 
