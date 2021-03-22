@@ -203,8 +203,8 @@ EnhancedTableHead.propTypes = {
 };
 
 function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
+  const { row, forceExpand } = props;
+  const [open, setOpen] = React.useState(forceExpand);
   const [linkageVisible, setLinkageVisible] = React.useState(false);
   const [linkageElevation, setLinkageElevation] = React.useState(0);
 
@@ -437,9 +437,11 @@ function Row(props) {
                 </div>
                 <div style={{width: "35%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
-                  <Typography variant="body2" gutterBottom component="div">
-                    <span style={{fontWeight: "bold"}}>Aliases:</span> {row.aliases}
-                  </Typography>
+                  {row.aliases &&
+                    <Typography variant="body2" gutterBottom component="div">
+                      <span style={{fontWeight: "bold"}}>Aliases:</span> {row.aliases}
+                    </Typography>
+                  }
                   {linkageVisible &&
                   <div>
                     {row.grid_info &&
@@ -553,6 +555,8 @@ const CollapsibleTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(company_data.slice(0));
+  const [forceExpand, setForceExpand] = React.useState(false);
+
   const maxSliderValue = 100;
   const defaultFilterValues = {
     "ai_pubs": [0, maxSliderValue],
@@ -651,8 +655,17 @@ const CollapsibleTable = () => {
         <Button color="primary" size="small" style={{marginRight: "10px"}} onClick={resetFilter}>
           <ClearIcon size={"small"}/> Clear Filters
         </Button>
-        <Button color="primary" size="small" style={{marginRight: "10px"}}>
+        <Button color="primary" size="small"
+                style={{marginRight: "10px", display: forceExpand ? "none": "inline-flex"}}
+                onClick={() => setForceExpand(true)}
+        >
           <ExpandMoreIcon size="small"/> Expand All Rows
+        </Button>
+        <Button color="primary" size="small"
+                style={{marginRight: "10px", display: forceExpand ? "inline-flex": "none"}}
+                onClick={() => setForceExpand(false)}
+        >
+          <ExpandLessIcon size="small"/> Close All Rows
         </Button>
       </div>
       <TableContainer component={Paper}>
@@ -666,10 +679,10 @@ const CollapsibleTable = () => {
             filterValues={filterValues}
             maxSliderValue={maxSliderValue}
           />
-          <TableBody>
+          <TableBody key={"table-content-"+forceExpand}>
             {stableSort(data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
-              return (<Row key={row.name} row={row} />)
+              return (<Row key={row.name} row={row} forceExpand={forceExpand}/>)
             })}
           </TableBody>
         </Table>
