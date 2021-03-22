@@ -3,7 +3,10 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import Button from '@material-ui/core/Button';
+import ClearIcon from '@material-ui/icons/Clear';
 import Collapse from "@material-ui/core/Collapse";
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Link from "@material-ui/core/Link";
 import Slider from "@material-ui/core/Slider";
 import Table from "@material-ui/core/Table";
@@ -85,36 +88,17 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort, onFilterRows } = props;
+  const { classes, order, orderBy, onRequestSort, onFilterRows, filterValues, maxSliderValue} = props;
   const companyNames = company_data.map(company => company.name).sort();
   const countries = [...new Set(company_data.map(company => company.country).filter(c => c !== null))].sort();
   const stages = [...new Set(company_data.map(company => company.stage).filter(c => c !== null))].sort();
-  const maxSliderValue = 100;
-  const [sliderValues, setSliderValues] = React.useState({
-    "ai_pubs": [0, maxSliderValue],
-    "ai_pubs_in_top_conferences": [0, maxSliderValue],
-    "ai_patents": [0, maxSliderValue]
-  });
+
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
   function handleFilter(evt, values, key){
     onFilterRows(key, [...values]);
-  }
-
-  function handleSliderChange(evt, newRange, metric) {
-    const updatedSliders = {...sliderValues};
-    updatedSliders[metric] = newRange;
-    setSliderValues(updatedSliders);
-    // hackily, replace the "max" value with a very large value in the version of the
-    // dict we send to onFilterRows
-    const maxSliders = {};
-    for(let key in updatedSliders){
-      maxSliders[key] = [updatedSliders[key][0],
-        updatedSliders[key][1] === maxSliderValue ? 100000000 : updatedSliders[key][1]];
-    }
-    onFilterRows("sliders", maxSliders);
   }
 
   function valueLabelFormat(value) {
@@ -141,6 +125,7 @@ function EnhancedTableHead(props) {
             size="small"
             renderInput={(params) => <TextField {...params} label="Company Name"/>}
             onChange={(evt, values) => handleFilter(evt, values, "name")}
+            value={filterValues["name"]}
            />
         </TableCell>
         <TableCell
@@ -156,6 +141,7 @@ function EnhancedTableHead(props) {
             size="small"
             renderInput={(params) => <TextField {...params} label="Country"/>}
             onChange={(evt, values) => handleFilter(evt, values, "country")}
+            value={filterValues["country"]}
            />
         </TableCell>
         <TableCell
@@ -171,6 +157,7 @@ function EnhancedTableHead(props) {
             size="small"
             renderInput={(params) => <TextField {...params} label="Stage"/>}
             onChange={(evt, values) => handleFilter(evt, values, "stage")}
+            value={filterValues["stage"]}
            />
         </TableCell>
         {headCells.map((headCell) => (
@@ -195,8 +182,8 @@ function EnhancedTableHead(props) {
                   ) : null}
                 </TableSortLabel>
                 <Slider
-                  value={sliderValues[headCell.id]}
-                  onChange={(evt, newRange) => handleSliderChange(evt, newRange, headCell.id)}
+                  value={filterValues[headCell.id]}
+                  onChange={(evt, newRange) => handleFilter(evt, newRange, headCell.id)}
                   valueLabelDisplay="auto"
                   valueLabelFormat={valueLabelFormat}
                   aria-labelledby="range-slider"
@@ -566,7 +553,16 @@ const CollapsibleTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(company_data.slice(0));
-  const [keyToSelected, setKeyToSelected] = React.useState({});
+  const maxSliderValue = 100;
+  const defaultFilterValues = {
+    "ai_pubs": [0, maxSliderValue],
+    "ai_pubs_in_top_conferences": [0, maxSliderValue],
+    "ai_patents": [0, maxSliderValue],
+    "name": [],
+    "country": [],
+    "stage": []
+  };
+  const [filterValues, setFilterValues] = React.useState({...defaultFilterValues});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -584,28 +580,34 @@ const CollapsibleTable = () => {
     setPage(0);
   };
 
-  const handleFilterRows = (key, filters) => {
+  const resetFilter = () => {
+    setFilterValues({...defaultFilterValues});
+    setData(company_data.slice(0));
+  };
+
+  const handleFilterRows = (changed_key, filters) => {
     let clean_filters = filters;
-    if(key !== "sliders") {
+    if(changed_key !== "sliders") {
       clean_filters = filters.filter(k => (k !== null) && (k !== ""));
     }
-    const updatedKeyToSelected = {...keyToSelected};
-    updatedKeyToSelected[key] = clean_filters;
-    setKeyToSelected(updatedKeyToSelected);
+    const updatedFilterValues = {...filterValues};
+    updatedFilterValues[changed_key] = clean_filters;
+    setFilterValues(updatedFilterValues);
 
     const filtered_data = [];
+    const slider_keys = ["ai_pubs", "ai_patents", "ai_pubs_in_top_conferences"];
     for(let datum of company_data) {
       let include = true;
-      for (let key in updatedKeyToSelected) {
-        if(key === "sliders"){
-          for (let metric in updatedKeyToSelected["sliders"]){
-            const min_and_max = updatedKeyToSelected["sliders"][metric];
-            if ((datum[metric]["value"] < min_and_max[0]) || (datum[metric]["value"] > min_and_max[1])){
-              include = false;
-            }
+      for (let key in updatedFilterValues) {
+        // check within range if sliders
+        if(slider_keys.includes(key)){
+          const min_value = updatedFilterValues[key][0];
+          const max_value = updatedFilterValues[key][1] === maxSliderValue ? 10000000 : updatedFilterValues[key][1];
+          if ((datum[key]["value"] < min_value) || (datum[key]["value"] > max_value)){
+            include = false;
           }
         }
-        else if ((updatedKeyToSelected[key].length !== 0) && !updatedKeyToSelected[key].includes(datum[key])) {
+        else if ((updatedFilterValues[key].length !== 0) && !updatedFilterValues[key].includes(datum[key])) {
           include = false;
         }
       }
@@ -645,6 +647,14 @@ const CollapsibleTable = () => {
 
   return (
     <div style={{minWidth: "800px", margin:"10px 1% 20px 1%", textAlign: "center"}}>
+      <div id="button-panel" style={{textAlign: "left", marginBottom: "5px"}}>
+        <Button color="primary" size="small" style={{marginRight: "10px"}} onClick={resetFilter}>
+          <ClearIcon size={"small"}/> Clear Filters
+        </Button>
+        <Button color="primary" size="small" style={{marginRight: "10px"}}>
+          <ExpandMoreIcon size="small"/> Expand All Rows
+        </Button>
+      </div>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
           <EnhancedTableHead
@@ -653,6 +663,8 @@ const CollapsibleTable = () => {
             orderBy={orderBy}
             onRequestSort={handleRequestSort}
             onFilterRows={handleFilterRows}
+            filterValues={filterValues}
+            maxSliderValue={maxSliderValue}
           />
           <TableBody>
             {stableSort(data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
