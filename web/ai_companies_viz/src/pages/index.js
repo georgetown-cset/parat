@@ -385,10 +385,10 @@ function Row(props) {
   function toggleLinkageVisibility(e){
     const newVisibility = !linkageVisible;
     if(newVisibility){
-      e.target.innerHTML="Hide Linkages";
+      e.target.innerHTML="Show Less Metadata";
       setLinkageElevation(2);
     } else{
-      e.target.innerHTML="Show Linkages";
+      e.target.innerHTML="Show More Metadata";
       setLinkageElevation(0);
     }
     setLinkageVisible(newVisibility);
@@ -430,9 +430,6 @@ function Row(props) {
                   </Typography>
                   {row.market && <span style={{paddingLeft: "10px", color: "#545454"}}>{row.market}</span>}
                   </div>
-                  <Typography variant="subtitle2" gutterBottom component="div">
-                    {row.aliases}
-                  </Typography>
                   {row.crunchbase_description && row.crunchbase_description.length > 0 &&
                   <Typography variant="body2" gutterBottom component="div" style={{marginTop: "10px"}}>
                     "{row.crunchbase_description}" <span style={{fontSize: "75%", marginLeft: "10px"}}>Crunchbase</span>
@@ -453,17 +450,9 @@ function Row(props) {
                 </div>
                 <div style={{width: "35%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
-                  <div style={{marginBottom: "10px", textAlign: "center"}}>
-                    <Button color="primary" size="small"
-                            style={{marginRight: "10px"}} onClick={toggleLinkageVisibility}>
-                      Show Linkages
-                    </Button>
-                    {row.crunchbase.crunchbase_url &&
-                      <Link href={row.crunchbase.crunchbase_url} target="_blank" rel="noreferrer">
-                        <Button color="secondary" size="small">View on Crunchbase</Button>
-                      </Link>
-                    }
-                  </div>
+                  <Typography variant="body2" gutterBottom component="div">
+                    <span style={{fontWeight: "bold"}}>Aliases:</span> {row.aliases}
+                  </Typography>
                   {linkageVisible &&
                   <div>
                     {row.grid_info &&
@@ -498,6 +487,17 @@ function Row(props) {
                     }
                   </div>
                   }
+                  <div style={{ textAlign: "center"}}>
+                    <Button color="primary" size="small"
+                            style={{marginRight: "10px"}} onClick={toggleLinkageVisibility}>
+                      Show More Metadata
+                    </Button>
+                    {row.crunchbase.crunchbase_url &&
+                      <Link href={row.crunchbase.crunchbase_url} target="_blank" rel="noreferrer">
+                        <Button color="secondary" size="small">View on Crunchbase</Button>
+                      </Link>
+                    }
+                  </div>
                   </Paper>
                 </div>
               </div>

@@ -141,7 +141,7 @@ def clean(refresh_images: bool) -> None:
             logo_url = js.pop("logo_url")
             js["local_logo"] = retrieve_image(logo_url, js["name"], refresh_images)
             aliases = js.pop("aliases")
-            js["aliases"] = None if len(aliases) == 0 else f"aka: {', '.join([a['alias'].title() for a in aliases])}"
+            js["aliases"] = None if len(aliases) == 0 else f"{', '.join([a['alias'].title() for a in aliases])}"
             js["stage"] = js["stage"] if js["stage"] else "Unknown"
             grids = js.pop("grid")
             js["grid_info"] = ", ".join(grids)
