@@ -67,7 +67,7 @@ const IndexPage = () => {
       <div style={{padding: "10px 50px", backgroundColor: "#FFFFFF", visibility: "hidden"}} id="table-container">
         <CollapsibleTable/>
         <div style={{textAlign: "center", fontSize: "80%", marginBottom: "20px"}}>
-          Powered by <Link href={"https://www.crunchbase.com/"} target="_blank" rel="noreferrer">Crunchbase</Link>, <Link href={"https://material-ui.com/"} target="_blank" rel="noreferrer">Material-UI</Link>, and <Link href={"https://www.gatsbyjs.com/"} target="_blank" rel="noreferrer">GatsbyJS</Link>, and <Link href={"https://www.chartjs.org/"} target="_blank" rel="noreferrer">Chart.js</Link>.
+          Powered by <Link href={"https://www.crunchbase.com/"} target="_blank" rel="noreferrer">Crunchbase</Link>, <Link href={"https://material-ui.com/"} target="_blank" rel="noreferrer">Material-UI</Link>, <Link href={"https://www.gatsbyjs.com/"} target="_blank" rel="noreferrer">GatsbyJS</Link>, and <Link href={"https://www.chartjs.org/"} target="_blank" rel="noreferrer">Chart.js</Link>.
         </div>
       </div>
     </main>
@@ -461,13 +461,13 @@ function Row(props) {
                 <div style={{width: "35%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
                   <div style={{marginBottom: "10px", textAlign: "center"}}>
-                    <Button variant="contained" color="primary" size="small"
+                    <Button color="primary" size="small"
                             style={{marginRight: "10px"}} onClick={toggleLinkageVisibility}>
                       Show Linkages
                     </Button>
                     {row.crunchbase.crunchbase_url &&
                       <Link href={row.crunchbase.crunchbase_url} target="_blank" rel="noreferrer">
-                        <Button variant="contained" color="secondary" size="small">View on Crunchbase</Button>
+                        <Button color="secondary" size="small">View on Crunchbase</Button>
                       </Link>
                     }
                   </div>
