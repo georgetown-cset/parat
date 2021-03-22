@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { useEffect } from "react";
 import Button from '@material-ui/core/Button';
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
