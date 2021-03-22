@@ -64,8 +64,11 @@ const IndexPage = () => {
           The authors would like to thank... Ben Murphy and Yanqi Ding.
         </Typography>
       </div>
-      <div style={{"padding": "10px 50px", backgroundColor: "#FFFFFF", visibility: "hidden"}} id="table-container">
+      <div style={{padding: "10px 50px", backgroundColor: "#FFFFFF", visibility: "hidden"}} id="table-container">
         <CollapsibleTable/>
+        <div style={{textAlign: "center", fontSize: "80%", marginBottom: "20px"}}>
+          Powered by <Link href={"https://www.crunchbase.com/"} target="_blank" rel="noreferrer">Crunchbase</Link>, <Link href={"https://material-ui.com/"} target="_blank" rel="noreferrer">Material-UI</Link>, and <Link href={"https://www.gatsbyjs.com/"} target="_blank" rel="noreferrer">GatsbyJS</Link>, and <Link href={"https://www.chartjs.org/"} target="_blank" rel="noreferrer">Chart.js</Link>.
+        </div>
       </div>
     </main>
   )
