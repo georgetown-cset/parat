@@ -454,7 +454,7 @@ function Row(props) {
                   {row.company_site_description && row.company_site_description.length > 0 &&
                   <Typography variant="body2" gutterBottom component="div" style={{marginTop: "10px"}}>
                     "{row.company_site_description}"
-                    <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.company_site_link} target="blank" rel="noreferrer">Homepage</a>, retrieved {row.description_retrieval_date}</span>
+                    <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.company_site_link} target="blank" rel="noreferrer">Source</a>, retrieved {row.description_retrieval_date}</span>
                   </Typography>
                   }
                 </div>
