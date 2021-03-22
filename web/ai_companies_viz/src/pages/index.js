@@ -99,16 +99,8 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
-  function handleNameFilter(evt, name){
-    onFilterRows("name", [name]);
-  }
-
-  function handleCountryFilter(evt, name){
-    onFilterRows("country", [...name]);
-  }
-
-  function handleStageFilter(evt, name){
-    onFilterRows("stage", [...name]);
+  function handleFilter(evt, values, key){
+    onFilterRows(key, [...values]);
   }
 
   function handleSliderChange(evt, newRange, metric) {
@@ -142,12 +134,13 @@ function EnhancedTableHead(props) {
           colSpan={2}
         >
           <Autocomplete
+            multiple
             id="company-name-search"
             options={companyNames}
             style={{ minWidth: "200px", paddingLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Company Name"/>}
-            onChange={handleNameFilter}
+            onChange={(evt, values) => handleFilter(evt, values, "name")}
            />
         </TableCell>
         <TableCell
@@ -162,7 +155,7 @@ function EnhancedTableHead(props) {
             style={{ minWidth: "150px", paddingLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Country"/>}
-            onChange={handleCountryFilter}
+            onChange={(evt, values) => handleFilter(evt, values, "country")}
            />
         </TableCell>
         <TableCell
@@ -177,7 +170,7 @@ function EnhancedTableHead(props) {
             style={{ minWidth: "70px", paddingLeft:"20px" }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Stage"/>}
-            onChange={handleStageFilter}
+            onChange={(evt, values) => handleFilter(evt, values, "stage")}
            />
         </TableCell>
         {headCells.map((headCell) => (
