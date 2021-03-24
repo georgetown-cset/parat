@@ -1,5 +1,4 @@
 import argparse
-import pandas as pd
 import json
 from collections import defaultdict
 
@@ -53,7 +52,7 @@ class CountGetter:
         client = bigquery.Client()
         query_job = client.query(companies_query)
         companies = []
-        for row in query_job:
+        for i, row in enumerate(query_job):
             row_dict = {"CSET_id": row["CSET_id"], field_name: row[field_name]}
             if by_year:
                 # Check if there's by year data already; if so, add it
@@ -85,6 +84,9 @@ class CountGetter:
             elif not row[field_name]:
                 # if we have a grid but don't have any papers, set that to be true
                 row_dict[field_name] = 0
+            # If we have a grid but don't have by-year data
+            if not field_name_by_year in row_dict:
+                row_dict[field_name_by_year] = []
             companies.append(row_dict)
         return companies
 
