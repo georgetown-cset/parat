@@ -1,1 +1,1 @@
-Rebecca Gelles, Zachary Arnold, and Jennifer Melot developed CARAT. We gratefully acknowledge input from ______ and annotation support from Ben Murphy, Yanqi Ding, and VISTA Consulting, LLC.
+[Rebecca Gelles](https://cset.georgetown.edu/staff/rebecca-gelles/), [Zachary Arnold](https://cset.georgetown.edu/staff/zachary-arnold/), and [Jennifer Melot](https://cset.georgetown.edu/staff/jennifer-melot/) developed CARAT. We gratefully acknowledge input from ______ and annotation support from Ben Murphy, Yanqi Ding, and VISTA Consulting, LLC.
