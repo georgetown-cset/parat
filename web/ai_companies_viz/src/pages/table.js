@@ -16,7 +16,7 @@ import Paper from "@material-ui/core/Paper/Paper";
 import Button from "@material-ui/core/Button";
 import {defaults, Line} from "react-chartjs-2";
 import {makeStyles} from "@material-ui/core";
-import ClearIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import ClearIcon from '@material-ui/icons/Clear';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import TableContainer from "@material-ui/core/TableContainer";

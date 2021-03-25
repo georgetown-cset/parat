@@ -55,7 +55,7 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
 def clean_parent(parents: list) -> str:
     if len(parents) == 0:
         return None
-    return "Parents: "+(", ".join([parent["parent_name"].title()+(" (Acquired)" if parent["parent_acquisition"] else "")
+    return (", ".join([parent["parent_name"].title()+(" (Acquired)" if parent["parent_acquisition"] else "")
                       for parent in parents]))
 
 def clean_children(children: list) -> str:
