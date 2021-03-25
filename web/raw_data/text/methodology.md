@@ -1,5 +1,3 @@
-# Methodology
-
 We select companies for inclusion in CARAT based on our analytic needs and feedback from users. (CARAT does *not* cover all AI-related companies, and the sample it does cover isn't necessarily representative.) CSET annotators map each company to a set of unique identifiers, including [GRID](https://www.grid.ac/) (used in academic publication datasets), [Crunchbase UUID](https://data.crunchbase.com/v3.1/docs/uuid) (for the Crunchbase investment dataset), [PermID](https://permid.org/) (for use with Refinitiv data and other PermID-compatible datasets), and regular expressions that precisely capture the company's name and known aliases.
 
 CARAT uses these identifiers to pull relevant data from our data sources, such as company logos and locations in the Crunchbase Open Data Map. Some CARAT fields involve more complex operations:
