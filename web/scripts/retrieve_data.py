@@ -17,6 +17,10 @@ raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
 supplemental_descriptions = os.path.join(raw_data_dir, "supplemental_company_descriptions.csv")
 web_src_dir = os.path.join("ai_companies_viz", "src")
 image_dir = os.path.join(raw_data_dir, "logos")
+country_name_map = {
+    "Korea, Republic of": "South Korea",
+    "Taiwan, Province of China": "Taiwan"
+}
 
 def retrieve_raw() -> None:
     client = bigquery.Client()
@@ -125,6 +129,17 @@ def add_supplemental_descriptions(rows: list) -> None:
             row.update(name_to_desc_info[company_name])
 
 
+def clean_country(country: str) -> str:
+    if country is None:
+        return None
+    country_obj = pycountry.countries.get(alpha_2=country)
+    if not country_obj:
+        country_obj = pycountry.countries.get(alpha_3=country)
+    if country_obj.name in country_name_map:
+        return country_name_map[country_obj.name]
+    return country_obj.name
+
+
 def clean(refresh_images: bool) -> None:
     rows = []
     missing_all = set()
@@ -132,12 +147,7 @@ def clean(refresh_images: bool) -> None:
         for row in f:
             js = json.loads(row)
             js["name"] = js["name"].strip().title()
-            country = js["country"]
-            if country is not None:
-                country_obj = pycountry.countries.get(alpha_2=country)
-                if not country_obj:
-                    country_obj = pycountry.countries.get(alpha_3=country)
-                js["country"] = country_obj.name
+            js["country"] = clean_country(js["country"])
             logo_url = js.pop("logo_url")
             js["local_logo"] = retrieve_image(logo_url, js["name"], refresh_images)
             aliases = js.pop("aliases")
