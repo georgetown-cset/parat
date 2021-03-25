@@ -12,37 +12,37 @@ WITH
     `gcp-cset-projects.gcp_cset_links_v2.corpus_merged`
   WHERE
   -- The list of top conferences, derived from csrankings.org. Regular expressions selected using DBLP to find all possibilities, and evaluating results produced to avoid false positives.
-    REGEXP_CONTAINS(source_title, r''(?i)AAAI Conference on Artificial Intelligence'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)\bAAAI\b'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)International Joint Conference on Artificial Intelligence'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)IJCAI'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)IEEE Conference on Computer Vision and Pattern Recognition'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)\bCVPR'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)European Conference on Computer Vision'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)ECCV'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)IEEE.*International Conference on Computer Vision'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)ICCV\b'')
-    OR (REGEXP_CONTAINS(source_title, r''(?i)International Conference on Machine Learning'')
-      AND NOT REGEXP_CONTAINS(source_title, r''(?i)and''))
-      OR REGEXP_CONTAINS(source_title, r''(?i)ICML\b'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)International Conference on Knowledge Discovery [a|\&]n?d? Data Mining'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)SIGKDD'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)Neural Information Processing Systems'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)\bNeurIPS\b'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)\bNIPS\b'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)Annual Meeting of the Association for Computational Linguistics'')
-      OR ( REGEXP_CONTAINS(source_title, r''(?i)\bACL\b'')
-        AND NOT REGEXP_CONTAINS(source_title, r''(?i)injur'')
-        AND NOT REGEXP_CONTAINS(source_title, r''(?i)surgery''))
-    OR REGEXP_CONTAINS(source_title, r''(?i)North American Chapter of the Association for Computational Linguistics'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)\bNAACL\b'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)Conference on Empirical Methods in Natural Language Processing'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)\bEMNLP\b'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)International.*Conference on Research and Development in Information Retrieval'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)\bSIGIR\b'')
-    OR REGEXP_CONTAINS(source_title, r''(?i)International Conference on World Wide Web'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)International World Wide Web Conference'')
-      OR REGEXP_CONTAINS(source_title, r''(?i)The Web Conference'') ),
+    REGEXP_CONTAINS(source_title, r'(?i)AAAI Conference on Artificial Intelligence')
+      OR REGEXP_CONTAINS(source_title, r'(?i)\bAAAI\b')
+    OR REGEXP_CONTAINS(source_title, r'(?i)International Joint Conference on Artificial Intelligence')
+      OR REGEXP_CONTAINS(source_title, r'(?i)IJCAI')
+    OR REGEXP_CONTAINS(source_title, r'(?i)IEEE Conference on Computer Vision and Pattern Recognition')
+      OR REGEXP_CONTAINS(source_title, r'(?i)\bCVPR')
+    OR REGEXP_CONTAINS(source_title, r'(?i)European Conference on Computer Vision')
+      OR REGEXP_CONTAINS(source_title, r'(?i)ECCV')
+    OR REGEXP_CONTAINS(source_title, r'(?i)IEEE.*International Conference on Computer Vision')
+      OR REGEXP_CONTAINS(source_title, r'(?i)ICCV\b')
+    OR (REGEXP_CONTAINS(source_title, r'(?i)International Conference on Machine Learning')
+      AND NOT REGEXP_CONTAINS(source_title, r'(?i)and'))
+      OR REGEXP_CONTAINS(source_title, r'(?i)ICML\b')
+    OR REGEXP_CONTAINS(source_title, r'(?i)International Conference on Knowledge Discovery [a|\&]n?d? Data Mining')
+      OR REGEXP_CONTAINS(source_title, r'(?i)SIGKDD')
+    OR REGEXP_CONTAINS(source_title, r'(?i)Neural Information Processing Systems')
+      OR REGEXP_CONTAINS(source_title, r'(?i)\bNeurIPS\b')
+      OR REGEXP_CONTAINS(source_title, r'(?i)\bNIPS\b')
+    OR REGEXP_CONTAINS(source_title, r'(?i)Annual Meeting of the Association for Computational Linguistics')
+      OR ( REGEXP_CONTAINS(source_title, r'(?i)\bACL\b')
+        AND NOT REGEXP_CONTAINS(source_title, r'(?i)injur')
+        AND NOT REGEXP_CONTAINS(source_title, r'(?i)surgery'))
+    OR REGEXP_CONTAINS(source_title, r'(?i)North American Chapter of the Association for Computational Linguistics')
+      OR REGEXP_CONTAINS(source_title, r'(?i)\bNAACL\b')
+    OR REGEXP_CONTAINS(source_title, r'(?i)Conference on Empirical Methods in Natural Language Processing')
+      OR REGEXP_CONTAINS(source_title, r'(?i)\bEMNLP\b')
+    OR REGEXP_CONTAINS(source_title, r'(?i)International.*Conference on Research and Development in Information Retrieval')
+      OR REGEXP_CONTAINS(source_title, r'(?i)\bSIGIR\b')
+    OR REGEXP_CONTAINS(source_title, r'(?i)International Conference on World Wide Web')
+      OR REGEXP_CONTAINS(source_title, r'(?i)International World Wide Web Conference')
+      OR REGEXP_CONTAINS(source_title, r'(?i)The Web Conference') ),
   -- Associating GRIDs to the merged paper ids
   affils AS (
   SELECT
@@ -65,12 +65,12 @@ SELECT DISTINCT org_name,
     year
 FROM
     sources
-    -- We''re inner joining because if there''s no affiliate information at all we have no way to even evaluate this data for our purposes
+    -- We're inner joining because if there's no affiliate information at all we have no way to even evaluate this data for our purposes
     INNER JOIN
     affils
 ON
     sources.merged_id = affils.merged_id
-    -- We''re inner joining for this particular version (the with-grid one) because if there''s no grid we''re going to use the without-grid version and search with a regular expression instead.
+    -- We're inner joining for this particular version (the with-grid one) because if there's no grid we're going to use the without-grid version and search with a regular expression instead.
     INNER JOIN
     grid_data
     ON
