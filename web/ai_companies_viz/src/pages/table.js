@@ -124,6 +124,7 @@ function EnhancedTableHead(props) {
                   direction={orderBy === headCell.id ? order : "asc"}
                   onClick={createSortHandler(headCell.id)}
                   style={{padding: "0 0 0 10px"}}
+                  hideSortIcon=false
                 >
                   {headCell.label}
                   {orderBy === headCell.id ? (
