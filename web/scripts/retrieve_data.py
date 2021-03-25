@@ -168,16 +168,19 @@ def clean(refresh_images: bool) -> None:
             ai_pubs_by_year = {p["year"]: p["ai_pubs"] for p in js.pop("ai_pubs_by_year")}
             js["yearly_ai_publications"] = [0 if y not in ai_pubs_by_year else ai_pubs_by_year[y]
                                             for y in js["years"]]
+            js["ai_pubs"] = sum(js["yearly_ai_publications"])
             for year_idx in range(len(js["years"])):
                 if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
                     missing_all.add(js["name"])
             ai_patents_by_year = {p["priority_year"]: p["ai_patents"] for p in js.pop("ai_patents_by_year")}
             js["yearly_ai_patents"] = [0 if y not in ai_patents_by_year else ai_patents_by_year[y]
                                        for y in js["years"]]
+            js["ai_patents"] = sum(js["yearly_ai_patents"])
             ai_pubs_in_top_conf = {p["year"]: p["ai_pubs_in_top_conferences"]
                                    for p in js.pop("ai_pubs_in_top_conferences_by_year")}
             js["yearly_ai_pubs_top_conf"] = [0 if y not in ai_pubs_in_top_conf else ai_pubs_in_top_conf[y]
                                              for y in js["years"]]
+            js["ai_pubs_in_top_conferences"] = sum(js["yearly_ai_pubs_top_conf"])
             js["market"] = clean_market(js.pop("market"))
             js["crunchbase_description"] = js.pop("short_description")
             rows.append(js)
