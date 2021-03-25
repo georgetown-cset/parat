@@ -194,7 +194,8 @@ function Row(props) {
           display: true,
         },
         ticks: {
-            suggestedMin: 0
+            suggestedMin: 0,
+            precision: 0
         }
       }],
       xAxes: [{
@@ -245,7 +246,8 @@ function Row(props) {
           display: true,
         },
         ticks: {
-            suggestedMin: 0
+            suggestedMin: 0,
+            precision: 0
         }
       }],
       xAxes: [{
@@ -297,7 +299,8 @@ function Row(props) {
           display: true,
         },
         ticks: {
-            suggestedMin: 0
+            suggestedMin: 0,
+            precision: 0
         }
       }],
       xAxes: [{
