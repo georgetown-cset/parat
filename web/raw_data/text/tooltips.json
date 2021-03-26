@@ -1,8 +1,4 @@
-{
-    "some_identifier": "Here is a thrilling and informative tooltip",
-    "another_identifier": "The awesomeness of this tooltip cannot be overstated"
-}    
-
+/* none of these are that important so far */
 
 {
 "loc": "included subsidiaries",
@@ -22,11 +18,4 @@
 {
 "loc": "permid",
 "text": "PermID is used to identify organizations in PermID-compatible investment databases."
-}
-
-
-
-{
-"loc": "",
-"text": ""
 }
