@@ -39,7 +39,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort, onFilterRows, filterValues, maxSliderValue} = props;
+  const { order, onRequestSort, onFilterRows, filterValues, maxSliderValue} = props;
   const companyNames = company_data.map(company => company.name).sort();
   const countries = [...new Set(company_data.map(company => company.country).filter(c => c !== null))].sort();
   const stages = [...new Set(company_data.map(company => company.stage).filter(c => c !== null))].sort();
@@ -117,21 +117,16 @@ function EnhancedTableHead(props) {
                 key={headCell.id}
                 align={"center"}
                 style={{ width: "150px", verticalAlign: "bottom" }}
-                sortDirection={orderBy === headCell.id ? order : false}
+                sortDirection={order[headCell.id] === 1 ? "asc" : "desc"}
               >
                 <TableSortLabel
-                  active={orderBy === headCell.id}
-                  direction={orderBy === headCell.id ? order : "asc"}
+                  active={true}
+                  direction={order[headCell.id] === 1 ? "asc" : "desc"}
                   onClick={createSortHandler(headCell.id)}
                   style={{padding: "0 0 0 10px"}}
-                  hideSortIcon=false
+                  hideSortIcon={true}
                 >
                   {headCell.label}
-                  {orderBy === headCell.id ? (
-                    <span className={classes.visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                  </span>
-                  ) : null}
                 </TableSortLabel>
                 <Slider
                   value={filterValues[headCell.id]}
@@ -147,12 +142,6 @@ function EnhancedTableHead(props) {
     </TableHead>
   );
 }
-
-EnhancedTableHead.propTypes = {
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
-  orderBy: PropTypes.string.isRequired,
-};
 
 function Row(props) {
   const { row, forceExpand } = props;
@@ -505,8 +494,12 @@ const useStyles = makeStyles((theme) => ({
 
 const CollapsibleTable = () => {
   const classes = useStyles();
-  const [orderBy, setOrderBy] = React.useState("ai_pubs");
-  const [order, setOrder] = React.useState("desc");
+  const [order, setOrder] = React.useState({
+    "ai_pubs": 1,
+    "ai_pubs_in_top_conferences": 1,
+    "ai_patents": 1
+  });
+  const [priority, setPriority] = React.useState(["ai_pubs", "ai_pubs_in_top_conferences", "ai_patents"]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(company_data.slice(0));
@@ -532,10 +525,15 @@ const CollapsibleTable = () => {
     setPage(0);
   };
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
+  const handleRequestSort = (event, column_name) => {
+    const updatedSortOrder = {...order};
+    // flip the order from what it previously was
+    updatedSortOrder[column_name] = -1*order[column_name];
+    setOrder(updatedSortOrder);
+
+    let updatedPriority = [column_name];
+    updatedPriority = updatedPriority.concat(priority.filter(key => key !== column_name));
+    setPriority(updatedPriority);
     setPage(0);
   };
 
@@ -578,27 +576,25 @@ const CollapsibleTable = () => {
     setPage(0);
   };
 
-  function descendingComparator(a, b, orderBy) {
-    if (b[orderBy]["value"] < a[orderBy]["value"]) {
-      return -1;
-    }
-    if (b[orderBy]["value"] > a[orderBy]["value"]) {
-      return 1;
+  function compare(a, b) {
+    for(let key of priority) {
+      if (b[key]["value"] < a[key]["value"]) {
+        return -1*order[key];
+      }
+      if (b[key]["value"] > a[key]["value"]) {
+        return 1*order[key];
+      }
     }
     return 0;
   }
 
-  function getComparator(order, orderBy) {
-    return order === "desc"
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-  }
-
-  function stableSort(array, comparator) {
+  function stableSort(array) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
+      const sortOrder = compare(a[0], b[0]);
+      if (sortOrder !== 0){
+        return sortOrder;
+      }
       return a[1]["value"] - b[1]["value"];
     });
     return stabilizedThis.map((el) => el[0]);
@@ -628,14 +624,13 @@ const CollapsibleTable = () => {
           <EnhancedTableHead
             classes={classes}
             order={order}
-            orderBy={orderBy}
             onRequestSort={handleRequestSort}
             onFilterRows={handleFilterRows}
             filterValues={filterValues}
             maxSliderValue={maxSliderValue}
           />
           <TableBody key={"table-content-"+forceExpand}>
-            {stableSort(data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            {stableSort(data).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
               return (<Row key={row.name} row={row} forceExpand={forceExpand}/>)
             })}
