@@ -121,7 +121,7 @@ function EnhancedTableHead(props) {
               >
                 <TableSortLabel
                   active={true}
-                  direction={order[headCell.id] === 1 ? "asc" : "desc"}
+                  direction={order[headCell.id] === 1 ? "desc" : "asc"}
                   onClick={createSortHandler(headCell.id)}
                   style={{padding: "0 0 0 10px"}}
                   hideSortIcon={true}
