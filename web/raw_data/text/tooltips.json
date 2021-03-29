@@ -1,0 +1,21 @@
+/* none of these are that important so far */
+
+{
+"loc": "included subsidiaries",
+"text": "CARAT treats these subsidiaries as part of the parent company."
+}
+
+{
+"loc": "excluded subsidiaries",
+"text": "CARAT treats these subsidiaries as separate from the parent company; they have their own records."
+}
+
+{
+"loc": "grid",
+"text": "GRID is used to identify organizations in academic publication databases."
+}
+
+{
+"loc": "permid",
+"text": "PermID is used to identify organizations in PermID-compatible investment databases."
+}
