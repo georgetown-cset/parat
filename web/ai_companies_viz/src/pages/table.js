@@ -211,7 +211,7 @@ function Row(props) {
     labels: row.years,
     datasets: [
       {
-        label: "Publications in top AI Conferences",
+        label: "Publications in Top AI Conferences",
         data: row.yearly_ai_pubs_top_conf,
         backgroundColor: "rgba(0,0,0,0)",
         borderColor: "rgba(0,0,255,0.5)"
