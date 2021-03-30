@@ -72,6 +72,11 @@ def clean_market(market_info: list) -> str:
         return None
     return ", ".join([f"{m['exchange'].upper()}:{m['ticker'].upper()}" for m in market_info])
 
+def clean_wiki_description(wiki_desc: str) -> str:
+    clean_wiki_desc = re.sub(r"\[\d+\]", "", wiki_desc)
+    clean_wiki_desc = re.sub(r"\s*\([^\)]*/[^\)]*\)\s*", " ", clean_wiki_desc)
+    return clean_wiki_desc
+
 def add_ranks(rows: list, metrics: list) -> None:
     """
     Mutates `rows`
@@ -109,7 +114,7 @@ def add_supplemental_descriptions(rows: list) -> None:
             company_name = row["company_name"]
             name_to_desc_info[company_name] = {desc_info[k]: row[k].strip() for k in desc_info}
             wiki_description = name_to_desc_info[company_name]["wikipedia_description"]
-            name_to_desc_info[company_name]["wikipedia_description"] = re.sub(r"\[\d+\]", "", wiki_description)
+            name_to_desc_info[company_name]["wikipedia_description"] = clean_wiki_description(wiki_description)
             wiki_link = name_to_desc_info[company_name]["wikipedia_link"]
             if not (wiki_link and ("http" in wiki_link or ".org" in wiki_link)):
                 if wiki_description:
