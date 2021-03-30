@@ -2,6 +2,10 @@
 
 We update CARAT's list of companies according to CSET's analytic needs and feedback from users. Adding new companies takes significant work, so we make these updates periodically. If you think a specific company should be added to CARAT, please [let us know](https://forms.gle/7RxrtAJHya2FmjXB6).
 
+## Are all of these companies AI companies?
+
+Not necessarily. Being included in CARAT, in and of itself, doesn't mean that a company is an "AI company" or is especially active in AI. We include companies in CARAT for a variety of reasons related to CSET's analytic needs and feedback from users.
+
 ## Why isn't *[insert company here]* ranked higher?
 
 CARAT isn't meant to be a "top AI companies" list. Which companies are at the "top" depends on the metrics and companies that are considered. For example, some companies may have lots of AI-related patents, others might sell a lot of AI products, and others might hire a lot of talented AI engineers. CARAT doesn't cover all of the metrics and companies that would be needed to draw general conclusions about which companies are ahead of others in AI, and it doesn't make judgments about whether some metrics are more important than others.
