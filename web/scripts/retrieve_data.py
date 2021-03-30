@@ -14,6 +14,7 @@ from io import BytesIO
 
 raw_data_dir = "raw_data"
 raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
+orig_names_fi = os.path.join(raw_data_dir, "company_names.jsonl")
 supplemental_descriptions = os.path.join(raw_data_dir, "supplemental_company_descriptions.csv")
 web_src_dir = os.path.join("ai_companies_viz", "src")
 image_dir = os.path.join(raw_data_dir, "logos")
@@ -24,10 +25,17 @@ country_name_map = {
 
 def retrieve_raw() -> None:
     client = bigquery.Client()
-    out = open(raw_data_fi, mode="w")
-    for row in client.list_rows("ai_companies_visualization.visualization_data"):
-        dict_row = {col: row[col] for col in row.keys()}
-        out.write(json.dumps(dict_row)+"\n")
+    with open(raw_data_fi, mode="w") as out:
+        for row in client.list_rows("ai_companies_visualization.visualization_data"):
+            dict_row = {col: row[col] for col in row.keys()}
+            out.write(json.dumps(dict_row)+"\n")
+    with open(orig_names_fi, mode="w") as out:
+        for row in client.list_rows("ai_companies_visualization.original_company_names"):
+            name = row["name"]
+            if name is None:
+                continue
+            row = {"orig_name": name, "lowercase_name": name.lower()}
+            out.write(json.dumps(row)+"\n")
 
 def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     if not url:
@@ -56,16 +64,18 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
         return img_name
     return None
 
-def clean_parent(parents: list) -> str:
+def clean_parent(parents: list, lowercase_to_orig_cname: dict) -> str:
     if len(parents) == 0:
         return None
-    return (", ".join([parent["parent_name"].title()+(" (Acquired)" if parent["parent_acquisition"] else "")
-                      for parent in parents]))
+    cleaned_parents = [clean_company_name(parent["parent_name"], lowercase_to_orig_cname)+
+                       (" (Acquired)" if parent["parent_acquisition"] else "")
+                      for parent in parents]
+    return ", ".join(cleaned_parents)
 
-def clean_children(children: list) -> str:
+def clean_children(children: list, lowercase_to_orig_cname: dict) -> str:
     if len(children) == 0:
         return None
-    return  ", ".join([c["child_name"].title() for c in children])
+    return  ", ".join([clean_company_name(c["child_name"], lowercase_to_orig_cname) for c in children])
 
 def clean_market(market_info: list) -> str:
     if len(market_info) == 0:
@@ -123,7 +133,7 @@ def add_supplemental_descriptions(rows: list) -> None:
                 name_to_desc_info[company_name]["wikipedia_description"] = None
             source_description = name_to_desc_info[company_name]["company_site_description"]
             source_link = name_to_desc_info[company_name]["company_site_link"]
-            if  not (source_link and ("http" in source_link or ".com" in source_link)):
+            if not (source_link and ("http" in source_link or ".com" in source_link)):
                 if source_description:
                     print(f"{company_name} missing source link")
                 name_to_desc_info[company_name]["company_site_description"] = None
@@ -132,7 +142,6 @@ def add_supplemental_descriptions(rows: list) -> None:
         company_name = row["name"].strip().lower()
         if company_name in name_to_desc_info:
             row.update(name_to_desc_info[company_name])
-
 
 def clean_country(country: str) -> str:
     if country is None:
@@ -144,28 +153,40 @@ def clean_country(country: str) -> str:
         return country_name_map[country_obj.name]
     return country_obj.name
 
+def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
+    clean_name = name.strip()
+    if clean_name in lowercase_to_orig_cname:
+        return lowercase_to_orig_cname[clean_name]
+    return clean_name.title()
+
+def clean_aliases(aliases: list, lowercase_to_orig_cname: dict) -> str:
+    unique_aliases = sorted(list({clean_company_name(a["alias"], lowercase_to_orig_cname).strip('.') for a in aliases}))
+    return None if len(aliases) == 0 else f"{'; '.join(unique_aliases)}"
 
 def clean(refresh_images: bool) -> None:
     rows = []
     missing_all = set()
+    lowercase_to_orig_cname = {}
+    with open(orig_names_fi) as f:
+        for line in f:
+            js = json.loads(line)
+            lowercase_to_orig_cname[js["lowercase_name"]] = js["orig_name"]
     with open(raw_data_fi) as f:
         for row in f:
             js = json.loads(row)
-            js["name"] = js["name"].strip().title()
+            js["name"] = clean_company_name(js["name"], lowercase_to_orig_cname)
             js["country"] = clean_country(js["country"])
             logo_url = js.pop("logo_url")
             js["local_logo"] = retrieve_image(logo_url, js["name"], refresh_images)
-            aliases = js.pop("aliases")
-            unique_aliases = sorted(list({a['alias'].title().strip().strip('.') for a in aliases}))
-            js["aliases"] = None if len(aliases) == 0 else f"{'; '.join(unique_aliases)}"
+            js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname)
             js["stage"] = js["stage"] if js["stage"] else "Unknown"
             grids = js.pop("grid")
             js["grid_info"] = ", ".join(grids)
             permids = js.pop("permid")
             js["permid_info"] = ", ".join([str(p) for p in permids])
-            js["parent_info"] = clean_parent(js.pop("parent"))
-            js["agg_child_info"] = clean_children(js.pop("children"))
-            js["unagg_child_info"] = clean_children(js.pop("non_agg_children"))
+            js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
+            js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
+            js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
             js["years"] = list(range(2010, datetime.now().year+1))
             all_pubs_by_year = {p["year"]: p["all_pubs"] for p in js.pop("all_pubs_by_year")}
             js["yearly_all_publications"] = [0 if y not in all_pubs_by_year else all_pubs_by_year[y]
