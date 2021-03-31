@@ -378,7 +378,14 @@ function Row(props) {
                   <Typography variant="h6" gutterBottom component="span">
                     <Link href={row.website} target="_blank" rel="noreferrer">{row.name}</Link>
                   </Typography>
-                  {row.market && <span style={{paddingLeft: "10px", color: "#545454"}}>{row.market}</span>}
+                  {row.market.map( m => (
+                    <span style={{paddingLeft: "10px", color: "#545454"}}>
+                      {m.link ?
+                        <Link href={m.link} target="blank" rel="noreferrer">{m.market_key}</Link>
+                        : <span>{m.market_key}</span>
+                      }
+                    </span>
+                  ))}
                   </div>
                   {row.crunchbase_description && row.crunchbase_description.length > 0 &&
                   <Typography variant="body2" gutterBottom component="div" style={{marginTop: "10px"}}>

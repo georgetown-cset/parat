@@ -108,10 +108,17 @@ def clean_children(children: list, lowercase_to_orig_cname: dict) -> str:
         return None
     return  ", ".join([clean_company_name(c["child_name"], lowercase_to_orig_cname) for c in children])
 
-def clean_market(market_info: list) -> str:
+def clean_market(market_info: list, market_key_to_link: dict) -> str:
     if len(market_info) == 0:
-        return None
-    return ", ".join([f"{m['exchange'].upper()}:{m['ticker'].upper()}" for m in market_info])
+        return []
+    ref_market_info = []
+    for m in market_info:
+        market_key = f"{m['exchange'].upper()}:{m['ticker'].upper()}"
+        ref_market_info.append({
+            "market_key": market_key,
+            "link": market_key_to_link[market_key]
+        })
+    return ref_market_info
 
 def clean_wiki_description(wiki_desc: str) -> str:
     clean_wiki_desc = re.sub(r"\[\d+\]", "", wiki_desc)
@@ -210,6 +217,11 @@ def clean(refresh_images: bool) -> None:
         for line in f:
             js = json.loads(line)
             lowercase_to_orig_cname[js["lowercase_name"]] = js["orig_name"]
+    market_key_to_link = {}
+    with open(exchange_link_fi) as f:
+        for line in f:
+            js = json.loads(line)
+            market_key_to_link[js["market_key"].upper()] = js["link"]
     with open(raw_data_fi) as f:
         for row in f:
             js = json.loads(row)
@@ -247,7 +259,7 @@ def clean(refresh_images: bool) -> None:
             js["yearly_ai_pubs_top_conf"] = [0 if y not in ai_pubs_in_top_conf else ai_pubs_in_top_conf[y]
                                              for y in js["years"]]
             js["ai_pubs_in_top_conferences"] = sum(js["yearly_ai_pubs_top_conf"])
-            js["market"] = clean_market(js.pop("market"))
+            js["market"] = clean_market(js.pop("market"), market_key_to_link)
             js["crunchbase_description"] = js.pop("short_description")
             rows.append(js)
     add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
