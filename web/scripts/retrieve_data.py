@@ -4,6 +4,7 @@ import json
 import math
 import os
 import pycountry
+import pycountry_convert
 import re
 import requests
 import time
@@ -183,6 +184,14 @@ def clean_country(country: str) -> str:
         return country_name_map[country_obj.name]
     return country_obj.name
 
+def get_continent(country: str) -> str:
+    if country is None:
+        return None
+    alpha2 = pycountry_convert.country_name_to_country_alpha2(country)
+    continent_code = pycountry_convert.country_alpha2_to_continent_code(alpha2)
+    continent = pycountry_convert.convert_continent_code_to_continent_name(continent_code)
+    return continent
+
 def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     clean_name = name.strip()
     if clean_name in lowercase_to_orig_cname:
@@ -206,6 +215,7 @@ def clean(refresh_images: bool) -> None:
             js = json.loads(row)
             js["name"] = clean_company_name(js["name"], lowercase_to_orig_cname)
             js["country"] = clean_country(js["country"])
+            js["continent"] = get_continent(js["country"])
             logo_url = js.pop("logo_url")
             js["local_logo"] = retrieve_image(logo_url, js["name"], refresh_images)
             js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname)

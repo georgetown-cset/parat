@@ -32,6 +32,7 @@ defaults.global.maintainAspectRatio = false;
 const headCells = [
   { id: "name", numeric: false, disablePadding: true, label: "Company Name" },
   { id: "country", numeric: false, disablePadding: false, label: "Country" },
+  { id: "continent", numeric: false, disablePadding: false, label: "Continent" },
   { id: "stage", numeric: false, disablePadding: false, label: "Company Stage" },
   { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Publications" },
   { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "AI Publications in Top Conferences" },
@@ -42,6 +43,7 @@ function EnhancedTableHead(props) {
   const { order, onRequestSort, onFilterRows, filterValues, maxSliderValue} = props;
   const companyNames = company_data.map(company => company.name).sort();
   const countries = [...new Set(company_data.map(company => company.country).filter(c => c !== null))].sort();
+  const continents = [...new Set(company_data.map(company => company.continent).filter(c => c !== null))].sort();
   const stages = [...new Set(company_data.map(company => company.stage).filter(c => c !== null))].sort();
 
   const createSortHandler = (property) => (event) => {
@@ -93,6 +95,22 @@ function EnhancedTableHead(props) {
             renderInput={(params) => <TextField {...params} label="Country"/>}
             onChange={(evt, values) => handleFilter(evt, values, "country")}
             value={filterValues["country"]}
+           />
+        </TableCell>
+        <TableCell
+          key={"continent"}
+          align={"left"}
+          padding={"none"}
+        >
+          <Autocomplete
+            multiple
+            id="continent-search"
+            options={continents}
+            style={{ minWidth: "150px", paddingLeft:"20px" }}
+            size="small"
+            renderInput={(params) => <TextField {...params} label="Continent"/>}
+            onChange={(evt, values) => handleFilter(evt, values, "continent")}
+            value={filterValues["continent"]}
            />
         </TableCell>
         <TableCell
@@ -335,6 +353,7 @@ function Row(props) {
         </TableCell>
         <TableCell component="th" scope="row">{row.name}</TableCell>
         <TableCell align="left">{row.country}</TableCell>
+        <TableCell align="left">{row.continent}</TableCell>
         <TableCell align="left">{row.stage}</TableCell>
         <TableCell align="right">
           <div style={{marginRight: "5px", display:"inline-block", color:"hsl(19, 85%, "+(row.ai_pubs.frac_of_max*62)+"%)"}}>{row.ai_pubs.value}</div>
