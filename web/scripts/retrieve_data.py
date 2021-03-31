@@ -6,6 +6,7 @@ import os
 import pycountry
 import re
 import requests
+import time
 
 from PIL import Image
 from datetime import datetime
@@ -15,6 +16,7 @@ from io import BytesIO
 raw_data_dir = "raw_data"
 raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
 orig_names_fi = os.path.join(raw_data_dir, "company_names.jsonl")
+exchange_link_fi = os.path.join(raw_data_dir, "exchange_links.jsonl")
 supplemental_descriptions = os.path.join(raw_data_dir, "supplemental_company_descriptions.csv")
 web_src_dir = os.path.join("ai_companies_viz", "src")
 image_dir = os.path.join(raw_data_dir, "logos")
@@ -23,12 +25,33 @@ country_name_map = {
     "Taiwan, Province of China": "Taiwan"
 }
 
-def retrieve_raw() -> None:
+def get_exchange_link(market_key) -> str:
+    time.sleep(5)
+    # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
+    first, last = sorted(market_key.split(":"))
+    gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:87.0) Gecko/20100101 Firefox/87.0"
+    }
+    r = requests.get(gf_link, headers=headers)
+    if "No results found" in r.text:
+        gf_link = f"https://www.google.com/finance/quote/{last}:{first}"
+        time.sleep(5)
+        r = requests.get(gf_link, headers=headers)
+        return {"market_key": market_key, "link": None if "No results found" in r.text else gf_link}
+    else:
+        return {"market_key": market_key, "link": gf_link}
+
+def retrieve_raw(get_links: bool) -> None:
     client = bigquery.Client()
+    market_info = set()
+    print("retrieving metadata")
     with open(raw_data_fi, mode="w") as out:
         for row in client.list_rows("ai_companies_visualization.visualization_data"):
             dict_row = {col: row[col] for col in row.keys()}
             out.write(json.dumps(dict_row)+"\n")
+            market_info = market_info.union([m["exchange"]+":"+m["ticker"] for m in dict_row["market"]])
+    print("retrieving original company names")
     with open(orig_names_fi, mode="w") as out:
         for row in client.list_rows("ai_companies_visualization.original_company_names"):
             name = row["name"]
@@ -36,6 +59,13 @@ def retrieve_raw() -> None:
                 continue
             row = {"orig_name": name, "lowercase_name": name.lower()}
             out.write(json.dumps(row)+"\n")
+    if get_links:
+        print("retrieving market links")
+        with open(exchange_link_fi, mode="w") as out:
+            for mi in market_info:
+                mi_row = get_exchange_link(mi)
+                print(mi_row)
+                out.write(json.dumps(mi_row)+"\n")
 
 def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     if not url:
@@ -220,8 +250,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--refresh_raw", action="store_true", default=False)
     parser.add_argument("--refresh_images", action="store_true", default=False)
+    parser.add_argument("--refresh_market_links", action="store_true", default=False)
     args = parser.parse_args()
 
+    if args.refresh_market_links and not args.refresh_raw:
+        print("You must specify --refresh_raw if you want to refresh the market links")
+        exit(0)
+
     if args.refresh_raw:
-        retrieve_raw()
+        retrieve_raw(args.refresh_market_links)
     clean(args.refresh_images)
