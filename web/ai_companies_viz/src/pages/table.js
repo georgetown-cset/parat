@@ -369,7 +369,7 @@ function Row(props) {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0}} colSpan={7}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0}} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <div style={{padding: "10px"}}>
               <div style={{marginBottom: "10px"}}>
@@ -646,7 +646,8 @@ const CollapsibleTable = () => {
         </Button>
       </div>
       <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
+        <div style={{width: "99.5%"}}>
+        <Table aria-label="collapsible table" style={{margin: "auto"}}>
           <EnhancedTableHead
             classes={classes}
             order={order}
@@ -662,6 +663,7 @@ const CollapsibleTable = () => {
             })}
           </TableBody>
         </Table>
+        </div>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 20, 100]}
