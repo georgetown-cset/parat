@@ -32,6 +32,9 @@ company_name_map = {
     "创新奇智": "AInnovation"
 }
 reverse_company_name_map = {v: k for k, v in company_name_map.items()}
+crunchbase_url_override = {
+    "https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv": "https://www.crunchbase.com/organization/covariant"
+}
 
 def get_exchange_link(market_key) -> str:
     time.sleep(5)
@@ -277,6 +280,10 @@ def clean(refresh_images: bool) -> None:
             js["ai_pubs_in_top_conferences"] = sum(js["yearly_ai_pubs_top_conf"])
             js["market"] = clean_market(js.pop("market"), market_key_to_link)
             js["crunchbase_description"] = js.pop("short_description")
+            if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
+                url = js["crunchbase"]["crunchbase_url"]
+                if url in crunchbase_url_override:
+                    js["crunchbase"]["crunchbase_url"] = crunchbase_url_override[url]
             rows.append(js)
     add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
     add_supplemental_descriptions(rows)
