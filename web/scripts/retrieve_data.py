@@ -25,6 +25,13 @@ country_name_map = {
     "Korea, Republic of": "South Korea",
     "Taiwan, Province of China": "Taiwan"
 }
+company_name_map = {
+    "睿思芯科": "RiVAI",
+    "江行智能": "Jiangxing Intelligence",
+    "智易科技": "Zhiyi Tech",
+    "创新奇智": "AInnovation"
+}
+reverse_company_name_map = {v: k for k, v in company_name_map.items()}
 
 def get_exchange_link(market_key) -> str:
     time.sleep(5)
@@ -178,6 +185,8 @@ def add_supplemental_descriptions(rows: list) -> None:
                 name_to_desc_info[company_name]["company_site_link"] = None
     for row in rows:
         company_name = row["name"].strip().lower()
+        if row["name"] in reverse_company_name_map:
+            company_name = reverse_company_name_map[row["name"]]
         if company_name in name_to_desc_info:
             row.update(name_to_desc_info[company_name])
 
@@ -201,13 +210,18 @@ def get_continent(country: str) -> str:
 
 def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     clean_name = name.strip()
+    if clean_name in company_name_map:
+        return company_name_map[clean_name]
     if clean_name in lowercase_to_orig_cname:
         return lowercase_to_orig_cname[clean_name]
     return clean_name.title()
 
-def clean_aliases(aliases: list, lowercase_to_orig_cname: dict) -> str:
-    unique_aliases = sorted(list({clean_company_name(a["alias"], lowercase_to_orig_cname).strip('.') for a in aliases}))
-    return None if len(aliases) == 0 else f"{'; '.join(unique_aliases)}"
+def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str = None) -> str:
+    unique_aliases = {clean_company_name(a["alias"], lowercase_to_orig_cname).strip('.') for a in aliases}
+    if orig_name is not None:
+        unique_aliases.add(orig_name)
+    sorted_aliases = sorted(list(unique_aliases))
+    return None if len(aliases) == 0 else f"{'; '.join(sorted_aliases)}"
 
 def clean(refresh_images: bool) -> None:
     rows = []
@@ -225,12 +239,14 @@ def clean(refresh_images: bool) -> None:
     with open(raw_data_fi) as f:
         for row in f:
             js = json.loads(row)
-            js["name"] = clean_company_name(js["name"], lowercase_to_orig_cname)
+            orig_company_name = js["name"]
+            js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
             js["country"] = clean_country(js["country"])
             js["continent"] = get_continent(js["country"])
             logo_url = js.pop("logo_url")
-            js["local_logo"] = retrieve_image(logo_url, js["name"], refresh_images)
-            js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname)
+            js["local_logo"] = retrieve_image(logo_url, orig_company_name, refresh_images)
+            js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
+                                          orig_company_name if orig_company_name != js["name"].lower() else None)
             js["stage"] = js["stage"] if js["stage"] else "Unknown"
             grids = js.pop("grid")
             js["grid_info"] = ", ".join(grids)

@@ -441,7 +441,7 @@ function Row(props) {
                     }
                     {!(row.grid_info || row.permid_info || row.parent_info || row.agg_child_info || row.unagg_child_info) &&
                     <Typography variant="body2" gutterBottom component="p" style={{textAlign: "center"}}>
-                      No linkage information available.
+                      No additional metadata available.
                     </Typography>
                     }
                   </div>
