@@ -40,11 +40,18 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { order, onRequestSort, onFilterRows, filterValues, maxSliderValue} = props;
-  const companyNames = company_data.map(company => company.name).sort();
-  const countries = [...new Set(company_data.map(company => company.country).filter(c => c !== null))].sort();
-  const continents = [...new Set(company_data.map(company => company.continent).filter(c => c !== null))].sort();
-  const stages = [...new Set(company_data.map(company => company.stage).filter(c => c !== null))].sort();
+  const { order, onRequestSort, onFilterRows, filterValues, maxSliderValue, filteredFilters} = props;
+  const companyNames = get_data_list("name");
+  const countries = get_data_list("country");
+  const continents = get_data_list("continent");
+  const stages = get_data_list("stage");
+
+  function get_data_list(key){
+    if(filteredFilters[key] === null){
+      return [...new Set(company_data.map(company => company[key]).filter(c => c !== null))].sort()
+    }
+    return [...new Set(filteredFilters[key])].sort();
+  }
 
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -73,6 +80,7 @@ function EnhancedTableHead(props) {
           <Autocomplete
             multiple
             id="company-name-search"
+            disabled={companyNames.length === 0}
             options={companyNames}
             style={{ minWidth: "200px", paddingLeft:"20px" }}
             size="small"
@@ -89,6 +97,7 @@ function EnhancedTableHead(props) {
           <Autocomplete
             multiple
             id="country-search"
+            disabled={countries.length === 0}
             options={countries}
             style={{ minWidth: "150px", paddingLeft:"20px" }}
             size="small"
@@ -105,6 +114,7 @@ function EnhancedTableHead(props) {
           <Autocomplete
             multiple
             id="continent-search"
+            disabled={continents.length === 0}
             options={continents}
             style={{ minWidth: "150px", paddingLeft:"20px" }}
             size="small"
@@ -121,6 +131,7 @@ function EnhancedTableHead(props) {
           <Autocomplete
             multiple
             id="stage-search"
+            disabled={stages.length === 0}
             options={stages}
             style={{ minWidth: "70px", paddingLeft:"20px" }}
             size="small"
@@ -529,6 +540,14 @@ const CollapsibleTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(company_data.slice(0));
+  // the "filteredFilters" is the data filtered by all attributes except company name, for use in restricting the filters
+  const initialFilteredFilters = {
+    "name": null,
+    "country": null,
+    "continent": null,
+    "stage": null
+  };
+  const [filteredFilters, setFilteredFilters] = React.useState({...initialFilteredFilters});
   const [forceExpand, setForceExpand] = React.useState(false);
 
   const maxSliderValue = 100;
@@ -538,6 +557,7 @@ const CollapsibleTable = () => {
     "ai_patents": [0, maxSliderValue],
     "name": [],
     "country": [],
+    "continent": [],
     "stage": []
   };
   const [filterValues, setFilterValues] = React.useState({...defaultFilterValues});
@@ -565,6 +585,7 @@ const CollapsibleTable = () => {
 
   const resetFilter = () => {
     setFilterValues({...defaultFilterValues});
+    setFilteredFilters({...initialFilteredFilters});
     setData(company_data.slice(0));
   };
 
@@ -578,9 +599,19 @@ const CollapsibleTable = () => {
     setFilterValues(updatedFilterValues);
 
     const filtered_data = [];
+    const key_filtered_data = {
+      "name": [],
+      "country": [],
+      "continent": [],
+      "stage": []
+    };
     const slider_keys = ["ai_pubs", "ai_patents", "ai_pubs_in_top_conferences"];
     for(let datum of company_data) {
       let include = true;
+      const include_key_filt = {};
+      for(let key in key_filtered_data){
+        include_key_filt[key] = true;
+      }
       for (let key in updatedFilterValues) {
         // check within range if sliders
         if(slider_keys.includes(key)){
@@ -592,13 +623,27 @@ const CollapsibleTable = () => {
         }
         else if ((updatedFilterValues[key].length !== 0) && !updatedFilterValues[key].includes(datum[key])) {
           include = false;
+          for(let other_key in key_filtered_data){
+            if(other_key !== key) {
+              include_key_filt[other_key] = false;
+            }
+          }
         }
       }
       if(include){
         filtered_data.push(datum);
       }
+      for(let key in key_filtered_data){
+        if(include_key_filt[key] && (key in datum) && (datum[key] !== null)){
+          if(key_filtered_data[key] === null){
+            key_filtered_data[key] = [];
+          }
+          key_filtered_data[key].push(datum[key])
+        }
+      }
     }
     setData(filtered_data);
+    setFilteredFilters(key_filtered_data);
     setPage(0);
   };
 
@@ -655,6 +700,7 @@ const CollapsibleTable = () => {
             onFilterRows={handleFilterRows}
             filterValues={filterValues}
             maxSliderValue={maxSliderValue}
+            filteredFilters={filteredFilters}
           />
           <TableBody key={"table-content-"+forceExpand}>
             {stableSort(data).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
