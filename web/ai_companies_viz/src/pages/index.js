@@ -64,10 +64,19 @@ const IndexPage = () => {
   return (
     <main>
       <div>
-        <div style={{margin: "20px", textAlign: "right"}}>
-          <a href={"https://cset.georgetown.edu"} target="_blank" rel="noreferrer" title="Link to CSET website, cset.georgetown.edu">
-              <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
-          </a>
+        <div style={{margin: "20px"}}>
+          <div style={{width: "80%", display: "inline-block"}}>
+            <h2>Welcome to CARAT, CSET's tracker for private-sector AI activity.</h2>
+            <p>
+              CARAT collects data related to companies' AI research, development, and production activities
+              in order to inform analysis of the global AI sector.
+            </p>
+          </div>
+          <div style={{width: "20%", display: "inline-block", textAlign: "right", verticalAlign: "top"}}>
+            <a href={"https://cset.georgetown.edu"} target="_blank" rel="noreferrer" title="Link to CSET website, cset.georgetown.edu">
+                <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
+            </a>
+          </div>
         </div>
         <Tabs value={selectedTab} onChange={handleTabChange} orientation={"vertical"}
               style={{borderRight: "1px solid grey", display: "inline-block", width: "15%"}}>
