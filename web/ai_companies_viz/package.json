@@ -25,6 +25,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.11.1",
+    "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-plotly.js": "^2.5.1"
   }

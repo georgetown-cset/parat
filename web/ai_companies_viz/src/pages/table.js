@@ -19,11 +19,13 @@ import {makeStyles} from "@material-ui/core";
 import ClearIcon from '@material-ui/icons/Clear';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TablePagination from "@material-ui/core/TablePagination";
 import "chartjs-plugin-annotation";
+import {CSVLink} from "react-csv";
 
 // https://sevketyalcin.com/blog/responsive-charts-using-Chart.js-and-react-chartjs-2/
 defaults.global.maintainAspectRatio = false;
@@ -561,6 +563,27 @@ const CollapsibleTable = () => {
     "stage": []
   };
   const [filterValues, setFilterValues] = React.useState({...defaultFilterValues});
+  const headers = [
+    { label: "cset_id", key: "CSET_id" },
+    { label: "company_name", key: "name" },
+    { label: "country", key: "country" },
+    { label: "website", key: "website" },
+    { label: "continent", key: "continent" },
+    { label: "stage", key: "stage" },
+    { label: "ai_pubs_since_2010", key: "ai_pubs.value" },
+    { label: "ai_pubs_in_top_conf_since_2010", key: "ai_pubs_in_top_conferences.value" },
+    { label: "ai_patents_since_2010", key: "ai_patents.value" },
+    { label: "crunchbase_uuid", key: "crunchbase.uuid" },
+    { label: "crunchbase_url", key: "crunchbase.url" },
+    { label: "aliases", key: "aliases" },
+    { label: "grid_ids", key: "grid_info" },
+    { label: "permids", key: "permid_info" },
+    { label: "parents", key: "parent_info" },
+    { label: "included_subsidiaries", key: "agg_child_info" },
+    { label: "excluded_subsidiaries", key: "unagg_child_info" },
+  ];
+  //const [exportFilename, setExportFilename] = React.useState("cset-carat-export.csv");
+  const exportFilename = "cset-carat-export.csv";
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -688,6 +711,10 @@ const CollapsibleTable = () => {
                 onClick={() => setForceExpand(false)}
         >
           <ExpandLessIcon size="small"/> Close All Rows
+        </Button>
+        <Button color="primary" size="small" style={{marginRight: "10px"}}>
+          <CloudDownloadIcon size="small"/><CSVLink data={data} filename={exportFilename} headers={headers} style={{verticalAlign: "center", color: "inherit", textDecoration: "none"}}>
+            &nbsp;&nbsp;Download Selected</CSVLink>
         </Button>
       </div>
       <TableContainer component={Paper}>
