@@ -714,7 +714,7 @@ const CollapsibleTable = () => {
         </Button>
         <Button color="primary" size="small" style={{marginRight: "10px"}}>
           <CloudDownloadIcon size="small"/><CSVLink data={data} filename={exportFilename} headers={headers} style={{verticalAlign: "center", color: "inherit", textDecoration: "none"}}>
-            &nbsp;&nbsp;Download Selected</CSVLink>
+            &nbsp;Download Selected</CSVLink>
         </Button>
       </div>
       <TableContainer component={Paper}>

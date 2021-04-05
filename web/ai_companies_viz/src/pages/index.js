@@ -1,14 +1,50 @@
 import React, { useEffect } from "react";
-import Button from "@material-ui/core/Button";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from "@material-ui/core/Link";
+import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 import cset_logo from "../images/cset_logo.svg";
 import "../styles/styles.css";
+import {tab_text} from "../static_data/text";
 
 const CollapsibleTable = React.lazy(() => import("./table"));
 
+function TabPanel(props) {
+  const { value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`wrapped-tabpanel-${index}`}
+      aria-labelledby={`wrapped-tab-${index}`}
+      style={{padding: "0px 100px"}}
+      {...other}
+    >
+      {value === index && (
+        <div>
+          <Typography dangerouslySetInnerHTML={tab_text[index]}></Typography>
+        </div>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `wrapped-tab-${index}`,
+    'aria-controls': `wrapped-tabpanel-${index}`,
+  };
+}
 
 const IndexPage = () => {
 
@@ -20,32 +56,40 @@ const IndexPage = () => {
   // thank you https://stackoverflow.com/a/63066975
   const isSSR = typeof window === "undefined";
 
+  const [selectedTab, setSelectedTab] = React.useState("overview");
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
   return (
     <main>
-      <div id="toolbar" style={{"margin": "20px"}}>
-        <a href={"https://cset.georgetown.edu"} target="_blank" rel="noreferrer" title="Link to CSET website, cset.georgetown.edu">
-          <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
-        </a>
-        <Button variant="contained"
-                color="primary"
-                style={{"float": "right"}}
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdMNP7fg3_HkIdKh_IZBksm6vZCbzb1cRZS-sdeLL5i3yxi_g/viewform"
-                target="_blank">
-          Questions and Submissions
-        </Button>
-      </div>
-      <div id="project-description" style={{"margin": "50px 100px"}}>
-        <div id="description-header" style={{"marginBottom": "30px"}}>
-          <Typography variant={"h4"} gutterBottom>AI Companies Tracker</Typography>
-          <Typography variant={"h6"} gutterBottom>By Zach & Rebecca</Typography>
-          <Typography variant={"subtitle2"} gutterBottom>Web design by Jennifer Melot</Typography>
+      <div>
+        <div style={{margin: "20px", textAlign: "right"}}>
+          <a href={"https://cset.georgetown.edu"} target="_blank" rel="noreferrer" title="Link to CSET website, cset.georgetown.edu">
+              <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
+          </a>
         </div>
-        <Typography variant={"body1"} paragraph>
-        The AI Companies Tracker is ... link to relevant reports ... link to export
-        </Typography>
-        <Typography variant={"body2"} paragraph>
-          The authors would like to thank... Ben Murphy and Yanqi Ding.
-        </Typography>
+        <Tabs value={selectedTab} onChange={handleTabChange} orientation={"vertical"}
+              style={{borderRight: "1px solid grey", display: "inline-block", width: "15%"}}>
+          <Tab
+            value="overview"
+            label="CSET CARAT Overview"
+            indicatorColor="primary"
+            textColor="primary"
+            {...a11yProps('overview')}
+          />
+          <Tab value="data_sources" label="Data Sources" {...a11yProps('data_sources')} />
+          <Tab value="methodology" label="Methodology" {...a11yProps('methodology')} />
+          <Tab value="faq" label="FAQ" {...a11yProps('faq')} />
+          <Tab value="acknowledgements" label="Acknowledgements" {...a11yProps('acknowledgements')} />
+        </Tabs>
+        <div style={{display: "inline-block", width: "84%", verticalAlign: "top"}}>
+          <TabPanel value={selectedTab} index="overview"/>
+          <TabPanel value={selectedTab} index="data_sources"/>
+          <TabPanel value={selectedTab} index="methodology"/>
+          <TabPanel value={selectedTab} index="faq"/>
+          <TabPanel value={selectedTab} index="acknowledgements"/>
+        </div>
       </div>
       <div style={{padding: "10px 50px", backgroundColor: "#FFFFFF"}} id="table-container">
         {!isSSR && (
