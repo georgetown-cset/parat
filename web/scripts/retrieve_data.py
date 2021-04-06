@@ -132,7 +132,7 @@ def clean_market(market_info: list, market_key_to_link: dict) -> str:
 
 def clean_wiki_description(wiki_desc: str) -> str:
     clean_wiki_desc = re.sub(r"\[\d+\]", "", wiki_desc)
-    clean_wiki_desc = re.sub(r"\s*\([^\)]*/[^\)]*\)\s*", " ", clean_wiki_desc)
+    clean_wiki_desc = re.sub(r"\s*\([^\)]*[/\[][^\)]*\)\s*", " ", clean_wiki_desc)
     return clean_wiki_desc
 
 def add_ranks(rows: list, metrics: list) -> None:
