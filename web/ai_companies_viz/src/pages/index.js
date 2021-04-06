@@ -21,13 +21,15 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`wrapped-tabpanel-${index}`}
       aria-labelledby={`wrapped-tab-${index}`}
-      style={{padding: "0px 100px"}}
+      style={{padding: "0px 7%"}}
       {...other}
     >
       {value === index && (
-        <div>
-          <Typography dangerouslySetInnerHTML={tab_text[index]}></Typography>
-        </div>
+        tab_text[index].map((para) =>
+          <div style={{paddingBottom: "10px"}}>
+            <Typography dangerouslySetInnerHTML={para}></Typography>
+          </div>
+        )
       )}
     </div>
   );
@@ -63,26 +65,27 @@ const IndexPage = () => {
 
   return (
     <main>
-      <div>
-        <div style={{margin: "20px"}}>
-          <div style={{width: "80%", display: "inline-block"}}>
-            <h2>Welcome to CARAT, CSET's tracker for private-sector AI activity.</h2>
-            <p>
+      <div style={{paddingBottom: "50px"}}>
+        <div style={{margin: "20px 20px 30px 20px"}}>
+          <div style={{width: "80%", marginLeft: "1%", display: "inline-block"}}>
+            <h2>🥕 Welcome to CARAT, CSET's tracker for private-sector AI activity.</h2>
+            <h3 style={{fontWeight: "normal"}}>
               CARAT collects data related to companies' AI research, development, and production activities
               in order to inform analysis of the global AI sector.
-            </p>
+            </h3>
           </div>
-          <div style={{width: "20%", display: "inline-block", textAlign: "right", verticalAlign: "top"}}>
+          <div style={{width: "19%", display: "inline-block", textAlign: "right", verticalAlign: "top"}}>
             <a href={"https://cset.georgetown.edu"} target="_blank" rel="noreferrer" title="Link to CSET website, cset.georgetown.edu">
-                <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
+                <img src={cset_logo} style={{"width": "100%"}} alt="CSET Logo"/>
             </a>
           </div>
         </div>
+        <div>
         <Tabs value={selectedTab} onChange={handleTabChange} orientation={"vertical"}
-              style={{borderRight: "1px solid grey", display: "inline-block", width: "15%"}}>
+              style={{borderRight: "1px solid grey", width: "15%", display: "inline-block", minWidth: "160px"}}>
           <Tab
             value="overview"
-            label="CSET CARAT Overview"
+            label="Overview"
             indicatorColor="primary"
             textColor="primary"
             {...a11yProps('overview')}
@@ -90,14 +93,15 @@ const IndexPage = () => {
           <Tab value="data_sources" label="Data Sources" {...a11yProps('data_sources')} />
           <Tab value="methodology" label="Methodology" {...a11yProps('methodology')} />
           <Tab value="faq" label="FAQ" {...a11yProps('faq')} />
-          <Tab value="acknowledgements" label="Acknowledgements" {...a11yProps('acknowledgements')} />
+          <Tab value="acknowledgments" label="Acknowledgements" {...a11yProps('acknowledgments')} />
         </Tabs>
-        <div style={{display: "inline-block", width: "84%", verticalAlign: "top"}}>
+        <div style={{verticalAlign: "top", display: "inline-block", width: "84.5%"}}>
           <TabPanel value={selectedTab} index="overview"/>
           <TabPanel value={selectedTab} index="data_sources"/>
           <TabPanel value={selectedTab} index="methodology"/>
           <TabPanel value={selectedTab} index="faq"/>
-          <TabPanel value={selectedTab} index="acknowledgements"/>
+          <TabPanel value={selectedTab} index="acknowledgments"/>
+        </div>
         </div>
       </div>
       <div style={{padding: "10px 50px", backgroundColor: "#FFFFFF"}} id="table-container">
