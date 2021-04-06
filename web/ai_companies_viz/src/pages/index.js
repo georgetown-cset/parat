@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from "@material-ui/core/Link";
 import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
@@ -26,9 +25,7 @@ function TabPanel(props) {
     >
       {value === index && (
         tab_text[index].map((para) =>
-          <div style={{paddingBottom: "10px"}}>
-            <Typography dangerouslySetInnerHTML={para}></Typography>
-          </div>
+          <div style={{paddingBottom: "10px"}} dangerouslySetInnerHTML={para} className={"MuiTypography-body1"}></div>
         )
       )}
     </div>
