@@ -1,10 +1,12 @@
 import argparse
+import chardet
 import csv
 import json
 import math
 import os
 import pycountry
 import pycountry_convert
+import pycld2
 import re
 import requests
 import time
@@ -12,6 +14,7 @@ import time
 from PIL import Image
 from datetime import datetime
 from google.cloud import bigquery
+from google.cloud import translate_v3beta1 as translate
 from io import BytesIO
 
 raw_data_dir = "raw_data"
@@ -35,6 +38,8 @@ reverse_company_name_map = {v: k for k, v in company_name_map.items()}
 crunchbase_url_override = {
     "https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv": "https://www.crunchbase.com/organization/covariant"
 }
+client = translate.TranslationServiceClient()
+parent = client.location_path("gcp-cset-projects", "global")
 
 def get_exchange_link(market_key) -> str:
     time.sleep(5)
@@ -157,6 +162,32 @@ def add_ranks(rows: list, metrics: list) -> None:
                 "frac_of_max": math.log(row[metric]+1, 2)/max_metric
             }
 
+def get_translation(desc: str) -> str:
+    if desc is None or len(desc.strip()) == 0:
+        return None
+    try:
+        is_reliable, text_bytes_found, details = pycld2.detect(desc)
+    except pycld2.error as e:
+        encoding = chardet.detect(desc.encode("utf-8"))["encoding"]
+        if encoding is None:
+            encoding = "latin-1"  # last-ditch effort...
+        try:
+            is_reliable, text_bytes_found, details = pycld2.detect(desc.encode("utf-8").decode(encoding))
+        except:
+            print("Error on "+desc)
+            return None
+    if details[0][1].lower() != "en":
+        print("Translating "+desc)
+        response = client.translate_text(
+            parent=parent,
+            contents=[desc],
+            mime_type="text/plain",
+            target_language_code="en"
+        )
+        translation = response.translations[0].translated_text.strip()
+        return translation
+    return None
+
 def add_supplemental_descriptions(rows: list) -> None:
     name_to_desc_info = {}
     # map keys from csv to keys for javascript
@@ -180,12 +211,15 @@ def add_supplemental_descriptions(rows: list) -> None:
                 name_to_desc_info[company_name]["wikipedia_link"] = None
                 name_to_desc_info[company_name]["wikipedia_description"] = None
             source_description = name_to_desc_info[company_name]["company_site_description"]
+            translation = get_translation(source_description)
+            name_to_desc_info[company_name]["company_site_description_translation"] = translation
             source_link = name_to_desc_info[company_name]["company_site_link"]
             if not (source_link and ("http" in source_link or ".com" in source_link)):
                 if source_description:
                     print(f"{company_name} missing source link")
                 name_to_desc_info[company_name]["company_site_description"] = None
                 name_to_desc_info[company_name]["company_site_link"] = None
+                name_to_desc_info[company_name]["company_site_description_translation"] = None
     for row in rows:
         company_name = row["name"].strip().lower()
         if row["name"] in reverse_company_name_map:

@@ -419,6 +419,12 @@ function Row(props) {
                     <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.company_site_link} target="blank" rel="noreferrer">Source</a>, retrieved {row.description_retrieval_date}</span>
                   </Typography>
                   }
+                  {row.company_site_description_translation && row.company_site_description.length > 0 &&
+                  <Typography variant="body2" gutterBottom component="div" style={{marginTop: "10px"}}>
+                    "{row.company_site_description_translation}"
+                    <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.company_site_link} target="blank" rel="noreferrer">Google Translation of source</a>, retrieved {row.description_retrieval_date}</span>
+                  </Typography>
+                  }
                 </div>
                 <div style={{width: "35%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
