@@ -73,7 +73,6 @@ class CountGetter:
                         for regex in regexes[1:]:
                             regex_to_use = rf"r'(?i){regex}'"
                             query += f"""OR regexp_contains(org_names, {regex_to_use}) """
-                    # results = pd.read_gbq(query, project_id='gcp-cset-projects')
                     query_job = client.query(query)
                     # query_job is an iterator, so even though we're only returning one row we're going to loop
                     for element in query_job:
@@ -119,7 +118,6 @@ class CountGetter:
         """
         for company in companies:
             if company["CSET_id"] in self.regex_dict:
-                # regex_to_use = rf"r'(?i){self.regex_dict[company['CSET_id']]}'"
                 query = f"""WITH
                               -- First we pull all the CSET ids and their associated grids
                               id_grid AS (
@@ -220,8 +218,6 @@ class CountGetter:
                               combined_patent_list"""
                 client = bigquery.Client()
                 query_job = client.query(query)
-                # results = pd.read_gbq(query, project_id='gcp-cset-projects')
-                # company["ai_patents"] = int(results["Simple_family_id"].count())
                 for row in query_job:
                     company["ai_patents"] = row["ai_patents"]
                 company["ai_patents_by_year"] = self.run_query_patents_by_year(company["CSET_id"])
