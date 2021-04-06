@@ -38,8 +38,8 @@ const headCells = [
   { id: "country", numeric: false, disablePadding: false, label: "Country" },
   { id: "continent", numeric: false, disablePadding: false, label: "Continent" },
   { id: "stage", numeric: false, disablePadding: false, label: "Company Stage" },
-  { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Publications" },
-  { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "AI Publications in Top Conferences" },
+  { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Pubs" },
+  { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "Top AI Pubs" },
   { id: "ai_patents", numeric: true, disablePadding: false, label: "AI Patents" },
 ];
 
@@ -149,7 +149,7 @@ function EnhancedTableHead(props) {
               <TableCell
                 key={headCell.id}
                 align={"center"}
-                style={{ width: "150px", verticalAlign: "bottom" }}
+                style={{ width: "120px", verticalAlign: "bottom" }}
                 sortDirection={order[headCell.id] === 1 ? "asc" : "desc"}
               >
                 <TableSortLabel
