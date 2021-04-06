@@ -1,6 +1,7 @@
 // much thanks due to the examples here https://material-ui.com/components/tables/
 import React from "react";
 import {company_data} from "../static_data/data";
+import {tooltips} from "../static_data/tooltips";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell/TableCell";
@@ -9,6 +10,7 @@ import TextField from "@material-ui/core/TextField/TextField";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Slider from "@material-ui/core/Slider";
 import PropTypes from "prop-types";
+import Tooltip from "@material-ui/core/Tooltip";
 import Collapse from "@material-ui/core/Collapse/Collapse";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
@@ -429,12 +431,12 @@ function Row(props) {
                   <div>
                     {row.grid_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <span style={{fontWeight: "bold"}}>GRID:</span> {row.grid_info}
+                      <Tooltip title={tooltips.grid}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>GRID</span></Tooltip>: {row.grid_info}
                     </Typography>
                     }
                     {row.permid_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <span style={{fontWeight: "bold"}}>PermID:</span> {row.permid_info}
+                      <Tooltip title={tooltips.permid}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>PermID</span></Tooltip>: {row.permid_info}
                     </Typography>
                     }
                     {row.parent_info &&
@@ -444,12 +446,12 @@ function Row(props) {
                     }
                     {row.agg_child_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <span style={{fontWeight: "bold"}}>Included Subsidiaries:</span> {row.agg_child_info}
+                      <Tooltip title={tooltips.included_subsidiaries}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Included Subsidiaries</span></Tooltip>: {row.agg_child_info}
                     </Typography>
                     }
                     {row.unagg_child_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <span style={{fontWeight: "bold"}}>Excluded Subsidiaries:</span> {row.unagg_child_info}
+                      <Tooltip title={tooltips.excluded_subsidiaries}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Excluded Subsidiaries</span></Tooltip>: {row.unagg_child_info}
                     </Typography>
                     }
                     {!(row.grid_info || row.permid_info || row.parent_info || row.agg_child_info || row.unagg_child_info) &&
