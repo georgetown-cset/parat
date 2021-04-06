@@ -85,7 +85,7 @@ class CountGetter:
                 # if we have a grid but don't have any papers, set that to be true
                 row_dict[field_name] = 0
             # If we have a grid but don't have by-year data
-            if not field_name_by_year in row_dict:
+            if by_year and not field_name_by_year in row_dict:
                 row_dict[field_name_by_year] = []
             companies.append(row_dict)
         return companies
