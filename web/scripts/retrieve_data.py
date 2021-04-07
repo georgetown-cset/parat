@@ -295,7 +295,7 @@ def clean(refresh_images: bool) -> None:
             permids = js.pop("permid")
             js["permid_info"] = ", ".join([str(p) for p in permids])
             js["permid_links"] = {"__html": ", ".join([(f"<a class={link_css} target='blank' rel='noreferrer' "
-                                                     f"href='https://permid.org/{permid}'>{permid}</a>")
+                                                     f"href='https://permid.org/1-{permid}'>{permid}</a>")
                                                     for permid in permids])}
             js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
             js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
