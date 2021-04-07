@@ -32,7 +32,8 @@ company_name_map = {
     "睿思芯科": "RiVAI",
     "江行智能": "Jiangxing Intelligence",
     "智易科技": "Zhiyi Tech",
-    "创新奇智": "AInnovation"
+    "创新奇智": "AInnovation",
+    "captricity": "Vidado"
 }
 reverse_company_name_map = {v: k for k, v in company_name_map.items()}
 crunchbase_url_override = {
@@ -313,6 +314,7 @@ def clean(refresh_images: bool) -> None:
                                              for y in js["years"]]
             js["ai_pubs_in_top_conferences"] = sum(js["yearly_ai_pubs_top_conf"])
             js["market"] = clean_market(js.pop("market"), market_key_to_link)
+            js["market_list"] = ", ".join([m["market_key"] for m in js["market"]])
             js["crunchbase_description"] = js.pop("short_description")
             if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
                 url = js["crunchbase"]["crunchbase_url"]
