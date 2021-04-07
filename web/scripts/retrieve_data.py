@@ -41,6 +41,7 @@ crunchbase_url_override = {
 }
 client = translate.TranslationServiceClient()
 parent = client.location_path("gcp-cset-projects", "global")
+link_css = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary'"
 
 def get_exchange_link(market_key) -> str:
     time.sleep(5)
@@ -288,8 +289,14 @@ def clean(refresh_images: bool) -> None:
             js["stage"] = js["stage"] if js["stage"] else "Unknown"
             grids = js.pop("grid")
             js["grid_info"] = ", ".join(grids)
+            js["grid_links"] = {"__html": ", ".join([(f"<a class={link_css} target='blank' rel='noreferrer' "
+                                                     f"href='https://www.grid.ac/institutes/{grid}'>{grid}</a>")
+                                                    for grid in grids])}
             permids = js.pop("permid")
             js["permid_info"] = ", ".join([str(p) for p in permids])
+            js["permid_links"] = {"__html": ", ".join([(f"<a class={link_css} target='blank' rel='noreferrer' "
+                                                     f"href='https://permid.org/{permid}'>{permid}</a>")
+                                                    for permid in permids])}
             js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
             js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
             js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
@@ -315,6 +322,8 @@ def clean(refresh_images: bool) -> None:
             js["ai_pubs_in_top_conferences"] = sum(js["yearly_ai_pubs_top_conf"])
             js["market"] = clean_market(js.pop("market"), market_key_to_link)
             js["market_list"] = ", ".join([m["market_key"] for m in js["market"]])
+            if js["website"] and not js["website"].startswith("http"):
+                js["website"] = "https://"+js["website"]
             js["crunchbase_description"] = js.pop("short_description")
             if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
                 url = js["crunchbase"]["crunchbase_url"]

@@ -434,15 +434,16 @@ function Row(props) {
                     </Typography>
                   }
                   {linkageVisible &&
-                  <div>
+                  <div width={"100%"}>
                     {row.grid_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={tooltips.grid}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>GRID</span></Tooltip>: {row.grid_info}
+                      <Tooltip title={tooltips.grid}>
+                        <span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>GRID</span></Tooltip>: <span dangerouslySetInnerHTML={row.grid_links}/>
                     </Typography>
                     }
                     {row.permid_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={tooltips.permid}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>PermID</span></Tooltip>: {row.permid_info}
+                      <Tooltip title={tooltips.permid}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>PermID</span></Tooltip>: <span dangerouslySetInnerHTML={row.permid_links}/>
                     </Typography>
                     }
                     {row.parent_info &&
