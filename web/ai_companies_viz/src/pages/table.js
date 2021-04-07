@@ -2,7 +2,6 @@
 import React from "react";
 import {company_data} from "../static_data/data";
 import {tooltips} from "../static_data/tooltips";
-import HelpIcon from "@material-ui/icons/Help";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell/TableCell";
@@ -39,8 +38,8 @@ const headCells = [
   { id: "country", numeric: false, disablePadding: false, label: "Country" },
   { id: "continent", numeric: false, disablePadding: false, label: "Continent" },
   { id: "stage", numeric: false, disablePadding: false, label: "Company Stage" },
-  { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Publications" },
-  { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "AI Publications in Top Conferences" },
+  { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Pubs" },
+  { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "Top AI Pubs" },
   { id: "ai_patents", numeric: true, disablePadding: false, label: "AI Patents" },
 ];
 
@@ -150,7 +149,7 @@ function EnhancedTableHead(props) {
               <TableCell
                 key={headCell.id}
                 align={"center"}
-                style={{ width: "150px", verticalAlign: "bottom" }}
+                style={{ width: "120px", verticalAlign: "bottom" }}
                 sortDirection={order[headCell.id] === 1 ? "asc" : "desc"}
               >
                 <TableSortLabel
@@ -427,7 +426,7 @@ function Row(props) {
                   </Typography>
                   }
                 </div>
-                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
+                <div style={{width: "37%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
                   {row.aliases &&
                     <Typography variant="body2" gutterBottom component="div">
@@ -435,15 +434,16 @@ function Row(props) {
                     </Typography>
                   }
                   {linkageVisible &&
-                  <div>
+                  <div width={"100%"}>
                     {row.grid_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.grid}</h2>}><span style={{fontWeight: "bold"}}>GRID<HelpIcon fontSize={"inherit"}/></span></Tooltip>: {row.grid_info}
+                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.grid}</h2>}>
+                        <span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>GRID</span></Tooltip>: <span dangerouslySetInnerHTML={row.grid_links}/>
                     </Typography>
                     }
                     {row.permid_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.permid}</h2>}><span style={{fontWeight: "bold"}}>PermID<HelpIcon fontSize={"inherit"}/></span></Tooltip>: {row.permid_info}
+                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.permid}</h2>}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>PermID</span></Tooltip>: <span dangerouslySetInnerHTML={row.permid_links}/>
                     </Typography>
                     }
                     {row.parent_info &&
@@ -453,12 +453,12 @@ function Row(props) {
                     }
                     {row.agg_child_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.included_subsidiaries}</h2>}><span style={{fontWeight: "bold"}}>Included Subsidiaries<HelpIcon fontSize={"inherit"}/></span></Tooltip>: {row.agg_child_info}
+                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.included_subsidiaries}</h2>}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Included Subsidiaries</span></Tooltip>: {row.agg_child_info}
                     </Typography>
                     }
                     {row.unagg_child_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.excluded_subsidiaries}</h2>}><span style={{fontWeight: "bold"}}>Excluded Subsidiaries<HelpIcon fontSize={"inherit"}/></span></Tooltip>: {row.unagg_child_info}
+                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.excluded_subsidiaries}</h2>}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Excluded Subsidiaries</span></Tooltip>: {row.unagg_child_info}
                     </Typography>
                     }
                     {!(row.grid_info || row.permid_info || row.parent_info || row.agg_child_info || row.unagg_child_info) &&
@@ -582,6 +582,10 @@ const CollapsibleTable = () => {
     { label: "ai_pubs_since_2010", key: "ai_pubs.value" },
     { label: "ai_pubs_in_top_conf_since_2010", key: "ai_pubs_in_top_conferences.value" },
     { label: "ai_patents_since_2010", key: "ai_patents.value" },
+    { label: "ai_pubs_since_2010_rank", key: "ai_pubs.rank" },
+    { label: "ai_pubs_in_top_conf_since_2010_rank", key: "ai_pubs_in_top_conferences.rank" },
+    { label: "ai_patents_since_2010_rank", key: "ai_patents.rank" },
+    { label: "market", key: "market_list"},
     { label: "crunchbase_uuid", key: "crunchbase.crunchbase_uuid" },
     { label: "crunchbase_url", key: "crunchbase.crunchbase_url" },
     { label: "aliases", key: "aliases" },
