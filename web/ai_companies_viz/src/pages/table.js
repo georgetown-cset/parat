@@ -426,7 +426,7 @@ function Row(props) {
                   </Typography>
                   }
                 </div>
-                <div style={{width: "35%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
+                <div style={{width: "37%", display: "inline-block", verticalAlign:"top", marginLeft: "30px"}}>
                   <Paper elevation={linkageElevation} style={{padding: "10px 20px"}}>
                   {row.aliases &&
                     <Typography variant="body2" gutterBottom component="div">
@@ -437,13 +437,13 @@ function Row(props) {
                   <div width={"100%"}>
                     {row.grid_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={tooltips.grid}>
+                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.grid}</h2>}>
                         <span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>GRID</span></Tooltip>: <span dangerouslySetInnerHTML={row.grid_links}/>
                     </Typography>
                     }
                     {row.permid_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={tooltips.permid}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>PermID</span></Tooltip>: <span dangerouslySetInnerHTML={row.permid_links}/>
+                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.permid}</h2>}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>PermID</span></Tooltip>: <span dangerouslySetInnerHTML={row.permid_links}/>
                     </Typography>
                     }
                     {row.parent_info &&
@@ -453,12 +453,12 @@ function Row(props) {
                     }
                     {row.agg_child_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={tooltips.included_subsidiaries}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Included Subsidiaries</span></Tooltip>: {row.agg_child_info}
+                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.included_subsidiaries}</h2>}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Included Subsidiaries</span></Tooltip>: {row.agg_child_info}
                     </Typography>
                     }
                     {row.unagg_child_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <Tooltip title={tooltips.excluded_subsidiaries}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Excluded Subsidiaries</span></Tooltip>: {row.unagg_child_info}
+                      <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.excluded_subsidiaries}</h2>}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Excluded Subsidiaries</span></Tooltip>: {row.unagg_child_info}
                     </Typography>
                     }
                     {!(row.grid_info || row.permid_info || row.parent_info || row.agg_child_info || row.unagg_child_info) &&
