@@ -42,6 +42,7 @@ crunchbase_url_override = {
 client = translate.TranslationServiceClient()
 parent = client.location_path("gcp-cset-projects", "global")
 link_css = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary'"
+filt_exchanges = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
 
 def get_exchange_link(market_key) -> str:
     time.sleep(5)
@@ -320,8 +321,18 @@ def clean(refresh_images: bool) -> None:
             js["yearly_ai_pubs_top_conf"] = [0 if y not in ai_pubs_in_top_conf else ai_pubs_in_top_conf[y]
                                              for y in js["years"]]
             js["ai_pubs_in_top_conferences"] = sum(js["yearly_ai_pubs_top_conf"])
-            js["market"] = clean_market(js.pop("market"), market_key_to_link)
-            js["market_list"] = ", ".join([m["market_key"] for m in js["market"]])
+            market = clean_market(js.pop("market"), market_key_to_link)
+            js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in filt_exchanges]
+            if len(market) > 0:
+                market_elts = []
+                for m in market:
+                    if m["link"]:
+                        market_elts.append(f"<a class={link_css} target='blank' rel='noreferrer' "
+                                                     f"href='{m['link']}'>{m['market_key']}</a>")
+                    else:
+                        market_elts.append(m["market_key"])
+                js["full_market_links"] = {"__html": ", ".join(market_elts)}
+            js["market_list"] = ", ".join([m["market_key"] for m in market])
             if js["website"] and not js["website"].startswith("http"):
                 js["website"] = "https://"+js["website"]
             js["crunchbase_description"] = js.pop("short_description")

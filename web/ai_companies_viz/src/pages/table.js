@@ -393,7 +393,7 @@ function Row(props) {
                   <Typography variant="h6" gutterBottom component="span">
                     <Link href={row.website} target="_blank" rel="noreferrer">{row.name}</Link>
                   </Typography>
-                  {row.market.map( m => (
+                  {row.market_filt.map( m => (
                     <span style={{paddingLeft: "10px", color: "#545454"}}>
                       {m.link ?
                         <Link href={m.link} target="blank" rel="noreferrer">{m.market_key}</Link>
@@ -448,7 +448,7 @@ function Row(props) {
                     }
                     {row.parent_info &&
                     <Typography variant="body2" gutterBottom component="p">
-                      <span style={{fontWeight: "bold"}}>Parents:</span> {row.parent_info}
+                      <span style={{fontWeight: "bold"}}>Parents</span>: {row.parent_info}
                     </Typography>
                     }
                     {row.agg_child_info &&
@@ -461,7 +461,12 @@ function Row(props) {
                       <Tooltip title={<h2 style={{ lineHeight: "1.5" }}>{tooltips.excluded_subsidiaries}</h2>}><span style={{fontWeight: "bold", borderBottom: "1px dashed black"}}>Excluded Subsidiaries</span></Tooltip>: {row.unagg_child_info}
                     </Typography>
                     }
-                    {!(row.grid_info || row.permid_info || row.parent_info || row.agg_child_info || row.unagg_child_info) &&
+                    {row.full_market_links &&
+                    <Typography variant="body2" gutterBottom component="p">
+                      <span style={{fontWeight: "bold"}}>Market (full)</span>: <span dangerouslySetInnerHTML={row.full_market_links}/>
+                    </Typography>
+                    }
+                    {!(row.grid_info || row.permid_info || row.parent_info || row.agg_child_info || row.unagg_child_info || row.full_market_links) &&
                     <Typography variant="body2" gutterBottom component="p" style={{textAlign: "center"}}>
                       No additional metadata available.
                     </Typography>
