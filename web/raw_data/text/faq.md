@@ -12,6 +12,10 @@ CARAT isn't meant to be a "top AI companies" list. Which companies are at the "t
 
 The numerical rankings that appear in CARAT, displayed alongside our patent and publication metrics, are generated automatically from our patent and publication datasets. They reflect how each company compares to the other companies in CARAT according to these specific metrics - not whether that company is more innovative or capable in AI overall.
 
+## Do you include subsidiaries when you calculate metrics for each company?
+
+In most cases, yes. CARAT includes parent-subsidiary mappings for many AI companies. When a subsidiary is mapped to a parent, the subsidiary's publications, patents, etc. are attributed to the parent company. (The "Included Subsidiaries" metadata field for each parent company lists any subsidiaries treated this way.) In other cases, our data sources already consolidate a subsidiary's data with its parent, or the queries we run on those data sources collect parent and subsidiary data together by design. We believe most CARAT companies' subsidiaries' data are ultimately "rolled up" to the parent level in one of these ways.
+
 ## Can I get the raw data that goes into CARAT?
 
 You can use CARAT's download feature to extract the descriptive information, metrics and metadata displayed in the CARAT web interface. We also share the code used to generate CARAT in our [GitHub repo](https://github.com/georgetown-cset/ai-companies-visualization). Licensing restrictions prevent us from sharing the underlying publication and patent [data sources](_____), but if you have access to these datasets (some of which are free), you can use CARAT metadata to efficiently query them. For example, you can use the GRID identifiers compiled in CARAT to quickly find a company's publications in databases like [Dimensions](https://www.dimensions.ai/) or [Microsoft Academic Graph](https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/).
