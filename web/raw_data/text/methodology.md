@@ -12,8 +12,5 @@ CARAT uses these identifiers to pull relevant data from our data sources, such a
 
 CSET annotators also manually collect some metadata for the companies in CARAT, including parent-subsidiary information, aliases, and some business descriptions.
 
-**[________Confirm timespans stated above]**
+We will update CARAT periodically; it was last updated on April 9, 2021, and we expect to next update it in August 2021.
 
-**[________How often data are updated]**
-
-**[________Any other technical details Jennifer/Rebecca see fit to include - backend architecture, etc.]**

@@ -1,5 +1,5 @@
 // much thanks due to the examples here https://material-ui.com/components/tables/
-import React from "react";
+import React, {useRef} from "react";
 import {company_data} from "../static_data/data";
 import {tooltips} from "../static_data/tooltips";
 import TableHead from "@material-ui/core/TableHead";
@@ -393,7 +393,7 @@ function Row(props) {
                     <Link href={row.website} target="_blank" rel="noreferrer">{row.name}</Link>
                   </Typography>
                   {row.market_filt.map( m => (
-                    <span style={{paddingLeft: "10px", color: "#545454"}}>
+                    <span key={m.market_key} style={{paddingLeft: "10px", color: "#545454"}}>
                       {m.link ?
                         <Link href={m.link} target="blank" rel="noreferrer">{m.market_key}</Link>
                         : <span>{m.market_key}</span>
@@ -421,7 +421,7 @@ function Row(props) {
                   {row.company_site_description_translation && row.company_site_description.length > 0 &&
                   <Typography variant="body2" gutterBottom component="div" style={{marginTop: "10px"}}>
                     "{row.company_site_description_translation}"
-                    <span style={{fontSize: "75%", marginLeft: "10px"}}><a href={row.company_site_link} target="blank" rel="noreferrer">Google Translation of source</a>, retrieved {row.description_retrieval_date}</span>
+                    <span style={{fontSize: "75%", marginLeft: "10px"}}>Google Translation of <a href={row.company_site_link} target="blank" rel="noreferrer">source</a>, retrieved {row.description_retrieval_date}</span>
                   </Typography>
                   }
                 </div>
@@ -602,8 +602,10 @@ const CollapsibleTable = () => {
   //const [exportFilename, setExportFilename] = React.useState("cset-carat-export.csv");
   const exportFilename = "cset-carat-export.csv";
 
+  const toolbarRef = useRef();
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    toolbarRef.current.scrollIntoView();
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -734,7 +736,7 @@ const CollapsibleTable = () => {
             &nbsp;Download Results</CSVLink>
         </Button>
       </div>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} ref={toolbarRef}>
         <div style={{width: "99.5%"}}>
         <Table aria-label="collapsible table" style={{margin: "auto"}}>
           <EnhancedTableHead

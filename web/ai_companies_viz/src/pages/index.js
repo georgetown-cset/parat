@@ -52,6 +52,7 @@ const IndexPage = () => {
     document.title = "CSET AI Companies Tracker";
     document.documentElement.lang = "en";
     window.addEventListener("resize", handleWindowResize);
+    handleWindowResize();
   }, []);
 
   // thank you https://stackoverflow.com/a/63066975
@@ -67,14 +68,14 @@ const IndexPage = () => {
     setSelectedTab(newValue);
   };
 
-  const [simplify, setSimplify] = React.useState(window.innerWidth < 1220);
+  const [simplify, setSimplify] = React.useState(true);
   const handleWindowResize = () => {
     setSimplify(window.innerWidth < 1220)
   };
 
   return (
-    <main>
-      <div id="toolbar" style={{"margin": "20px"}}>
+    <main style={{backgroundColor: "#F9F9F9"}}>
+      <div id="toolbar" style={{"padding": "20px"}}>
         <a href={"https://cset.georgetown.edu"} target="_blank" rel="noreferrer" title="Link to CSET website, cset.georgetown.edu">
           <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
         </a>
@@ -117,11 +118,11 @@ const IndexPage = () => {
             <Tab value="acknowledgments" label="Acknowledgements" {...a11yProps('acknowledgments')} />
           </Tabs>
           <div style={{verticalAlign: "top", display: "inline-block", width: (simplify ? "100%" : "84.5%")}}>
-            <TabPanel value={selectedTab} index="overview"/>
-            <TabPanel value={selectedTab} index="data_sources"/>
-            <TabPanel value={selectedTab} index="methodology"/>
-            <TabPanel value={selectedTab} index="faq"/>
-            <TabPanel value={selectedTab} index="acknowledgments"/>
+            <TabPanel value={selectedTab} index="overview" key={"overview"}/>
+            <TabPanel value={selectedTab} index="data_sources" key={"data_sources"}/>
+            <TabPanel value={selectedTab} index="methodology" key={"methodology"}/>
+            <TabPanel value={selectedTab} index="faq" key={"faq"}/>
+            <TabPanel value={selectedTab} index="acknowledgments" key={"acknowledgments"}/>
           </div>
         </div>
       </div>
