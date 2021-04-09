@@ -51,6 +51,7 @@ const IndexPage = () => {
   useEffect(() => {
     document.title = "CSET AI Companies Tracker";
     document.documentElement.lang = "en";
+    window.addEventListener("resize", handleWindowResize);
   }, []);
 
   // thank you https://stackoverflow.com/a/63066975
@@ -66,8 +67,13 @@ const IndexPage = () => {
     setSelectedTab(newValue);
   };
 
+  const [simplify, setSimplify] = React.useState(window.innerWidth < 1220);
+  const handleWindowResize = () => {
+    setSimplify(window.innerWidth < 1220)
+  };
+
   return (
-    <main style={{minWidth: "1220px"}}>
+    <main>
       <div id="toolbar" style={{"margin": "20px"}}>
         <a href={"https://cset.georgetown.edu"} target="_blank" rel="noreferrer" title="Link to CSET website, cset.georgetown.edu">
           <img src={cset_logo} style={{"width": "300px"}} alt="CSET Logo"/>
@@ -91,8 +97,13 @@ const IndexPage = () => {
           </div>
         </div>
         <div style={{"display": showDesc ? "block" : "none", paddingBottom: "50px"}}>
-          <Tabs value={selectedTab} onChange={handleTabChange} orientation={"vertical"}
-                style={{borderRight: "1px solid grey", width: "15%", display: "inline-block", minWidth: "160px"}}>
+          <Tabs value={selectedTab} onChange={handleTabChange} orientation={simplify ? "horizontal" : "vertical"}
+                style={{borderRight: "1px solid grey",
+                  width: (simplify ? "100%" : "15%"),
+                  display: (simplify ? "block" : "inline-block"),
+                  marginBottom: (simplify ? "20px" : "0px"),
+                  textAlign: "center"}}
+                variant={simplify ? "scrollable" : "standard"} scrollButtons={"off"}>
             <Tab
               value="overview"
               label="Overview"
@@ -105,7 +116,7 @@ const IndexPage = () => {
             <Tab value="faq" label="FAQ" {...a11yProps('faq')} />
             <Tab value="acknowledgments" label="Acknowledgements" {...a11yProps('acknowledgments')} />
           </Tabs>
-          <div style={{verticalAlign: "top", display: "inline-block", width: "84.5%"}}>
+          <div style={{verticalAlign: "top", display: "inline-block", width: (simplify ? "100%" : "84.5%")}}>
             <TabPanel value={selectedTab} index="overview"/>
             <TabPanel value={selectedTab} index="data_sources"/>
             <TabPanel value={selectedTab} index="methodology"/>

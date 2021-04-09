@@ -166,7 +166,6 @@ function EnhancedTableHead(props) {
                   onChange={(evt, newRange) => handleFilter(evt, newRange, headCell.id)}
                   valueLabelDisplay="auto"
                   valueLabelFormat={valueLabelFormat}
-                  aria-labelledby="range-slider"
                 />
               </TableCell>
           ))
@@ -713,7 +712,7 @@ const CollapsibleTable = () => {
   }
 
   return (
-    <div style={{minWidth: "800px", margin:"10px 1% 20px 1%", textAlign: "center"}}>
+    <div style={{minWidth: "1150px", margin:"10px 1% 20px 1%", textAlign: "center"}}>
       <div id="button-panel" style={{textAlign: "left", marginBottom: "5px"}}>
         <Button color="primary" size="small" style={{marginRight: "10px"}} onClick={resetFilter}>
           <ClearIcon size={"small"}/> Clear Filters
