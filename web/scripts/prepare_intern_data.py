@@ -3,7 +3,11 @@ import csv
 import json
 import urllib.parse
 
-def get_intern_data(input_fi, output_fi):
+"""
+Prepare data for intern annotation.
+"""
+
+def get_intern_data(input_fi: str, output_fi: str):
     rows = []
     with open(input_fi) as f:
         for line in f:
@@ -27,8 +31,9 @@ def get_intern_data(input_fi, output_fi):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("input_fi")
-    parser.add_argument("output_fi")
+    parser.add_argument("input_fi", help="Path to file containing raw jsonl data download from BQ containing "
+                             "ai_companies_visualization.visualization_data")
+    parser.add_argument("output_fi", help="Path where output csv for intern consumption should be written")
     args = parser.parse_args()
 
     get_intern_data(args.input_fi, args.output_fi)

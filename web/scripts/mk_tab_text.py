@@ -2,7 +2,19 @@ import json
 import os
 import re
 
+from retrieve_data import link_css
+
+"""
+Puts a directory of markdown-formatted text for the tabbed overview, faq, etc. sections into a javascript array 
+with elements to be consumed by React using dangerouslySetInnerHTML
+"""
+
 def clean(s: str) -> list:
+    """
+    Clean and reformat a markdown string as html
+    :param s: markdown string
+    :return: a JSON mapping the "__html" key expected by dangerouslySetInnerHTML to the html version of the input string
+    """
     cleaned = []
     header_buffer = []
     ul_buffer = []
@@ -12,7 +24,7 @@ def clean(s: str) -> list:
             continue
         para = re.sub(r"\*\*([^\*]+)\*\*", r"<span style='font-weight: bold'>\1</span>", para)
         para = re.sub(r"\[([^\]]+)\]\(([^\)]+)\)",
-                      (r"<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' "
+                      (rf"<a class='{link_css}' "
                        r"href='\2' target='_blank' rel='noreferrer'>\1</a>"), para)
         para = re.sub(r"\*([^\*]+)\*", r"<span style='font-style:italic'>\1</span>", para)
         if para.startswith("##"):
@@ -40,6 +52,10 @@ def clean(s: str) -> list:
     return cleaned
 
 def mk_tab_text():
+    """
+    Convert the text that will go in the tabs on the website from markdown to a JS array of html
+    :return: None
+    """
     text_parent = os.path.join("raw_data", "text")
     label_to_text = {}
     for fi_name in os.listdir(text_parent):

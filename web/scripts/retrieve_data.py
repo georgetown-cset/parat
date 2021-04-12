@@ -17,17 +17,33 @@ from google.cloud import bigquery
 from google.cloud import translate_v3beta1 as translate
 from io import BytesIO
 
+"""
+Retrieves and reformats raw data for consumption by javascript
+"""
+
+### GLOBALS ###
+
 raw_data_dir = "raw_data"
-raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
-orig_names_fi = os.path.join(raw_data_dir, "company_names.jsonl")
-exchange_link_fi = os.path.join(raw_data_dir, "exchange_links.jsonl")
-supplemental_descriptions = os.path.join(raw_data_dir, "supplemental_company_descriptions.csv")
 web_src_dir = os.path.join("ai_companies_viz", "src")
 image_dir = os.path.join(raw_data_dir, "logos")
+
+# Local cache of raw data (ai_companies_visualization.visualization_data)
+raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
+# Local cache of ai_companies_visualization.original_company_names; used to map lowercased versions of
+# company names back to original casing, where available
+orig_names_fi = os.path.join(raw_data_dir, "company_names.jsonl")
+# Cache of links to Google Finance page
+exchange_link_fi = os.path.join(raw_data_dir, "exchange_links.jsonl")
+# Download of https://docs.google.com/spreadsheets/d/1OpZGUG9y0onZfRfx9aVgRWiYSFWJ-TRsDQwYtcniCB0/edit#gid=468518268
+# containing student-retrieved company descriptions to supplement crunchbase
+supplemental_descriptions = os.path.join(raw_data_dir, "supplemental_company_descriptions.csv")
+
+# Maps pycountry country names to more user-friendly ones
 country_name_map = {
     "Korea, Republic of": "South Korea",
     "Taiwan, Province of China": "Taiwan"
 }
+# Maps original company name from raw data to version of the name we should display as the canonical one in the UI
 company_name_map = {
     "睿思芯科": "RiVAI",
     "江行智能": "Jiangxing Intelligence",
@@ -36,15 +52,25 @@ company_name_map = {
     "captricity": "Vidado"
 }
 reverse_company_name_map = {v: k for k, v in company_name_map.items()}
+# Maps broken links from crunchbase to correct ones
 crunchbase_url_override = {
-    "https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv": "https://www.crunchbase.com/organization/covariant"
+    ("https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&"
+     "utm_campaign=odm_csv"): "https://www.crunchbase.com/organization/covariant"
 }
-client = translate.TranslationServiceClient()
-parent = client.location_path("gcp-cset-projects", "global")
+# styling to apply to links we generate here - change if main react styling changes
 link_css = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary'"
+# Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
 filt_exchanges = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
 
-def get_exchange_link(market_key) -> str:
+### END GLOBALS ###
+
+def get_exchange_link(market_key: str) -> dict:
+    """
+    Given a exchange:ticker market key, check google finance links for both exchange:ticker and ticker:exchange
+    (ordering is not consistent and at most one variant leads to a valid url).
+    :param market_key: exchange:ticker
+    :return: A dict mapping market_key to the input market_key and link to the link, if successfully found, else None
+    """
     time.sleep(5)
     # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
     first, last = sorted(market_key.split(":"))
@@ -62,6 +88,12 @@ def get_exchange_link(market_key) -> str:
         return {"market_key": market_key, "link": gf_link}
 
 def retrieve_raw(get_links: bool) -> None:
+    """
+    Retrieve raw data from the ai_companies_visualization dataset in BQ
+    :param get_links: If true, will refresh the cache of market links (this takes about 1.5-2 hrs at the moment
+    so only use this parameter if you need to
+    :return: None
+    """
     client = bigquery.Client()
     market_info = set()
     print("retrieving metadata")
@@ -87,6 +119,13 @@ def retrieve_raw(get_links: bool) -> None:
                 out.write(json.dumps(mi_row)+"\n")
 
 def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
+    """
+    Retrieves company logos from crunchbase links
+    :param url: Link to logo from crunchbase
+    :param company_name: Name of company (used to generate an image name)
+    :param refresh_images: If false, doesn't actually re-download the images, and just re-generates the name
+    :return: The image filename
+    """
     if not url:
         return None
     cleanup = {
@@ -114,6 +153,12 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     return None
 
 def clean_parent(parents: list, lowercase_to_orig_cname: dict) -> str:
+    """
+    Cleans a list of company parent names
+    :param parents: List of strings which are company parent names
+    :param lowercase_to_orig_cname: Maps lowercase name to originally-cased name
+    :return: A string containing a comma-separated list of cleaned company parent names
+    """
     if len(parents) == 0:
         return None
     cleaned_parents = [clean_company_name(parent["parent_name"], lowercase_to_orig_cname)+
@@ -122,11 +167,23 @@ def clean_parent(parents: list, lowercase_to_orig_cname: dict) -> str:
     return ", ".join(cleaned_parents)
 
 def clean_children(children: list, lowercase_to_orig_cname: dict) -> str:
+    """
+    Cleans a list of company children names
+    :param childrens: List of strings which are company children names
+    :param lowercase_to_orig_cname: Maps lowercase name to originally-cased name
+    :return: A string containing a comma-separated list of cleaned company children names
+    """
     if len(children) == 0:
         return None
     return  ", ".join([clean_company_name(c["child_name"], lowercase_to_orig_cname) for c in children])
 
-def clean_market(market_info: list, market_key_to_link: dict) -> str:
+def clean_market(market_info: list, market_key_to_link: dict) -> list:
+    """
+    Cleans/reformats list of exchange information
+    :param market_info: List of dicts of exchange/ticker info
+    :param market_key_to_link: Dict mapping exchange:ticker strings to google finance links where available
+    :return: List of dicts of market keys (exchange:ticker strings) and links
+    """
     if len(market_info) == 0:
         return []
     ref_market_info = []
@@ -139,6 +196,11 @@ def clean_market(market_info: list, market_key_to_link: dict) -> str:
     return ref_market_info
 
 def clean_wiki_description(wiki_desc: str) -> str:
+    """
+    Clean stuff like the parenthetical pronunciation info and reference numbers out of the wiki descriptions
+    :param wiki_desc: First paragraph of a wikipedia page
+    :return: cleaned wiki_desc
+    """
     clean_wiki_desc = re.sub(r"\[\d+\]", "", wiki_desc)
     clean_wiki_desc = re.sub(r"\s*\([^\)]*[/\[][^\)]*\)\s*", " ", clean_wiki_desc)
     return clean_wiki_desc
@@ -148,7 +210,7 @@ def add_ranks(rows: list, metrics: list) -> None:
     Mutates `rows`
     :param rows:
     :param metrics:
-    :return:
+    :return: None (mutates `rows`)
     """
     for metric in metrics:
         curr_rank = 0
@@ -162,10 +224,19 @@ def add_ranks(rows: list, metrics: list) -> None:
             row[metric] = {
                 "value": row[metric],
                 "rank": curr_rank,
+                # used to scale color
                 "frac_of_max": math.log(row[metric]+1, 2)/max_metric
             }
 
-def get_translation(desc: str) -> str:
+def get_translation(desc: str, client, parent) -> str:
+    """
+    Get translation of non-english company descriptions. Returns None if `desc` cannot be translated or if it is
+    English already according to pycld2
+    :param desc: Description form any language.
+    :param client: Google Translation Client
+    :param parent: Parent project
+    :return: translation of `desc` or None
+    """
     if desc is None or len(desc.strip()) == 0:
         return None
     try:
@@ -176,9 +247,11 @@ def get_translation(desc: str) -> str:
             encoding = "latin-1"  # last-ditch effort...
         try:
             is_reliable, text_bytes_found, details = pycld2.detect(desc.encode("utf-8").decode(encoding))
-        except:
+        except Exception as e1:
+            print(e1)
             print("Error on "+desc)
             return None
+    # Check if desc appears to be in English, and if not, translate it
     if details[0][1].lower() != "en":
         print("Translating "+desc)
         response = client.translate_text(
@@ -192,6 +265,11 @@ def get_translation(desc: str) -> str:
     return None
 
 def add_supplemental_descriptions(rows: list) -> None:
+    """
+    Adds student-retrieved descriptions of companies to `rows`
+    :param rows: list of dicts of company metadata
+    :return: None; mutates rows
+    """
     name_to_desc_info = {}
     # map keys from csv to keys for javascript
     desc_info = {
@@ -202,6 +280,8 @@ def add_supplemental_descriptions(rows: list) -> None:
         "retrieval_date": "description_retrieval_date"
     }
     with open(supplemental_descriptions) as f:
+        client = translate.TranslationServiceClient()
+        parent = client.location_path("gcp-cset-projects", "global")
         for row in csv.DictReader(f):
             company_name = row["company_name"]
             name_to_desc_info[company_name] = {desc_info[k]: row[k].strip() for k in desc_info}
@@ -214,7 +294,7 @@ def add_supplemental_descriptions(rows: list) -> None:
                 name_to_desc_info[company_name]["wikipedia_link"] = None
                 name_to_desc_info[company_name]["wikipedia_description"] = None
             source_description = name_to_desc_info[company_name]["company_site_description"]
-            translation = get_translation(source_description)
+            translation = get_translation(source_description, client, parent)
             name_to_desc_info[company_name]["company_site_description_translation"] = translation
             source_link = name_to_desc_info[company_name]["company_site_link"]
             if not (source_link and ("http" in source_link or ".com" in source_link)):
@@ -231,6 +311,11 @@ def add_supplemental_descriptions(rows: list) -> None:
             row.update(name_to_desc_info[company_name])
 
 def clean_country(country: str) -> str:
+    """
+    Convert country abbreviation to full country name
+    :param country: country abbreviation from raw data
+    :return: country name
+    """
     if country is None:
         return None
     country_obj = pycountry.countries.get(alpha_2=country)
@@ -241,6 +326,11 @@ def clean_country(country: str) -> str:
     return country_obj.name
 
 def get_continent(country: str) -> str:
+    """
+    Get continent of country
+    :param country: Name of a country
+    :return: Country's continent
+    """
     if country is None:
         return None
     alpha2 = pycountry_convert.country_name_to_country_alpha2(country)
@@ -249,6 +339,13 @@ def get_continent(country: str) -> str:
     return continent
 
 def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
+    """
+    Clean the company name. First try to find it in the map containing one-off mappings, then try to find it
+    in the mapping of lowercase to original company names, and if both those fail, title case it
+    :param name: lowercased company name
+    :param lowercase_to_orig_cname: dict mapping lowercase to original-cased company names
+    :return: cleaned company name
+    """
     clean_name = name.strip()
     if clean_name in company_name_map:
         return company_name_map[clean_name]
@@ -257,6 +354,13 @@ def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     return clean_name.title()
 
 def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str = None) -> str:
+    """
+    Cleans company aliases and returns them as a string, semicolon-separated
+    :param aliases: list of dicts containing an "alias" key
+    :param lowercase_to_orig_cname: dict mapping lowercased company name to originally-cased company name
+    :param orig_name: if not None, then a variant of the company name we should include as an alias
+    :return: A semicolon-separated string of aliases
+    """
     unique_aliases = {clean_company_name(a["alias"], lowercase_to_orig_cname).strip('.') for a in aliases}
     if orig_name is not None:
         unique_aliases.add(orig_name)
@@ -264,6 +368,12 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     return None if len(aliases) == 0 else f"{'; '.join(sorted_aliases)}"
 
 def clean(refresh_images: bool) -> None:
+    """
+    Reads and cleans the raw data from the local cache
+    :param refresh_images: if true, will re-download all the company logos from crunchbase; don't call with true
+    unless necessary
+    :return: None
+    """
     rows = []
     missing_all = set()
     lowercase_to_orig_cname = {}
@@ -349,9 +459,12 @@ def clean(refresh_images: bool) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--refresh_raw", action="store_true", default=False)
-    parser.add_argument("--refresh_images", action="store_true", default=False)
-    parser.add_argument("--refresh_market_links", action="store_true", default=False)
+    parser.add_argument("--refresh_raw", action="store_true", default=False,
+                        help="Re-retrieve the raw data from BQ; if not specified will use local cache")
+    parser.add_argument("--refresh_images", action="store_true", default=False,
+                        help="Re-download the images; if not specified will use local cache")
+    parser.add_argument("--refresh_market_links", action="store_true", default=False,
+                        help="Re-retrieve the market links (takes ~1.5 hrs); if not specified will use local cache")
     args = parser.parse_args()
 
     if args.refresh_market_links and not args.refresh_raw:
