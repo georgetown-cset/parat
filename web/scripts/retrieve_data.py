@@ -376,7 +376,7 @@ def get_list_and_links(link_text: list, url_prefix: str) -> (str, dict):
     :param url_stub: the url prefix
     :return: a tuple of a comma-separated string of link_text elts and a dict mapping "__html" to a list of <a> elements
     """
-    csv_list = ", ".join(link_text)
+    csv_list = ", ".join([str(lt) for lt in link_text])
     html_list = {"__html": ", ".join([(f"<a class={link_css} target='blank' rel='noreferrer' "
                            f"href='{url_prefix}{text}'>{text}</a>")
                           for text in link_text])}
@@ -392,7 +392,7 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     :param years: a list of years to include
     :return: a tuple containing a list of counts for each year in years, and the sum of the counts
     """
-    counts_by_year = {p["year"]: p[key] for p in counts}
+    counts_by_year = {p["year" if not key == "ai_patents" else "priority_year"]: p[key] for p in counts}
     yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
     return yearly_counts, sum(yearly_counts)
 
