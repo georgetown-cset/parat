@@ -367,6 +367,104 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     sorted_aliases = sorted(list(unique_aliases))
     return None if len(aliases) == 0 else f"{'; '.join(sorted_aliases)}"
 
+def get_list_and_links(link_text: list, url_prefix: str) -> (str, dict):
+    """
+    Given a list of text to be added to link urls, generates a comma-separated string from the text,
+     and also generates a list of html links in the format needed
+    for dangerouslySetInnerHTML
+    :param link_text: list of parameters to list
+    :param url_stub: the url prefix
+    :return: a tuple of a comma-separated string of link_text elts and a dict mapping "__html" to a list of <a> elements
+    """
+    csv_list = ", ".join(link_text)
+    html_list = {"__html": ", ".join([(f"<a class={link_css} target='blank' rel='noreferrer' "
+                           f"href='{url_prefix}{text}'>{text}</a>")
+                          for text in link_text])}
+    return csv_list, html_list
+
+def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
+    """
+    Given a list of dicts containing year (`year`) and count (`key`) information, the name of the key to use,
+    and a list of years to include in order, returns a tuple. The first element is a list of counts for each
+    year in years, and the second element is the sum of the counts
+    :param counts: a list of dicts containing year (`year`) and count (`key`) information
+    :param key: the key in the `counts` dicts that contains the yearly count
+    :param years: a list of years to include
+    :return: a tuple containing a list of counts for each year in years, and the sum of the counts
+    """
+    counts_by_year = {p["year"]: p[key] for p in counts}
+    yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
+    return yearly_counts, sum(yearly_counts)
+
+def get_market_link_list(market: list) -> dict:
+    """
+    Given a list of market information, return a comma-separated list of either html <a> elements if a link
+    is available for that exchange:ticker, or otherwise just an exchange:ticker string
+    :param market: list of dicts of market information containing (possibly) `link` and (definitely) `market_key` keys
+    :return: a dict mapping the __html key expected by dangerouslySetInnerHTML to a list of market key links or market
+    key strings
+    """
+    market_elts = []
+    for m in market:
+        if m["link"]:
+            market_elts.append(f"<a class={link_css} target='blank' rel='noreferrer' "
+                               f"href='{m['link']}'>{m['market_key']}</a>")
+        else:
+            market_elts.append(m["market_key"])
+    return {"__html": ", ".join(market_elts)}
+
+def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
+    """
+    Given a row from a jsonl, reformat its elements into the form needed by the carat javascript
+    :param row: jsonl line containing company metadata
+    :param refresh_images: if true, will re-download images from crunchbase
+    :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
+    :param market_key_to_link: dict mapping exchange:ticker to google finance link
+    :return: dict of company metadata
+    """
+    js = json.loads(row)
+    orig_company_name = js["name"]
+    js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
+    js["country"] = clean_country(js["country"])
+    js["continent"] = get_continent(js["country"])
+    js["local_logo"] = retrieve_image(js.pop("logo_url"), orig_company_name, refresh_images)
+    js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
+                                  orig_company_name if orig_company_name != js["name"].lower() else None)
+    js["stage"] = js["stage"] if js["stage"] else "Unknown"
+    js["grid_info"], js["grid_links"] = get_list_and_links(js.pop("grid"), "https://www.grid.ac/institutes/")
+    js["permid_info"], js["permid_links"] = get_list_and_links(js.pop("permid"), "https://permid.org/1-")
+    js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
+    js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
+    js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
+
+    # add pub/patent counts
+    js["years"] = list(range(2010, datetime.now().year + 1))
+    js["yearly_all_publications"], _ = get_yearly_counts(js.pop("all_pubs_by_year"), "all_pubs", js["years"])
+    js["yearly_ai_publications"], js["ai_pubs"] = get_yearly_counts(js.pop("ai_pubs_by_year"), "ai_pubs", js["years"])
+    js["yearly_ai_patents"], js["ai_patents"] = get_yearly_counts(js.pop("ai_patents_by_year"),
+                                                                  "ai_patents", js["years"])
+    js["yearly_ai_pubs_top_conf"], js["ai_pubs_in_top_conferences"] = get_yearly_counts(
+        js.pop("ai_pubs_in_top_conferences_by_year"), "ai_pubs_in_top_conferences", js["years"]
+    )
+    for year_idx in range(len(js["years"])):
+        assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
+
+    market = clean_market(js.pop("market"), market_key_to_link)
+    js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in filt_exchanges]
+    if len(market) > 0:
+        js["full_market_links"] = get_market_link_list(market)
+    js["market_list"] = ", ".join([m["market_key"] for m in market])
+
+    if js["website"] and not js["website"].startswith("http"):
+        js["website"] = "https://" + js["website"]
+
+    js["crunchbase_description"] = js.pop("short_description")
+    if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
+        url = js["crunchbase"]["crunchbase_url"]
+        if url in crunchbase_url_override:
+            js["crunchbase"]["crunchbase_url"] = crunchbase_url_override[url]
+    return js
+
 def clean(refresh_images: bool) -> None:
     """
     Reads and cleans the raw data from the local cache
@@ -375,7 +473,6 @@ def clean(refresh_images: bool) -> None:
     :return: None
     """
     rows = []
-    missing_all = set()
     lowercase_to_orig_cname = {}
     with open(orig_names_fi) as f:
         for line in f:
@@ -388,74 +485,11 @@ def clean(refresh_images: bool) -> None:
             market_key_to_link[js["market_key"].upper()] = js["link"]
     with open(raw_data_fi) as f:
         for row in f:
-            js = json.loads(row)
-            orig_company_name = js["name"]
-            js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
-            js["country"] = clean_country(js["country"])
-            js["continent"] = get_continent(js["country"])
-            logo_url = js.pop("logo_url")
-            js["local_logo"] = retrieve_image(logo_url, orig_company_name, refresh_images)
-            js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
-                                          orig_company_name if orig_company_name != js["name"].lower() else None)
-            js["stage"] = js["stage"] if js["stage"] else "Unknown"
-            grids = js.pop("grid")
-            js["grid_info"] = ", ".join(grids)
-            js["grid_links"] = {"__html": ", ".join([(f"<a class={link_css} target='blank' rel='noreferrer' "
-                                                     f"href='https://www.grid.ac/institutes/{grid}'>{grid}</a>")
-                                                    for grid in grids])}
-            permids = js.pop("permid")
-            js["permid_info"] = ", ".join([str(p) for p in permids])
-            js["permid_links"] = {"__html": ", ".join([(f"<a class={link_css} target='blank' rel='noreferrer' "
-                                                     f"href='https://permid.org/1-{permid}'>{permid}</a>")
-                                                    for permid in permids])}
-            js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
-            js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
-            js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
-            js["years"] = list(range(2010, datetime.now().year+1))
-            all_pubs_by_year = {p["year"]: p["all_pubs"] for p in js.pop("all_pubs_by_year")}
-            js["yearly_all_publications"] = [0 if y not in all_pubs_by_year else all_pubs_by_year[y]
-                                             for y in js["years"]]
-            ai_pubs_by_year = {p["year"]: p["ai_pubs"] for p in js.pop("ai_pubs_by_year")}
-            js["yearly_ai_publications"] = [0 if y not in ai_pubs_by_year else ai_pubs_by_year[y]
-                                            for y in js["years"]]
-            js["ai_pubs"] = sum(js["yearly_ai_publications"])
-            for year_idx in range(len(js["years"])):
-                if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
-                    missing_all.add(js["name"])
-            ai_patents_by_year = {p["priority_year"]: p["ai_patents"] for p in js.pop("ai_patents_by_year")}
-            js["yearly_ai_patents"] = [0 if y not in ai_patents_by_year else ai_patents_by_year[y]
-                                       for y in js["years"]]
-            js["ai_patents"] = sum(js["yearly_ai_patents"])
-            ai_pubs_in_top_conf = {p["year"]: p["ai_pubs_in_top_conferences"]
-                                   for p in js.pop("ai_pubs_in_top_conferences_by_year")}
-            js["yearly_ai_pubs_top_conf"] = [0 if y not in ai_pubs_in_top_conf else ai_pubs_in_top_conf[y]
-                                             for y in js["years"]]
-            js["ai_pubs_in_top_conferences"] = sum(js["yearly_ai_pubs_top_conf"])
-            market = clean_market(js.pop("market"), market_key_to_link)
-            js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in filt_exchanges]
-            if len(market) > 0:
-                market_elts = []
-                for m in market:
-                    if m["link"]:
-                        market_elts.append(f"<a class={link_css} target='blank' rel='noreferrer' "
-                                                     f"href='{m['link']}'>{m['market_key']}</a>")
-                    else:
-                        market_elts.append(m["market_key"])
-                js["full_market_links"] = {"__html": ", ".join(market_elts)}
-            js["market_list"] = ", ".join([m["market_key"] for m in market])
-            if js["website"] and not js["website"].startswith("http"):
-                js["website"] = "https://"+js["website"]
-            js["crunchbase_description"] = js.pop("short_description")
-            if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
-                url = js["crunchbase"]["crunchbase_url"]
-                if url in crunchbase_url_override:
-                    js["crunchbase"]["crunchbase_url"] = crunchbase_url_override[url]
-            rows.append(js)
+            rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
     add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
     add_supplemental_descriptions(rows)
     with open(os.path.join(web_src_dir, "static_data", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
-    print(f"missing all pubs years: {missing_all}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
