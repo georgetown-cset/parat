@@ -1,6 +1,12 @@
+import os
+import sys
 import unittest
 
-from scripts.mk_tab_text import clean
+myPath = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, myPath + '/../scripts/')
+
+from web.scripts.mk_tab_text import clean
+
 
 class TestMkTabText(unittest.TestCase):
     def test_clean(self):
