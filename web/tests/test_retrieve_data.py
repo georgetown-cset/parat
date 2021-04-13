@@ -78,24 +78,40 @@ class TestMkTabText(unittest.TestCase):
         self.assertEqual(clean_wiki_description(desc), clean_desc)
 
     def test_add_ranks(self):
-        pass
-
-    def test_add_supplemental_descriptions(self):
-        pass
+        rows = [{"metric": 2}, {"metric": 2**4}, {"metric": 2**8}]
+        add_ranks(rows, ["metric"])
+        self.assertEqual(rows, [{"metric": {"frac_of_max": 1.0, "rank": 1, "value": 256}},
+                                {"metric": {"frac_of_max": 0.5105738866634614, "rank": 2, "value": 16}},
+                                {"metric": {"frac_of_max": 0.1979811182727465, "rank": 3, "value": 2}}])
 
     def test_clean_country(self):
-        pass
+        self.assertEqual("South Korea", clean_country("kr"))
+        self.assertEqual("United States", clean_country("usa"))
+        self.assertEqual("Taiwan", clean_country("tw"))
+        self.assertEqual("United States", clean_country("us"))
 
     def test_get_continent(self):
-        pass
+        self.assertEqual("Asia", get_continent("South Korea"))
+        self.assertEqual("Asia", get_continent("Taiwan"))
+        self.assertEqual("Oceania", get_continent("Australia"))
+        self.assertEqual("Africa", get_continent("Ethiopia"))
 
     def test_clean_company_name(self):
-        pass
+        self.assertEqual(clean_company_name("captricity", {}), "Vidado")
+        self.assertEqual(clean_company_name("创新奇智", {}), "AInnovation")
+        self.assertEqual(clean_company_name("ibm", {"ibm": "IBM"}), "IBM")
+        self.assertEqual(clean_company_name("test", {}), "Test")
 
     def test_clean_aliases(self):
         pass
 
     def test_get_list_and_links(self):
+        pass
+
+    def test_get_yearly_counts(self):
+        pass
+
+    def test_get_market_link_list(self):
         pass
 
     def test_clean_row(self):
