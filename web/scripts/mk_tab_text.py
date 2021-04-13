@@ -2,7 +2,7 @@ import json
 import os
 import re
 
-from scripts.retrieve_data import link_css
+from retrieve_data import link_css
 
 """
 Puts a directory of markdown-formatted text for the tabbed overview, faq, etc. sections into a javascript array 
