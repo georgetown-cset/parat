@@ -9,6 +9,8 @@ from web.scripts.retrieve_data import *
 
 
 class TestMkTabText(unittest.TestCase):
+    maxDiff = None
+
     def test_clean_parent(self):
         orig = [
             {"parent_name": "test1", "parent_acquisition": True},
@@ -103,16 +105,194 @@ class TestMkTabText(unittest.TestCase):
         self.assertEqual(clean_company_name("test", {}), "Test")
 
     def test_clean_aliases(self):
-        pass
+        aliases = [{"alias": "foo"}, {"alias": "bar"}, {"alias": "baz"}]
+        lowercase_to_orig_cname = {
+            "foo": "FoO",
+            "bar": "BAR",
+        }
+        self.assertEqual("BAR; Baz; FoO; Fred", clean_aliases(aliases, lowercase_to_orig_cname, "Fred"))
 
     def test_get_list_and_links(self):
-        pass
+        prefix = "https://my_test_prefix.com/"
+        link_suffixes = ["foo", "bar", "baz"]
+        template = f"<a class={link_css} target='blank' rel='noreferrer' href='{prefix}"+"{}'>{}</a>"
+        expected_links = [template.format(link_text, link_text) for link_text in link_suffixes]
+        self.assertEqual(get_list_and_links(link_suffixes, prefix),
+                         (", ".join(link_suffixes), {"__html": ", ".join(expected_links)}))
 
     def test_get_yearly_counts(self):
-        pass
+        counts = [{"year": 2002, "count": 1}, {"year": 2021, "count": 2}, {"year": 2015, "count": 15}]
+        years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+        expected_values = [0 for year in years]
+        expected_values[-2] = 2
+        expected_values[0] = 15
+        self.assertEqual(get_yearly_counts(counts, "count", years), (expected_values, 17))
 
     def test_get_market_link_list(self):
-        pass
+        market_info = [{"link": "foo", "market_key": "BAR:FOO"}, {"market_key": "TEST:BAZ", "link": ""}]
+        expected_outputs = f"<a class={link_css} target='blank' rel='noreferrer' href='foo'>BAR:FOO</a>, TEST:BAZ"
+        self.assertEqual(get_market_link_list(market_info), {"__html": expected_outputs})
 
-    def test_clean_row(self):
-        pass
+    def test_clean_row_alphabet(self):
+        market_key_to_link = {}
+        with open(exchange_link_fi) as f:
+            for line in f:
+                js = json.loads(line)
+                market_key_to_link[js["market_key"].upper()] = js["link"]
+        input = ('{"CSET_id": 796, "name": "alphabet", "country": "usa", '
+                 '"aliases": [{"alias_language": "en", "alias": "alphabet inc"}], "parent": [], '
+                 '"children": [{"child_name": "verily life sciences", "child_id": 745}, '
+                 '{"child_name": "waymo", "child_id": 762}], "non_agg_children": '
+                 '[{"child_name": "google", "child_id": 101}, {"child_name": "deepmind", "child_id": 414}, '
+                 '{"child_name": "fitbit", "child_id": 451}, {"child_name": "google brain", "child_id": 473}, '
+                 '{"child_name": "google robotics", "child_id": 474}], "permid": [5050702354, 5053732847, 5030853586], '
+                 '"website": "https://abc.xyz/", "market": [{"exchange": "nasdaq", "ticker": "googl"}], '
+                 '"crunchbase": {"crunchbase_uuid": "096694c6-bcd2-a975-b95c-fab77c81d915", '
+                 '"crunchbase_url": "https://www.crunchbase.com/organization/alphabet?utm_source=crunchbase'
+                 '&utm_medium=export&utm_campaign=odm_csv"}, "child_crunchbase": [{"crunchbase_uuid": '
+                 '"ceff4e5b-95c2-839a-3150-c340c4b5bc71", "crunchbase_url": '
+                 '"https://www.crunchbase.com/organization/verily-2"}, {"crunchbase_uuid": '
+                 '"c1833ca6-85d5-e3b8-08e5-8fcceb76717b", "crunchbase_url": '
+                 '"https://www.crunchbase.com/organization/google-s-self-driving-car-project"}], '
+                 '"grid": ["grid.497059.6"], "ai_pubs": 2, "ai_pubs_by_year": [{"year": 2018, "ai_pubs": 1}, '
+                 '{"year": 2019, "ai_pubs": 1}], "ai_patents": 0, "ai_patents_by_year": [], '
+                 '"ai_pubs_in_top_conferences": 0, "ai_pubs_in_top_conferences_by_year": [], "all_pubs": 9, '
+                 '"all_pubs_by_year": [{"year": 2016, "all_pubs": 1}, {"year": 2017, "all_pubs": 1}, {"year": 2018, '
+                 '"all_pubs": 3}, {"year": 2019, "all_pubs": 4}], "short_description": "Alphabet is the holding '
+                 'company of Google, Inc. and several Google-related initiatives.", "logo_url": '
+                 '"https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_120,w_120,f_jpg/'
+                 'v1439250525/oyr10rqwvctjcfxnvapx.png", "stage": "Mature"}')
+        expected_output = {'CSET_id': 796,
+            'agg_child_info': 'Verily Life Sciences, Waymo',
+            'ai_patents': 0,
+            'ai_pubs': 2,
+            'ai_pubs_in_top_conferences': 0,
+            'aliases': 'Alphabet Inc',
+            'all_pubs': 9,
+            'child_crunchbase': [{'crunchbase_url': 'https://www.crunchbase.com/organization/verily-2',
+                                  'crunchbase_uuid': 'ceff4e5b-95c2-839a-3150-c340c4b5bc71'},
+                                 {'crunchbase_url': 'https://www.crunchbase.com/organization/google-s-self-driving-car-project',
+                                  'crunchbase_uuid': 'c1833ca6-85d5-e3b8-08e5-8fcceb76717b'}],
+            'continent': 'North America',
+            'country': 'United States',
+            'crunchbase': {'crunchbase_url': 'https://www.crunchbase.com/organization/alphabet?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv',
+                           'crunchbase_uuid': '096694c6-bcd2-a975-b95c-fab77c81d915'},
+            'crunchbase_description': 'Alphabet is the holding company of Google, Inc. '
+                                      'and several Google-related initiatives.',
+            'full_market_links': {'__html': "<a class='MuiTypography-root MuiLink-root "
+                                            'MuiLink-underlineHover '
+                                            "MuiTypography-colorPrimary' target='blank' "
+                                            "rel='noreferrer' "
+                                            "href='https://www.google.com/finance/quote/googl:nasdaq'>NASDAQ:GOOGL</a>"},
+            'grid_info': 'grid.497059.6',
+            'grid_links': {'__html': "<a class='MuiTypography-root MuiLink-root "
+                                     "MuiLink-underlineHover MuiTypography-colorPrimary' "
+                                     "target='blank' rel='noreferrer' "
+                                     "href='https://www.grid.ac/institutes/grid.497059.6'>grid.497059.6</a>"},
+            'local_logo': 'alphabet.png',
+            'market_filt': [{'link': 'https://www.google.com/finance/quote/googl:nasdaq',
+                             'market_key': 'NASDAQ:GOOGL'}],
+            'market_list': 'NASDAQ:GOOGL',
+            'name': 'Alphabet',
+            'parent_info': None,
+            'permid_info': '5050702354, 5053732847, 5030853586',
+            'permid_links': {'__html': "<a class='MuiTypography-root MuiLink-root "
+                                       'MuiLink-underlineHover '
+                                       "MuiTypography-colorPrimary' target='blank' "
+                                       "rel='noreferrer' "
+                                       "href='https://permid.org/1-5050702354'>5050702354</a>, "
+                                       "<a class='MuiTypography-root MuiLink-root "
+                                       'MuiLink-underlineHover '
+                                       "MuiTypography-colorPrimary' target='blank' "
+                                       "rel='noreferrer' "
+                                       "href='https://permid.org/1-5053732847'>5053732847</a>, "
+                                       "<a class='MuiTypography-root MuiLink-root "
+                                       'MuiLink-underlineHover '
+                                       "MuiTypography-colorPrimary' target='blank' "
+                                       "rel='noreferrer' "
+                                       "href='https://permid.org/1-5030853586'>5030853586</a>"},
+            'stage': 'Mature',
+            'unagg_child_info': 'Google, Deepmind, Fitbit, Google Brain, Google Robotics',
+            'website': 'https://abc.xyz/',
+            'yearly_ai_patents': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            'yearly_ai_publications': [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+            'yearly_ai_pubs_top_conf': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            'yearly_all_publications': [0, 0, 0, 0, 0, 0, 1, 1, 3, 4, 0, 0],
+            'years': [2010,
+                      2011,
+                      2012,
+                      2013,
+                      2014,
+                      2015,
+                      2016,
+                      2017,
+                      2018,
+                      2019,
+                      2020,
+                      2021]}
+        self.assertEqual(clean_row(input, False, {}, market_key_to_link), expected_output)
+
+    def test_clean_row_hf(self):
+        market_key_to_link = {}
+        with open(exchange_link_fi) as f:
+            for line in f:
+                js = json.loads(line)
+                market_key_to_link[js["market_key"].upper()] = js["link"]
+        input = ('{"CSET_id": 1425, "name": "hugging face", "country": "us", "aliases": [{"alias_language": "en", '
+                 '"alias": "hugging face, inc."}, {"alias_language": "en", "alias": "hugging face inc"}], "parent": [], '
+                 '"children": [], "non_agg_children": [], "permid": [5063742076], "website": "https://huggingface.co/", '
+                 '"market": [], "crunchbase": {"crunchbase_uuid": "b7947f18-b199-45ac-b7da-66f5c52fcfbc", '
+                 '"crunchbase_url": "https://www.crunchbase.com/organization/hugging-face"}, "child_crunchbase": [], '
+                 '"grid": [], "ai_pubs": 2, "ai_pubs_by_year": [{"year": 2018, "ai_pubs": 2}], "ai_patents": 0, '
+                 '"ai_patents_by_year": [], "ai_pubs_in_top_conferences": 0, "ai_pubs_in_top_conferences_by_year": [], '
+                 '"all_pubs": 2, "all_pubs_by_year": [{"year": 2018, "all_pubs": 2}], "short_description": '
+                 '"Hugging Face is building open-source tools for natural language processing", "logo_url": '
+                 '"https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_120,w_120,f_jpg/v1505375959'
+                 '/urhmulzddqdfmlzpk2vn.png", "stage": "Growth"}')
+        expected_output = {'CSET_id': 1425,
+                 'agg_child_info': None,
+                 'ai_patents': 0,
+                 'ai_pubs': 2,
+                 'ai_pubs_in_top_conferences': 0,
+                 'aliases': 'Hugging Face Inc; Hugging Face, Inc',
+                 'all_pubs': 2,
+                 'child_crunchbase': [],
+                 'continent': 'North America',
+                 'country': 'United States',
+                 'crunchbase': {'crunchbase_url': 'https://www.crunchbase.com/organization/hugging-face',
+                                'crunchbase_uuid': 'b7947f18-b199-45ac-b7da-66f5c52fcfbc'},
+                 'crunchbase_description': 'Hugging Face is building open-source tools for '
+                                           'natural language processing',
+                 'grid_info': '',
+                 'grid_links': {'__html': ''},
+                 'local_logo': 'hugging_face.png',
+                 'market_filt': [],
+                 'market_list': '',
+                 'name': 'Hugging Face',
+                 'parent_info': None,
+                 'permid_info': '5063742076',
+                 'permid_links': {'__html': "<a class='MuiTypography-root MuiLink-root "
+                                            'MuiLink-underlineHover '
+                                            "MuiTypography-colorPrimary' target='blank' "
+                                            "rel='noreferrer' "
+                                            "href='https://permid.org/1-5063742076'>5063742076</a>"},
+                 'stage': 'Growth',
+                 'unagg_child_info': None,
+                 'website': 'https://huggingface.co/',
+                 'yearly_ai_patents': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 'yearly_ai_publications': [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+                 'yearly_ai_pubs_top_conf': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 'yearly_all_publications': [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+                 'years': [2010,
+                           2011,
+                           2012,
+                           2013,
+                           2014,
+                           2015,
+                           2016,
+                           2017,
+                           2018,
+                           2019,
+                           2020,
+                           2021]}
+        self.assertEqual(clean_row(input, False, {}, market_key_to_link), expected_output)
