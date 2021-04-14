@@ -25,7 +25,7 @@ Retrieves and reformats raw data for consumption by javascript
 
 raw_data_dir = "raw_data"
 web_src_dir = os.path.join("ai_companies_viz", "src")
-image_dir = os.path.join(raw_data_dir, "logos")
+image_dir = os.path.join(web_src_dir, "images")
 
 # Local cache of raw data (ai_companies_visualization.visualization_data)
 raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
@@ -143,12 +143,12 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     if refresh_images:
         response = requests.get(url)
         if response.status_code == 200:
-            Image.open(BytesIO(response.content)).save(os.path.join(web_src_dir, "images", img_name))
+            Image.open(BytesIO(response.content)).save(os.path.join(image_dir, img_name))
             return img_name
         else:
             print("Download failed for "+url)
             return None
-    elif img_name in os.listdir(os.path.join(web_src_dir, "images")):
+    elif img_name in os.listdir(os.path.join(image_dir)):
         return img_name
     return None
 
