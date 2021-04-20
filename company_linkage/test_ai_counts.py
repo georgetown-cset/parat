@@ -1,5 +1,5 @@
 import unittest
-from get_ai_counts import CountGetter
+from company_linkage.get_ai_counts import CountGetter
 import warnings
 
 

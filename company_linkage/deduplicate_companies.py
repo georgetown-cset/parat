@@ -7,7 +7,7 @@ import json
 def get_companies():
     """
     Pulling the companies we want to clean
-    :return:
+    :return: The queried iterator of companies
     """
     query = """SELECT * FROM high_resolution_entities.organizations_tmp"""
     client = bigquery.Client()
@@ -20,7 +20,7 @@ def clean_location(current_location, location):
     Cleaning the location field
     :param current_location: Location of the entry we're looking at
     :param location: Location of the main entry for this identifier
-    :return:
+    :return: The location field
     """
     current_country = current_location["country"]
     country = location["country"]
@@ -38,7 +38,7 @@ def clean_website(current_website, website):
     Cleaning the website field
     :param current_website: Website of the entry we're looking at
     :param website: Website of the main entry for this identifier
-    :return:
+    :return: The website field
     """
     if "https" in website and "https" not in current_website:
         current_website = website
@@ -54,7 +54,7 @@ def clean_aliases(current_aliases, aliases):
     Cleaning the alias field. Main goal here is to include all aliases for the identifier.
     :param current_aliases: Aliases of the entry we're looking at
     :param aliases: Aliases of the main entry for this identifier
-    :return:
+    :return: The alias field
     """
     current_aliases = set([(al["alias"], al["alias_language"]) for al in current_aliases])
     aliases = set([(al["alias"], al["alias_language"]) for al in aliases])
@@ -68,7 +68,7 @@ def clean_parents(current_parents_dup, parents_dup):
     Cleaning the alias field. Main goal here is to include all parents for the identifier.
     :param current_parents_dup: Parents of the entry we're looking at
     :param parents_dup: Parents of the main entry for this identifier
-    :return:
+    :return: The parents field
     """
     current_parents = set([(par["parent_acquisition"], par["parent_name"].lower(), par["parent_id"])
                            for par in current_parents_dup])
@@ -109,7 +109,7 @@ def clean_permid(name, current_permid, permid):
     :param name: Company name, so we can make manual decisions
     :param current_permid: Permid of the entry we're looking at
     :param permid: Permid of the main entry for this identifier
-    :return:
+    :return: The permid field
     """
     permid_dict = {"roivant sciences": [5057747992, 5044178170],
                    "lockheed martin": [5000069094],
@@ -141,7 +141,7 @@ def clean_market(current_market_dup, market_dup):
     Cleaning the alias field. Main goal here is to include all markets for the identifier.
     :param current_market_dup: Markets of the entry we're looking at
     :param market_dup: Markets of the main entry for this identifier
-    :return:
+    :return: The market field
     """
     current_market = set([(mar["exchange"], mar["ticker"]) for mar in current_market_dup])
     market = set([(mar["exchange"], mar["ticker"]) for mar in market_dup])
@@ -155,7 +155,7 @@ def clean_crunchbase(current_crunchbase, crunchbase):
     Cleaning the crunchbase field. Basically we just want to get nicer urls here.
     :param current_crunchbase: Crunchbase of the entry we're looking at
     :param crunchbase: Crunchbase of the main entry for this identifier
-    :return:
+    :return: The crunchbase field
     """
     # we're only going to swap urls if we can get an ODM url; otherwise the difference is meh
     if "odm_csv" in crunchbase["crunchbase_url"] and "odm_csv" not in current_crunchbase["crunchbase_url"]:
@@ -171,18 +171,19 @@ def clean_grid(current_grid_dup, grid_dup):
     Cleaning the alias field. Main goal here is to include all grids for the identifier.
     :param current_grid_dup: Grids of the entry we're looking at
     :param grid_dup: Grids of the main entry for this identifier
-    :return:
+    :return: The grid field
     """
     current_grid = set(current_grid_dup)
-    return list(current_grid.union(set(grid_dup)))
+    return list(current_grid.union(grid_dup))
 
 
+# No_grid was what we used to call the regex field when it was only used for companies that did not have a grid
 def clean_no_grid(current_no_grid, no_grid):
     """
     Cleaning the no_grid field (now regex, but this cleanup was done before!) We want the more informative one.
     :param current_no_grid: No_grid of the entry we're looking at
     :param no_grid: No_grid of the main entry for this identifier
-    :return:
+    :return: The no_grid field
     """
     if current_no_grid == "":
         current_no_grid = None
@@ -201,7 +202,7 @@ def clean_comment(current_comment, comment):
     Cleaning comment. Basically, if one is blank, pick the other
     :param current_comment: Comment of the entry we're looking at
     :param comment: Comment of the main entry for this identifier
-    :return:
+    :return: The comment field
     """
     if current_comment is None and comment != "":
         current_comment = comment
@@ -215,7 +216,7 @@ def clean_companies(companies):
     Cleaning the whole list of companies. Add new entries. If an entry is a duplicate, go through all the cleaning steps,
      plus do some of the simple basically-in-line cleaning of fields.
     :param companies: The list of companies to clean
-    :return:
+    :return: A dictionary containing all company data
     """
     company_dict = {}
     for company in companies:

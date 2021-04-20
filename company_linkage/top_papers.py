@@ -1,6 +1,6 @@
 import argparse
 
-from get_ai_counts import CountGetter
+from company_linkage.get_ai_counts import CountGetter
 
 
 def main() -> None:

@@ -1,5 +1,5 @@
 import unittest
-import aggregate_organizations
+from company_linkage import aggregate_organizations
 from collections import defaultdict
 
 

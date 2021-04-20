@@ -36,7 +36,7 @@ class CountGetter:
         """
         Running a query to find paper counts using regex for papers missing GRID. This query combines
         this data with preexisting paper counts already identified using SQL for papers that have GRID.
-        table_name: The table to look for papers in
+        :param table_name: The table to look for papers in
         :param field_name: The json field name
         :param test: False if not running as a unit test
         :param by_year: False if not adding by_year data
@@ -65,14 +65,12 @@ class CountGetter:
                     print(row["CSET_id"])
                 else:
                     regexes = self.regex_dict[row['CSET_id']]
-                    regex_to_use = rf"r'(?i){regexes[0]}'"
-                    query = f"SELECT COUNT(DISTINCT merged_id) as paper_count FROM `{table_name}`" \
-                            f" WHERE regexp_contains(org_names, {regex_to_use}) "
+                    query = f"""SELECT COUNT(DISTINCT merged_id) as paper_count FROM `{table_name}`
+                             WHERE regexp_contains(org_names, r'(?i){regexes[0]}') """
                     # if we have more than one regex for an org, include all of them
                     if len(regexes) > 1:
                         for regex in regexes[1:]:
-                            regex_to_use = rf"r'(?i){regex}'"
-                            query += f"""OR regexp_contains(org_names, {regex_to_use}) """
+                            query += f"""OR regexp_contains(org_names, r'(?i){regex}') """
                     query_job = client.query(query)
                     # query_job is an iterator, so even though we're only returning one row we're going to loop
                     for element in query_job:
@@ -91,18 +89,18 @@ class CountGetter:
 
     def run_query_papers_by_year(self, table_name: str, field_name: str, regexes: list) -> list:
         field_name_by_year = f"{field_name}_by_year"
-        regex_to_use = rf"r'(?i){regexes[0]}'"
+        # regex_to_use = rf"r'(?i){regexes[0]}'"
         query = f"""SELECT
                       STRUCT(year,
                         COUNT(merged_id) AS {field_name}) AS {field_name_by_year}
                     FROM
                       `{table_name}`
                     WHERE
-                      REGEXP_CONTAINS(org_names, {regex_to_use}) """
+                      REGEXP_CONTAINS(org_names, r'(?i){regexes[0]}') """
         if len(regexes) > 1:
             for regex in regexes[1:]:
-                regex_to_use = rf"r'(?i){regex}'"
-                query += f"""OR regexp_contains(org_names, {regex_to_use}) """
+                # regex_to_use = rf"r'(?i){regex}'"
+                query += f"""OR regexp_contains(org_names, r'(?i){regex}') """
         query += """GROUP BY year ORDER BY year"""
         client = bigquery.Client()
         query_job = client.query(query)

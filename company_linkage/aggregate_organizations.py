@@ -34,7 +34,7 @@ class Organization:
             province_state = None
         if country == "":
             country = None
-        if city is not None or province_state is not None or country is not None:
+        if city or province_state or country:
             self.location = {"city": city, "province_state": province_state, "country": country}
 
     def add_website(self, website):
@@ -46,17 +46,17 @@ class Organization:
             alias_language = None
         if alias == "":
             alias = None
-        if alias_language is not None or alias is not None:
+        if alias_language or alias:
             alias_val = {"alias_language": alias_language, "alias": alias}
             if alias_val not in self.aliases:
                 self.aliases.append(alias_val)
 
     def add_permid(self, permid):
-        if permid is not None and permid != "" and permid not in self.permid:
+        if permid and permid != "" and permid not in self.permid:
             self.permid.append(permid)
 
     def add_market(self, exchange, ticker):
-        if exchange is not None or ticker is not None:
+        if exchange or ticker:
             market = {"exchange": exchange, "ticker": ticker}
             if market not in self.market:
                 self.market.append(market)
@@ -66,7 +66,7 @@ class Organization:
             uuid = None
         if url == "":
             url = None
-        if uuid is not None or url is not None:
+        if uuid or url:
             # We're not worried about matching here because there's only one parent
             # The parent crunchbase should always get added
             self.crunchbase = {"crunchbase_uuid": uuid, "crunchbase_url": url}
@@ -76,26 +76,26 @@ class Organization:
             uuid = None
         if url == "":
             url = None
-        if uuid is not None or url is not None:
+        if uuid or url:
             crunchbase = {"crunchbase_uuid": uuid, "crunchbase_url": url}
             # We don't want it in our list and we don't want it to match the parent
             if crunchbase not in self.child_crunchbase and crunchbase != self.crunchbase:
                 self.child_crunchbase.append(crunchbase)
 
     def add_grid(self, grid):
-        if grid is not None and grid != "" and grid not in self.grid:
+        if grid and grid not in self.grid:
             self.grid.append(grid)
 
     def add_regex(self, regex):
-        if regex is not None and regex != "" and regex not in self.regex:
+        if regex and regex not in self.regex:
             self.regex.append(regex)
 
     def add_bgov_id(self, bgov):
-        if bgov is not None and bgov != "" and bgov not in self.bgov_id:
+        if bgov and bgov not in self.bgov_id:
             self.bgov_id.append(bgov)
 
     def add_comment(self, comment):
-        if comment is not None and comment != "":
+        if comment:
             self.comment = comment
 
     def add_child(self, child_id, child_name):
@@ -111,7 +111,7 @@ class Organization:
     def add_parent(self, parent_acquisition, parent_name, parent_id):
         if parent_name == "":
             parent_name = None
-        if parent_acquisition is not None or parent_name is not None or parent_id is not None:
+        if parent_acquisition or parent_name or parent_id:
             parent = {"parent_acquisition": parent_acquisition, "parent_name": parent_name, "parent_id": parent_id}
             if parent not in self.parent:
                 # Don't want to add a new parent if we already have the parent id in parent
@@ -137,7 +137,7 @@ class OrganizationAggregator:
         organizations = query_job.result()
         for organization in organizations:
             for par in organization.parent:
-                if par["parent_id"] is not None and par["parent_id"] != organization["CSET_id"]:
+                if par["parent_id"] and par["parent_id"] != organization["CSET_id"]:
                     self.parent_names[par["parent_id"]] = par["parent_name"]
                     self.full_aggregate_child_to_parent[organization["CSET_id"]].append(par["parent_id"])
                     # we don't want to create a child-to-parent link if our child shouldn't be rolled up
