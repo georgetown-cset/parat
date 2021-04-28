@@ -21,48 +21,49 @@ from io import BytesIO
 Retrieves and reformats raw data for consumption by javascript
 """
 
-### GLOBALS ###
+### CONSTANTS ###
 
-raw_data_dir = "raw_data"
-web_src_dir = os.path.join("ai_companies_viz", "src")
-image_dir = os.path.join(web_src_dir, "images")
+RAW_DATA_DIR = "raw_data"
+WEB_SRC_DIR = os.path.join("ai_companies_viz", "src")
+IMAGE_DIR = os.path.join(WEB_SRC_DIR, "images")
 
 # Local cache of raw data (ai_companies_visualization.visualization_data)
-raw_data_fi = os.path.join(raw_data_dir, "data.jsonl")
+RAW_DATA_FI = os.path.join(RAW_DATA_DIR, "data.jsonl")
 # Local cache of ai_companies_visualization.original_company_names; used to map lowercased versions of
 # company names back to original casing, where available
-orig_names_fi = os.path.join(raw_data_dir, "company_names.jsonl")
+ORIG_NAMES_FI = os.path.join(RAW_DATA_DIR, "company_names.jsonl")
 # Cache of links to Google Finance page
-exchange_link_fi = os.path.join(raw_data_dir, "exchange_links.jsonl")
+EXCHANGE_LINK_FI = os.path.join(RAW_DATA_DIR, "exchange_links.jsonl")
 # Download of https://docs.google.com/spreadsheets/d/1OpZGUG9y0onZfRfx9aVgRWiYSFWJ-TRsDQwYtcniCB0/edit#gid=468518268
 # containing student-retrieved company descriptions to supplement crunchbase
-supplemental_descriptions = os.path.join(raw_data_dir, "supplemental_company_descriptions.csv")
+SUPPLEMENTAL_DESCRIPTIONS = os.path.join(RAW_DATA_DIR, "supplemental_company_descriptions.csv")
 
 # Maps pycountry country names to more user-friendly ones
-country_name_map = {
+COUNTRY_NAME_MAP = {
     "Korea, Republic of": "South Korea",
     "Taiwan, Province of China": "Taiwan"
 }
 # Maps original company name from raw data to version of the name we should display as the canonical one in the UI
-company_name_map = {
+COMPANY_NAME_MAP = {
     "睿思芯科": "RiVAI",
     "江行智能": "Jiangxing Intelligence",
     "智易科技": "Zhiyi Tech",
     "创新奇智": "AInnovation",
     "captricity": "Vidado"
 }
-reverse_company_name_map = {v: k for k, v in company_name_map.items()}
+REVERSE_COMPANY_NAME_MAP = {v: k for k, v in COMPANY_NAME_MAP.items()}
 # Maps broken links from crunchbase to correct ones
-crunchbase_url_override = {
+CRUNCHBASE_URL_OVERRIDE = {
     ("https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&"
      "utm_campaign=odm_csv"): "https://www.crunchbase.com/organization/covariant"
 }
 # styling to apply to links we generate here - change if main react styling changes
-link_css = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary'"
+LINK_CSS = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary'"
 # Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
-filt_exchanges = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
+FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
 
-### END GLOBALS ###
+### END CONSTANTS ###
+
 
 def get_exchange_link(market_key: str) -> dict:
     """
@@ -87,6 +88,7 @@ def get_exchange_link(market_key: str) -> dict:
     else:
         return {"market_key": market_key, "link": gf_link}
 
+
 def retrieve_raw(get_links: bool) -> None:
     """
     Retrieve raw data from the ai_companies_visualization dataset in BQ
@@ -97,13 +99,13 @@ def retrieve_raw(get_links: bool) -> None:
     client = bigquery.Client()
     market_info = set()
     print("retrieving metadata")
-    with open(raw_data_fi, mode="w") as out:
+    with open(RAW_DATA_FI, mode="w") as out:
         for row in client.list_rows("ai_companies_visualization.visualization_data"):
             dict_row = {col: row[col] for col in row.keys()}
             out.write(json.dumps(dict_row)+"\n")
             market_info = market_info.union([m["exchange"]+":"+m["ticker"] for m in dict_row["market"]])
     print("retrieving original company names")
-    with open(orig_names_fi, mode="w") as out:
+    with open(ORIG_NAMES_FI, mode="w") as out:
         for row in client.list_rows("ai_companies_visualization.original_company_names"):
             name = row["name"]
             if name is None:
@@ -112,11 +114,12 @@ def retrieve_raw(get_links: bool) -> None:
             out.write(json.dumps(row)+"\n")
     if get_links:
         print("retrieving market links")
-        with open(exchange_link_fi, mode="w") as out:
+        with open(EXCHANGE_LINK_FI, mode="w") as out:
             for mi in market_info:
                 mi_row = get_exchange_link(mi)
                 print(mi_row)
                 out.write(json.dumps(mi_row)+"\n")
+
 
 def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     """
@@ -143,14 +146,15 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     if refresh_images:
         response = requests.get(url)
         if response.status_code == 200:
-            Image.open(BytesIO(response.content)).save(os.path.join(image_dir, img_name))
+            Image.open(BytesIO(response.content)).save(os.path.join(IMAGE_DIR, img_name))
             return img_name
         else:
             print("Download failed for "+url)
             return None
-    elif img_name in os.listdir(os.path.join(image_dir)):
+    elif img_name in os.listdir(os.path.join(IMAGE_DIR)):
         return img_name
     return None
+
 
 def clean_parent(parents: list, lowercase_to_orig_cname: dict) -> str:
     """
@@ -166,6 +170,7 @@ def clean_parent(parents: list, lowercase_to_orig_cname: dict) -> str:
                       for parent in parents]
     return ", ".join(cleaned_parents)
 
+
 def clean_children(children: list, lowercase_to_orig_cname: dict) -> str:
     """
     Cleans a list of company children names
@@ -175,7 +180,8 @@ def clean_children(children: list, lowercase_to_orig_cname: dict) -> str:
     """
     if len(children) == 0:
         return None
-    return  ", ".join([clean_company_name(c["child_name"], lowercase_to_orig_cname) for c in children])
+    return ", ".join([clean_company_name(c["child_name"], lowercase_to_orig_cname) for c in children])
+
 
 def clean_market(market_info: list, market_key_to_link: dict) -> list:
     """
@@ -195,6 +201,7 @@ def clean_market(market_info: list, market_key_to_link: dict) -> list:
         })
     return ref_market_info
 
+
 def clean_wiki_description(wiki_desc: str) -> str:
     """
     Clean stuff like the parenthetical pronunciation info and reference numbers out of the wiki descriptions
@@ -204,6 +211,7 @@ def clean_wiki_description(wiki_desc: str) -> str:
     clean_wiki_desc = re.sub(r"\[\d+\]", "", wiki_desc)
     clean_wiki_desc = re.sub(r"\s*\([^\)]*[/\[][^\)]*\)\s*", " ", clean_wiki_desc)
     return clean_wiki_desc
+
 
 def add_ranks(rows: list, metrics: list) -> None:
     """
@@ -227,6 +235,7 @@ def add_ranks(rows: list, metrics: list) -> None:
                 # used to scale color
                 "frac_of_max": math.log(row[metric]+1, 2)/max_metric
             }
+
 
 def get_translation(desc: str, client, parent) -> str:
     """
@@ -264,6 +273,7 @@ def get_translation(desc: str, client, parent) -> str:
         return translation
     return None
 
+
 def add_supplemental_descriptions(rows: list) -> None:
     """
     Adds student-retrieved descriptions of companies to `rows`
@@ -279,7 +289,7 @@ def add_supplemental_descriptions(rows: list) -> None:
         "company_description_link": "company_site_link",
         "retrieval_date": "description_retrieval_date"
     }
-    with open(supplemental_descriptions) as f:
+    with open(SUPPLEMENTAL_DESCRIPTIONS) as f:
         client = translate.TranslationServiceClient()
         parent = client.location_path("gcp-cset-projects", "global")
         for row in csv.DictReader(f):
@@ -305,10 +315,11 @@ def add_supplemental_descriptions(rows: list) -> None:
                 name_to_desc_info[company_name]["company_site_description_translation"] = None
     for row in rows:
         company_name = row["name"].strip().lower()
-        if row["name"] in reverse_company_name_map:
-            company_name = reverse_company_name_map[row["name"]]
+        if row["name"] in REVERSE_COMPANY_NAME_MAP:
+            company_name = REVERSE_COMPANY_NAME_MAP[row["name"]]
         if company_name in name_to_desc_info:
             row.update(name_to_desc_info[company_name])
+
 
 def clean_country(country: str) -> str:
     """
@@ -321,9 +332,10 @@ def clean_country(country: str) -> str:
     country_obj = pycountry.countries.get(alpha_2=country)
     if not country_obj:
         country_obj = pycountry.countries.get(alpha_3=country)
-    if country_obj.name in country_name_map:
-        return country_name_map[country_obj.name]
+    if country_obj.name in COUNTRY_NAME_MAP:
+        return COUNTRY_NAME_MAP[country_obj.name]
     return country_obj.name
+
 
 def get_continent(country: str) -> str:
     """
@@ -338,6 +350,7 @@ def get_continent(country: str) -> str:
     continent = pycountry_convert.convert_continent_code_to_continent_name(continent_code)
     return continent
 
+
 def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     """
     Clean the company name. First try to find it in the map containing one-off mappings, then try to find it
@@ -347,11 +360,12 @@ def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     :return: cleaned company name
     """
     clean_name = name.strip()
-    if clean_name in company_name_map:
-        return company_name_map[clean_name]
+    if clean_name in COMPANY_NAME_MAP:
+        return COMPANY_NAME_MAP[clean_name]
     if clean_name in lowercase_to_orig_cname:
         return lowercase_to_orig_cname[clean_name]
     return clean_name.title()
+
 
 def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str = None) -> str:
     """
@@ -367,6 +381,7 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     sorted_aliases = sorted(list(unique_aliases))
     return None if len(aliases) == 0 else f"{'; '.join(sorted_aliases)}"
 
+
 def get_list_and_links(link_text: list, url_prefix: str) -> (str, dict):
     """
     Given a list of text to be added to link urls, generates a comma-separated string from the text,
@@ -377,10 +392,11 @@ def get_list_and_links(link_text: list, url_prefix: str) -> (str, dict):
     :return: a tuple of a comma-separated string of link_text elts and a dict mapping "__html" to a list of <a> elements
     """
     csv_list = ", ".join([str(lt) for lt in link_text])
-    html_list = {"__html": ", ".join([(f"<a class={link_css} target='blank' rel='noreferrer' "
+    html_list = {"__html": ", ".join([(f"<a class={LINK_CSS} target='blank' rel='noreferrer' "
                            f"href='{url_prefix}{text}'>{text}</a>")
                           for text in link_text])}
     return csv_list, html_list
+
 
 def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     """
@@ -396,6 +412,7 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
     return yearly_counts, sum(yearly_counts)
 
+
 def get_market_link_list(market: list) -> dict:
     """
     Given a list of market information, return a comma-separated list of either html <a> elements if a link
@@ -407,11 +424,12 @@ def get_market_link_list(market: list) -> dict:
     market_elts = []
     for m in market:
         if m["link"]:
-            market_elts.append(f"<a class={link_css} target='blank' rel='noreferrer' "
+            market_elts.append(f"<a class={LINK_CSS} target='blank' rel='noreferrer' "
                                f"href='{m['link']}'>{m['market_key']}</a>")
         else:
             market_elts.append(m["market_key"])
     return {"__html": ", ".join(market_elts)}
+
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
     """
@@ -450,7 +468,7 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
         assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
 
     market = clean_market(js.pop("market"), market_key_to_link)
-    js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in filt_exchanges]
+    js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in FILT_EXCHANGES]
     if len(market) > 0:
         js["full_market_links"] = get_market_link_list(market)
     js["market_list"] = ", ".join([m["market_key"] for m in market])
@@ -461,9 +479,10 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     js["crunchbase_description"] = js.pop("short_description")
     if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
         url = js["crunchbase"]["crunchbase_url"]
-        if url in crunchbase_url_override:
-            js["crunchbase"]["crunchbase_url"] = crunchbase_url_override[url]
+        if url in CRUNCHBASE_URL_OVERRIDE:
+            js["crunchbase"]["crunchbase_url"] = CRUNCHBASE_URL_OVERRIDE[url]
     return js
+
 
 def clean(refresh_images: bool) -> None:
     """
@@ -474,22 +493,23 @@ def clean(refresh_images: bool) -> None:
     """
     rows = []
     lowercase_to_orig_cname = {}
-    with open(orig_names_fi) as f:
+    with open(ORIG_NAMES_FI) as f:
         for line in f:
             js = json.loads(line)
             lowercase_to_orig_cname[js["lowercase_name"]] = js["orig_name"]
     market_key_to_link = {}
-    with open(exchange_link_fi) as f:
+    with open(EXCHANGE_LINK_FI) as f:
         for line in f:
             js = json.loads(line)
             market_key_to_link[js["market_key"].upper()] = js["link"]
-    with open(raw_data_fi) as f:
+    with open(RAW_DATA_FI) as f:
         for row in f:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
     add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
     add_supplemental_descriptions(rows)
-    with open(os.path.join(web_src_dir, "static_data", "data.js"), mode="w") as out:
+    with open(os.path.join(WEB_SRC_DIR, "static_data", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
