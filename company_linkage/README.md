@@ -1,18 +1,5 @@
 # AI Companies Visualization
 
-Before running scripts in the workspace:
-
-1.) Make a new virtualenv:
- 
- ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-2.) `export GOOGLE_APPLICATION_CREDENTIALS=<path to your credentials>` - a service account json.
-You should have at least BQ reader permissions.
-
 ## What is in the workspace
 
 * SQL (see order to run below)
