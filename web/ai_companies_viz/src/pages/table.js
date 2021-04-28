@@ -217,7 +217,8 @@ function Row(props) {
         },
         ticks: {
             suggestedMin: 0,
-            precision: 0
+            precision: 0,
+            suggestedMax: getSuggestedMax(row.yearly_all_publications)
         }
       }],
       xAxes: [{
@@ -269,7 +270,8 @@ function Row(props) {
         },
         ticks: {
             suggestedMin: 0,
-            precision: 0
+            precision: 0,
+            suggestedMax: getSuggestedMax(row.yearly_ai_pubs_top_conf)
         }
       }],
       xAxes: [{
@@ -322,7 +324,8 @@ function Row(props) {
         },
         ticks: {
             suggestedMin: 0,
-            precision: 0
+            precision: 0,
+            suggestedMax: getSuggestedMax(row.yearly_ai_patents)
         }
       }],
       xAxes: [{
@@ -344,6 +347,17 @@ function Row(props) {
       }]
    }
   };
+
+  function getSuggestedMax(ary){
+    const max = Math.max(...ary);
+    const maxes = [10, 50, 100, 250, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000];
+    for(let m of maxes){
+      if(max <= m){
+        return m;
+      }
+    }
+    return max + 500;
+  }
 
   function toggleLinkageVisibility(e){
     const newVisibility = !linkageVisible;
