@@ -115,7 +115,7 @@ class TestMkTabText(unittest.TestCase):
     def test_get_list_and_links(self):
         prefix = "https://my_test_prefix.com/"
         link_suffixes = ["foo", "bar", "baz"]
-        template = f"<a class={LINK_CSS} target='blank' rel='noreferrer' href='{prefix}" + "{}'>{}</a>"
+        template = f"<a class={link_css} target='blank' rel='noreferrer' href='{prefix}"+"{}'>{}</a>"
         expected_links = [template.format(link_text, link_text) for link_text in link_suffixes]
         self.assertEqual(get_list_and_links(link_suffixes, prefix),
                          (", ".join(link_suffixes), {"__html": ", ".join(expected_links)}))
@@ -130,12 +130,12 @@ class TestMkTabText(unittest.TestCase):
 
     def test_get_market_link_list(self):
         market_info = [{"link": "foo", "market_key": "BAR:FOO"}, {"market_key": "TEST:BAZ", "link": ""}]
-        expected_outputs = f"<a class={LINK_CSS} target='blank' rel='noreferrer' href='foo'>BAR:FOO</a>, TEST:BAZ"
+        expected_outputs = f"<a class={link_css} target='blank' rel='noreferrer' href='foo'>BAR:FOO</a>, TEST:BAZ"
         self.assertEqual(get_market_link_list(market_info), {"__html": expected_outputs})
 
     def test_clean_row_alphabet(self):
         market_key_to_link = {}
-        with open(EXCHANGE_LINK_FI) as f:
+        with open(exchange_link_fi) as f:
             for line in f:
                 js = json.loads(line)
                 market_key_to_link[js["market_key"].upper()] = js["link"]
@@ -233,13 +233,13 @@ class TestMkTabText(unittest.TestCase):
         output = clean_row(input, False, {}, market_key_to_link)
         if output["local_logo"] != expected_output["local_logo"]:
             # then we're probably running on github actions and the images are not available
-            assert not output["local_logo"] and not os.path.exists(os.path.join(IMAGE_DIR, "hugging_face.png"))
+            assert not output["local_logo"] and not os.path.exists(os.path.join(image_dir, "hugging_face.png"))
             output["local_logo"] = "alphabet.png"
         self.assertEqual(output, expected_output)
 
     def test_clean_row_hf(self):
         market_key_to_link = {}
-        with open(EXCHANGE_LINK_FI) as f:
+        with open(exchange_link_fi) as f:
             for line in f:
                 js = json.loads(line)
                 market_key_to_link[js["market_key"].upper()] = js["link"]
@@ -303,6 +303,6 @@ class TestMkTabText(unittest.TestCase):
         output = clean_row(input, False, {}, market_key_to_link)
         if output["local_logo"] != expected_output["local_logo"]:
             # then we're probably running on github actions and the images are not available
-            assert not output["local_logo"] and not os.path.exists(os.path.join(IMAGE_DIR, "hugging_face.png"))
+            assert not output["local_logo"] and not os.path.exists(os.path.join(image_dir, "hugging_face.png"))
             output["local_logo"] = "hugging_face.png"
         self.assertEqual(output, expected_output)
