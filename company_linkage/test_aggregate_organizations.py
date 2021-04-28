@@ -1,3 +1,4 @@
+import os
 import unittest
 from company_linkage import aggregate_organizations
 from collections import defaultdict
@@ -207,6 +208,8 @@ class TestOrganizationAggregator(unittest.TestCase):
         self.assertEqual(aggregator.full_aggregate_child_to_parent, defaultdict(list))
         self.assertEqual(aggregator.organization_dict, {})
 
+    @unittest.skipIf(not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"),
+                     "No google credentials")
     def test_get_parents(self):
         aggregator = aggregate_organizations.OrganizationAggregator()
         aggregator.get_parents()

@@ -2,7 +2,7 @@ import json
 import os
 import re
 
-from retrieve_data import link_css
+from retrieve_data import LINK_CSS
 
 """
 Puts a directory of markdown-formatted text for the tabbed overview, faq, etc. sections into a javascript array 
@@ -24,7 +24,7 @@ def clean(s: str) -> list:
             continue
         para = re.sub(r"\*\*([^\*]+)\*\*", r"<span style='font-weight: bold'>\1</span>", para)
         para = re.sub(r"\[([^\]]+)\]\(([^\)]+)\)",
-                      (rf"<a class={link_css} "
+                      (rf"<a class={LINK_CSS} "
                        r"href='\2' target='_blank' rel='noreferrer'>\1</a>"), para)
         para = re.sub(r"\*([^\*]+)\*", r"<span style='font-style:italic'>\1</span>", para)
         if para.startswith("##"):

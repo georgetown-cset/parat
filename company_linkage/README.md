@@ -1,18 +1,5 @@
 # AI Companies Visualization
 
-Before running scripts in the workspace:
-
-1.) Make a new virtualenv:
- 
- ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-2.) `export GOOGLE_APPLICATION_CREDENTIALS=<path to your credentials>` - a service account json.
-You should have at least BQ reader permissions.
-
 ## What is in the workspace
 
 * SQL (see order to run below)
@@ -24,7 +11,7 @@ You should have at least BQ reader permissions.
 script to get top conference papers, these tests will work for both.
 * A unit test for the Python script to aggregate our initial organization list.
 
-## Tasks to build visualization
+## Tasks to build visualization data
 
 1. [selecting_grid_ai_publications.sql](sql/selecting_grid_ai_publications.sql)
 2. `python3 aggregate_organizations.py aggregated_organizations.jsonl`

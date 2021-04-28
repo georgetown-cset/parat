@@ -7,7 +7,31 @@ import urllib.parse
 Prepare data for intern annotation.
 """
 
+
 def get_intern_data(input_fi: str, output_fi: str):
+    """
+    Format data for interns, to use in their search for more detailed company descriptions. Instructions
+    for how to use this data were:
+
+    For each row, please:
+      1.) Go to the link in the wikipedia_search column. If you are redirected to a wikipedia page for the company
+          in the company_name column, or the first search result is for that company, then:
+        a.) Put the first paragraph of the wikipedia article in the wikipedia_description column.
+        b.) Put the wikipedia link for the company in the wikipedia_description_link column.
+        c.) Put the current date in the retrieval_date column
+      2.) If you can't find the company on wikipedia, go to the company's website (in the column company_homepage)
+          and try to find an "about" page that contains a 1-paragraph-ish description of the company
+          (this description may be found on the homepage or elsewhere on the site). If you can quickly find a
+          suitable description:
+        a.) Put this description in the company_description column
+        b.) Put the link to the page where you found this description in the company_description_link column
+        c.) Put the current date in the retrieval_date column
+
+    If you couldn't complete steps (1) or (2) quickly for a company, then don't worry about it and move on.
+    :param input_fi: jsonl export from ai_companies_visualization.visualization_data
+    :param output_fi: file where output csv should be written
+    :return: None
+    """
     rows = []
     with open(input_fi) as f:
         for line in f:
