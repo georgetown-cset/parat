@@ -11,6 +11,9 @@
 script to get top conference papers, these tests will work for both.
 * A unit test for the Python script to aggregate our initial organization list.
 
+This code is dependent on internal CSET BigQuery datasets; without access to these datasets, you will not be able to
+run some of this code as-is.
+
 ## Tasks to build visualization data
 
 1. [selecting_grid_ai_publications.sql](sql/selecting_grid_ai_publications.sql)

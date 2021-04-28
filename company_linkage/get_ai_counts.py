@@ -226,6 +226,11 @@ class CountGetter:
         return companies
 
     def run_query_patents_by_year(self, cset_id: int):
+        """
+        Running the patents query with by-year breakdowns
+        :param cset_id: The CSET id of the organization we want to run the query on
+        :return:
+        """
         query = f"""WITH
                       -- First we pull all the CSET ids and their associated grids
                       id_grid AS (

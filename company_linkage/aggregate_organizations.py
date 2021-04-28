@@ -3,7 +3,7 @@ from google.cloud import bigquery
 import json
 from collections import defaultdict
 
-# Would it be better to import this from somewhere? Maybe if it gets bigger
+# List of companies not being aggregated
 no_roll_up = [101, 550]
 
 
@@ -28,6 +28,13 @@ class Organization:
         self.parent = []
 
     def add_location(self, city, province_state, country):
+        """
+        Adding location for aggregation
+        :param city: city
+        :param province_state: province or state
+        :param country: country
+        :return:
+        """
         if city == "":
             city = None
         if province_state == "":
@@ -38,10 +45,21 @@ class Organization:
             self.location = {"city": city, "province_state": province_state, "country": country}
 
     def add_website(self, website):
+        """
+        Adding website for aggregation
+        :param website: website
+        :return:
+        """
         if website is not None and website != "":
             self.website = website
 
     def add_alias(self, alias_language, alias):
+        """
+        Adding any aliases for aggregation
+        :param alias_language: language alias is in
+        :param alias: alias
+        :return:
+        """
         if alias_language == "":
             alias_language = None
         if alias == "":
@@ -52,16 +70,33 @@ class Organization:
                 self.aliases.append(alias_val)
 
     def add_permid(self, permid):
+        """
+        Adding permid (from Refinitiv/Eikon) for aggregation
+        :param permid: permid
+        :return:
+        """
         if permid and permid != "" and permid not in self.permid:
             self.permid.append(permid)
 
     def add_market(self, exchange, ticker):
+        """
+        Adding exchange/ticker data for aggregation
+        :param exchange: exchange
+        :param ticker: ticker
+        :return:
+        """
         if exchange or ticker:
             market = {"exchange": exchange, "ticker": ticker}
             if market not in self.market:
                 self.market.append(market)
 
     def add_crunchbase(self, uuid, url):
+        """
+        Adding crunchbase data for aggregation
+        :param uuid: crunchbase uuid
+        :param url: crunchbase url
+        :return:
+        """
         if uuid == "":
             uuid = None
         if url == "":
@@ -72,6 +107,12 @@ class Organization:
             self.crunchbase = {"crunchbase_uuid": uuid, "crunchbase_url": url}
 
     def add_child_crunchbase(self, uuid, url):
+        """
+        Adding crunchbase data of any child organizations for aggregation
+        :param uuid: crunchbase uuid
+        :param url: crunchbase url
+        :return:
+        """
         if uuid == "":
             uuid = None
         if url == "":
@@ -83,32 +124,71 @@ class Organization:
                 self.child_crunchbase.append(crunchbase)
 
     def add_grid(self, grid):
+        """
+        Adding GRID (from grid.ac) for aggregation
+        :param grid: grid value
+        :return:
+        """
         if grid and grid not in self.grid:
             self.grid.append(grid)
 
     def add_regex(self, regex):
+        """
+        Adding regular expression for aggregation
+        :param regex: regular expression
+        :return:
+        """
         if regex and regex not in self.regex:
             self.regex.append(regex)
 
     def add_bgov_id(self, bgov):
+        """
+        Adding Bloomberg gov id for aggregation
+        :param bgov: Bloomberg gov id
+        :return:
+        """
         if bgov and bgov not in self.bgov_id:
             self.bgov_id.append(bgov)
 
     def add_comment(self, comment):
+        """
+        Adding comment from annotation for aggregation
+        :param comment:
+        :return:
+        """
         if comment:
             self.comment = comment
 
     def add_child(self, child_id, child_name):
+        """
+        Adding parent company's children
+        :param child_id: child's CSET-assigned ID
+        :param child_name: child's name
+        :return:
+        """
         child = {"child_name": child_name, "child_id": child_id}
         if child not in self.children:
             self.children.append(child)
 
     def add_non_agg_child(self, child_id, child_name):
+        """
+        Adding parent company's children if children aren't getting rolled up into main company
+        :param child_id: child's CSET-assigned ID
+        :param child_name: child's name
+        :return:
+        """
         child = {"child_name": child_name, "child_id": child_id}
         if child not in self.non_agg_children:
             self.non_agg_children.append(child)
 
     def add_parent(self, parent_acquisition, parent_name, parent_id):
+        """
+        Adding parent of company (usually if there's no CSET id so company isn't getting rolled up)
+        :param parent_acquisition: was the company acquired?
+        :param parent_name: Name of parent company
+        :param parent_id: CSET id of parent company
+        :return:
+        """
         if parent_name == "":
             parent_name = None
         if parent_acquisition or parent_name or parent_id:
@@ -125,12 +205,19 @@ class Organization:
 class OrganizationAggregator:
 
     def __init__(self):
+        """
+        A class to aggregate organizations into parent organizations
+        """
         self.parent_names = {}
         self.child_to_parent = defaultdict(list)
         self.full_aggregate_child_to_parent = defaultdict(list)
         self.organization_dict = {}
 
     def get_parents(self):
+        """
+        Getting all parents of a given organization; aggregating companies!
+        :return:
+        """
         query = "SELECT parent, CSET_id FROM high_resolution_entities.organizations"
         client = bigquery.Client()
         query_job = client.query(query)
@@ -190,6 +277,10 @@ class OrganizationAggregator:
         return child_mapping_dict
 
     def get_organizations(self):
+        """
+        Creating all of our new organizations with all the parent and child data
+        :return:
+        """
         query = "SELECT * FROM high_resolution_entities.organizations"
         client = bigquery.Client()
         query_job = client.query(query)
@@ -224,6 +315,12 @@ class OrganizationAggregator:
                     org_info.add_non_agg_child(org_id, org["name"])
 
     def make_new_org(self, org_id, name=None):
+        """
+        Making a new organization that is capable of holding child org data if needed
+        :param org_id: The organization's CSET id
+        :param name: The name of the child org
+        :return:
+        """
         if org_id not in self.organization_dict:
             # we provide a name for child orgs, but not for parents
             if not name:
@@ -233,6 +330,12 @@ class OrganizationAggregator:
         return self.organization_dict[org_id]
 
     def update_organization_identifiers(self, org, org_id):
+        """
+        Adding more organization identifiers to an organization's data entry
+        :param org: The organization's data entry getting info added to it
+        :param org_id: The CSET id of the organization whose info we are adding
+        :return:
+        """
         org_info = self.organization_dict[org_id]
         for permid in org["permid"]:
             org_info.add_permid(permid)
@@ -247,6 +350,12 @@ class OrganizationAggregator:
         org_info.add_bgov_id(org["BGOV_id"])
 
     def update_organization_data(self, org, org_id):
+        """
+        Adding metadata about an organization to an organization's data entry
+        :param org: The organization's data entry getting info added to it
+        :param org_id: The CSET id of the organization whose info we are adding
+        :return:
+        """
         org_info = self.organization_dict[org_id]
         org_info.add_location(org["location"]["city"], org["location"]["province_state"], org["location"]["country"])
         org_info.add_website(org["website"])
@@ -259,6 +368,11 @@ class OrganizationAggregator:
         org_info.add_comment(org["comment"])
 
     def print_output(self, output_file):
+        """
+        Writing the aggregated organization output to file
+        :param output_file: The output file we're writing to
+        :return:
+        """
         out = open(output_file, "w")
         for org_id, org_info in self.organization_dict.items():
             js = {"CSET_id": org_info.cset_id, "name": org_info.name,
