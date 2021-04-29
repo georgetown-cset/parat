@@ -1,4 +1,4 @@
-CARAT uses the following datasets:
+PARAT uses the following datasets:
 - Company logo and location: [Crunchbase Open Data Map](https://data.crunchbase.com/v3.1/docs/open-data-map)
 - Company descriptions: [Crunchbase Open Data Map](https://data.crunchbase.com/v3.1/docs/open-data-map), [Wikipedia](https://wikipedia.org) text collected by CSET, company website text collected by CSET
 - Ticker: [Crunchbase Open Data Map](https://data.crunchbase.com/v3.1/docs/open-data-map)
