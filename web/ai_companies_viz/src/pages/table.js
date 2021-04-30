@@ -1,7 +1,6 @@
 // much thanks due to the examples here https://material-ui.com/components/tables/
 import React, {useRef} from "react";
 import {company_data} from "../static_data/data";
-import {tooltips} from "../static_data/tooltips";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell/TableCell";
