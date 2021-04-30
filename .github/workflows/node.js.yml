@@ -22,5 +22,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: cd web/parat && npm ci
-    - run: cd web/parat && npm run build --if-present
     - run: cd web/parat && npm test
