@@ -250,8 +250,7 @@ const CollapsibleTable = () => {
     { label: "included_subsidiaries", key: "agg_child_info" },
     { label: "excluded_subsidiaries", key: "unagg_child_info" },
   ];
-  //const [exportFilename, setExportFilename] = React.useState("cset-carat-export.csv");
-  const exportFilename = "cset-carat-export.csv";
+  const exportFilename = "cset-parat-export.csv";
 
   const toolbarRef = useRef();
   const handleChangePage = (event, newPage) => {

@@ -90,10 +90,11 @@ const IndexPage = () => {
       <div>
         <div style={{margin: "20px 20px 30px 20px"}}>
           <div style={{marginLeft: "1%", display: "inline-block"}}>
-            <h2><span role={"img"} aria-label={"carat logo"}>🥕</span> Welcome to CARAT, CSET's tracker for private-sector AI activity.</h2>
+            <h2><span role={"img"} aria-label={"parat logo"}>🦜</span> Welcome to PARAT, CSET's Private-sector AI-Related Activity Tracker.</h2>
             <h3 style={{fontWeight: "normal"}}>
-              CARAT collects data related to companies' AI research, development, and production activities
-              in order to inform analysis of the global AI sector. <Link onClick={toggleDesc} style={{cursor: "pointer"}}>{showDesc ? "Hide details..." : "Show details..."}</Link>
+              PARAT collects data related to companies' AI research and development in order to inform analysis of the
+              global AI sector. This tracker includes companies with various degrees of AI activity that CSET has
+              considered relevant to research at the intersection of AI and national security. <Link onClick={toggleDesc} style={{cursor: "pointer"}}>{showDesc ? "Hide details..." : "Show details..."}</Link>
             </h3>
           </div>
         </div>

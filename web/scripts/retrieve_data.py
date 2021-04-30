@@ -433,7 +433,7 @@ def get_market_link_list(market: list) -> dict:
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
     """
-    Given a row from a jsonl, reformat its elements into the form needed by the carat javascript
+    Given a row from a jsonl, reformat its elements into the form needed by the PARAT javascript
     :param row: jsonl line containing company metadata
     :param refresh_images: if true, will re-download images from crunchbase
     :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
