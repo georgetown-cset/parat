@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Closed MS row renders correctly 1`] = `
+<tr
+  class="MuiTableRow-root"
+  style="cursor: pointer;"
+>
+  <td
+    class="MuiTableCell-root"
+  >
+    <img
+      alt="Microsoft"
+      src=""
+      style="height: 30px;"
+    />
+  </td>
+  <th
+    class="MuiTableCell-root"
+    role="cell"
+    scope="row"
+  >
+    Microsoft
+  </th>
+  <td
+    class="MuiTableCell-root MuiTableCell-alignLeft"
+  >
+    United States
+  </td>
+  <td
+    class="MuiTableCell-root MuiTableCell-alignLeft"
+  >
+    North America
+  </td>
+  <td
+    class="MuiTableCell-root MuiTableCell-alignLeft"
+  >
+    Mature
+  </td>
+  <td
+    class="MuiTableCell-root MuiTableCell-alignRight"
+  >
+    <div
+      style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+    >
+      9899
+    </div>
+    <div
+      style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+    >
+      #
+      1
+    </div>
+  </td>
+  <td
+    class="MuiTableCell-root MuiTableCell-alignRight"
+  >
+    <div
+      style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+    >
+      1457
+    </div>
+    <div
+      style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+    >
+      #
+      1
+    </div>
+  </td>
+  <td
+    class="MuiTableCell-root MuiTableCell-alignRight"
+  >
+    <div
+      style="margin-right: 5px; display: inline-block; color: rgb(47, 47, 47);"
+    >
+      1741
+    </div>
+    <div
+      style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+    >
+      #
+      2
+    </div>
+  </td>
+</tr>
+`;
