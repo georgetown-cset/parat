@@ -89,7 +89,7 @@ const IndexPage = () => {
       </div>
       <div>
         <div style={{margin: "20px 20px 30px 20px"}}>
-          <div style={{marginLeft: "1%", display: "inline-block"}}>
+          <div style={{margin: "0 5%", display: "inline-block"}}>
             <h2><span role={"img"} aria-label={"parat logo"}>🦜</span> Welcome to PARAT, CSET's Private-sector AI-Related Activity Tracker.</h2>
             <h3 style={{fontWeight: "normal"}}>
               PARAT collects data related to companies' AI research and development in order to inform analysis of the
