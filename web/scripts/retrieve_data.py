@@ -24,7 +24,7 @@ Retrieves and reformats raw data for consumption by javascript
 ### CONSTANTS ###
 
 RAW_DATA_DIR = "raw_data"
-WEB_SRC_DIR = os.path.join("ai_companies_viz", "src")
+WEB_SRC_DIR = os.path.join("parat", "src")
 IMAGE_DIR = os.path.join(WEB_SRC_DIR, "images")
 
 # Local cache of raw data (ai_companies_visualization.visualization_data)

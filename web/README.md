@@ -20,7 +20,7 @@ and BigQuery reader permissions. To fully regenerate everything including images
 Next, to run the site in development mode, do:
 
 ```bash
-cd ai_companies_viz
+cd parat 
 gatsby develop
 ```
 

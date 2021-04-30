@@ -64,7 +64,7 @@ def mk_tab_text():
             continue
         with open(os.path.join(text_parent, fi_name)) as f:
             label_to_text[fi_name.replace(".md", "")] = clean(f.read())
-    with open(os.path.join("ai_companies_viz", "src", "static_data", "text.js"), mode="w") as out:
+    with open(os.path.join("parat", "src", "static_data", "text.js"), mode="w") as out:
         out.write(f"const tab_text = {json.dumps(label_to_text)};\n\nexport {{ tab_text }};")
 
 if __name__ == "__main__":
