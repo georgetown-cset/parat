@@ -1,85 +1,5203 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Closed MS row renders correctly 1`] = `
-<tr
-  class="MuiTableRow-root"
-  style="cursor: pointer;"
->
-  <td
-    class="MuiTableCell-root"
+exports[`Alibaba: Closed row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
   >
-    <img
-      alt="Microsoft"
-      src=""
-      style="height: 30px;"
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Alibaba"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Alibaba
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(19, 19, 19);"
+      >
+        1534
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        13
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(17, 17, 17);"
+      >
+        192
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        6
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(19, 19, 19);"
+      >
+        652
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        10
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
     />
-  </td>
-  <th
-    class="MuiTableCell-root"
-    role="cell"
-    scope="row"
+  </tr>
+</div>
+`;
+
+exports[`Alibaba: Open more metadata renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
   >
-    Microsoft
-  </th>
-  <td
-    class="MuiTableCell-root MuiTableCell-alignLeft"
-  >
-    United States
-  </td>
-  <td
-    class="MuiTableCell-root MuiTableCell-alignLeft"
-  >
-    North America
-  </td>
-  <td
-    class="MuiTableCell-root MuiTableCell-alignLeft"
-  >
-    Mature
-  </td>
-  <td
-    class="MuiTableCell-root MuiTableCell-alignRight"
-  >
-    <div
-      style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+    <td
+      class="MuiTableCell-root"
     >
-      9899
-    </div>
-    <div
-      style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      <img
+        alt="Alibaba"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
     >
-      #
-      1
-    </div>
-  </td>
-  <td
-    class="MuiTableCell-root MuiTableCell-alignRight"
+      Alibaba
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(19, 19, 19);"
+      >
+        1534
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        13
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(17, 17, 17);"
+      >
+        192
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        6
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(19, 19, 19);"
+      >
+        652
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        10
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
   >
-    <div
-      style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
     >
-      1457
-    </div>
-    <div
-      style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
-    >
-      #
-      1
-    </div>
-  </td>
-  <td
-    class="MuiTableCell-root MuiTableCell-alignRight"
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://alibabagroup.com"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Alibaba
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/baba:nyse"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        NYSE:BABA
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/9988:hkg"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        HKG:9988
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <span>
+                        SEHK:9988
+                      </span>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Alibaba Group enables businesses to transform the way they market, sell, operate and improve their efficiencies.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Alibaba Group Holding Limited, also known as Alibaba Group and as Alibaba.com, is a Chinese multinational technology company specializing in e-commerce, retail, Internet, and technology. Founded on 28 June 1999 in Hangzhou, Zhejiang, the company provides consumer-to-consumer (C2C), business-to-consumer (B2C), and business-to-business (B2B) sales services via web portals, as well as electronic payment services, shopping search engines and cloud computing services. It owns and operates a diverse portfolio of companies around the world in numerous business sectors.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="https://en.wikipedia.org/wiki/Alibaba_Group"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Wikipedia
+                      </a>
+                      , retrieved 
+                      2021-03-17
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation2 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Alibaba; Alibaba Group; Alibaba Group Holding Limited; Alibaba Group Holding Ltd; 阿里; 阿里巴巴集团; 阿里巴巴集团控股有限公司
+                    </div>
+                    <div
+                      width="100%"
+                    >
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          GRID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.480001.d"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.480001.d
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.481557.a"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.481557.a
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.481558.5"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.481558.5
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          PermID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-5000066483"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            5000066483
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          style="font-weight: bold;"
+                        >
+                          Market (full)
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.google.com/finance/quote/baba:nyse"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            NYSE:BABA
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.google.com/finance/quote/9988:hkg"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            HKG:9988
+                          </a>
+                          , SEHK:9988
+                        </span>
+                      </p>
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show Less Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/alibaba?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Alibaba: Open row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
   >
-    <div
-      style="margin-right: 5px; display: inline-block; color: rgb(47, 47, 47);"
+    <td
+      class="MuiTableCell-root"
     >
-      1741
-    </div>
-    <div
-      style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      <img
+        alt="Alibaba"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
     >
-      #
-      2
-    </div>
-  </td>
-</tr>
+      Alibaba
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(19, 19, 19);"
+      >
+        1534
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        13
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(17, 17, 17);"
+      >
+        192
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        6
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(19, 19, 19);"
+      >
+        652
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        10
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://alibabagroup.com"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Alibaba
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/baba:nyse"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        NYSE:BABA
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/9988:hkg"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        HKG:9988
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <span>
+                        SEHK:9988
+                      </span>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Alibaba Group enables businesses to transform the way they market, sell, operate and improve their efficiencies.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Alibaba Group Holding Limited, also known as Alibaba Group and as Alibaba.com, is a Chinese multinational technology company specializing in e-commerce, retail, Internet, and technology. Founded on 28 June 1999 in Hangzhou, Zhejiang, the company provides consumer-to-consumer (C2C), business-to-consumer (B2C), and business-to-business (B2B) sales services via web portals, as well as electronic payment services, shopping search engines and cloud computing services. It owns and operates a diverse portfolio of companies around the world in numerous business sectors.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="https://en.wikipedia.org/wiki/Alibaba_Group"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Wikipedia
+                      </a>
+                      , retrieved 
+                      2021-03-17
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation0 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Alibaba; Alibaba Group; Alibaba Group Holding Limited; Alibaba Group Holding Ltd; 阿里; 阿里巴巴集团; 阿里巴巴集团控股有限公司
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show More Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/alibaba?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Google: Closed row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Google"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Google
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(62, 62, 62);"
+      >
+        7099
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        3
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(47, 47, 47);"
+      >
+        722
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        2
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(43, 43, 43);"
+      >
+        1564
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        3
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    />
+  </tr>
+</div>
+`;
+
+exports[`Google: Open more metadata renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Google"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Google
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(62, 62, 62);"
+      >
+        7099
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        3
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(47, 47, 47);"
+      >
+        722
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        2
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(43, 43, 43);"
+      >
+        1564
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        3
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://www.google.com/"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Google
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/goog:nasdaq"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        NASDAQ:GOOG
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Google is a multinational corporation that specializes in Internet-related services and products.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, a search engine, cloud computing, software, and hardware. It is considered one of the Big Five technology companies in the U.S. information technology industry, alongside Amazon, Facebook, Apple, and Microsoft.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="https://en.wikipedia.org/wiki/Google"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Wikipedia
+                      </a>
+                      , retrieved 
+                      2021-03-17
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation2 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Google; Google LLC; Google [X] - Self-Driving Car Project
+                    </div>
+                    <div
+                      width="100%"
+                    >
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          GRID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.420451.6"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.420451.6
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.424498.7"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.424498.7
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.432839.7"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.432839.7
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.472568.a"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.472568.a
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.498398.7"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.498398.7
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.498210.6"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.498210.6
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.497121.8"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.497121.8
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          PermID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-4295899948"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            4295899948
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-5040958065"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            5040958065
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-4298082502"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            4298082502
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          style="font-weight: bold;"
+                        >
+                          Parents
+                        </span>
+                        : 
+                        Alphabet
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          Included Subsidiaries
+                        </span>
+                        : 
+                        DeepMind, Fitbit, Google Brain, Google Robotics
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          style="font-weight: bold;"
+                        >
+                          Market (full)
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.google.com/finance/quote/goog:nasdaq"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            NASDAQ:GOOG
+                          </a>
+                        </span>
+                      </p>
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show Less Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/google?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Google: Open row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Google"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Google
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(62, 62, 62);"
+      >
+        7099
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        3
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(47, 47, 47);"
+      >
+        722
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        2
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(43, 43, 43);"
+      >
+        1564
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        3
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://www.google.com/"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Google
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/goog:nasdaq"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        NASDAQ:GOOG
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Google is a multinational corporation that specializes in Internet-related services and products.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, a search engine, cloud computing, software, and hardware. It is considered one of the Big Five technology companies in the U.S. information technology industry, alongside Amazon, Facebook, Apple, and Microsoft.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="https://en.wikipedia.org/wiki/Google"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Wikipedia
+                      </a>
+                      , retrieved 
+                      2021-03-17
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation0 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Google; Google LLC; Google [X] - Self-Driving Car Project
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show More Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/google?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Hoperun: Closed row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Hoperun"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Hoperun
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        624
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    />
+  </tr>
+</div>
+`;
+
+exports[`Hoperun: Open more metadata renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Hoperun"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Hoperun
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        624
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://www.hoperun.com/"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Hoperun
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <span>
+                        SZSE:300339
+                      </span>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Jiangsu Hoperun Software provides software outsourcing services for professional fields.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation2 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Hoperun Information Technology; Hoperun Software; Jiangsu Hoperun Software; Jiangsu Hoperun Software Co.,Ltd; Jiangsu Hoperun Software Hangzhou Branch Co Ltd; Jiangsu Runhe Software Co., Ltd; 江苏润和软件股份有限公司; 润和软件
+                    </div>
+                    <div
+                      width="100%"
+                    >
+                      
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          PermID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-5040047337"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            5040047337
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          style="font-weight: bold;"
+                        >
+                          Market (full)
+                        </span>
+                        : 
+                        <span>
+                          SZSE:300339
+                        </span>
+                      </p>
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show Less Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/jiangsu-hoperun-software"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Hoperun: Open row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Hoperun"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Hoperun
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        624
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://www.hoperun.com/"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Hoperun
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <span>
+                        SZSE:300339
+                      </span>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Jiangsu Hoperun Software provides software outsourcing services for professional fields.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation0 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Hoperun Information Technology; Hoperun Software; Jiangsu Hoperun Software; Jiangsu Hoperun Software Co.,Ltd; Jiangsu Hoperun Software Hangzhou Branch Co Ltd; Jiangsu Runhe Software Co., Ltd; 江苏润和软件股份有限公司; 润和软件
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show More Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/jiangsu-hoperun-software"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`LinkedIn: Closed row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="LinkedIn"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      LinkedIn
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(13, 13, 13);"
+      >
+        180
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        52
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(13, 13, 13);"
+      >
+        53
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        14
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    />
+  </tr>
+</div>
+`;
+
+exports[`LinkedIn: Open more metadata renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="LinkedIn"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      LinkedIn
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(13, 13, 13);"
+      >
+        180
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        52
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(13, 13, 13);"
+      >
+        53
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        14
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://linkedin.com"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        LinkedIn
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <span>
+                        NYSE:LNKD
+                      </span>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    LinkedIn, a professional networking site, allows its members to create business connections, search for jobs, and find potential clients.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps. Launched on May 5, 2003, the platform is mainly used for professional networking, and allows job seekers to post their CVs and employers to post jobs. As of 2015, most of the company's revenue came from selling access to information about its members to recruiters and sales professionals. Since December 2016, it has been a wholly owned subsidiary of Microsoft. As of February 2021, LinkedIn had 740 million registered members from 150 countries.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="https://en.wikipedia.org/wiki/LinkedIn"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Wikipedia
+                      </a>
+                      , retrieved 
+                      2021-03-18
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation2 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      LinkedIn Corp; Linkedin Corporation
+                    </div>
+                    <div
+                      width="100%"
+                    >
+                      
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          PermID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-4296977663"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            4296977663
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          style="font-weight: bold;"
+                        >
+                          Parents
+                        </span>
+                        : 
+                        Microsoft (Acquired)
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          style="font-weight: bold;"
+                        >
+                          Market (full)
+                        </span>
+                        : 
+                        <span>
+                          NYSE:LNKD
+                        </span>
+                      </p>
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show Less Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/linkedin?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`LinkedIn: Open row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="LinkedIn"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      LinkedIn
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(13, 13, 13);"
+      >
+        180
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        52
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(13, 13, 13);"
+      >
+        53
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        14
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://linkedin.com"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        LinkedIn
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <span>
+                        NYSE:LNKD
+                      </span>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    LinkedIn, a professional networking site, allows its members to create business connections, search for jobs, and find potential clients.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps. Launched on May 5, 2003, the platform is mainly used for professional networking, and allows job seekers to post their CVs and employers to post jobs. As of 2015, most of the company's revenue came from selling access to information about its members to recruiters and sales professionals. Since December 2016, it has been a wholly owned subsidiary of Microsoft. As of February 2021, LinkedIn had 740 million registered members from 150 countries.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="https://en.wikipedia.org/wiki/LinkedIn"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Wikipedia
+                      </a>
+                      , retrieved 
+                      2021-03-18
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation0 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      LinkedIn Corp; Linkedin Corporation
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show More Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/linkedin?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Microsoft: Closed row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Microsoft"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Microsoft
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+      >
+        9899
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        1
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+      >
+        1457
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        1
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(47, 47, 47);"
+      >
+        1741
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        2
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    />
+  </tr>
+</div>
+`;
+
+exports[`Microsoft: Open more metadata renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Microsoft"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Microsoft
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+      >
+        9899
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        1
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+      >
+        1457
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        1
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(47, 47, 47);"
+      >
+        1741
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        2
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://www.microsoft.com"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Microsoft
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/msft:nasdaq"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        NASDAQ:MSFT
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Microsoft is a software corporation that develops, manufactures, licenses, supports, and sells a range of software products and services.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. Its best known software products are the Microsoft Windows line of operating systems, the Microsoft Office suite, and the Internet Explorer and Edge web browsers. Its flagship hardware products are the Xbox video game consoles and the Microsoft Surface lineup of touchscreen personal computers. Microsoft ranked No. 21 in the 2020 Fortune 500 rankings of the largest United States corporations by total revenue; it was the world's largest software maker by revenue as of 2016. It is considered one of the Big Five companies in the U.S. information technology industry, along with Google, Apple, Amazon, and Facebook.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="https://en.wikipedia.org/wiki/Microsoft"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Wikipedia
+                      </a>
+                      , retrieved 
+                      2021-03-18
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation2 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Microsoft (Contract); Microsoft Corp; Microsoft Corporation
+                    </div>
+                    <div
+                      width="100%"
+                    >
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          GRID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.419815.0"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.419815.0
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.424745.4"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.424745.4
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.425776.5"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.425776.5
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.434364.2"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.434364.2
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.436621.4"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.436621.4
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.451068.e"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.451068.e
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.472724.0"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.472724.0
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.472818.0"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.472818.0
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.47355.30"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.47355.30
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.480246.c"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.480246.c
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.481753.c"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.481753.c
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.482139.5"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.482139.5
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.497586.1"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.497586.1
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.501318.e"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.501318.e
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.24488.32"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.24488.32
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.466948.1"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.466948.1
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.466946.f"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.466946.f
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.491181.4"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.491181.4
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          PermID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-4295907168"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            4295907168
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-5026988025"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            5026988025
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-5073957652"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            5073957652
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-5048229492"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            5048229492
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          Included Subsidiaries
+                        </span>
+                        : 
+                        Microsoft Research, Microsoft Research India, Semantic Machines
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          Excluded Subsidiaries
+                        </span>
+                        : 
+                        LinkedIn
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          style="font-weight: bold;"
+                        >
+                          Market (full)
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.google.com/finance/quote/msft:nasdaq"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            NASDAQ:MSFT
+                          </a>
+                        </span>
+                      </p>
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show Less Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/microsoft?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Microsoft: Open row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Microsoft"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Microsoft
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+      >
+        9899
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        1
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(76, 76, 76);"
+      >
+        1457
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        1
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(47, 47, 47);"
+      >
+        1741
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        2
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://www.microsoft.com"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Microsoft
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/msft:nasdaq"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        NASDAQ:MSFT
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Microsoft is a software corporation that develops, manufactures, licenses, supports, and sells a range of software products and services.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. Its best known software products are the Microsoft Windows line of operating systems, the Microsoft Office suite, and the Internet Explorer and Edge web browsers. Its flagship hardware products are the Xbox video game consoles and the Microsoft Surface lineup of touchscreen personal computers. Microsoft ranked No. 21 in the 2020 Fortune 500 rankings of the largest United States corporations by total revenue; it was the world's largest software maker by revenue as of 2016. It is considered one of the Big Five companies in the U.S. information technology industry, along with Google, Apple, Amazon, and Facebook.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="https://en.wikipedia.org/wiki/Microsoft"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Wikipedia
+                      </a>
+                      , retrieved 
+                      2021-03-18
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation0 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Microsoft (Contract); Microsoft Corp; Microsoft Corporation
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show More Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/microsoft?utm_source=crunchbase&utm_medium=export&utm_campaign=odm_csv"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`SPX Corp: Closed row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="SPX Corp"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      SPX Corp
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        624
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    />
+  </tr>
+</div>
+`;
+
+exports[`SPX Corp: Open more metadata renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="SPX Corp"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      SPX Corp
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        624
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.spx.com/"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        SPX Corp
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/spxc:nyse"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        NYSE:SPXC
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    SPX Corporation is a Fortune 500 multi-industry manufacturing leader that provides its customers with highly-specialized, engineered
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation2 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      SPX; Spx Corporation
+                    </div>
+                    <div
+                      width="100%"
+                    >
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          GRID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.471278.f"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.471278.f
+                          </a>
+                          , 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.grid.ac/institutes/grid.481731.8"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            grid.481731.8
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          PermID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-4295910086"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            4295910086
+                          </a>
+                        </span>
+                      </p>
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          style="font-weight: bold;"
+                        >
+                          Market (full)
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.google.com/finance/quote/spxc:nyse"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            NYSE:SPXC
+                          </a>
+                          , NYQ:SPXC, ASE:SPXC, BER:SPW, MUN:SPW, DEU:SPW, STU:SPW, 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.google.com/finance/quote/spw:fra"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            FRA:SPW
+                          </a>
+                          , BRN:SPW, 
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://www.google.com/finance/quote/ffc:fra"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            FRA:FFC
+                          </a>
+                        </span>
+                      </p>
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show Less Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/spx-corporation"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`SPX Corp: Open row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="SPX Corp"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      SPX Corp
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      United States
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      North America
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Mature
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        624
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.spx.com/"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        SPX Corp
+                      </a>
+                    </span>
+                    <span
+                      style="padding-left: 10px; color: rgb(84, 84, 84);"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.google.com/finance/quote/spxc:nyse"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        NYSE:SPXC
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    SPX Corporation is a Fortune 500 multi-industry manufacturing leader that provides its customers with highly-specialized, engineered
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation0 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      SPX; Spx Corporation
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show More Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/spx-corporation"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Video++: Closed row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Video++"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Video++
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Growth
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(12, 12, 12);"
+      >
+        100
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        68
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    />
+  </tr>
+</div>
+`;
+
+exports[`Video++: Open more metadata renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Video++"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Video++
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Growth
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(12, 12, 12);"
+      >
+        100
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        68
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://videojj.com/"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Video++
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Video++ provides video-streaming services.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    极链集团专注于智能营销、新娱乐消费、科技服务。核心品牌为Video++智能营销—服务67家头部客户，包括阿里、腾讯、京东、惠氏、思念；TakiToys潮流玩具品牌；TakiPlay线下新娱乐街区—包括沉浸剧本密室、一番赏零售等；极链云智能服务平台—为华为、芒果、国动集团等提供视频AI整体解决方案。集团年销售额近10亿元。
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="http://videojj.com/about/"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Source
+                      </a>
+                      , retrieved 
+                      2021-03-15
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Jilian Group focuses on smart marketing, new entertainment consumption, and technology services. The core brand is Video++ Smart Marketing-serving 67 top customers, including Alibaba, Tencent, JD.com, Wyeth, Miss; TakiToys trendy toy brand; TakiPlay offline new entertainment district-including immersive script secret room, Yifanyou retail, etc.; Jilian Cloud Intelligent Service Platform-Provides overall video AI solutions for Huawei, Mango, and China National Dynamics Group. The group's annual sales are nearly 1 billion yuan.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Google Translation of 
+                      <a
+                        href="http://videojj.com/about/"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        source
+                      </a>
+                      , retrieved 
+                      2021-03-15
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation2 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Jilian Technology; Shanghai Extreme Chain Network Technology Co., Ltd; Shanghai Jilian Network Technology Co Ltd; Videoplusplus; 上海极链网络科技有限公司
+                    </div>
+                    <div
+                      width="100%"
+                    >
+                      
+                      <p
+                        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                      >
+                        <span
+                          class=""
+                          style="font-weight: bold; border-bottom: 1px dashed black;"
+                        >
+                          PermID
+                        </span>
+                        : 
+                        <span>
+                          <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                            href="https://permid.org/1-5065370760"
+                            rel="noreferrer"
+                            target="blank"
+                          >
+                            5065370760
+                          </a>
+                        </span>
+                      </p>
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show Less Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/video-7010"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;
+
+exports[`Video++: Open row renders correctly 1`] = `
+<div>
+  <tr
+    class="MuiTableRow-root"
+    style="cursor: pointer;"
+  >
+    <td
+      class="MuiTableCell-root"
+    >
+      <img
+        alt="Video++"
+        src=""
+        style="height: 30px;"
+      />
+    </td>
+    <th
+      class="MuiTableCell-root"
+      role="cell"
+      scope="row"
+    >
+      Video++
+    </th>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      China
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Asia
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignLeft"
+    >
+      Growth
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(12, 12, 12);"
+      >
+        100
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        68
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        140
+      </div>
+    </td>
+    <td
+      class="MuiTableCell-root MuiTableCell-alignRight"
+    >
+      <div
+        style="margin-right: 5px; display: inline-block; color: rgb(0, 0, 0);"
+      >
+        0
+      </div>
+      <div
+        style="color: darkgrey; width: 30px; display: inline-block; text-align: right; margin-right: 20px;"
+      >
+        #
+        290
+      </div>
+    </td>
+  </tr>
+  <tr
+    class="MuiTableRow-root"
+  >
+    <td
+      class="MuiTableCell-root"
+      colspan="8"
+      style="padding-bottom: 0px; padding-top: 0px;"
+    >
+      <div
+        class="MuiCollapse-container"
+        style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+      >
+        <div
+          class="MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner"
+          >
+            <div
+              style="padding: 10px;"
+            >
+              <div
+                style="margin-bottom: 10px;"
+              >
+                <div
+                  style="width: 60%; display: inline-block;"
+                >
+                  <div>
+                    <span
+                      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://videojj.com/"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Video++
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Video++ provides video-streaming services.
+                    " 
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Crunchbase
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    极链集团专注于智能营销、新娱乐消费、科技服务。核心品牌为Video++智能营销—服务67家头部客户，包括阿里、腾讯、京东、惠氏、思念；TakiToys潮流玩具品牌；TakiPlay线下新娱乐街区—包括沉浸剧本密室、一番赏零售等；极链云智能服务平台—为华为、芒果、国动集团等提供视频AI整体解决方案。集团年销售额近10亿元。
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      <a
+                        href="http://videojj.com/about/"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        Source
+                      </a>
+                      , retrieved 
+                      2021-03-15
+                    </span>
+                  </div>
+                  <div
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    style="margin-top: 10px;"
+                  >
+                    "
+                    Jilian Group focuses on smart marketing, new entertainment consumption, and technology services. The core brand is Video++ Smart Marketing-serving 67 top customers, including Alibaba, Tencent, JD.com, Wyeth, Miss; TakiToys trendy toy brand; TakiPlay offline new entertainment district-including immersive script secret room, Yifanyou retail, etc.; Jilian Cloud Intelligent Service Platform-Provides overall video AI solutions for Huawei, Mango, and China National Dynamics Group. The group's annual sales are nearly 1 billion yuan.
+                    "
+                    <span
+                      style="font-size: 75%; margin-left: 10px;"
+                    >
+                      Google Translation of 
+                      <a
+                        href="http://videojj.com/about/"
+                        rel="noreferrer"
+                        target="blank"
+                      >
+                        source
+                      </a>
+                      , retrieved 
+                      2021-03-15
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="width: 37%; display: inline-block; vertical-align: top; margin-left: 30px;"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation0 MuiPaper-rounded"
+                    style="padding: 10px 20px;"
+                  >
+                    <div
+                      class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+                    >
+                      <span
+                        style="font-weight: bold;"
+                      >
+                        Aliases:
+                      </span>
+                       
+                      Jilian Technology; Shanghai Extreme Chain Network Technology Co., Ltd; Shanghai Jilian Network Technology Co Ltd; Videoplusplus; 上海极链网络科技有限公司
+                    </div>
+                    <div
+                      style="text-align: center;"
+                    >
+                      <button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        style="margin-right: 10px;"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiButton-label"
+                        >
+                          Show More Metadata
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://www.crunchbase.com/organization/video-7010"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <button
+                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeSmall MuiButton-sizeSmall"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiButton-label"
+                          >
+                            View on Crunchbase
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="text-align: center;"
+              >
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+                <div
+                  style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
+                >
+                  <canvas
+                    height="150"
+                    width="300"
+                  />
+                </div>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+                style="text-align: right; font-size: 90%;"
+              >
+                Grey shaded regions of the graphs contain partial data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
 `;
