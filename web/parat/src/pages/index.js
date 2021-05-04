@@ -10,7 +10,7 @@ import cset_logo from "../images/cset_logo.svg";
 import "../styles/styles.css";
 import {tab_text} from "../static_data/text";
 
-const CollapsibleTable = React.lazy(() => import("./table"));
+const CollapsibleTable = React.lazy(() => import("../components/table"));
 
 function TabPanel(props) {
   const { value, index, ...other } = props;
