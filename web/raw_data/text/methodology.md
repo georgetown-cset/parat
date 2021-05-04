@@ -1,5 +1,4 @@
-We select companies for inclusion in PARAT based on CSET’s research priorities in AI and national security as well as feedback from users.
- (Not all AI-related companies are covered by PARAT, and the sample covered in PARAT may be over- or under-representing certain sub-industries, regions of the world, or company sizes and types.) CSET annotators map each company to a set of unique identifiers, including [GRID](https://www.grid.ac/) (used in academic publication datasets), [Crunchbase UUID](https://data.crunchbase.com/v3.1/docs/uuid) (for the Crunchbase investment dataset), [PermID](https://permid.org/) (for use with Refinitiv data and other PermID-compatible datasets), and regular expressions that precisely capture the company's name and known aliases.
+We select companies for inclusion in PARAT based on CSET’s research priorities in AI and national security as well as feedback from users. Not all AI-related companies are covered by PARAT, and the sample covered in PARAT may be over- or under-representing certain sub-industries, regions of the world, or company sizes and types. CSET annotators map each company to a set of unique identifiers, including [GRID](https://www.grid.ac/) (used in academic publication datasets), [Crunchbase UUID](https://data.crunchbase.com/v3.1/docs/uuid) (for the Crunchbase investment dataset), [PermID](https://permid.org/) (for use with Refinitiv data and other PermID-compatible datasets), and regular expressions that precisely capture the company's name and known aliases.
 
 PARAT uses these identifiers to pull relevant data from our data sources, such as company logos and locations in the Crunchbase Open Data Map. Some PARAT fields involve more complex operations:
 
@@ -13,5 +12,5 @@ PARAT uses these identifiers to pull relevant data from our data sources, such a
 
 CSET annotators also manually collect some metadata for the companies in PARAT, including parent-subsidiary information, aliases, and some business descriptions.
 
-We will update PARAT periodically; it was last updated on April 9, 2021, and we expect to next update it in August 2021.
+We will update PARAT periodically; it was last updated on May 4, 2021, and we expect to next update it in August 2021.
 
