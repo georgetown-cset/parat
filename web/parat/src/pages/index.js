@@ -104,7 +104,8 @@ const IndexPage = () => {
                   width: (simplify ? "100%" : "15%"),
                   display: (simplify ? "block" : "inline-block"),
                   marginBottom: (simplify ? "20px" : "0px"),
-                  textAlign: "center"}}
+                  textAlign: "center",
+                  overflow: "scroll"}}
                 variant={simplify ? "scrollable" : "standard"} scrollButtons={"off"}>
             <Tab
               value="overview"
