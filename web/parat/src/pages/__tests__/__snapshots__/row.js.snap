@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Alibaba: Closed row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -92,11 +92,11 @@ exports[`Alibaba: Closed row renders correctly 1`] = `
       style="padding-bottom: 0px; padding-top: 0px;"
     />
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Alibaba: Open more metadata renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -445,28 +445,13 @@ exports[`Alibaba: Open more metadata renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -480,11 +465,11 @@ exports[`Alibaba: Open more metadata renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Alibaba: Open row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -739,28 +724,13 @@ exports[`Alibaba: Open row renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -774,11 +744,11 @@ exports[`Alibaba: Open row renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Google: Closed row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -869,11 +839,11 @@ exports[`Google: Closed row renders correctly 1`] = `
       style="padding-bottom: 0px; padding-top: 0px;"
     />
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Google: Open more metadata renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -1270,28 +1240,13 @@ exports[`Google: Open more metadata renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -1305,11 +1260,11 @@ exports[`Google: Open more metadata renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Google: Open row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -1545,28 +1500,13 @@ exports[`Google: Open row renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -1580,11 +1520,11 @@ exports[`Google: Open row renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Hoperun: Closed row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -1675,11 +1615,11 @@ exports[`Hoperun: Closed row renders correctly 1`] = `
       style="padding-bottom: 0px; padding-top: 0px;"
     />
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Hoperun: Open more metadata renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -1928,28 +1868,13 @@ exports[`Hoperun: Open more metadata renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -1963,11 +1888,11 @@ exports[`Hoperun: Open more metadata renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Hoperun: Open row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -2177,28 +2102,13 @@ exports[`Hoperun: Open row renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -2212,11 +2122,11 @@ exports[`Hoperun: Open row renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`LinkedIn: Closed row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -2307,11 +2217,11 @@ exports[`LinkedIn: Closed row renders correctly 1`] = `
       style="padding-bottom: 0px; padding-top: 0px;"
     />
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`LinkedIn: Open more metadata renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -2592,28 +2502,13 @@ exports[`LinkedIn: Open more metadata renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -2627,11 +2522,11 @@ exports[`LinkedIn: Open more metadata renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`LinkedIn: Open row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -2862,28 +2757,13 @@ exports[`LinkedIn: Open row renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -2897,11 +2777,11 @@ exports[`LinkedIn: Open row renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Microsoft: Closed row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -2992,11 +2872,11 @@ exports[`Microsoft: Closed row renders correctly 1`] = `
       style="padding-bottom: 0px; padding-top: 0px;"
     />
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Microsoft: Open more metadata renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -3502,28 +3382,13 @@ exports[`Microsoft: Open more metadata renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -3537,11 +3402,11 @@ exports[`Microsoft: Open more metadata renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Microsoft: Open row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -3777,28 +3642,13 @@ exports[`Microsoft: Open row renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -3812,11 +3662,11 @@ exports[`Microsoft: Open row renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`SPX Corp: Closed row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -3907,11 +3757,11 @@ exports[`SPX Corp: Closed row renders correctly 1`] = `
       style="padding-bottom: 0px; padding-top: 0px;"
     />
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`SPX Corp: Open more metadata renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -4219,28 +4069,13 @@ exports[`SPX Corp: Open more metadata renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -4254,11 +4089,11 @@ exports[`SPX Corp: Open more metadata renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`SPX Corp: Open row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -4473,28 +4308,13 @@ exports[`SPX Corp: Open row renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -4508,11 +4328,11 @@ exports[`SPX Corp: Open row renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Video++: Closed row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -4603,11 +4423,11 @@ exports[`Video++: Closed row renders correctly 1`] = `
       style="padding-bottom: 0px; padding-top: 0px;"
     />
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Video++: Open more metadata renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -4879,28 +4699,13 @@ exports[`Video++: Open more metadata renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -4914,11 +4719,11 @@ exports[`Video++: Open more metadata renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;
 
 exports[`Video++: Open row renders correctly 1`] = `
-<div>
+<tbody>
   <tr
     class="MuiTableRow-root"
     style="cursor: pointer;"
@@ -5164,28 +4969,13 @@ exports[`Video++: Open row renders correctly 1`] = `
               >
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
                 <div
                   style="width: 33%; display: inline-block; height: 100%; min-height: 250px; min-width: 300px;"
-                >
-                  <canvas
-                    height="150"
-                    width="300"
-                  />
-                </div>
+                />
               </div>
               <p
                 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
@@ -5199,5 +4989,5 @@ exports[`Video++: Open row renders correctly 1`] = `
       </div>
     </td>
   </tr>
-</div>
+</tbody>
 `;

@@ -1,5 +1,5 @@
-const React = require("react")
-const gatsby = jest.requireActual("gatsby")
+const React = require("react");
+const gatsby = jest.requireActual("gatsby");
 module.exports = {
   ...gatsby,
   graphql: jest.fn(),
@@ -23,4 +23,4 @@ module.exports = {
   ),
   StaticQuery: jest.fn(),
   useStaticQuery: jest.fn(),
-}
+};

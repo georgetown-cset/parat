@@ -2,9 +2,16 @@ import React from "react"
 import { render, getByText } from "@testing-library/react"
 import Row from "../row"
 
+jest.mock('react-chartjs-2', () => ({
+  Line: () => null
+}));
+
 function check_row_interactions(label, data){
+  const table = document.createElement("tbody");
   test(label, () => {
-    const { container } = render(<Row row={data} forceExpand={false} />);
+    const { container } = render(<Row row={data} forceExpand={false} />,
+      {container: document.body.appendChild(table)}
+    );
     // check closed row
     expect(container).toMatchSnapshot("Closed row renders correctly");
     // expand row and check it's still as expected
