@@ -25,8 +25,8 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        tab_text[index].map((para) =>
-          <div style={{paddingBottom: "10px"}} dangerouslySetInnerHTML={para} className={"MuiTypography-body1"}></div>
+        tab_text[index].map((para, idx) =>
+          <div style={{paddingBottom: "10px"}} dangerouslySetInnerHTML={para} className={"MuiTypography-body1"} key={idx}></div>
         )
       )}
     </div>
@@ -128,7 +128,7 @@ const IndexPage = () => {
           </div>
         </div>
       </div>
-      <div style={{padding: "10px 50px", backgroundColor: "#FFFFFF"}} id="table-container">
+      <div style={{padding: "10px 40px", backgroundColor: "#FFFFFF"}} id="table-container">
         {!isSSR && (
           <React.Suspense fallback={<div style={{textAlign: "center"}}><CircularProgress/></div>}>
             <CollapsibleTable/>

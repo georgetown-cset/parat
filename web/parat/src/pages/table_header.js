@@ -16,7 +16,7 @@ const headCells = [
   { id: "continent", numeric: false, disablePadding: false, label: "Continent" },
   { id: "stage", numeric: false, disablePadding: false, label: "Company Stage" },
   { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Pubs" },
-  { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "Top AI Pubs" },
+  { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "Top AI Conf Pubs" },
   { id: "ai_patents", numeric: true, disablePadding: false, label: "AI Patents" },
 ];
 
@@ -126,14 +126,14 @@ function CompanyTableHead(props) {
               <TableCell
                 key={headCell.id}
                 align={"center"}
-                style={{ width: "120px", verticalAlign: "bottom" }}
+                style={{ width: "140px", verticalAlign: "bottom" }}
                 sortDirection={order[headCell.id] === 1 ? "asc" : "desc"}
               >
                 <TableSortLabel
                   active={true}
                   direction={order[headCell.id] === 1 ? "desc" : "asc"}
                   onClick={createSortHandler(headCell.id)}
-                  style={{padding: "0 0 0 10px"}}
+                  style={{padding: "0"}}
                   hideSortIcon={true}
                 >
                   {headCell.label}
