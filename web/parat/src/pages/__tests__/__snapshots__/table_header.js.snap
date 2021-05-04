@@ -387,13 +387,13 @@ Object {
           aria-sort="ascending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
             AI Pubs
@@ -478,16 +478,16 @@ Object {
           aria-sort="ascending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
-            Top AI Pubs
+            Top AI Conf Pubs
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
@@ -569,13 +569,13 @@ Object {
           aria-sort="ascending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
             AI Patents
@@ -1043,13 +1043,13 @@ Object {
           aria-sort="ascending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
             AI Pubs
@@ -1134,16 +1134,16 @@ Object {
           aria-sort="ascending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
-            Top AI Pubs
+            Top AI Conf Pubs
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
@@ -1225,13 +1225,13 @@ Object {
           aria-sort="ascending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
             AI Patents
@@ -1866,13 +1866,13 @@ Object {
           aria-sort="descending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
             AI Pubs
@@ -1957,16 +1957,16 @@ Object {
           aria-sort="descending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
-            Top AI Pubs
+            Top AI Conf Pubs
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
@@ -2048,13 +2048,13 @@ Object {
           aria-sort="descending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
             AI Patents
@@ -2632,13 +2632,13 @@ Object {
           aria-sort="descending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
             AI Pubs
@@ -2723,16 +2723,16 @@ Object {
           aria-sort="descending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
-            Top AI Pubs
+            Top AI Conf Pubs
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
@@ -2814,13 +2814,13 @@ Object {
           aria-sort="descending"
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter"
           scope="col"
-          style="width: 120px; vertical-align: bottom;"
+          style="width: 140px; vertical-align: bottom;"
         >
           <span
             aria-disabled="false"
             class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-active"
             role="button"
-            style="padding: 0px 0px 0px 10px;"
+            style="padding: 0px;"
             tabindex="0"
           >
             AI Patents
