@@ -1,7 +1,7 @@
-### Web artifacts and data preprocessing code for CARAT
+### Web artifacts and data preprocessing code for PARAT
 
-This directory contains the code that processes the data generated in *[link to come]* for use in the CARAT website.
-It also contains a Gatsby project that contains the CARAT website generation code.
+This directory contains the code that processes the data generated in *[link to come]* for use in the PARAT website.
+It also contains a Gatsby project that contains the PARAT website generation code.
 
 To update the text that is used in the various explanatory tabs, edit the markdown files in `raw_data/text/`.
 To update the tooltips, edit `src/static_data/tooltips.js`.
