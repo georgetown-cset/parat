@@ -1,8 +1,8 @@
 {
-  "name": "ai_companies_viz",
+  "name": "parat",
   "version": "1.0.0",
   "private": true,
-  "description": "ai_companies_viz",
+  "description": "parat",
   "keywords": [
     "gatsby"
   ],
@@ -11,7 +11,8 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -28,5 +29,20 @@
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-plotly.js": "^2.5.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "babel-jest": "^26.6.3",
+    "babel-preset-gatsby": "^1.4.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3",
+    "jest-canvas-mock": "^2.3.1",
+    "react-test-renderer": "^17.0.2"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
   }
 }

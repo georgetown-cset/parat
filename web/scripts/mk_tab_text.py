@@ -9,6 +9,7 @@ Puts a directory of markdown-formatted text for the tabbed overview, faq, etc. s
 with elements to be consumed by React using dangerouslySetInnerHTML
 """
 
+
 def clean(s: str) -> list:
     """
     Clean and reformat a markdown string as html
@@ -36,8 +37,15 @@ def clean(s: str) -> list:
             ul_buffer.append(f"<li style='margin:10px 0px'>{para}</li>")
         else:
             if len(header_buffer) > 0:
-                assert len(header_buffer) == 1
-                cleaned.append({"__html": header_buffer[0]+" "+para})
+                assert len(header_buffer) < 3
+                if len(header_buffer) == 2:
+                    # it's possible that a section will contain only bullets in which case we'll only
+                    # close the section at the start of the next header
+                    assert len(ul_buffer) > 0
+                    fmt_list = "\n".join(ul_buffer)
+                    cleaned.append({"__html": f"{header_buffer[0]} <ul>{fmt_list}</ul>"})
+                    ul_buffer = []
+                cleaned.append({"__html": header_buffer[-1]+" "+para})
                 header_buffer = []
             elif len(ul_buffer) > 0:
                 fmt_list = "\n".join(ul_buffer)
@@ -52,6 +60,7 @@ def clean(s: str) -> list:
         cleaned.append({"__html": f"<ul>{fmt_list}</ul>"})
     return cleaned
 
+
 def mk_tab_text():
     """
     Convert the text that will go in the tabs on the website from markdown to a JS array of html
@@ -64,8 +73,9 @@ def mk_tab_text():
             continue
         with open(os.path.join(text_parent, fi_name)) as f:
             label_to_text[fi_name.replace(".md", "")] = clean(f.read())
-    with open(os.path.join("ai_companies_viz", "src", "static_data", "text.js"), mode="w") as out:
+    with open(os.path.join("parat", "src", "static_data", "text.js"), mode="w") as out:
         out.write(f"const tab_text = {json.dumps(label_to_text)};\n\nexport {{ tab_text }};")
+
 
 if __name__ == "__main__":
     mk_tab_text()
