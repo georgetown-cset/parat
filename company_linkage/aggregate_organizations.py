@@ -144,11 +144,12 @@ class Organization:
     def add_bgov_id(self, bgov):
         """
         Adding Bloomberg gov id for aggregation
-        :param bgov: Bloomberg gov id
+        :param bgov: Bloomberg gov ids
         :return:
         """
-        if bgov and bgov not in self.bgov_id:
-            self.bgov_id.append(bgov)
+        for bgov_val in bgov:
+            if bgov_val and bgov_val not in self.bgov_id:
+                self.bgov_id.append(bgov_val)
 
     def add_comment(self, comment):
         """
