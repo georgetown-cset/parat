@@ -141,14 +141,14 @@ class TestOrganization(unittest.TestCase):
 
     def test_add_bgov_id(self):
         org = aggregate_organizations.Organization(1, "test")
-        org.add_bgov_id("684405")
+        org.add_bgov_id(["684405"])
         self.assertEqual(org.bgov_id[0], "684405")
         self.assertEqual(len(org.bgov_id), 1)
         # Don't add a duplicate entry!
-        org.add_grid("684405")
+        org.add_bgov_id(["684405"])
         self.assertEqual(len(org.bgov_id), 1)
         # Do add a new one
-        org.add_bgov_id("773795")
+        org.add_bgov_id(["773795"])
         self.assertEqual(org.bgov_id[1], "773795")
         self.assertEqual(len(org.bgov_id), 2)
 
