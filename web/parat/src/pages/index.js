@@ -5,6 +5,7 @@ import Link from "@material-ui/core/Link";
 import PropTypes from "prop-types";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Typography from '@material-ui/core/Typography';
 
 import cset_logo from "../images/cset_logo.svg";
 import "../styles/styles.css";
@@ -49,7 +50,7 @@ function a11yProps(index) {
 const IndexPage = () => {
 
   useEffect(() => {
-    document.title = "CSET AI Companies Tracker";
+    document.title = "CSET PARAT";
     document.documentElement.lang = "en";
     window.addEventListener("resize", handleWindowResize);
     handleWindowResize();
@@ -92,11 +93,11 @@ const IndexPage = () => {
         <div style={{margin: "20px 20px 30px 20px"}}>
           <div style={{margin: "0 6%", display: "inline-block"}}>
             <h2><span role={"img"} aria-label={"parat logo"}>🦜</span> Welcome to PARAT, CSET's Private-sector AI-Related Activity Tracker.</h2>
-            <h3 style={{fontWeight: "normal"}}>
+            <Typography variant={"body1"} style={{fontSize: "110%"}}>
               PARAT collects data related to companies' AI research and development in order to inform analysis of the
               global AI sector. This tracker includes companies with various degrees of AI activity that CSET has
-              considered relevant to research at the intersection of AI and national security. <Link onClick={toggleDesc} style={{cursor: "pointer"}}>{showDesc ? "Hide details..." : "Show details..."}</Link>
-            </h3>
+              considered relevant to research at the intersection of AI and national security. <Link onClick={toggleDesc} style={{cursor: "pointer", fontWeight: "bold"}}>{showDesc ? "Hide methodology details..." : "Show methodology details..."}</Link>
+            </Typography>
           </div>
         </div>
         <div style={{"display": showDesc ? "block" : "none", paddingBottom: "50px"}}>
