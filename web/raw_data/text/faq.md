@@ -18,7 +18,7 @@ In most cases, yes. PARAT includes parent-subsidiary mappings for many companies
 
 ## Can I get the raw data that goes into PARAT?
 
-You can use PARAT's download feature to extract the descriptive information, metrics and metadata displayed in the PARAT web interface. We also share the code used to generate PARAT in our [GitHub repo](https://github.com/georgetown-cset/parat). Licensing restrictions prevent us from sharing the underlying publication and patent [data sources](_____), but if you have access to these datasets (some of which are free), you can use PARAT metadata to efficiently query them. For example, you can use the GRID identifiers compiled in PARAT to quickly find a company's publications in databases like [Dimensions](https://www.dimensions.ai/) or [Microsoft Academic Graph](https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/).
+You can use PARAT's download feature to extract the descriptive information, metrics and metadata displayed in the PARAT web interface. We also share the code used to generate PARAT in our [GitHub repo](https://github.com/georgetown-cset/parat). Licensing restrictions prevent us from sharing the underlying publication and patent data sources, but if you have access to these datasets (some of which are free), you can use PARAT metadata to efficiently query them. For example, you can use the GRID identifiers compiled in PARAT to quickly find a company's publications in databases like [Dimensions](https://www.dimensions.ai/) or [Microsoft Academic Graph](https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/).
 
 ## Can you tell me more about how to use PARAT?
 
