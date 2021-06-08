@@ -1,6 +1,6 @@
 ### 🦜 PARAT: CSET's Private-sector AI-Related Activity Tracker
 
-This repository contains the code that generates PARAT *final link to come*.
+This repository contains the code that generates [PARAT](https://parat.cset.tech).
 
 [company_linkage](/company_linkage) contains the code that generates the data behind PARAT: 
 company resolution across datasets, publication counts, etc.
