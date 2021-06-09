@@ -109,12 +109,7 @@ const IndexPage = () => {
                   textAlign: "center",
                   overflow: "scroll"}}
                 variant={simplify ? "scrollable" : "standard"} scrollButtons={"off"}>
-            <Tab
-              value="overview"
-              label="Overview"
-              textColor="primary"
-              {...a11yProps('overview')}
-            />
+            <Tab value="overview" label="Overview" textColor="primary" {...a11yProps('overview')} />
             <Tab value="data_sources" label="Data Sources" {...a11yProps('data_sources')} />
             <Tab value="methodology" label="Methodology" {...a11yProps('methodology')} />
             <Tab value="faq" label="FAQ" {...a11yProps('faq')} />

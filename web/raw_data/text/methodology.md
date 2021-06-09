@@ -12,5 +12,5 @@ PARAT uses these identifiers to pull relevant data from our data sources, such a
 
 CSET annotators also manually collect some metadata for the companies in PARAT, including parent-subsidiary information, aliases, and some business descriptions.
 
-We will update PARAT periodically; it was last updated on May 4, 2021, and we expect to next update it in August 2021.
+We will update PARAT periodically; it was last updated on June 8, 2021, and we expect to next update it later in 2021.
 
