@@ -112,7 +112,6 @@ const IndexPage = () => {
             <Tab
               value="overview"
               label="Overview"
-              indicatorColor="primary"
               textColor="primary"
               {...a11yProps('overview')}
             />
