@@ -2,6 +2,8 @@ import json
 import re
 import requests
 
+from tqdm import tqdm
+
 """
 Checks links in src/static_data/{data.js,text.js}  
 """
@@ -32,12 +34,15 @@ def check_data_links() -> None:
                 links.add(company[key])
     print(f"Checking {len(links)} links")
     ok_links = 0
-    for link in links:
-        resp = requests.get(link)
-        if resp.status_code != 200:
-            print(f"{link} had status code {resp.status_code}")
-        else:
-            ok_links += 1
+    for link in tqdm(links):
+        try:
+            resp = requests.get(link, timeout=5)
+            if resp.status_code != 200:
+                print(f"{link} had status code {resp.status_code}")
+            else:
+                ok_links += 1
+        except Exception as e:
+            print(f"{link} threw {e}")
     print(f"{ok_links} of {len(links)} succeeded!")
 
 

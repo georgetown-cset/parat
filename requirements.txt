@@ -42,3 +42,4 @@ urllib3==1.25.11
 pycountry-convert
 pycld2
 pytest
+tqdm
