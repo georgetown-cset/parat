@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import {graphql} from "gatsby";
 import Button from "@material-ui/core/Button";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from "@material-ui/core/Link";
@@ -47,7 +48,7 @@ function a11yProps(index) {
   };
 }
 
-const IndexPage = () => {
+const IndexPage = ({data}) => {
 
   useEffect(() => {
     document.title = "CSET PARAT";
@@ -131,7 +132,7 @@ const IndexPage = () => {
           </React.Suspense>
         )}
         <div style={{textAlign: "center", fontSize: "80%", marginBottom: "20px"}}>
-          Powered by <Link href={"https://www.crunchbase.com/"} target="_blank" rel="noreferrer">Crunchbase</Link>, <Link href={"https://material-ui.com/"} target="_blank" rel="noreferrer">Material-UI</Link>, <Link href={"https://www.gatsbyjs.com/"} target="_blank" rel="noreferrer">GatsbyJS</Link>, and <Link href={"https://www.chartjs.org/"} target="_blank" rel="noreferrer">Chart.js</Link>.
+          Powered by <Link href={"https://www.crunchbase.com/"} target="_blank" rel="noreferrer">Crunchbase</Link>, <Link href={"https://material-ui.com/"} target="_blank" rel="noreferrer">Material-UI</Link>, <Link href={"https://www.gatsbyjs.com/"} target="_blank" rel="noreferrer">GatsbyJS</Link>, and <Link href={"https://www.chartjs.org/"} target="_blank" rel="noreferrer">Chart.js</Link>. Last updated on {data.site.buildTime}.
         </div>
       </div>
     </main>
@@ -140,3 +141,11 @@ const IndexPage = () => {
 
 
 export default IndexPage;
+
+export const query = graphql`
+  query {
+    site {
+      buildTime(formatString: "YYYY-MM-DD")
+    }
+  }
+`;

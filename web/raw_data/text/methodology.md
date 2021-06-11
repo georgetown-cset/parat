@@ -10,7 +10,5 @@ PARAT uses these identifiers to pull relevant data from our data sources, such a
 
 - Company **stages** are generated using Crunchbase Pro data and a simple algorithm. "Mature" companies must meet any of the following conditions: be publicly traded; have more than a thousand employees; or have last raised funding in late-stage venture capital or private equity rounds (e.g., Series D or post-IPO rounds). "Growth" and "Startup" companies are distinguished only by their last raised funding rounds: companies which raised funding in mid-stage rounds (i.e., Series A-C) are labeled "Growth;" those which last raised funding in early-stage rounds (e.g., seed or angel) are labeled "Startup." Any privately-held company with no information on funding rounds and fewer than 1000 employees or no employee data will be designated "Unknown."
 
-CSET annotators also manually collect some metadata for the companies in PARAT, including parent-subsidiary information, aliases, and some business descriptions.
-
-We will update PARAT periodically; it was last updated on June 8, 2021, and we expect to next update it later in 2021.
+CSET annotators also manually collect some metadata for the companies in PARAT, including parent-subsidiary information, aliases, and some business descriptions. PARAT will be updated periodically.
 
