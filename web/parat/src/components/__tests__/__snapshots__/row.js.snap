@@ -12,7 +12,7 @@ exports[`Alibaba: Closed row renders correctly 1`] = `
       <img
         alt="Alibaba"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -107,7 +107,7 @@ exports[`Alibaba: Open more metadata renders correctly 1`] = `
       <img
         alt="Alibaba"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -480,7 +480,7 @@ exports[`Alibaba: Open row renders correctly 1`] = `
       <img
         alt="Alibaba"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -759,7 +759,7 @@ exports[`Google: Closed row renders correctly 1`] = `
       <img
         alt="Google"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -854,7 +854,7 @@ exports[`Google: Open more metadata renders correctly 1`] = `
       <img
         alt="Google"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -1275,7 +1275,7 @@ exports[`Google: Open row renders correctly 1`] = `
       <img
         alt="Google"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -1535,7 +1535,7 @@ exports[`Hoperun: Closed row renders correctly 1`] = `
       <img
         alt="Hoperun"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -1630,7 +1630,7 @@ exports[`Hoperun: Open more metadata renders correctly 1`] = `
       <img
         alt="Hoperun"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -1903,7 +1903,7 @@ exports[`Hoperun: Open row renders correctly 1`] = `
       <img
         alt="Hoperun"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -2137,7 +2137,7 @@ exports[`LinkedIn: Closed row renders correctly 1`] = `
       <img
         alt="LinkedIn"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -2232,7 +2232,7 @@ exports[`LinkedIn: Open more metadata renders correctly 1`] = `
       <img
         alt="LinkedIn"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -2537,7 +2537,7 @@ exports[`LinkedIn: Open row renders correctly 1`] = `
       <img
         alt="LinkedIn"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -2792,7 +2792,7 @@ exports[`Microsoft: Closed row renders correctly 1`] = `
       <img
         alt="Microsoft"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -2887,7 +2887,7 @@ exports[`Microsoft: Open more metadata renders correctly 1`] = `
       <img
         alt="Microsoft"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -3417,7 +3417,7 @@ exports[`Microsoft: Open row renders correctly 1`] = `
       <img
         alt="Microsoft"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -3677,7 +3677,7 @@ exports[`SPX Corp: Closed row renders correctly 1`] = `
       <img
         alt="SPX Corp"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -3772,7 +3772,7 @@ exports[`SPX Corp: Open more metadata renders correctly 1`] = `
       <img
         alt="SPX Corp"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -4104,7 +4104,7 @@ exports[`SPX Corp: Open row renders correctly 1`] = `
       <img
         alt="SPX Corp"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -4343,7 +4343,7 @@ exports[`Video++: Closed row renders correctly 1`] = `
       <img
         alt="Video++"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -4438,7 +4438,7 @@ exports[`Video++: Open more metadata renders correctly 1`] = `
       <img
         alt="Video++"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
@@ -4734,7 +4734,7 @@ exports[`Video++: Open row renders correctly 1`] = `
       <img
         alt="Video++"
         src=""
-        style="height: 30px;"
+        style="height: 30px; max-width: 100px;"
       />
     </td>
     <th
