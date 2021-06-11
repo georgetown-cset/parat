@@ -146,7 +146,19 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     if refresh_images:
         response = requests.get(url)
         if response.status_code == 200:
-            Image.open(BytesIO(response.content)).save(os.path.join(IMAGE_DIR, img_name))
+            try:
+                Image.open(BytesIO(response.content)).save(os.path.join(IMAGE_DIR, img_name))
+            except Exception as e:
+                print(f"{e} occurred when downloading {url} to {img_name}, trying jpg download")
+                try:
+                    img_name = company_name.strip()+".jpg"
+                    Image.open(BytesIO(response.content)).save(os.path.join(IMAGE_DIR, img_name))
+                except Exception as e:
+                    print(f"{e} occurred when downloading {url} to {img_name}, forcing download to svg, "
+                          f"manually check this file")
+                    img_name = company_name.strip()+".svg"
+                    with open(os.path.join(IMAGE_DIR, img_name), mode="wb") as f:
+                        f.write(response.content)
             return img_name
         else:
             print("Download failed for "+url)
@@ -306,10 +318,12 @@ def add_supplemental_descriptions(rows: list) -> None:
             source_description = name_to_desc_info[company_name]["company_site_description"]
             translation = get_translation(source_description, client, parent)
             name_to_desc_info[company_name]["company_site_description_translation"] = translation
-            source_link = name_to_desc_info[company_name]["company_site_link"]
+            source_link = clean_link(name_to_desc_info[company_name]["company_site_link"])
+            name_to_desc_info[company_name]["company_site_link"] = source_link
             if not (source_link and ("http" in source_link or ".com" in source_link)):
                 if source_description:
                     print(f"{company_name} missing source link")
+                    print(source_description)
                 name_to_desc_info[company_name]["company_site_description"] = None
                 name_to_desc_info[company_name]["company_site_link"] = None
                 name_to_desc_info[company_name]["company_site_description_translation"] = None
@@ -473,15 +487,24 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
         js["full_market_links"] = get_market_link_list(market)
     js["market_list"] = ", ".join([m["market_key"] for m in market])
 
-    if js["website"] and not js["website"].startswith("http"):
-        js["website"] = "https://" + js["website"]
-
+    js["website"] = clean_link(js["website"])
     js["crunchbase_description"] = js.pop("short_description")
     if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
         url = js["crunchbase"]["crunchbase_url"]
         if url in CRUNCHBASE_URL_OVERRIDE:
             js["crunchbase"]["crunchbase_url"] = CRUNCHBASE_URL_OVERRIDE[url]
     return js
+
+
+def clean_link(link: str) -> str:
+    """
+    Prepend https:// to links that don't start with http
+    :param link: link to clean
+    :return: link with https:// prepended
+    """
+    if link and not link.startswith("http"):
+        return "https://" + link
+    return link
 
 
 def clean(refresh_images: bool) -> None:
