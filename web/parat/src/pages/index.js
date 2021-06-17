@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import {graphql} from "gatsby";
 import Button from "@material-ui/core/Button";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from "@material-ui/core/Link";
 import PropTypes from "prop-types";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Typography from '@material-ui/core/Typography';
 
 import cset_logo from "../images/cset_logo.svg";
 import "../styles/styles.css";
@@ -46,10 +48,10 @@ function a11yProps(index) {
   };
 }
 
-const IndexPage = () => {
+const IndexPage = ({data}) => {
 
   useEffect(() => {
-    document.title = "CSET AI Companies Tracker";
+    document.title = "CSET PARAT";
     document.documentElement.lang = "en";
     window.addEventListener("resize", handleWindowResize);
     handleWindowResize();
@@ -92,11 +94,11 @@ const IndexPage = () => {
         <div style={{margin: "20px 20px 30px 20px"}}>
           <div style={{margin: "0 6%", display: "inline-block"}}>
             <h2><span role={"img"} aria-label={"parat logo"}>🦜</span> Welcome to PARAT, CSET's Private-sector AI-Related Activity Tracker.</h2>
-            <h3 style={{fontWeight: "normal"}}>
+            <Typography variant={"body1"} style={{fontSize: "110%"}}>
               PARAT collects data related to companies' AI research and development in order to inform analysis of the
               global AI sector. This tracker includes companies with various degrees of AI activity that CSET has
-              considered relevant to research at the intersection of AI and national security. <Link onClick={toggleDesc} style={{cursor: "pointer"}}>{showDesc ? "Hide details..." : "Show details..."}</Link>
-            </h3>
+              considered relevant to research at the intersection of AI and national security. <Link onClick={toggleDesc} style={{cursor: "pointer", fontWeight: "bold"}}>{showDesc ? "Hide methodology details..." : "Show methodology details..."}</Link>
+            </Typography>
           </div>
         </div>
         <div style={{"display": showDesc ? "block" : "none", paddingBottom: "50px"}}>
@@ -108,13 +110,7 @@ const IndexPage = () => {
                   textAlign: "center",
                   overflow: "scroll"}}
                 variant={simplify ? "scrollable" : "standard"} scrollButtons={"off"}>
-            <Tab
-              value="overview"
-              label="Overview"
-              indicatorColor="primary"
-              textColor="primary"
-              {...a11yProps('overview')}
-            />
+            <Tab value="overview" label="Overview" textColor="primary" {...a11yProps('overview')} />
             <Tab value="data_sources" label="Data Sources" {...a11yProps('data_sources')} />
             <Tab value="methodology" label="Methodology" {...a11yProps('methodology')} />
             <Tab value="faq" label="FAQ" {...a11yProps('faq')} />
@@ -136,7 +132,7 @@ const IndexPage = () => {
           </React.Suspense>
         )}
         <div style={{textAlign: "center", fontSize: "80%", marginBottom: "20px"}}>
-          Powered by <Link href={"https://www.crunchbase.com/"} target="_blank" rel="noreferrer">Crunchbase</Link>, <Link href={"https://material-ui.com/"} target="_blank" rel="noreferrer">Material-UI</Link>, <Link href={"https://www.gatsbyjs.com/"} target="_blank" rel="noreferrer">GatsbyJS</Link>, and <Link href={"https://www.chartjs.org/"} target="_blank" rel="noreferrer">Chart.js</Link>.
+          Powered by <Link href={"https://www.crunchbase.com/"} target="_blank" rel="noreferrer">Crunchbase</Link>, <Link href={"https://material-ui.com/"} target="_blank" rel="noreferrer">Material-UI</Link>, <Link href={"https://www.gatsbyjs.com/"} target="_blank" rel="noreferrer">GatsbyJS</Link>, and <Link href={"https://www.chartjs.org/"} target="_blank" rel="noreferrer">Chart.js</Link>. Last updated on {data.site.buildTime}.
         </div>
       </div>
     </main>
@@ -145,3 +141,11 @@ const IndexPage = () => {
 
 
 export default IndexPage;
+
+export const query = graphql`
+  query {
+    site {
+      buildTime(formatString: "YYYY-MM-DD")
+    }
+  }
+`;

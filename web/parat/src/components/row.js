@@ -212,7 +212,7 @@ function Row(props) {
       <TableRow style={{borderBottom: "unset", cursor: "pointer"}} onClick={() => setOpen(!open)}>
         <TableCell>
           {row.local_logo !== null &&
-            <img src={require("../images/" + row.local_logo)} style={{height: "30px"}} alt={row.name}/>
+            <img src={require("../images/" + row.local_logo)} style={{height: "30px", maxWidth: "100px"}} alt={row.name}/>
           }
         </TableCell>
         <TableCell component="th" scope="row">{row.name}</TableCell>
