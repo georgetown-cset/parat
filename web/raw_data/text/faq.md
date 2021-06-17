@@ -1,20 +1,20 @@
-## Why isn't *[insert company here]* on the list?
+## Why is *[insert company here]* not on the list?
 
 We update PARAT's list of companies according to CSET's analytic needs and feedback from users. Adding new companies takes significant work, so we make these updates periodically. If you think a specific company should be added to PARAT, please [let us know](https://forms.gle/7RxrtAJHya2FmjXB6).
 
 ## Are all of these companies AI companies?
 
-Not necessarily. Being included in PARAT, in and of itself, doesn't mean that a company is an "AI company" or is especially active in AI. We include companies in PARAT for a variety of reasons related to CSET's analytic needs and feedback from users.
+Not necessarily. Being included in PARAT, in and of itself, does not mean that a company is an "AI company" or is especially active in AI. We include companies in PARAT for a variety of reasons related to CSET's analytic needs and feedback from users.
 
-## Why isn't *[insert company here]* ranked higher?
+## Why is *[insert company here]* not ranked higher?
 
-PARAT isn't meant to be a "top AI companies" list. Which companies are at the "top" depends on the metrics and companies that are considered. For example, some companies may have lots of AI-related patents, others might sell a lot of AI products, and others might hire a lot of talented AI engineers. PARAT doesn't cover all of the metrics and companies that would be needed to draw general conclusions about which companies are ahead of others in AI, and it doesn't make judgments about whether some metrics are more important than others.
+PARAT is not meant to be a "top AI companies" list. Which companies are at the "top" depends on the metrics and companies that are considered. For example, some companies may have lots of AI-related patents, others might sell a lot of AI products, and others might hire a lot of talented AI engineers. PARAT does not cover all of the metrics and companies that would be needed to draw general conclusions about which companies are ahead of others in AI, and it does not make judgments about whether some metrics are more important than others.
 
 The numerical rankings that appear in PARAT, displayed alongside our patent and publication metrics, are generated automatically from our patent and publication datasets. They reflect how each company compares to the other companies in PARAT according to these specific metrics - not whether that company is more innovative or capable in AI overall.
 
 ## Do you include subsidiaries when you calculate metrics for each company?
 
-In most cases, yes. PARAT includes parent-subsidiary mappings for many companies. When a subsidiary is mapped to a parent, the subsidiary's publications, patents, etc. are attributed to the parent company. (The "Included Subsidiaries" metadata field for each parent company lists any subsidiaries treated this way.) In other cases, our data sources already consolidate a subsidiary's data with its parent, or the queries we run on those data sources collect parent and subsidiary data together by design. We believe most PARAT companies' subsidiaries' data are ultimately "rolled up" to the parent level in one of these ways.
+In most cases, yes. PARAT includes parent-subsidiary mappings for many companies. When a subsidiary is mapped to a parent, the subsidiary's publications, patents, etc. are attributed to the parent company. (The "Included Subsidiaries" metadata field for each parent company lists any subsidiaries treated this way.) In other cases, our data sources already consolidate a subsidiary's data with its parent, or the queries we run on those data sources collect parent and subsidiary data together by design. We believe the data of most PARAT companies are ultimately "rolled up" to the parent level in one of these ways.
 
 ## Can I get the raw data that goes into PARAT?
 
