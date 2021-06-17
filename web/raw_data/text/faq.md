@@ -14,7 +14,7 @@ The numerical rankings that appear in PARAT, displayed alongside our patent and 
 
 ## Do you include subsidiaries when you calculate metrics for each company?
 
-In most cases, yes. PARAT includes parent-subsidiary mappings for many companies. When a subsidiary is mapped to a parent, the subsidiary's publications, patents, etc. are attributed to the parent company. (The "Included Subsidiaries" metadata field for each parent company lists any subsidiaries treated this way.) In other cases, our data sources already consolidate a subsidiary's data with its parent, or the queries we run on those data sources collect parent and subsidiary data together by design. We believe the data of most PARAT companies are ultimately "rolled up" to the parent level in one of these ways.
+In most cases, yes. PARAT includes parent-subsidiary mappings for many companies. When a subsidiary is mapped to a parent, the subsidiary's publications, patents, etc. are attributed to the parent company. (The "Included Subsidiaries" metadata field for each parent company lists any subsidiaries treated this way.) In other cases, our data sources already consolidate a subsidiary's data with its parent, or the queries we run on those data sources collect parent and subsidiary data together by design. We believe the data of most PARAT subsidiary companies are ultimately "rolled up" to the parent level in one of these ways.
 
 ## Can I get the raw data that goes into PARAT?
 
