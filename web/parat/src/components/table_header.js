@@ -15,7 +15,7 @@ const headCells = [
   { id: "country", numeric: false, disablePadding: false, label: "Country" },
   { id: "continent", numeric: false, disablePadding: false, label: "Region" },
   { id: "stage", numeric: false, disablePadding: false, label: "Company Stage" },
-  { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Pubs" },
+  { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Publications" },
   { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "Top AI Conf Pubs" },
   { id: "ai_patents", numeric: true, disablePadding: false, label: "AI Patents" },
 ];
