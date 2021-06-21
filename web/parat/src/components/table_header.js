@@ -13,7 +13,7 @@ import React from "react";
 const headCells = [
   { id: "name", numeric: false, disablePadding: true, label: "Company Name" },
   { id: "country", numeric: false, disablePadding: false, label: "Country" },
-  { id: "continent", numeric: false, disablePadding: false, label: "Continent" },
+  { id: "continent", numeric: false, disablePadding: false, label: "Region" },
   { id: "stage", numeric: false, disablePadding: false, label: "Company Stage" },
   { id: "ai_pubs", numeric: true, disablePadding: false, label: "AI Pubs" },
   { id: "ai_pubs_in_top_conferences", numeric: true, disablePadding: false, label: "Top AI Conf Pubs" },
@@ -99,7 +99,7 @@ function CompanyTableHead(props) {
             options={continents}
             style={{ minWidth: "150px", paddingLeft:"20px" }}
             size="small"
-            renderInput={(params) => <TextField {...params} label="Continent"/>}
+            renderInput={(params) => <TextField {...params} label="Region"/>}
             onChange={(evt, values) => handleFilter(evt, values, "continent")}
             value={filterValues["continent"]}
            />
