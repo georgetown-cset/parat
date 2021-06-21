@@ -145,7 +145,7 @@ export default IndexPage;
 export const query = graphql`
   query {
     site {
-      buildTime(formatString: "YYYY-MM-DD")
+      buildTime(formatString: "MMMM DD, YYYY")
     }
   }
 `;
