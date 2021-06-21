@@ -97,7 +97,7 @@ const IndexPage = ({data}) => {
             <Typography variant={"body1"} style={{fontSize: "110%"}}>
               PARAT collects data related to companies' artificial intelligence research and development in order to inform analyses of the
               global AI sector. This tracker includes companies with various degrees of AI activity that CSET has
-              considered relevant to research at the intersection of AI and national security. <Link onClick={toggleDesc} style={{cursor: "pointer", fontWeight: "bold"}}>{showDesc ? "Hide methodology details..." : "Show methodology details..."}</Link>
+              considered relevant to research at the intersection of AI and national security. <Link onClick={toggleDesc} style={{cursor: "pointer", fontWeight: "bold"}}>{showDesc ? "Hide details..." : "Dig deeper..."}</Link>
             </Typography>
           </div>
         </div>
