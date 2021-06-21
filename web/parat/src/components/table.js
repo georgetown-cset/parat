@@ -115,10 +115,13 @@ const CollapsibleTable = () => {
   };
 
   const handleRequestSort = (event, column_name) => {
-    const updatedSortOrder = {...order};
-    // flip the order from what it previously was
-    updatedSortOrder[column_name] = -1*order[column_name];
-    setOrder(updatedSortOrder);
+    // only flip the sort ordering of the column if the column currently has top order priority
+    if(column_name === priority[0]) {
+      const updatedSortOrder = {...order};
+      // flip the order from what it previously was
+      updatedSortOrder[column_name] = -1 * order[column_name];
+      setOrder(updatedSortOrder);
+    }
 
     let updatedPriority = [column_name];
     updatedPriority = updatedPriority.concat(priority.filter(key => key !== column_name));
