@@ -11,7 +11,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from tqdm import tqdm
 
 """
-Checks links in src/static_data/{data.js,text.js}  
+Checks links are ok in src/static_data/{data.js,text.js}. Requires chromedriver to be on your PATH. 
+Check this periodically while selenium is running.
 """
 
 
@@ -45,14 +46,23 @@ def check_data_links() -> None:
     print(f"Checking {len(links)} links")
     links = list(links)
     random.shuffle(links)
+    num_seen_cb = 0
     for link in tqdm(links):
-        if not link or not "crunchbase" in link:
+        if not link:
             continue
-        time.sleep(20)
-        time.sleep(random.randint(0,10))
+        is_crunchbase = "crunchbase" in link
+        if is_crunchbase:
+            time.sleep(5)
+            num_seen_cb += 1
+            if num_seen_cb == 20:
+                num_seen_cb = 0
+                browser.close()
+                browser = webdriver.Chrome()
+            elif num_seen_cb == 0:
+                time.sleep(60)
         try:
             browser.get(link)
-            if "crunchbase" in link:
+            if is_crunchbase:
                 WebDriverWait(browser, 10).until(
                     EC.presence_of_element_located((By.TAG_NAME, "h1"))
                 )
