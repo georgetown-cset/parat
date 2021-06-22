@@ -24,7 +24,7 @@ You can use PARAT's download feature to extract the descriptive information, met
 
 - You can filter the set of companies displayed using the dropdowns and sliders. You may select multiple values within each dropdown. The rankings displayed are relative to the entire list of companies in PARAT and do not change when the data is filtered.
 - The displayed metric values are color-coded to indicate their relative size compared to the largest value of that metric.
-- You can download an export of the currently selected data using the "Download Results" button. To download an export of all data, make sure you clear any filters you have set before clicking "Download Results".
+- You can download an export of the currently selected data using the "Download Results" button. To download an export of all data, make sure you clear any filters you have set before clicking "Download Results."
 
 ## Could you please add *[insert feature here]*?
 
