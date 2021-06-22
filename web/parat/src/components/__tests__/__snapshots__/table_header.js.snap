@@ -216,7 +216,7 @@ Object {
                 for="continent-search"
                 id="continent-search-label"
               >
-                Continent
+                Region
               </label>
               <div
                 class="MuiInputBase-root MuiInput-root MuiInput-underline MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense MuiInput-marginDense"
@@ -396,7 +396,7 @@ Object {
             style="padding: 0px;"
             tabindex="0"
           >
-            AI Pubs
+            AI Publications
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
@@ -872,7 +872,7 @@ Object {
                 for="continent-search"
                 id="continent-search-label"
               >
-                Continent
+                Region
               </label>
               <div
                 class="MuiInputBase-root MuiInput-root MuiInput-underline MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense MuiInput-marginDense"
@@ -1052,7 +1052,7 @@ Object {
             style="padding: 0px;"
             tabindex="0"
           >
-            AI Pubs
+            AI Publications
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
@@ -1651,7 +1651,7 @@ Object {
                 for="continent-search"
                 id="continent-search-label"
               >
-                Continent
+                Region
               </label>
               <div
                 class="MuiInputBase-root MuiInput-root MuiInput-underline MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense MuiInput-marginDense"
@@ -1875,7 +1875,7 @@ Object {
             style="padding: 0px;"
             tabindex="0"
           >
-            AI Pubs
+            AI Publications
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
@@ -2417,7 +2417,7 @@ Object {
                 for="continent-search"
                 id="continent-search-label"
               >
-                Continent
+                Region
               </label>
               <div
                 class="MuiInputBase-root MuiInput-root MuiInput-underline MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense MuiInput-marginDense"
@@ -2641,7 +2641,7 @@ Object {
             style="padding: 0px;"
             tabindex="0"
           >
-            AI Pubs
+            AI Publications
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
