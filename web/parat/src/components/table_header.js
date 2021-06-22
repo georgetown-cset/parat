@@ -49,78 +49,36 @@ function CompanyTableHead(props) {
     return value
   }
 
+  const dropdownMetadata = [
+    {"key": "name", "label": "Company Name", "minWidth": "200px", values: companyNames, colSpan: 2},
+    {"key": "country", "label": "Country", "minWidth": "150px", values: countries, colSpan: 1},
+    {"key": "continent", "label": "Region", "minWidth": "150px", values: continents, colSpan: 1},
+    {"key": "stage", "label": "Stage", "minWidth": "70px", values: stages, colSpan: 1},
+  ];
+
   return (
     <TableHead>
       <TableRow>
-        <TableCell
-          key={"name"}
-          align={"left"}
-          padding={"none"}
-          colSpan={2}
-        >
-          <Autocomplete
-            multiple
-            id="company-name-search"
-            disabled={companyNames.length === 0}
-            options={companyNames}
-            style={{ minWidth: "200px", paddingLeft:"20px" }}
-            size="small"
-            renderInput={(params) => <TextField {...params} label="Company Name"/>}
-            onChange={(evt, values) => handleFilter(evt, values, "name")}
-            value={filterValues["name"]}
-           />
-        </TableCell>
-        <TableCell
-          key={"country"}
-          align={"left"}
-          padding={"none"}
-        >
-          <Autocomplete
-            multiple
-            id="country-search"
-            disabled={countries.length === 0}
-            options={countries}
-            style={{ minWidth: "150px", paddingLeft:"20px" }}
-            size="small"
-            renderInput={(params) => <TextField {...params} label="Country"/>}
-            onChange={(evt, values) => handleFilter(evt, values, "country")}
-            value={filterValues["country"]}
-           />
-        </TableCell>
-        <TableCell
-          key={"continent"}
-          align={"left"}
-          padding={"none"}
-        >
-          <Autocomplete
-            multiple
-            id="continent-search"
-            disabled={continents.length === 0}
-            options={continents}
-            style={{ minWidth: "150px", paddingLeft:"20px" }}
-            size="small"
-            renderInput={(params) => <TextField {...params} label="Region"/>}
-            onChange={(evt, values) => handleFilter(evt, values, "continent")}
-            value={filterValues["continent"]}
-           />
-        </TableCell>
-        <TableCell
-          key={"stage"}
-          align={"left"}
-          padding={"none"}
-        >
-          <Autocomplete
-            multiple
-            id="stage-search"
-            disabled={stages.length === 0}
-            options={stages}
-            style={{ minWidth: "70px", paddingLeft:"20px" }}
-            size="small"
-            renderInput={(params) => <TextField {...params} label="Stage"/>}
-            onChange={(evt, values) => handleFilter(evt, values, "stage")}
-            value={filterValues["stage"]}
-           />
-        </TableCell>
+        {dropdownMetadata.map((meta) => (
+          <TableCell
+             key={meta.key}
+             align={"left"}
+             padding={"none"}
+             colSpan={meta.colSpan}
+           >
+            <Autocomplete
+               multiple
+               id={meta.key+"-search"}
+               disabled={meta.values.length === 0}
+               options={meta.values}
+               style={{ minWidth: meta.minWidth, paddingLeft:"20px" }}
+               size="small"
+               renderInput={(params) => <TextField {...params} label={meta.label}/>}
+               onChange={(evt, values) => handleFilter(evt, values, meta.key)}
+               value={filterValues[meta.key]}
+              />
+          </TableCell>
+        ))}
         {headCells.map((headCell) => (
             headCell.id.startsWith("ai_") &&
               <TableCell

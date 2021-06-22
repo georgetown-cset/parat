@@ -27,8 +27,8 @@ Object {
               <label
                 class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
                 data-shrink="false"
-                for="company-name-search"
-                id="company-name-search-label"
+                for="name-search"
+                id="name-search-label"
               >
                 Company Name
               </label>
@@ -41,7 +41,7 @@ Object {
                   autocapitalize="none"
                   autocomplete="off"
                   class="MuiInputBase-input MuiInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
-                  id="company-name-search"
+                  id="name-search"
                   spellcheck="false"
                   type="text"
                   value=""
@@ -106,6 +106,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -199,6 +200,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -292,6 +294,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -683,8 +686,8 @@ Object {
               <label
                 class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
                 data-shrink="false"
-                for="company-name-search"
-                id="company-name-search-label"
+                for="name-search"
+                id="name-search-label"
               >
                 Company Name
               </label>
@@ -697,7 +700,7 @@ Object {
                   autocapitalize="none"
                   autocomplete="off"
                   class="MuiInputBase-input MuiInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
-                  id="company-name-search"
+                  id="name-search"
                   spellcheck="false"
                   type="text"
                   value=""
@@ -762,6 +765,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -855,6 +859,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -948,6 +953,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -1396,8 +1402,8 @@ Object {
               <label
                 class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense"
                 data-shrink="true"
-                for="company-name-search"
-                id="company-name-search-label"
+                for="name-search"
+                id="name-search-label"
               >
                 Company Name
               </label>
@@ -1432,7 +1438,7 @@ Object {
                   autocapitalize="none"
                   autocomplete="off"
                   class="MuiInputBase-input MuiInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
-                  id="company-name-search"
+                  id="name-search"
                   spellcheck="false"
                   type="text"
                   value=""
@@ -1497,6 +1503,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -1634,6 +1641,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -1727,6 +1735,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -2162,8 +2171,8 @@ Object {
               <label
                 class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense"
                 data-shrink="true"
-                for="company-name-search"
-                id="company-name-search-label"
+                for="name-search"
+                id="name-search-label"
               >
                 Company Name
               </label>
@@ -2198,7 +2207,7 @@ Object {
                   autocapitalize="none"
                   autocomplete="off"
                   class="MuiInputBase-input MuiInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
-                  id="company-name-search"
+                  id="name-search"
                   spellcheck="false"
                   type="text"
                   value=""
@@ -2263,6 +2272,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -2400,6 +2410,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
@@ -2493,6 +2504,7 @@ Object {
         </th>
         <th
           class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-paddingNone"
+          colspan="1"
           scope="col"
         >
           <div
