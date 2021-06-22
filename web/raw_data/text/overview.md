@@ -1,6 +1,6 @@
 Identifying "AI companies" can help shed light on many important policy issues, from the size and health of a nation's AI industry to the skills and experiences most sought by AI employers. However, there's no one correct definition of "AI companies." Private firms can be active in AI in many different ways, and some will be more relevant to particular policy questions than others. For example, some companies hold many AI-related patents, making them relevant to discussions about trade policy or intellectual property law. Other companies might conduct more AI-related research, and would be worth considering in discussions about higher education or federal research funding.
 
-To support analysis by our team and others across the AI policy space, CSET is developing **PARAT** (Private-Sector AI-Related Activity Tracker), an interactive tool for exploring data about private-sector companies and their AI activities. Researchers can use PARAT to quickly and accurately identify companies that are relevant to their work, such as:
+To support analysis by our team and others across the AI policy space, CSET is developing **PARAT** (Private-sector AI-Related Activity Tracker), an interactive tool for exploring data about private-sector companies and their AI activities. Researchers can use PARAT to quickly and accurately identify companies that are relevant to their work, such as:
 
 - Companies with many AI-related research publications
 - Chinese companies with at least five AI-related patents
