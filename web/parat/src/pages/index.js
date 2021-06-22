@@ -108,7 +108,7 @@ const IndexPage = ({data}) => {
                   display: (simplify ? "block" : "inline-block"),
                   marginBottom: (simplify ? "20px" : "0px"),
                   textAlign: "center",
-                  overflow: "scroll"}}
+                  overflow: "auto"}}
                 variant={simplify ? "scrollable" : "standard"} scrollButtons={"off"}>
             <Tab value="overview" label="Overview" textColor="primary" {...a11yProps('overview')} />
             <Tab value="data_sources" label="Data Sources" {...a11yProps('data_sources')} />
