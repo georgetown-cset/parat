@@ -117,7 +117,6 @@ def retrieve_raw(get_links: bool) -> None:
         with open(EXCHANGE_LINK_FI, mode="w") as out:
             for mi in market_info:
                 mi_row = get_exchange_link(mi)
-                print(mi_row)
                 out.write(json.dumps(mi_row)+"\n")
 
 
@@ -320,6 +319,8 @@ def add_supplemental_descriptions(rows: list) -> None:
             name_to_desc_info[company_name]["company_site_description_translation"] = translation
             source_link = clean_link(name_to_desc_info[company_name]["company_site_link"])
             name_to_desc_info[company_name]["company_site_link"] = source_link
+            if row["company_homepage"]:
+                name_to_desc_info[company_name]["website"] = row["company_homepage"]
             if not (source_link and ("http" in source_link or ".com" in source_link)):
                 if source_description:
                     print(f"{company_name} missing source link")
@@ -332,6 +333,13 @@ def add_supplemental_descriptions(rows: list) -> None:
         if row["name"] in REVERSE_COMPANY_NAME_MAP:
             company_name = REVERSE_COMPANY_NAME_MAP[row["name"]]
         if company_name in name_to_desc_info:
+            curr_website = "" if "website" not in row else row["website"]
+            new_website = "" if "website" not in name_to_desc_info[company_name] else \
+                            name_to_desc_info[company_name]["website"]
+            if new_website and new_website.startswith("http") and curr_website != new_website:
+                print(f'Website mismatch from crunchbase ({curr_website}) and '
+                      f'from manual entry ({new_website}); using '
+                      f'manual entry!')
             row.update(name_to_desc_info[company_name])
 
 
