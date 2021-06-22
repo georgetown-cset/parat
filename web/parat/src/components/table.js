@@ -83,7 +83,7 @@ const CollapsibleTable = () => {
     { label: "company_name", key: "name" },
     { label: "country", key: "country" },
     { label: "website", key: "website" },
-    { label: "continent", key: "continent" },
+    { label: "region", key: "continent" },
     { label: "stage", key: "stage" },
     { label: "ai_pubs_since_2010", key: "ai_pubs.value" },
     { label: "ai_pubs_in_top_conf_since_2010", key: "ai_pubs_in_top_conferences.value" },
