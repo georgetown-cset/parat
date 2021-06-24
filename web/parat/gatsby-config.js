@@ -9,6 +9,12 @@ module.exports = {
         start_url: "/",
         icon: "src/images/favicon.ico", // This path is relative to the root of the site.
       },
+    },
+    {
+      resolve: 'gatsby-plugin-gtag',
+      options: {
+        trackingId: 'UA-148144643-1',
+      },
     }
   ],
 };
