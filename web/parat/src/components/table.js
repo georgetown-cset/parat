@@ -9,6 +9,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
+import HelpIcon from '@material-ui/icons/Help';
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -17,6 +18,7 @@ import "chartjs-plugin-annotation";
 import {CSVLink} from "react-csv";
 import Row from "./row";
 import CompanyTableHead from "./table_header"
+import HelpModal from "./help"
 
 // https://sevketyalcin.com/blog/responsive-charts-using-Chart.js-and-react-chartjs-2/
 defaults.global.maintainAspectRatio = false;
@@ -66,6 +68,7 @@ const CollapsibleTable = () => {
   };
   const [filteredFilters, setFilteredFilters] = React.useState({...initialFilteredFilters});
   const [forceExpand, setForceExpand] = React.useState(false);
+  const [helpOpen, setHelpOpen] = React.useState(false);
 
   const maxSliderValue = 100;
   const defaultFilterValues = {
@@ -239,6 +242,10 @@ const CollapsibleTable = () => {
           <CloudDownloadIcon size="small"/><CSVLink data={data} filename={exportFilename} headers={headers} style={{verticalAlign: "center", color: "inherit", textDecoration: "none"}}>
             &nbsp;Download Results</CSVLink>
         </Button>
+        <Button color="primary" size="small" style={{minWidth: "15px"}} onClick={()=>setHelpOpen(!helpOpen)}>
+          <HelpIcon size="small"/>
+        </Button>
+        <HelpModal open={helpOpen} onClose={()=>setHelpOpen(false)}/>
       </div>
       <TableContainer component={Paper} ref={toolbarRef}>
         <div style={{width: "99.5%"}}>
