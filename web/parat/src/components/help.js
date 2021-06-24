@@ -28,13 +28,13 @@ const HelpModal = (props) => {
             <span style={{fontWeight:"bold"}}>Stage</span>: Filters results to companies at a certain stage of growth.
           </li>
           <li style={{margin: "5px 0px"}}>
-            <span style={{fontWeight:"bold"}}>AI Publications</span>: Filters to companies with a number of publications since 2010 that fall in a certain range.
+            <span style={{fontWeight:"bold"}}>AI Publications</span>: Filters results to companies with a number of publications since 2010 that falls in a certain range.
           </li>
           <li style={{margin: "5px 0px"}}>
-            <span style={{fontWeight:"bold"}}>Top AI Conf Pubs</span>: Filters to companies with a number of publications in top AI conferences since 2010 that fall in a certain range.
+            <span style={{fontWeight:"bold"}}>Top AI Conf Pubs</span>: Filters results to companies with a number of publications in top AI conferences since 2010 that falls in a certain range.
           </li>
           <li style={{margin: "5px 0px"}}>
-            <span style={{fontWeight:"bold"}}>AI Patents</span>: Filters to companies with a number of patents since 2010 that fall in a certain range.
+            <span style={{fontWeight:"bold"}}>AI Patents</span>: Filters results to companies with a number of patents since 2010 that falls in a certain range.
           </li>
         </ul>
         </Typography>
