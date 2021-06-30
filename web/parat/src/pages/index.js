@@ -94,10 +94,13 @@ const IndexPage = ({data}) => {
         <div style={{margin: "20px 20px 30px 20px"}}>
           <div style={{margin: "0 6%", display: "inline-block"}}>
             <h2><span role={"img"} aria-label={"parat logo"}>🦜</span> Welcome to PARAT, CSET's Private-sector AI-Related Activity Tracker.</h2>
-            <Typography variant={"body1"} style={{fontSize: "110%"}}>
+            <Typography variant={"body1"} style={{fontSize: "110%", marginBottom: "10px"}}>
               PARAT collects data related to companies' artificial intelligence research and development in order to inform analyses of the
               global AI sector. This tracker includes companies with various degrees of AI activity that CSET has
               considered relevant to research at the intersection of AI and national security. <Link onClick={toggleDesc} style={{cursor: "pointer", fontWeight: "bold"}}>{showDesc ? "Hide details..." : "Dig deeper..."}</Link>
+            </Typography>
+            <Typography variant={"body1"} style={{fontSize: "110%"}}>
+              We <Link href={"https://docs.google.com/forms/d/e/1FAIpQLSdMNP7fg3_HkIdKh_IZBksm6vZCbzb1cRZS-sdeLL5i3yxi_g/viewform"} target="_blank" rel="noreferrer">welcome</Link> your feedback, corrections, and additions.
             </Typography>
           </div>
         </div>
