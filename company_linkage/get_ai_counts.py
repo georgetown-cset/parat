@@ -110,7 +110,7 @@ class CountGetter:
 
     def run_query_patents(self, companies: list) -> list:
         """
-        Running a query to find AI patent counts using both Dimensions and 1790 for papers with and without GRID.
+        Running a query to find AI patent counts using both Dimensions and 1790 for patents with and without GRID.
         :param companies: The list of company entries with CSET ids that we want to count patents for
         :return:
         """
@@ -127,7 +127,7 @@ class CountGetter:
                                 -- from the aggregated organizations table
                                 `gcp-cset-projects.high_resolution_entities.aggregated_organizations`
                                 -- Adding in the associated grids
-                              CROSS JOIN
+                              LEFT JOIN
                                 UNNEST(grid) AS grids
                               CROSS JOIN
                                 UNNEST(regex) AS regexes),
@@ -242,7 +242,7 @@ class CountGetter:
                         -- from the aggregated organizations table
                         `gcp-cset-projects.high_resolution_entities.aggregated_organizations`
                         -- Adding in the associated grids
-                      CROSS JOIN
+                      LEFT JOIN
                         UNNEST(grid) AS grids
                       CROSS JOIN
                         UNNEST(regex) AS regexes),
