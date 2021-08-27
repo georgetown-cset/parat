@@ -141,6 +141,9 @@ def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
     company_name = company_name.lower()
     for from_char, to_char in cleanup.items():
         company_name = company_name.replace(from_char, to_char)
+    # Override apple logo to use manually corrected svg if present
+    if (company_name == "apple") and os.path.exists(os.path.join(IMAGE_DIR, "apple.svg")):
+        return "apple.svg"
     img_name = company_name.strip()+".png"
     if refresh_images:
         response = requests.get(url)
