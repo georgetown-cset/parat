@@ -1,5 +1,5 @@
 Pillow
-PyYAML==5.3.1
+PyYAML>=5.4
 cachetools==4.1.1
 certifi==2020.6.20
 cffi==1.14.3
@@ -32,13 +32,11 @@ pycparser==2.20
 pydata-google-auth==1.1.0
 python-dateutil==2.8.1
 pytz==2020.1
-requests-oauthlib==1.3.0
-requests==2.24.0
-rsa==4.6
+rsa>=4.7
 six==1.15.0
 typing-extensions==3.7.4.3
 typing-inspect==0.6.0
-urllib3==1.25.11
+urllib3>=1.26.5
 pycountry-convert
 pycld2
 pytest
