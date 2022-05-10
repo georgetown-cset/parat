@@ -3,16 +3,20 @@
   -- many publication IDs exist?" That is, we'll count publications multiple times if they have multiple affiliations
   -- but not multiple times if they have multiple authors with the same affiliation. Creating this table makes that easy!
   -- We also include years because we'll want those later for yearly counts
+  -- and cv/robotics/nlp so we can filter on these
 CREATE OR REPLACE TABLE
   ai_companies_visualization.grid_ai_publications AS
 WITH
   ai_papers AS (
   SELECT
-    cset_id AS merged_id
+    cset_id AS merged_id,
+    cv_filtered,
+    nlp_filtered,
+    robotics_filtered
   FROM
     gcp-cset-projects.article_classification.predictions
   WHERE
-    ai = TRUE),
+    ai_filtered = TRUE),
   gr AS (
     -- Adding in org names and country data using GRID
   SELECT
@@ -25,22 +29,24 @@ WITH
     -- Selecting all the merged ids and grid ids from the links table
   SELECT
     merged_id,
-    grid_id
+    grid_id,
+    cv_filtered,
+    nlp_filtered,
+    robotics_filtered
   FROM
     `gcp-cset-projects.gcp_cset_links_v2.paper_affiliations_merged`
     -- if they're AI papers
-  WHERE
-    merged_id IN (
-    SELECT
-      *
-    FROM
-      ai_papers)),
+  INNER JOIN ai_papers
+    USING (merged_id)),
   ai_arts AS (
-  SELECT
+  SELECT DISTINCT
     -- Distincting on the merged publication id and the grid id so each paper is only listed with each affiliation once
     -- but is listed multiple times if it has multiple distinct affiliations
-    DISTINCT merged_id,
-    grid_id
+    merged_id,
+    grid_id,
+    LOGICAL_OR(cv_filtered) as cv,
+    LOGICAL_OR(nlp_filtered) as nlp,
+    LOGICAL_OR(robotics_filtered) as robotics
   FROM
     merged_grids
   GROUP BY

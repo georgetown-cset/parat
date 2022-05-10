@@ -1,3 +1,4 @@
+-- DEPRECATED, REMOVE SOON
 -- Update the visualization table itself to add paper and patent data
 CREATE OR REPLACE TABLE
   ai_companies_visualization.visualization_data AS

@@ -14,12 +14,11 @@ def ignore_warnings(test_func):
 class TestAICounts(unittest.TestCase):
 
     def test_init(self):
-        count_getter = CountGetter("test.jsonl")
-        self.assertEqual(count_getter.output_file, "test.jsonl")
+        count_getter = CountGetter()
         self.assertEqual(count_getter.regex_dict, {})
 
     def test_get_regex(self):
-        count_getter = CountGetter("test.jsonl")
+        count_getter = CountGetter()
         count_getter.get_regex()
         # the dicts are populated
         self.assertGreater(len(count_getter.regex_dict), 0)
@@ -31,7 +30,7 @@ class TestAICounts(unittest.TestCase):
 
     @ignore_warnings
     def test_run_query_papers(self):
-        count_getter = CountGetter("test.jsonl")
+        count_getter = CountGetter()
         count_getter.get_regex()
         table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
         test = True
@@ -40,21 +39,39 @@ class TestAICounts(unittest.TestCase):
         for company in companies:
             self.assertIsNotNone(company["ai_pubs"])
 
+# This is deprecated and can no longer be tested because the by-year data isn't necessarily in the visualization table
+    # @ignore_warnings
+    # def test_run_query_papers_by_year(self):
+    #     count_getter = CountGetter()
+    #     count_getter.get_regex()
+    #     table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
+    #     test = True
+    #     companies = count_getter.run_query_papers(table_name, "ai_pubs", test=test, by_year=True)
+    #     # Make sure we're setting the AI pubs for every company!
+    #     for company in companies:
+    #         self.assertIsNotNone(company["ai_pubs"])
+    #         self.assertIsNotNone(company["ai_pubs_by_year"])
+
     @ignore_warnings
-    def test_run_query_papers_by_year(self):
-        count_getter = CountGetter("test.jsonl")
+    def test_run_query_id_papers(self):
+        count_getter = CountGetter()
         count_getter.get_regex()
         table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
         test = True
-        companies = count_getter.run_query_papers(table_name, "ai_pubs", test=test, by_year=True)
-        # Make sure we're setting the AI pubs for every company!
-        for company in companies:
-            self.assertIsNotNone(company["ai_pubs"])
-            self.assertIsNotNone(company["ai_pubs_by_year"])
+        company_rows = count_getter.run_query_id_papers(table_name, test=test)
+        for company_row in company_rows:
+            self.assertIsNotNone(company_row["CSET_id"])
+            self.assertEqual(type(company_row["CSET_id"]), int)
+            self.assertIsNotNone(company_row["merged_id"])
+            self.assertIsNotNone(company_row["year"])
+            self.assertEqual(type(company_row["year"]), int)
+            self.assertIsNotNone(company_row["cv"])
+            self.assertIsNotNone(company_row["nlp"])
+            self.assertIsNotNone(company_row["robotics"])
 
     @ignore_warnings
     def test_run_query_patents(self):
-        count_getter = CountGetter("test.jsonl")
+        count_getter = CountGetter()
         count_getter.get_regex()
         table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
         test = True
@@ -63,6 +80,26 @@ class TestAICounts(unittest.TestCase):
         for company in companies:
             self.assertIsNotNone(company["ai_patents"])
 
+    @ignore_warnings
+    def test_run_query_id_patents(self):
+        count_getter = CountGetter()
+        count_getter.get_regex()
+        table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
+        test = True
+        count_getter.run_query_id_papers(table_name, test)
+        patent_companies = count_getter.run_query_id_patents()
+        for company_row in patent_companies:
+            self.assertIsNotNone(company_row["CSET_id"])
+            self.assertEqual(type(company_row["CSET_id"]), int)
+            self.assertIsNotNone(company_row["family_id"])
+            self.assertIsNotNone(company_row["priority_year"])
+            self.assertEqual(type(company_row["priority_year"]), int)
+            self.assertIsNotNone(company_row["Life_Sciences"])
+            self.assertIsNotNone(company_row["Language_Processing"])
+            self.assertIsNotNone(company_row["Analytics_and_Algorithms"])
+            self.assertEqual(type(company_row["Life_Sciences"]), bool)
+            self.assertEqual(type(company_row["Language_Processing"]), bool)
+            self.assertEqual(type(company_row["Analytics_and_Algorithms"]), bool)
 
 
 

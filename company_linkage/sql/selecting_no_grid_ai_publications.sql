@@ -11,26 +11,28 @@ CREATE OR REPLACE TABLE
 WITH
   ai_papers AS (
   SELECT
-    cset_id AS merged_id
+    cset_id AS merged_id,
+    cv_filtered,
+    nlp_filtered,
+    robotics_filtered
   FROM
     gcp-cset-projects.article_classification.predictions
   WHERE
-    ai = TRUE),
+    ai_filtered = TRUE),
   grid_link AS (
   SELECT
     -- Pulling data from the combined paper set
     merged_id,
     org_name,
-    grid_id
+    grid_id,
+    cv_filtered,
+    nlp_filtered,
+    robotics_filtered
   FROM
     `gcp-cset-projects.gcp_cset_links_v2.paper_affiliations_merged`
-  WHERE
+  INNER JOIN ai_papers
     -- Only want AI papers
-    merged_id IN (
-    SELECT
-      merged_id
-    FROM
-      ai_papers) ),
+    USING(merged_id) ),
   ai_arts AS (
   SELECT
     DISTINCT merged_id,
@@ -39,7 +41,10 @@ WITH
     -- with GRIDs we don't want to include them. We'll unique on papers in the Python, and we don't have to worry
     -- about overlapping paper counts because for any given company we're either querying with GRID or regex, not both.
     STRING_AGG(org_name, "^") AS org_names,
-    grid_id
+    grid_id,
+    LOGICAL_OR(cv_filtered) as cv,
+    LOGICAL_OR(nlp_filtered) as nlp,
+    LOGICAL_OR(robotics_filtered) as robotics
   FROM
     grid_link
   GROUP BY
