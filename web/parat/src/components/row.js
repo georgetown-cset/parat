@@ -17,6 +17,7 @@ function Row(props) {
   const [linkageVisible, setLinkageVisible] = React.useState(false);
   const [linkageElevation, setLinkageElevation] = React.useState(0);
 
+  const max_year = Math.max(...row.years);
   const pubs_data = {
     labels: row.years,
     datasets: [
@@ -69,8 +70,8 @@ function Row(props) {
          type: "box",
          yScaleID: "y-axis-0",
          xScaleID: "x-axis-0",
-         xMin: new Date().getFullYear()-1,
-         xMax: new Date().getFullYear(),
+         xMin: max_year-1,
+         xMax: max_year,
          backgroundColor: "rgba(100,100,100,0.1)",
          borderColor: "rgba(0,0,0,0)"
       }]
@@ -122,8 +123,8 @@ function Row(props) {
          type: "box",
          yScaleID: "y-axis-0",
          xScaleID: "x-axis-0",
-         xMin: new Date().getFullYear()-1,
-         xMax: new Date().getFullYear(),
+         xMin: max_year-1,
+         xMax: max_year,
          backgroundColor: "rgba(100,100,100,0.1)",
          borderColor: "rgba(0,0,0,0)"
       }]
@@ -176,8 +177,8 @@ function Row(props) {
          type: "box",
          yScaleID: "y-axis-0",
          xScaleID: "x-axis-0",
-         xMin: new Date().getFullYear()-3,
-         xMax: new Date().getFullYear(),
+         xMin: max_year-3,
+         xMax: max_year,
          backgroundColor: "rgba(100,100,100,0.1)",
          borderColor: "rgba(0,0,0,0)"
       }]
