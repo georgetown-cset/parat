@@ -26,6 +26,7 @@ class Organization:
         self.children = []
         self.non_agg_children = []
         self.parent = []
+        self.linkedin = []
 
     def add_location(self, city, province_state, country):
         """
@@ -202,6 +203,15 @@ class Organization:
                         return
                 self.parent.append(parent)
 
+    def add_linkedin(self, linkedin):
+        """
+        Adding LinkedIn website link for aggregation
+        :param linkedin: linkedin value
+        :return:
+        """
+        if linkedin and linkedin not in self.linkedin:
+            self.linkedin.append(linkedin)
+
 
 class OrganizationAggregator:
 
@@ -348,6 +358,7 @@ class OrganizationAggregator:
         for grid in org["grid"]:
             org_info.add_grid(grid)
         org_info.add_regex(org["regex"])
+        org_info.add_linkedin(org["linkedin"])
         org_info.add_bgov_id(org["BGOV_id"])
 
     def update_organization_data(self, org, org_id):
@@ -382,8 +393,9 @@ class OrganizationAggregator:
                   "permid": org_info.permid, "market": org_info.market,
                   "crunchbase": org_info.crunchbase, "child_crunchbase": org_info.child_crunchbase,
                   "grid": org_info.grid, "regex": org_info.regex,
-                  "BGOV_id": org_info.bgov_id, "comment": org_info.comment,
-                  "children": org_info.children, "non_agg_children": org_info.non_agg_children}
+                  "BGOV_id": org_info.bgov_id, "linkedin": org_info.linkedin,
+                   "comment": org_info.comment, "children": org_info.children,
+                   "non_agg_children": org_info.non_agg_children}
             out.write(json.dumps(js, ensure_ascii=False) + "\n")
         out.close()
 

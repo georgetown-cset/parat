@@ -52,6 +52,8 @@ run some of this code as-is.
 34. `python3 all_papers.py all_paper_counts.jsonl`
 35. Upload `all_paper_counts.jsonl` to `ai_companies_visualization.total_paper_counts` using the [all_papers_schema](schemas/all_papers_schema.json)
 36. [adding_all_paper_counts.sql](sql/adding_all_paper_counts.sql)
-37. [omitting_companies.sql](sql/omitting_companies.sql)
-38. [omit_by_rule.sql](sql/omit_by_rule.sql)
-39. [adding_crunchbase_company_metadata.sql](sql/adding_crunchbase_company_metadata.sql)
+37. [creating_workforce_visualization_data.sql](sql/creating_workforce_visualization_data.sql)
+38. [adding_ai_jobs_to_workforce_visualization.sql](sql/adding_ai_jobs_to_workforce_visualization.sql)
+39. [omitting_companies.sql](sql/omitting_companies.sql)
+40. [omit_by_rule.sql](sql/omit_by_rule.sql)
+41. [adding_crunchbase_company_metadata.sql](sql/adding_crunchbase_company_metadata.sql)
