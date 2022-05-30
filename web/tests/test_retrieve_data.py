@@ -133,6 +133,14 @@ class TestMkTabText(unittest.TestCase):
         expected_outputs = f"<a class={LINK_CSS} target='blank' rel='noreferrer' href='foo'>BAR:FOO</a>, TEST:BAZ"
         self.assertEqual(get_market_link_list(market_info), {"__html": expected_outputs})
 
+    def check_years(self, output, expected_output):
+        year_keys = ["yearly_ai_patents", "yearly_ai_publications", "yearly_ai_pubs_top_conf",
+                     "yearly_all_publications", "years"]
+        for year_key in year_keys:
+            years = output.pop(year_key)
+            expected_years = expected_output.pop(year_key)
+            self.assertEqual(years[:12], expected_years[:12])
+
     def test_clean_row_alphabet(self):
         market_key_to_link = {}
         with open(EXCHANGE_LINK_FI) as f:
@@ -235,6 +243,7 @@ class TestMkTabText(unittest.TestCase):
             # then we're probably running on github actions and the images are not available
             assert not output["local_logo"] and not os.path.exists(os.path.join(IMAGE_DIR, "hugging_face.png"))
             output["local_logo"] = "alphabet.png"
+        self.check_years(output, expected_output)
         self.assertEqual(output, expected_output)
 
     def test_clean_row_hf(self):
@@ -305,4 +314,5 @@ class TestMkTabText(unittest.TestCase):
             # then we're probably running on github actions and the images are not available
             assert not output["local_logo"] and not os.path.exists(os.path.join(IMAGE_DIR, "hugging_face.png"))
             output["local_logo"] = "hugging_face.png"
+        self.check_years(output, expected_output)
         self.assertEqual(output, expected_output)
