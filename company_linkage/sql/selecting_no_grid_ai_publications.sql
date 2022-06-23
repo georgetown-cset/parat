@@ -18,7 +18,7 @@ WITH
   FROM
     gcp-cset-projects.article_classification.predictions
   WHERE
-    ai_filtered = TRUE),
+    ai_filtered = TRUE OR cv_filtered = TRUE OR nlp_filtered = TRUE OR robotics_filtered = TRUE),
   grid_link AS (
   SELECT
     -- Pulling data from the combined paper set
