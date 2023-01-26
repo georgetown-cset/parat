@@ -3,7 +3,7 @@ CREATE OR REPLACE TABLE
 WITH
   get_citations AS (
   SELECT
-    DISTINCT id,
+    DISTINCT CSET_id,
     refs_merged.merged_id,
     ref_id
   FROM
@@ -14,7 +14,7 @@ WITH
     (ai_company_pubs.merged_id = ref_id)),
   add_year AS (
   SELECT
-    DISTINCT id,
+    DISTINCT CSET_id,
     merged_id,
     ref_id,
     year
@@ -28,16 +28,16 @@ WITH
     year IS NOT NULL),
   by_year AS (
   SELECT
-    id,
+    CSET_id,
     year,
     COUNT(DISTINCT merged_id) AS citation_count
   FROM
     add_year
   GROUP BY
-    id,
+    CSET_id,
     year)
 SELECT
-  id,
+  CSET_id,
   ARRAY_AGG(STRUCT(year,
       citation_count)
   ORDER BY
@@ -45,6 +45,6 @@ SELECT
 FROM
   by_year
 GROUP BY
-  id
+  CSET_id
 ORDER BY
-  id
+  CSET_id

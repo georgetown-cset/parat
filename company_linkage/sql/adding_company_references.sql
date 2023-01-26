@@ -4,7 +4,7 @@ CREATE OR REPLACE TABLE
 WITH
   get_references AS (
   SELECT
-    DISTINCT id,
+    DISTINCT CSET_id,
     merged_id,
     ref_id
   FROM
@@ -15,10 +15,10 @@ WITH
     (merged_id)),
   referenced_companies AS (
   SELECT
-    DISTINCT get_references.id,
+    DISTINCT get_references.CSET_id,
     get_references.merged_id,
     ref_id,
-    ai_company_pubs.id AS ref_CSET_id
+    ai_company_pubs.CSET_id AS ref_CSET_id
   FROM
     get_references
   INNER JOIN
@@ -26,10 +26,10 @@ WITH
   ON
     ref_id = ai_company_pubs.merged_id
   ORDER BY
-    id),
+    CSET_id),
   count_company_refs AS (
   SELECT
-    id,
+    CSET_id,
     ref_CSET_id,
     -- We want the count of distinct references
     -- Not the count of distinct referenced articles: count(distinct ref_id)
@@ -38,11 +38,11 @@ WITH
   FROM
     referenced_companies
   GROUP BY
-    id,
+    CSET_id,
     ref_CSET_id),
 aggregated_refs as
 (SELECT
-  id,
+  CSET_id,
   ARRAY_AGG(STRUCT(ref_CSET_id,
       referenced_count)
   ORDER BY
@@ -50,9 +50,9 @@ aggregated_refs as
 FROM
   count_company_refs
 GROUP BY
-  id
+  CSET_id
 ORDER BY
-  id)
+  CSET_id)
   SELECT
   paper_visualization_data.*,
   company_references
@@ -61,6 +61,6 @@ FROM
 LEFT JOIN
   aggregated_refs
 USING
-  (id)
+  (CSET_id)
 ORDER BY
-  id
+  CSET_id

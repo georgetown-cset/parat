@@ -1,10 +1,20 @@
+create or replace table ai_companies_visualization.workforce_visualization_data as
 WITH
+  clean_linkedins AS (
+  SELECT
+    DISTINCT cset_id,
+    name,
+    REPLACE(linkedins, "https://www.", "http://") AS linkedin
+  FROM
+    high_resolution_entities.aggregated_organizations
+  CROSS JOIN
+    UNNEST (linkedin) AS linkedins),
   new_ai_jobs AS (
   SELECT
     DISTINCT cset_id,
     COUNT(DISTINCT user_id) AS ai_jobs
   FROM
-    high_resolution_entities.organizations
+    clean_linkedins
   INNER JOIN
     `gcp-cset-projects.gcp_cset_revelio.position` position
   ON
@@ -40,7 +50,7 @@ WITH
 SELECT
   cset_id,
   tt1_jobs,
-  ai_jobs
+  COALESCE(ai_jobs, 0) as ai_jobs
 FROM
   ai_companies_visualization.workforce_visualization_data
 LEFT JOIN

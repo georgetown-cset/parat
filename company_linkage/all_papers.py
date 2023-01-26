@@ -15,10 +15,10 @@ def main() -> None:
         parser.print_help()
         return
     paper_finder = CountGetter()
-    paper_finder.get_regex()
+    paper_finder.get_identifiers()
     # These are the only two lines that make this different from running AI pubs
     # We select from a different table
-    table_name = "ai_companies_visualization.no_grid_all_publications"
+    table_name = "ai_companies_visualization.all_publications"
     # And we write out our data to a different variable
     companies = paper_finder.run_query_papers(table_name, "all_pubs", by_year=True)
     paper_finder.write_output(companies, args.output_file)

@@ -1,22 +1,18 @@
--- Pulling every AI-associated patent family id which has an assignee that isn't linked to a grid id for that patent
--- We want this because when we count AI patents later on, our count will be "for each grid id, how
--- many patent family IDs exist?" but will be supplemented by "for each regex, how many patent family IDs exist?"
--- That is, we'll count patent families multiple times (for multiple organizations) if they have multiple assignees.
--- Creating this table makes that easy! We are using family ids instead of ids to avoid overcounting patents that were filed
--- multiple times or have multiple records (applied/granted, say) or were filed in multiple locations.
--- We also pull in the AI subcategories
-create or replace table ai_companies_visualization.no_grid_ai_patents as
+-- Pulling every AI-associated patent family id linked to every grid id of any assignee for that patent, and all the assignee names
+-- We also pull in the AI subcategories and the years
+-- We also attempt to add in "fake" families for the patents that are missing patent families
+create or replace table ai_companies_visualization.linked_ai_patents as
 with patents_orig as (
 SELECT
   -- Pulling in the current assignee grid ids from dimensions
   patent_id,
   family_id,
-  grid,
-  assignee
+  assignee,
+  grid
 FROM
   `gcp-cset-projects.unified_patents.normalized_patent_assignees`),
 all_ai as (
-  -- Selecting all the family ids and patent IDs from 1790 to get AI patents
+  -- Selecting all the family ids and patent IDs to get AI patents
   -- Also select the year so we can get counts by year
     SELECT
       patent_id,
@@ -62,18 +58,15 @@ all_ai as (
       EXTRACT(year FROM first_priority_date) as priority_year
     FROM
       gcp-cset-projects.unified_patents.patent_dates
-  ),
-ai_pats as (
+  )
   SELECT
-  -- Distincting on the merged family id and the grid id so each patent is only listed with each assignee once
-  -- but is listed multiple times if it has multiple distinct assignees
     DISTINCT
     -- If the family id is null we can't group by family id so we create a fake family id using the patent id
     -- Since we can't group by family id there should only be one patent id in these cases
     -- We're just doing this so our counts aren't blank
     COALESCE(family_id, "X-" || patent_id) as family_id,
-    grid,
     assignee,
+    grid,
     MIN(priority_year) as priority_year,
     LOGICAL_OR(Physical_Sciences_and_Engineering) as Physical_Sciences_and_Engineering,
     LOGICAL_OR(Life_Sciences) as Life_Sciences,
@@ -110,18 +103,14 @@ ai_pats as (
     LOGICAL_OR(Ontology_Engineering) as Ontology_Engineering,
     LOGICAL_OR(Machine_Learning) as Machine_Learning,
     LOGICAL_OR(Search_Methods) as Search_Methods
-    -- Only including patents if their ids are in 1790, ensuring we have AI patents
+    -- Only including patents if their ids are in or AI patent set, ensuring we have AI patents
   FROM ( all_ai
       LEFT JOIN patents_orig
         USING (patent_id)
       LEFT JOIN patent_years
         USING (patent_id))
+  WHERE priority_year IS NOT NULL
   GROUP BY
     grid,
     assignee,
-    family_id)
-SELECT
--- Adding in the org name and country associated with the grid id
-* EXCEPT(grid)
-FROM ai_pats
-  WHERE grid IS NULL OR grid = ""
+    family_id

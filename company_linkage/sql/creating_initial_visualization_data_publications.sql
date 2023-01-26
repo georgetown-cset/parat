@@ -8,7 +8,7 @@ WITH
   aipubs AS (
     -- Pulling all the papers with any of the given GRIDs as affiliates
   SELECT
-    id,
+    CSET_id,
     merged_id,
     cv,
     nlp,
@@ -18,7 +18,7 @@ WITH
   gridtable AS (
     -- Getting the count of publications
   SELECT
-    id,
+    CSET_id,
     COUNT(DISTINCT merged_id) AS ai_pubs,
     COUNT(DISTINCT CASE WHEN cv IS TRUE THEN merged_id END) as cv_pubs,
     COUNT(DISTINCT CASE WHEN nlp IS TRUE THEN merged_id END) as nlp_pubs,
@@ -26,7 +26,7 @@ WITH
 
   FROM aipubs
   GROUP BY
-    id)
+    CSET_id)
   -- Pulling all the columns we care about that are already in the aggregated organizations table, plus ai_pubs
 SELECT
   CSET_id,
@@ -42,6 +42,9 @@ SELECT
   crunchbase,
   child_crunchbase,
   grid,
+  linkedin,
+  in_sandp_500,
+  in_fortune_global_500,
   COALESCE(ai_pubs, 0) as ai_pubs,
   COALESCE(cv_pubs, 0) as cv_pubs,
   COALESCE(nlp_pubs, 0) as nlp_pubs,
@@ -50,5 +53,5 @@ FROM
   `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
 LEFT JOIN
   gridtable
-ON
-  orgs.CSET_id = gridtable.id
+USING
+  (CSET_id)

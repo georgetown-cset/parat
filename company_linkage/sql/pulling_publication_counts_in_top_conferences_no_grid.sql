@@ -1,3 +1,4 @@
+-- DEPRECATED, DELETE WHEN READY
 CREATE OR REPLACE TABLE
   ai_companies_visualization.pubs_in_top_conferences_no_grid AS
 WITH

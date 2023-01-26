@@ -1,7 +1,3 @@
--- Omitting a swath of companies, by rule, that we believe are unlikely to hold much interest
--- We're essentially leaving out companies that we have very little data for
--- If there's no papers or patents or private financial info (Crunchbase) or public financial info (possible if it's on the market)
--- Then what can we even share?
 CREATE OR REPLACE TABLE
   `gcp-cset-projects.ai_companies_visualization.visualization_data` AS
   -- Selecting the companies we want to leave out
@@ -10,21 +6,29 @@ WITH
   SELECT
     CSET_id
   FROM
-    `gcp-cset-projects.ai_companies_visualization.visualization_data`
-    -- We're left joining instead of cross joining because we WANT to include nulls
+    ai_companies_visualization.visualization_data
   LEFT JOIN
-    UNNEST(market) AS mark
+    ai_companies_visualization.patent_visualization_data
+  USING (cset_id)
+  LEFT JOIN
+    ai_companies_visualization.workforce_visualization_data
+  USING
+    (cset_id)
   WHERE
   -- Our exclusion rules
   -- If a company has no output at all, and has no crunchbase info,
   -- and is privately held so we can't get public info on it, it's not of much interest for this
-    ai_pubs = 0
-    AND ai_patents = 0
-    AND ai_pubs_in_top_conferences = 0
+    (ai_pubs = 0 or ai_pubs IS NULL)
+    AND (ai_patents = 0 or ai_patents IS NULL)
+    AND (ai_pubs_in_top_conferences = 0 or ai_pubs_in_top_conferences IS NULL)
     AND (crunchbase.crunchbase_uuid IS NULL
       OR crunchbase.crunchbase_uuid = "")
     AND (crunchbase.crunchbase_url IS NULL
-      OR crunchbase.crunchbase_url = "") )
+      OR crunchbase.crunchbase_url = "")
+    AND (tt1_jobs = 0 or tt1_jobs IS NULL)
+    AND ARRAY_LENGTH(market) = 0
+    and in_fortune_global_500 IS FALSE
+    and in_sandp_500 IS FALSE)
 SELECT
   *
 FROM

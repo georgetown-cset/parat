@@ -25,6 +25,9 @@ class TestOrganization(unittest.TestCase):
         self.assertEqual(org.children, [])
         self.assertEqual(org.non_agg_children, [])
         self.assertEqual(org.parent, [])
+        self.assertEqual(org.linkedin, [])
+        self.assertFalse(org.in_sandp_500)
+        self.assertFalse(org.in_fortune_global_500)
 
     def test_add_location(self):
         org = aggregate_organizations.Organization(1, "test")
@@ -197,6 +200,36 @@ class TestOrganization(unittest.TestCase):
         org.add_child("test match", 8)
         self.assertEqual(org.non_agg_children[1], {"child_name": "test match", "child_id": 8})
         self.assertEqual(len(org.non_agg_children), 2)
+
+    def test_add_linkedin(self):
+        org = aggregate_organizations.Organization(1, "test")
+        org.add_linkedin("https://www.linkedin.com/company/test")
+        self.assertEqual(len(org.linkedin), 1)
+        self.assertEqual(org.linkedin[0], "https://www.linkedin.com/company/test")
+        org.add_linkedin("https://www.linkedin.com/company/test2")
+        self.assertEqual(len(org.linkedin), 2)
+        self.assertEqual(org.linkedin[1], "https://www.linkedin.com/company/test2")
+        org.add_linkedin("https://www.linkedin.com/company/test")
+        self.assertEqual(len(org.linkedin), 2)
+
+    def test_add_sandp(self):
+        org = aggregate_organizations.Organization(1, "test")
+        org.add_sandp(False)
+        self.assertFalse(org.in_sandp_500)
+        org.add_sandp(True)
+        self.assertTrue(org.in_sandp_500)
+        org.add_sandp(False)
+        self.assertTrue(org.in_sandp_500)
+
+    def test_add_fortune(self):
+        org = aggregate_organizations.Organization(1, "test")
+        org.add_fortune(False)
+        self.assertFalse(org.in_fortune_global_500)
+        org.add_fortune(True)
+        self.assertTrue(org.in_fortune_global_500)
+        org.add_fortune(False)
+        self.assertTrue(org.in_fortune_global_500)
+
 
 
 class TestOrganizationAggregator(unittest.TestCase):

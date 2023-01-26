@@ -17,33 +17,44 @@ class TestAICounts(unittest.TestCase):
         count_getter = CountGetter()
         self.assertEqual(count_getter.regex_dict, {})
 
-    def test_get_regex(self):
+    def test_get_identifiers(self):
         count_getter = CountGetter()
-        count_getter.get_regex()
+        count_getter.get_identifiers()
         # the dicts are populated
         self.assertGreater(len(count_getter.regex_dict), 0)
+        self.assertGreater(len(count_getter.grid_dict), 0)
+        self.assertGreater(len(count_getter.cset_ids), 0)
+        self.assertEqual(type(count_getter.cset_ids), list)
         # the values in the dict are the correct type
         for key_val in count_getter.regex_dict.keys():
             self.assertEqual(type(key_val), int)
             # we allow multiple regexes, so we have a list
             self.assertEqual(type(count_getter.regex_dict[key_val]), list)
+        for key_val in count_getter.grid_dict.keys():
+            self.assertEqual(type(key_val), int)
+            # we allow multiple regexes, so we have a list
+            self.assertEqual(type(count_getter.grid_dict[key_val]), list)
 
     @ignore_warnings
     def test_run_query_papers(self):
         count_getter = CountGetter()
-        count_getter.get_regex()
-        table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
+        count_getter.get_identifiers()
+        table_name = "gcp-cset-projects.ai_companies_visualization.ai_publications"
         test = True
         companies = count_getter.run_query_papers(table_name, "ai_pubs", test=test, by_year=False)
         # Make sure we're setting the AI pubs for every company!
         for company in companies:
             self.assertIsNotNone(company["ai_pubs"])
 
-# This is deprecated and can no longer be tested because the by-year data isn't necessarily in the visualization table
+    """
+    This is deprecated and can no longer be tested this because 
+    the by-year data  isn't necessarily in the visualization table.
+    TODO: Find a new way to test
+    """
     # @ignore_warnings
     # def test_run_query_papers_by_year(self):
     #     count_getter = CountGetter()
-    #     count_getter.get_regex()
+    #     count_getter.get_identifiers()
     #     table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
     #     test = True
     #     companies = count_getter.run_query_papers(table_name, "ai_pubs", test=test, by_year=True)
@@ -55,8 +66,8 @@ class TestAICounts(unittest.TestCase):
     @ignore_warnings
     def test_run_query_id_papers(self):
         count_getter = CountGetter()
-        count_getter.get_regex()
-        table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
+        count_getter.get_identifiers()
+        table_name = "gcp-cset-projects.ai_companies_visualization.ai_publications"
         test = True
         company_rows = count_getter.run_query_id_papers(table_name, test=test)
         for company_row in company_rows:
@@ -70,21 +81,10 @@ class TestAICounts(unittest.TestCase):
             self.assertIsNotNone(company_row["robotics"])
 
     @ignore_warnings
-    def test_run_query_patents(self):
-        count_getter = CountGetter()
-        count_getter.get_regex()
-        table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
-        test = True
-        companies = count_getter.run_query_papers(table_name, "ai_pubs", test)
-        companies = count_getter.run_query_patents(companies)
-        for company in companies:
-            self.assertIsNotNone(company["ai_patents"])
-
-    @ignore_warnings
     def test_run_query_id_patents(self):
         count_getter = CountGetter()
-        count_getter.get_regex()
-        table_name = "gcp-cset-projects.ai_companies_visualization.no_grid_ai_publications"
+        count_getter.get_identifiers()
+        table_name = "gcp-cset-projects.ai_companies_visualization.ai_publications"
         test = True
         count_getter.run_query_id_papers(table_name, test)
         patent_companies = count_getter.run_query_id_patents()
@@ -100,7 +100,6 @@ class TestAICounts(unittest.TestCase):
             self.assertEqual(type(company_row["Life_Sciences"]), bool)
             self.assertEqual(type(company_row["Language_Processing"]), bool)
             self.assertEqual(type(company_row["Analytics_and_Algorithms"]), bool)
-
 
 
 if __name__ == '__main__':

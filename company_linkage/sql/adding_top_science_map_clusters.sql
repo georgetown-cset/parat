@@ -3,7 +3,7 @@ CREATE OR REPLACE TABLE
 WITH
   company_cluster_assignment AS (
   SELECT
-    DISTINCT id,
+    DISTINCT CSET_id,
     merged_id,
     cluster_id
   FROM
@@ -16,17 +16,17 @@ WITH
     cluster_id IS NOT NULL),
   map_counts AS (
   SELECT
-    id,
+    CSET_id,
     cluster_id,
     COUNT(DISTINCT merged_id) AS cluster_count
   FROM
     company_cluster_assignment
   GROUP BY
-    id,
+    CSET_id,
     cluster_id),
   aggregated_clusters AS (
   SELECT
-    id,
+    CSET_id,
     ARRAY_AGG(STRUCT(cluster_id,
         cluster_count)
     ORDER BY
@@ -34,7 +34,7 @@ WITH
   FROM
     map_counts
   GROUP BY
-    id)
+    CSET_id)
 SELECT
   paper_visualization_data.*,
   clusters
@@ -43,6 +43,6 @@ FROM
 LEFT JOIN
   aggregated_clusters
 USING
-  (id)
+  (CSET_id)
 ORDER BY
-  id
+  CSET_id

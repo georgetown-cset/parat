@@ -11,7 +11,7 @@ WITH
     UNNEST(referents) AS referent),
   company_articles_with_methods AS (
   SELECT
-    DISTINCT id,
+    DISTINCT CSET_id,
     merged_id,
     referent
   FROM
@@ -24,17 +24,17 @@ WITH
     referent IS NOT NULL),
   method_counts AS (
   SELECT
-    id,
+    CSET_id,
     referent,
     COUNT(DISTINCT merged_id) AS method_count
   FROM
     company_articles_with_methods
   GROUP BY
-    id,
+    CSET_id,
     referent),
   aggregated_fields AS (
   SELECT
-    id,
+    CSET_id,
     ARRAY_AGG(STRUCT(referent,
         method_count)
     ORDER BY
@@ -42,7 +42,7 @@ WITH
   FROM
     method_counts
   GROUP BY
-    id)
+    CSET_id)
 SELECT
   paper_visualization_data.*,
   methods
@@ -51,6 +51,6 @@ FROM
 LEFT JOIN
   aggregated_fields
 USING
-  (id)
+  (CSET_id)
 ORDER BY
-  id
+  CSET_id

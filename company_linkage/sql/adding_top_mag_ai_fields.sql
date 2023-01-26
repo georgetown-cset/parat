@@ -54,7 +54,7 @@ WITH
     level = 2),
   company_articles_with_fields AS (
   SELECT
-    DISTINCT id,
+    DISTINCT CSET_id,
     merged_id,
     field_id,
     field_name
@@ -68,17 +68,17 @@ WITH
     field_name IS NOT NULL),
   mag_counts AS (
   SELECT
-    id,
+    CSET_id,
     field_name,
     COUNT(DISTINCT merged_id) AS field_count
   FROM
     company_articles_with_fields
   GROUP BY
-    id,
+    CSET_id,
     field_name),
   aggregated_fields AS (
   SELECT
-    id,
+    CSET_id,
     ARRAY_AGG(STRUCT(field_name,
         field_count)
     ORDER BY
@@ -86,7 +86,7 @@ WITH
   FROM
     mag_counts
   GROUP BY
-    id)
+    CSET_id)
 SELECT
   paper_visualization_data.*,
   fields
@@ -95,6 +95,6 @@ FROM
 LEFT JOIN
   aggregated_fields
 USING
-  (id)
+  (CSET_id)
 ORDER BY
-  id
+  CSET_id

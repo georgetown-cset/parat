@@ -6,7 +6,7 @@ WITH
   aipubs AS (
     -- Pulling all the papers with any of the given GRIDs as affiliates
   SELECT
-    id,
+    CSET_id,
     merged_id,
     year,
     cv,
@@ -17,7 +17,7 @@ WITH
   gridtable AS (
     -- Getting the count of publications
   SELECT
-    id,
+    CSET_id,
     year,
     COUNT(DISTINCT merged_id) AS ai_pubs,
     COUNT(DISTINCT CASE WHEN cv IS TRUE THEN merged_id END) as cv_pubs,
@@ -26,7 +26,7 @@ WITH
   FROM  aipubs
    WHERE year IS NOT NULL
   GROUP BY
-    id,
+    CSET_id,
     year),
   -- Aggregating the by-year data so it's all in one field
   by_year AS (
@@ -52,8 +52,8 @@ WITH
     `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
   LEFT JOIN
     gridtable
-  ON
-    orgs.CSET_id = gridtable.id
+  USING
+    (CSET_id)
   GROUP BY
     CSET_id)
 SELECT

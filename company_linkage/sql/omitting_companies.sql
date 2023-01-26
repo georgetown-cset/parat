@@ -1,3 +1,4 @@
+-- DEPRECATED, REMOVE WHEN READY
 -- We want to omit companies from the visualization
 CREATE OR REPLACE TABLE
   ai_companies_visualization.visualization_data AS

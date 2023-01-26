@@ -180,6 +180,18 @@
     "description": "The LinkedIn website address for the company."
   },
   {
+    "mode": "REQUIRED",
+    "name": "in_sandp_500",
+    "type": "BOOLEAN",
+    "description": "Boolean identifying whether the company was ever on the 2020 S&P 500."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "in_fortune_global_500",
+    "type": "BOOLEAN",
+    "description": "Boolean identifying whether the company was on the 2021 Fortune Global 500 list."
+  },
+  {
     "mode": "NULLABLE",
     "name": "comment",
     "type": "STRING",

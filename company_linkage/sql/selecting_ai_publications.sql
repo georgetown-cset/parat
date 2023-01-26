@@ -1,11 +1,8 @@
-  -- Pulling every AI-associated publication id linked to every grid id of any author affiliate for that publication
-  -- We want this because when we count AI publications later on, our count will be "for each grid id, how
-  -- many publication IDs exist?" That is, we'll count publications multiple times if they have multiple affiliations
-  -- but not multiple times if they have multiple authors with the same affiliation. Creating this table makes that easy!
+  -- Pulling every AI-associated publication id linked to every grid id and every organization name
   -- We also include years because we'll want those later for yearly counts
   -- and cv/robotics/nlp so we can filter on these
 CREATE OR REPLACE TABLE
-  ai_companies_visualization.grid_ai_publications AS
+  ai_companies_visualization.ai_publications AS
 WITH
   ai_papers AS (
   SELECT
@@ -28,30 +25,18 @@ WITH
   merged_grids AS (
     -- Selecting all the merged ids and grid ids from the links table
   SELECT
+    DISTINCT
     merged_id,
     grid_id,
-    cv_filtered,
-    nlp_filtered,
-    robotics_filtered
+    org_name,
+    cv_filtered as cv,
+    nlp_filtered as nlp,
+    robotics_filtered as robotics
   FROM
     `gcp-cset-projects.gcp_cset_links_v2.paper_affiliations_merged`
     -- if they're AI papers
   INNER JOIN ai_papers
     USING (merged_id)),
-  ai_arts AS (
-  SELECT DISTINCT
-    -- Distincting on the merged publication id and the grid id so each paper is only listed with each affiliation once
-    -- but is listed multiple times if it has multiple distinct affiliations
-    merged_id,
-    grid_id,
-    LOGICAL_OR(cv_filtered) as cv,
-    LOGICAL_OR(nlp_filtered) as nlp,
-    LOGICAL_OR(robotics_filtered) as robotics
-  FROM
-    merged_grids
-  GROUP BY
-    Grid_ID,
-    merged_id),
   article_years AS (
   SELECT
     merged_id,
@@ -60,17 +45,17 @@ WITH
     `gcp-cset-projects.gcp_cset_links_v2.corpus_merged`)
 SELECT
   -- Adding in the org name and country associated with the grid id
-  ai_arts.*,
-  org_name,
+  merged_grids.* EXCEPT (org_name),
+  COALESCE(gr.org_name, merged_grids.org_name) as org_name,
   country,
   year
 FROM
-  ai_arts
+  merged_grids
 LEFT JOIN
   gr
 ON
-  ai_arts.Grid_ID = gr.id
+  merged_grids.Grid_ID = gr.id
 LEFT JOIN
   article_years
 ON
-  ai_arts.merged_id = article_years.merged_id
+  merged_grids.merged_id = article_years.merged_id

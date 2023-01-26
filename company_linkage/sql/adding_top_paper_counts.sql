@@ -13,8 +13,7 @@ WITH
   -- Pull in the current visualization data. Exclude the ai_pubs_in_top_conferences data, since that was included when we built the top paper data, so we don't need it
   viz_data AS (
   SELECT
-    * EXCEPT(ai_pubs_in_top_conferences,
-      ai_pubs_in_top_conferences_by_year)
+    *
   FROM
     `gcp-cset-projects.ai_companies_visualization.visualization_data`)
   -- Join the two together using the CSET id

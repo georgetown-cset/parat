@@ -4,7 +4,10 @@ import json
 from collections import defaultdict
 
 # List of companies not being aggregated
-no_roll_up = [101, 550]
+# note: check https://docs.google.com/spreadsheets/d/1Tq28O8qIA6T3AJ5oTHKCcscaNZsY_E4OPOUm6JaiwWA/edit#gid=0
+# to ensure list is complete
+# we might switch this to a query or something instead of hard-coding it but this is easier for now
+no_roll_up = [101, 550, 1826, 313, 327, 2343]
 
 
 class Organization:
@@ -27,6 +30,8 @@ class Organization:
         self.non_agg_children = []
         self.parent = []
         self.linkedin = []
+        self.in_fortune_global_500 = False
+        self.in_sandp_500 = False
 
     def add_location(self, city, province_state, country):
         """
@@ -212,6 +217,14 @@ class Organization:
         if linkedin and linkedin not in self.linkedin:
             self.linkedin.append(linkedin)
 
+    def add_sandp(self, in_sandp_500):
+        if in_sandp_500:
+            self.in_sandp_500 = True
+
+    def add_fortune(self, in_fortune_global_500):
+        if in_fortune_global_500:
+            self.in_fortune_global_500 = True
+
 
 class OrganizationAggregator:
 
@@ -378,6 +391,8 @@ class OrganizationAggregator:
         for parent in org["parent"]:
             org_info.add_parent(parent["parent_acquisition"], parent["parent_name"], parent["parent_id"])
         org_info.add_comment(org["comment"])
+        org_info.add_sandp(org["in_sandp_500"])
+        org_info.add_fortune(org["in_fortune_global_500"])
 
     def print_output(self, output_file):
         """
@@ -394,8 +409,9 @@ class OrganizationAggregator:
                   "crunchbase": org_info.crunchbase, "child_crunchbase": org_info.child_crunchbase,
                   "grid": org_info.grid, "regex": org_info.regex,
                   "BGOV_id": org_info.bgov_id, "linkedin": org_info.linkedin,
-                   "comment": org_info.comment, "children": org_info.children,
-                   "non_agg_children": org_info.non_agg_children}
+                  "in_sandp_500": org_info.in_sandp_500, "in_fortune_global_500": org_info.in_fortune_global_500,
+                  "comment": org_info.comment, "children": org_info.children,
+                  "non_agg_children": org_info.non_agg_children}
             out.write(json.dumps(js, ensure_ascii=False) + "\n")
         out.close()
 
