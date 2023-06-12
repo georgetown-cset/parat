@@ -1,0 +1,34 @@
+{
+  "name": "parat-v2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "parat-v2",
+  "author": "Brian Love",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop -p 8550",
+    "start": "gatsby develop -p 8550",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "artifactregistry-login": "npx google-artifactregistry-auth",
+    "arlogin": "npm run artifactregistry-login"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@eto/eto-ui-components": "^1.3.6",
+    "@mdx-js/react": "^2.3.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
+    "gatsby": "^5.10.0",
+    "gatsby-plugin-emotion": "^8.10.0",
+    "gatsby-plugin-google-gtag": "^5.10.0",
+    "gatsby-plugin-mdx": "^5.10.0",
+    "gatsby-plugin-plausible": "^0.0.7",
+    "gatsby-source-filesystem": "^5.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
