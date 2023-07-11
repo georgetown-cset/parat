@@ -88,10 +88,17 @@ const getDataList = (data, filters, key) => {
 
 const listToDropdownOptions = (list) => {
   return [
-    { val: DROPDOWN_ANY, text: '--any--' },
+    // { val: DROPDOWN_ANY, text: '--any--' },
     ...list.map(o => ({val: o, text: o}))
   ];
 }
+
+const dropdownParamToArray = (str) => {
+  return str
+    .split(',')
+    .filter(e => e !== "");
+}
+
 
 
 const ListViewTable = ({
@@ -101,24 +108,74 @@ const ListViewTable = ({
   const [dialogOpen, setDialogOpen] = useState(false);
   const [windowSize, setWindowSize] = useState(800);
 
+
+  // Testing an alternate state management concept
+  const testState = {
+    foo: useState(false),
+    count: useState(0),
+    param: useQueryParamString('test', 0),
+  };
+  console.info("testState:", testState); // DEBUG
+  const testFilters = Object.fromEntries(
+    Object.keys(testState)
+      .map((key) => {
+        return [
+          key,
+          {
+            get get() { return testState[key][0] },
+            set: (newVal) => testState[key][1](newVal),
+          }
+        ];
+      })
+  );
+
+  // Alternate method of accessing the state values, storing the useState-equivalents
+  // directly into an object (and then remapping to create user-friendlier keys).
+  const filterStore = {
+    name: useQueryParamString('name', ''),
+    country: useQueryParamString('country', ''),
+    continent: useQueryParamString('continent', ''),
+    stage: useQueryParamString('stage', ''),
+    // ...
+    ai_pubs: useQueryParamString('ai_pubs', '0,100'),
+    ai_patents: useQueryParamString('ai_patents', '0,100'),
+  };
+  const altFilters = Object.fromEntries(
+    Object.keys(filterStore).map(k => [k, {
+      get get() { return filterStore[k][0].split(',').filter(e => e !== "") },
+      set: (newVal) => filterStore[k][1](newVal.join(',')),
+    }])
+  );
+
+
   // Filter state, stored in URL parameters
-  const [regionParam, setRegionParam, regionParamInitialized, clearRegionParam] = useQueryParamString('region', DROPDOWN_ANY);
-  const [stageParam, setStageParam, stageParamInitialized, clearStageParam] = useQueryParamString('stage', DROPDOWN_ANY);
+  const [nameParam, setNameParam] = useQueryParamString('name', '');
+  const [countryParam, setCountryParam] = useQueryParamString('country', '');
+  const [continent, setContinentParam, continentParamInitialized, clearContinentParam] = useQueryParamString('continent', '');
+  const [stageParam, setStageParam, stageParamInitialized, clearStageParam] = useQueryParamString('stage', '');
   // ...
-  const [aiPubsParam, setAiPubsParam] = useQueryParamString('ai_pubs', '0,10000');
+  const [aiPubsParam, setAiPubsParam] = useQueryParamString('ai_pubs', '0,100');
   const [aiPatentsParam, setAiPatentsParam] = useQueryParamString('ai_patents', '0,100');
 
   // Common interface for all filters so that they can be programmatically
   // accessed via their keys (via this object) and the filter state is handled
   // via `useQueryParamString` and URL parameters.
   const filters = {
-    region: {
-      get get() { return regionParam },
-      set: (newVal) => setRegionParam(newVal),
+    name: {
+      get get() { return dropdownParamToArray(nameParam) },
+      set: (newVal) => setNameParam(newVal.join(',')),
+    },
+    country: {
+      get get() { return dropdownParamToArray(countryParam) },
+      set: (newVal) => setCountryParam(newVal.join(',')),
+    },
+    continent: {
+      get get() { return dropdownParamToArray(continent) },
+      set: (newVal) => setContinentParam(newVal.join(',')),
     },
     stage: {
-      get get() { return stageParam },
-      set: (newVal) => setStageParam(newVal),
+      get get() { return dropdownParamToArray(stageParam) },
+      set: (newVal) => setStageParam(newVal.join(',')),
     },
     // ...
     ai_pubs: {
@@ -132,8 +189,9 @@ const ListViewTable = ({
   }
 
   console.info("Filters object:", filters); // DEBUG
-  console.info("  - ai_pubs:", filters.ai_pubs.get);
-  console.info("  - ai_patents:", filters.ai_patents.get);
+  console.info("Current filters:",
+    Object.fromEntries(Object.keys(filters).map(e => [e, filters[e].get]))
+  ); // DEBUG
 
 
   const activeFilters = useMemo(
@@ -155,6 +213,16 @@ const ListViewTable = ({
     handleResize();
   });
 
+  const handleDropdownChange = (columnKey, newVal) => {
+    console.info(`dropdown changed for ${columnKey}: `, newVal); // DEBUG
+    if ( ! Array.isArray(newVal) ) {
+      newVal = [newVal];
+    }
+
+    if ( filters?.[columnKey] ) {
+      filters[columnKey].set(newVal);
+    }
+  };
 
   const handleSliderChange = (columnKey, newVal) => {
     console.info(`slider changed for ${columnKey}: `, newVal); // DEBUG
@@ -173,6 +241,16 @@ const ListViewTable = ({
   //   "stage": null
   // };
 
+  const companies = useMemo(
+    () => getDataList(data, filteredFilters, 'name'),
+    [data]
+  );
+
+  const countries = useMemo(
+    () => getDataList(data, filteredFilters, 'country'),
+    [data]
+  );
+
   const continents = useMemo(
     () => getDataList(data, filteredFilters, 'continent'),
     [data]
@@ -185,6 +263,8 @@ const ListViewTable = ({
 
   const filterOptions = useMemo(
     () => ({
+      name: listToDropdownOptions(companies),
+      country: listToDropdownOptions(countries),
       continent: listToDropdownOptions(continents),
       stage: listToDropdownOptions(stages),
     }),
@@ -202,11 +282,13 @@ const ListViewTable = ({
           <HeaderDropdown
             label={colDef.title}
             options={filterOptions?.[colDef.key]}
+            selected={filters?.[colDef.key].get}
+            setSelected={newVal => handleDropdownChange(colDef.key, newVal)}
           />
         :
           <HeaderSlider
             label={colDef.title}
-            onChange={(newVal) => handleSliderChange(colDef.key, newVal.target.value)}
+            onChange={newVal => handleSliderChange(colDef.key, newVal.target.value)}
             value={filters?.[colDef.key].get}
           />
         ),
@@ -230,6 +312,45 @@ const ListViewTable = ({
 
   return (
     <div className="list-view-table" data-testid="list-view-table">
+      <div style={{backgroundColor: "lightgreen", padding: 4}}>
+        <button onClick={() => testState.foo[1](!testState.foo[0])}>
+          bool: {`${testState.foo[0]}`}
+        </button>
+        <button onClick={() => testState.count[1](v => v+1)}>
+          int state: {testState.count[0]}
+        </button>
+        <button onClick={() => testState.param[1](parseInt(testState.param[0])+1)}>
+          URL param: {testState.param[0]}
+        </button>
+      </div>
+
+      <div style={{backgroundColor: "salmon", padding: 4}}>
+        <button onClick={() => testFilters.foo.set(!testFilters.foo.get)}>
+          bool: {`${testFilters.foo.get}`}
+        </button>
+        <button onClick={() => testFilters.count.set(v => v+1)}>
+          int state: {testFilters.count.get}
+        </button>
+        <button onClick={() => testFilters.param.set(parseInt(testFilters.param.get)+1)}>
+          URL param: {testFilters.param.get}
+        </button>
+      </div>
+
+      <div style={{backgroundColor: "lightblue", padding: 4}}>
+        <Dropdown
+          inputLabel="Stage"
+          multiple={true}
+          options={filterOptions.stage}
+          selected={altFilters.stage.get}
+          setSelected={(newVal) => {
+            if ( ! Array.isArray(newVal) ) {
+              newVal = [newVal];
+            }
+            altFilters.stage.set(newVal);
+          }}
+        />
+      </div>
+
       <div css={styles.buttonBar}>
         <div>
           <Button css={styles.buttonBarButton}>

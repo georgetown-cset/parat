@@ -15,6 +15,7 @@ const styles = {
 
 const HeaderDropdown = ({
   label,
+  multiple=true,
   options,
   selected,
   setSelected,
@@ -26,6 +27,7 @@ const HeaderDropdown = ({
     <Dropdown
       css={styles.headerDropdown}
       inputLabel={label}
+      multiple={multiple}
       options={optionsInternal}
       selected={selected}
       setSelected={setSelected}

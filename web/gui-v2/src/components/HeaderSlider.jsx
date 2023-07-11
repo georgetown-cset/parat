@@ -31,6 +31,7 @@ const HeaderSlider = ({
         size="small"
         value={value}
         valueLabelDisplay="auto"
+        valueLabelFormat={(val) => val === 100 ? "100+" : val}
       />
     </div>
   );
