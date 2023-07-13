@@ -391,7 +391,7 @@ const ListViewTable = ({
   return (
     <div className="list-view-table" data-testid="list-view-table">
       {/* TESTING ELEMENTS */}
-      <div style={{backgroundColor: "lightgreen", padding: 4}}>
+      {/* <div style={{backgroundColor: "lightgreen", padding: 4}}>
         <button onClick={() => testState.foo[1](!testState.foo[0])}>
           bool: {`${testState.foo[0]}`}
         </button>
@@ -401,10 +401,10 @@ const ListViewTable = ({
         <button onClick={() => testState.param[1](parseInt(testState.param[0])+1)}>
           URL param: {testState.param[0]}
         </button>
-      </div>
+      </div> */}
 
       {/* TESTING ELEMENTS */}
-      <div style={{backgroundColor: "salmon", padding: 4}}>
+      {/* <div style={{backgroundColor: "salmon", padding: 4}}>
         <button onClick={() => testFilters.foo.set(!testFilters.foo.get)}>
           bool: {`${testFilters.foo.get}`}
         </button>
@@ -414,10 +414,10 @@ const ListViewTable = ({
         <button onClick={() => testFilters.param.set(parseInt(testFilters.param.get)+1)}>
           URL param: {testFilters.param.get}
         </button>
-      </div>
+      </div> */}
 
       {/* TESTING ELEMENTS */}
-      <div style={{backgroundColor: "lightblue", padding: 4}}>
+      {/* <div style={{backgroundColor: "lightblue", padding: 4}}>
         <Dropdown
           inputLabel="Stage"
           multiple={true}
@@ -430,7 +430,7 @@ const ListViewTable = ({
             altFilters.stage.set(newVal);
           }}
         />
-      </div>
+      </div> */}
 
       <div css={styles.buttonBar}>
         <div>
