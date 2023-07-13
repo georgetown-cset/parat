@@ -8,15 +8,11 @@ import {
 } from "@mui/icons-material";
 import {
   Button,
-  Dialog,
-  DialogTitle,
 } from '@mui/material';
 
 import {
-  ButtonStyled,
   Dropdown,
   Table,
-  TextFieldStyled,
   classes,
 } from '@eto/eto-ui-components';
 
@@ -24,6 +20,7 @@ import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
 import columnDefinitions from '../static_data/table_columns';
 import { srOnly } from '../accessibility';
+import AddRemoveColumnDialog from './AddRemoveColumnDialog';
 
 const styles = {
   buttonBar: css`
@@ -45,18 +42,6 @@ const styles = {
   buttonBarButton: css`
     min-width: 40px;
   `,
-  columnDialog: css`
-    font-family: GTZirkonLight;
-    padding: 0.5rem;
-
-  `,
-  columnDialogTitle: css`
-    font-family: GTZirkonRegular;
-  `,
-  columnDialogBottom: css`
-    display: flex;
-    justify-content: center;
-  `,
   table: css`
     td.MuiTableCell-root {
       padding: 0.5rem;
@@ -75,6 +60,10 @@ const styles = {
   `,
 };
 
+
+const DEFAULT_COLUMNS = columnDefinitions
+  .filter(colDef => colDef?.initialCol)
+  .map(colDef => colDef.key);
 
 const getDataList = (data, filters, key) => {
   if ( filters[key] === null ){
@@ -101,6 +90,13 @@ const ListViewTable = ({
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [windowSize, setWindowSize] = useState(800);
+
+  // Using param name 'zz_columns' to keep the columns selection at the end of
+  // the URL.  I'm theorizing that users are most likely to care about the other
+  // filters when looking at the URL, so it makes sense that filter params like
+  // 'ai_pubs' are at the beginning of the URL, which is more directly visible
+  // to users. (`useQueryParamString` appears to order the params alphabetically)
+  const [columnsParam, setColumnsParam] = useQueryParamString('zz_columns', DEFAULT_COLUMNS.join(','));
 
 
   // Testing an alternate state management concept
@@ -132,6 +128,10 @@ const ListViewTable = ({
     // ...
     ai_pubs: useQueryParamString('ai_pubs', '0,100'),
     ai_patents: useQueryParamString('ai_patents', '0,100'),
+    // ...
+    market_list: useQueryParamString('market_list', ''),
+
+    columns: useQueryParamString('columns', DEFAULT_COLUMNS.join(',')),
   };
   const altFilters = Object.fromEntries(
     Object.keys(filterStore).map(k => [k, {
@@ -149,6 +149,9 @@ const ListViewTable = ({
   // ...
   const [aiPubsParam, setAiPubsParam] = useQueryParamString('ai_pubs', '0,100');
   const [aiPatentsParam, setAiPatentsParam] = useQueryParamString('ai_patents', '0,100');
+  // ...
+  const [marketListParam, setMarketListParam] = useQueryParamString('market_list', '');
+
 
   // Common interface for all filters so that they can be programmatically
   // accessed via their keys (via this object) and the filter state is handled
@@ -178,6 +181,11 @@ const ListViewTable = ({
     ai_patents: {
       get get() { return aiPatentsParam.split(',').map(v => parseInt(v)) },
       set: (newVal) => setAiPatentsParam(newVal.join(',')),
+    },
+    // ...
+    market_list: {
+      get get() { return marketListParam.split(',') },
+      set: (newVal) => setMarketListParam(newVal.join(',')),
     },
   }
 
@@ -247,24 +255,42 @@ const ListViewTable = ({
   // console.info("filterOptions:", filterOptions);
 
 
+  // Prepare the columns that we will display in the `<Table>`, including
+  // adding the appropriate filter mechanisms to the header cells.
   const columns = columnDefinitions
-    .filter(colDef => colDef?.initialCol)
+    .filter(colDef => columnsParam.includes(colDef.key))
     .map((colDef) => {
+      let display_name;
+      switch ( colDef.type ) {
+        case 'dropdown':
+          display_name = (
+            <HeaderDropdown
+              label={colDef.title}
+              options={filterOptions?.[colDef.key]}
+              selected={filters?.[colDef.key].get}
+              setSelected={newVal => handleDropdownChange(colDef.key, newVal)}
+            />
+          );
+          break;
+        case 'slider':
+          display_name = (
+            <HeaderSlider
+              label={colDef.title}
+              onChange={newVal => handleSliderChange(colDef.key, newVal)}
+              value={filters?.[colDef.key].get}
+            />
+          );
+          break;
+        case 'stock':
+          display_name = (
+            colDef.title
+          );
+          break;
+        default:
+          display_name = colDef.title;
+      }
       const column = {
-        display_name: (colDef.type === 'dropdown' ?
-          <HeaderDropdown
-            label={colDef.title}
-            options={filterOptions?.[colDef.key]}
-            selected={filters?.[colDef.key].get}
-            setSelected={newVal => handleDropdownChange(colDef.key, newVal)}
-          />
-        :
-          <HeaderSlider
-            label={colDef.title}
-            onChange={newVal => handleSliderChange(colDef.key, newVal)}
-            value={filters?.[colDef.key].get}
-          />
-        ),
+        display_name,
         key: colDef.key,
         sortable: colDef.sortable,
         css: colDef.type === 'slider' && css`width: 120px;`,
@@ -275,12 +301,17 @@ const ListViewTable = ({
       return column;
     });
 
+  // Prepare a mapping of column key --> column index; necessary for the table
+  // sort comparator to be able to extract the correct values from each row.
   const colDefIndices = {};
   columnDefinitions.forEach((def, ix) => {
     colDefIndices[def.key] = ix;
   });
 
 
+  // Some columns, such as `ai_pubs`, contain an object with multiple subvalues,
+  // which cannot be sorted with the default comparator.  Define a column-aware
+  // comparator that will let us sort entries correctly.
   const tableSortComparator = (a, b, key) => {
     const colDef = columnDefinitions[colDefIndices[key]];
     const aVal = colDef?.extract ? colDef.extract(a[key]) : a[key];
@@ -315,13 +346,7 @@ const ListViewTable = ({
   };
 
 
-  // Aggregate some of the data that aren't (yet) available in the raw sources
-  // const dataForTable = data.slice(0, 16).map((entry) => ({
-  //   ...entry,
-  //   aggregate_ai_publications: entry.yearly_ai_publications.reduce((a, b) => a+b, 0),
-  //   aggregate_ai_patents: entry.yearly_ai_patents.reduce((a, b) => a+b, 0),
-  // }));
-
+  // Filter the data for display.
   const filterKeys = Object.keys(filters);
   const dataForTable = data
     .filter((elem) => {
@@ -330,6 +355,8 @@ const ListViewTable = ({
           continue;
         }
 
+        // Extract the appropriate value from the row, as defined for the column
+        // (for example, the `value` key of the `ai_pubs` column).
         const elemVal = colDef?.extract?.(elem[colDef.key]) ?? elem[colDef.key];
 
         if ( colDef.type === "dropdown" ) {
@@ -348,6 +375,10 @@ const ListViewTable = ({
           if ( elemVal < min || ( max < 100 && max < elemVal) ) {
             return false;
           }
+        } else if ( colDef.type === "stock" ) {
+          // TODO: Figure out how we're filtering the `market_list` column
+          // -- Actually - are we even wanting this column, or did I just make
+          //    it as a placeholder?
         } else {
           console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
         }
@@ -436,18 +467,13 @@ const ListViewTable = ({
         data={dataForTable}
         sortComparator={tableSortComparator}
       />
-
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <DialogTitle css={styles.columnDialogTitle}>Add/remove columns</DialogTitle>
-        <div css={styles.columnDialog}>
-          {}
-          <div css={styles.columnDialogBottom}>
-            <ButtonStyled onClick={() => setDialogOpen(false)} variant="contained">
-              Close
-            </ButtonStyled>
-          </div>
-        </div>
-      </Dialog>
+      <AddRemoveColumnDialog
+        columnDefinitions={columnDefinitions}
+        isOpen={dialogOpen}
+        selectedColumns={columnsParam}
+        updateIsOpen={setDialogOpen}
+        updateSelectedColumns={setColumnsParam}
+      />
     </div>
   );
 };
