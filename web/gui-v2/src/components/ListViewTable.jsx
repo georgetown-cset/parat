@@ -75,9 +75,6 @@ const styles = {
   `,
 };
 
-// Internal value for unfiltered dropdowns (i.e. any value)
-const DROPDOWN_ANY = "-";
-
 
 const getDataList = (data, filters, key) => {
   if ( filters[key] === null ){
@@ -87,10 +84,7 @@ const getDataList = (data, filters, key) => {
 };
 
 const listToDropdownOptions = (list) => {
-  return [
-    // { val: DROPDOWN_ANY, text: '--any--' },
-    ...list.map(o => ({val: o, text: o}))
-  ];
+  return list.map(o => ({val: o, text: o}));
 }
 
 const dropdownParamToArray = (str) => {
@@ -115,7 +109,6 @@ const ListViewTable = ({
     count: useState(0),
     param: useQueryParamString('test', 0),
   };
-  console.info("testState:", testState); // DEBUG
   const testFilters = Object.fromEntries(
     Object.keys(testState)
       .map((key) => {
@@ -188,24 +181,6 @@ const ListViewTable = ({
     },
   }
 
-  console.info("Filters object:", filters); // DEBUG
-  console.info("Current filters:",
-    Object.fromEntries(Object.keys(filters).map(e => [e, filters[e].get]))
-  ); // DEBUG
-
-
-  const activeFilters = useMemo(
-    () => {
-      const filterEntries = Object.entries(filters);
-      const active = {};
-
-
-      console.info("active filters:", active);
-      return active;
-    },
-    [filters]
-  );
-
 
   useEffect(() => {
     const handleResize = () => setWindowSize(window.innerWidth);
@@ -228,7 +203,6 @@ const ListViewTable = ({
     console.info(`slider changed for ${columnKey}: `, newVal); // DEBUG
 
     if ( filters?.[columnKey] ) {
-      console.info(">> setting new value:", newVal);
       filters[columnKey].set(newVal);
     }
   };
@@ -270,8 +244,7 @@ const ListViewTable = ({
     }),
     [continents, stages]
   );
-  console.info("filterOptions:", filterOptions);
-
+  // console.info("filterOptions:", filterOptions);
 
 
   const columns = columnDefinitions
@@ -288,30 +261,105 @@ const ListViewTable = ({
         :
           <HeaderSlider
             label={colDef.title}
-            onChange={newVal => handleSliderChange(colDef.key, newVal.target.value)}
+            onChange={newVal => handleSliderChange(colDef.key, newVal)}
             value={filters?.[colDef.key].get}
           />
         ),
         key: colDef.key,
         sortable: colDef.sortable,
+        css: colDef.type === 'slider' && css`width: 120px;`,
       };
       if ( colDef?.format ) {
         column.format = colDef.format;
       }
       return column;
     });
-  console.info("columns:", columns); // DEBUG
+
+  const colDefIndices = {};
+  columnDefinitions.forEach((def, ix) => {
+    colDefIndices[def.key] = ix;
+  });
+
+
+  const tableSortComparator = (a, b, key) => {
+    const colDef = columnDefinitions[colDefIndices[key]];
+    const aVal = colDef?.extract ? colDef.extract(a[key]) : a[key];
+    const bVal = colDef?.extract ? colDef.extract(b[key]) : b[key];
+
+    const aIsUndef = aVal === null || aVal === undefined;
+    const bIsUndef = bVal === null || bVal === undefined;
+
+    if ( aIsUndef && bIsUndef ) {
+      return 0;
+    } else if ( aIsUndef ) {
+      return 1;
+    } else if ( bIsUndef ) {
+      return -1;
+    } else if ( bVal < aVal ) {
+      return -1;
+    } else if ( aVal < bVal ) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
+  const resetFilters = () => {
+    columnDefinitions.forEach((colDef) => {
+      if ( colDef.type === "dropdown" ) {
+        filters[colDef.key]?.set([]);
+      } else if ( colDef.type === "slider" ) {
+        filters[colDef.key]?.set([0, 100]);
+      }
+    });
+  };
 
 
   // Aggregate some of the data that aren't (yet) available in the raw sources
-  const dataForTable = data.slice(0, 16).map((entry) => ({
-    ...entry,
-    aggregate_ai_publications: entry.yearly_ai_publications.reduce((a, b) => a+b, 0),
-    aggregate_ai_patents: entry.yearly_ai_patents.reduce((a, b) => a+b, 0),
-  }));
+  // const dataForTable = data.slice(0, 16).map((entry) => ({
+  //   ...entry,
+  //   aggregate_ai_publications: entry.yearly_ai_publications.reduce((a, b) => a+b, 0),
+  //   aggregate_ai_patents: entry.yearly_ai_patents.reduce((a, b) => a+b, 0),
+  // }));
+
+  const filterKeys = Object.keys(filters);
+  const dataForTable = data
+    .filter((elem) => {
+      for ( const colDef of columnDefinitions ) {
+        if ( !filterKeys.includes(colDef.key) ) {
+          continue;
+        }
+
+        const elemVal = colDef?.extract?.(elem[colDef.key]) ?? elem[colDef.key];
+
+        if ( colDef.type === "dropdown" ) {
+          if ( filters?.[colDef.key].get.length > 0 ) {
+            if ( ! filters?.[colDef.key].get.includes(elemVal) ) {
+              return false;
+            }
+          }
+        } else if ( colDef.type === "slider" ) {
+          if ( filters?.[colDef.key].get.length !== 2 ) {
+            console.error(`Invalid filter value for range filter '${colDef.key}': expecting [min, max], got ${JSON.stringify(filters?.[colDef.key].get)}`);
+            continue;
+          }
+
+          const [min, max] = filters[colDef.key].get;
+          if ( elemVal < min || ( max < 100 && max < elemVal) ) {
+            return false;
+          }
+        } else {
+          console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
+        }
+      }
+
+      return true;
+    });
+
 
   return (
     <div className="list-view-table" data-testid="list-view-table">
+      {/* TESTING ELEMENTS */}
       <div style={{backgroundColor: "lightgreen", padding: 4}}>
         <button onClick={() => testState.foo[1](!testState.foo[0])}>
           bool: {`${testState.foo[0]}`}
@@ -324,6 +372,7 @@ const ListViewTable = ({
         </button>
       </div>
 
+      {/* TESTING ELEMENTS */}
       <div style={{backgroundColor: "salmon", padding: 4}}>
         <button onClick={() => testFilters.foo.set(!testFilters.foo.get)}>
           bool: {`${testFilters.foo.get}`}
@@ -336,6 +385,7 @@ const ListViewTable = ({
         </button>
       </div>
 
+      {/* TESTING ELEMENTS */}
       <div style={{backgroundColor: "lightblue", padding: 4}}>
         <Dropdown
           inputLabel="Stage"
@@ -353,7 +403,10 @@ const ListViewTable = ({
 
       <div css={styles.buttonBar}>
         <div>
-          <Button css={styles.buttonBarButton}>
+          <Button
+            css={styles.buttonBarButton}
+            onClick={resetFilters}
+          >
             <CloseIcon />
             <span className={classes([windowSize < 300 && "sr-only"])}>
               Reset filters
@@ -377,10 +430,13 @@ const ListViewTable = ({
         </div>
       </div>
       <Table
-        css={styles.table}
         columns={columns}
+        css={styles.table}
+        cutoff={100}
         data={dataForTable}
+        sortComparator={tableSortComparator}
       />
+
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
         <DialogTitle css={styles.columnDialogTitle}>Add/remove columns</DialogTitle>
         <div css={styles.columnDialog}>

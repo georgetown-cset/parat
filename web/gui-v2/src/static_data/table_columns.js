@@ -1,3 +1,7 @@
+import React from 'react';
+
+import CellStat from '../components/CellStat';
+
 export default [
   { title: "Company", key: "name", initialCol: true, sortable: true, type: 'dropdown' },
   { title: "Country", key: "country", initialCol: true, type: 'dropdown' },
@@ -8,18 +12,20 @@ export default [
     key: "ai_pubs",
     subkey: "value",
     initialCol: true,
-    format: (val) => val.value,
+    format: (val) => <CellStat data={val} />,
     sortable: true,
     type: 'slider',
+    extract: (val) => val.value,
   },
   {
     title: "AI patents",
     key: "ai_patents",
     subkey: "value",
     initialCol: true,
-    format: (val) => val.value,
+    format: (val) => <CellStat data={val} />,
     sortable: true,
     type: 'slider',
+    extract: (val) => val.value,
   },
   { title: "AI publication intensity", key: "???", initialCol: false, type: 'slider' },
   // { title: "NLP publications", key: "???", initialCol: true },
