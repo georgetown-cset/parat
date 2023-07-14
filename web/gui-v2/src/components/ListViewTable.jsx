@@ -19,7 +19,6 @@ import {
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
 import columnDefinitions from '../static_data/table_columns';
-import { srOnly } from '../accessibility';
 import AddRemoveColumnDialog from './AddRemoveColumnDialog';
 
 const styles = {
