@@ -29,6 +29,7 @@ const HeaderSlider = ({
   // Update internal value based on external changes
   useEffect(
     () => setValueInternal(value),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [JSON.stringify(value)]
   );
 
@@ -41,6 +42,7 @@ const HeaderSlider = ({
   // Trigger external state change
   useEffect(
     () => handleExternalChange(valueInternal),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [JSON.stringify(valueInternal)]
   );
 

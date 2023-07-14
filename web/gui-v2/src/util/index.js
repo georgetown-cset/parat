@@ -1,4 +1,5 @@
 
+export { useMultiState } from './useMultiState';
 
 export function debounce(callback, wait) {
   let timeout;

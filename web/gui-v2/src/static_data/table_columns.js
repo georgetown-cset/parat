@@ -36,5 +36,5 @@ export default [
   // { title: "Robotics patents", key: "ro_patents", initialCol: false },
   // { title: "tt1 jobs (??)", key: "tt1_jobs", initialCol: false },
   // { title: "AI jobs", key: "ai_jobs", initialCol: false },
-  { title: "Stock ticker", key: "market_list", type: "stock" },
+  // { title: "Stock ticker", key: "market_list", type: "stock" },
 ];
