@@ -21,6 +21,7 @@ import HeaderSlider from './HeaderSlider';
 import columnDefinitions from '../static_data/table_columns';
 import { useMultiState } from '../util';
 import AddRemoveColumnDialog from './AddRemoveColumnDialog';
+import { Link } from 'gatsby';
 
 const styles = {
   buttonBar: css`
@@ -243,6 +244,8 @@ const ListViewTable = ({
       };
       if ( colDef?.format ) {
         column.format = colDef.format;
+      } else if ( colDef.key === "name" ) {
+        column.format = (name) => <Link to="company/163">{name}</Link>
       }
       return column;
     });
