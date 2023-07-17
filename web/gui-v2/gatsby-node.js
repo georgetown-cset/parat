@@ -8,7 +8,7 @@ exports.onCreatePage = async ({ page, actions }) => {
   if ( page.path.match(/^\/company/) ) {
     createPage({
       path: "/company",
-      matchPath: "/company/*",
+      matchPath: "/company/:slug",
       component: path.resolve("src/pages/company-detail.js"),
     });
   }

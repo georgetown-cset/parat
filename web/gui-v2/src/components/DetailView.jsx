@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as GatsbyLink } from 'gatsby';
 import { css } from '@emotion/react';
 import {
   NavigateNext as NavigateNextIcon,
@@ -9,12 +10,22 @@ import {
   Typography,
 } from '@mui/material';
 
-import { InfoCard, breakpoints } from '@eto/eto-ui-components';
+import {
+  InfoCard,
+  TableOfContents,
+  breakpoints,
+  breakpointStops,
+} from '@eto/eto-ui-components';
 
 import DetailViewIntro from './DetailViewIntro';
-import { company_data } from '../static_data/data';
+import DetailViewPublications from './DetailViewPublications';
+import DetailViewPatents from './DetailViewPatents';
+import DetailViewWorkforce from './DetailViewWorkforce';
+// import { company_data } from '../static_data/data';
+import tableOfContentsData from '../static_data/detail-toc.json';
+import { useWindowSize } from '../util';
 
-console.info("company_data:", company_data); // DEBUG
+// console.info("company_data:", company_data); // DEBUG
 
 const styles = {
   breadcrumbs: css`
@@ -48,40 +59,48 @@ const styles = {
         margin-top: 0;
       }
     }
+
+    small.stock-ticker {
+      font-size: 60%;
+    }
+  `,
+  contentsWrapper: css`
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+
+    ${breakpoints.medium} {
+      grid-template-columns: 200px 1fr;
+    }
+  `,
+  toc: css`
+    /* grid-area: toc; */
+  `,
+  contentsArea: css`
+    /* grid-area: contents; */
   `,
 };
 
-const DetailView = ({}) => {
-  const match = window.location.pathname.match(/company\/([^\/]*)/);
-  console.info("match:", match); // DEBUG
-  if ( ! match || match.len < 2 || match[1] === "" ) {
-    // TODO: what behavior do we want if no or an invalid slug is provided?
-    // alert("No company detected - future: Redirect?"); // TEMP
-    return <div css={styles.error}>ERROR: no URL slug match</div>;
+const DetailView = ({
+  companyData,
+  companyId,
+}) => {
+  const windowSize = useWindowSize();
+
+  if ( companyId === undefined ) {
+    return <div css={styles.error}>ERROR: No company ID found: "{companyId}"</div>
   }
-  const companySlug = match[1];
-  console.info("slug:", companySlug); // DEBUG
-
-  const idMatch = match[1].match(/(\d+)/);
-  if ( ! idMatch || idMatch.len < 2 ) {
-    return <div css={styles.error}>ERROR: No company ID found: "{match[1]}"</div>
-  }
-  const companyId = parseInt(idMatch[1]);
-  console.info("companyId:", companyId); // DEBUG
-
-  const companyData = company_data.find(e => e.CSET_id === companyId);
-
-  const breadcrumbs = [
-    <Link href="/">
-      ETO PARAT
-    </Link>,
-    <Typography>
-      {companyData.name}
-    </Typography>
-  ];
-
 
   if ( companyData ) {
+    const breadcrumbs = [
+      <Link href="/">
+        ETO PARAT
+      </Link>,
+      <Typography>
+        {companyData.name}
+      </Typography>
+    ];
+
     return (
       <>
         <Breadcrumbs css={styles.breadcrumbs} separator={<NavigateNextIcon fontSize="small" />}>
@@ -96,10 +115,36 @@ const DetailView = ({}) => {
             />
           }
           headingComponent="h1"
-          // sidebarContent="SIDEBAR CONTENT?"
-          title={companyData.name}
+          title={
+            <>
+              {companyData.name}
+              {companyData.market_list &&
+                <> <small className="stock-ticker">({companyData.market_list})</small></>
+              }
+            </>
+          }
         >
-          Main contents goes here.....
+          <div css={styles.contentsWrapper}>
+            {windowSize >= breakpointStops.medium &&
+              <TableOfContents css={styles.toc} toc={tableOfContentsData} />
+            }
+            <div css={styles.contentsArea}>
+              <div>
+                <a href="../115">IBM</a>
+                <a href="../163">Microsoft</a>
+                {/*
+                Slug/ID detection and parsing is currently happening only one on
+                initial page load.  Need to redo this so that it happens whenver
+                the page changes (via GatsbyLink).
+                */}
+                {/* <GatsbyLink to="../115">IBM</GatsbyLink> */}
+                {/* <GatsbyLink to="../163">Microsoft</GatsbyLink> */}
+              </div>
+              <DetailViewPublications data={companyData} />
+              <DetailViewPatents data={companyData} />
+              <DetailViewWorkforce data={companyData} />
+            </div>
+          </div>
         </InfoCard>
       </>
     );

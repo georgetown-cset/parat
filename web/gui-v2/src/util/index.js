@@ -1,5 +1,6 @@
 
 export { useMultiState } from './useMultiState';
+export { useWindowSize } from './useWindowSize';
 
 export function debounce(callback, wait) {
   let timeout;

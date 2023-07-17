@@ -7,8 +7,6 @@ import { AppWrapper, InfoCard, breakpoints } from '@eto/eto-ui-components';
 
 import ListView from '../components/ListView';
 
-import '../accessibility.css';
-
 const styles = {
   introBox: css`
     margin-bottom: 0;
