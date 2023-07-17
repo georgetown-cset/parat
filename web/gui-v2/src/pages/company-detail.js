@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
+import slugify from 'slugify';
 
 import { AppWrapper } from '@eto/eto-ui-components';
 
@@ -11,23 +12,35 @@ console.info("company_data:", company_data); // DEBUG
 const styles = {};
 
 
-// Identify the company that we are working with
-// TODO: Refactor this so that it runs when the page loads, not just on the
-//       initial load (currently the data won't update when the page switches
-//       via Gatsby's `Link` component).
-const slugMatch = window.location.pathname.match(/company\/([^\/]*)/);
-const slug = slugMatch?.[1];
-const idMatch = slug?.match?.(/(\d+)/);
-const companyId = idMatch?.[1] ? parseInt(idMatch[1]) : undefined;
-console.info("companyId:", slug, "-->", companyId); // DEBUG
+const CompanyDetailPage = (props) => {
+  console.info("company pageProps:", props); // DEBUG
 
-const companyData = company_data.find(e => e.CSET_id === companyId);
+  // Identify the company that we are working with
+  const slugMatch = window.location.pathname.match(/company\/([^\/]*)/);
+  const slug = slugMatch?.[1];
+  const idMatch = slug?.match?.(/(\d+)/);
+  const companyId = idMatch?.[1] ? parseInt(idMatch[1]) : undefined;
 
+  const companyData = company_data.find(e => e.CSET_id === companyId);
 
-const CompanyDetailPage = () => {
+  // If the `pathname` of the page doesn't match the authoritative pathname for
+  // the identified company (i.e. of the form `/company/ID-SLUGIFIED_NAME`),
+  // redirect to the correct form.  This ensures that the visible URL will always
+  // include a human-readable form of the company, while internally the site
+  // only has to deal with the ID number (the internal `CSET_id` field).
+  const INVALID_CHARS = /[()'"]/g;
+  const slugifiedName = slugify(companyData.name, { lower: true, remove: INVALID_CHARS });
+  const realSlug = `${companyId}-${slugifiedName}`;
+  if ( slug !== realSlug ) {
+    console.info("** The full slug for this company isn't present - we should redirect"); // DEBUG
+    window.history.replaceState({}, '', `/company/${realSlug}/${window.location.search}`);
+  } else {
+    console.info(`-- we are on the authoritative page for company ${companyId}`) // DEBUG
+  }
 
   return (
-    <AppWrapper>
+    <AppWrapper>``
+      <title>{companyData?.name} &ndash; PARAT &ndash; Emerging Technology Observatory</title>
       <DetailView
         companyData={companyData}
         companyId={companyId}
@@ -37,10 +50,3 @@ const CompanyDetailPage = () => {
 };
 
 export default CompanyDetailPage;
-
-export const Head = (headProps) => {
-  console.info("company headProps:", headProps); // DEBUG
-  return (
-    <title>{companyData?.name} &ndash; PARAT &ndash; Emerging Technology Observatory</title>
-  );
-};
