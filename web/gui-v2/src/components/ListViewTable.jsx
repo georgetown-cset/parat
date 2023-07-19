@@ -8,6 +8,7 @@ import {
 } from "@mui/icons-material";
 import {
   Button,
+  Typography,
 } from '@mui/material';
 
 import {
@@ -35,6 +36,20 @@ const styles = {
       svg {
         margin-right: 5px;
       }
+    }
+  `,
+  buttonBarLeft: css`
+    display: flex;
+
+    * + * {
+      margin-left: 0.5rem;
+    }
+
+    .MuiTypography-root {
+      color: var(--dark-blue);
+      font-family: GTZirkonLight;
+      margin: 6px 8px;
+      text-transform: uppercase;
     }
   `,
   buttonBarRight: css`
@@ -144,7 +159,6 @@ const ListViewTable = ({
   });
 
   const handleDropdownChange = (columnKey, newVal) => {
-    console.info(`dropdown changed for ${columnKey}: `, newVal); // DEBUG
     if ( ! Array.isArray(newVal) ) {
       newVal = [newVal];
     }
@@ -155,8 +169,6 @@ const ListViewTable = ({
   };
 
   const handleSliderChange = (columnKey, newVal) => {
-    console.info(`slider changed for ${columnKey}: `, newVal); // DEBUG
-
     if ( filters?.[columnKey] ) {
       filters[columnKey].set(newVal);
     }
@@ -335,12 +347,14 @@ const ListViewTable = ({
 
       return true;
     });
-
+  const numRows = dataForTable.length;
+  const totalRows = data.length;
+  const filterStatText = numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows;
 
   return (
     <div className="list-view-table" data-testid="list-view-table">
       <div css={styles.buttonBar}>
-        <div>
+        <div css={styles.buttonBarLeft}>
           <Button
             css={styles.buttonBarButton}
             onClick={resetFilters}
@@ -350,6 +364,9 @@ const ListViewTable = ({
               Reset filters
             </span>
           </Button>
+          <Typography>
+            Viewing {filterStatText} companies
+          </Typography>
         </div>
         <div css={styles.buttonBarRight}>
           {/* TODO: enable once downloads are possible */}

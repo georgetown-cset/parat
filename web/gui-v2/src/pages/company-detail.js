@@ -39,7 +39,7 @@ const CompanyDetailPage = (props) => {
   }
 
   return (
-    <AppWrapper>``
+    <AppWrapper>
       <title>{companyData?.name} &ndash; PARAT &ndash; Emerging Technology Observatory</title>
       <DetailView
         companyData={companyData}

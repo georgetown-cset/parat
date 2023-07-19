@@ -56,7 +56,6 @@ const AddRemoveColumnDialog = ({
   updateIsOpen,
   updateSelectedColumns,
 }) => {
-
   const [columnsInternal, setColumnsInternal] = useState(() => {
     const split = selectedColumns.split(',');
     return Object.fromEntries(columnDefinitions.map(e => [e.key, split.includes(e.key)]));

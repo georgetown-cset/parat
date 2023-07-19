@@ -6,7 +6,7 @@ import { classes } from '@eto/eto-ui-components';
 import ListViewTable from './ListViewTable';
 import { company_data } from '../static_data/data';
 
-console.info("company_data:", company_data); // DEBUG
+// console.info("company_data:", company_data); // DEBUG
 
 const styles = {};
 
