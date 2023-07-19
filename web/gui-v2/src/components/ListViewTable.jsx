@@ -67,7 +67,11 @@ const styles = {
     }
 
     th .MuiButtonBase-root {
-      width: 100%;
+      /* width: 100%; */
+
+      input.MuiInputBase-input {
+        width: 100%;
+      }
 
       & > span {
         width: 100%;
@@ -387,8 +391,8 @@ const ListViewTable = ({
       <Table
         columns={columns}
         css={styles.table}
-        cutoff={100}
         data={dataForTable}
+        paginate={true}
         sortComparator={tableSortComparator}
       />
       <AddRemoveColumnDialog

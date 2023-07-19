@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Dropdown } from '@eto/eto-ui-components';
+import { Autocomplete, Dropdown } from '@eto/eto-ui-components';
 
 const styles = {
   headerDropdown: css`
@@ -24,7 +24,7 @@ const HeaderDropdown = ({
   const optionsInternal = options ?? [{val: 'a', text: 'a'}, {val: 'b', text: 'b'}];
 
   return (
-    <Dropdown
+    <Autocomplete
       css={styles.headerDropdown}
       inputLabel={label}
       multiple={multiple}

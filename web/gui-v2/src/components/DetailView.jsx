@@ -6,7 +6,6 @@ import {
 } from '@mui/icons-material';
 import {
   Breadcrumbs,
-  Link,
   Typography,
 } from '@mui/material';
 
@@ -93,9 +92,9 @@ const DetailView = ({
 
   if ( companyData ) {
     const breadcrumbs = [
-      <Link href="/">
+      <GatsbyLink href="/">
         ETO PARAT
-      </Link>,
+      </GatsbyLink>,
       <Typography>
         {companyData.name}
       </Typography>
@@ -137,8 +136,8 @@ const DetailView = ({
                 initial page load.  Need to redo this so that it happens whenver
                 the page changes (via GatsbyLink).
                 */}
-                {/* <GatsbyLink to="../115">IBM</GatsbyLink> */}
-                {/* <GatsbyLink to="../163">Microsoft</GatsbyLink> */}
+                <GatsbyLink to="../115">IBM</GatsbyLink>
+                <GatsbyLink to="../163">Microsoft</GatsbyLink>
               </div>
               <DetailViewPublications data={companyData} />
               <DetailViewPatents data={companyData} />

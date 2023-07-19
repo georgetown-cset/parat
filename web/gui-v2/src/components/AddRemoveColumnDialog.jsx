@@ -94,6 +94,7 @@ const AddRemoveColumnDialog = ({
                       [colDef.key]: evt.target.checked,
                     })
                   }}
+                  disabled={colDef.key === "name"}
                 />
                 {colDef.title}
               </label>
