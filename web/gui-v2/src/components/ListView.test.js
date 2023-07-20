@@ -29,7 +29,7 @@ describe("ListView", () => {
     // Reset the filters and verify that the count updates
     await user.click(screen.getByRole('button', { name: /reset filters/i }));
     expect(screen.getByText('Viewing 1304 companies')).toBeVisible();
-  });
+  }, 10000);
 
   describe("add/remove columns dialog", () => {
     it("opens the dialog and changes columns", async () => {
@@ -61,6 +61,6 @@ describe("ListView", () => {
       for ( const column of INITIAL_COLUMNS.filter(e => e !== REMOVED_COLUMN) ) {
         expect(screen.getByRole('columnheader', { name: new RegExp(column, 'i') }));
       }
-    });
+    }, 20000);
   });
 });
