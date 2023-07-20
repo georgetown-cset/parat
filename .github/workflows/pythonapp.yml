@@ -77,6 +77,6 @@ jobs:
         coverage-title: "Modified Files"
         github-token: ${{ secrets.GITHUB_TOKEN }}
         report-only-changed-files: true
-        coverage-path: ./map-of-science/coverage.txt
-        coverage-summary-path: ./map-of-science/coverage/coverage-summary.json
-        coverage-path-prefix: map-of-science/src/
+        coverage-path: ./web/gui-v2/coverage.txt
+        coverage-summary-path: ./web/gui-v2/coverage/coverage-summary.json
+        coverage-path-prefix: web/gui-v2/src/
