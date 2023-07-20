@@ -1,13 +1,8 @@
 import React from 'react';
-import { css } from '@emotion/react';
 
 import Chart from './DetailViewChart';
 import HeaderWithLink from './HeaderWithLink';
-import {
-  assemblePlotlyParams,
-} from '../util/plotly-helpers';
-
-const styles = {};
+import { assemblePlotlyParams } from '../util/plotly-helpers';
 
 const chartLayoutChanges = {
   legend: {

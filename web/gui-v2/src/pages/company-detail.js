@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import slugify from 'slugify';
 
 import { AppWrapper } from '@eto/eto-ui-components';
@@ -9,14 +8,10 @@ import { company_data } from '../static_data/data';
 
 console.info("company_data:", company_data); // DEBUG
 
-const styles = {};
 
-
-const CompanyDetailPage = (props) => {
-  console.info("company pageProps:", props); // DEBUG
-
+const CompanyDetailPage = () => {
   // Identify the company that we are working with
-  const slugMatch = window.location.pathname.match(/company\/([^\/]*)/);
+  const slugMatch = window.location.pathname.match(/company\/([^/]*)/);
   const slug = slugMatch?.[1];
   const idMatch = slug?.match?.(/(\d+)/);
   const companyId = idMatch?.[1] ? parseInt(idMatch[1]) : undefined;

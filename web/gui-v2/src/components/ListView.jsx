@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from '@emotion/react';
 
 import { classes } from '@eto/eto-ui-components';
 
@@ -8,14 +7,11 @@ import { company_data } from '../static_data/data';
 
 // console.info("company_data:", company_data); // DEBUG
 
-const styles = {};
-
 const ListView = ({
   className: appliedClassName,
   css: appliedCss,
   id: appliedId
 }) => {
-
   // TODO
   const filteredFilters = {
     "name": null,

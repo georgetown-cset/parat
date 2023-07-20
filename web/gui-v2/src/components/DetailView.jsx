@@ -20,11 +20,9 @@ import DetailViewIntro from './DetailViewIntro';
 import DetailViewPublications from './DetailViewPublications';
 import DetailViewPatents from './DetailViewPatents';
 import DetailViewWorkforce from './DetailViewWorkforce';
-// import { company_data } from '../static_data/data';
 import tableOfContentsData from '../static_data/detail-toc.json';
 import { useWindowSize } from '../util';
 
-// console.info("company_data:", company_data); // DEBUG
 
 const styles = {
   breadcrumbs: css`
@@ -128,17 +126,6 @@ const DetailView = ({
               <TableOfContents css={styles.toc} toc={tableOfContentsData} />
             }
             <div css={styles.contentsArea}>
-              <div>
-                <a href="../115">IBM</a>
-                <a href="../163">Microsoft</a>
-                {/*
-                Slug/ID detection and parsing is currently happening only one on
-                initial page load.  Need to redo this so that it happens whenver
-                the page changes (via GatsbyLink).
-                */}
-                <GatsbyLink to="../115">IBM</GatsbyLink>
-                <GatsbyLink to="../163">Microsoft</GatsbyLink>
-              </div>
               <DetailViewPublications data={companyData} />
               <DetailViewPatents data={companyData} />
               <DetailViewWorkforce data={companyData} />

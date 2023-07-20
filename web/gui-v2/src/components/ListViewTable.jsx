@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 
 import {
-  Dropdown,
   Table,
   classes,
 } from '@eto/eto-ui-components';
@@ -41,7 +40,7 @@ const styles = {
   buttonBarLeft: css`
     display: flex;
 
-    * + * {
+    & > * + * {
       margin-left: 0.5rem;
     }
 
@@ -393,6 +392,8 @@ const ListViewTable = ({
         css={styles.table}
         data={dataForTable}
         paginate={true}
+        sortByDir="desc"
+        sortByKey="ai_pubs"
         sortComparator={tableSortComparator}
       />
       <AddRemoveColumnDialog

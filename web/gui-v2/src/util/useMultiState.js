@@ -1,6 +1,8 @@
 
 /**
- * 
+ * Convert a collection of `useState`-type entities into an object that can be
+ * accessed and updated programmatically by key.
+ *
  * @param {object} storeDefs An object of `useState`-equivalent results, consisting
  *      of an array of the form `[VARIABLE, SET_FUNCTION<, ...>]`.  Entries beyond
  *      the first two (such as from useQueryParamString) are currently ignored.

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Autocomplete, Dropdown } from '@eto/eto-ui-components';
+import { Autocomplete } from '@eto/eto-ui-components';
 
 const styles = {
   headerDropdown: css`
