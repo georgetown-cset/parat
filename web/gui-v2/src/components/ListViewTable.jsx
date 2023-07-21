@@ -19,7 +19,7 @@ import {
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
 import columnDefinitions from '../static_data/table_columns';
-import { useMultiState } from '../util';
+import { useMultiState, useWindowSize } from '../util';
 import AddRemoveColumnDialog from './AddRemoveColumnDialog';
 import { Link } from 'gatsby';
 
@@ -118,7 +118,7 @@ const ListViewTable = ({
   filteredFilters,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [windowSize, setWindowSize] = useState(800);
+  const windowSize = useWindowSize();
 
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
@@ -154,12 +154,6 @@ const ListViewTable = ({
     (_key, val) => val?.join(',')
   );
 
-
-  useEffect(() => {
-    const handleResize = () => setWindowSize(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    handleResize();
-  });
 
   const handleDropdownChange = (columnKey, newVal) => {
     if ( ! Array.isArray(newVal) ) {
