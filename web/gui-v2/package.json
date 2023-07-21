@@ -13,6 +13,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "jest",
+    "percy-snapshot": "npx percy snapshot snapshots.yml",
     "artifactregistry-login": "npx google-artifactregistry-auth",
     "arlogin": "npm run artifactregistry-login"
   },

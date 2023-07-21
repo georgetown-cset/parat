@@ -1,0 +1,2 @@
+- name: List view, unfiltered
+  url: http://localhost:8550
