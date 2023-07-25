@@ -32,6 +32,7 @@ const styles = {
       margin: 1rem 65px 0;
     }
 
+    .MuiBreadcrumbs-li,
     .MuiTypography-root {
       font-family: GTZirkonRegular;
     }

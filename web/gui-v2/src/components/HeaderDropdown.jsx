@@ -5,10 +5,10 @@ import { Autocomplete } from '@eto/eto-ui-components';
 
 const styles = {
   headerDropdown: css`
-    --dropdown-width: calc(100% - 1rem);
+    width: calc(100% - 1rem);
 
     .MuiFormControl-root {
-      width: var(--dropdown-width, 120px);
+      width: 100%;
     }
   `,
 };

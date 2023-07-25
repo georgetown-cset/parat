@@ -1,4 +1,6 @@
 
+import slugify from 'slugify';
+
 export { useMultiState } from './useMultiState';
 export { useWindowSize } from './useWindowSize';
 
@@ -26,4 +28,16 @@ export function isSerializedStyles(obj) {
     'name' in obj &&
     'styles' in obj
   );
+}
+
+
+/**
+ * Slugify a company name in a PARAT-standard way.
+ *
+ * @param {string} name The name of a company
+ * @returns A slugified form of the name, using the standard format in PARAT
+ */
+export function slugifyCompanyName(name) {
+  const INVALID_CHARS = /[()'"]/g;
+  return name ? slugify(name, { lower: true, remove: INVALID_CHARS }) : "";
 }

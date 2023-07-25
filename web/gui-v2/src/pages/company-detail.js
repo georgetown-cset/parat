@@ -1,10 +1,10 @@
 import React from 'react';
-import slugify from 'slugify';
 
 import { AppWrapper } from '@eto/eto-ui-components';
 
 import DetailView from '../components/DetailView';
 import { company_data } from '../static_data/data';
+import { slugifyCompanyName } from '../util';
 
 // console.info("company_data:", company_data); // DEBUG
 
@@ -23,8 +23,7 @@ const CompanyDetailPage = () => {
   // redirect to the correct form.  This ensures that the visible URL will always
   // include a human-readable form of the company, while internally the site
   // only has to deal with the ID number (the internal `CSET_id` field).
-  const INVALID_CHARS = /[()'"]/g;
-  const slugifiedName = companyData !== undefined ? slugify(companyData?.name, { lower: true, remove: INVALID_CHARS }) : "";
+  const slugifiedName = slugifyCompanyName(companyData?.name);
   const realSlug = `${companyId}-${slugifiedName}`;
   if ( slug !== realSlug ) {
     console.info("** The full slug for this company isn't present - we should redirect"); // DEBUG
