@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { DateTime } from 'luxon';
-import { graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { AppWrapper, InfoCard, breakpoints } from '@eto/eto-ui-components';
 
@@ -27,8 +27,14 @@ const styles = {
   `,
 };
 
-const IndexPage = ({ data }) => {
-  const formattedDate = DateTime.fromISO(data.site.buildTime).toLocaleString(DateTime.DATE_FULL);
+const IndexPage = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        buildTime(formatString: "MMMM DD, YYYY")
+      }
+    }
+  `);
 
   return (
     <AppWrapper>
@@ -45,7 +51,7 @@ const IndexPage = ({ data }) => {
         title="ETO Private-sector AI-Related Activity Tracker"
       >
         <div css={styles.lastUpdated}>
-          Site last updated {formattedDate}
+          Site last updated <span className="no-percy">{data.site.buildTime}</span>
         </div>
       </InfoCard>
       <ListView css={styles.listView} />
@@ -54,13 +60,5 @@ const IndexPage = ({ data }) => {
 }
 
 export default IndexPage;
-
-export const query = graphql`
-  query {
-    site {
-      buildTime
-    }
-  }
-`;
 
 export const Head = () => <title>PARAT &ndash; Emerging Technology Observatory</title>;
