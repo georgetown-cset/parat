@@ -5,3 +5,9 @@
   font-family: GTZirkonLight;
   scroll-behavior: smooth;
 }
+
+@media only percy {
+  .no-percy {
+      visibility: hidden;
+  }
+}

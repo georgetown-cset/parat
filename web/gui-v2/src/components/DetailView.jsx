@@ -86,6 +86,8 @@ const DetailView = ({
 
   if ( companyId === undefined ) {
     return <div css={styles.error}>ERROR: No company ID found: "{companyId}"</div>
+  } else if ( companyData === undefined ) {
+    return <div css={styles.error}>ERROR: No data for company "{companyId}"</div>
   }
 
   if ( companyData ) {

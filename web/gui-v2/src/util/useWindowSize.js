@@ -10,12 +10,16 @@ export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState(800);
 
   useEffect(() => {
-    const handleResize = () => setWindowSize(window.innerWidth);
-    window.addEventListener("resize", handleResize);
+    const handleResize = () => setWindowSize(window?.innerWidth ?? 800);
+    if ( typeof window !== "undefined" ) {
+      window.addEventListener("resize", handleResize);
+    }
     handleResize();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      if ( typeof window !== "undefined" ) {
+        window.removeEventListener("resize", handleResize);
+      }
     }
   });
 
