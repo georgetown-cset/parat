@@ -52,6 +52,7 @@ const HeaderSlider = ({
       <Slider
         css={styles.slider}
         onChange={(newVal) => setValueInternal(newVal.target.value)}
+        onClick={(event) => event.stopPropagation()}
         size="small"
         value={valueInternal}
         valueLabelDisplay="auto"
