@@ -8,6 +8,8 @@ import {
 } from "@mui/icons-material";
 import {
   Button,
+  TableCell,
+  TableRow,
   Typography,
 } from '@mui/material';
 
@@ -19,9 +21,12 @@ import {
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
 import columnDefinitions from '../static_data/table_columns';
-import { useMultiState, useWindowSize } from '../util';
+import {
+  commas,
+  useMultiState,
+  useWindowSize,
+} from '../util';
 import AddRemoveColumnDialog from './AddRemoveColumnDialog';
-import { Link } from 'gatsby';
 
 const styles = {
   buttonBar: css`
@@ -325,6 +330,36 @@ const ListViewTable = ({
   const totalRows = data.length;
   const filterStatText = numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows;
 
+  const AGGREGATE_SUM_COLUMNS = [
+    'ai_pubs',
+    'ai_patents',
+  ];
+
+  const aggregateData = useMemo(
+    () => {
+      const aggregate = dataForTable
+        .reduce((acc, curr) => {
+          for ( const colDef of columnDefinitions ) {
+            if ( !AGGREGATE_SUM_COLUMNS.includes(colDef.key) ) {
+              continue;
+            }
+            const keyVal = curr[colDef.key];
+            const keyValExtract = colDef?.extract?.(keyVal) ?? keyVal;
+            acc[colDef.key] = (acc[colDef.key] ?? 0) + keyValExtract;
+          }
+          return acc;
+        }, {});
+
+      return aggregate;
+    },
+    [dataForTable, filterKeys]
+  );
+
+  const footerData = Object.fromEntries(
+    Object.entries(aggregateData)
+      .map(([key, data]) => [key, <>Total: {data}</>])
+  );
+
   return (
     <div className="list-view-table" data-testid="list-view-table">
       <div css={styles.buttonBar}>
@@ -362,7 +397,9 @@ const ListViewTable = ({
         columns={columns}
         css={styles.table}
         data={dataForTable}
+        footerData={footerData}
         paginate={true}
+        showFooter={true}
         sortByDir="desc"
         sortByKey="ai_pubs"
       />
