@@ -93,6 +93,20 @@ const SLIDER_COLUMNS = columnDefinitions
   .map(colDef => colDef.key);
 
 
+const DEFAULT_FILTER_VALUES = {
+  name: [],
+  country: [],
+  continent: [],
+  stage: [],
+  ai_pubs: [0, 100],
+  ai_patents: [0, 100],
+};
+const initialVal = (key) => {
+  return DEFAULT_FILTER_VALUES[key]?.join(',') ?? '';
+}
+const resetVal = (key) => {
+  return DEFAULT_FILTER_VALUES[key] ?? [];
+};
 
 const getDataList = (data, filters, key) => {
   if ( filters[key] === null ){
@@ -132,13 +146,13 @@ const ListViewTable = ({
   // accessible via an object.
   const filters = useMultiState(
     {
-      name: useQueryParamString('name', ''),
-      country: useQueryParamString('country', ''),
-      continent: useQueryParamString('continent', ''),
-      stage: useQueryParamString('stage', ''),
+      name: useQueryParamString('name', initialVal('name')),
+      country: useQueryParamString('country', initialVal('country')),
+      continent: useQueryParamString('continent', initialVal('continent')),
+      stage: useQueryParamString('stage', initialVal('stage')),
       // ...
-      ai_pubs: useQueryParamString('ai_pubs', '0,100'),
-      ai_patents: useQueryParamString('ai_patents', '0,100'),
+      ai_pubs: useQueryParamString('ai_pubs', initialVal('ai_pubs')),
+      ai_patents: useQueryParamString('ai_patents', initialVal('ai_patents')),
       // ...
       // market_list: useQueryParamString('market_list', ''),
     },
@@ -295,11 +309,7 @@ const ListViewTable = ({
 
   const resetFilters = () => {
     columnDefinitions.forEach((colDef) => {
-      if ( colDef.type === "dropdown" ) {
-        filters[colDef.key]?.set([]);
-      } else if ( colDef.type === "slider" ) {
-        filters[colDef.key]?.set([0, 100]);
-      }
+      filters[colDef.key]?.set(resetVal(colDef.key));
     });
   };
 
