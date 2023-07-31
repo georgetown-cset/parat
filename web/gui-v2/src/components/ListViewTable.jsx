@@ -18,15 +18,17 @@ import {
   classes,
 } from '@eto/eto-ui-components';
 
+import AddRemoveColumnDialog from './AddRemoveColumnDialog';
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
+import GroupSelector from './ListViewGroupSelector';
+import groupsList from '../static_data/groups';
 import columnDefinitions from '../static_data/table_columns';
 import {
   commas,
   useMultiState,
   useWindowSize,
 } from '../util';
-import AddRemoveColumnDialog from './AddRemoveColumnDialog';
 
 const styles = {
   buttonBar: css`
@@ -97,6 +99,7 @@ const SLIDER_COLUMNS = columnDefinitions
   .filter(colDef => colDef.type === "slider")
   .map(colDef => colDef.key);
 
+const NO_SELECTED_GROUP = '--';
 
 const DEFAULT_FILTER_VALUES = {
   name: [],
@@ -138,6 +141,8 @@ const ListViewTable = ({
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const windowSize = useWindowSize();
+
+  const [selectedGroup, setSelectedGroup] = useQueryParamString('group', NO_SELECTED_GROUP);
 
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
@@ -290,6 +295,12 @@ const ListViewTable = ({
   const filterKeys = Object.keys(filters);
   const dataForTable = data
     .filter((elem) => {
+      if ( selectedGroup !== NO_SELECTED_GROUP ) {
+        if ( ! groupsList[selectedGroup].members.includes(elem.CSET_id) ) {
+          return false;
+        }
+      }
+
       for ( const colDef of columnDefinitions ) {
         if ( !filterKeys.includes(colDef.key) ) {
           continue;
@@ -362,6 +373,11 @@ const ListViewTable = ({
 
   return (
     <div className="list-view-table" data-testid="list-view-table">
+      <GroupSelector
+        groupsList={groupsList}
+        selectedGroup={selectedGroup}
+        setSelectedGroup={setSelectedGroup}
+      />
       <div css={styles.buttonBar}>
         <div css={styles.buttonBarLeft}>
           <Button
@@ -399,7 +415,7 @@ const ListViewTable = ({
         data={dataForTable}
         footerData={footerData}
         paginate={true}
-        showFooter={true}
+        showFooter={selectedGroup !== NO_SELECTED_GROUP}
         sortByDir="desc"
         sortByKey="ai_pubs"
       />
