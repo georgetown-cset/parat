@@ -203,34 +203,14 @@ const ListViewTable = ({
   //   "stage": null
   // };
 
-  const companies = useMemo(
-    () => getDataList(data, filteredFilters, 'name'),
-    [data]
-  );
-
-  const countries = useMemo(
-    () => getDataList(data, filteredFilters, 'country'),
-    [data]
-  );
-
-  const continents = useMemo(
-    () => getDataList(data, filteredFilters, 'continent'),
-    [data]
-  );
-
-  const stages = useMemo(
-    () => getDataList(data, filteredFilters, 'stage'),
-    [data]
-  );
-
   const filterOptions = useMemo(
     () => ({
-      name: listToDropdownOptions(companies),
-      country: listToDropdownOptions(countries),
-      continent: listToDropdownOptions(continents),
-      stage: listToDropdownOptions(stages),
+      name: listToDropdownOptions(getDataList(data, filteredFilters, 'name')),
+      country: listToDropdownOptions(getDataList(data, filteredFilters, 'country')),
+      continent: listToDropdownOptions(getDataList(data, filteredFilters, 'continent')),
+      stage: listToDropdownOptions(getDataList(data, filteredFilters, 'stage')),
     }),
-    [continents, stages]
+    [data, filteredFilters]
   );
   // console.info("filterOptions:", filterOptions);
 
