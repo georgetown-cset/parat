@@ -260,16 +260,9 @@ const ListViewTable = ({
           display_name = colDef.title;
       }
       const column = {
+        ...colDef,
         display_name,
-        key: colDef.key,
-        sortable: colDef.sortable,
-        css: colDef.type === 'slider' && css`width: 120px;`,
       };
-      if ( colDef?.format ) {
-        column.format = colDef.format;
-      } else if ( colDef.key === "name" ) {
-        column.format = (name) => <Link to="company/163">{name}</Link>
-      }
       return column;
     });
 
@@ -280,32 +273,6 @@ const ListViewTable = ({
     colDefIndices[def.key] = ix;
   });
 
-
-  // Some columns, such as `ai_pubs`, contain an object with multiple subvalues,
-  // which cannot be sorted with the default comparator.  Define a column-aware
-  // comparator that will let us sort entries correctly.
-  const tableSortComparator = (a, b, key) => {
-    const colDef = columnDefinitions[colDefIndices[key]];
-    const aVal = colDef?.extract ? colDef.extract(a[key]) : a[key];
-    const bVal = colDef?.extract ? colDef.extract(b[key]) : b[key];
-
-    const aIsUndef = aVal === null || aVal === undefined;
-    const bIsUndef = bVal === null || bVal === undefined;
-
-    if ( aIsUndef && bIsUndef ) {
-      return 0;
-    } else if ( aIsUndef ) {
-      return 1;
-    } else if ( bIsUndef ) {
-      return -1;
-    } else if ( bVal < aVal ) {
-      return -1;
-    } else if ( aVal < bVal ) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
 
   const resetFilters = () => {
     columnDefinitions.forEach((colDef) => {
@@ -398,7 +365,6 @@ const ListViewTable = ({
         paginate={true}
         sortByDir="desc"
         sortByKey="ai_pubs"
-        sortComparator={tableSortComparator}
       />
       <AddRemoveColumnDialog
         columnDefinitions={columnDefinitions}

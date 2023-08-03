@@ -1,9 +1,27 @@
 import React from 'react';
+import { Link } from 'gatsby';
+import { css } from '@emotion/react';
 
 import CellStat from '../components/CellStat';
+import { slugifyCompanyName } from '../util';
+
+const sliderColumnStyle = css`
+  width: 120px;
+
+  .MuiButtonBase-root {
+    width: 100%;
+  }
+`;
 
 export default [
-  { title: "Company", key: "name", initialCol: true, sortable: true, type: 'dropdown' },
+  {
+    title: "Company",
+    key: "name",
+    format: (name, row) => <Link to={`company/${row.CSET_id}-${slugifyCompanyName(name)}`}>{name}</Link>,
+    initialCol: true,
+    sortable: true,
+    type: 'dropdown',
+  },
   { title: "Country", key: "country", initialCol: true, type: 'dropdown' },
   { title: "Region", key: "continent", initialCol: true, type: 'dropdown' },
   { title: "Stage", key: "stage", initialCol: true, type: 'dropdown' },
@@ -11,21 +29,23 @@ export default [
     title: "AI publications",
     key: "ai_pubs",
     subkey: "value",
+    css: sliderColumnStyle,
     initialCol: true,
+    extract: (val) => val.value,
     format: (val) => <CellStat data={val} />,
     sortable: true,
     type: 'slider',
-    extract: (val) => val.value,
   },
   {
     title: "AI patents",
     key: "ai_patents",
     subkey: "value",
+    css: sliderColumnStyle,
     initialCol: true,
+    extract: (val) => val.value,
     format: (val) => <CellStat data={val} />,
     sortable: true,
     type: 'slider',
-    extract: (val) => val.value,
   },
   // { title: "AI publication intensity", key: "ai_pubs_int", initialCol: false, type: 'slider' },
   // { title: "NLP publications", key: "nlp_pubs", initialCol: true },
