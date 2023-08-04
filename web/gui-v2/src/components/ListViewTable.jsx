@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useQueryParamString } from 'react-use-query-param-string';
 import { css } from '@emotion/react';
 import {
@@ -16,12 +16,17 @@ import {
   classes,
 } from '@eto/eto-ui-components';
 
+import AddRemoveColumnDialog from './AddRemoveColumnDialog';
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
+import GroupSelector, { NO_SELECTED_GROUP } from './ListViewGroupSelector';
+import groupsList from '../static_data/groups';
 import columnDefinitions from '../static_data/table_columns';
-import { useMultiState, useWindowSize } from '../util';
-import AddRemoveColumnDialog from './AddRemoveColumnDialog';
-import { Link } from 'gatsby';
+import {
+  commas,
+  useMultiState,
+  useWindowSize,
+} from '../util';
 
 const styles = {
   buttonBar: css`
@@ -92,7 +97,6 @@ const SLIDER_COLUMNS = columnDefinitions
   .filter(colDef => colDef.type === "slider")
   .map(colDef => colDef.key);
 
-
 const DEFAULT_FILTER_VALUES = {
   name: [],
   country: [],
@@ -125,6 +129,10 @@ const dropdownParamToArray = (str) => {
     .filter(e => e !== "");
 }
 
+const AGGREGATE_SUM_COLUMNS = [
+  'ai_pubs',
+  'ai_patents',
+];
 
 
 const ListViewTable = ({
@@ -133,6 +141,8 @@ const ListViewTable = ({
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const windowSize = useWindowSize();
+
+  const [selectedGroup, setSelectedGroup] = useQueryParamString('group', NO_SELECTED_GROUP);
 
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
@@ -193,34 +203,14 @@ const ListViewTable = ({
   //   "stage": null
   // };
 
-  const companies = useMemo(
-    () => getDataList(data, filteredFilters, 'name'),
-    [data]
-  );
-
-  const countries = useMemo(
-    () => getDataList(data, filteredFilters, 'country'),
-    [data]
-  );
-
-  const continents = useMemo(
-    () => getDataList(data, filteredFilters, 'continent'),
-    [data]
-  );
-
-  const stages = useMemo(
-    () => getDataList(data, filteredFilters, 'stage'),
-    [data]
-  );
-
   const filterOptions = useMemo(
     () => ({
-      name: listToDropdownOptions(companies),
-      country: listToDropdownOptions(countries),
-      continent: listToDropdownOptions(continents),
-      stage: listToDropdownOptions(stages),
+      name: listToDropdownOptions(getDataList(data, filteredFilters, 'name')),
+      country: listToDropdownOptions(getDataList(data, filteredFilters, 'country')),
+      continent: listToDropdownOptions(getDataList(data, filteredFilters, 'continent')),
+      stage: listToDropdownOptions(getDataList(data, filteredFilters, 'stage')),
     }),
-    [continents, stages]
+    [data, filteredFilters]
   );
   // console.info("filterOptions:", filterOptions);
 
@@ -285,6 +275,12 @@ const ListViewTable = ({
   const filterKeys = Object.keys(filters);
   const dataForTable = data
     .filter((elem) => {
+      if ( selectedGroup !== NO_SELECTED_GROUP ) {
+        if ( ! groupsList[selectedGroup].members.includes(elem.CSET_id) ) {
+          return false;
+        }
+      }
+
       for ( const colDef of columnDefinitions ) {
         if ( !filterKeys.includes(colDef.key) ) {
           continue;
@@ -325,8 +321,38 @@ const ListViewTable = ({
   const totalRows = data.length;
   const filterStatText = numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows;
 
+  const aggregateData = useMemo(
+    () => {
+      const aggregate = dataForTable
+        .reduce((acc, curr) => {
+          for ( const colDef of columnDefinitions ) {
+            if ( !AGGREGATE_SUM_COLUMNS.includes(colDef.key) ) {
+              continue;
+            }
+            const keyVal = curr[colDef.key];
+            const keyValExtract = colDef?.extract?.(keyVal) ?? keyVal;
+            acc[colDef.key] = (acc[colDef.key] ?? 0) + keyValExtract;
+          }
+          return acc;
+        }, {});
+
+      return aggregate;
+    },
+    [dataForTable]
+  );
+
+  const footerData = Object.fromEntries(
+    Object.entries(aggregateData)
+      .map(([key, data]) => [key, <>Total: {commas(data)}</>])
+  );
+
   return (
     <div className="list-view-table" data-testid="list-view-table">
+      <GroupSelector
+        groupsList={groupsList}
+        selectedGroup={selectedGroup}
+        setSelectedGroup={setSelectedGroup}
+      />
       <div css={styles.buttonBar}>
         <div css={styles.buttonBarLeft}>
           <Button
@@ -362,7 +388,9 @@ const ListViewTable = ({
         columns={columns}
         css={styles.table}
         data={dataForTable}
+        footerData={footerData}
         paginate={true}
+        showFooter={selectedGroup !== NO_SELECTED_GROUP}
         sortByDir="desc"
         sortByKey="ai_pubs"
       />
