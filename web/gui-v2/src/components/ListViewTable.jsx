@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useQueryParamString } from 'react-use-query-param-string';
 import { css } from '@emotion/react';
 import {
@@ -8,8 +8,6 @@ import {
 } from "@mui/icons-material";
 import {
   Button,
-  TableCell,
-  TableRow,
   Typography,
 } from '@mui/material';
 
@@ -21,7 +19,7 @@ import {
 import AddRemoveColumnDialog from './AddRemoveColumnDialog';
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
-import GroupSelector from './ListViewGroupSelector';
+import GroupSelector, { NO_SELECTED_GROUP } from './ListViewGroupSelector';
 import groupsList from '../static_data/groups';
 import columnDefinitions from '../static_data/table_columns';
 import {
@@ -99,8 +97,6 @@ const SLIDER_COLUMNS = columnDefinitions
   .filter(colDef => colDef.type === "slider")
   .map(colDef => colDef.key);
 
-const NO_SELECTED_GROUP = '--';
-
 const DEFAULT_FILTER_VALUES = {
   name: [],
   country: [],
@@ -133,6 +129,10 @@ const dropdownParamToArray = (str) => {
     .filter(e => e !== "");
 }
 
+const AGGREGATE_SUM_COLUMNS = [
+  'ai_pubs',
+  'ai_patents',
+];
 
 
 const ListViewTable = ({
@@ -321,11 +321,6 @@ const ListViewTable = ({
   const totalRows = data.length;
   const filterStatText = numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows;
 
-  const AGGREGATE_SUM_COLUMNS = [
-    'ai_pubs',
-    'ai_patents',
-  ];
-
   const aggregateData = useMemo(
     () => {
       const aggregate = dataForTable
@@ -343,12 +338,12 @@ const ListViewTable = ({
 
       return aggregate;
     },
-    [dataForTable, filterKeys]
+    [dataForTable]
   );
 
   const footerData = Object.fromEntries(
     Object.entries(aggregateData)
-      .map(([key, data]) => [key, <>Total: {data}</>])
+      .map(([key, data]) => [key, <>Total: {commas(data)}</>])
   );
 
   return (

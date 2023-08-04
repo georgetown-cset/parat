@@ -19,13 +19,15 @@ const styles = {
   `,
 };
 
+export const NO_SELECTED_GROUP = '--';
+
 const GroupSelector = ({
   groupsList,
   selectedGroup,
   setSelectedGroup,
 }) => {
   const groupsOptions = [
-    { text: '--any group--', val: '--' },
+    { text: '--any group--', val: NO_SELECTED_GROUP },
     ...Object.keys(groupsList).map(groupName => ({ text: groupName, val: groupName })),
   ];
 
