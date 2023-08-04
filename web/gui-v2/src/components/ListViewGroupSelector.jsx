@@ -16,6 +16,17 @@ const styles = {
   `,
   dropdown: css`
     margin-left: 0.5rem;
+
+    .MuiInput-input.MuiSelect-select {
+      align-items: center;
+      display: flex;
+      padding: 0.25rem;
+
+      &,
+      &:focus {
+        background-color: var(--bright-blue-lighter);
+      }
+    }
   `,
 };
 
