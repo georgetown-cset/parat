@@ -5,18 +5,26 @@ import { css } from '@emotion/react';
 import CellStat from '../components/CellStat';
 import { slugifyCompanyName } from '../util';
 
-const sliderColumnStyle = css`
-  width: 120px;
+const styles = {
+  name: css`
+    .MuiTableSortLabel-root {
+      width: 100%;
+    }
+  `,
+  sliderColumn: css`
+    width: 120px;
 
-  .MuiButtonBase-root {
-    width: 100%;
-  }
-`;
+    .MuiButtonBase-root {
+      width: 100%;
+    }
+  `,
+};
 
 export default [
   {
     title: "Company",
     key: "name",
+    css: styles.name,
     format: (name, row) => <Link to={`company/${row.CSET_id}-${slugifyCompanyName(name)}`}>{name}</Link>,
     initialCol: true,
     sortable: true,
@@ -29,7 +37,7 @@ export default [
     title: "AI publications",
     key: "ai_pubs",
     subkey: "value",
-    css: sliderColumnStyle,
+    css: styles.sliderColumn,
     initialCol: true,
     extract: (val) => val.value,
     format: (val) => <CellStat data={val} />,
@@ -40,7 +48,7 @@ export default [
     title: "AI patents",
     key: "ai_patents",
     subkey: "value",
-    css: sliderColumnStyle,
+    css: styles.sliderColumn,
     initialCol: true,
     extract: (val) => val.value,
     format: (val) => <CellStat data={val} />,
