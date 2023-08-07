@@ -1,6 +1,5 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { DateTime } from 'luxon';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import { AppWrapper, InfoCard, breakpoints } from '@eto/eto-ui-components';
