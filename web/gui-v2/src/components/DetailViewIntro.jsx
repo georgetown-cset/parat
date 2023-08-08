@@ -35,7 +35,8 @@ const DetailViewIntro = ({
     { title: "Country", data: data.country },
     { title: "Region", data: data.continent },
     { title: "Stage", data: data.stage },
-    { title: "Groupings", data: "S&P 500" },
+    // { title: "Groupings", data: "S&P 500" },
+    { title: "Stock tickers", data: data.market_list },
   ];
 
   return (
