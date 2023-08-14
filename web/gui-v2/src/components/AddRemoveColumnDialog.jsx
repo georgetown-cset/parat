@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import {
   Checkbox,
@@ -49,6 +49,11 @@ const styles = {
   `,
 };
 
+const generateColumnState = (selected, defs) => {
+  const split = selected.split(',');
+  return Object.fromEntries(defs.map(e => [e.key, split.includes(e.key)]));
+}
+
 const AddRemoveColumnDialog = ({
   columnDefinitions,
   isOpen,
@@ -57,9 +62,15 @@ const AddRemoveColumnDialog = ({
   updateSelectedColumns,
 }) => {
   const [columnsInternal, setColumnsInternal] = useState(() => {
-    const split = selectedColumns.split(',');
-    return Object.fromEntries(columnDefinitions.map(e => [e.key, split.includes(e.key)]));
+    return generateColumnState(selectedColumns, columnDefinitions);
   });
+
+  useEffect(
+    () => {
+      setColumnsInternal(generateColumnState(selectedColumns, columnDefinitions));
+    },
+    [columnDefinitions, selectedColumns]
+  );
 
   const handleCancel = () => {
     updateIsOpen(false);
