@@ -74,7 +74,8 @@ def get_exchange_link(market_key: str) -> dict:
     """
     time.sleep(5)
     # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
-    first, last = sorted(market_key.split(":"))
+    print(market_key)
+    first, last = sorted(market_key.strip(":").split(":"))
     gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:87.0) Gecko/20100101 Firefox/87.0"
@@ -100,7 +101,7 @@ def retrieve_raw(get_links: bool) -> None:
     market_info = set()
     print("retrieving metadata")
     with open(RAW_DATA_FI, mode="w") as out:
-        for row in client.list_rows("ai_companies_visualization.visualization_data"):
+        for row in client.list_rows("ai_companies_visualization.all_visualization_data"):
             dict_row = {col: row[col] for col in row.keys()}
             out.write(json.dumps(dict_row)+"\n")
             market_info = market_info.union([m["exchange"]+":"+m["ticker"] for m in dict_row["market"]])
