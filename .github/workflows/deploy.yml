@@ -36,15 +36,15 @@ jobs:
     - name: 'Cache node_modules'
       uses: actions/cache@v3
       with:
-        path: gui/node_modules
-        key: js-${{ hashFiles('gui/package-lock.json') }}
+        path: web/gui-v2/node_modules
+        key: js-${{ hashFiles('web/gui-v2/package-lock.json') }}
     - name: 'Get node_modules'
-      working-directory: gui
+      working-directory: web/gui-v2
       run: |
         npm run artifactregistry-login
         npm install
     - name: 'Build assets'
-      working-directory: gui
+      working-directory: web/gui-v2
       run: |
         npm install -g gatsby-cli
         gatsby build
@@ -58,7 +58,7 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v1'
     - name: 'Copy built assets to cloud'
       id: 'gcloud'
-      working-directory: gui
+      working-directory: web/gui-v2
       run: |
         gsutil -m cp -r public gs://eto-cd/parat/${{ steps.date.outputs.today }}
     - name: 'Copy built assets to compute engine'
