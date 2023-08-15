@@ -118,8 +118,8 @@ const DetailView = ({
           title={
             <>
               {companyData.name}
-              {companyData.market_list &&
-                <> <small className="stock-ticker">({companyData.market_list})</small></>
+              {companyData.market_filt && companyData.market_filt.length > 0 &&
+                <> <small className="stock-ticker">({companyData.market_filt.map(ticker => ticker.market_key).join(', ')})</small></>
               }
             </>
           }
