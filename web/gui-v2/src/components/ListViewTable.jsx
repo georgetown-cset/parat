@@ -268,6 +268,7 @@ const ListViewTable = ({
     columnDefinitions.forEach((colDef) => {
       filters[colDef.key]?.set(resetVal(colDef.key));
     });
+    setSelectedGroup(NO_SELECTED_GROUP);
   };
 
 
