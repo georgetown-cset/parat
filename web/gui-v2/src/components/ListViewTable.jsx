@@ -135,9 +135,56 @@ const AGGREGATE_SUM_COLUMNS = [
 ];
 
 
+// Determine whether a given row matches the filters and/or selected group
+const filterRow = (row, filters, selectedGroup) => {
+  const filterKeys = Object.keys(filters);
+
+  if ( selectedGroup !== NO_SELECTED_GROUP ) {
+    if ( ! groupsList[selectedGroup].members.includes(row.CSET_id) ) {
+      return false;
+    }
+  }
+
+  for ( const colDef of columnDefinitions ) {
+    if ( !filterKeys.includes(colDef.key) ) {
+      continue;
+    }
+
+    // Extract the appropriate value from the row, as defined for the column
+    // (for example, the `value` key of the `ai_pubs` column).
+    const rowVal = colDef?.extract?.(row[colDef.key]) ?? row[colDef.key];
+
+    if ( colDef.type === "dropdown" ) {
+      if ( filters?.[colDef.key].length > 0 ) {
+        if ( ! filters?.[colDef.key].includes(rowVal) ) {
+          return false;
+        }
+      }
+    } else if ( colDef.type === "slider" ) {
+      if ( filters?.[colDef.key].length !== 2 ) {
+        console.error(`Invalid filter value for range filter '${colDef.key}': expecting [min, max], got ${JSON.stringify(filters?.[colDef.key].get)}`);
+        continue;
+      }
+
+      const [min, max] = filters[colDef.key];
+      if ( rowVal < min || ( max < 100 && max < rowVal) ) {
+        return false;
+      }
+    } else if ( colDef.type === "stock" ) {
+      // TODO: Figure out how we're filtering the `market_list` column
+      // -- Actually - are we even wanting this column, or did I just make
+      //    it as a placeholder?
+    } else {
+      console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
+    }
+  }
+
+  return true;
+};
+
+
 const ListViewTable = ({
   data,
-  filteredFilters,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const windowSize = useWindowSize();
@@ -178,6 +225,15 @@ const ListViewTable = ({
     (_key, val) => val?.join(',')
   );
 
+  // Read-only object of the currently-set values of the filters
+  const currentFilters = useMemo(
+    () => {
+      return Object.fromEntries(
+        Object.entries(filters).map( ([k, { get }]) => ([k, get]) )
+      );
+    },
+    [filters]
+  );
 
   const handleDropdownChange = (columnKey, newVal) => {
     if ( ! Array.isArray(newVal) ) {
@@ -195,24 +251,30 @@ const ListViewTable = ({
     }
   };
 
+  const narrowedFilterOptions = useMemo(
+    () => {
+      const columns = Object.keys(currentFilters).filter(e => DROPDOWN_COLUMNS.includes(e));
+      const results = {};
 
-  // const filteredFilters = {
-  //   "name": null,
-  //   "country": null,
-  //   "continent": null,
-  //   "stage": null
-  // };
+      for ( const column of columns ) {
+        // Ignore the filter value for the current column since we want to
+        // provide the full range of options there.
+        const otherFilters = { ...currentFilters };
+        delete otherFilters[column];
 
-  const filterOptions = useMemo(
-    () => ({
-      name: listToDropdownOptions(getDataList(data, filteredFilters, 'name')),
-      country: listToDropdownOptions(getDataList(data, filteredFilters, 'country')),
-      continent: listToDropdownOptions(getDataList(data, filteredFilters, 'continent')),
-      stage: listToDropdownOptions(getDataList(data, filteredFilters, 'stage')),
-    }),
-    [data, filteredFilters]
+        const filteredSubset = data.filter((row) => {
+          return filterRow(row, otherFilters, selectedGroup);
+        });
+
+        results[column] = listToDropdownOptions(
+          [...new Set(filteredSubset.map(row => row[column]))].sort()
+        );
+      }
+
+      return results;
+    },
+    [data, currentFilters]
   );
-  // console.info("filterOptions:", filterOptions);
 
 
   // Prepare the columns that we will display in the `<Table>`, including
@@ -226,7 +288,7 @@ const ListViewTable = ({
           display_name = (
             <HeaderDropdown
               label={colDef.title}
-              options={filterOptions?.[colDef.key]}
+              options={narrowedFilterOptions?.[colDef.key]}
               selected={filters?.[colDef.key].get}
               setSelected={newVal => handleDropdownChange(colDef.key, newVal)}
             />
@@ -273,51 +335,8 @@ const ListViewTable = ({
 
 
   // Filter the data for display.
-  const filterKeys = Object.keys(filters);
-  const dataForTable = data
-    .filter((elem) => {
-      if ( selectedGroup !== NO_SELECTED_GROUP ) {
-        if ( ! groupsList[selectedGroup].members.includes(elem.CSET_id) ) {
-          return false;
-        }
-      }
+  const dataForTable = data.filter(row => filterRow(row, currentFilters, selectedGroup));
 
-      for ( const colDef of columnDefinitions ) {
-        if ( !filterKeys.includes(colDef.key) ) {
-          continue;
-        }
-
-        // Extract the appropriate value from the row, as defined for the column
-        // (for example, the `value` key of the `ai_pubs` column).
-        const elemVal = colDef?.extract?.(elem[colDef.key]) ?? elem[colDef.key];
-
-        if ( colDef.type === "dropdown" ) {
-          if ( filters?.[colDef.key].get.length > 0 ) {
-            if ( ! filters?.[colDef.key].get.includes(elemVal) ) {
-              return false;
-            }
-          }
-        } else if ( colDef.type === "slider" ) {
-          if ( filters?.[colDef.key].get.length !== 2 ) {
-            console.error(`Invalid filter value for range filter '${colDef.key}': expecting [min, max], got ${JSON.stringify(filters?.[colDef.key].get)}`);
-            continue;
-          }
-
-          const [min, max] = filters[colDef.key].get;
-          if ( elemVal < min || ( max < 100 && max < elemVal) ) {
-            return false;
-          }
-        } else if ( colDef.type === "stock" ) {
-          // TODO: Figure out how we're filtering the `market_list` column
-          // -- Actually - are we even wanting this column, or did I just make
-          //    it as a placeholder?
-        } else {
-          console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
-        }
-      }
-
-      return true;
-    });
   const numRows = dataForTable.length;
   const totalRows = data.length;
   const filterStatText = numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows;
