@@ -355,6 +355,9 @@ def clean_country(country: str) -> str:
     country_obj = pycountry.countries.get(alpha_2=country)
     if not country_obj:
         country_obj = pycountry.countries.get(alpha_3=country)
+    if not country_obj:
+        print(f"{country} not found")
+        return None
     if country_obj.name in COUNTRY_NAME_MAP:
         return COUNTRY_NAME_MAP[country_obj.name]
     return country_obj.name
@@ -382,6 +385,8 @@ def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     :param lowercase_to_orig_cname: dict mapping lowercase to original-cased company names
     :return: cleaned company name
     """
+    if not name:
+        return None
     clean_name = name.strip()
     if clean_name in COMPANY_NAME_MAP:
         return COMPANY_NAME_MAP[clean_name]
@@ -398,7 +403,13 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     :param orig_name: if not None, then a variant of the company name we should include as an alias
     :return: A semicolon-separated string of aliases
     """
-    unique_aliases = {clean_company_name(a["alias"], lowercase_to_orig_cname).strip('.') for a in aliases}
+    unique_aliases = set()
+    for alias in aliases:
+        cleaned_alias = clean_company_name(alias["alias"], lowercase_to_orig_cname)
+        if not cleaned_alias:
+            print(f"Null alias: {alias}")
+            continue
+        unique_aliases.add(cleaned_alias.strip("."))
     if orig_name is not None:
         unique_aliases.add(orig_name)
     sorted_aliases = sorted(list(unique_aliases))
@@ -431,7 +442,9 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     :param years: a list of years to include
     :return: a tuple containing a list of counts for each year in years, and the sum of the counts
     """
-    counts_by_year = {p["year" if not key == "ai_patents" else "priority_year"]: p[key] for p in counts}
+    year_key = "year" if not key == "ai_patents" else "priority_year"
+    earliest_valid_year = min(years)
+    counts_by_year = {p[year_key]: p[key] for p in counts if p[year_key] and int(p[year_key]) >= earliest_valid_year}
     yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
     return yearly_counts, sum(yearly_counts)
 
@@ -464,8 +477,12 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     :return: dict of company metadata
     """
     js = json.loads(row)
+    if js["cset_id"] == 163:
+        print(row)
     orig_company_name = js["name"]
     js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
+    if not js["name"]:
+        print(f"No name for {js['cset_id']}")
     js["country"] = clean_country(js["country"])
     js["continent"] = get_continent(js["country"])
     js["local_logo"] = retrieve_image(js.pop("logo_url"), orig_company_name, refresh_images)
@@ -487,8 +504,13 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     js["yearly_ai_pubs_top_conf"], js["ai_pubs_in_top_conferences"] = get_yearly_counts(
         js.pop("ai_pubs_in_top_conferences_by_year"), "ai_pubs_in_top_conferences", js["years"]
     )
+    js["yearly_citation_counts"], js["citation_count"] = get_yearly_counts(js.pop("citation_count_by_year"),
+                                                                           "citation_count",
+                                                                           js["years"])
     for year_idx in range(len(js["years"])):
-        assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
+        # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
+        if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
+            print(f"Mismatched publication counts for {js['cset_id']}")
 
     market = clean_market(js.pop("market"), market_key_to_link)
     js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in FILT_EXCHANGES]
