@@ -516,20 +516,24 @@ def get_market_link_list(market: list) -> dict:
 
 def get_top_n_list(entities: list, count_key: str, n: int = 10) -> list:
     """
-
-    :param entities:
-    :param count_key:
-    :return:
+    Sort entries by count_key, descending, and return the top n
+    :param entities: List of dicts corresponding to counts of some entity
+    :param count_key: Key within entity elements containing field that should be used to sort
+    :param n: Number of entities to return
+    :return: Top ten entities
     """
     entities.sort(key=lambda e: e[count_key], reverse=True)
     return entities[:n]
 
 
-def clean_basic_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> None:
+def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> None:
     """
-
-    :param js:
-    :return:
+    Clean various PARAT fields that don't fit into another category
+    :param js: A dict of data corresponding to an individual PARAT record
+    :param refresh_images: if true, will re-download images from crunchbase
+    :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
+    :param market_key_to_link: dict mapping exchange:ticker to google finance link
+    :return: None (mutates js)
     """
     orig_company_name = js["name"]
     js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
@@ -562,23 +566,22 @@ def clean_basic_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: 
 
 def get_top_10_lists(js: dict) -> None:
     """
-
-    :param js:
-    :param n:
-    :return:
+    Filter count lists to top 10 elements
+    :param js: A dict of data corresponding to an individual PARAT record
+    :return: None (mutates js)
     """
     js["fields"] = get_top_n_list(js.pop("fields"), "field_count")
     js["clusters"] = get_top_n_list(js.pop("clusters"), "cluster_count")
-    js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count") # TODO: figure out what this is
+    js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count")
     js["tasks"] = get_top_n_list(js.pop("tasks"), "task_count")
     js["methods"] = get_top_n_list(js.pop("methods"), "method_count")
 
 
 def get_category_counts(js: dict) -> None:
     """
-
-    :param js:
-    :return:
+    Reformat yearly and count-across-all-years data
+    :param js: A dict of data corresponding to an individual PARAT record
+    :return: None (mutates js)
     """
     # add pub/patent counts
     current_year = datetime.now().year
@@ -597,8 +600,6 @@ def get_category_counts(js: dict) -> None:
         # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
         if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
             print(f"Mismatched publication counts for {js['cset_id']}")
-
-    # Filter irrelevant (non-"industry", according to the categorization in CAT) patent fields
 
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
     keys = list(js.keys())
@@ -624,12 +625,9 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     :return: dict of company metadata
     """
     js = json.loads(row)
-    clean_basic_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
+    clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
     get_top_10_lists(js)
     get_category_counts(js)
-
-    if js["cset_id"] == 163:
-        print(json.dumps(js))
     return js
 
 
