@@ -103,6 +103,12 @@ PATENT_FIELD_MAPPING = {
     "Generic_and_Unspecified": "General",
 }
 
+INDUSTRY_PATENT_CATEGORIES = ["Physical Sciences and Engineering", "Life Sciences", "Security", "Transportation",
+    "Industry and Manufacturing", "Education", "Document Management and Publishing",
+    "Military","Agriculture", "Computing in Government", "Personal Devices and Computing",
+    "Banking and Finance", "Telecommunications", "Networks", "Business", "Energy Management", "Entertainment",
+    "Nanotechnology", "Semiconductors"]
+
 ### END CONSTANTS ###
 
 
@@ -508,7 +514,7 @@ def get_market_link_list(market: list) -> dict:
     return {"__html": ", ".join(market_elts)}
 
 
-def get_top_n_list(entities: list, count_key: str) -> list:
+def get_top_n_list(entities: list, count_key: str, n: int = 10) -> list:
     """
 
     :param entities:
@@ -516,19 +522,15 @@ def get_top_n_list(entities: list, count_key: str) -> list:
     :return:
     """
     entities.sort(key=lambda e: e[count_key], reverse=True)
-    return entities[:10]
+    return entities[:n]
 
 
-def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
+def clean_basic_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> None:
     """
-    Given a row from a jsonl, reformat its elements into the form needed by the PARAT javascript
-    :param row: jsonl line containing company metadata
-    :param refresh_images: if true, will re-download images from crunchbase
-    :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
-    :param market_key_to_link: dict mapping exchange:ticker to google finance link
-    :return: dict of company metadata
+
+    :param js:
+    :return:
     """
-    js = json.loads(row)
     orig_company_name = js["name"]
     js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
     if not js["name"]:
@@ -544,49 +546,6 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
     js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
-
-    # add pub/patent counts
-    js["years"] = list(range(2010, datetime.now().year + 1))
-    js["yearly_all_publications"], _ = get_yearly_counts(js.pop("all_pubs_by_year"), "all_pubs", js["years"])
-    js["yearly_ai_publications"], js["ai_pubs"] = get_yearly_counts(js.pop("ai_pubs_by_year"), "ai_pubs", js["years"])
-    js["yearly_ai_patents"], js["ai_patents"] = get_yearly_counts(js.pop("ai_patents_by_year"),
-                                                                  "ai_patents", js["years"])
-    js["yearly_ai_pubs_top_conf"], js["ai_pubs_in_top_conferences"] = get_yearly_counts(
-        js.pop("ai_pubs_in_top_conferences_by_year"), "ai_pubs_in_top_conferences", js["years"]
-    )
-    js["yearly_citation_counts"], js["citation_count"] = get_yearly_counts(js.pop("citation_count_by_year"),
-                                                                           "citation_count", js["years"])
-    for year_idx in range(len(js["years"])):
-        # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
-        if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
-            print(f"Mismatched publication counts for {js['cset_id']}")
-
-    # Get top ten lists
-    js["fields"] = get_top_n_list(js.pop("fields"), "field_count")
-    js["clusters"] = get_top_n_list(js.pop("clusters"), "cluster_count")
-    js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count") # TODO: figure out what this is
-    js["tasks"] = get_top_n_list(js.pop("tasks"), "task_count")
-    js["methods"] = get_top_n_list(js.pop("methods"), "method_count")
-
-    # Filter irrelevant (non-"industry", according to the categorization in CAT) patent fields
-    patent_industries = ["Physical Sciences and Engineering", "Life Sciences", "Security", "Transportation",
-                   "Industry and Manufacturing", "Education", "Document Management and Publishing", "Military",
-                   "Agriculture", "Computing in Government", "Personal Devices and Computing", "Banking and Finance",
-                   "Telecommunications", "Networks", "Business", "Energy Management", "Entertainment", "Nanotechnology",
-                   "Semiconductors"]
-    # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
-    keys = list(js.keys())
-    # TODO: maybe restructure this so we don't have to parse keys to iterate over patent data in the UI
-    for k in keys:
-        if "_pats" not in k:
-            continue
-        field_name = k.replace("_pats_by_year", "").replace("_pats", "")
-        if PATENT_FIELD_MAPPING[field_name] not in patent_industries:
-            js.pop(k)
-        elif k.endswith("_pats_by_year"):
-            js["yearly_"+field_name], js[field_name+"_count"] = get_yearly_counts(js.pop(k),
-                                                                                  field_name+"_pats", js["years"])
-
     market = clean_market(js.pop("market"), market_key_to_link)
     js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in FILT_EXCHANGES]
     if len(market) > 0:
@@ -599,8 +558,77 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
         url = js["crunchbase"]["crunchbase_url"]
         if url in CRUNCHBASE_URL_OVERRIDE:
             js["crunchbase"]["crunchbase_url"] = CRUNCHBASE_URL_OVERRIDE[url]
+
+
+def get_top_10_lists(js: dict) -> None:
+    """
+
+    :param js:
+    :param n:
+    :return:
+    """
+    js["fields"] = get_top_n_list(js.pop("fields"), "field_count")
+    js["clusters"] = get_top_n_list(js.pop("clusters"), "cluster_count")
+    js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count") # TODO: figure out what this is
+    js["tasks"] = get_top_n_list(js.pop("tasks"), "task_count")
+    js["methods"] = get_top_n_list(js.pop("methods"), "method_count")
+
+
+def get_category_counts(js: dict) -> None:
+    """
+
+    :param js:
+    :return:
+    """
+    # add pub/patent counts
+    current_year = datetime.now().year
+    years = list(range(current_year-10, current_year + 1))
+    js["years"] = years
+    js["yearly_all_publications"], _ = get_yearly_counts(js.pop("all_pubs_by_year"), "all_pubs", years)
+    js["yearly_ai_publications"], js["ai_pubs"] = get_yearly_counts(js.pop("ai_pubs_by_year"), "ai_pubs", years)
+    js["yearly_ai_patents"], js["ai_patents"] = get_yearly_counts(js.pop("ai_patents_by_year"),
+                                                                  "ai_patents", years)
+    js["yearly_ai_pubs_top_conf"], js["ai_pubs_in_top_conferences"] = get_yearly_counts(
+        js.pop("ai_pubs_in_top_conferences_by_year"), "ai_pubs_in_top_conferences", years
+    )
+    js["yearly_citation_counts"], js["citation_count"] = get_yearly_counts(js.pop("citation_count_by_year"),
+                                                                           "citation_count", years)
+    for year_idx in range(len(years)):
+        # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
+        if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
+            print(f"Mismatched publication counts for {js['cset_id']}")
+
+    # Filter irrelevant (non-"industry", according to the categorization in CAT) patent fields
+
+    # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
+    keys = list(js.keys())
+    # TODO: maybe restructure this so we don't have to parse keys to iterate over patent data in the UI
+    for k in keys:
+        if "_pats" not in k:
+            continue
+        field_name = k.replace("_pats_by_year", "").replace("_pats", "")
+        if PATENT_FIELD_MAPPING[field_name] not in INDUSTRY_PATENT_CATEGORIES:
+            js.pop(k)
+        elif k.endswith("_pats_by_year"):
+            js["yearly_"+field_name], js[field_name+"_count"] = get_yearly_counts(js.pop(k),
+                                                                                  field_name+"_pats", years)
+
+
+def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
+    """
+    Given a row from a jsonl, reformat its elements into the form needed by the PARAT javascript
+    :param row: jsonl line containing company metadata
+    :param refresh_images: if true, will re-download images from crunchbase
+    :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
+    :param market_key_to_link: dict mapping exchange:ticker to google finance link
+    :return: dict of company metadata
+    """
+    js = json.loads(row)
+    clean_basic_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
+    get_top_10_lists(js)
+    get_category_counts(js)
+
     if js["cset_id"] == 163:
-        print("ai_pubs_in_top_conferences_by_year" in js)
         print(json.dumps(js))
     return js
 
