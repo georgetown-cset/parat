@@ -62,6 +62,47 @@ LINK_CSS = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypograph
 # Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
 FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
 
+# Copied from CAT
+PATENT_FIELD_MAPPING = {
+    "All": "All",
+    "Physical_Sciences_and_Engineering": "Physical Sciences and Engineering",
+    "Life_Sciences": "Life Sciences",
+    "Security__eg_cybersecurity": "Security",
+    "Transportation": "Transportation",
+    "Industrial_and_Manufacturing": "Industry and Manufacturing",
+    "Education": "Education",
+    "Document_Mgt_and_Publishing": "Document Management and Publishing",
+    "Military": "Military",
+    "Agricultural": "Agriculture",
+    "Computing_in_Government": "Computing in Government",
+    "Personal_Devices_and_Computing": "Personal Devices and Computing",
+    "Banking_and_Finance": "Banking and Finance",
+    "Telecommunications": "Telecommunications",
+    "Networks__eg_social_IOT_etc": "Networks",
+    "Business": "Business",
+    "Energy_Management": "Energy Management",
+    "Entertainment": "Entertainment",
+    "Nanotechnology": "Nanotechnology",
+    "Semiconductors": "Semiconductors",
+    "Language_Processing": "Natural Language Processing",
+    "Speech_Processing": "Speech Processing",
+    "Knowledge_Representation": "Knowledge Representation",
+    "Planning_and_Scheduling": "Planning and Scheduling",
+    "Control": "Control Methods",
+    "Distributed_AI": "Distributed AI",
+    "Robotics": "Robotics",
+    "Computer_Vision": "Computer Vision",
+    "Analytics_and_Algorithms": "Analytics and Algorithms",
+    "Measuring_and_Testing": "Measuring and Testing",
+    "Logic_Programming": "Logic Programming",
+    "Fuzzy_Logic": "Fuzzy Logic",
+    "Probabilistic_Reasoning": "Probabilistic Reasoning",
+    "Ontology_Engineering": "Ontology Engineering",
+    "Machine_Learning": "Machine Learning",
+    "Search_Methods": "Search Methods",
+    "Generic_and_Unspecified": "General",
+}
+
 ### END CONSTANTS ###
 
 
@@ -74,7 +115,6 @@ def get_exchange_link(market_key: str) -> dict:
     """
     time.sleep(5)
     # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
-    print(market_key)
     first, last = sorted(market_key.strip(":").split(":"))
     gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
     headers = {
@@ -442,9 +482,10 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     :param years: a list of years to include
     :return: a tuple containing a list of counts for each year in years, and the sum of the counts
     """
-    year_key = "year" if not key == "ai_patents" else "priority_year"
-    earliest_valid_year = min(years)
-    counts_by_year = {p[year_key]: p[key] for p in counts if p[year_key] and int(p[year_key]) >= earliest_valid_year}
+    if not counts:
+        return [0 for _ in years], 0
+    year_key = "priority_year" if "priority_year" in counts[0] else "year"
+    counts_by_year = {p[year_key]: p[key] for p in counts}
     yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
     return yearly_counts, sum(yearly_counts)
 
@@ -467,6 +508,17 @@ def get_market_link_list(market: list) -> dict:
     return {"__html": ", ".join(market_elts)}
 
 
+def get_top_n_list(entities: list, count_key: str) -> list:
+    """
+
+    :param entities:
+    :param count_key:
+    :return:
+    """
+    entities.sort(key=lambda e: e[count_key], reverse=True)
+    return entities[:10]
+
+
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
     """
     Given a row from a jsonl, reformat its elements into the form needed by the PARAT javascript
@@ -477,8 +529,6 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     :return: dict of company metadata
     """
     js = json.loads(row)
-    if js["cset_id"] == 163:
-        print(row)
     orig_company_name = js["name"]
     js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
     if not js["name"]:
@@ -505,12 +555,37 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
         js.pop("ai_pubs_in_top_conferences_by_year"), "ai_pubs_in_top_conferences", js["years"]
     )
     js["yearly_citation_counts"], js["citation_count"] = get_yearly_counts(js.pop("citation_count_by_year"),
-                                                                           "citation_count",
-                                                                           js["years"])
+                                                                           "citation_count", js["years"])
     for year_idx in range(len(js["years"])):
         # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
         if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
             print(f"Mismatched publication counts for {js['cset_id']}")
+
+    # Get top ten lists
+    js["fields"] = get_top_n_list(js.pop("fields"), "field_count")
+    js["clusters"] = get_top_n_list(js.pop("clusters"), "cluster_count")
+    js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count") # TODO: figure out what this is
+    js["tasks"] = get_top_n_list(js.pop("tasks"), "task_count")
+    js["methods"] = get_top_n_list(js.pop("methods"), "method_count")
+
+    # Filter irrelevant (non-"industry", according to the categorization in CAT) patent fields
+    patent_industries = ["Physical Sciences and Engineering", "Life Sciences", "Security", "Transportation",
+                   "Industry and Manufacturing", "Education", "Document Management and Publishing", "Military",
+                   "Agriculture", "Computing in Government", "Personal Devices and Computing", "Banking and Finance",
+                   "Telecommunications", "Networks", "Business", "Energy Management", "Entertainment", "Nanotechnology",
+                   "Semiconductors"]
+    # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
+    keys = list(js.keys())
+    # TODO: maybe restructure this so we don't have to parse keys to iterate over patent data in the UI
+    for k in keys:
+        if "_pats" not in k:
+            continue
+        field_name = k.replace("_pats_by_year", "").replace("_pats", "")
+        if PATENT_FIELD_MAPPING[field_name] not in patent_industries:
+            js.pop(k)
+        elif k.endswith("_pats_by_year"):
+            js["yearly_"+field_name], js[field_name+"_count"] = get_yearly_counts(js.pop(k),
+                                                                                  field_name+"_pats", js["years"])
 
     market = clean_market(js.pop("market"), market_key_to_link)
     js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in FILT_EXCHANGES]
@@ -524,6 +599,9 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
         url = js["crunchbase"]["crunchbase_url"]
         if url in CRUNCHBASE_URL_OVERRIDE:
             js["crunchbase"]["crunchbase_url"] = CRUNCHBASE_URL_OVERRIDE[url]
+    if js["cset_id"] == 163:
+        print("ai_pubs_in_top_conferences_by_year" in js)
+        print(json.dumps(js))
     return js
 
 
