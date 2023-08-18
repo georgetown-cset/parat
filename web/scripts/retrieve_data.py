@@ -2,7 +2,6 @@ import argparse
 import chardet
 import csv
 import json
-import math
 import os
 import pycountry
 import pycountry_convert
@@ -24,7 +23,7 @@ Retrieves and reformats raw data for consumption by javascript
 ### CONSTANTS ###
 
 RAW_DATA_DIR = "raw_data"
-WEB_SRC_DIR = os.path.join("parat", "src")
+WEB_SRC_DIR = os.path.join("gui-v2", "src")
 IMAGE_DIR = os.path.join(WEB_SRC_DIR, "images")
 
 # Local cache of raw data (ai_companies_visualization.visualization_data)
