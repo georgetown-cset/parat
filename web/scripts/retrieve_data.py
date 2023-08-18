@@ -271,30 +271,6 @@ def clean_wiki_description(wiki_desc: str) -> str:
     return clean_wiki_desc
 
 
-def add_ranks(rows: list, metrics: list) -> None:
-    """
-    Mutates `rows`
-    :param rows:
-    :param metrics:
-    :return: None (mutates `rows`)
-    """
-    for metric in metrics:
-        curr_rank = 0
-        curr_value = 100000000000
-        rows.sort(key=lambda r: -1*r[metric])
-        max_metric = math.log(max([r[metric] for r in rows])+1, 2)
-        for idx, row in enumerate(rows):
-            if row[metric] < curr_value:
-                curr_rank = idx+1
-                curr_value = row[metric]
-            row[metric] = {
-                "value": row[metric],
-                "rank": curr_rank,
-                # used to scale color
-                "frac_of_max": math.log(row[metric]+1, 2)/max_metric
-            }
-
-
 def get_translation(desc: str, client, parent) -> str:
     """
     Get translation of non-english company descriptions. Returns None if `desc` cannot be translated or if it is
@@ -619,7 +595,7 @@ def get_category_counts(js: dict) -> None:
         if "_pats" not in k:
             continue
         field_name = k.replace("_pats_by_year", "").replace("_pats", "")
-        if PATENT_FIELD_MAPPING[field_name] not in INDUSTRY_PATENT_CATEGORIES:
+        if (PATENT_FIELD_MAPPING[field_name] not in INDUSTRY_PATENT_CATEGORIES) or k.endswith("_pats"):
             js.pop(k)
         elif k.endswith("_pats_by_year"):
             counts, total = get_yearly_counts(js.pop(k), field_name+"_pats", years)
@@ -629,6 +605,10 @@ def get_category_counts(js: dict) -> None:
                 "total": total
             }
     js["patents"] = patents
+
+    for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_pubs_in_top_conferences",
+                            "all_pubs", "ai_patents"]:
+        js.pop(redundant_count)
 
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
@@ -681,7 +661,6 @@ def clean(refresh_images: bool) -> None:
     with open(RAW_DATA_FI) as f:
         for row in f:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
-    add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
     add_supplemental_descriptions(rows)
     with open(os.path.join(WEB_SRC_DIR, "static_data", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
