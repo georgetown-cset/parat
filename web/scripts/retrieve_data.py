@@ -462,7 +462,8 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     :param counts: a list of dicts containing year (`year`) and count (`key`) information
     :param key: the key in the `counts` dicts that contains the yearly count
     :param years: a list of years to include
-    :return: a tuple containing a list of counts for each year in years, and the sum of the counts
+    :return: a tuple containing a list of counts for each year in years, and the sum of the counts over all years
+    (including those outside `years`)
     """
     if not counts:
         return [0 for _ in years], 0
@@ -624,8 +625,6 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
     get_top_10_lists(js)
     get_category_counts(js)
-    if js["cset_id"] == 163:
-        print(json.dumps(js))
     return js
 
 

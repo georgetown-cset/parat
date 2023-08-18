@@ -1,0 +1,756 @@
+{
+  "cset_id": 796,
+  "country": "United States",
+  "website": "https://abc.xyz/",
+  "crunchbase": {
+    "crunchbase_uuid": "096694c6-bcd2-a975-b95c-fab77c81d915",
+    "crunchbase_url": "https://www.crunchbase.com/organization/alphabet"
+  },
+  "child_crunchbase": [
+    {
+      "crunchbase_uuid": "19a9c1dc-6f04-41ca-bd48-77dad98897a0",
+      "crunchbase_url": "https://www.crunchbase.com/organization/intrinsic-97a0"
+    },
+    {
+      "crunchbase_uuid": "c1833ca6-85d5-e3b8-08e5-8fcceb76717b",
+      "crunchbase_url": "https://www.crunchbase.com/organization/google-s-self-driving-car-project"
+    },
+    {
+      "crunchbase_uuid": "d9f418da-28f5-8b04-97f7-086b4ffbf048",
+      "crunchbase_url": "https://www.crunchbase.com/organization/vicarious-systems-inc"
+    },
+    {
+      "crunchbase_uuid": "ceff4e5b-95c2-839a-3150-c340c4b5bc71",
+      "crunchbase_url": "https://www.crunchbase.com/organization/verily-2"
+    }
+  ],
+  "linkedin": [
+    "https://www.linkedin.com/company/intrinsic",
+    "https://www.linkedin.com/company/alphabet-inc",
+    "https://www.linkedin.com/company/waymo",
+    "https://www.linkedin.com/company/vicarious-ai",
+    "https://www.linkedin.com/company/verily"
+  ],
+  "in_sandp_500": true,
+  "in_fortune_global_500": true,
+  "stage": "Mature",
+  "tt1_jobs": 2111,
+  "ai_jobs": 213,
+  "name": "Alphabet",
+  "patent_name": "alphabet",
+  "continent": "North America",
+  "local_logo": "alphabet.png",
+  "aliases": "Alphabet Inc",
+  "grid_info": "grid.497059.6",
+  "grid_links": {
+    "__html": "<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.grid.ac/institutes/grid.497059.6'>grid.497059.6</a>"
+  },
+  "permid_info": "5082534760, 5030853586, 5053732847, 5028044072, 5050702354",
+  "permid_links": {
+    "__html": "<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5082534760'>5082534760</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5030853586'>5030853586</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5053732847'>5053732847</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5028044072'>5028044072</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5050702354'>5050702354</a>"
+  },
+  "parent_info": null,
+  "agg_child_info": "Intrinsic, Waymo, Vicarious Ai, Verily Life Sciences",
+  "unagg_child_info": "Google Brain, Deepmind, Google, Fitbit, Nest, Google Robotics",
+  "market_filt": [
+    {
+      "market_key": "NASDAQ:GOOG",
+      "link": "https://www.google.com/finance/quote/goog:nasdaq"
+    },
+    {
+      "market_key": "NASDAQ:GOOGL",
+      "link": "https://www.google.com/finance/quote/googl:nasdaq"
+    }
+  ],
+  "full_market_links": {
+    "__html": "<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/goog:nasdaq'>NASDAQ:GOOG</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/bmv:googl'>BMV:GOOGL</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:dus'>DUS:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/goog-rm:moex'>MOEX:GOOG-RM</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/goog:neo'>NEO:GOOG</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:mun'>MUN:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/googl:mil'>MIL:GOOGL</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:xetr'>XETR:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:ham'>HAM:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/0rih:lon'>LON:0RIH</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:ber'>BER:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/googl:nasdaq'>NASDAQ:GOOGL</a>"
+  },
+  "market_list": "NASDAQ:GOOG, BMV:GOOGL, DUS:ABEA, MOEX:GOOG-RM, NEO:GOOG, MUN:ABEA, MIL:GOOGL, XETR:ABEA, HAM:ABEA, LON:0RIH, BER:ABEA, NASDAQ:GOOGL",
+  "crunchbase_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
+  "fields": [
+    {
+      "field_name": "Segmentation",
+      "field_count": 4
+    },
+    {
+      "field_name": "Task (computing)",
+      "field_count": 4
+    },
+    {
+      "field_name": "Convolutional neural network",
+      "field_count": 4
+    },
+    {
+      "field_name": "Object (computer science)",
+      "field_count": 4
+    },
+    {
+      "field_name": "Probabilistic logic",
+      "field_count": 4
+    },
+    {
+      "field_name": "Receiver operating characteristic",
+      "field_count": 4
+    },
+    {
+      "field_name": "Inference",
+      "field_count": 4
+    },
+    {
+      "field_name": "Feature (computer vision)",
+      "field_count": 3
+    },
+    {
+      "field_name": "Deep learning",
+      "field_count": 3
+    },
+    {
+      "field_name": "Concept learning",
+      "field_count": 3
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": 23307,
+      "cluster_count": 12
+    },
+    {
+      "cluster_id": 19977,
+      "cluster_count": 9
+    },
+    {
+      "cluster_id": 2844,
+      "cluster_count": 4
+    },
+    {
+      "cluster_id": 56050,
+      "cluster_count": 4
+    },
+    {
+      "cluster_id": 32715,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 1609,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 52787,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 4455,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 2482,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 3628,
+      "cluster_count": 2
+    }
+  ],
+  "company_references": [
+    {
+      "ref_CSET_id": 101,
+      "referenced_count": 506
+    },
+    {
+      "ref_CSET_id": 87,
+      "referenced_count": 140
+    },
+    {
+      "ref_CSET_id": 163,
+      "referenced_count": 135
+    },
+    {
+      "ref_CSET_id": 796,
+      "referenced_count": 103
+    },
+    {
+      "ref_CSET_id": 184,
+      "referenced_count": 58
+    },
+    {
+      "ref_CSET_id": 336,
+      "referenced_count": 46
+    },
+    {
+      "ref_CSET_id": 35,
+      "referenced_count": 42
+    },
+    {
+      "ref_CSET_id": 23,
+      "referenced_count": 34
+    },
+    {
+      "ref_CSET_id": 6,
+      "referenced_count": 34
+    },
+    {
+      "ref_CSET_id": 223,
+      "referenced_count": 33
+    }
+  ],
+  "tasks": [
+    {
+      "referent": "classification",
+      "task_count": 18
+    },
+    {
+      "referent": "autonomous_driving",
+      "task_count": 13
+    },
+    {
+      "referent": "artificial_intelligence_and_machine_learning",
+      "task_count": 12
+    },
+    {
+      "referent": "motion_planning",
+      "task_count": 9
+    },
+    {
+      "referent": "disease_detection",
+      "task_count": 8
+    },
+    {
+      "referent": "domain_generalization",
+      "task_count": 8
+    },
+    {
+      "referent": "autonomous_vehicles",
+      "task_count": 7
+    },
+    {
+      "referent": "inference_attack",
+      "task_count": 7
+    },
+    {
+      "referent": "object_detection",
+      "task_count": 7
+    },
+    {
+      "referent": "segmentation",
+      "task_count": 6
+    }
+  ],
+  "methods": [
+    {
+      "referent": "convolutional_neural_networks",
+      "method_count": 13
+    },
+    {
+      "referent": "3d_representations",
+      "method_count": 12
+    },
+    {
+      "referent": "recurrent_neural_networks",
+      "method_count": 11
+    },
+    {
+      "referent": "vqa_models",
+      "method_count": 10
+    },
+    {
+      "referent": "neural_architecture_search",
+      "method_count": 7
+    },
+    {
+      "referent": "symbolic_deep_learning",
+      "method_count": 6
+    },
+    {
+      "referent": "chexnet",
+      "method_count": 5
+    },
+    {
+      "referent": "causal_inference",
+      "method_count": 5
+    },
+    {
+      "referent": "mad_learning",
+      "method_count": 5
+    },
+    {
+      "referent": "generative_models",
+      "method_count": 5
+    }
+  ],
+  "years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "articles": {
+    "all_publications": {
+      "name": "All Publications",
+      "counts": [
+        0,
+        2,
+        6,
+        24,
+        61,
+        105,
+        120,
+        157,
+        134,
+        159,
+        0
+      ],
+      "total": 769
+    },
+    "ai_publications": {
+      "name": "AI Publications",
+      "counts": [
+        0,
+        1,
+        2,
+        1,
+        7,
+        18,
+        18,
+        29,
+        31,
+        29,
+        0
+      ],
+      "total": 136
+    },
+    "ai_patents": {
+      "name": "AI Patents",
+      "counts": [
+        22,
+        25,
+        61,
+        99,
+        143,
+        155,
+        201,
+        198,
+        64,
+        0,
+        0
+      ],
+      "total": 1043
+    },
+    "ai_pubs_top_conf": {
+      "name": "AI Publications in Top Conferences",
+      "counts": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        2,
+        2,
+        11,
+        11,
+        4,
+        0
+      ],
+      "total": 32
+    },
+    "citation_counts": {
+      "name": "Yearly Citations",
+      "counts": [
+        0,
+        0,
+        1,
+        15,
+        45,
+        230,
+        541,
+        1357,
+        2039,
+        1820,
+        39
+      ],
+      "total": 6087
+    },
+    "cv_pubs": {
+      "name": "Computer Vision Publications",
+      "counts": [
+        0,
+        1,
+        0,
+        0,
+        3,
+        6,
+        5,
+        13,
+        19,
+        21,
+        0
+      ],
+      "total": 68
+    },
+    "nlp_pubs": {
+      "name": "NLP Publications",
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "total": 1
+    },
+    "robotics_pubs": {
+      "name": "Robotics Publications",
+      "counts": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        4,
+        4,
+        6,
+        5,
+        10,
+        0
+      ],
+      "total": 31
+    }
+  },
+  "patents": {
+    "Physical_Sciences_and_Engineering": {
+      "name": "Physical Sciences and Engineering Patents",
+      "counts": [
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 10
+    },
+    "Life_Sciences": {
+      "name": "Life Sciences Patents",
+      "counts": [
+        3,
+        0,
+        6,
+        13,
+        17,
+        24,
+        17,
+        27,
+        5,
+        0,
+        0
+      ],
+      "total": 117
+    },
+    "Security__eg_cybersecurity": {
+      "name": "Security Patents",
+      "counts": [
+        1,
+        1,
+        3,
+        1,
+        2,
+        3,
+        2,
+        4,
+        0,
+        0,
+        0
+      ],
+      "total": 22
+    },
+    "Transportation": {
+      "name": "Transportation Patents",
+      "counts": [
+        13,
+        15,
+        17,
+        25,
+        52,
+        58,
+        50,
+        29,
+        8,
+        0,
+        0
+      ],
+      "total": 297
+    },
+    "Industrial_and_Manufacturing": {
+      "name": "Industry and Manufacturing Patents",
+      "counts": [
+        0,
+        1,
+        6,
+        10,
+        17,
+        12,
+        23,
+        21,
+        3,
+        0,
+        0
+      ],
+      "total": 93
+    },
+    "Education": {
+      "name": "Education Patents",
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        3,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "total": 7
+    },
+    "Document_Mgt_and_Publishing": {
+      "name": "Document Management and Publishing Patents",
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0
+    },
+    "Military": {
+      "name": "Military Patents",
+      "counts": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 2
+    },
+    "Agricultural": {
+      "name": "Agriculture Patents",
+      "counts": [
+        0,
+        0,
+        0,
+        2,
+        2,
+        5,
+        3,
+        10,
+        1,
+        0,
+        0
+      ],
+      "total": 23
+    },
+    "Computing_in_Government": {
+      "name": "Computing in Government Patents",
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "total": 1
+    },
+    "Personal_Devices_and_Computing": {
+      "name": "Personal Devices and Computing Patents",
+      "counts": [
+        3,
+        2,
+        17,
+        25,
+        30,
+        37,
+        40,
+        43,
+        6,
+        0,
+        0
+      ],
+      "total": 240
+    },
+    "Banking_and_Finance": {
+      "name": "Banking and Finance Patents",
+      "counts": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        2,
+        3,
+        0,
+        1,
+        0,
+        0
+      ],
+      "total": 14
+    },
+    "Telecommunications": {
+      "name": "Telecommunications Patents",
+      "counts": [
+        6,
+        3,
+        12,
+        11,
+        16,
+        21,
+        17,
+        23,
+        5,
+        0,
+        0
+      ],
+      "total": 136
+    },
+    "Networks__eg_social_IOT_etc": {
+      "name": "Networks Patents",
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0
+    },
+    "Business": {
+      "name": "Business Patents",
+      "counts": [
+        0,
+        4,
+        3,
+        4,
+        11,
+        7,
+        4,
+        11,
+        2,
+        0,
+        0
+      ],
+      "total": 61
+    },
+    "Energy_Management": {
+      "name": "Energy Management Patents",
+      "counts": [
+        2,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      "total": 10
+    },
+    "Entertainment": {
+      "name": "Entertainment Patents",
+      "counts": [
+        1,
+        0,
+        1,
+        3,
+        2,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 12
+    },
+    "Nanotechnology": {
+      "name": "Nanotechnology Patents",
+      "counts": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 1
+    },
+    "Semiconductors": {
+      "name": "Semiconductors Patents",
+      "counts": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 4
+    }
+  }
+}
