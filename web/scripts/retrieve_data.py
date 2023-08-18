@@ -493,7 +493,7 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     year_key = "priority_year" if "priority_year" in counts[0] else "year"
     counts_by_year = {p[year_key]: p[key] for p in counts}
     yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
-    return yearly_counts, sum(yearly_counts)
+    return yearly_counts, sum([v for _, v in counts_by_year.items() if v])
 
 
 def get_market_link_list(market: list) -> dict:
@@ -587,23 +587,34 @@ def get_category_counts(js: dict) -> None:
     current_year = datetime.now().year
     years = list(range(current_year-10, current_year + 1))
     js["years"] = years
-    js["yearly_all_publications"], _ = get_yearly_counts(js.pop("all_pubs_by_year"), "all_pubs", years)
-    js["yearly_ai_publications"], js["ai_pubs"] = get_yearly_counts(js.pop("ai_pubs_by_year"), "ai_pubs", years)
-    js["yearly_ai_patents"], js["ai_patents"] = get_yearly_counts(js.pop("ai_patents_by_year"),
-                                                                  "ai_patents", years)
-    js["yearly_ai_pubs_top_conf"], js["ai_pubs_in_top_conferences"] = get_yearly_counts(
-        js.pop("ai_pubs_in_top_conferences_by_year"), "ai_pubs_in_top_conferences", years
-    )
-    js["yearly_citation_counts"], js["citation_count"] = get_yearly_counts(js.pop("citation_count_by_year"),
-                                                                           "citation_count", years)
+    articles = {}
+    for machine_name, human_name, orig_key, count_key in [
+        ["all_publications", "All Publications", "all_pubs_by_year", "all_pubs"],
+        ["ai_publications", "AI Publications", "ai_pubs_by_year", "ai_pubs"],
+        ["ai_patents", "AI Patents", "ai_patents_by_year", "ai_patents"],
+        ["ai_pubs_top_conf", "AI Publications in Top Conferences",
+            "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences"],
+        ["citation_counts", "Yearly Citations", "citation_count_by_year", "citation_count"],
+        ["cv_pubs", "Computer Vision Publications", "cv_pubs_by_year", "cv_pubs"],
+        ["nlp_pubs", "NLP Publications", "nlp_pubs_by_year", "nlp_pubs"],
+        ["robotics_pubs", "Robotics Publications", "robotics_pubs_by_year", "robotics_pubs"],
+    ]:
+        counts, total = get_yearly_counts(js.pop(orig_key), count_key, years)
+        articles[machine_name] = {
+            "name": human_name,
+            "counts": counts,
+            "total": total
+        }
+
     for year_idx in range(len(years)):
         # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
-        if js["yearly_all_publications"][year_idx] < js["yearly_ai_publications"][year_idx]:
+        if articles["all_publications"]["counts"][year_idx] < articles["ai_publications"]["counts"][year_idx]:
             print(f"Mismatched publication counts for {js['cset_id']}")
+    js["articles"] = articles
 
+    patents = {}
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
     keys = list(js.keys())
-    # TODO: maybe restructure this so we don't have to parse keys to iterate over patent data in the UI
     for k in keys:
         if "_pats" not in k:
             continue
@@ -611,8 +622,13 @@ def get_category_counts(js: dict) -> None:
         if PATENT_FIELD_MAPPING[field_name] not in INDUSTRY_PATENT_CATEGORIES:
             js.pop(k)
         elif k.endswith("_pats_by_year"):
-            js["yearly_"+field_name], js[field_name+"_count"] = get_yearly_counts(js.pop(k),
-                                                                                  field_name+"_pats", years)
+            counts, total = get_yearly_counts(js.pop(k), field_name+"_pats", years)
+            patents[field_name] = {
+                "name": PATENT_FIELD_MAPPING[field_name]+" Patents",
+                "counts": counts,
+                "total": total
+            }
+    js["patents"] = patents
 
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
@@ -628,6 +644,8 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
     get_top_10_lists(js)
     get_category_counts(js)
+    if js["cset_id"] == 163:
+        print(json.dumps(js))
     return js
 
 
