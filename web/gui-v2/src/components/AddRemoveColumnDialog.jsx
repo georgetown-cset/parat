@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 
 import { ButtonStyled } from '@eto/eto-ui-components';
+import { plausibleEvent } from '../util/analytics';
 
 
 const styles = {
@@ -77,11 +78,15 @@ const AddRemoveColumnDialog = ({
   };
 
   const handleApply = () => {
-    const result = Object.entries(columnsInternal)
+    const columns = Object.entries(columnsInternal)
       .filter(e => e[1])
-      .map(e => e[0]);
+      .map(e => e[0])
+      .join(',');
 
-    updateSelectedColumns(result.join(','));
+    if ( columns !== selectedColumns ) {
+      plausibleEvent('Update selected columns', { columns });
+      updateSelectedColumns(columns);
+    }
     updateIsOpen(false);
   };
 

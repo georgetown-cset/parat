@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import { css } from '@emotion/react';
 import {
@@ -22,6 +22,7 @@ import DetailViewPatents from './DetailViewPatents';
 import DetailViewWorkforce from './DetailViewWorkforce';
 import tableOfContentsData from '../static_data/detail-toc.json';
 import { useWindowSize } from '../util';
+import { plausibleEvent } from '../util/analytics';
 
 
 const styles = {
@@ -84,6 +85,10 @@ const DetailView = ({
   companyId,
 }) => {
   const windowSize = useWindowSize();
+
+  useEffect(() => {
+    plausibleEvent('Load detail page', { companyId, companyName: companyData?.name });
+  }, []);
 
   if ( companyId === undefined ) {
     return <div css={styles.error}>ERROR: No company ID found: "{companyId}"</div>
