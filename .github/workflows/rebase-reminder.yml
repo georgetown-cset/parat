@@ -1,12 +1,5 @@
 name: Rebase reminder
-on:
-  pull_request:
-  pull_request_review:
-  push:
-    branches:
-      - main
-      - master
-      - version2
+on: [pull_request, pull_request_review]
 
 jobs:
   build:
