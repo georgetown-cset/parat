@@ -123,12 +123,6 @@ const listToDropdownOptions = (list) => {
   return list.map(o => ({val: o, text: o}));
 }
 
-const dropdownParamToArray = (str) => {
-  return str
-    .split(',')
-    .filter(e => e !== "");
-}
-
 const AGGREGATE_SUM_COLUMNS = [
   'ai_pubs',
   'ai_patents',
@@ -215,14 +209,23 @@ const ListViewTable = ({
     },
     (key, val) => {
       if ( DROPDOWN_COLUMNS.includes(key) ) {
-        return dropdownParamToArray(val);
+        let result = val.split(',').filter(e => e !== "");
+        if ( key === 'name' ) {
+          result = result.map(e => e.replace('&comma;', ','));
+        }
+        return result;
       } else if ( SLIDER_COLUMNS.includes(key) ) {
         return val?.split(',').map(e => parseInt(e));
       } else {
         return val?.split(',').filter(e => e !== "");
       }
     },
-    (_key, val) => val?.join(',')
+    (key, val) => {
+      if ( key === 'name' ) {
+        val = val.map(e => e.replace(',', '&comma;'));
+      }
+      return val?.join(',');
+    }
   );
 
   // Read-only object of the currently-set values of the filters
