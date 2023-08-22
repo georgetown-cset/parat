@@ -96,6 +96,11 @@ const styles = {
 };
 
 
+const DATAKEYS_WITH_SUBKEYS = [
+  "articles",
+  "patents",
+];
+
 const DEFAULT_COLUMNS = columnDefinitions
   .filter(colDef => colDef?.initialCol)
   .map(colDef => colDef.key);
@@ -138,7 +143,7 @@ const filterRow = (row, filters, selectedGroup) => {
   const filterKeys = Object.keys(filters);
 
   if ( selectedGroup !== NO_SELECTED_GROUP ) {
-    if ( ! groupsList[selectedGroup].members.includes(row.CSET_id) ) {
+    if ( ! groupsList[selectedGroup].members.includes(row.cset_id) ) {
       return false;
     }
   }
@@ -150,7 +155,12 @@ const filterRow = (row, filters, selectedGroup) => {
 
     // Extract the appropriate value from the row, as defined for the column
     // (for example, the `value` key of the `ai_pubs` column).
-    const rowVal = colDef?.extract?.(row[colDef.key]) ?? row[colDef.key];
+    const dataKey = colDef.dataKey ?? colDef.key;
+    let rawVal = row[dataKey];
+    if ( colDef.dataKey && DATAKEYS_WITH_SUBKEYS.includes(colDef.dataKey) ) {
+      rawVal = rawVal[colDef.dataSubkey];
+    }
+    const rowVal = colDef?.extract?.(rawVal, row) ?? rawVal;
 
     if ( colDef.type === "dropdown" ) {
       if ( filters?.[colDef.key].length > 0 ) {
@@ -362,8 +372,9 @@ const ListViewTable = ({
             if ( !AGGREGATE_SUM_COLUMNS.includes(colDef.key) ) {
               continue;
             }
-            const keyVal = curr[colDef.key];
-            const keyValExtract = colDef?.extract?.(keyVal) ?? keyVal;
+            const dataKey = colDef.dataKey ?? colDef.key;
+            const keyVal = curr[dataKey];
+            const keyValExtract = colDef?.extract?.(keyVal, curr) ?? keyVal;
             acc[colDef.key] = (acc[colDef.key] ?? 0) + keyValExtract;
           }
           return acc;

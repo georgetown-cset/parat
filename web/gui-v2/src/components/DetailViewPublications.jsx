@@ -21,8 +21,8 @@ const DetailViewPublications = ({
     "All publications vs AI publications over time",
     data.years,
     [
-      ["All publications", data.yearly_all_publications],
-      ["AI publications", data.yearly_ai_publications],
+      ["All publications", data.articles.all_publications.counts],
+      ["AI publications", data.articles.ai_publications.counts],
     ],
     chartLayoutChanges,
   );
@@ -31,7 +31,7 @@ const DetailViewPublications = ({
     "AI top conference publications",
     data.years,
     [
-      ["AI top conference publications", data.yearly_ai_pubs_top_conf],
+      ["AI top conference publications", data.articles.ai_pubs_top_conf.counts],
     ],
     chartLayoutChanges,
   );

@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
+import { commas } from '../util';
+
 const styles = {
   cell: css`
     display: flex;
@@ -16,7 +18,7 @@ const styles = {
 const CellStat = ({data, colKey}) => {
   return (
     <div css={styles.cell}>
-      <span className="val">{data.value}</span> <span className="rank">#{data.rank}</span>
+      <span className="val">{commas(data.total)}</span> <span className="rank">#{data.rank}</span>
     </div>
   );
 };

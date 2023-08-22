@@ -22,7 +22,7 @@ const DetailViewPatents = ({
     "AI patents over time",
     data.years,
     [
-      ["AI patents", data.yearly_ai_patents],
+      ["AI patents", data.patents.ai_patents.counts],
     ],
     chartLayoutChanges,
   );
