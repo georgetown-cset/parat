@@ -82,6 +82,17 @@ const styles = {
       }
     }
   `,
+  fallbackContent: css`
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+
+    big {
+      font-size: 150%;
+    }
+  `,
 };
 
 
@@ -410,9 +421,15 @@ const ListViewTable = ({
         columns={columns}
         css={styles.table}
         data={dataForTable}
+        fallbackContent={
+          <div css={styles.fallbackContent}>
+            <big>No results found</big>
+            <span>Try adjusting your filters to get more results</span>
+          </div>
+        }
         footerData={footerData}
         paginate={true}
-        showFooter={selectedGroup !== NO_SELECTED_GROUP}
+        showFooter={selectedGroup !== NO_SELECTED_GROUP && Object.keys(footerData).length > 0}
         sortByDir="desc"
         sortByKey="ai_pubs"
       />
