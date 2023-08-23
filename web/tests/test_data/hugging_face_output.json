@@ -13,8 +13,6 @@
   "in_sandp_500": false,
   "in_fortune_global_500": false,
   "stage": "Growth",
-  "tt1_jobs": 72,
-  "ai_jobs": 37,
   "name": "Hugging Face",
   "patent_name": "hugging face",
   "continent": "North America",
@@ -702,6 +700,18 @@
         0
       ],
       "total": 0
+    }
+  },
+  "other_metrics": {
+    "tt1_jobs": {
+      "name": "Tech Tier 1 Jobs",
+      "counts": null,
+      "total": 72
+    },
+    "ai_jobs": {
+      "name": "AI Jobs",
+      "counts": null,
+      "total": 37
     }
   }
 }

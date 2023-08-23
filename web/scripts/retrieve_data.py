@@ -564,6 +564,8 @@ def get_category_counts(js: dict) -> None:
     years = list(range(current_year-10, current_year + 1))
     js["years"] = years
     articles = {}
+
+    ### Reformat publication-related metrics
     for machine_name, human_name, orig_key, count_key in [
         ["all_publications", "All Publications", "all_pubs_by_year", "all_pubs"],
         ["ai_publications", "AI Publications", "ai_pubs_by_year", "ai_pubs"],
@@ -587,6 +589,7 @@ def get_category_counts(js: dict) -> None:
             print(f"Mismatched publication counts for {js['cset_id']}")
     js["articles"] = articles
 
+    ### Reformat patent-related metrics
     counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents", years)
     patents = {
         "ai_patents": {
@@ -612,9 +615,28 @@ def get_category_counts(js: dict) -> None:
             }
     js["patents"] = patents
 
+    ### Reformat other metrics
+    other_metrics = {}
+    for metric in ["tt1_jobs", "ai_jobs"]:
+        other_metrics[metric] = {
+            "name": "Tech Tier 1 Jobs" if metric == "tt1_jobs" else "AI Jobs",
+            "counts": None,
+            "total": js.pop(metric)
+        }
+    js["other_metrics"] = other_metrics
+
     for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_pubs_in_top_conferences",
                             "all_pubs", "ai_patents"]:
         js.pop(redundant_count)
+
+
+def add_rankings(js: dict) -> None:
+    """
+    Reformat yearly and count-across-all-years data
+    :param js: A dict of data corresponding to an individual PARAT record
+    :return: None (mutates js)
+    """
+    pass
 
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
@@ -630,6 +652,7 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
     get_top_10_lists(js)
     get_category_counts(js)
+    add_rankings(js)
     return js
 
 
