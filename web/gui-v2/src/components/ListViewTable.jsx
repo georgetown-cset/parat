@@ -112,13 +112,6 @@ const resetVal = (key) => {
   return DEFAULT_FILTER_VALUES[key] ?? [];
 };
 
-const getDataList = (data, filters, key) => {
-  if ( filters[key] === null ){
-    return [...new Set(data.map(company => company[key]).filter(c => c !== null))].sort()
-  }
-  return [...new Set(filters[key])].sort();
-};
-
 const listToDropdownOptions = (list) => {
   return list.map(o => ({val: o, text: o}));
 }
@@ -254,6 +247,13 @@ const ListViewTable = ({
     }
   };
 
+  // Filter the data for display.
+  const dataForTable = data.filter(row => filterRow(row, currentFilters, selectedGroup));
+  const numRows = dataForTable.length;
+  const totalRows = data.length;
+
+  // The filter options available for each column, given the currently-applied
+  // filters from the other columns.
   const narrowedFilterOptions = useMemo(
     () => {
       const columns = Object.keys(currentFilters).filter(e => DROPDOWN_COLUMNS.includes(e));
@@ -266,7 +266,13 @@ const ListViewTable = ({
         delete otherFilters[column];
 
         const filteredSubset = data.filter((row) => {
-          return filterRow(row, otherFilters, selectedGroup);
+          // If we don't have any data to display, then give the user all the
+          // possible filter options.  Otherwise, only show those that match
+          // the other active filters.
+          return (
+            numRows === 0 ||
+            filterRow(row, otherFilters, selectedGroup)
+          );
         });
 
         results[column] = listToDropdownOptions(
@@ -337,13 +343,6 @@ const ListViewTable = ({
   };
 
 
-  // Filter the data for display.
-  const dataForTable = data.filter(row => filterRow(row, currentFilters, selectedGroup));
-
-  const numRows = dataForTable.length;
-  const totalRows = data.length;
-  const filterStatText = numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows;
-
   const aggregateData = useMemo(
     () => {
       const aggregate = dataForTable
@@ -388,7 +387,7 @@ const ListViewTable = ({
             </span>
           </Button>
           <Typography>
-            Viewing {filterStatText} companies
+            Viewing {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
           </Typography>
         </div>
         <div css={styles.buttonBarRight}>
