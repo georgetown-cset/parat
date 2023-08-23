@@ -325,23 +325,6 @@
       ],
       "total": 136
     },
-    "ai_patents": {
-      "name": "AI Patents",
-      "counts": [
-        22,
-        25,
-        61,
-        99,
-        143,
-        155,
-        201,
-        198,
-        64,
-        0,
-        0
-      ],
-      "total": 1043
-    },
     "ai_pubs_top_conf": {
       "name": "AI Publications in Top Conferences",
       "counts": [
@@ -429,6 +412,23 @@
     }
   },
   "patents": {
+    "ai_patents": {
+      "name": "AI Patents",
+      "counts": [
+        22,
+        25,
+        61,
+        99,
+        143,
+        155,
+        201,
+        198,
+        64,
+        0,
+        0
+      ],
+      "total": 1043
+    },
     "Physical_Sciences_and_Engineering": {
       "name": "Physical Sciences and Engineering Patents",
       "counts": [

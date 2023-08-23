@@ -567,7 +567,6 @@ def get_category_counts(js: dict) -> None:
     for machine_name, human_name, orig_key, count_key in [
         ["all_publications", "All Publications", "all_pubs_by_year", "all_pubs"],
         ["ai_publications", "AI Publications", "ai_pubs_by_year", "ai_pubs"],
-        ["ai_patents", "AI Patents", "ai_patents_by_year", "ai_patents"],
         ["ai_pubs_top_conf", "AI Publications in Top Conferences",
             "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences"],
         ["citation_counts", "Yearly Citations", "citation_count_by_year", "citation_count"],
@@ -588,7 +587,14 @@ def get_category_counts(js: dict) -> None:
             print(f"Mismatched publication counts for {js['cset_id']}")
     js["articles"] = articles
 
-    patents = {}
+    counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents", years)
+    patents = {
+        "ai_patents": {
+            "name": "AI Patents",
+            "counts": counts,
+            "total": total
+        }
+    }
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
     keys = list(js.keys())
     for k in keys:
