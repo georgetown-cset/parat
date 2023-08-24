@@ -2,12 +2,13 @@ import merge from 'lodash/merge';
 import { PlotlyDefaults } from '@eto/eto-ui-components';
 
 
-const assembleChartData = (name, years, vals) => {
+const assembleChartData = (name, years, vals, otherParams) => {
   return {
     hovertemplate: "%{y}",
     mode: 'lines+markers',
-    name,
     type: 'scatter',
+    ...otherParams,
+    name,
     x: years,
     y: vals,
   };
@@ -27,7 +28,9 @@ const assembleChartData = (name, years, vals) => {
  *     `{ config, data, layout, title }`
  */
 export const assemblePlotlyParams = (title, years, data, layoutChanges) => {
-  const preparedData = data.map(([traceTitle, traceData]) => assembleChartData(traceTitle, years, traceData));
+  const preparedData = data.map(([traceTitle, traceData, otherParams={}]) => {
+    return assembleChartData(traceTitle, years, traceData, otherParams);
+  });
   const maxY = Math.max(
     ...data.map(e => Math.max(...e[1]))
   );

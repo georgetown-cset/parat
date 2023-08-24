@@ -18,11 +18,14 @@ const DetailViewPublications = ({
   data,
 }) => {
   const allVsAi = assemblePlotlyParams(
-    "All publications vs AI publications over time",
+    "All publications vs topics over time",
     data.years,
     [
       ["All publications", data.articles.all_publications.counts],
       ["AI publications", data.articles.ai_publications.counts],
+      ["CV publications", data.articles.cv_pubs.counts],
+      ["NLP publications", data.articles.nlp_pubs.counts],
+      ["Robotics publications", data.articles.robotics_pubs.counts],
     ],
     chartLayoutChanges,
   );
