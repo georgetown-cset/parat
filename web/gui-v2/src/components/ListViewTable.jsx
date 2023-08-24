@@ -82,6 +82,17 @@ const styles = {
       }
     }
   `,
+  fallbackContent: css`
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+
+    big {
+      font-size: 150%;
+    }
+  `,
 };
 
 
@@ -112,21 +123,8 @@ const resetVal = (key) => {
   return DEFAULT_FILTER_VALUES[key] ?? [];
 };
 
-const getDataList = (data, filters, key) => {
-  if ( filters[key] === null ){
-    return [...new Set(data.map(company => company[key]).filter(c => c !== null))].sort()
-  }
-  return [...new Set(filters[key])].sort();
-};
-
 const listToDropdownOptions = (list) => {
   return list.map(o => ({val: o, text: o}));
-}
-
-const dropdownParamToArray = (str) => {
-  return str
-    .split(',')
-    .filter(e => e !== "");
 }
 
 const AGGREGATE_SUM_COLUMNS = [
@@ -135,9 +133,56 @@ const AGGREGATE_SUM_COLUMNS = [
 ];
 
 
+// Determine whether a given row matches the filters and/or selected group
+const filterRow = (row, filters, selectedGroup) => {
+  const filterKeys = Object.keys(filters);
+
+  if ( selectedGroup !== NO_SELECTED_GROUP ) {
+    if ( ! groupsList[selectedGroup].members.includes(row.CSET_id) ) {
+      return false;
+    }
+  }
+
+  for ( const colDef of columnDefinitions ) {
+    if ( !filterKeys.includes(colDef.key) ) {
+      continue;
+    }
+
+    // Extract the appropriate value from the row, as defined for the column
+    // (for example, the `value` key of the `ai_pubs` column).
+    const rowVal = colDef?.extract?.(row[colDef.key]) ?? row[colDef.key];
+
+    if ( colDef.type === "dropdown" ) {
+      if ( filters?.[colDef.key].length > 0 ) {
+        if ( ! filters?.[colDef.key].includes(rowVal) ) {
+          return false;
+        }
+      }
+    } else if ( colDef.type === "slider" ) {
+      if ( filters?.[colDef.key].length !== 2 ) {
+        console.error(`Invalid filter value for range filter '${colDef.key}': expecting [min, max], got ${JSON.stringify(filters?.[colDef.key].get)}`);
+        continue;
+      }
+
+      const [min, max] = filters[colDef.key];
+      if ( rowVal < min || ( max < 100 && max < rowVal) ) {
+        return false;
+      }
+    } else if ( colDef.type === "stock" ) {
+      // TODO: Figure out how we're filtering the `market_list` column
+      // -- Actually - are we even wanting this column, or did I just make
+      //    it as a placeholder?
+    } else {
+      console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
+    }
+  }
+
+  return true;
+};
+
+
 const ListViewTable = ({
   data,
-  filteredFilters,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const windowSize = useWindowSize();
@@ -168,16 +213,34 @@ const ListViewTable = ({
     },
     (key, val) => {
       if ( DROPDOWN_COLUMNS.includes(key) ) {
-        return dropdownParamToArray(val);
+        let result = val.split(',').filter(e => e !== "");
+        if ( key === 'name' ) {
+          result = result.map(e => e.replace('&comma;', ','));
+        }
+        return result;
       } else if ( SLIDER_COLUMNS.includes(key) ) {
         return val?.split(',').map(e => parseInt(e));
       } else {
         return val?.split(',').filter(e => e !== "");
       }
     },
-    (_key, val) => val?.join(',')
+    (key, val) => {
+      if ( key === 'name' ) {
+        val = val.map(e => e.replace(',', '&comma;'));
+      }
+      return val?.join(',');
+    }
   );
 
+  // Read-only object of the currently-set values of the filters
+  const currentFilters = useMemo(
+    () => {
+      return Object.fromEntries(
+        Object.entries(filters).map( ([k, { get }]) => ([k, get]) )
+      );
+    },
+    [filters]
+  );
 
   const handleDropdownChange = (columnKey, newVal) => {
     if ( ! Array.isArray(newVal) ) {
@@ -195,24 +258,43 @@ const ListViewTable = ({
     }
   };
 
+  // Filter the data for display.
+  const dataForTable = data.filter(row => filterRow(row, currentFilters, selectedGroup));
+  const numRows = dataForTable.length;
+  const totalRows = data.length;
 
-  // const filteredFilters = {
-  //   "name": null,
-  //   "country": null,
-  //   "continent": null,
-  //   "stage": null
-  // };
+  // The filter options available for each column, given the currently-applied
+  // filters from the other columns.
+  const narrowedFilterOptions = useMemo(
+    () => {
+      const columns = Object.keys(currentFilters).filter(e => DROPDOWN_COLUMNS.includes(e));
+      const results = {};
 
-  const filterOptions = useMemo(
-    () => ({
-      name: listToDropdownOptions(getDataList(data, filteredFilters, 'name')),
-      country: listToDropdownOptions(getDataList(data, filteredFilters, 'country')),
-      continent: listToDropdownOptions(getDataList(data, filteredFilters, 'continent')),
-      stage: listToDropdownOptions(getDataList(data, filteredFilters, 'stage')),
-    }),
-    [data, filteredFilters]
+      for ( const column of columns ) {
+        // Ignore the filter value for the current column since we want to
+        // provide the full range of options there.
+        const otherFilters = { ...currentFilters };
+        delete otherFilters[column];
+
+        const filteredSubset = data.filter((row) => {
+          // If we don't have any data to display, then give the user all the
+          // possible filter options.  Otherwise, only show those that match
+          // the other active filters.
+          return (
+            numRows === 0 ||
+            filterRow(row, otherFilters, selectedGroup)
+          );
+        });
+
+        results[column] = listToDropdownOptions(
+          [...new Set(filteredSubset.map(row => row[column]))].sort()
+        );
+      }
+
+      return results;
+    },
+    [data, currentFilters]
   );
-  // console.info("filterOptions:", filterOptions);
 
 
   // Prepare the columns that we will display in the `<Table>`, including
@@ -226,7 +308,7 @@ const ListViewTable = ({
           display_name = (
             <HeaderDropdown
               label={colDef.title}
-              options={filterOptions?.[colDef.key]}
+              options={narrowedFilterOptions?.[colDef.key]}
               selected={filters?.[colDef.key].get}
               setSelected={newVal => handleDropdownChange(colDef.key, newVal)}
             />
@@ -272,56 +354,6 @@ const ListViewTable = ({
   };
 
 
-  // Filter the data for display.
-  const filterKeys = Object.keys(filters);
-  const dataForTable = data
-    .filter((elem) => {
-      if ( selectedGroup !== NO_SELECTED_GROUP ) {
-        if ( ! groupsList[selectedGroup].members.includes(elem.CSET_id) ) {
-          return false;
-        }
-      }
-
-      for ( const colDef of columnDefinitions ) {
-        if ( !filterKeys.includes(colDef.key) ) {
-          continue;
-        }
-
-        // Extract the appropriate value from the row, as defined for the column
-        // (for example, the `value` key of the `ai_pubs` column).
-        const elemVal = colDef?.extract?.(elem[colDef.key]) ?? elem[colDef.key];
-
-        if ( colDef.type === "dropdown" ) {
-          if ( filters?.[colDef.key].get.length > 0 ) {
-            if ( ! filters?.[colDef.key].get.includes(elemVal) ) {
-              return false;
-            }
-          }
-        } else if ( colDef.type === "slider" ) {
-          if ( filters?.[colDef.key].get.length !== 2 ) {
-            console.error(`Invalid filter value for range filter '${colDef.key}': expecting [min, max], got ${JSON.stringify(filters?.[colDef.key].get)}`);
-            continue;
-          }
-
-          const [min, max] = filters[colDef.key].get;
-          if ( elemVal < min || ( max < 100 && max < elemVal) ) {
-            return false;
-          }
-        } else if ( colDef.type === "stock" ) {
-          // TODO: Figure out how we're filtering the `market_list` column
-          // -- Actually - are we even wanting this column, or did I just make
-          //    it as a placeholder?
-        } else {
-          console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
-        }
-      }
-
-      return true;
-    });
-  const numRows = dataForTable.length;
-  const totalRows = data.length;
-  const filterStatText = numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows;
-
   const aggregateData = useMemo(
     () => {
       const aggregate = dataForTable
@@ -366,7 +398,7 @@ const ListViewTable = ({
             </span>
           </Button>
           <Typography>
-            Viewing {filterStatText} companies
+            Viewing {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
           </Typography>
         </div>
         <div css={styles.buttonBarRight}>
@@ -389,9 +421,15 @@ const ListViewTable = ({
         columns={columns}
         css={styles.table}
         data={dataForTable}
+        fallbackContent={
+          <div css={styles.fallbackContent}>
+            <big>No results found</big>
+            <span>Try adjusting your filters to get more results</span>
+          </div>
+        }
         footerData={footerData}
         paginate={true}
-        showFooter={selectedGroup !== NO_SELECTED_GROUP}
+        showFooter={selectedGroup !== NO_SELECTED_GROUP && Object.keys(footerData).length > 0}
         sortByDir="desc"
         sortByKey="ai_pubs"
       />

@@ -12,15 +12,6 @@ const ListView = ({
   css: appliedCss,
   id: appliedId
 }) => {
-  // TODO
-  const filteredFilters = {
-    "name": null,
-    "country": null,
-    "continent": null,
-    "stage": null
-  };
-
-
   return (
     <div
       className={classes("list-view", appliedClassName)}
@@ -30,7 +21,6 @@ const ListView = ({
     >
       <ListViewTable
         data={company_data}
-        filteredFilters={filteredFilters}
       />
     </div>
   );
