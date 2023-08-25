@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react';
+import { Button } from '@mui/material';
+import { Construction as ConstructionIcon } from '@mui/icons-material';
 
 import { Dropdown, HelpTooltip } from '@eto/eto-ui-components';
 
+import EditCustomCompanyGroupDialog from './EditCustomCompanyGroupDialog';
 import { plausibleEvent } from '../util/analytics';
 
 const styles = {
@@ -14,7 +17,7 @@ const styles = {
     font-family: GTZirkonRegular;
     font-size: 120%;
     margin-bottom: 1rem;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 0.5rem;
   `,
   dropdown: css`
     margin-left: 0.5rem;
@@ -30,18 +33,32 @@ const styles = {
       }
     }
   `,
+  editCustomGroupButton: css`
+    font-family: GTZirkonLight;
+    margin-left: auto;
+
+    svg {
+      margin-right: 5px;
+    }
+  `,
 };
 
 export const NO_SELECTED_GROUP = '--';
+export const USER_CUSTOM_GROUP = 'custom';
 
 const GroupSelector = ({
+  companyList,
+  customGroup,
   groupsList,
   selectedGroup,
-  setSelectedGroup,
+  updateSelectedGroup,
+  updateCustomGroup,
 }) => {
+  const [isCustomGroupDialogOpen, setIsCustomGroupDialogOpen] = useState(false);
   const groupsOptions = [
-    { text: '--any group--', val: NO_SELECTED_GROUP },
+    { text: 'All companies', val: NO_SELECTED_GROUP },
     ...Object.keys(groupsList).map(groupName => ({ text: groupName, val: groupName })),
+    { text: 'User-defined', val: USER_CUSTOM_GROUP },
   ];
 
   return (
@@ -54,12 +71,26 @@ const GroupSelector = ({
         selected={selectedGroup}
         setSelected={(newVal) => {
           plausibleEvent('Select company group', { group: newVal });
-          setSelectedGroup(newVal);
+          updateSelectedGroup(newVal);
         }}
         showLabel={false}
       />
       <HelpTooltip
         text="TOOLTIP GOES HERE EXPLAINING GROUPS"
+      />
+      <Button
+        css={styles.editCustomGroupButton}
+        onClick={() => setIsCustomGroupDialogOpen(true)}
+      >
+        <ConstructionIcon />
+        Edit custom group
+      </Button>
+      <EditCustomCompanyGroupDialog
+        companyList={companyList}
+        customGroup={customGroup}
+        isOpen={isCustomGroupDialogOpen}
+        updateCustomGroup={updateCustomGroup}
+        updateIsOpen={setIsCustomGroupDialogOpen}
       />
     </div>
   );
