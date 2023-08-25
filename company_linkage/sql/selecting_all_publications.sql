@@ -2,42 +2,46 @@
 CREATE OR REPLACE TABLE
   ai_companies_visualization.all_publications AS
 WITH
-  gr AS (
-    -- Adding in org names and country data using GRID
+  ror AS (
+    -- Adding in org names and country data using ROR
   SELECT
     id,
-    name AS org_name,
-    country_name AS country
+    ror.name AS org_name,
+    standard_name as country
   FROM
-    gcp-cset-projects.gcp_cset_grid.api_grid),
+    gcp_cset_ror.ror
+    LEFT JOIN
+    countries.country_code
+    ON lower(country.country_code) = lower(country_code.raw_alpha_2)),
   arts AS (
     -- Selecting all the merged ids and affiliations from the links table
   SELECT
     DISTINCT
     merged_id,
     org_name,
-    grid_id
+    ror_id,
+    country
   FROM
-    `gcp-cset-projects.gcp_cset_links_v2.paper_affiliations_merged`
-    WHERE org_name IS NOT NULL OR grid_id IS NOT NULL),
+    literature.affiliations
+    WHERE org_name IS NOT NULL OR ror_id IS NOT NULL),
   article_years AS (
   SELECT
     merged_id,
     year
   FROM
-    `gcp-cset-projects.gcp_cset_links_v2.corpus_merged`)
+    literature.papers)
 SELECT
   -- Adding in the org name and country associated with the grid id
-  arts.* EXCEPT (org_name),
-  COALESCE(gr.org_name, arts.org_name) as org_name,
-  country,
+  arts.* EXCEPT (org_name, country),
+  COALESCE(ror.org_name, arts.org_name) as org_name,
+  COALESCE(ror.country, arts.country) as country,
   year
 FROM
   arts
 LEFT JOIN
-  gr
+  ror
 ON
-  arts.Grid_ID = gr.id
+  arts.ror_id = ror.id
 LEFT JOIN
   article_years
 ON
