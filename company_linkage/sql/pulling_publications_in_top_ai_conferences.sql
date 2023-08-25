@@ -6,24 +6,27 @@ WITH
   SELECT
     merged_id,
     org_name,
-    grid_id
+    ror_id
   FROM
-    `gcp-cset-projects.gcp_cset_links_v2.paper_affiliations_merged`
-    WHERE org_name IS NOT NULL OR grid_id IS NOT NULL),
-  -- Associating GRID organizational information to the GRIDs, for consistent naming and locational information
-  grid_data AS (
+    literature.affiliations
+    WHERE org_name IS NOT NULL OR ror_id IS NOT NULL),
+  -- Associating ROR organizational information to the RORs, for consistent naming and locational information
+  ror_data AS (
   SELECT
     id,
-    name AS org_name,
-    country_name AS country
+    ror.name AS org_name,
+    standard_name as country
   FROM
-    gcp-cset-projects.gcp_cset_grid.api_grid)
-  -- For every paper that was published at a top AI conference, we want its paper id, its grid, and its grid-base org name
+    gcp_cset_ror.ror
+    LEFT JOIN
+    countries.country_code
+    ON lower(country.country_code) = lower(country_code.raw_alpha_2))
+  -- For every paper that was published at a top AI conference, we want its paper id, its ror, and its ror-based org name
 SELECT
   DISTINCT
   top_pubs.merged_id,
-  COALESCE(grid_data.org_name, affils.org_name) as org_name,
-  grid_id,
+  COALESCE(ror_data.org_name, affils.org_name) as org_name,
+  ror_id,
   year
 FROM
   ai_companies_visualization.top_conference_pubs AS top_pubs
@@ -33,11 +36,11 @@ INNER JOIN
 ON
   top_pubs.merged_id = affils.merged_id
 LEFT JOIN
-  grid_data
+  ror_data
 ON
-  affils.Grid_ID = grid_data.id
+  affils.ror_ID = ror_data.id
 GROUP BY
-  Grid_ID,
+  ror_id,
   org_name,
   top_pubs.merged_id,
   year
