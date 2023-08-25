@@ -1,33 +1,82 @@
-name: Python application
+name: CI tests
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
-
+    name: tests-pass
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+      pull-requests: 'write'
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
+    - uses: actions/checkout@v3
+    # - name: Set up Python 3.7
+    #   uses: actions/setup-python@v`
+    #   with:
+    #     python-version: 3.7
+    # - name: Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install -r requirements.txt
+    - name: 'Authenticate to Google Cloud'
+      id: 'auth'
+      uses: 'google-github-actions/auth@v1'
       with:
-        python-version: 3.7
-    - name: Install dependencies
+        workload_identity_provider: 'projects/855475113448/locations/global/workloadIdentityPools/eto-github/providers/eto-github'
+        service_account: 'eto-artifact-registry-github@gcp-cset-projects.iam.gserviceaccount.com'
+        token_format: 'access_token'
+    - name: 'Log into Artifact Registry'
+      uses: 'docker/login-action@v2'
+      with:
+        registry: us-east1-docker.pkg.dev
+        username: 'oauth2accesstoken'
+        password: '${{ steps.auth.outputs.access_token }}'
+    - name: Setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    - name: Test with Jest
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Lint with flake8
-      run: |
-        pip install flake8
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pip install pytest
-        cd web
-        python3 -m pytest tests
-        cd ..
-        python3 -m pytest company_linkage/test_aggregate_organizations.py
+        cd web/gui-v2
+        npm run artifactregistry-login
+        npm install
+        npm test -- --coverage --coverageReporters="json-summary" --coverageReporters="text" | tee ./coverage.txt
+      shell: bash
+    # - name: Run linting
+    #   run: |
+    #     pip install pre-commit
+    #     pre-commit run --all-files
+    # - name: Lint with flake8
+    #   run: |
+    #     pip install flake8
+    #     # stop the build if there are Python syntax errors or undefined names
+    #     flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    #     # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+    #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    # - name: Test with pytest
+    #   run: |
+    #     pip install pytest
+    #     cd web
+    #     python3 -m pytest tests
+    #     cd ..
+    #     python3 -m pytest company_linkage/test_aggregate_organizations.py
+    # - name: Report python coverage
+    #   uses: orgoro/coverage@v3
+    #   with:
+    #     coverageFile: coverage/python.xml
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Report javascript coverage
+      uses: MishaKav/jest-coverage-comment@v1.0.23
+      with:
+        title: "JavaScript Coverage"
+        summary-title: "Summary"
+        coverage-title: "Modified Files"
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        report-only-changed-files: true
+        coverage-path: ./web/gui-v2/coverage.txt
+        coverage-summary-path: ./web/gui-v2/coverage/coverage-summary.json
+        coverage-path-prefix: web/gui-v2/src/
