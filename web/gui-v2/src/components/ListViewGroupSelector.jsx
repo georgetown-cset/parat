@@ -35,7 +35,6 @@ const styles = {
   `,
   editCustomGroupButton: css`
     font-family: GTZirkonLight;
-    margin-left: auto;
 
     svg {
       margin-right: 5px;
@@ -64,6 +63,9 @@ const GroupSelector = ({
   return (
     <div css={styles.groupSelector}>
       <span>Select a group for comparison:</span>
+      <HelpTooltip
+        text="TOOLTIP GOES HERE EXPLAINING GROUPS"
+      />
       <Dropdown
         css={styles.dropdown}
         inputLabel="Group"
@@ -75,16 +77,15 @@ const GroupSelector = ({
         }}
         showLabel={false}
       />
-      <HelpTooltip
-        text="TOOLTIP GOES HERE EXPLAINING GROUPS"
-      />
-      <Button
-        css={styles.editCustomGroupButton}
-        onClick={() => setIsCustomGroupDialogOpen(true)}
-      >
-        <ConstructionIcon />
-        Edit custom group
-      </Button>
+      {selectedGroup === USER_CUSTOM_GROUP &&
+        <Button
+          css={styles.editCustomGroupButton}
+          onClick={() => setIsCustomGroupDialogOpen(true)}
+        >
+          <ConstructionIcon />
+          Edit custom group
+        </Button>
+      }
       <EditCustomCompanyGroupDialog
         companyList={companyList}
         customGroup={customGroup}

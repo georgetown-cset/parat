@@ -144,10 +144,12 @@ const AGGREGATE_SUM_COLUMNS = [
 const filterRow = (row, filters, selectedGroupMembers) => {
   const filterKeys = Object.keys(filters);
 
-  if ( !selectedGroupMembers ) {
-    return false
-  } else if ( selectedGroupMembers?.length > 0 ) {
-    if ( ! selectedGroupMembers.includes(row.cset_id) ) {
+  if ( selectedGroupMembers === null ) {
+    return false;
+  } else if ( Array.isArray(selectedGroupMembers) ) {
+    if ( selectedGroupMembers.length == 0 ) {
+      return false;
+    } else if ( !selectedGroupMembers.includes(row.cset_id) ) {
       return false;
     }
   }
@@ -264,10 +266,19 @@ const ListViewTable = ({
     [filters]
   );
 
+  /**
+   * The list of companies included in the currently-selected group.
+   *
+   * Cases and values:
+   *  - Pre-defined group - an array of cset_id values
+   *  - Custom group - an array of cset_id values
+   *  - No selected group - false
+   *  - Invalid group - null
+   */
   const selectedGroupMembers = useMemo(
     () => {
       if ( selectedGroup === NO_SELECTED_GROUP ) {
-        return [];
+        return false;
       } else if ( selectedGroup === USER_CUSTOM_GROUP ) {
         return splitCustomGroup(customGroup);
       } else if ( selectedGroup in groupsList ) {
@@ -490,8 +501,13 @@ const ListViewTable = ({
             {selectedGroupMembers === null ?
               <span>Invalid group '{selectedGroup}' selected &ndash; try another group</span>
             :
-              // TODO: add a case here for when no companies are in the group
-              <span>Try adjusting your filters to get more results</span>
+              (
+                selectedGroup === USER_CUSTOM_GROUP && selectedGroupMembers.length === 0
+                ?
+                <span>No companies selected &ndash; click 'Edit custom group' to add companies to this group and get results</span>
+                :
+                <span>Try adjusting your filters to get more results</span>
+              )
             }
           </div>
         }

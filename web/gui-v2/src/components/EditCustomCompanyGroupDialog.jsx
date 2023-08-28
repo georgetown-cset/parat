@@ -47,7 +47,7 @@ export const splitCustomGroup = (externalValue) => {
         return null
       }
     })
-    .filter(e => e !== null);
+    .filter(e => !!e);
 };
 
 const EditCustomCompanyGroupDialog = ({
@@ -60,7 +60,13 @@ const EditCustomCompanyGroupDialog = ({
   const [groupInternal, setGroupInternal] = useState(() => {
     return splitCustomGroup(customGroup);
   });
-  console.info("groupInternal:", groupInternal); // DEBUG
+
+  useEffect(
+    () => {
+      setGroupInternal(splitCustomGroup(customGroup));
+    },
+    [customGroup]
+  );
 
   const handleApply = (event) => {
     updateCustomGroup(groupInternal.join(','));
