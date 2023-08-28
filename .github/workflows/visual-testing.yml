@@ -44,6 +44,8 @@ jobs:
       shell: bash
       working-directory: ${{ env.app-dir }}
     - name: Run server
+      env:
+        NODE_OPTIONS: "--max_old_space_size=4096"
       run: |
         npm run build
         npm run serve -- -p 8550 &
