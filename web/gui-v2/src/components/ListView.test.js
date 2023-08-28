@@ -63,4 +63,50 @@ describe("ListView", () => {
       }
     }, 40000);
   });
+
+  describe('groups', () => {
+    it('switches to custom group mode', async () => {
+      const { user } = userEventSetup(
+        <ListView />
+      );
+
+      const groupSelectorWrapper = screen.getByTestId('group-selector');
+      await user.click(getByRole(groupSelectorWrapper, 'button'));
+
+      // Verify that the groups we expect are present
+      expect(screen.getByRole('option', { name: 'All companies' })).toBeVisible();
+      expect(screen.getByRole('option', { name: 'S&P 500' })).toBeVisible();
+      expect(screen.getByRole('option', { name: 'User-defined' })).toBeVisible();
+      await user.click(screen.getByRole('option', { name: 'User-defined' }));
+
+      // We don't have any companies in our group yet, so no results should be shown
+      expect(screen.getByText(/no results found/i)).toBeVisible();
+      expect(screen.getByText(/no companies selected/i)).toBeVisible();
+
+      // Open the group editor dialog
+      await user.click(screen.getByRole('button', { name: /edit custom group/i }));
+      expect(screen.getByRole('heading', { name: 'Modify custom company group' })).toBeVisible();
+      const dialog = screen.getByRole('dialog');
+      const companyInput = getByRole(dialog, 'combobox');
+      await user.click(companyInput);
+      await user.type(companyInput, 'Microsoft');
+      await user.click(getByRole(dialog, 'option', { name: 'Microsoft' }));
+      await user.click(getByRole(dialog, 'button', { name: 'Apply' }));
+      await waitForElementToBeRemoved(dialog);
+
+      // Confirm that our group selection is present in the table
+      const table = screen.getByRole('table');
+      expect(getByRole(table, 'row', { name: /Microsoft/ })).toBeVisible();
+
+      // Verify that a pre-existing group displays correctly
+      await user.click(getByRole(groupSelectorWrapper, 'button', { name: 'User-defined' }));
+      expect(screen.getByRole('option', { name: 'S&P 500' })).toBeVisible();
+      await user.click(screen.getByRole('option', { name: 'S&P 500' }));
+      expect(getByRole(table, 'row', { name: /Microsoft/ })).toBeVisible();
+      expect(getByRole(table, 'row', { name: /IBM/ })).toBeVisible();
+      expect(getByRole(table, 'row', { name: /Google/ })).toBeVisible();
+      expect(getByRole(table, 'row', { name: /Apple/ })).toBeVisible();
+      expect(getByRole(table, 'row', { name: /3M/ })).toBeVisible();
+    }, 20000);
+  });
 });

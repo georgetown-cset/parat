@@ -88,7 +88,6 @@ const EditCustomCompanyGroupDialog = ({
     },
     [companyList]
   );
-  console.info("options:", companyListOptions); // DEBUG
 
   return (
     <Dialog

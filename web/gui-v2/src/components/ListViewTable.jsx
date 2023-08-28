@@ -200,7 +200,6 @@ const filterRow = (row, filters, selectedGroupMembers) => {
 const ListViewTable = ({
   data,
 }) => {
-  console.info("data:", data); // DEBUG
   const [dialogOpen, setDialogOpen] = useState(false);
   const windowSize = useWindowSize();
 
@@ -291,7 +290,6 @@ const ListViewTable = ({
     },
     [selectedGroup, customGroup]
   );
-  console.info("selectedGroupMembers:", selectedGroupMembers); // DEBUG
 
   const companyList = useMemo(
     () => {

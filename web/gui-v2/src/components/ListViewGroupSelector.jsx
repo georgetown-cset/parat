@@ -61,7 +61,7 @@ const GroupSelector = ({
   ];
 
   return (
-    <div css={styles.groupSelector}>
+    <div css={styles.groupSelector} data-testid="group-selector">
       <span>Select a group for comparison:</span>
       <HelpTooltip
         text="TOOLTIP GOES HERE EXPLAINING GROUPS"
