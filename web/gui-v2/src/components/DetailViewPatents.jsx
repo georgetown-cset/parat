@@ -7,7 +7,8 @@ import { assemblePlotlyParams } from '../util/plotly-helpers';
 
 const chartLayoutChanges = {
   legend: {
-    y: 1.15,
+    groupclick: 'toggleitem',
+    y: 1.32,
   },
   margin: { t: 0, r: 50, b: 50, l: 50, pad: 4 },
   yaxis: {
@@ -15,15 +16,45 @@ const chartLayoutChanges = {
   },
 };
 
+const PATENT_CHART_LEGEND_GROUPINGS = {
+  ai_patents: 'col-1',
+  Security__eg_cybersecurity: 'col-1',
+  Education: 'col-1',
+  Networks__eg_social_IOT_etc: 'col-1',
+  Business: 'col-1',
+
+  Military: 'col-2',
+  Agricultural: 'col-2',
+  Life_Sciences: 'col-2',
+  Entertainment: 'col-2',
+  Transportation: 'col-2',
+
+  Semiconductors: 'col-3',
+  Nanotechnology: 'col-3',
+  Energy_Management: 'col-3',
+  Banking_and_Finance: 'col-3',
+  Telecommunications: 'col-3',
+
+  Computing_in_Government: 'col-4',
+  Industrial_and_Manufacturing: 'col-4',
+  Physical_Sciences_and_Engineering: 'col-4',
+  Document_Mgt_and_Publishing: 'col-4',
+  Personal_Devices_and_Computing: 'col-4',
+};
+
 const DetailViewPatents = ({
   data,
 }) => {
+  const patentsData = Object.entries(PATENT_CHART_LEGEND_GROUPINGS)
+    .map(([key, group]) => {
+      const { name, counts } = data.patents[key];
+      return [name.replace(/ patents/i, ''), counts, { legendgroup: group }];
+    });
+
   const patentsChart = assemblePlotlyParams(
     "AI patents over time",
     data.years,
-    [
-      ["AI patents", data.yearly_ai_patents],
-    ],
+    patentsData,
     chartLayoutChanges,
   );
 
@@ -41,8 +72,6 @@ const DetailViewPatents = ({
       </p>
 
       <Chart {...patentsChart} />
-
-      {/* TODO: add chart of top AI patent areas */}
     </>
   );
 };
