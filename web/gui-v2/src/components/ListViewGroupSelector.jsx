@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 
 import { Dropdown, HelpTooltip } from '@eto/eto-ui-components';
 
+import { plausibleEvent } from '../util/analytics';
+
 const styles = {
   groupSelector: css`
     align-items: center;
@@ -50,7 +52,10 @@ const GroupSelector = ({
         inputLabel="Group"
         options={groupsOptions}
         selected={selectedGroup}
-        setSelected={setSelectedGroup}
+        setSelected={(newVal) => {
+          plausibleEvent('Select company group', { group: newVal });
+          setSelectedGroup(newVal);
+        }}
         showLabel={false}
       />
       <HelpTooltip

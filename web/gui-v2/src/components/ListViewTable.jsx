@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useQueryParamString } from 'react-use-query-param-string';
 import { css } from '@emotion/react';
 import {
@@ -27,6 +27,7 @@ import {
   useMultiState,
   useWindowSize,
 } from '../util';
+import { plausibleEvent } from '../util/analytics';
 
 const styles = {
   buttonBar: css`
@@ -197,6 +198,10 @@ const ListViewTable = ({
   const [dialogOpen, setDialogOpen] = useState(false);
   const windowSize = useWindowSize();
 
+  const [sortDir, setSortDir] = useState('desc');
+  const [sortKey, setSortKey] = useState('ai_pubs');
+  const isFirstRender = useRef(true);
+
   const [selectedGroup, setSelectedGroup] = useQueryParamString('group', NO_SELECTED_GROUP);
 
   // Using param name 'zz_columns' to keep the columns selection at the end of
@@ -363,6 +368,18 @@ const ListViewTable = ({
     setSelectedGroup(NO_SELECTED_GROUP);
   };
 
+  // On the first render we don't want to trigger the Plausible event (since it's
+  // the default sort).  Afterwards, when the sort changes we want to record it.
+  useEffect(
+    () => {
+      if ( isFirstRender.current ) {
+        isFirstRender.current = false;
+      } else {
+        plausibleEvent('Sorting list view table', { column: sortKey, direction: sortDir });
+      }
+    },
+    [sortDir, sortKey]
+  );
 
   const aggregateData = useMemo(
     () => {
@@ -441,8 +458,10 @@ const ListViewTable = ({
         footerData={footerData}
         paginate={true}
         showFooter={selectedGroup !== NO_SELECTED_GROUP && Object.keys(footerData).length > 0}
-        sortByDir="desc"
-        sortByKey="ai_pubs"
+        sortByDir={sortDir}
+        sortByKey={sortKey}
+        updateSortByDir={setSortDir}
+        updateSortByKey={setSortKey}
       />
       <AddRemoveColumnDialog
         columnDefinitions={columnDefinitions}
