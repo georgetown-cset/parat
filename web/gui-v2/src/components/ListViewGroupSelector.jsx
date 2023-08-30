@@ -17,7 +17,7 @@ const styles = {
     font-family: GTZirkonRegular;
     font-size: 120%;
     margin-bottom: 1rem;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 1rem;
   `,
   dropdown: css`
     margin-left: 0.5rem;
