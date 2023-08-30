@@ -44,6 +44,8 @@ jobs:
         npm run artifactregistry-login
         npm install
     - name: 'Build assets'
+      env:
+        NODE_OPTIONS: "--max_old_space_size=4096"
       working-directory: web/gui-v2
       run: |
         npm install -g gatsby-cli
