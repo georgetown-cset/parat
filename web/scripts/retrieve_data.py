@@ -2,7 +2,6 @@ import argparse
 import chardet
 import csv
 import json
-import math
 import os
 import pycountry
 import pycountry_convert
@@ -24,7 +23,7 @@ Retrieves and reformats raw data for consumption by javascript
 ### CONSTANTS ###
 
 RAW_DATA_DIR = "raw_data"
-WEB_SRC_DIR = os.path.join("parat", "src")
+WEB_SRC_DIR = os.path.join("gui-v2", "src")
 IMAGE_DIR = os.path.join(WEB_SRC_DIR, "images")
 
 # Local cache of raw data (ai_companies_visualization.visualization_data)
@@ -62,6 +61,53 @@ LINK_CSS = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypograph
 # Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
 FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
 
+# Copied from CAT
+PATENT_FIELD_MAPPING = {
+    "All": "All",
+    "Physical_Sciences_and_Engineering": "Physical Sciences and Engineering",
+    "Life_Sciences": "Life Sciences",
+    "Security__eg_cybersecurity": "Security",
+    "Transportation": "Transportation",
+    "Industrial_and_Manufacturing": "Industry and Manufacturing",
+    "Education": "Education",
+    "Document_Mgt_and_Publishing": "Document Management and Publishing",
+    "Military": "Military",
+    "Agricultural": "Agriculture",
+    "Computing_in_Government": "Computing in Government",
+    "Personal_Devices_and_Computing": "Personal Devices and Computing",
+    "Banking_and_Finance": "Banking and Finance",
+    "Telecommunications": "Telecommunications",
+    "Networks__eg_social_IOT_etc": "Networks",
+    "Business": "Business",
+    "Energy_Management": "Energy Management",
+    "Entertainment": "Entertainment",
+    "Nanotechnology": "Nanotechnology",
+    "Semiconductors": "Semiconductors",
+    "Language_Processing": "Natural Language Processing",
+    "Speech_Processing": "Speech Processing",
+    "Knowledge_Representation": "Knowledge Representation",
+    "Planning_and_Scheduling": "Planning and Scheduling",
+    "Control": "Control Methods",
+    "Distributed_AI": "Distributed AI",
+    "Robotics": "Robotics",
+    "Computer_Vision": "Computer Vision",
+    "Analytics_and_Algorithms": "Analytics and Algorithms",
+    "Measuring_and_Testing": "Measuring and Testing",
+    "Logic_Programming": "Logic Programming",
+    "Fuzzy_Logic": "Fuzzy Logic",
+    "Probabilistic_Reasoning": "Probabilistic Reasoning",
+    "Ontology_Engineering": "Ontology Engineering",
+    "Machine_Learning": "Machine Learning",
+    "Search_Methods": "Search Methods",
+    "Generic_and_Unspecified": "General",
+}
+
+INDUSTRY_PATENT_CATEGORIES = ["Physical Sciences and Engineering", "Life Sciences", "Security", "Transportation",
+    "Industry and Manufacturing", "Education", "Document Management and Publishing",
+    "Military","Agriculture", "Computing in Government", "Personal Devices and Computing",
+    "Banking and Finance", "Telecommunications", "Networks", "Business", "Energy Management", "Entertainment",
+    "Nanotechnology", "Semiconductors"]
+
 ### END CONSTANTS ###
 
 
@@ -74,7 +120,7 @@ def get_exchange_link(market_key: str) -> dict:
     """
     time.sleep(5)
     # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
-    first, last = sorted(market_key.split(":"))
+    first, last = sorted(market_key.strip(":").split(":"))
     gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:87.0) Gecko/20100101 Firefox/87.0"
@@ -100,7 +146,7 @@ def retrieve_raw(get_links: bool) -> None:
     market_info = set()
     print("retrieving metadata")
     with open(RAW_DATA_FI, mode="w") as out:
-        for row in client.list_rows("ai_companies_visualization.visualization_data"):
+        for row in client.list_rows("ai_companies_visualization.all_visualization_data"):
             dict_row = {col: row[col] for col in row.keys()}
             out.write(json.dumps(dict_row)+"\n")
             market_info = market_info.union([m["exchange"]+":"+m["ticker"] for m in dict_row["market"]])
@@ -224,30 +270,6 @@ def clean_wiki_description(wiki_desc: str) -> str:
     return clean_wiki_desc
 
 
-def add_ranks(rows: list, metrics: list) -> None:
-    """
-    Mutates `rows`
-    :param rows:
-    :param metrics:
-    :return: None (mutates `rows`)
-    """
-    for metric in metrics:
-        curr_rank = 0
-        curr_value = 100000000000
-        rows.sort(key=lambda r: -1*r[metric])
-        max_metric = math.log(max([r[metric] for r in rows])+1, 2)
-        for idx, row in enumerate(rows):
-            if row[metric] < curr_value:
-                curr_rank = idx+1
-                curr_value = row[metric]
-            row[metric] = {
-                "value": row[metric],
-                "rank": curr_rank,
-                # used to scale color
-                "frac_of_max": math.log(row[metric]+1, 2)/max_metric
-            }
-
-
 def get_translation(desc: str, client, parent) -> str:
     """
     Get translation of non-english company descriptions. Returns None if `desc` cannot be translated or if it is
@@ -354,6 +376,9 @@ def clean_country(country: str) -> str:
     country_obj = pycountry.countries.get(alpha_2=country)
     if not country_obj:
         country_obj = pycountry.countries.get(alpha_3=country)
+    if not country_obj:
+        print(f"{country} not found")
+        return None
     if country_obj.name in COUNTRY_NAME_MAP:
         return COUNTRY_NAME_MAP[country_obj.name]
     return country_obj.name
@@ -381,6 +406,8 @@ def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     :param lowercase_to_orig_cname: dict mapping lowercase to original-cased company names
     :return: cleaned company name
     """
+    if not name:
+        return None
     clean_name = name.strip()
     if clean_name in COMPANY_NAME_MAP:
         return COMPANY_NAME_MAP[clean_name]
@@ -397,7 +424,13 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     :param orig_name: if not None, then a variant of the company name we should include as an alias
     :return: A semicolon-separated string of aliases
     """
-    unique_aliases = {clean_company_name(a["alias"], lowercase_to_orig_cname).strip('.') for a in aliases}
+    unique_aliases = set()
+    for alias in aliases:
+        cleaned_alias = clean_company_name(alias["alias"], lowercase_to_orig_cname)
+        if not cleaned_alias:
+            print(f"Null alias: {alias}")
+            continue
+        unique_aliases.add(cleaned_alias.strip("."))
     if orig_name is not None:
         unique_aliases.add(orig_name)
     sorted_aliases = sorted(list(unique_aliases))
@@ -428,11 +461,15 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     :param counts: a list of dicts containing year (`year`) and count (`key`) information
     :param key: the key in the `counts` dicts that contains the yearly count
     :param years: a list of years to include
-    :return: a tuple containing a list of counts for each year in years, and the sum of the counts
+    :return: a tuple containing a list of counts for each year in years, and the sum of the counts over all years
+    (including those outside `years`)
     """
-    counts_by_year = {p["year" if not key == "ai_patents" else "priority_year"]: p[key] for p in counts}
+    if not counts:
+        return [0 for _ in years], 0
+    year_key = "priority_year" if "priority_year" in counts[0] else "year"
+    counts_by_year = {p[year_key]: p[key] for p in counts}
     yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
-    return yearly_counts, sum(yearly_counts)
+    return yearly_counts, sum([v for _, v in counts_by_year.items() if v])
 
 
 def get_market_link_list(market: list) -> dict:
@@ -453,18 +490,31 @@ def get_market_link_list(market: list) -> dict:
     return {"__html": ", ".join(market_elts)}
 
 
-def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
+def get_top_n_list(entities: list, count_key: str, n: int = 10) -> list:
     """
-    Given a row from a jsonl, reformat its elements into the form needed by the PARAT javascript
-    :param row: jsonl line containing company metadata
+    Sort entries by count_key, descending, and return the top n
+    :param entities: List of dicts corresponding to counts of some entity
+    :param count_key: Key within entity elements containing field that should be used to sort
+    :param n: Number of entities to return
+    :return: Top ten entities
+    """
+    entities.sort(key=lambda e: e[count_key], reverse=True)
+    return entities[:n]
+
+
+def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> None:
+    """
+    Clean various PARAT fields that don't fit into another category
+    :param js: A dict of data corresponding to an individual PARAT record
     :param refresh_images: if true, will re-download images from crunchbase
     :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
     :param market_key_to_link: dict mapping exchange:ticker to google finance link
-    :return: dict of company metadata
+    :return: None (mutates js)
     """
-    js = json.loads(row)
     orig_company_name = js["name"]
     js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
+    if not js["name"]:
+        print(f"No name for {js['cset_id']}")
     js["country"] = clean_country(js["country"])
     js["continent"] = get_continent(js["country"])
     js["local_logo"] = retrieve_image(js.pop("logo_url"), orig_company_name, refresh_images)
@@ -476,19 +526,6 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
     js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
-
-    # add pub/patent counts
-    js["years"] = list(range(2010, datetime.now().year + 1))
-    js["yearly_all_publications"], _ = get_yearly_counts(js.pop("all_pubs_by_year"), "all_pubs", js["years"])
-    js["yearly_ai_publications"], js["ai_pubs"] = get_yearly_counts(js.pop("ai_pubs_by_year"), "ai_pubs", js["years"])
-    js["yearly_ai_patents"], js["ai_patents"] = get_yearly_counts(js.pop("ai_patents_by_year"),
-                                                                  "ai_patents", js["years"])
-    js["yearly_ai_pubs_top_conf"], js["ai_pubs_in_top_conferences"] = get_yearly_counts(
-        js.pop("ai_pubs_in_top_conferences_by_year"), "ai_pubs_in_top_conferences", js["years"]
-    )
-    for year_idx in range(len(js["years"])):
-        assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
-
     market = clean_market(js.pop("market"), market_key_to_link)
     js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in FILT_EXCHANGES]
     if len(market) > 0:
@@ -501,6 +538,121 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
         url = js["crunchbase"]["crunchbase_url"]
         if url in CRUNCHBASE_URL_OVERRIDE:
             js["crunchbase"]["crunchbase_url"] = CRUNCHBASE_URL_OVERRIDE[url]
+
+
+def get_top_10_lists(js: dict) -> None:
+    """
+    Filter count lists to top 10 elements
+    :param js: A dict of data corresponding to an individual PARAT record
+    :return: None (mutates js)
+    """
+    js["fields"] = get_top_n_list(js.pop("fields"), "field_count")
+    js["clusters"] = get_top_n_list(js.pop("clusters"), "cluster_count")
+    js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count")
+    js["tasks"] = get_top_n_list(js.pop("tasks"), "task_count")
+    js["methods"] = get_top_n_list(js.pop("methods"), "method_count")
+
+
+def get_category_counts(js: dict) -> None:
+    """
+    Reformat yearly and count-across-all-years data
+    :param js: A dict of data corresponding to an individual PARAT record
+    :return: None (mutates js)
+    """
+    # add pub/patent counts
+    current_year = datetime.now().year
+    years = list(range(current_year-10, current_year + 1))
+    js["years"] = years
+    articles = {}
+
+    ### Reformat publication-related metrics
+    for machine_name, human_name, orig_key, count_key in [
+        ["all_publications", "All Publications", "all_pubs_by_year", "all_pubs"],
+        ["ai_publications", "AI Publications", "ai_pubs_by_year", "ai_pubs"],
+        ["ai_pubs_top_conf", "AI Publications in Top Conferences",
+            "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences"],
+        ["citation_counts", "Yearly Citations", "citation_count_by_year", "citation_count"],
+        ["cv_pubs", "Computer Vision Publications", "cv_pubs_by_year", "cv_pubs"],
+        ["nlp_pubs", "NLP Publications", "nlp_pubs_by_year", "nlp_pubs"],
+        ["robotics_pubs", "Robotics Publications", "robotics_pubs_by_year", "robotics_pubs"],
+    ]:
+        counts, total = get_yearly_counts(js.pop(orig_key), count_key, years)
+        articles[machine_name] = {
+            "name": human_name,
+            "counts": counts,
+            "total": total
+        }
+
+    for year_idx in range(len(years)):
+        # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
+        if articles["all_publications"]["counts"][year_idx] < articles["ai_publications"]["counts"][year_idx]:
+            print(f"Mismatched publication counts for {js['cset_id']}")
+    js["articles"] = articles
+
+    ### Reformat patent-related metrics
+    counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents", years)
+    patents = {
+        "ai_patents": {
+            "name": "AI Patents",
+            "counts": counts,
+            "total": total
+        }
+    }
+    # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
+    keys = list(js.keys())
+    for k in keys:
+        if "_pats" not in k:
+            continue
+        field_name = k.replace("_pats_by_year", "").replace("_pats", "")
+        if (PATENT_FIELD_MAPPING[field_name] not in INDUSTRY_PATENT_CATEGORIES) or k.endswith("_pats"):
+            js.pop(k)
+        elif k.endswith("_pats_by_year"):
+            counts, total = get_yearly_counts(js.pop(k), field_name+"_pats", years)
+            patents[field_name] = {
+                "name": PATENT_FIELD_MAPPING[field_name]+" Patents",
+                "counts": counts,
+                "total": total
+            }
+    js["patents"] = patents
+
+    ### Reformat other metrics
+    other_metrics = {}
+    for metric in ["tt1_jobs", "ai_jobs"]:
+        other_metrics[metric] = {
+            "name": "Tech Tier 1 Jobs" if metric == "tt1_jobs" else "AI Jobs",
+            "counts": None,
+            "total": js.pop(metric)
+        }
+    js["other_metrics"] = other_metrics
+
+    for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_pubs_in_top_conferences",
+                            "all_pubs", "ai_patents"]:
+        js.pop(redundant_count)
+
+
+def add_rankings(js: dict) -> None:
+    """
+    Reformat yearly and count-across-all-years data
+    :param js: A dict of data corresponding to an individual PARAT record
+    :return: None (mutates js)
+    """
+    pass
+
+
+def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
+    """
+    Given a row from a jsonl, reformat its elements into the form needed by the PARAT javascript
+    :param row: jsonl line containing company metadata
+    :param refresh_images: if true, will re-download images from crunchbase
+    :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
+    :param market_key_to_link: dict mapping exchange:ticker to google finance link
+    :return: dict of company metadata
+    """
+    js = json.loads(row)
+    clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
+    get_top_10_lists(js)
+    get_category_counts(js)
+    add_rankings(js)
     return js
 
 
@@ -536,7 +688,6 @@ def clean(refresh_images: bool) -> None:
     with open(RAW_DATA_FI) as f:
         for row in f:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
-    add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
     add_supplemental_descriptions(rows)
     with open(os.path.join(WEB_SRC_DIR, "static_data", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")

@@ -19,16 +19,16 @@ describe("ListView", () => {
     );
 
     // Filter by Europe and verify that the count updates
-    expect(screen.getByText('Viewing 1304 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 1760 companies')).toBeVisible();
     const regionHeader = screen.getByRole('columnheader', { name: /region/i });
     await user.click(getByRole(regionHeader, 'button'));
     const menu = screen.getByRole('listbox');
     await user.click(getByText(menu, 'Europe'));
-    expect(screen.getByText('Viewing 89 of 1304 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 168 of 1760 companies')).toBeVisible();
 
     // Reset the filters and verify that the count updates
     await user.click(screen.getByRole('button', { name: /reset filters/i }));
-    expect(screen.getByText('Viewing 1304 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 1760 companies')).toBeVisible();
   }, 20000);
 
   describe("add/remove columns dialog", () => {

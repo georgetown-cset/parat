@@ -16,13 +16,13 @@ const CompanyDetailPage = () => {
   const idMatch = slug?.match?.(/(\d+)/);
   const companyId = idMatch?.[1] ? parseInt(idMatch[1]) : undefined;
 
-  const companyData = company_data.find(e => e.CSET_id === companyId);
+  const companyData = company_data.find(e => e.cset_id === companyId);
 
   // If the `pathname` of the page doesn't match the authoritative pathname for
   // the identified company (i.e. of the form `/company/ID-SLUGIFIED_NAME`),
   // redirect to the correct form.  This ensures that the visible URL will always
   // include a human-readable form of the company, while internally the site
-  // only has to deal with the ID number (the internal `CSET_id` field).
+  // only has to deal with the ID number (the internal `cset_id` field).
   const slugifiedName = slugifyCompanyName(companyData?.name);
   const realSlug = `${companyId}-${slugifiedName}`;
   if ( slug !== realSlug ) {

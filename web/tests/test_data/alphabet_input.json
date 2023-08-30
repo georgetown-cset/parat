@@ -1,0 +1,5444 @@
+{
+  "cset_id": 796,
+  "country": "usa",
+  "aliases": [
+    {
+      "alias_language": "en",
+      "alias": "alphabet inc"
+    }
+  ],
+  "parent": [],
+  "children": [
+    {
+      "child_name": "intrinsic",
+      "child_id": 3163
+    },
+    {
+      "child_name": "waymo",
+      "child_id": 762
+    },
+    {
+      "child_name": "vicarious ai",
+      "child_id": 750
+    },
+    {
+      "child_name": "verily life sciences",
+      "child_id": 745
+    }
+  ],
+  "non_agg_children": [
+    {
+      "child_name": "google brain",
+      "child_id": 473
+    },
+    {
+      "child_name": "deepmind",
+      "child_id": 414
+    },
+    {
+      "child_name": "google",
+      "child_id": 101
+    },
+    {
+      "child_name": "fitbit",
+      "child_id": 451
+    },
+    {
+      "child_name": "nest",
+      "child_id": 594
+    },
+    {
+      "child_name": "google robotics",
+      "child_id": 474
+    }
+  ],
+  "permid": [
+    5082534760,
+    5030853586,
+    5053732847,
+    5028044072,
+    5050702354
+  ],
+  "website": "https://abc.xyz/",
+  "market": [
+    {
+      "exchange": "nasdaq",
+      "ticker": "goog"
+    },
+    {
+      "exchange": "bmv",
+      "ticker": "googl"
+    },
+    {
+      "exchange": "dus",
+      "ticker": "abea"
+    },
+    {
+      "exchange": "moex",
+      "ticker": "goog-rm"
+    },
+    {
+      "exchange": "neo",
+      "ticker": "goog"
+    },
+    {
+      "exchange": "mun",
+      "ticker": "abea"
+    },
+    {
+      "exchange": "mil",
+      "ticker": "googl"
+    },
+    {
+      "exchange": "xetr",
+      "ticker": "abea"
+    },
+    {
+      "exchange": "ham",
+      "ticker": "abea"
+    },
+    {
+      "exchange": "lon",
+      "ticker": "0rih"
+    },
+    {
+      "exchange": "ber",
+      "ticker": "abea"
+    },
+    {
+      "exchange": "nasdaq",
+      "ticker": "googl"
+    }
+  ],
+  "crunchbase": {
+    "crunchbase_uuid": "096694c6-bcd2-a975-b95c-fab77c81d915",
+    "crunchbase_url": "https://www.crunchbase.com/organization/alphabet"
+  },
+  "child_crunchbase": [
+    {
+      "crunchbase_uuid": "19a9c1dc-6f04-41ca-bd48-77dad98897a0",
+      "crunchbase_url": "https://www.crunchbase.com/organization/intrinsic-97a0"
+    },
+    {
+      "crunchbase_uuid": "c1833ca6-85d5-e3b8-08e5-8fcceb76717b",
+      "crunchbase_url": "https://www.crunchbase.com/organization/google-s-self-driving-car-project"
+    },
+    {
+      "crunchbase_uuid": "d9f418da-28f5-8b04-97f7-086b4ffbf048",
+      "crunchbase_url": "https://www.crunchbase.com/organization/vicarious-systems-inc"
+    },
+    {
+      "crunchbase_uuid": "ceff4e5b-95c2-839a-3150-c340c4b5bc71",
+      "crunchbase_url": "https://www.crunchbase.com/organization/verily-2"
+    }
+  ],
+  "grid": [
+    "grid.497059.6"
+  ],
+  "linkedin": [
+    "https://www.linkedin.com/company/intrinsic",
+    "https://www.linkedin.com/company/alphabet-inc",
+    "https://www.linkedin.com/company/waymo",
+    "https://www.linkedin.com/company/vicarious-ai",
+    "https://www.linkedin.com/company/verily"
+  ],
+  "in_sandp_500": true,
+  "in_fortune_global_500": true,
+  "ai_pubs": 136,
+  "cv_pubs": 68,
+  "nlp_pubs": 1,
+  "robotics_pubs": 31,
+  "ai_pubs_by_year": [
+    {
+      "year": 2014,
+      "ai_pubs": 1
+    },
+    {
+      "year": 2015,
+      "ai_pubs": 2
+    },
+    {
+      "year": 2016,
+      "ai_pubs": 1
+    },
+    {
+      "year": 2017,
+      "ai_pubs": 7
+    },
+    {
+      "year": 2018,
+      "ai_pubs": 18
+    },
+    {
+      "year": 2019,
+      "ai_pubs": 18
+    },
+    {
+      "year": 2020,
+      "ai_pubs": 29
+    },
+    {
+      "year": 2021,
+      "ai_pubs": 31
+    },
+    {
+      "year": 2022,
+      "ai_pubs": 29
+    }
+  ],
+  "cv_pubs_by_year": [
+    {
+      "year": 2014,
+      "cv_pubs": 1
+    },
+    {
+      "year": 2015,
+      "cv_pubs": 0
+    },
+    {
+      "year": 2016,
+      "cv_pubs": 0
+    },
+    {
+      "year": 2017,
+      "cv_pubs": 3
+    },
+    {
+      "year": 2018,
+      "cv_pubs": 6
+    },
+    {
+      "year": 2019,
+      "cv_pubs": 5
+    },
+    {
+      "year": 2020,
+      "cv_pubs": 13
+    },
+    {
+      "year": 2021,
+      "cv_pubs": 19
+    },
+    {
+      "year": 2022,
+      "cv_pubs": 21
+    }
+  ],
+  "nlp_pubs_by_year": [
+    {
+      "year": 2014,
+      "nlp_pubs": 0
+    },
+    {
+      "year": 2015,
+      "nlp_pubs": 0
+    },
+    {
+      "year": 2016,
+      "nlp_pubs": 0
+    },
+    {
+      "year": 2017,
+      "nlp_pubs": 0
+    },
+    {
+      "year": 2018,
+      "nlp_pubs": 0
+    },
+    {
+      "year": 2019,
+      "nlp_pubs": 0
+    },
+    {
+      "year": 2020,
+      "nlp_pubs": 1
+    },
+    {
+      "year": 2021,
+      "nlp_pubs": 0
+    },
+    {
+      "year": 2022,
+      "nlp_pubs": 0
+    }
+  ],
+  "robotics_pubs_by_year": [
+    {
+      "year": 2014,
+      "robotics_pubs": 1
+    },
+    {
+      "year": 2015,
+      "robotics_pubs": 0
+    },
+    {
+      "year": 2016,
+      "robotics_pubs": 0
+    },
+    {
+      "year": 2017,
+      "robotics_pubs": 1
+    },
+    {
+      "year": 2018,
+      "robotics_pubs": 4
+    },
+    {
+      "year": 2019,
+      "robotics_pubs": 4
+    },
+    {
+      "year": 2020,
+      "robotics_pubs": 6
+    },
+    {
+      "year": 2021,
+      "robotics_pubs": 5
+    },
+    {
+      "year": 2022,
+      "robotics_pubs": 10
+    }
+  ],
+  "ai_pubs_in_top_conferences": 32,
+  "ai_pubs_in_top_conferences_by_year": [
+    {
+      "year": 2015,
+      "ai_pubs_in_top_conferences": 1
+    },
+    {
+      "year": 2017,
+      "ai_pubs_in_top_conferences": 1
+    },
+    {
+      "year": 2018,
+      "ai_pubs_in_top_conferences": 2
+    },
+    {
+      "year": 2019,
+      "ai_pubs_in_top_conferences": 2
+    },
+    {
+      "year": 2020,
+      "ai_pubs_in_top_conferences": 11
+    },
+    {
+      "year": 2021,
+      "ai_pubs_in_top_conferences": 11
+    },
+    {
+      "year": 2022,
+      "ai_pubs_in_top_conferences": 4
+    }
+  ],
+  "all_pubs": 745,
+  "all_pubs_by_year": [
+    {
+      "year": 2009,
+      "all_pubs": 1
+    },
+    {
+      "year": 2014,
+      "all_pubs": 2
+    },
+    {
+      "year": 2015,
+      "all_pubs": 6
+    },
+    {
+      "year": 2016,
+      "all_pubs": 24
+    },
+    {
+      "year": 2017,
+      "all_pubs": 61
+    },
+    {
+      "year": 2018,
+      "all_pubs": 105
+    },
+    {
+      "year": 2019,
+      "all_pubs": 120
+    },
+    {
+      "year": 2020,
+      "all_pubs": 157
+    },
+    {
+      "year": 2021,
+      "all_pubs": 134
+    },
+    {
+      "year": 2022,
+      "all_pubs": 159
+    }
+  ],
+  "short_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
+  "logo_url": "https://res.cloudinary.com/crunchbase-production/image/upload/v1439250525/oyr10rqwvctjcfxnvapx.png",
+  "stage": "Mature",
+  "tt1_jobs": 2111,
+  "ai_jobs": 213,
+  "citation_count_by_year": [
+    {
+      "year": 2015,
+      "citation_count": 1
+    },
+    {
+      "year": 2016,
+      "citation_count": 15
+    },
+    {
+      "year": 2017,
+      "citation_count": 45
+    },
+    {
+      "year": 2018,
+      "citation_count": 230
+    },
+    {
+      "year": 2019,
+      "citation_count": 541
+    },
+    {
+      "year": 2020,
+      "citation_count": 1357
+    },
+    {
+      "year": 2021,
+      "citation_count": 2039
+    },
+    {
+      "year": 2022,
+      "citation_count": 1820
+    },
+    {
+      "year": 2023,
+      "citation_count": 39
+    }
+  ],
+  "fields": [
+    {
+      "field_name": "Segmentation",
+      "field_count": 4
+    },
+    {
+      "field_name": "Task (computing)",
+      "field_count": 4
+    },
+    {
+      "field_name": "Convolutional neural network",
+      "field_count": 4
+    },
+    {
+      "field_name": "Object (computer science)",
+      "field_count": 4
+    },
+    {
+      "field_name": "Probabilistic logic",
+      "field_count": 4
+    },
+    {
+      "field_name": "Receiver operating characteristic",
+      "field_count": 4
+    },
+    {
+      "field_name": "Inference",
+      "field_count": 4
+    },
+    {
+      "field_name": "Feature (computer vision)",
+      "field_count": 3
+    },
+    {
+      "field_name": "Deep learning",
+      "field_count": 3
+    },
+    {
+      "field_name": "Concept learning",
+      "field_count": 3
+    },
+    {
+      "field_name": "Artificial neural network",
+      "field_count": 3
+    },
+    {
+      "field_name": "Robot",
+      "field_count": 2
+    },
+    {
+      "field_name": "Graphical model",
+      "field_count": 2
+    },
+    {
+      "field_name": "Motion estimation",
+      "field_count": 2
+    },
+    {
+      "field_name": "Unsupervised learning",
+      "field_count": 2
+    },
+    {
+      "field_name": "Pose",
+      "field_count": 2
+    },
+    {
+      "field_name": "Test set",
+      "field_count": 2
+    },
+    {
+      "field_name": "Cluster analysis",
+      "field_count": 2
+    },
+    {
+      "field_name": "Sequence learning",
+      "field_count": 2
+    },
+    {
+      "field_name": "Reinforcement learning",
+      "field_count": 2
+    },
+    {
+      "field_name": "Kernel (image processing)",
+      "field_count": 1
+    },
+    {
+      "field_name": "Pixel",
+      "field_count": 1
+    },
+    {
+      "field_name": "Human intelligence",
+      "field_count": 1
+    },
+    {
+      "field_name": "Advanced driver assistance systems",
+      "field_count": 1
+    },
+    {
+      "field_name": "Feature extraction",
+      "field_count": 1
+    },
+    {
+      "field_name": "Domain knowledge",
+      "field_count": 1
+    },
+    {
+      "field_name": "Artificial general intelligence",
+      "field_count": 1
+    },
+    {
+      "field_name": "Unified Medical Language System",
+      "field_count": 1
+    },
+    {
+      "field_name": "Lasso (statistics)",
+      "field_count": 1
+    },
+    {
+      "field_name": "Bayesian optimization",
+      "field_count": 1
+    },
+    {
+      "field_name": "Hidden Markov model",
+      "field_count": 1
+    },
+    {
+      "field_name": "Point cloud",
+      "field_count": 1
+    },
+    {
+      "field_name": "Sensor fusion",
+      "field_count": 1
+    },
+    {
+      "field_name": "Bayesian network",
+      "field_count": 1
+    },
+    {
+      "field_name": "Monocular",
+      "field_count": 1
+    },
+    {
+      "field_name": "Applications of artificial intelligence",
+      "field_count": 1
+    },
+    {
+      "field_name": "Syntax (programming languages)",
+      "field_count": 1
+    },
+    {
+      "field_name": "Geometric primitive",
+      "field_count": 1
+    },
+    {
+      "field_name": "Identification (information)",
+      "field_count": 1
+    },
+    {
+      "field_name": "Correlation coefficient",
+      "field_count": 1
+    },
+    {
+      "field_name": "False positive paradox",
+      "field_count": 1
+    },
+    {
+      "field_name": "Embodied cognition",
+      "field_count": 1
+    },
+    {
+      "field_name": "Motion (physics)",
+      "field_count": 1
+    },
+    {
+      "field_name": "Feature vector",
+      "field_count": 1
+    },
+    {
+      "field_name": "Hierarchical database model",
+      "field_count": 1
+    },
+    {
+      "field_name": "Data pre-processing",
+      "field_count": 1
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": 23307,
+      "cluster_count": 12
+    },
+    {
+      "cluster_id": 19977,
+      "cluster_count": 9
+    },
+    {
+      "cluster_id": 2844,
+      "cluster_count": 4
+    },
+    {
+      "cluster_id": 56050,
+      "cluster_count": 4
+    },
+    {
+      "cluster_id": 32715,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 1609,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 52787,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 4455,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 2482,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 3628,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 41301,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 7095,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 21056,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 27589,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 12947,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 13150,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 1338,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 31316,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 5380,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 31558,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 60946,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 10352,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 22394,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 19381,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 56536,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 34936,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 22949,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 39035,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 1168,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 1989,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 66730,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 179,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 6975,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 2418,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 34017,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 4473,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 44810,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 4424,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 3341,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 28004,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 1764,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 23493,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 8412,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 20677,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 56125,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 9640,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 38462,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 22831,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 11234,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 2353,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 50740,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 3446,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 10926,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 37629,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 1055,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 20279,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 24449,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 15853,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 62403,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 5141,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 2149,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 578,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 22816,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 56364,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 35911,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 2005,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 6865,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 59293,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 33518,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 86080,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 7420,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 3886,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 32069,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 49096,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 18418,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 23233,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 22331,
+      "cluster_count": 1
+    }
+  ],
+  "company_references": [
+    {
+      "ref_CSET_id": 101,
+      "referenced_count": 506
+    },
+    {
+      "ref_CSET_id": 87,
+      "referenced_count": 140
+    },
+    {
+      "ref_CSET_id": 163,
+      "referenced_count": 135
+    },
+    {
+      "ref_CSET_id": 796,
+      "referenced_count": 103
+    },
+    {
+      "ref_CSET_id": 184,
+      "referenced_count": 58
+    },
+    {
+      "ref_CSET_id": 336,
+      "referenced_count": 46
+    },
+    {
+      "ref_CSET_id": 35,
+      "referenced_count": 42
+    },
+    {
+      "ref_CSET_id": 23,
+      "referenced_count": 34
+    },
+    {
+      "ref_CSET_id": 6,
+      "referenced_count": 34
+    },
+    {
+      "ref_CSET_id": 223,
+      "referenced_count": 33
+    },
+    {
+      "ref_CSET_id": 37,
+      "referenced_count": 31
+    },
+    {
+      "ref_CSET_id": 27,
+      "referenced_count": 29
+    },
+    {
+      "ref_CSET_id": 1126,
+      "referenced_count": 25
+    },
+    {
+      "ref_CSET_id": 127,
+      "referenced_count": 24
+    },
+    {
+      "ref_CSET_id": 245,
+      "referenced_count": 20
+    },
+    {
+      "ref_CSET_id": 790,
+      "referenced_count": 15
+    },
+    {
+      "ref_CSET_id": 800,
+      "referenced_count": 15
+    },
+    {
+      "ref_CSET_id": 112,
+      "referenced_count": 14
+    },
+    {
+      "ref_CSET_id": 183,
+      "referenced_count": 14
+    },
+    {
+      "ref_CSET_id": 115,
+      "referenced_count": 13
+    },
+    {
+      "ref_CSET_id": 1797,
+      "referenced_count": 10
+    },
+    {
+      "ref_CSET_id": 258,
+      "referenced_count": 10
+    },
+    {
+      "ref_CSET_id": 795,
+      "referenced_count": 9
+    },
+    {
+      "ref_CSET_id": 21,
+      "referenced_count": 8
+    },
+    {
+      "ref_CSET_id": 789,
+      "referenced_count": 7
+    },
+    {
+      "ref_CSET_id": 786,
+      "referenced_count": 6
+    },
+    {
+      "ref_CSET_id": 1784,
+      "referenced_count": 5
+    },
+    {
+      "ref_CSET_id": 694,
+      "referenced_count": 5
+    },
+    {
+      "ref_CSET_id": 734,
+      "referenced_count": 5
+    },
+    {
+      "ref_CSET_id": 785,
+      "referenced_count": 4
+    },
+    {
+      "ref_CSET_id": 820,
+      "referenced_count": 4
+    },
+    {
+      "ref_CSET_id": 110,
+      "referenced_count": 4
+    },
+    {
+      "ref_CSET_id": 2528,
+      "referenced_count": 4
+    },
+    {
+      "ref_CSET_id": 133,
+      "referenced_count": 3
+    },
+    {
+      "ref_CSET_id": 787,
+      "referenced_count": 3
+    },
+    {
+      "ref_CSET_id": 1917,
+      "referenced_count": 3
+    },
+    {
+      "ref_CSET_id": 209,
+      "referenced_count": 3
+    },
+    {
+      "ref_CSET_id": 170,
+      "referenced_count": 3
+    },
+    {
+      "ref_CSET_id": 50,
+      "referenced_count": 3
+    },
+    {
+      "ref_CSET_id": 161,
+      "referenced_count": 3
+    },
+    {
+      "ref_CSET_id": 1037,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 792,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 72,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 219,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 396,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 784,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 949,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 637,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 635,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 805,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 375,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 506,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 187,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1132,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1850,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 798,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 345,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1881,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 557,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 2800,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1950,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 793,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 815,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 76,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 410,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 347,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 319,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 671,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1129,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 783,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1867,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 124,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1423,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1636,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1791,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 797,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 737,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 3131,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 936,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 201,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 78,
+      "referenced_count": 1
+    }
+  ],
+  "tasks": [
+    {
+      "referent": "classification",
+      "task_count": 18
+    },
+    {
+      "referent": "autonomous_driving",
+      "task_count": 13
+    },
+    {
+      "referent": "artificial_intelligence_and_machine_learning",
+      "task_count": 12
+    },
+    {
+      "referent": "motion_planning",
+      "task_count": 9
+    },
+    {
+      "referent": "disease_detection",
+      "task_count": 8
+    },
+    {
+      "referent": "domain_generalization",
+      "task_count": 8
+    },
+    {
+      "referent": "autonomous_vehicles",
+      "task_count": 7
+    },
+    {
+      "referent": "inference_attack",
+      "task_count": 7
+    },
+    {
+      "referent": "object_detection",
+      "task_count": 7
+    },
+    {
+      "referent": "segmentation",
+      "task_count": 6
+    },
+    {
+      "referent": "motion_detection",
+      "task_count": 6
+    },
+    {
+      "referent": "self_driving_cars",
+      "task_count": 6
+    },
+    {
+      "referent": "robots",
+      "task_count": 6
+    },
+    {
+      "referent": "3d_object_classification",
+      "task_count": 5
+    },
+    {
+      "referent": "single_cell_modeling",
+      "task_count": 5
+    },
+    {
+      "referent": "autonomous_navigation",
+      "task_count": 4
+    },
+    {
+      "referent": "3d_point_cloud_classification",
+      "task_count": 4
+    },
+    {
+      "referent": "image_manipulation",
+      "task_count": 3
+    },
+    {
+      "referent": "zero_shot_cross_lingual_transfer",
+      "task_count": 3
+    },
+    {
+      "referent": "behavioral_malware_classification",
+      "task_count": 3
+    },
+    {
+      "referent": "mobile_robot",
+      "task_count": 3
+    },
+    {
+      "referent": "safety_perception_recognition",
+      "task_count": 3
+    },
+    {
+      "referent": "decision_making",
+      "task_count": 3
+    },
+    {
+      "referent": "3d_action_recognition",
+      "task_count": 3
+    },
+    {
+      "referent": "semantic_segmentation",
+      "task_count": 3
+    },
+    {
+      "referent": "steering_control",
+      "task_count": 3
+    },
+    {
+      "referent": "image_interpretation",
+      "task_count": 2
+    },
+    {
+      "referent": "portfolio_optimization",
+      "task_count": 2
+    },
+    {
+      "referent": "graph_sampling",
+      "task_count": 2
+    },
+    {
+      "referent": "gaze_redirection",
+      "task_count": 2
+    },
+    {
+      "referent": "imitation_learning",
+      "task_count": 2
+    },
+    {
+      "referent": "clinical_concept_extraction",
+      "task_count": 2
+    },
+    {
+      "referent": "3d_human_pose_estimation",
+      "task_count": 2
+    },
+    {
+      "referent": "sequence_to_sequence_speech_recognition",
+      "task_count": 2
+    },
+    {
+      "referent": "locomotion",
+      "task_count": 2
+    },
+    {
+      "referent": "action_generation",
+      "task_count": 2
+    },
+    {
+      "referent": "transparency_separation",
+      "task_count": 2
+    },
+    {
+      "referent": "feature_selection",
+      "task_count": 2
+    },
+    {
+      "referent": "path_planning",
+      "task_count": 2
+    },
+    {
+      "referent": "magnetic_resonance_fingerprinting",
+      "task_count": 2
+    },
+    {
+      "referent": "object_discovery",
+      "task_count": 2
+    },
+    {
+      "referent": "computer_vision",
+      "task_count": 2
+    },
+    {
+      "referent": "pedestrian_detection",
+      "task_count": 2
+    },
+    {
+      "referent": "trajectory_prediction",
+      "task_count": 2
+    },
+    {
+      "referent": "denoising",
+      "task_count": 2
+    },
+    {
+      "referent": "multi_class_classification",
+      "task_count": 2
+    },
+    {
+      "referent": "image_recognition",
+      "task_count": 2
+    },
+    {
+      "referent": "unsupervised_image_classification",
+      "task_count": 2
+    },
+    {
+      "referent": "reasoning",
+      "task_count": 2
+    },
+    {
+      "referent": "depth_estimation",
+      "task_count": 2
+    },
+    {
+      "referent": "neural_rendering",
+      "task_count": 1
+    },
+    {
+      "referent": "injury_prediction",
+      "task_count": 1
+    },
+    {
+      "referent": "classification_tasks",
+      "task_count": 1
+    },
+    {
+      "referent": "noisy_speech_recognition",
+      "task_count": 1
+    },
+    {
+      "referent": "image_captioning",
+      "task_count": 1
+    },
+    {
+      "referent": "video_surveillance",
+      "task_count": 1
+    },
+    {
+      "referent": "translation_studies",
+      "task_count": 1
+    },
+    {
+      "referent": "breast_cancer_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "mammogram",
+      "task_count": 1
+    },
+    {
+      "referent": "generalized_zero_shot_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "transfer_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "computational_manga",
+      "task_count": 1
+    },
+    {
+      "referent": "activity_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "domain_adaptation",
+      "task_count": 1
+    },
+    {
+      "referent": "bayesian_optimisation",
+      "task_count": 1
+    },
+    {
+      "referent": "industrial_robots",
+      "task_count": 1
+    },
+    {
+      "referent": "probabilistic_programming",
+      "task_count": 1
+    },
+    {
+      "referent": "individual_identification",
+      "task_count": 1
+    },
+    {
+      "referent": "computational_phenotyping",
+      "task_count": 1
+    },
+    {
+      "referent": "parkinson_'s_disease",
+      "task_count": 1
+    },
+    {
+      "referent": "real_time_object_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "scene_parsing",
+      "task_count": 1
+    },
+    {
+      "referent": "ser",
+      "task_count": 1
+    },
+    {
+      "referent": "image_annotation",
+      "task_count": 1
+    },
+    {
+      "referent": "animation",
+      "task_count": 1
+    },
+    {
+      "referent": "3d_multi_person_pose_estimation",
+      "task_count": 1
+    },
+    {
+      "referent": "lung_cancer",
+      "task_count": 1
+    },
+    {
+      "referent": "incremental_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "medical_image_segmentation",
+      "task_count": 1
+    },
+    {
+      "referent": "vehicle_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "routing",
+      "task_count": 1
+    },
+    {
+      "referent": "robotic_process_automation",
+      "task_count": 1
+    },
+    {
+      "referent": "pneumonia_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "disease_diagnosis",
+      "task_count": 1
+    },
+    {
+      "referent": "variable_selection",
+      "task_count": 1
+    },
+    {
+      "referent": "x_ray",
+      "task_count": 1
+    },
+    {
+      "referent": "general_reinforcement_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "continuous_control",
+      "task_count": 1
+    },
+    {
+      "referent": "distributed_optimization",
+      "task_count": 1
+    },
+    {
+      "referent": "cbc_test",
+      "task_count": 1
+    },
+    {
+      "referent": "image_analysis",
+      "task_count": 1
+    },
+    {
+      "referent": "data_to_text_generation",
+      "task_count": 1
+    },
+    {
+      "referent": "action_anticipation",
+      "task_count": 1
+    },
+    {
+      "referent": "graph_representation_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "network_pruning",
+      "task_count": 1
+    },
+    {
+      "referent": "direction_of_arrival_estimation",
+      "task_count": 1
+    },
+    {
+      "referent": "meta_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "data_augmentation",
+      "task_count": 1
+    },
+    {
+      "referent": "future_prediction",
+      "task_count": 1
+    },
+    {
+      "referent": "clustering",
+      "task_count": 1
+    },
+    {
+      "referent": "video_semantic_segmentation",
+      "task_count": 1
+    },
+    {
+      "referent": "probabilistic_deep_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "probabilistic_time_series_forecasting",
+      "task_count": 1
+    },
+    {
+      "referent": "system_identification",
+      "task_count": 1
+    },
+    {
+      "referent": "human_dynamics",
+      "task_count": 1
+    },
+    {
+      "referent": "auxiliary_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "lidar_semantic_segmentation",
+      "task_count": 1
+    },
+    {
+      "referent": "land_cover_mapping",
+      "task_count": 1
+    },
+    {
+      "referent": "pancreas_segmentation",
+      "task_count": 1
+    },
+    {
+      "referent": "fast_vehicle_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "multi_label_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "interpretability_techniques_for_deep_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "zero_shot_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "multimodal_text_and_image_classification",
+      "task_count": 1
+    },
+    {
+      "referent": "variational_inference",
+      "task_count": 1
+    },
+    {
+      "referent": "neural_architecture_search",
+      "task_count": 1
+    },
+    {
+      "referent": "image_alignment",
+      "task_count": 1
+    },
+    {
+      "referent": "active_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "scene_flow_estimation",
+      "task_count": 1
+    },
+    {
+      "referent": "causal_inference",
+      "task_count": 1
+    },
+    {
+      "referent": "density_estimation",
+      "task_count": 1
+    },
+    {
+      "referent": "metric_type_identification",
+      "task_count": 1
+    },
+    {
+      "referent": "image_generation",
+      "task_count": 1
+    },
+    {
+      "referent": "text_classification",
+      "task_count": 1
+    },
+    {
+      "referent": "age_related_macular_degeneration_classification",
+      "task_count": 1
+    },
+    {
+      "referent": "image_processing",
+      "task_count": 1
+    },
+    {
+      "referent": "multiple_action_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "speculation_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "prediction_of_occupancy_grid_maps",
+      "task_count": 1
+    },
+    {
+      "referent": "scene_text_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "neural_network_compression",
+      "task_count": 1
+    },
+    {
+      "referent": "sleep_stage_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "physiological_computing",
+      "task_count": 1
+    },
+    {
+      "referent": "6d_pose_estimation",
+      "task_count": 1
+    },
+    {
+      "referent": "3d_hand_pose_estimation",
+      "task_count": 1
+    },
+    {
+      "referent": "hand_joint_reconstruction",
+      "task_count": 1
+    },
+    {
+      "referent": "hand_pose_estimation",
+      "task_count": 1
+    },
+    {
+      "referent": "3d_hand_recognition",
+      "task_count": 1
+    },
+    {
+      "referent": "multi_object_tracking",
+      "task_count": 1
+    },
+    {
+      "referent": "semi_supervised_image_classification",
+      "task_count": 1
+    },
+    {
+      "referent": "face_recognition",
+      "task_count": 1
+    },
+    {
+      "referent": "2d_object_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "component_classification",
+      "task_count": 1
+    },
+    {
+      "referent": "speech_recognition",
+      "task_count": 1
+    },
+    {
+      "referent": "machine_translation",
+      "task_count": 1
+    },
+    {
+      "referent": "question_answering",
+      "task_count": 1
+    },
+    {
+      "referent": "scene_understanding",
+      "task_count": 1
+    },
+    {
+      "referent": "scene_segmentation",
+      "task_count": 1
+    },
+    {
+      "referent": "multi_task_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "semi_supervised_object_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "robot_navigation",
+      "task_count": 1
+    }
+  ],
+  "methods": [
+    {
+      "referent": "convolutional_neural_networks",
+      "method_count": 13
+    },
+    {
+      "referent": "3d_representations",
+      "method_count": 12
+    },
+    {
+      "referent": "recurrent_neural_networks",
+      "method_count": 11
+    },
+    {
+      "referent": "vqa_models",
+      "method_count": 10
+    },
+    {
+      "referent": "neural_architecture_search",
+      "method_count": 7
+    },
+    {
+      "referent": "symbolic_deep_learning",
+      "method_count": 6
+    },
+    {
+      "referent": "chexnet",
+      "method_count": 5
+    },
+    {
+      "referent": "causal_inference",
+      "method_count": 5
+    },
+    {
+      "referent": "mad_learning",
+      "method_count": 5
+    },
+    {
+      "referent": "generative_models",
+      "method_count": 5
+    },
+    {
+      "referent": "meta_learning_algorithms",
+      "method_count": 4
+    },
+    {
+      "referent": "hit_detector",
+      "method_count": 4
+    },
+    {
+      "referent": "autoencoder",
+      "method_count": 4
+    },
+    {
+      "referent": "griffin_lim_algorithm",
+      "method_count": 3
+    },
+    {
+      "referent": "video_sampling",
+      "method_count": 3
+    },
+    {
+      "referent": "admm",
+      "method_count": 3
+    },
+    {
+      "referent": "semi_supervised_learning_methods",
+      "method_count": 3
+    },
+    {
+      "referent": "reinforcement_learning",
+      "method_count": 3
+    },
+    {
+      "referent": "neural_probabilistic_language_model",
+      "method_count": 2
+    },
+    {
+      "referent": "ltls",
+      "method_count": 2
+    },
+    {
+      "referent": "mckernel",
+      "method_count": 2
+    },
+    {
+      "referent": "heuristic_search_algorithms",
+      "method_count": 2
+    },
+    {
+      "referent": "hierarchical_vae",
+      "method_count": 2
+    },
+    {
+      "referent": "dcgan",
+      "method_count": 2
+    },
+    {
+      "referent": "twin_networks",
+      "method_count": 2
+    },
+    {
+      "referent": "graph_models",
+      "method_count": 2
+    },
+    {
+      "referent": "natural_language_processing",
+      "method_count": 2
+    },
+    {
+      "referent": "estimation_statistics",
+      "method_count": 2
+    },
+    {
+      "referent": "visual_attention",
+      "method_count": 2
+    },
+    {
+      "referent": "ghost_bottleneck",
+      "method_count": 2
+    },
+    {
+      "referent": "logistic_regression",
+      "method_count": 2
+    },
+    {
+      "referent": "l1_regularization",
+      "method_count": 2
+    },
+    {
+      "referent": "deep_belief_network",
+      "method_count": 2
+    },
+    {
+      "referent": "optimization",
+      "method_count": 2
+    },
+    {
+      "referent": "q_learning",
+      "method_count": 2
+    },
+    {
+      "referent": "image_models",
+      "method_count": 2
+    },
+    {
+      "referent": "glow",
+      "method_count": 2
+    },
+    {
+      "referent": "gan",
+      "method_count": 2
+    },
+    {
+      "referent": "polya_gamma_augmentation",
+      "method_count": 2
+    },
+    {
+      "referent": "object_detection_models",
+      "method_count": 2
+    },
+    {
+      "referent": "self_supervised_learning",
+      "method_count": 2
+    },
+    {
+      "referent": "activation_functions",
+      "method_count": 2
+    },
+    {
+      "referent": "cgnn",
+      "method_count": 2
+    },
+    {
+      "referent": "ggs_nns",
+      "method_count": 1
+    },
+    {
+      "referent": "generalized_mean_pooling",
+      "method_count": 1
+    },
+    {
+      "referent": "linear_warmup_with_linear_decay",
+      "method_count": 1
+    },
+    {
+      "referent": "ulmfit",
+      "method_count": 1
+    },
+    {
+      "referent": "sparse_convolutions",
+      "method_count": 1
+    },
+    {
+      "referent": "convolutions",
+      "method_count": 1
+    },
+    {
+      "referent": "statistical_inference",
+      "method_count": 1
+    },
+    {
+      "referent": "multi_attention_network",
+      "method_count": 1
+    },
+    {
+      "referent": "global_convolutional_network",
+      "method_count": 1
+    },
+    {
+      "referent": "(2+1)d_convolution",
+      "method_count": 1
+    },
+    {
+      "referent": "pointnet",
+      "method_count": 1
+    },
+    {
+      "referent": "bp_transformer",
+      "method_count": 1
+    },
+    {
+      "referent": "residual_srm",
+      "method_count": 1
+    },
+    {
+      "referent": "channel_attention_module",
+      "method_count": 1
+    },
+    {
+      "referent": "attention",
+      "method_count": 1
+    },
+    {
+      "referent": "dac",
+      "method_count": 1
+    },
+    {
+      "referent": "u_net",
+      "method_count": 1
+    },
+    {
+      "referent": "feature_extractors",
+      "method_count": 1
+    },
+    {
+      "referent": "sttp",
+      "method_count": 1
+    },
+    {
+      "referent": "inception_a",
+      "method_count": 1
+    },
+    {
+      "referent": "gts",
+      "method_count": 1
+    },
+    {
+      "referent": "content_based_attention",
+      "method_count": 1
+    },
+    {
+      "referent": "ca",
+      "method_count": 1
+    },
+    {
+      "referent": "appo",
+      "method_count": 1
+    },
+    {
+      "referent": "general",
+      "method_count": 1
+    },
+    {
+      "referent": "ctc_loss",
+      "method_count": 1
+    },
+    {
+      "referent": "inception_module",
+      "method_count": 1
+    },
+    {
+      "referent": "off_policy_td_control",
+      "method_count": 1
+    },
+    {
+      "referent": "generalized_focal_loss",
+      "method_count": 1
+    },
+    {
+      "referent": "1d_cnn",
+      "method_count": 1
+    },
+    {
+      "referent": "adversarial_training",
+      "method_count": 1
+    },
+    {
+      "referent": "discriminators",
+      "method_count": 1
+    },
+    {
+      "referent": "crossvit",
+      "method_count": 1
+    },
+    {
+      "referent": "csgld",
+      "method_count": 1
+    },
+    {
+      "referent": "counting_methods",
+      "method_count": 1
+    },
+    {
+      "referent": "maddpg",
+      "method_count": 1
+    },
+    {
+      "referent": "dnas",
+      "method_count": 1
+    },
+    {
+      "referent": "skip_gram_word2vec",
+      "method_count": 1
+    },
+    {
+      "referent": "dilated_convolution",
+      "method_count": 1
+    },
+    {
+      "referent": "sequential",
+      "method_count": 1
+    },
+    {
+      "referent": "multigrain",
+      "method_count": 1
+    },
+    {
+      "referent": "semantic_segmentation_models",
+      "method_count": 1
+    },
+    {
+      "referent": "dueling_network",
+      "method_count": 1
+    },
+    {
+      "referent": "generative_adversarial_networks",
+      "method_count": 1
+    },
+    {
+      "referent": "clustering",
+      "method_count": 1
+    },
+    {
+      "referent": "image_segmentation_models",
+      "method_count": 1
+    },
+    {
+      "referent": "scatnet",
+      "method_count": 1
+    },
+    {
+      "referent": "adamw",
+      "method_count": 1
+    },
+    {
+      "referent": "double_q_learning",
+      "method_count": 1
+    },
+    {
+      "referent": "feedforward_network",
+      "method_count": 1
+    },
+    {
+      "referent": "computer_vision",
+      "method_count": 1
+    },
+    {
+      "referent": "random_search",
+      "method_count": 1
+    },
+    {
+      "referent": "hyperparameter_search",
+      "method_count": 1
+    },
+    {
+      "referent": "time_series_analysis",
+      "method_count": 1
+    },
+    {
+      "referent": "atss",
+      "method_count": 1
+    },
+    {
+      "referent": "sequence_to_sequence_models",
+      "method_count": 1
+    },
+    {
+      "referent": "graphs",
+      "method_count": 1
+    },
+    {
+      "referent": "holographic_reduced_representation",
+      "method_count": 1
+    },
+    {
+      "referent": "fast_ocr",
+      "method_count": 1
+    },
+    {
+      "referent": "downsampling",
+      "method_count": 1
+    },
+    {
+      "referent": "vae",
+      "method_count": 1
+    },
+    {
+      "referent": "attention_mechanisms",
+      "method_count": 1
+    },
+    {
+      "referent": "patchgan",
+      "method_count": 1
+    },
+    {
+      "referent": "feedback_memory",
+      "method_count": 1
+    },
+    {
+      "referent": "dmage",
+      "method_count": 1
+    },
+    {
+      "referent": "sm3",
+      "method_count": 1
+    },
+    {
+      "referent": "cdcc_net",
+      "method_count": 1
+    },
+    {
+      "referent": "backbone_architectures",
+      "method_count": 1
+    },
+    {
+      "referent": "population_based_augmentation",
+      "method_count": 1
+    },
+    {
+      "referent": "schnet",
+      "method_count": 1
+    },
+    {
+      "referent": "lime",
+      "method_count": 1
+    },
+    {
+      "referent": "nerf",
+      "method_count": 1
+    }
+  ],
+  "ai_patents": 1043,
+  "Physical_Sciences_and_Engineering_pats": 10,
+  "Life_Sciences_pats": 117,
+  "Security__eg_cybersecurity_pats": 22,
+  "Transportation_pats": 297,
+  "Industrial_and_Manufacturing_pats": 93,
+  "Education_pats": 7,
+  "Document_Mgt_and_Publishing_pats": 0,
+  "Military_pats": 2,
+  "Agricultural_pats": 23,
+  "Computing_in_Government_pats": 1,
+  "Personal_Devices_and_Computing_pats": 240,
+  "Banking_and_Finance_pats": 14,
+  "Telecommunications_pats": 136,
+  "Networks__eg_social_IOT_etc_pats": 0,
+  "Business_pats": 61,
+  "Energy_Management_pats": 10,
+  "Entertainment_pats": 12,
+  "Nanotechnology_pats": 1,
+  "Semiconductors_pats": 4,
+  "Language_Processing_pats": 16,
+  "Speech_Processing_pats": 29,
+  "Knowledge_Representation_pats": 43,
+  "Planning_and_Scheduling_pats": 43,
+  "Control_pats": 346,
+  "Distributed_AI_pats": 8,
+  "Robotics_pats": 16,
+  "Computer_Vision_pats": 328,
+  "Analytics_and_Algorithms_pats": 81,
+  "Measuring_and_Testing_pats": 175,
+  "Logic_Programming_pats": 88,
+  "Fuzzy_Logic_pats": 10,
+  "Probabilistic_Reasoning_pats": 121,
+  "Ontology_Engineering_pats": 11,
+  "Machine_Learning_pats": 950,
+  "Search_Methods_pats": 41,
+  "ai_patents_by_year": [
+    {
+      "priority_year": 1995,
+      "ai_patents": 1
+    },
+    {
+      "priority_year": 1999,
+      "ai_patents": 1
+    },
+    {
+      "priority_year": 2001,
+      "ai_patents": 2
+    },
+    {
+      "priority_year": 2004,
+      "ai_patents": 1
+    },
+    {
+      "priority_year": 2005,
+      "ai_patents": 4
+    },
+    {
+      "priority_year": 2006,
+      "ai_patents": 1
+    },
+    {
+      "priority_year": 2007,
+      "ai_patents": 7
+    },
+    {
+      "priority_year": 2008,
+      "ai_patents": 6
+    },
+    {
+      "priority_year": 2009,
+      "ai_patents": 4
+    },
+    {
+      "priority_year": 2010,
+      "ai_patents": 6
+    },
+    {
+      "priority_year": 2011,
+      "ai_patents": 14
+    },
+    {
+      "priority_year": 2012,
+      "ai_patents": 28
+    },
+    {
+      "priority_year": 2013,
+      "ai_patents": 22
+    },
+    {
+      "priority_year": 2014,
+      "ai_patents": 25
+    },
+    {
+      "priority_year": 2015,
+      "ai_patents": 61
+    },
+    {
+      "priority_year": 2016,
+      "ai_patents": 99
+    },
+    {
+      "priority_year": 2017,
+      "ai_patents": 143
+    },
+    {
+      "priority_year": 2018,
+      "ai_patents": 155
+    },
+    {
+      "priority_year": 2019,
+      "ai_patents": 201
+    },
+    {
+      "priority_year": 2020,
+      "ai_patents": 198
+    },
+    {
+      "priority_year": 2021,
+      "ai_patents": 64
+    }
+  ],
+  "Physical_Sciences_and_Engineering_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Physical_Sciences_and_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2011,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Physical_Sciences_and_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2013,
+      "Physical_Sciences_and_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2014,
+      "Physical_Sciences_and_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2015,
+      "Physical_Sciences_and_Engineering_pats": 2
+    },
+    {
+      "priority_year": 2016,
+      "Physical_Sciences_and_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2017,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2018,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2019,
+      "Physical_Sciences_and_Engineering_pats": 3
+    },
+    {
+      "priority_year": 2020,
+      "Physical_Sciences_and_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Physical_Sciences_and_Engineering_pats": 0
+    }
+  ],
+  "Life_Sciences_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Life_Sciences_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Life_Sciences_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Life_Sciences_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Life_Sciences_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Life_Sciences_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Life_Sciences_pats": 1
+    },
+    {
+      "priority_year": 2007,
+      "Life_Sciences_pats": 1
+    },
+    {
+      "priority_year": 2008,
+      "Life_Sciences_pats": 1
+    },
+    {
+      "priority_year": 2009,
+      "Life_Sciences_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Life_Sciences_pats": 1
+    },
+    {
+      "priority_year": 2011,
+      "Life_Sciences_pats": 1
+    },
+    {
+      "priority_year": 2012,
+      "Life_Sciences_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Life_Sciences_pats": 3
+    },
+    {
+      "priority_year": 2014,
+      "Life_Sciences_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Life_Sciences_pats": 6
+    },
+    {
+      "priority_year": 2016,
+      "Life_Sciences_pats": 13
+    },
+    {
+      "priority_year": 2017,
+      "Life_Sciences_pats": 17
+    },
+    {
+      "priority_year": 2018,
+      "Life_Sciences_pats": 24
+    },
+    {
+      "priority_year": 2019,
+      "Life_Sciences_pats": 17
+    },
+    {
+      "priority_year": 2020,
+      "Life_Sciences_pats": 27
+    },
+    {
+      "priority_year": 2021,
+      "Life_Sciences_pats": 5
+    }
+  ],
+  "Security__eg_cybersecurity_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Security__eg_cybersecurity_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Security__eg_cybersecurity_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Security__eg_cybersecurity_pats": 1
+    },
+    {
+      "priority_year": 2004,
+      "Security__eg_cybersecurity_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Security__eg_cybersecurity_pats": 1
+    },
+    {
+      "priority_year": 2006,
+      "Security__eg_cybersecurity_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Security__eg_cybersecurity_pats": 1
+    },
+    {
+      "priority_year": 2008,
+      "Security__eg_cybersecurity_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Security__eg_cybersecurity_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Security__eg_cybersecurity_pats": 2
+    },
+    {
+      "priority_year": 2011,
+      "Security__eg_cybersecurity_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Security__eg_cybersecurity_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Security__eg_cybersecurity_pats": 1
+    },
+    {
+      "priority_year": 2014,
+      "Security__eg_cybersecurity_pats": 1
+    },
+    {
+      "priority_year": 2015,
+      "Security__eg_cybersecurity_pats": 3
+    },
+    {
+      "priority_year": 2016,
+      "Security__eg_cybersecurity_pats": 1
+    },
+    {
+      "priority_year": 2017,
+      "Security__eg_cybersecurity_pats": 2
+    },
+    {
+      "priority_year": 2018,
+      "Security__eg_cybersecurity_pats": 3
+    },
+    {
+      "priority_year": 2019,
+      "Security__eg_cybersecurity_pats": 2
+    },
+    {
+      "priority_year": 2020,
+      "Security__eg_cybersecurity_pats": 4
+    },
+    {
+      "priority_year": 2021,
+      "Security__eg_cybersecurity_pats": 0
+    }
+  ],
+  "Transportation_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Transportation_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Transportation_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Transportation_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Transportation_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Transportation_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Transportation_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Transportation_pats": 1
+    },
+    {
+      "priority_year": 2008,
+      "Transportation_pats": 1
+    },
+    {
+      "priority_year": 2009,
+      "Transportation_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Transportation_pats": 2
+    },
+    {
+      "priority_year": 2011,
+      "Transportation_pats": 3
+    },
+    {
+      "priority_year": 2012,
+      "Transportation_pats": 23
+    },
+    {
+      "priority_year": 2013,
+      "Transportation_pats": 13
+    },
+    {
+      "priority_year": 2014,
+      "Transportation_pats": 15
+    },
+    {
+      "priority_year": 2015,
+      "Transportation_pats": 17
+    },
+    {
+      "priority_year": 2016,
+      "Transportation_pats": 25
+    },
+    {
+      "priority_year": 2017,
+      "Transportation_pats": 52
+    },
+    {
+      "priority_year": 2018,
+      "Transportation_pats": 58
+    },
+    {
+      "priority_year": 2019,
+      "Transportation_pats": 50
+    },
+    {
+      "priority_year": 2020,
+      "Transportation_pats": 29
+    },
+    {
+      "priority_year": 2021,
+      "Transportation_pats": 8
+    }
+  ],
+  "Industrial_and_Manufacturing_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Industrial_and_Manufacturing_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Industrial_and_Manufacturing_pats": 1
+    },
+    {
+      "priority_year": 2015,
+      "Industrial_and_Manufacturing_pats": 6
+    },
+    {
+      "priority_year": 2016,
+      "Industrial_and_Manufacturing_pats": 10
+    },
+    {
+      "priority_year": 2017,
+      "Industrial_and_Manufacturing_pats": 17
+    },
+    {
+      "priority_year": 2018,
+      "Industrial_and_Manufacturing_pats": 12
+    },
+    {
+      "priority_year": 2019,
+      "Industrial_and_Manufacturing_pats": 23
+    },
+    {
+      "priority_year": 2020,
+      "Industrial_and_Manufacturing_pats": 21
+    },
+    {
+      "priority_year": 2021,
+      "Industrial_and_Manufacturing_pats": 3
+    }
+  ],
+  "Education_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Education_pats": 1
+    },
+    {
+      "priority_year": 2004,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2016,
+      "Education_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Education_pats": 1
+    },
+    {
+      "priority_year": 2018,
+      "Education_pats": 3
+    },
+    {
+      "priority_year": 2019,
+      "Education_pats": 1
+    },
+    {
+      "priority_year": 2020,
+      "Education_pats": 1
+    },
+    {
+      "priority_year": 2021,
+      "Education_pats": 0
+    }
+  ],
+  "Document_Mgt_and_Publishing_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2016,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2018,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2019,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2020,
+      "Document_Mgt_and_Publishing_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Document_Mgt_and_Publishing_pats": 0
+    }
+  ],
+  "Military_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Military_pats": 1
+    },
+    {
+      "priority_year": 2016,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2018,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2019,
+      "Military_pats": 1
+    },
+    {
+      "priority_year": 2020,
+      "Military_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Military_pats": 0
+    }
+  ],
+  "Agricultural_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Agricultural_pats": 0
+    },
+    {
+      "priority_year": 2016,
+      "Agricultural_pats": 2
+    },
+    {
+      "priority_year": 2017,
+      "Agricultural_pats": 2
+    },
+    {
+      "priority_year": 2018,
+      "Agricultural_pats": 5
+    },
+    {
+      "priority_year": 2019,
+      "Agricultural_pats": 3
+    },
+    {
+      "priority_year": 2020,
+      "Agricultural_pats": 10
+    },
+    {
+      "priority_year": 2021,
+      "Agricultural_pats": 1
+    }
+  ],
+  "Computing_in_Government_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2016,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2018,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2019,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2020,
+      "Computing_in_Government_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Computing_in_Government_pats": 1
+    }
+  ],
+  "Personal_Devices_and_Computing_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Personal_Devices_and_Computing_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Personal_Devices_and_Computing_pats": 1
+    },
+    {
+      "priority_year": 2001,
+      "Personal_Devices_and_Computing_pats": 1
+    },
+    {
+      "priority_year": 2004,
+      "Personal_Devices_and_Computing_pats": 1
+    },
+    {
+      "priority_year": 2005,
+      "Personal_Devices_and_Computing_pats": 3
+    },
+    {
+      "priority_year": 2006,
+      "Personal_Devices_and_Computing_pats": 1
+    },
+    {
+      "priority_year": 2007,
+      "Personal_Devices_and_Computing_pats": 5
+    },
+    {
+      "priority_year": 2008,
+      "Personal_Devices_and_Computing_pats": 6
+    },
+    {
+      "priority_year": 2009,
+      "Personal_Devices_and_Computing_pats": 4
+    },
+    {
+      "priority_year": 2010,
+      "Personal_Devices_and_Computing_pats": 3
+    },
+    {
+      "priority_year": 2011,
+      "Personal_Devices_and_Computing_pats": 9
+    },
+    {
+      "priority_year": 2012,
+      "Personal_Devices_and_Computing_pats": 3
+    },
+    {
+      "priority_year": 2013,
+      "Personal_Devices_and_Computing_pats": 3
+    },
+    {
+      "priority_year": 2014,
+      "Personal_Devices_and_Computing_pats": 2
+    },
+    {
+      "priority_year": 2015,
+      "Personal_Devices_and_Computing_pats": 17
+    },
+    {
+      "priority_year": 2016,
+      "Personal_Devices_and_Computing_pats": 25
+    },
+    {
+      "priority_year": 2017,
+      "Personal_Devices_and_Computing_pats": 30
+    },
+    {
+      "priority_year": 2018,
+      "Personal_Devices_and_Computing_pats": 37
+    },
+    {
+      "priority_year": 2019,
+      "Personal_Devices_and_Computing_pats": 40
+    },
+    {
+      "priority_year": 2020,
+      "Personal_Devices_and_Computing_pats": 43
+    },
+    {
+      "priority_year": 2021,
+      "Personal_Devices_and_Computing_pats": 6
+    }
+  ],
+  "Banking_and_Finance_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Banking_and_Finance_pats": 1
+    },
+    {
+      "priority_year": 2007,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Banking_and_Finance_pats": 1
+    },
+    {
+      "priority_year": 2011,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Banking_and_Finance_pats": 1
+    },
+    {
+      "priority_year": 2014,
+      "Banking_and_Finance_pats": 1
+    },
+    {
+      "priority_year": 2015,
+      "Banking_and_Finance_pats": 2
+    },
+    {
+      "priority_year": 2016,
+      "Banking_and_Finance_pats": 1
+    },
+    {
+      "priority_year": 2017,
+      "Banking_and_Finance_pats": 1
+    },
+    {
+      "priority_year": 2018,
+      "Banking_and_Finance_pats": 2
+    },
+    {
+      "priority_year": 2019,
+      "Banking_and_Finance_pats": 3
+    },
+    {
+      "priority_year": 2020,
+      "Banking_and_Finance_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Banking_and_Finance_pats": 1
+    }
+  ],
+  "Telecommunications_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Telecommunications_pats": 1
+    },
+    {
+      "priority_year": 1999,
+      "Telecommunications_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Telecommunications_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Telecommunications_pats": 1
+    },
+    {
+      "priority_year": 2005,
+      "Telecommunications_pats": 2
+    },
+    {
+      "priority_year": 2006,
+      "Telecommunications_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Telecommunications_pats": 4
+    },
+    {
+      "priority_year": 2008,
+      "Telecommunications_pats": 3
+    },
+    {
+      "priority_year": 2009,
+      "Telecommunications_pats": 2
+    },
+    {
+      "priority_year": 2010,
+      "Telecommunications_pats": 2
+    },
+    {
+      "priority_year": 2011,
+      "Telecommunications_pats": 5
+    },
+    {
+      "priority_year": 2012,
+      "Telecommunications_pats": 2
+    },
+    {
+      "priority_year": 2013,
+      "Telecommunications_pats": 6
+    },
+    {
+      "priority_year": 2014,
+      "Telecommunications_pats": 3
+    },
+    {
+      "priority_year": 2015,
+      "Telecommunications_pats": 12
+    },
+    {
+      "priority_year": 2016,
+      "Telecommunications_pats": 11
+    },
+    {
+      "priority_year": 2017,
+      "Telecommunications_pats": 16
+    },
+    {
+      "priority_year": 2018,
+      "Telecommunications_pats": 21
+    },
+    {
+      "priority_year": 2019,
+      "Telecommunications_pats": 17
+    },
+    {
+      "priority_year": 2020,
+      "Telecommunications_pats": 23
+    },
+    {
+      "priority_year": 2021,
+      "Telecommunications_pats": 5
+    }
+  ],
+  "Networks__eg_social_IOT_etc_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2016,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2018,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2019,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2020,
+      "Networks__eg_social_IOT_etc_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Networks__eg_social_IOT_etc_pats": 0
+    }
+  ],
+  "Business_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Business_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Business_pats": 1
+    },
+    {
+      "priority_year": 2001,
+      "Business_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Business_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Business_pats": 3
+    },
+    {
+      "priority_year": 2006,
+      "Business_pats": 1
+    },
+    {
+      "priority_year": 2007,
+      "Business_pats": 2
+    },
+    {
+      "priority_year": 2008,
+      "Business_pats": 1
+    },
+    {
+      "priority_year": 2009,
+      "Business_pats": 1
+    },
+    {
+      "priority_year": 2010,
+      "Business_pats": 2
+    },
+    {
+      "priority_year": 2011,
+      "Business_pats": 3
+    },
+    {
+      "priority_year": 2012,
+      "Business_pats": 1
+    },
+    {
+      "priority_year": 2013,
+      "Business_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Business_pats": 4
+    },
+    {
+      "priority_year": 2015,
+      "Business_pats": 3
+    },
+    {
+      "priority_year": 2016,
+      "Business_pats": 4
+    },
+    {
+      "priority_year": 2017,
+      "Business_pats": 11
+    },
+    {
+      "priority_year": 2018,
+      "Business_pats": 7
+    },
+    {
+      "priority_year": 2019,
+      "Business_pats": 4
+    },
+    {
+      "priority_year": 2020,
+      "Business_pats": 11
+    },
+    {
+      "priority_year": 2021,
+      "Business_pats": 2
+    }
+  ],
+  "Energy_Management_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Energy_Management_pats": 2
+    },
+    {
+      "priority_year": 2011,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Energy_Management_pats": 2
+    },
+    {
+      "priority_year": 2014,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Energy_Management_pats": 1
+    },
+    {
+      "priority_year": 2016,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Energy_Management_pats": 1
+    },
+    {
+      "priority_year": 2018,
+      "Energy_Management_pats": 0
+    },
+    {
+      "priority_year": 2019,
+      "Energy_Management_pats": 2
+    },
+    {
+      "priority_year": 2020,
+      "Energy_Management_pats": 2
+    },
+    {
+      "priority_year": 2021,
+      "Energy_Management_pats": 0
+    }
+  ],
+  "Entertainment_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Entertainment_pats": 1
+    },
+    {
+      "priority_year": 2007,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Entertainment_pats": 1
+    },
+    {
+      "priority_year": 2011,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Entertainment_pats": 1
+    },
+    {
+      "priority_year": 2014,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Entertainment_pats": 1
+    },
+    {
+      "priority_year": 2016,
+      "Entertainment_pats": 3
+    },
+    {
+      "priority_year": 2017,
+      "Entertainment_pats": 2
+    },
+    {
+      "priority_year": 2018,
+      "Entertainment_pats": 2
+    },
+    {
+      "priority_year": 2019,
+      "Entertainment_pats": 1
+    },
+    {
+      "priority_year": 2020,
+      "Entertainment_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Entertainment_pats": 0
+    }
+  ],
+  "Nanotechnology_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Nanotechnology_pats": 1
+    },
+    {
+      "priority_year": 2016,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2018,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2019,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2020,
+      "Nanotechnology_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Nanotechnology_pats": 0
+    }
+  ],
+  "Semiconductors_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Semiconductors_pats": 2
+    },
+    {
+      "priority_year": 2016,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2018,
+      "Semiconductors_pats": 1
+    },
+    {
+      "priority_year": 2019,
+      "Semiconductors_pats": 1
+    },
+    {
+      "priority_year": 2020,
+      "Semiconductors_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Semiconductors_pats": 0
+    }
+  ],
+  "Language_Processing_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Language_Processing_pats": 1
+    },
+    {
+      "priority_year": 2005,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Language_Processing_pats": 1
+    },
+    {
+      "priority_year": 2008,
+      "Language_Processing_pats": 2
+    },
+    {
+      "priority_year": 2009,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Language_Processing_pats": 1
+    },
+    {
+      "priority_year": 2012,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Language_Processing_pats": 1
+    },
+    {
+      "priority_year": 2014,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Language_Processing_pats": 2
+    },
+    {
+      "priority_year": 2016,
+      "Language_Processing_pats": 3
+    },
+    {
+      "priority_year": 2017,
+      "Language_Processing_pats": 4
+    },
+    {
+      "priority_year": 2018,
+      "Language_Processing_pats": 1
+    },
+    {
+      "priority_year": 2019,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2020,
+      "Language_Processing_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Language_Processing_pats": 0
+    }
+  ],
+  "Speech_Processing_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Speech_Processing_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Speech_Processing_pats": 4
+    },
+    {
+      "priority_year": 2016,
+      "Speech_Processing_pats": 5
+    },
+    {
+      "priority_year": 2017,
+      "Speech_Processing_pats": 3
+    },
+    {
+      "priority_year": 2018,
+      "Speech_Processing_pats": 4
+    },
+    {
+      "priority_year": 2019,
+      "Speech_Processing_pats": 5
+    },
+    {
+      "priority_year": 2020,
+      "Speech_Processing_pats": 6
+    },
+    {
+      "priority_year": 2021,
+      "Speech_Processing_pats": 2
+    }
+  ],
+  "Knowledge_Representation_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Knowledge_Representation_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Knowledge_Representation_pats": 1
+    },
+    {
+      "priority_year": 2001,
+      "Knowledge_Representation_pats": 2
+    },
+    {
+      "priority_year": 2004,
+      "Knowledge_Representation_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Knowledge_Representation_pats": 2
+    },
+    {
+      "priority_year": 2006,
+      "Knowledge_Representation_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Knowledge_Representation_pats": 4
+    },
+    {
+      "priority_year": 2008,
+      "Knowledge_Representation_pats": 2
+    },
+    {
+      "priority_year": 2009,
+      "Knowledge_Representation_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Knowledge_Representation_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Knowledge_Representation_pats": 3
+    },
+    {
+      "priority_year": 2012,
+      "Knowledge_Representation_pats": 2
+    },
+    {
+      "priority_year": 2013,
+      "Knowledge_Representation_pats": 2
+    },
+    {
+      "priority_year": 2014,
+      "Knowledge_Representation_pats": 2
+    },
+    {
+      "priority_year": 2015,
+      "Knowledge_Representation_pats": 2
+    },
+    {
+      "priority_year": 2016,
+      "Knowledge_Representation_pats": 1
+    },
+    {
+      "priority_year": 2017,
+      "Knowledge_Representation_pats": 4
+    },
+    {
+      "priority_year": 2018,
+      "Knowledge_Representation_pats": 5
+    },
+    {
+      "priority_year": 2019,
+      "Knowledge_Representation_pats": 7
+    },
+    {
+      "priority_year": 2020,
+      "Knowledge_Representation_pats": 3
+    },
+    {
+      "priority_year": 2021,
+      "Knowledge_Representation_pats": 1
+    }
+  ],
+  "Planning_and_Scheduling_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Planning_and_Scheduling_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Planning_and_Scheduling_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Planning_and_Scheduling_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Planning_and_Scheduling_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Planning_and_Scheduling_pats": 1
+    },
+    {
+      "priority_year": 2006,
+      "Planning_and_Scheduling_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Planning_and_Scheduling_pats": 1
+    },
+    {
+      "priority_year": 2008,
+      "Planning_and_Scheduling_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Planning_and_Scheduling_pats": 1
+    },
+    {
+      "priority_year": 2010,
+      "Planning_and_Scheduling_pats": 1
+    },
+    {
+      "priority_year": 2011,
+      "Planning_and_Scheduling_pats": 1
+    },
+    {
+      "priority_year": 2012,
+      "Planning_and_Scheduling_pats": 1
+    },
+    {
+      "priority_year": 2013,
+      "Planning_and_Scheduling_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Planning_and_Scheduling_pats": 2
+    },
+    {
+      "priority_year": 2015,
+      "Planning_and_Scheduling_pats": 3
+    },
+    {
+      "priority_year": 2016,
+      "Planning_and_Scheduling_pats": 3
+    },
+    {
+      "priority_year": 2017,
+      "Planning_and_Scheduling_pats": 10
+    },
+    {
+      "priority_year": 2018,
+      "Planning_and_Scheduling_pats": 5
+    },
+    {
+      "priority_year": 2019,
+      "Planning_and_Scheduling_pats": 3
+    },
+    {
+      "priority_year": 2020,
+      "Planning_and_Scheduling_pats": 9
+    },
+    {
+      "priority_year": 2021,
+      "Planning_and_Scheduling_pats": 2
+    }
+  ],
+  "Control_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Control_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Control_pats": 3
+    },
+    {
+      "priority_year": 2011,
+      "Control_pats": 3
+    },
+    {
+      "priority_year": 2012,
+      "Control_pats": 23
+    },
+    {
+      "priority_year": 2013,
+      "Control_pats": 14
+    },
+    {
+      "priority_year": 2014,
+      "Control_pats": 15
+    },
+    {
+      "priority_year": 2015,
+      "Control_pats": 18
+    },
+    {
+      "priority_year": 2016,
+      "Control_pats": 37
+    },
+    {
+      "priority_year": 2017,
+      "Control_pats": 64
+    },
+    {
+      "priority_year": 2018,
+      "Control_pats": 68
+    },
+    {
+      "priority_year": 2019,
+      "Control_pats": 60
+    },
+    {
+      "priority_year": 2020,
+      "Control_pats": 31
+    },
+    {
+      "priority_year": 2021,
+      "Control_pats": 10
+    }
+  ],
+  "Distributed_AI_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Distributed_AI_pats": 1
+    },
+    {
+      "priority_year": 2006,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2016,
+      "Distributed_AI_pats": 0
+    },
+    {
+      "priority_year": 2017,
+      "Distributed_AI_pats": 2
+    },
+    {
+      "priority_year": 2018,
+      "Distributed_AI_pats": 2
+    },
+    {
+      "priority_year": 2019,
+      "Distributed_AI_pats": 2
+    },
+    {
+      "priority_year": 2020,
+      "Distributed_AI_pats": 1
+    },
+    {
+      "priority_year": 2021,
+      "Distributed_AI_pats": 0
+    }
+  ],
+  "Robotics_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Robotics_pats": 2
+    },
+    {
+      "priority_year": 2015,
+      "Robotics_pats": 2
+    },
+    {
+      "priority_year": 2016,
+      "Robotics_pats": 2
+    },
+    {
+      "priority_year": 2017,
+      "Robotics_pats": 8
+    },
+    {
+      "priority_year": 2018,
+      "Robotics_pats": 2
+    },
+    {
+      "priority_year": 2019,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2020,
+      "Robotics_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Robotics_pats": 0
+    }
+  ],
+  "Computer_Vision_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Computer_Vision_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Computer_Vision_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Computer_Vision_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Computer_Vision_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Computer_Vision_pats": 1
+    },
+    {
+      "priority_year": 2006,
+      "Computer_Vision_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Computer_Vision_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Computer_Vision_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Computer_Vision_pats": 1
+    },
+    {
+      "priority_year": 2010,
+      "Computer_Vision_pats": 2
+    },
+    {
+      "priority_year": 2011,
+      "Computer_Vision_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Computer_Vision_pats": 9
+    },
+    {
+      "priority_year": 2013,
+      "Computer_Vision_pats": 10
+    },
+    {
+      "priority_year": 2014,
+      "Computer_Vision_pats": 9
+    },
+    {
+      "priority_year": 2015,
+      "Computer_Vision_pats": 8
+    },
+    {
+      "priority_year": 2016,
+      "Computer_Vision_pats": 26
+    },
+    {
+      "priority_year": 2017,
+      "Computer_Vision_pats": 40
+    },
+    {
+      "priority_year": 2018,
+      "Computer_Vision_pats": 57
+    },
+    {
+      "priority_year": 2019,
+      "Computer_Vision_pats": 85
+    },
+    {
+      "priority_year": 2020,
+      "Computer_Vision_pats": 61
+    },
+    {
+      "priority_year": 2021,
+      "Computer_Vision_pats": 19
+    }
+  ],
+  "Analytics_and_Algorithms_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Analytics_and_Algorithms_pats": 1
+    },
+    {
+      "priority_year": 1999,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Analytics_and_Algorithms_pats": 1
+    },
+    {
+      "priority_year": 2007,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Analytics_and_Algorithms_pats": 1
+    },
+    {
+      "priority_year": 2011,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Analytics_and_Algorithms_pats": 3
+    },
+    {
+      "priority_year": 2014,
+      "Analytics_and_Algorithms_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Analytics_and_Algorithms_pats": 3
+    },
+    {
+      "priority_year": 2016,
+      "Analytics_and_Algorithms_pats": 11
+    },
+    {
+      "priority_year": 2017,
+      "Analytics_and_Algorithms_pats": 13
+    },
+    {
+      "priority_year": 2018,
+      "Analytics_and_Algorithms_pats": 11
+    },
+    {
+      "priority_year": 2019,
+      "Analytics_and_Algorithms_pats": 18
+    },
+    {
+      "priority_year": 2020,
+      "Analytics_and_Algorithms_pats": 15
+    },
+    {
+      "priority_year": 2021,
+      "Analytics_and_Algorithms_pats": 4
+    }
+  ],
+  "Measuring_and_Testing_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Measuring_and_Testing_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Measuring_and_Testing_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Measuring_and_Testing_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Measuring_and_Testing_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Measuring_and_Testing_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Measuring_and_Testing_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Measuring_and_Testing_pats": 1
+    },
+    {
+      "priority_year": 2008,
+      "Measuring_and_Testing_pats": 1
+    },
+    {
+      "priority_year": 2009,
+      "Measuring_and_Testing_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Measuring_and_Testing_pats": 3
+    },
+    {
+      "priority_year": 2011,
+      "Measuring_and_Testing_pats": 3
+    },
+    {
+      "priority_year": 2012,
+      "Measuring_and_Testing_pats": 14
+    },
+    {
+      "priority_year": 2013,
+      "Measuring_and_Testing_pats": 9
+    },
+    {
+      "priority_year": 2014,
+      "Measuring_and_Testing_pats": 5
+    },
+    {
+      "priority_year": 2015,
+      "Measuring_and_Testing_pats": 7
+    },
+    {
+      "priority_year": 2016,
+      "Measuring_and_Testing_pats": 13
+    },
+    {
+      "priority_year": 2017,
+      "Measuring_and_Testing_pats": 27
+    },
+    {
+      "priority_year": 2018,
+      "Measuring_and_Testing_pats": 28
+    },
+    {
+      "priority_year": 2019,
+      "Measuring_and_Testing_pats": 30
+    },
+    {
+      "priority_year": 2020,
+      "Measuring_and_Testing_pats": 27
+    },
+    {
+      "priority_year": 2021,
+      "Measuring_and_Testing_pats": 7
+    }
+  ],
+  "Logic_Programming_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Logic_Programming_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Logic_Programming_pats": 1
+    },
+    {
+      "priority_year": 2001,
+      "Logic_Programming_pats": 2
+    },
+    {
+      "priority_year": 2004,
+      "Logic_Programming_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Logic_Programming_pats": 3
+    },
+    {
+      "priority_year": 2006,
+      "Logic_Programming_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Logic_Programming_pats": 4
+    },
+    {
+      "priority_year": 2008,
+      "Logic_Programming_pats": 2
+    },
+    {
+      "priority_year": 2009,
+      "Logic_Programming_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Logic_Programming_pats": 1
+    },
+    {
+      "priority_year": 2011,
+      "Logic_Programming_pats": 5
+    },
+    {
+      "priority_year": 2012,
+      "Logic_Programming_pats": 3
+    },
+    {
+      "priority_year": 2013,
+      "Logic_Programming_pats": 3
+    },
+    {
+      "priority_year": 2014,
+      "Logic_Programming_pats": 2
+    },
+    {
+      "priority_year": 2015,
+      "Logic_Programming_pats": 4
+    },
+    {
+      "priority_year": 2016,
+      "Logic_Programming_pats": 4
+    },
+    {
+      "priority_year": 2017,
+      "Logic_Programming_pats": 10
+    },
+    {
+      "priority_year": 2018,
+      "Logic_Programming_pats": 13
+    },
+    {
+      "priority_year": 2019,
+      "Logic_Programming_pats": 15
+    },
+    {
+      "priority_year": 2020,
+      "Logic_Programming_pats": 11
+    },
+    {
+      "priority_year": 2021,
+      "Logic_Programming_pats": 5
+    }
+  ],
+  "Fuzzy_Logic_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Fuzzy_Logic_pats": 1
+    },
+    {
+      "priority_year": 2010,
+      "Fuzzy_Logic_pats": 1
+    },
+    {
+      "priority_year": 2011,
+      "Fuzzy_Logic_pats": 2
+    },
+    {
+      "priority_year": 2012,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Fuzzy_Logic_pats": 1
+    },
+    {
+      "priority_year": 2014,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Fuzzy_Logic_pats": 2
+    },
+    {
+      "priority_year": 2016,
+      "Fuzzy_Logic_pats": 1
+    },
+    {
+      "priority_year": 2017,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2018,
+      "Fuzzy_Logic_pats": 1
+    },
+    {
+      "priority_year": 2019,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2020,
+      "Fuzzy_Logic_pats": 0
+    },
+    {
+      "priority_year": 2021,
+      "Fuzzy_Logic_pats": 1
+    }
+  ],
+  "Probabilistic_Reasoning_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Probabilistic_Reasoning_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Probabilistic_Reasoning_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Probabilistic_Reasoning_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Probabilistic_Reasoning_pats": 1
+    },
+    {
+      "priority_year": 2005,
+      "Probabilistic_Reasoning_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Probabilistic_Reasoning_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Probabilistic_Reasoning_pats": 1
+    },
+    {
+      "priority_year": 2008,
+      "Probabilistic_Reasoning_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Probabilistic_Reasoning_pats": 1
+    },
+    {
+      "priority_year": 2010,
+      "Probabilistic_Reasoning_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Probabilistic_Reasoning_pats": 2
+    },
+    {
+      "priority_year": 2012,
+      "Probabilistic_Reasoning_pats": 3
+    },
+    {
+      "priority_year": 2013,
+      "Probabilistic_Reasoning_pats": 3
+    },
+    {
+      "priority_year": 2014,
+      "Probabilistic_Reasoning_pats": 3
+    },
+    {
+      "priority_year": 2015,
+      "Probabilistic_Reasoning_pats": 3
+    },
+    {
+      "priority_year": 2016,
+      "Probabilistic_Reasoning_pats": 16
+    },
+    {
+      "priority_year": 2017,
+      "Probabilistic_Reasoning_pats": 11
+    },
+    {
+      "priority_year": 2018,
+      "Probabilistic_Reasoning_pats": 23
+    },
+    {
+      "priority_year": 2019,
+      "Probabilistic_Reasoning_pats": 26
+    },
+    {
+      "priority_year": 2020,
+      "Probabilistic_Reasoning_pats": 21
+    },
+    {
+      "priority_year": 2021,
+      "Probabilistic_Reasoning_pats": 7
+    }
+  ],
+  "Ontology_Engineering_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Ontology_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2001,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2014,
+      "Ontology_Engineering_pats": 0
+    },
+    {
+      "priority_year": 2015,
+      "Ontology_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2016,
+      "Ontology_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2017,
+      "Ontology_Engineering_pats": 3
+    },
+    {
+      "priority_year": 2018,
+      "Ontology_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2019,
+      "Ontology_Engineering_pats": 2
+    },
+    {
+      "priority_year": 2020,
+      "Ontology_Engineering_pats": 1
+    },
+    {
+      "priority_year": 2021,
+      "Ontology_Engineering_pats": 1
+    }
+  ],
+  "Machine_Learning_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Machine_Learning_pats": 1
+    },
+    {
+      "priority_year": 1999,
+      "Machine_Learning_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Machine_Learning_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Machine_Learning_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Machine_Learning_pats": 1
+    },
+    {
+      "priority_year": 2006,
+      "Machine_Learning_pats": 1
+    },
+    {
+      "priority_year": 2007,
+      "Machine_Learning_pats": 1
+    },
+    {
+      "priority_year": 2008,
+      "Machine_Learning_pats": 1
+    },
+    {
+      "priority_year": 2009,
+      "Machine_Learning_pats": 2
+    },
+    {
+      "priority_year": 2010,
+      "Machine_Learning_pats": 3
+    },
+    {
+      "priority_year": 2011,
+      "Machine_Learning_pats": 3
+    },
+    {
+      "priority_year": 2012,
+      "Machine_Learning_pats": 25
+    },
+    {
+      "priority_year": 2013,
+      "Machine_Learning_pats": 18
+    },
+    {
+      "priority_year": 2014,
+      "Machine_Learning_pats": 22
+    },
+    {
+      "priority_year": 2015,
+      "Machine_Learning_pats": 54
+    },
+    {
+      "priority_year": 2016,
+      "Machine_Learning_pats": 97
+    },
+    {
+      "priority_year": 2017,
+      "Machine_Learning_pats": 139
+    },
+    {
+      "priority_year": 2018,
+      "Machine_Learning_pats": 148
+    },
+    {
+      "priority_year": 2019,
+      "Machine_Learning_pats": 193
+    },
+    {
+      "priority_year": 2020,
+      "Machine_Learning_pats": 184
+    },
+    {
+      "priority_year": 2021,
+      "Machine_Learning_pats": 57
+    }
+  ],
+  "Search_Methods_pats_by_year": [
+    {
+      "priority_year": 1995,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 1999,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2001,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2004,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2005,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2006,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2007,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2008,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2009,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2010,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2011,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2012,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2013,
+      "Search_Methods_pats": 1
+    },
+    {
+      "priority_year": 2014,
+      "Search_Methods_pats": 1
+    },
+    {
+      "priority_year": 2015,
+      "Search_Methods_pats": 0
+    },
+    {
+      "priority_year": 2016,
+      "Search_Methods_pats": 3
+    },
+    {
+      "priority_year": 2017,
+      "Search_Methods_pats": 5
+    },
+    {
+      "priority_year": 2018,
+      "Search_Methods_pats": 9
+    },
+    {
+      "priority_year": 2019,
+      "Search_Methods_pats": 12
+    },
+    {
+      "priority_year": 2020,
+      "Search_Methods_pats": 8
+    },
+    {
+      "priority_year": 2021,
+      "Search_Methods_pats": 2
+    }
+  ],
+  "name": "alphabet",
+  "patent_name": "alphabet"
+}

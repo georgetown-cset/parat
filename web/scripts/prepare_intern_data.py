@@ -1,6 +1,7 @@
 import argparse
 import csv
 import json
+import os
 import urllib.parse
 
 """
@@ -32,16 +33,22 @@ def get_intern_data(input_fi: str, output_fi: str):
     :param output_fi: file where output csv should be written
     :return: None
     """
+    companies_with_existing_descriptions = set()
+    with open(os.path.join("raw_data", "supplemental_company_descriptions.csv")) as f:
+        for line in csv.DictReader(f):
+            companies_with_existing_descriptions.add(line["company_name"].lower())
     rows = []
     with open(input_fi) as f:
         for line in f:
             js = json.loads(line)
+            if js["name"].lower() in companies_with_existing_descriptions:
+                continue
             has_null_description = ("short_description" not in js) or (not js["short_description"])
             encoded_wiki_search = urllib.parse.urlencode({"search": js["name"]})
             rows.append({
                 "company_name": js["name"],
                 "wikipedia_search": f"https://en.wikipedia.org/wiki/Special:Search?"+encoded_wiki_search,
-                "company_homepage": js["website"],
+                "company_homepage": js.get("website"),
                 "crunchbase_description": "" if has_null_description else js["short_description"]
             })
     with open(output_fi, mode="w") as f:
