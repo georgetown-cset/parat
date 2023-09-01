@@ -57,7 +57,7 @@ const GroupSelector = ({
   const groupsOptions = [
     { text: 'All companies', val: NO_SELECTED_GROUP },
     ...Object.keys(groupsList).map(groupName => ({ text: groupName, val: groupName })),
-    { text: 'User-defined', val: USER_CUSTOM_GROUP },
+    { text: 'Custom', val: USER_CUSTOM_GROUP },
   ];
 
   return (

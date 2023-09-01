@@ -68,23 +68,26 @@ const EditCustomCompanyGroupDialog = ({
     [customGroup]
   );
 
-  const handleApply = (event) => {
+  const handleApply = () => {
     updateCustomGroup(groupInternal.join(','));
     updateIsOpen(false);
   };
 
-  const handleCancel = (event) => {
+  const handleCancel = () => {
+    setGroupInternal(splitCustomGroup(customGroup));
     updateIsOpen(false);
   };
 
   const companyListOptions = useMemo(
     () => {
-      return companyList.map((company) => {
-        return {
-          text: company.name,
-          val: company.cset_id,
-        };
-      });
+      return companyList
+        .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }))
+        .map((company) => {
+          return {
+            text: company.name,
+            val: company.cset_id,
+          };
+        });
     },
     [companyList]
   );

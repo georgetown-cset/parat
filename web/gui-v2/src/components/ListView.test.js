@@ -76,8 +76,8 @@ describe("ListView", () => {
       // Verify that the groups we expect are present
       expect(screen.getByRole('option', { name: 'All companies' })).toBeVisible();
       expect(screen.getByRole('option', { name: 'S&P 500' })).toBeVisible();
-      expect(screen.getByRole('option', { name: 'User-defined' })).toBeVisible();
-      await user.click(screen.getByRole('option', { name: 'User-defined' }));
+      expect(screen.getByRole('option', { name: 'Custom' })).toBeVisible();
+      await user.click(screen.getByRole('option', { name: 'Custom' }));
 
       // We don't have any companies in our group yet, so no results should be shown
       expect(screen.getByText(/no results found/i)).toBeVisible();
@@ -99,7 +99,7 @@ describe("ListView", () => {
       expect(getByRole(table, 'row', { name: /Microsoft/ })).toBeVisible();
 
       // Verify that a pre-existing group displays correctly
-      await user.click(getByRole(groupSelectorWrapper, 'button', { name: 'User-defined' }));
+      await user.click(getByRole(groupSelectorWrapper, 'button', { name: 'Custom' }));
       expect(screen.getByRole('option', { name: 'S&P 500' })).toBeVisible();
       await user.click(screen.getByRole('option', { name: 'S&P 500' }));
       expect(getByRole(table, 'row', { name: /Microsoft/ })).toBeVisible();
