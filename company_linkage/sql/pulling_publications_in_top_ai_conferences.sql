@@ -38,7 +38,7 @@ ON
 LEFT JOIN
   ror_data
 ON
-  affils.ror_ID = ror_data.id
+  affils.ror_id = ror_data.id
 GROUP BY
   ror_id,
   org_name,

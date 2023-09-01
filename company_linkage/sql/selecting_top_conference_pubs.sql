@@ -13,9 +13,9 @@ SELECT
       OR REGEXP_CONTAINS(source_name, r'(?i)\(AAAI-'))
       AND NOT
     REGEXP_CONTAINS(source_name, r'(?i)Interactive Digital Entertainment|\bAAIDE\b')
-    OR (REGEXP_CONTAINS(source_name, r'(?i)International Joint Conference on Artificial Intelligence')
+    OR ((REGEXP_CONTAINS(source_name, r'(?i)International Joint Conference on Artificial Intelligence')
       OR REGEXP_CONTAINS(source_name, r'(?i)IJCAI'))
-      AND NOT REGEXP_CONTAINS(source_name, r'(?i)Multimedia for Cooking and Eating Activities')
+      AND NOT REGEXP_CONTAINS(source_name, r'(?i)Multimedia for Cooking and Eating Activities'))
     OR REGEXP_CONTAINS(source_name, r'(?i)IEEE Conference on Computer Vision and Pattern Recognition')
       OR REGEXP_CONTAINS(source_name, r'(?i)IEEE Computer Society Conference on Computer Vision and Pattern Recognition')
       OR REGEXP_CONTAINS(source_name, r'(?i)\bCVPR')
@@ -38,9 +38,9 @@ SELECT
     AND NOT REGEXP_CONTAINS(source_name, r'(?i)(injur)|(special interest)|(coling)'))
     OR REGEXP_CONTAINS(source_name, r'(?i)North American Chapter of the Association for Computational Linguistics')
          OR REGEXP_CONTAINS(source_name, r'(?i)\bNAACL\b')
-    OR (REGEXP_CONTAINS(source_name, r'(?i)Conference on Empirical Methods in Natural Language Processing')
+    OR ((REGEXP_CONTAINS(source_name, r'(?i)Conference on Empirical Methods in Natural Language Processing')
       OR REGEXP_CONTAINS(source_name, r'(?i)\bEMNLP\b'))
-      AND NOT REGEXP_CONTAINS(source_name, r'(?i)SIGDAT')
+      AND NOT REGEXP_CONTAINS(source_name, r'(?i)SIGDAT'))
     OR ((REGEXP_CONTAINS(source_name, r'(?i)International.*Conference on Research and Development in Information Retrieval')
       OR REGEXP_CONTAINS(source_name, r'(?i)\bSIGIR\b'))
       AND is_conference IS TRUE
