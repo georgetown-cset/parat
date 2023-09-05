@@ -83,6 +83,11 @@ const styles = {
         width: 100%;
       }
     }
+
+    .table--content {
+      /* This is set so that the Dropdown menus in the table headers will extend beyond '.table-content' */
+      overflow-x: initial;
+    }
   `,
   fallbackContent: css`
     align-items: center;
@@ -448,6 +453,15 @@ const ListViewTable = ({
       .map(([key, data]) => [key, <>Total: {commas(data)}</>])
   );
 
+  let fallbackBigText = <big>No results found</big>;
+  let fallbackSmallText = <span>Try adjusting your filters to get more results</span>;
+  if ( selectedGroupMembers === null ) {
+    fallbackSmallText = <span>Invalid group '{selectedGroup}' selected &ndash; try another group</span>;
+  } else if ( selectedGroup === USER_CUSTOM_GROUP && selectedGroupMembers.length === 0 ) {
+    fallbackBigText = <big>No companies selected</big>
+    fallbackSmallText = <span>Click 'Edit custom group' to add companies to this group and get results</span>
+  }
+
   return (
     <div className="list-view-table" data-testid="list-view-table">
       <GroupSelector
@@ -495,18 +509,8 @@ const ListViewTable = ({
         data={dataForTable}
         fallbackContent={
           <div css={styles.fallbackContent}>
-            <big>No results found</big>
-            {selectedGroupMembers === null ?
-              <span>Invalid group '{selectedGroup}' selected &ndash; try another group</span>
-            :
-              (
-                selectedGroup === USER_CUSTOM_GROUP && selectedGroupMembers.length === 0
-                ?
-                <span>No companies selected &ndash; click 'Edit custom group' to add companies to this group and get results</span>
-                :
-                <span>Try adjusting your filters to get more results</span>
-              )
-            }
+            {fallbackBigText}
+            {fallbackSmallText}
           </div>
         }
         footerData={footerData}

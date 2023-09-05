@@ -11,6 +11,7 @@ const styles = {
   dialog: css`
     .MuiPaper-root {
       background-color: var(--bright-blue-light);
+      overflow-y: initial;
     }
   `,
   dialogOuter: css`

@@ -80,7 +80,6 @@ describe("ListView", () => {
       await user.click(screen.getByRole('option', { name: 'Custom' }));
 
       // We don't have any companies in our group yet, so no results should be shown
-      expect(screen.getByText(/no results found/i)).toBeVisible();
       expect(screen.getByText(/no companies selected/i)).toBeVisible();
 
       // Open the group editor dialog
