@@ -97,7 +97,7 @@ const EditCustomCompanyGroupDialog = ({
     <Dialog
       css={styles.dialog}
       open={isOpen}
-      onClose={() => updateIsOpen(false)}
+      onClose={handleCancel}
     >
       <DialogTitle css={styles.dialogTitle}>Modify custom company group</DialogTitle>
       <div css={styles.dialogOuter}>
