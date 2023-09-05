@@ -222,8 +222,11 @@ const ListViewTable = ({
   const [columnsParam, setColumnsParam] = useQueryParamString('zz_columns', DEFAULT_COLUMNS.join(','));
 
   // Custom, user-defined group of companies.  Again naming the key to keep it
-  // after the filter parameters.
+  // after the filter parameters.  The 'Retained' version is for preserving the
+  // custom group composition when the user is viewing a different group
+  // (see `handleSelectedGroupChange()`).
   const [customGroup, setCustomGroup] = useQueryParamString('zc_companies', '');
+  const [customGroupRetained, setCustomGroupRetained] = useState('');
 
   // Store filters via the URL parameters, making the values (and setters)
   // accessible via an object.
@@ -269,6 +272,33 @@ const ListViewTable = ({
     },
     [filters]
   );
+
+  /**
+   * When the user switches from a custom group to a pre-defined group, save the
+   * companies that they included in the custom group in a separate state
+   * variable (that is not connected to the displayed URL).  Restore the company
+   * list when they return to custom group view.  This ensures that the custom
+   * group remains available to the user, but that it's only in the shared URL
+   * when the user is specifically in custom group mode.
+   */
+  const handleSelectedGroupChange = (newGroup) => {
+    if ( newGroup !== selectedGroup ) {
+      if ( newGroup === USER_CUSTOM_GROUP ) {
+        if ( customGroupRetained !== '' ) {
+          setCustomGroup(customGroupRetained);
+          setCustomGroupRetained('');
+        }
+      } else {
+        if ( selectedGroup === USER_CUSTOM_GROUP ) {
+          setCustomGroupRetained(customGroup);
+          setCustomGroup('');
+        }
+      }
+    }
+
+    setSelectedGroup(newGroup);
+  };
+
 
   /**
    * The list of companies included in the currently-selected group.
@@ -470,7 +500,7 @@ const ListViewTable = ({
         groupsList={groupsList}
         selectedGroup={selectedGroup}
         updateCustomGroup={setCustomGroup}
-        updateSelectedGroup={setSelectedGroup}
+        updateSelectedGroup={handleSelectedGroupChange}
       />
       <div css={styles.buttonBar}>
         <div css={styles.buttonBarLeft}>
