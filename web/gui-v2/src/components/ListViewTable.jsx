@@ -17,9 +17,10 @@ import {
 } from '@eto/eto-ui-components';
 
 import AddRemoveColumnDialog from './AddRemoveColumnDialog';
+import { splitCustomGroup } from './EditCustomCompanyGroupDialog';
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
-import GroupSelector, { NO_SELECTED_GROUP } from './ListViewGroupSelector';
+import GroupSelector, { NO_SELECTED_GROUP, USER_CUSTOM_GROUP } from './ListViewGroupSelector';
 import groupsList from '../static_data/groups';
 import columnDefinitions from '../static_data/table_columns';
 import {
@@ -82,6 +83,11 @@ const styles = {
         width: 100%;
       }
     }
+
+    .table--content {
+      /* This is set so that the Dropdown menus in the table headers will extend beyond '.table-content' */
+      overflow-x: initial;
+    }
   `,
   fallbackContent: css`
     align-items: center;
@@ -140,11 +146,15 @@ const AGGREGATE_SUM_COLUMNS = [
 
 
 // Determine whether a given row matches the filters and/or selected group
-const filterRow = (row, filters, selectedGroup) => {
+const filterRow = (row, filters, selectedGroupMembers) => {
   const filterKeys = Object.keys(filters);
 
-  if ( selectedGroup !== NO_SELECTED_GROUP ) {
-    if ( ! groupsList[selectedGroup].members.includes(row.cset_id) ) {
+  if ( selectedGroupMembers === null ) {
+    return false;
+  } else if ( Array.isArray(selectedGroupMembers) ) {
+    if ( selectedGroupMembers.length == 0 ) {
+      return false;
+    } else if ( !selectedGroupMembers.includes(row.cset_id) ) {
       return false;
     }
   }
@@ -211,6 +221,12 @@ const ListViewTable = ({
   // to users. (`useQueryParamString` appears to order the params alphabetically)
   const [columnsParam, setColumnsParam] = useQueryParamString('zz_columns', DEFAULT_COLUMNS.join(','));
 
+  // Custom, user-defined group of companies.  Again naming the key to keep it
+  // after the filter parameters.  The 'Retained' version is for preserving the
+  // custom group composition when the user is viewing a different group
+  // (see `handleSelectedGroupChange()`).
+  const [customGroup, setCustomGroup] = useQueryParamString('zc_companies', '');
+  const [customGroupRetained, setCustomGroupRetained] = useState('');
 
   // Store filters via the URL parameters, making the values (and setters)
   // accessible via an object.
@@ -257,6 +273,66 @@ const ListViewTable = ({
     [filters]
   );
 
+  /**
+   * When the user switches from a custom group to a pre-defined group, save the
+   * companies that they included in the custom group in a separate state
+   * variable (that is not connected to the displayed URL).  Restore the company
+   * list when they return to custom group view.  This ensures that the custom
+   * group remains available to the user, but that it's only in the shared URL
+   * when the user is specifically in custom group mode.
+   */
+  const handleSelectedGroupChange = (newGroup) => {
+    if ( newGroup !== selectedGroup ) {
+      if ( newGroup === USER_CUSTOM_GROUP ) {
+        if ( customGroupRetained !== '' ) {
+          setCustomGroup(customGroupRetained);
+          setCustomGroupRetained('');
+        }
+      } else {
+        if ( selectedGroup === USER_CUSTOM_GROUP ) {
+          setCustomGroupRetained(customGroup);
+          setCustomGroup('');
+        }
+      }
+    }
+
+    setSelectedGroup(newGroup);
+  };
+
+
+  /**
+   * The list of companies included in the currently-selected group.
+   *
+   * Cases and values:
+   *  - Pre-defined group - an array of cset_id values
+   *  - Custom group - an array of cset_id values
+   *  - No selected group - false
+   *  - Invalid group - null
+   */
+  const selectedGroupMembers = useMemo(
+    () => {
+      if ( selectedGroup === NO_SELECTED_GROUP ) {
+        return false;
+      } else if ( selectedGroup === USER_CUSTOM_GROUP ) {
+        return splitCustomGroup(customGroup);
+      } else if ( selectedGroup in groupsList ) {
+        // Valid pre-defined groups
+        return groupsList[selectedGroup].members;
+      } else {
+        // Invalid group
+        return null;
+      }
+    },
+    [selectedGroup, customGroup]
+  );
+
+  const companyList = useMemo(
+    () => {
+      return data.map(({ cset_id, name, country }) => ({ cset_id, name, country }));
+    },
+    [data]
+  );
+
   const handleDropdownChange = (columnKey, newVal) => {
     if ( ! Array.isArray(newVal) ) {
       newVal = [newVal];
@@ -274,7 +350,7 @@ const ListViewTable = ({
   };
 
   // Filter the data for display.
-  const dataForTable = data.filter(row => filterRow(row, currentFilters, selectedGroup));
+  const dataForTable = data.filter(row => filterRow(row, currentFilters, selectedGroupMembers));
   const numRows = dataForTable.length;
   const totalRows = data.length;
 
@@ -297,7 +373,7 @@ const ListViewTable = ({
           // the other active filters.
           return (
             numRows === 0 ||
-            filterRow(row, otherFilters, selectedGroup)
+            filterRow(row, otherFilters, selectedGroupMembers)
           );
         });
 
@@ -407,12 +483,24 @@ const ListViewTable = ({
       .map(([key, data]) => [key, <>Total: {commas(data)}</>])
   );
 
+  let fallbackBigText = <big>No results found</big>;
+  let fallbackSmallText = <span>Try adjusting your filters to get more results</span>;
+  if ( selectedGroupMembers === null ) {
+    fallbackSmallText = <span>Invalid group '{selectedGroup}' selected &ndash; try another group</span>;
+  } else if ( selectedGroup === USER_CUSTOM_GROUP && selectedGroupMembers.length === 0 ) {
+    fallbackBigText = <big>No companies selected</big>
+    fallbackSmallText = <span>Click 'Edit custom group' to add companies to this group and get results</span>
+  }
+
   return (
     <div className="list-view-table" data-testid="list-view-table">
       <GroupSelector
+        companyList={companyList}
+        customGroup={customGroup}
         groupsList={groupsList}
         selectedGroup={selectedGroup}
-        setSelectedGroup={setSelectedGroup}
+        updateCustomGroup={setCustomGroup}
+        updateSelectedGroup={handleSelectedGroupChange}
       />
       <div css={styles.buttonBar}>
         <div css={styles.buttonBarLeft}>
@@ -451,8 +539,8 @@ const ListViewTable = ({
         data={dataForTable}
         fallbackContent={
           <div css={styles.fallbackContent}>
-            <big>No results found</big>
-            <span>Try adjusting your filters to get more results</span>
+            {fallbackBigText}
+            {fallbackSmallText}
           </div>
         }
         footerData={footerData}
