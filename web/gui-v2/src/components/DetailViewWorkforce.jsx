@@ -1,27 +1,19 @@
 import React from 'react';
-import { css } from '@emotion/react';
 
 import HeaderWithLink from './HeaderWithLink';
 import StatBox from './StatBox';
+import StatWrapper from './StatWrapper';
 
-const styles = {
-  statWrapper: css`
-    display: flex;
-    justify-content: space-around;
-    margin: 1rem auto;
-    max-width: 720px;
-  `,
-};
 
 const DetailViewWorkforce = () => {
   return (
     <>
       <HeaderWithLink title="Workforce" />
 
-      <div css={styles.statWrapper}>
+      <StatWrapper>
         <StatBox label="tt1 jobs" value="1536" />
         <StatBox label="AI jobs" value="3456" />
-      </div>
+      </StatWrapper>
       <p>
         The carbon in our apple pies circumnavigated venture worldlets Orion's
         sword network of wormholes. Permanence of the stars another world
