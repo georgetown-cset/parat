@@ -52,6 +52,36 @@ class TestMkTabText(unittest.TestCase):
         self.assertEqual(clean_market(market_info, market_key_to_link), expected_output)
         self.assertEqual(clean_market([], market_key_to_link), [])
 
+    def test_add_ranks(self):
+        rows = [
+            {"cset_id": 1,
+             ARTICLE_METRICS: {"metric": {"total": 2}},
+             PATENT_METRICS: {"a_patent_metric": {"total": 1}}},
+            {"cset_id": 2,
+             ARTICLE_METRICS: {"metric": {"total": 2**4}},
+             PATENT_METRICS: {"another_patent_metric": {"total": 2}}},
+            {"cset_id": 3,
+             ARTICLE_METRICS: {"metric": {"total": 2**8}},
+             PATENT_METRICS: {"another_patent_metric": {"total": 1}}},
+        ]
+        expected_rows = [
+            {"cset_id": 2,
+             ARTICLE_METRICS: {"metric": {"total": 2 ** 4, "rank": 2, "frac_of_max": 0.5105738866634614}},
+             PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2, "frac_of_max": 0.0},
+                              "another_patent_metric": {"total": 2, "rank": 1, "frac_of_max": 1.0}}},
+            {"cset_id": 3,
+             ARTICLE_METRICS: {"metric": {"total": 2 ** 8, "rank": 1, "frac_of_max": 1.0}},
+             PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2, "frac_of_max": 0.0},
+                              "another_patent_metric": {"total": 1, "rank": 2, "frac_of_max": 0.6309297535714574}}},
+            {"cset_id": 1,
+             ARTICLE_METRICS: {"metric": {"total": 2, "rank": 3, "frac_of_max": 0.1979811182727465}},
+             PATENT_METRICS: {"a_patent_metric": {"total": 1, "rank": 1, "frac_of_max": 1.0},
+                              "another_patent_metric": {"total": 0, "rank": 3, "frac_of_max": 0.0}}}
+        ]
+        add_ranks(rows)
+        print(rows)
+        self.assertEqual(rows, expected_rows)
+
     def test_clean_wiki_description(self):
         desc = ("Walmart Inc. ( /ˈwɔːlmɑːrt/; formerly Wal-Mart Stores, Inc.) is an American multinational "
                 "retail corporation that operates a chain of hypermarkets, discount department stores, and "
