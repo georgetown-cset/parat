@@ -79,7 +79,6 @@ class TestMkTabText(unittest.TestCase):
                               "another_patent_metric": {"total": 0, "rank": 3, "frac_of_max": 0.0}}}
         ]
         add_ranks(rows)
-        print(rows)
         self.assertEqual(rows, expected_rows)
 
     def test_clean_wiki_description(self):
