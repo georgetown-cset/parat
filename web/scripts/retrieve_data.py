@@ -2,6 +2,7 @@ import argparse
 import chardet
 import csv
 import json
+import math
 import os
 import pycountry
 import pycountry_convert
@@ -107,6 +108,11 @@ INDUSTRY_PATENT_CATEGORIES = ["Physical Sciences and Engineering", "Life Science
     "Military","Agriculture", "Computing in Government", "Personal Devices and Computing",
     "Banking and Finance", "Telecommunications", "Networks", "Business", "Energy Management", "Entertainment",
     "Nanotechnology", "Semiconductors"]
+
+ARTICLE_METRICS = "articles"
+PATENT_METRICS = "patents"
+OTHER_METRICS = "other_metrics"
+METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
 
 ### END CONSTANTS ###
 
@@ -268,6 +274,48 @@ def clean_wiki_description(wiki_desc: str) -> str:
     clean_wiki_desc = re.sub(r"\[\d+\]", "", wiki_desc)
     clean_wiki_desc = re.sub(r"\s*\([^\)]*[/\[][^\)]*\)\s*", " ", clean_wiki_desc)
     return clean_wiki_desc
+
+
+def get_metric_value(row: dict, metric_list_name: str, metric_name: str) -> float:
+    """
+    Extract the "total" value of a metric from a row
+    :param row: Row of data
+    :param metric_list_name: Metric list containing `metric_name`
+    :param metric_name: Name of metric to retrieve a total value for
+    :return: Total value of `metric` in row
+    """
+    total = row[metric_list_name].get(metric_name, {}).get("total", 0)
+    return total if total else 0
+
+
+def add_ranks(rows: list) -> None:
+    """
+    Add row ranks to all metrics in our metric lists
+    :param rows: PARAT data rows
+    :return: None (mutates `rows`)
+    """
+    for metric_list_name in METRIC_LISTS:
+        all_metrics = set()
+        for row in rows:
+            for metric in row.get(metric_list_name, {}):
+                all_metrics.add(metric)
+        for metric in sorted(list(all_metrics)):
+            curr_rank = 0
+            curr_value = 100000000000
+            rows.sort(key=lambda r: -1*get_metric_value(r, metric_list_name, metric))
+            max_metric = math.log(max([get_metric_value(r, metric_list_name, metric) for r in rows])+1, 2)
+            for idx, row in enumerate(rows):
+                metric_value = get_metric_value(row, metric_list_name, metric)
+                if metric_value < curr_value:
+                    curr_rank = idx+1
+                    curr_value = metric_value
+                if metric not in row[metric_list_name]:
+                    row[metric_list_name][metric] = {"total": metric_value}
+                row[metric_list_name][metric].update({
+                    "rank": curr_rank,
+                    # used to scale color
+                    "frac_of_max": math.log(metric_value+1, 2)/max_metric
+                })
 
 
 def get_translation(desc: str, client, parent) -> str:
@@ -587,7 +635,7 @@ def get_category_counts(js: dict) -> None:
         # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
         if articles["all_publications"]["counts"][year_idx] < articles["ai_publications"]["counts"][year_idx]:
             print(f"Mismatched publication counts for {js['cset_id']}")
-    js["articles"] = articles
+    js[ARTICLE_METRICS] = articles
 
     ### Reformat patent-related metrics
     counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents", years)
@@ -613,7 +661,7 @@ def get_category_counts(js: dict) -> None:
                 "counts": counts,
                 "total": total
             }
-    js["patents"] = patents
+    js[PATENT_METRICS] = patents
 
     ### Reformat other metrics
     other_metrics = {}
@@ -623,20 +671,11 @@ def get_category_counts(js: dict) -> None:
             "counts": None,
             "total": js.pop(metric)
         }
-    js["other_metrics"] = other_metrics
+    js[OTHER_METRICS] = other_metrics
 
     for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_pubs_in_top_conferences",
                             "all_pubs", "ai_patents"]:
         js.pop(redundant_count)
-
-
-def add_rankings(js: dict) -> None:
-    """
-    Reformat yearly and count-across-all-years data
-    :param js: A dict of data corresponding to an individual PARAT record
-    :return: None (mutates js)
-    """
-    pass
 
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
@@ -652,7 +691,6 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
     get_top_10_lists(js)
     get_category_counts(js)
-    add_rankings(js)
     return js
 
 
@@ -689,6 +727,7 @@ def clean(refresh_images: bool) -> None:
         for row in f:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
     add_supplemental_descriptions(rows)
+    add_ranks(rows)
     with open(os.path.join(WEB_SRC_DIR, "static_data", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
 
