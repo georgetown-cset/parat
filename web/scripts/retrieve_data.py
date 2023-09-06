@@ -316,8 +316,6 @@ def add_ranks(rows: list) -> None:
                     # used to scale color
                     "frac_of_max": math.log(metric_value+1, 2)/max_metric
                 })
-                if row["cset_id"] in [796, 1425]:
-                    print(json.dumps(row))
 
 
 def get_translation(desc: str, client, parent) -> str:
