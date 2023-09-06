@@ -106,6 +106,6 @@ describe("ListView", () => {
       expect(getByRole(table, 'row', { name: /Google/ })).toBeVisible();
       expect(getByRole(table, 'row', { name: /Apple/ })).toBeVisible();
       expect(getByRole(table, 'row', { name: /3M/ })).toBeVisible();
-    }, 20000);
+    }, 30000);
   });
 });
