@@ -1,10 +1,17 @@
 import React from 'react';
+import { css } from '@emotion/react';
 
 import Chart from './DetailViewChart';
 import HeaderWithLink from './HeaderWithLink';
 import StatBox from './StatBox';
 import StatWrapper from './StatWrapper';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
+
+const styles = {
+  noTopMargin: css`
+    margin-top: 0;
+  `,
+};
 
 const chartLayoutChanges = {
   legend: {
@@ -45,7 +52,7 @@ const DetailViewPublications = ({
 
   return (
     <>
-      <HeaderWithLink title="Publications" />
+      <HeaderWithLink css={styles.noTopMargin} title="Publications" />
 
       <p>
         Radio telescope light years extraplanetary the sky calls to us billions

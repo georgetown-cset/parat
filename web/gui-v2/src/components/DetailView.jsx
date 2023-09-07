@@ -72,8 +72,10 @@ const styles = {
       grid-template-columns: 200px 1fr;
     }
   `,
-  toc: css`
-    /* grid-area: toc; */
+  tocWrapper: css`
+    max-height: 250px;
+    position: sticky;
+    top: 0px;
   `,
   contentsArea: css`
     /* grid-area: contents; */
@@ -131,7 +133,9 @@ const DetailView = ({
         >
           <div css={styles.contentsWrapper}>
             {windowSize >= breakpointStops.medium &&
-              <TableOfContents css={styles.toc} toc={tableOfContentsData} />
+              <div css={styles.tocWrapper}>
+                <TableOfContents toc={tableOfContentsData} />
+              </div>
             }
             <div css={styles.contentsArea}>
               <DetailViewPublications data={companyData} />
