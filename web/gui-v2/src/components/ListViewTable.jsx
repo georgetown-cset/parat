@@ -508,25 +508,26 @@ const ListViewTable = ({
             onClick={resetFilters}
           >
             <CloseIcon />
-            <span className={classes([windowSize < 300 && "sr-only"])}>
+            <span className={classes([windowSize < 490 && "sr-only"])}>
               Reset filters
             </span>
           </Button>
           <Typography>
-            Viewing {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
+            {windowSize >= 430 && <>Viewing </>}
+            {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
           </Typography>
         </div>
         <div css={styles.buttonBarRight}>
           {/* TODO: enable once downloads are possible */}
           <Button css={styles.buttonBarButton} disabled>
             <DownloadIcon />
-            <span className={classes([windowSize < 600 && "sr-only"])}>
+            <span className={classes([windowSize < 780 && "sr-only"])}>
               Download results
             </span>
           </Button>
           <Button css={styles.buttonBarButton} onClick={() => setDialogOpen(true)}>
             <AddCircleOutlineIcon />
-            <span className={classes([windowSize < 500 && "sr-only"])}>
+            <span className={classes([windowSize < 650 && "sr-only"])}>
               Add/remove columns
             </span>
           </Button>
