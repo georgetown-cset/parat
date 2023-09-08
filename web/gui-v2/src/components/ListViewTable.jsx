@@ -493,7 +493,7 @@ const ListViewTable = ({
   }
 
   return (
-    <div className="list-view-table" data-testid="list-view-table">
+    <div id="table" className="list-view-table" data-testid="list-view-table">
       <GroupSelector
         companyList={companyList}
         customGroup={customGroup}

@@ -98,7 +98,7 @@ const DetailView = ({
 
   if ( companyData ) {
     const breadcrumbs = [
-      <GatsbyLink href="/">
+      <GatsbyLink to="/#table">
         ETO PARAT
       </GatsbyLink>,
       <Typography>
