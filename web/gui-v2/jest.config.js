@@ -29,6 +29,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
+    '!src/pages/**',
     '!**/*.test.*',
     '!**/__tests__/**',
   ],
