@@ -10,10 +10,17 @@ const styles = {
     .MuiFormControl-root {
       width: 100%;
     }
+
+    .MuiAutocomplete-option {
+      padding: 6px;
+    }
   `,
 };
 
 const HeaderDropdown = ({
+  className: appliedClassName,
+  css: appliedCss,
+  id: appliedId,
   label,
   multiple=true,
   options,
@@ -25,7 +32,9 @@ const HeaderDropdown = ({
 
   return (
     <Autocomplete
-      css={styles.headerDropdown}
+      className={appliedClassName}
+      css={[styles.headerDropdown, appliedCss]}
+      id={appliedId}
       inputLabel={label}
       multiple={multiple}
       options={optionsInternal}
