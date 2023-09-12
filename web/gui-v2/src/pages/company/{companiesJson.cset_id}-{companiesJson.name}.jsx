@@ -5,15 +5,11 @@ import { AppWrapper } from '@eto/eto-ui-components';
 
 import DetailView from '../../components/DetailView';
 import { company_data as allCompanies } from '../../static_data/data';
-import { slugifyCompanyName } from '../../util';
 
 const CompanyPage = ({ data }) => {
-  console.info("data>", data); // DEBUG
   const { cset_id: companyId, name: companyName } = data.companiesJson;
-  console.info(companyId, companyName); // DEBUG
 
   const companyData = allCompanies.find(e => e.cset_id === companyId);
-  console.info("company>", companyData); // DEBUG
 
   return (
     <AppWrapper>

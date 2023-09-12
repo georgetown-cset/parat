@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React, { useEffect } from 'react';
+import { Link, navigate } from 'gatsby';
 import { css } from '@emotion/react';
-import { Router, navigate } from '@reach/router';
+import { Router } from '@gatsbyjs/reach-router';
 
 import { company_data as allCompanies } from '../../static_data/data';
 import { slugifyCompanyName } from '../../util';
@@ -47,52 +47,20 @@ const GenericPage = (props) => {
     if ( !companyData ) {
       return <NoCompany error="No matching company found" />;
     }
-
-    const slugifiedName = slugifyCompanyName(companyData.name);
-    setTimeout(() => {
-      navigate(`/company/${companyId}-${slugifiedName}`);
-    }, 20);
-
-    return (
-      <div css={styles.notice}>
-        Redirecting to {companyData.name}...
-      </div>
-    );
   }
 
+  useEffect(() => {
+    const slugifiedName = slugifyCompanyName(companyData.name);
+    setTimeout(() => {
+      navigate(`/company/${companyId}-${slugifiedName}/`);
+    }, 10);
+  }, []);
 
-  // if ( idMatch ) {
-  //   console.info("match:", idMatch); // DEBUG
-  //   companyId = parseInt(idMatch[1]);
-
-  //   companyData = allCompanies.find(e => e.cset_id === companyId);
-  //   console.info("company>", companyId, companyData); // DEBUG
-
-  //   const slugifiedName = slugifyCompanyName(companyData.name);
-  //   console.info("  - slug:", slugifiedName); // DEBUG
-
-  //   // navigate(`/company/${companyId}-${slugifiedName}`);
-
-  //   setTimeout(() => {
-  //     navigate(`/company/${companyId}-${slugifiedName}`);
-  //   }, 20);
-
-  //   // return (
-  //   //   <div css={styles.redirecting}>
-  //   //     Redirecting to {companyData.name}...
-  //   //   </div>
-  //   // )
-  // } else {
-  //   console.info("no match"); // DEBUG
-
-  //   // return (
-  //   //   <div>
-  //   //     ERROR - no company
-  //   //   </div>
-  //   // )
-  // }
-
-
+  return (
+    <div css={styles.notice}>
+      Redirecting to {companyData.name}...
+    </div>
+  );
 }
 
 
