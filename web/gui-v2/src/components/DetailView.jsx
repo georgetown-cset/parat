@@ -51,7 +51,7 @@ const styles = {
     }
 
     .description {
-      padding-right: 20px; /* TODO: CHECK FOR RESPONSIVENESS */
+      padding-right: 0;
       width: 100%;
 
       * + .metadata-table {
