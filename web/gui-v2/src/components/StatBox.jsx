@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
+import { commas } from '../util';
+
 const styles = {
   statbox: css`
     align-items: center;
@@ -26,7 +28,7 @@ const StatBox = ({
 
   return (
     <div css={styles.statbox}>
-      <div css={styles.value}>{value}</div>
+      <div css={styles.value}>{commas(value)}</div>
       <div css={styles.label}>{label}</div>
     </div>
   );

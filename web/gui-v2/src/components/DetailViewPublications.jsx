@@ -2,6 +2,8 @@ import React from 'react';
 
 import Chart from './DetailViewChart';
 import HeaderWithLink from './HeaderWithLink';
+import StatBox from './StatBox';
+import StatWrapper from './StatWrapper';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
 
 const chartLayoutChanges = {
@@ -39,6 +41,8 @@ const DetailViewPublications = ({
     chartLayoutChanges,
   );
 
+  const averageCitations = Math.round(10 * data.articles.citation_counts.total / data.articles.all_publications.total) / 10;
+
   return (
     <>
       <HeaderWithLink title="Publications" />
@@ -71,6 +75,9 @@ const DetailViewPublications = ({
         the impossible preserve and cherish that pale blue dot citizens of
         distant epochs inconspicuous motes of rock and gas.
       </p>
+      <StatWrapper>
+        <StatBox label="Average citations per article" value={averageCitations} />
+      </StatWrapper>
     </>
   );
 };
