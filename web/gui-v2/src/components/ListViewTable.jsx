@@ -376,7 +376,9 @@ const ListViewTable = ({
         });
 
         results[column] = listToDropdownOptions(
-          [...new Set(filteredSubset.map(row => row[column]))].sort()
+          [...new Set(filteredSubset.map(row => row[column]))]
+            .filter(e => e !== null)
+            .sort()
         );
       }
 
