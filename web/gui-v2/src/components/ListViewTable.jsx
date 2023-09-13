@@ -73,8 +73,6 @@ const styles = {
     }
 
     th .MuiButtonBase-root {
-      /* width: 100%; */
-
       input.MuiInputBase-input {
         width: 100%;
       }
@@ -83,10 +81,10 @@ const styles = {
         width: 100%;
       }
     }
-
-    .table--content {
-      /* This is set so that the Dropdown menus in the table headers will extend beyond '.table-content' */
-      overflow-x: initial;
+  `,
+  shortDropdown: css`
+    .MuiPaper-root {
+      max-height: 192px;
     }
   `,
   fallbackContent: css`
@@ -94,7 +92,7 @@ const styles = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 1rem;
+    padding: 4rem 1rem;
 
     big {
       font-size: 150%;
@@ -398,6 +396,7 @@ const ListViewTable = ({
         case 'dropdown':
           display_name = (
             <HeaderDropdown
+              css={dataForTable.length === 0 && styles.shortDropdown}
               label={colDef.title}
               options={narrowedFilterOptions?.[colDef.key]}
               selected={filters?.[colDef.key].get}
