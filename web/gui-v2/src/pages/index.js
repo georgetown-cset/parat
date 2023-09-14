@@ -60,4 +60,11 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export const Head = () => <title>PARAT &ndash; Emerging Technology Observatory</title>;
+export const Head = () => {
+  return (
+    <>
+      <html lang="en" />
+      <title>PARAT &ndash; Emerging Technology Observatory</title>
+    </>
+  );
+};
