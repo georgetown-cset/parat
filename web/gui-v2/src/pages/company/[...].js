@@ -50,7 +50,6 @@ const styles = {
 const NoCompany = ({ error }) => {
   return (
     <AppWrapper>
-      <title>Error &ndash; Emerging Technology Observatory</title>
       <div css={[styles.notice, styles.error]}>
         <p css={styles.message}>
           <WarningIcon />
@@ -104,3 +103,12 @@ const FallbackPage = () => {
 };
 
 export default FallbackPage;
+
+export const Head = () => {
+  return (
+    <>
+      <html lang="en" />
+      <title>Error &ndash; Emerging Technology Observatory</title>
+    </>
+  );
+};

@@ -13,19 +13,43 @@ const styles = {
     align-items: center;
     background-color: var(--bright-blue-lighter);
     color: var(--dark-blue);
+    column-gap: 0.5rem;
     display: flex;
+    flex-wrap: wrap;
     font-family: GTZirkonRegular;
     font-size: 120%;
     margin-bottom: 1rem;
-    padding: 0.25rem 1rem;
+    padding: 0.5rem 1rem;
+
+    .group-selector-label,
+    .group-selector-controls {
+      display: flex;
+    }
+
+    .group-selector-label {
+      padding: 3.25px 0;
+    }
+
+    .group-selector-controls {
+      column-gap: 0.5rem;
+
+      .dropdown .MuiFormControl-root {
+        margin: 0;
+      }
+    }
+  `,
+  groupSelectorSection: css`
+    display: flex;
   `,
   dropdown: css`
-    margin-left: 0.5rem;
+    .MuiFormControl-root {
+      margin: 0.5rem 0;
+      width: 200px;
+    }
 
     .MuiInput-input.MuiSelect-select {
       align-items: center;
       display: flex;
-      padding: 0.25rem;
 
       &,
       &:focus {
@@ -62,30 +86,34 @@ const GroupSelector = ({
 
   return (
     <div css={styles.groupSelector} data-testid="group-selector">
-      <span>Select a group for comparison:</span>
-      <HelpTooltip
-        text="TOOLTIP GOES HERE EXPLAINING GROUPS"
-      />
-      <Dropdown
-        css={styles.dropdown}
-        inputLabel="Group"
-        options={groupsOptions}
-        selected={selectedGroup}
-        setSelected={(newVal) => {
-          plausibleEvent('Select company group', { group: newVal });
-          updateSelectedGroup(newVal);
-        }}
-        showLabel={false}
-      />
-      {selectedGroup === USER_CUSTOM_GROUP &&
-        <Button
-          css={styles.editCustomGroupButton}
-          onClick={() => setIsCustomGroupDialogOpen(true)}
-        >
-          <ConstructionIcon />
-          Edit custom group
-        </Button>
-      }
+      <div className="group-selector-label group-selector-label" css={styles.groupSelectorSection}>
+        <span>Select a group for comparison:</span>
+        <HelpTooltip
+          text="TOOLTIP GOES HERE EXPLAINING GROUPS"
+        />
+      </div>
+      <div className="group-selector-controls" css={styles.groupSelectorSection}>
+        <Dropdown
+          css={styles.dropdown}
+          inputLabel="Group"
+          options={groupsOptions}
+          selected={selectedGroup}
+          setSelected={(newVal) => {
+            plausibleEvent('Select company group', { group: newVal });
+            updateSelectedGroup(newVal);
+          }}
+          showLabel={false}
+        />
+        {selectedGroup === USER_CUSTOM_GROUP &&
+          <Button
+            css={styles.editCustomGroupButton}
+            onClick={() => setIsCustomGroupDialogOpen(true)}
+          >
+            <ConstructionIcon />
+            Edit custom group
+          </Button>
+        }
+      </div>
       <EditCustomCompanyGroupDialog
         companyList={companyList}
         customGroup={customGroup}

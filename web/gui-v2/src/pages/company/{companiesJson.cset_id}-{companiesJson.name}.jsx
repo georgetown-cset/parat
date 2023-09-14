@@ -13,7 +13,6 @@ const CompanyPage = ({ data }) => {
 
   return (
     <AppWrapper>
-      <title>{companyName} &ndash; PARAT &ndash; Emerging Technology Observatory</title>
       <DetailView
         companyData={companyData}
         companyId={companyId}
@@ -32,3 +31,12 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = ({ pageContext }) => {
+  return (
+    <>
+      <html lang="en" />
+      <title>{pageContext.name} &ndash; PARAT &ndash; Emerging Technology Observatory</title>
+    </>
+  );
+};
