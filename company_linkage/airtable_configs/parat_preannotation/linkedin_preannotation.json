@@ -1,0 +1,14 @@
+{
+  "airtable_table": "linkedin",
+  "airtable_base": "appxfErHmrB8xH98Y",
+  "schema_name": "linkedin_preannotation",
+  "merge_query": "default_merge",
+  "production_table": "linkedin_preannotation",
+  "column_map": {
+    "CSET_id": "CSET_id",
+    "name": "name",
+    "linkedin": "linkedin",
+    "organizations": "EXCLUDE",
+    "annotator_comment": "EXCLUDE"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "airtable_table": "grid",
+  "airtable_base": "appxfErHmrB8xH98Y",
+  "schema_name": "grid_preannotation",
+  "merge_query": "default_merge",
+  "production_table": "grid_preannotation",
+  "column_map": {
+    "CSET_id": "CSET_id",
+    "name": "name",
+    "grid": "grid",
+    "organizations": "EXCLUDE",
+    "annotator_comment": "EXCLUDE"
+  }
+}

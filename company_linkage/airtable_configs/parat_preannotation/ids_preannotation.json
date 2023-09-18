@@ -1,0 +1,18 @@
+{
+  "airtable_table": "ids",
+  "airtable_base": "appxfErHmrB8xH98Y",
+  "schema_name": "ids_preannotation",
+  "merge_query": "default_merge",
+  "production_table": "ids_preannotation",
+  "column_map": {
+    "CSET_id": "CSET_id",
+    "name": "name",
+    "crunchbase_uuid": "crunchbase_uuid",
+    "crunchbase_url": "crunchbase_url",
+    "regex": "regex",
+    "comment": "comment",
+    "organizations": "EXCLUDE",
+    "annotator_comment_crunchbase": "EXCLUDE",
+    "annotator_comment_regex": "EXCLUDE"
+  }
+}

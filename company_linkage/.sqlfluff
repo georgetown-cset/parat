@@ -1,0 +1,13 @@
+[sqlfluff]
+dialect=bigquery
+indent_unit = space
+exclude_rules = L014,L018,L027,L032,L034,L042,L044
+
+[sqlfluff:rules]
+tab_space_size = 2
+max_line_length = 120
+
+[sqlfluff:templater:jinja:context]
+staging_dataset = staging_parat_input
+production_dataset = parat_input
+params = {"table_name": "organizations_preannotation", "staging_table_name": "organizations_preannotation_raw", "production_table_name": "organizations_preannotation", "production_dataset": "parat_input", "staging_dataset": "staging_airtable_to_bq"}

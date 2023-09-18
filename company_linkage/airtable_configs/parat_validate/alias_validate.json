@@ -1,0 +1,15 @@
+{
+  "airtable_table": "alias",
+  "airtable_base": "appEc1iixuT2D1Ir5",
+  "schema_name": "alias_validate",
+  "merge_query": "default_merge",
+  "production_table": "alias_validate",
+  "column_map": {
+    "CSET_id": "CSET_id",
+    "name": "name",
+    "alias_language": "alias_language",
+    "alias": "alias",
+    "organizations": "EXCLUDE",
+    "annotator_comment": "EXCLUDE"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "airtable_table": "parent",
+  "airtable_base": "appEc1iixuT2D1Ir5",
+  "schema_name": "parent_validate",
+  "merge_query": "parent_merge",
+  "production_table": "parent_validate",
+  "column_map": {
+    "CSET_id": "CSET_id",
+    "name": "name",
+    "parent_acquisition": "parent_acquisition",
+    "parent_name": "parent_name",
+    "parent_id": "parent_id",
+    "annotator_comment": "comment",
+    "organizations": "EXCLUDE"
+  }
+}

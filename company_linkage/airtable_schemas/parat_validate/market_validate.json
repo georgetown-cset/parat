@@ -1,0 +1,26 @@
+[
+  {
+    "description": "Organization unique id",
+    "mode": "REQUIRED",
+    "name": "CSET_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Organization name",
+    "mode": "REQUIRED",
+    "name": "name",
+    "type": "STRING"
+  },
+  {
+    "description": "Exchange an organization is listed on",
+    "mode": "NULLABLE",
+    "name": "exchange",
+    "type": "STRING"
+  },
+  {
+    "description": "Organization ticker",
+    "mode": "NULLABLE",
+    "name": "ticker",
+    "type": "STRING"
+  }
+]

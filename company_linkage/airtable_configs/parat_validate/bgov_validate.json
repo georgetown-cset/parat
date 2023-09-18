@@ -1,0 +1,13 @@
+{
+  "airtable_table": "bgov",
+  "airtable_base": "appEc1iixuT2D1Ir5",
+  "schema_name": "bgov_validate",
+  "merge_query": "default_merge",
+  "production_table": "bgov_validate",
+  "column_map": {
+    "CSET_id": "CSET_id",
+    "name": "name",
+    "bgov": "bgov_id",
+    "organizations": "EXCLUDE"
+  }
+}

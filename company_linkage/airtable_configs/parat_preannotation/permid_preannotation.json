@@ -1,0 +1,14 @@
+{
+  "airtable_table": "permid",
+  "airtable_base": "appxfErHmrB8xH98Y",
+  "schema_name": "permid_preannotation",
+  "merge_query": "default_merge",
+  "production_table": "permid_preannotation",
+  "column_map": {
+    "CSET_id": "CSET_id",
+    "name": "name",
+    "permid": "permid",
+    "organizations": "EXCLUDE",
+    "annotator_comment": "EXCLUDE"
+  }
+}
