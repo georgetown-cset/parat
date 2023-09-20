@@ -5,10 +5,6 @@
   "merge_query": "default_merge",
   "production_table": "market_preannotation",
   "column_map": {
-    "CSET_id": "CSET_id",
-    "name": "name",
-    "exchange": "exchange",
-    "ticker": "ticker",
     "organizations": "EXCLUDE",
     "comment": "EXCLUDE"
   }

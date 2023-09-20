@@ -5,12 +5,6 @@
   "merge_query": "default_merge",
   "production_table": "ids_validate",
   "column_map": {
-    "CSET_id": "CSET_id",
-    "name": "name",
-    "crunchbase_uuid": "crunchbase_uuid",
-    "crunchbase_url": "crunchbase_url",
-    "regex": "regex",
-    "comment": "comment",
     "organizations": "EXCLUDE",
     "annotator_comment_crunchbase": "EXCLUDE",
     "annotator_comment_regex": "EXCLUDE",

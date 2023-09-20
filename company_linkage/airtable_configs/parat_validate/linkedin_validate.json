@@ -5,9 +5,6 @@
   "merge_query": "default_merge",
   "production_table": "linkedin_validate",
   "column_map": {
-    "CSET_id": "CSET_id",
-    "name": "name",
-    "linkedin": "linkedin",
     "organizations": "EXCLUDE",
     "annotator_comment": "EXCLUDE"
   }
