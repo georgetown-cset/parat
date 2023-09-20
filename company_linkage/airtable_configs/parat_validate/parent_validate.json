@@ -5,9 +5,6 @@
   "merge_query": "parent_merge",
   "production_table": "parent_validate",
   "column_map": {
-    "parent_acquisition": "parent_acquisition",
-    "parent_name": "parent_name",
-    "parent_id": "parent_id",
     "annotator_comment": "comment",
     "organizations": "EXCLUDE"
   }
