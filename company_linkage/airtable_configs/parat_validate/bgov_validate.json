@@ -5,8 +5,6 @@
   "merge_query": "default_merge",
   "production_table": "bgov_validate",
   "column_map": {
-    "CSET_id": "CSET_id",
-    "name": "name",
     "bgov": "bgov_id",
     "organizations": "EXCLUDE"
   }

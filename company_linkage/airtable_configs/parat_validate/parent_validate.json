@@ -5,8 +5,6 @@
   "merge_query": "parent_merge",
   "production_table": "parent_validate",
   "column_map": {
-    "CSET_id": "CSET_id",
-    "name": "name",
     "parent_acquisition": "parent_acquisition",
     "parent_name": "parent_name",
     "parent_id": "parent_id",
