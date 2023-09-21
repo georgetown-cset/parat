@@ -1,0 +1,50 @@
+[
+  {
+    "description": "Organization unique id",
+    "mode": "REQUIRED",
+    "name": "CSET_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Organization name",
+    "mode": "REQUIRED",
+    "name": "name",
+    "type": "STRING"
+  },
+  {
+    "description": "Organization city",
+    "mode": "REQUIRED",
+    "name": "city",
+    "type": "STRING"
+  },
+  {
+    "description": "Organization state, province, or region",
+    "mode": "REQUIRED",
+    "name": "province_state",
+    "type": "STRING"
+  },
+  {
+    "description": "Alpha-3 code for organization country",
+    "mode": "REQUIRED",
+    "name": "country",
+    "type": "STRING"
+  },
+  {
+    "description": "Organization website",
+    "mode": "REQUIRED",
+    "name": "website",
+    "type": "STRING"
+  },
+  {
+    "description": "Whether organization is in the 2021 Fortune Global 500 List",
+    "mode": "NULLABLE",
+    "name": "in_fortune_global_500",
+    "type": "BOOLEAN"
+  },
+  {
+    "description": "Whether organization is in the 2020 S&P 500 List",
+    "mode": "NULLABLE",
+    "name": "in_sandp_500",
+    "type": "BOOLEAN"
+  }
+]
