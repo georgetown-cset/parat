@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Table, breakpoints } from '@eto/eto-ui-components';
+import { ExternalLink, Table, breakpoints } from '@eto/eto-ui-components';
 
 const styles = {
   detailIntroWrapper: css`
@@ -46,7 +46,20 @@ const DetailViewIntro = ({
 
   const metadataColumns = [
     { display_name: "", key: "title" },
-    { display_name: "", key: "data", align: "right" },
+    {
+      display_name: "",
+      key: "data",
+      align: "right",
+      format: (val, row) => {
+        if ( row.title === "Website" ) {
+          return <ExternalLink href={val}>{val}</ExternalLink>;
+        } else if ( row.title === "Stock tickers" ) {
+          return val.map(e => <ExternalLink href={e.link}>{e.market_key}</ExternalLink>);
+        } else {
+          return val;
+        }
+      },
+    },
   ];
 
   const metadataData = [
@@ -55,8 +68,15 @@ const DetailViewIntro = ({
     { title: "Region", data: data.continent },
     { title: "Stage", data: data.stage },
     // { title: "Groupings", data: "S&P 500" },
-    { title: "Stock tickers", data: data.market_list },
+    { title: "Website", data: data.website },
   ];
+
+  if ( data.market_filt && data.market_filt.length > 0 ) {
+    metadataData.push({
+      title: "Stock tickers",
+      data: data.market_filt,
+    });
+  }
 
   return (
     <div css={styles.detailIntroWrapper}>
