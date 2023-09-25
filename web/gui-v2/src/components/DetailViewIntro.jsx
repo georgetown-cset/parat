@@ -1,17 +1,36 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Table } from '@eto/eto-ui-components';
+import { Table, breakpoints } from '@eto/eto-ui-components';
 
 const styles = {
-  wrapper: css`
-    display: flex;
-    justify-content: space-between;
+  detailIntroWrapper: css`
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
     width: 100%;
+
+    ${breakpoints.tablet_small} {
+      grid-template-columns: 1fr 300px;
+    }
   `,
-  descriptionBlurbs: css``,
+  descriptionBlurbs: css`
+    small {
+      color: var(--grey);
+      font-size: 75%;
+
+      a {
+        color: var(--bright-blue);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  `,
   metadataTable: css`
-    margin-top: 0;
+    margin: 0 auto;
     width: 300px;
 
     td {
@@ -40,9 +59,18 @@ const DetailViewIntro = ({
   ];
 
   return (
-    <div css={styles.wrapper}>
+    <div css={styles.detailIntroWrapper}>
       <div css={styles.descriptionBlurbs}>
-        Description blurbs about the company go here....
+        {data?.wikipedia_description ?
+          <>
+            <div>{data.wikipedia_description}</div>
+            <small>
+              <a href={data.wikipedia_link}>Wikipedia</a>, retrieved {data.description_retrieval_date}
+            </small>
+          </>
+        :
+          <div>No description available</div>
+        }
       </div>
       <Table
         className="metadata-table"
