@@ -81,6 +81,13 @@ const styles = {
         width: 100%;
       }
     }
+
+    svg.MuiSvgIcon-root.MuiTableSortLabel-icon {
+      background-color: var(--bright-blue);
+      color: white;
+      padding: 2px;
+      margin-left: 1rem;
+    }
   `,
   shortDropdown: css`
     .MuiPaper-root {
