@@ -61,13 +61,15 @@ const DetailViewIntro = ({
   return (
     <div css={styles.detailIntroWrapper}>
       <div css={styles.descriptionBlurbs}>
-        {data?.wikipedia_description &&
+        {data?.wikipedia_description ?
           <>
             <div>{data.wikipedia_description}</div>
             <small>
               <a href={data.wikipedia_link}>Wikipedia</a>, retrieved {data.description_retrieval_date}
             </small>
           </>
+        :
+          <div>No description available</div>
         }
       </div>
       <Table
