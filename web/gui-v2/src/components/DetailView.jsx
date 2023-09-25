@@ -35,7 +35,7 @@ const styles = {
 
     .MuiBreadcrumbs-li,
     .MuiTypography-root {
-      font-family: GTZirkonRegular;
+      font-family: GTZirkonLight;
     }
   `,
   error: css`
@@ -122,14 +122,7 @@ const DetailView = ({
             />
           }
           headingComponent="h1"
-          title={
-            <>
-              {companyData.name}
-              {companyData.market_filt && companyData.market_filt.length > 0 &&
-                <> <small className="stock-ticker">({companyData.market_filt.map(ticker => ticker.market_key).join(', ')})</small></>
-              }
-            </>
-          }
+          title={companyData.name}
         >
           <div css={styles.contentsWrapper}>
             {windowSize >= breakpointStops.medium &&
