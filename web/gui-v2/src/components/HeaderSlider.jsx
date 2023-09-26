@@ -4,8 +4,6 @@ import { Slider } from '@mui/material';
 
 import { debounce } from '../util';
 
-// import { LabelStyled } from '@eto/eto-ui-components';
-
 const styles = {
   wrapper: css`
     display: flex;
@@ -16,6 +14,11 @@ const styles = {
   slider: css`
     margin: 0 6px;
     width: calc(100% - 12px);
+
+    .MuiSlider-thumb {
+      height: 10px;
+      width: 10px;
+    }
   `,
 };
 
