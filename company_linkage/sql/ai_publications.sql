@@ -1,8 +1,6 @@
   -- Pulling every AI-associated publication id linked to every grid id and every organization name
   -- We also include years because we'll want those later for yearly counts
   -- and cv/robotics/nlp so we can filter on these
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.ai_publications AS
 WITH
   ai_papers AS (
   SELECT

@@ -2,6 +2,7 @@ import argparse
 from google.cloud import bigquery
 import json
 from collections import defaultdict
+import subprocess
 
 # List of companies not being aggregated
 # note: check https://docs.google.com/spreadsheets/d/1Tq28O8qIA6T3AJ5oTHKCcscaNZsY_E4OPOUm6JaiwWA/edit#gid=0
@@ -394,7 +395,7 @@ class OrganizationAggregator:
         org_info.add_sandp(org["in_sandp_500"])
         org_info.add_fortune(org["in_fortune_global_500"])
 
-    def print_output(self, output_file):
+    def print_output(self, output_file, local):
         """
         Writing the aggregated organization output to file
         :param output_file: The output file we're writing to
@@ -414,18 +415,22 @@ class OrganizationAggregator:
                   "non_agg_children": org_info.non_agg_children}
             out.write(json.dumps(js, ensure_ascii=False) + "\n")
         out.close()
+        if not local:
+            subprocess.run(["gsutil", "-m", "cp", "-r", output_file, "gs://parat/"], check=True)
 
-def main():
+
+def aggregate_organizations(output_file, local=False):
+    aggregator = OrganizationAggregator()
+    aggregator.get_parents()
+    aggregator.get_organizations()
+    aggregator.print_output(output_file, local)
+
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("output_file", type=str, help="A jsonl file for writing output data to create new tables")
     args = parser.parse_args()
     if not args.output_file.endswith(".jsonl"):
         parser.print_help()
-    aggregator = OrganizationAggregator()
-    aggregator.get_parents()
-    aggregator.get_organizations()
-    aggregator.print_output(args.output_file)
+    aggregate_organizations(args.output_file, local=True)
 
-
-if __name__ == "__main__":
-    main()

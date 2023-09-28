@@ -1,5 +1,3 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.pubs_in_top_conferences AS
 WITH
   -- Associating GRIDs to the merged paper ids
   affils AS (

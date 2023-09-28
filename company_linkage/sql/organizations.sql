@@ -1,5 +1,3 @@
-CREATE OR REPLACE TABLE
-  high_resolution_entities.organizations AS
 SELECT
   * REPLACE( (
     SELECT

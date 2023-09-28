@@ -1,6 +1,6 @@
 import os
 import unittest
-from company_linkage import aggregate_organizations
+import aggregate_organizations
 from collections import defaultdict
 
 
@@ -131,15 +131,15 @@ class TestOrganization(unittest.TestCase):
 
     def test_add_regex(self):
         org = aggregate_organizations.Organization(1, "test")
-        org.add_regex("^hhi\s+corporation$|^hhi$|^hhi\s+corp$")
-        self.assertEqual(org.regex[0], "^hhi\s+corporation$|^hhi$|^hhi\s+corp$")
+        org.add_regex(r"^hhi\s+corporation$|^hhi$|^hhi\s+corp$")
+        self.assertEqual(org.regex[0], r"^hhi\s+corporation$|^hhi$|^hhi\s+corp$")
         self.assertEqual(len(org.regex), 1)
         # Don't add a duplicate entry!
-        org.add_regex("^hhi\s+corporation$|^hhi$|^hhi\s+corp$")
+        org.add_regex(r"^hhi\s+corporation$|^hhi$|^hhi\s+corp$")
         self.assertEqual(len(org.regex), 1)
         # Do add a new one
-        org.add_regex("^hhi\s+corporation$")
-        self.assertEqual(org.regex[1], "^hhi\s+corporation$")
+        org.add_regex(r"^hhi\s+corporation$")
+        self.assertEqual(org.regex[1], r"^hhi\s+corporation$")
         self.assertEqual(len(org.regex), 2)
 
     def test_add_bgov_id(self):

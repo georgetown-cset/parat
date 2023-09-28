@@ -1,5 +1,3 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.top_conference_pubs AS
 WITH
   venues AS (
 SELECT
