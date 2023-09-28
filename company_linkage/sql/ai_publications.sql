@@ -12,26 +12,26 @@ WITH
     gcp-cset-projects.article_classification.predictions
   WHERE
     ai_filtered = TRUE OR cv_filtered = TRUE OR nlp_filtered = TRUE OR robotics_filtered = TRUE),
-  gr AS (
-    -- Adding in org names and country data using GRID
+  ror AS (
+    -- Adding in org names and country data using ROR
   SELECT
     id,
     name AS org_name,
-    country_name AS country
+    country.country_name AS country
   FROM
-    gcp-cset-projects.gcp_cset_grid.api_grid),
-  merged_grids AS (
-    -- Selecting all the merged ids and grid ids from the links table
+    gcp_cset_ror.ror),
+  merged_rors AS (
+    -- Selecting all the merged ids and ror ids from the literature table
   SELECT
     DISTINCT
     merged_id,
-    grid_id,
+    ror_id,
     org_name,
     cv_filtered as cv,
     nlp_filtered as nlp,
     robotics_filtered as robotics
   FROM
-    `gcp-cset-projects.gcp_cset_links_v2.paper_affiliations_merged`
+    literature.affiliations
     -- if they're AI papers
   INNER JOIN ai_papers
     USING (merged_id)),
@@ -40,20 +40,20 @@ WITH
     merged_id,
     year
   FROM
-    `gcp-cset-projects.gcp_cset_links_v2.corpus_merged`)
+    literature.papers)
 SELECT
-  -- Adding in the org name and country associated with the grid id
-  merged_grids.* EXCEPT (org_name),
-  COALESCE(gr.org_name, merged_grids.org_name) as org_name,
+  -- Adding in the org name and country associated with the ror id
+  merged_rors.* EXCEPT (org_name),
+  COALESCE(ror.org_name, merged_rors.org_name) as org_name,
   country,
   year
 FROM
-  merged_grids
+  merged_rors
 LEFT JOIN
-  gr
+  ror
 ON
-  merged_grids.Grid_ID = gr.id
+  merged_rors.ror_id = ror.id
 LEFT JOIN
   article_years
 ON
-  merged_grids.merged_id = article_years.merged_id
+  merged_rors.merged_id = article_years.merged_id

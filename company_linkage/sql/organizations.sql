@@ -35,7 +35,7 @@ FROM (
     organizations_joined.name,
     STRUCT(city,
       province_state,
-      country) AS location,
+      organizations_joined.country) AS location,
     website,
     ARRAY_AGG(STRUCT(alias_language,
         alias)) AS aliases,
@@ -52,9 +52,9 @@ FROM (
         ticker)) AS market,
     STRUCT(crunchbase_uuid,
       crunchbase_url) AS crunchbase,
-    ARRAY_AGG(DISTINCT grid IGNORE NULLS) AS grid,
+    ARRAY_AGG(DISTINCT ror.id IGNORE NULLS) AS ror_id,
     regex,
-    ARRAY_AGG(DISTINCT bgov IGNORE NULLS) AS BGOV_id,
+    ARRAY_AGG(DISTINCT bgov_id IGNORE NULLS) AS BGOV_id,
     linkedin,
     CASE
       WHEN in_sandp_500 IS TRUE THEN TRUE
@@ -68,7 +68,7 @@ FROM (
     FALSE
   END
     AS in_fortune_global_500,
-    comment
+    ids_joined.comment
   FROM
     parat_input.organizations_joined
   LEFT JOIN
@@ -103,12 +103,16 @@ FROM (
     parat_input.linkedin_joined
   USING
     (CSET_id)
+  LEFT JOIN
+    gcp_cset_ror.ror
+  ON
+    grid_joined.grid = external_ids.GRID.all
   GROUP BY
     CSET_id,
     name,
     city,
     province_state,
-    country,
+    organizations_joined.country,
     website,
     crunchbase_uuid,
     crunchbase_url,

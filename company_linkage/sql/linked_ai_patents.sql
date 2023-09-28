@@ -3,13 +3,13 @@
 -- We also attempt to add in "fake" families for the patents that are missing patent families
 with patents_orig as (
 SELECT
-  -- Pulling in the current assignee grid ids from dimensions
+  -- Pulling in the current assignee ror ids from dimensions
   patent_id,
   family_id,
   assignee,
-  grid
+  ror_id
 FROM
-  `gcp-cset-projects.unified_patents.normalized_patent_assignees`),
+  unified_patents.assignees_normalized),
 all_ai as (
   -- Selecting all the family ids and patent IDs to get AI patents
   -- Also select the year so we can get counts by year
@@ -50,13 +50,13 @@ all_ai as (
       Machine_Learning,
       Search_Methods
     FROM
-      gcp-cset-projects.unified_patents.ai_patents),
+      unified_patents.ai_patents),
   patent_years as (
   SELECT
       patent_id,
       EXTRACT(year FROM first_priority_date) as priority_year
     FROM
-      gcp-cset-projects.unified_patents.patent_dates
+      unified_patents.dates
   )
   SELECT
     DISTINCT
@@ -65,7 +65,7 @@ all_ai as (
     -- We're just doing this so our counts aren't blank
     COALESCE(family_id, "X-" || patent_id) as family_id,
     assignee,
-    grid,
+    ror_id,
     MIN(priority_year) as priority_year,
     LOGICAL_OR(Physical_Sciences_and_Engineering) as Physical_Sciences_and_Engineering,
     LOGICAL_OR(Life_Sciences) as Life_Sciences,
@@ -110,6 +110,6 @@ all_ai as (
         USING (patent_id))
   WHERE priority_year IS NOT NULL
   GROUP BY
-    grid,
+    ror_id,
     assignee,
     family_id
