@@ -25,7 +25,7 @@ const CellStat = ({data, colKey}) => {
     <div css={styles.cell}>
       <div className="val">{commas(data.total)}</div>
       <div className="rank">
-        { data.total > 0 && <>#{data.rank}</> }
+        { data?.total === 0 ? '---' : <>#{data.rank}</> }
       </div>
     </div>
   );
