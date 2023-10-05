@@ -23,9 +23,11 @@ const styles = {
 const CellStat = ({data, colKey}) => {
   return (
     <div css={styles.cell}>
-      <div className="val">{commas(data.total)}</div>
+      <div className="val">
+        { data?.total === null ? 'n/a' : commas(data.total) }
+      </div>
       <div className="rank">
-        { data?.total === 0 ? '---' : <>#{data.rank}</> }
+        { (data?.total === 0 || data?.total === null) ? '---' : <>#{data.rank}</> }
       </div>
     </div>
   );

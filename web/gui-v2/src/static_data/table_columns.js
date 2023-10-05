@@ -45,7 +45,10 @@ const generateDataFns = (dataKey, dataSubkey) => {
   return {
     dataKey,
     dataSubkey,
-    extract: (_val, row) => row[dataKey][dataSubkey].total,
+    extract: (_val, row) => {
+      const res = row[dataKey][dataSubkey].total;
+      return res === null ? 0 : res;
+    },
     format: (_val, row) => <CellStat data={row[dataKey][dataSubkey]} />,
   }
 };

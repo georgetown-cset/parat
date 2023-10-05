@@ -111,6 +111,7 @@ const styles = {
 const DATAKEYS_WITH_SUBKEYS = [
   "articles",
   "patents",
+  "other_metrics",
 ];
 
 const DEFAULT_COLUMNS = columnDefinitions
@@ -131,37 +132,7 @@ const DEFAULT_FILTER_VALUES = {
   continent: [],
   stage: [],
 
-  all_pubs: [0, 100],
-  citations: [0, 100],
-  ai_pubs: [0, 100],
-  ai_pubs_top_conf: [0, 100],
-  cv_pubs: [0, 100],
-  nlp_pubs: [0, 100],
-  ro_pubs: [0, 100],
-
-  ai_patents: [0, 100],
-  agri_patents: [0, 100],
-  finance_patents: [0, 100],
-  business_patents: [0, 100],
-  comp_in_gov_patents: [0, 100],
-  doc_mgt_patents: [0, 100],
-  edu_patents: [0, 100],
-  energy_mgt_patents: [0, 100],
-  entertain_patents: [0, 100],
-  industry_patents: [0, 100],
-  life_patents: [0, 100],
-  mil_patents: [0, 100],
-  nano_patents: [0, 100],
-  network_patents: [0, 100],
-  personal_comp_patents: [0, 100],
-  phys_sci_patents: [0, 100],
-  security_patents: [0, 100],
-  semiconductor_patents: [0, 100],
-  telecom_patents: [0, 100],
-  transport_patents: [0, 100],
-
-  ai_jobs: [0, 100],
-  tt1_jobs: [0, 100],
+  ...SLIDER_COLUMNS.reduce((obj, e) => { obj[e] = [0, 100]; return obj; }, {}),
 };
 const initialVal = (key) => {
   return DEFAULT_FILTER_VALUES[key]?.join(',') ?? '';
