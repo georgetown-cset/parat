@@ -126,12 +126,13 @@ const SLIDER_COLUMNS = columnDefinitions
   .filter(colDef => colDef.type === "slider")
   .map(colDef => colDef.key);
 
-const DEFAULT_FILTER_VALUES = {
-  name: [],
-  country: [],
-  continent: [],
-  stage: [],
+const ALL_COLUMNS = [
+  ...DROPDOWN_COLUMNS,
+  ...SLIDER_COLUMNS,
+];
 
+const DEFAULT_FILTER_VALUES = {
+  ...DROPDOWN_COLUMNS.reduce((obj, e) => { obj[e] = []; return obj; }, {}),
   ...SLIDER_COLUMNS.reduce((obj, e) => { obj[e] = [0, 100]; return obj; }, {}),
 };
 const initialVal = (key) => {
@@ -149,7 +150,6 @@ const AGGREGATE_SUM_COLUMNS = [
   'ai_pubs',
   'ai_patents',
 ];
-
 
 // Determine whether a given row matches the filters and/or selected group
 const filterRow = (row, filters, selectedGroupMembers) => {
@@ -195,10 +195,6 @@ const filterRow = (row, filters, selectedGroupMembers) => {
       if ( rowVal < min || ( max < 100 && max < rowVal) ) {
         return false;
       }
-    } else if ( colDef.type === "stock" ) {
-      // TODO: Figure out how we're filtering the `market_list` column
-      // -- Actually - are we even wanting this column, or did I just make
-      //    it as a placeholder?
     } else {
       console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
     }
@@ -237,45 +233,10 @@ const ListViewTable = ({
   // Store filters via the URL parameters, making the values (and setters)
   // accessible via an object.
   const filters = useMultiState(
-    {
-      name: useQueryParamString('name', initialVal('name')),
-      country: useQueryParamString('country', initialVal('country')),
-      continent: useQueryParamString('continent', initialVal('continent')),
-      stage: useQueryParamString('stage', initialVal('stage')),
-      // ...
-
-      all_pubs: useQueryParamString('all_pubs', initialVal('all_pubs')),
-      citations: useQueryParamString('citations', initialVal('citations')),
-      ai_pubs: useQueryParamString('ai_pubs', initialVal('ai_pubs')),
-      ai_pubs_top_conf: useQueryParamString('ai_pubs_top_conf', initialVal('ai_pubs_top_conf')),
-      cv_pubs: useQueryParamString('cv_pubs', initialVal('cv_pubs')),
-      nlp_pubs: useQueryParamString('nlp_pubs', initialVal('nlp_pubs')),
-      ro_pubs: useQueryParamString('ro_pubs', initialVal('ro_pubs')),
-
-      ai_patents: useQueryParamString('ai_patents', initialVal('ai_patents')),
-      agri_patents: useQueryParamString('agri_patents', initialVal('agri_patents')),
-      finance_patents: useQueryParamString('finance_patents', initialVal('finance_patents')),
-      business_patents: useQueryParamString('business_patents', initialVal('business_patents')),
-      comp_in_gov_patents: useQueryParamString('comp_in_gov_patents', initialVal('comp_in_gov_patents')),
-      doc_mgt_patents: useQueryParamString('doc_mgt_patents', initialVal('doc_mgt_patents')),
-      edu_patents: useQueryParamString('edu_patents', initialVal('edu_patents')),
-      energy_mgt_patents: useQueryParamString('energy_mgt_patents', initialVal('energy_mgt_patents')),
-      entertain_patents: useQueryParamString('entertain_patents', initialVal('entertain_patents')),
-      industry_patents: useQueryParamString('industry_patents', initialVal('industry_patents')),
-      life_patents: useQueryParamString('life_patents', initialVal('life_patents')),
-      mil_patents: useQueryParamString('mil_patents', initialVal('mil_patents')),
-      nano_patents: useQueryParamString('nano_patents', initialVal('nano_patents')),
-      network_patents: useQueryParamString('network_patents', initialVal('network_patents')),
-      personal_comp_patents: useQueryParamString('personal_comp_patents', initialVal('personal_comp_patents')),
-      phys_sci_patents: useQueryParamString('phys_sci_patents', initialVal('phys_sci_patents')),
-      security_patents: useQueryParamString('security_patents', initialVal('security_patents')),
-      semiconductor_patents: useQueryParamString('semiconductor_patents', initialVal('semiconductor_patents')),
-      telecom_patents: useQueryParamString('telecom_patents', initialVal('telecom_patents')),
-      transport_patents: useQueryParamString('transport_patents', initialVal('transport_patents')),
-
-      ai_jobs: useQueryParamString('ai_jobs', initialVal('ai_jobs')),
-      tt1_jobs: useQueryParamString('tt1_jobs', initialVal('tt1_jobs')),
-    },
+    ALL_COLUMNS.reduce((obj, e) => {
+      obj[e] = useQueryParamString(e, initialVal(e));
+      return obj;
+    }, {}),
     (key, val) => {
       if ( DROPDOWN_COLUMNS.includes(key) ) {
         let result = val.split(',').filter(e => e !== "");
@@ -449,11 +410,6 @@ const ListViewTable = ({
               onChange={newVal => handleSliderChange(colDef.key, newVal)}
               value={filters?.[colDef.key].get}
             />
-          );
-          break;
-        case 'stock':
-          display_name = (
-            colDef.title
           );
           break;
         default:
