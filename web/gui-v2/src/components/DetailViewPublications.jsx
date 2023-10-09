@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 
-import {
-  Dropdown,
-  Table,
-  breakpoints,
-} from '@eto/eto-ui-components';
+import { Dropdown } from '@eto/eto-ui-components';
 
 import Chart from './DetailViewChart';
 import HeaderWithLink from './HeaderWithLink';
-import SectionHeading from './SectionHeading';
+import StatGrid from './StatGrid';
+import TableSection from './TableSection';
+import TextAndBigStat from './TextAndBigStat';
+import TrendsChart from './TrendsChart';
 import { commas } from '../util';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
 
@@ -17,86 +16,12 @@ const styles = {
   noTopMargin: css`
     margin-top: 0;
   `,
-  sectionMargin: css`
-    margin: 1rem auto;
+  section: css`
+    margin: 2rem auto 1rem;
     max-width: 808px;
-  `,
-  sectionWithHeading: css`
-    margin-top: 2rem;
+
     h3 {
       margin-bottom: 0.25rem;
-    }
-  `,
-  aiResearch: css`
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 1rem;
-
-    ${breakpoints.tablet_regular} {
-      flex-direction: row;
-    }
-
-    big {
-      font-family: GTZirkonRegular;
-      font-size: 180%;
-      margin-left: 0.5rem;
-    }
-  `,
-  stats: css`
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: minmax(0, 400px);
-    list-style: none;
-    margin: 1rem auto;
-    max-width: fit-content;
-    padding: 0;
-
-    ${breakpoints.tablet_regular} {
-      grid-template-columns: repeat(2, minmax(0, 400px));
-    }
-
-    & > li {
-      align-content: center;
-      border: 1px solid var(--bright-blue-light);
-      display: grid;
-      gap: 0.5rem;
-      grid-template-columns: 80px 1fr;
-      max-width: 400px;
-      padding: 0.5rem;
-
-      & > div {
-        align-items: center;
-        display: flex;
-
-        &:first-of-type {
-          font-size: 150%;
-          justify-content: right;
-        }
-      }
-    }
-  `,
-  topResearchTopics: css`
-    margin: 1rem auto;
-    max-width: 808px;
-  `,
-  topResearchTopicsTable: css`
-    max-width: 808px;
-  `,
-  aiSubfieldChart: css`
-    h3 {
-      align-items: center;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 0 auto;
-      width: fit-content;
-
-      .dropdown .MuiFormControl-root {
-        margin: 0;
-        margin-left: 0.5rem;
-      }
     }
   `,
 };
@@ -117,6 +42,33 @@ const DetailViewPublications = ({
   const [aiSubfield, setAiSubfield] = useState("ai_publications");
 
   const averageCitations = Math.round(10 * data.articles.citation_counts.total / data.articles.all_publications.total) / 10;
+
+  const statGridEntries = [
+    {
+      stat: <>#{data.articles.ai_publications.rank}</>,
+      text: <>in PARAT for number of AI research articles</>,
+    },
+    {
+      stat: <>{averageCitations}</>,
+      text: <>citations per article on average (#RANK in PARAT, #RANK in the S&P 500)</>,
+    },
+    {
+      stat: <>NUMBER</>,
+      text: <>highly-cited articles (#RANK in PARAT, #RANK in the S&P 500)</>,
+    },
+    {
+      stat: <>NUM%</>,
+      text: <>growth in {data.name}'s public AI research (YEAR-YEAR)</>,
+    },
+    {
+      stat: <>{commas(data.articles.ai_pubs_top_conf.total)}</>,
+      text: <>articles at top AI conferences (#{data.articles.ai_pubs_top_conf.rank} in PARAT, #RANK in the S&P 500)</>,
+    },
+    {
+      stat: <>NUM%</>,
+      text: <>of {data.name}'s total public research was AI-focused</>,
+    },
+  ];
 
   const topAiResearchTopicsColumns = [
     { display_name: "Subfield", key: "subfield" },
@@ -177,69 +129,40 @@ const DetailViewPublications = ({
     <>
       <HeaderWithLink css={styles.noTopMargin} title="Publications" />
 
-      <div css={[styles.aiResearch]}>
-        Between {data.years[0]} and {data.years[data.years.length-1]}, {data.name} researchers released
-        <big>{data.articles.ai_publications.total} AI research articles</big>
-      </div>
+      <TextAndBigStat
+        smallText={<>Between {data.years[0]} and {data.years[data.years.length-1]}, {data.name} researchers released</>}
+        bigText={<>{commas(data.articles.ai_publications.total)} AI research articles</>}
+      />
 
-      <ul css={[styles.sectionMargin, styles.stats]}>
-        <li>
-          <div>#{data.articles.ai_publications.rank}</div>
-          <div>in PARAT for number of AI research articles</div>
-        </li>
-        <li>
-          <div>{averageCitations}</div>
-          <div>citations per article on average (#RANK in PARAT, #RANK in the S&P 500)</div>
-        </li>
-        <li>
-          <div>NUMBER</div>
-          <div>highly-cited articles (#RANK in PARAT, #RANK in the S&P 500)</div>
-        </li>
-        <li>
-          <div>NUM%</div>
-          <div>growth in {data.name}'s public AI research (YEAR-YEAR)</div>
-        </li>
-        <li>
-          <div>{commas(data.articles.ai_pubs_top_conf.total)}</div>
-          <div>articles at top AI conferences (#{data.articles.ai_pubs_top_conf.rank} in PARAT, #RANK in the S&P 500)</div>
-        </li>
-        <li>
-          <div>NUM%</div>
-          <div>of {data.name}'s total public research was AI-focused</div>
-        </li>
-      </ul>
+      <StatGrid css={styles.sectionMargin} entries={statGridEntries} />
 
-      <div css={[styles.sectionMargin, styles.sectionWithHeading, styles.topResearchTopics]}>
-        <SectionHeading id="top-research-topics">
-          {data.name}'s top AI research topics
-        </SectionHeading>
-        <Table
-          columns={topAiResearchTopicsColumns}
-          css={styles.topResearchTopicsTable}
-          data={topAiResearchTopics}
-        />
-      </div>
+      <TableSection
+        columns={topAiResearchTopicsColumns}
+        css={styles.section}
+        data={topAiResearchTopics}
+        id="top-research-topics"
+        title={<>{data.name}'s top AI research topics</>}
+      />
 
-      <div css={[styles.sectionMargin, styles.sectionWithHeading, styles.aiSubfieldChart]}>
-        <Chart
-          {...aiSubfieldChartData}
-          id="ai-subfield-research"
-          title={
-            <>
-              Trends in {data.name}'s research in
-              <Dropdown
-                inputLabel="AI subfield"
-                options={aiSubfieldOptions}
-                selected={aiSubfield}
-                setSelected={setAiSubfield}
-                showLabel={false}
-              />
-            </>
-          }
-        />
-      </div>
+      <TrendsChart
+        css={styles.section}
+        {...aiSubfieldChartData}
+        id="ai-subfield-research"
+        title={
+          <>
+            Trends in {data.name}'s research in
+            <Dropdown
+              inputLabel="AI subfield"
+              options={aiSubfieldOptions}
+              selected={aiSubfield}
+              setSelected={setAiSubfield}
+              showLabel={false}
+            />
+          </>
+        }
+      />
 
-      <div css={[styles.sectionMargin, styles.sectionWithHeading]}>
+      <div css={styles.section}>
         <Chart {...topConfs} id="ai-top-conference-pubs" />
       </div>
     </>

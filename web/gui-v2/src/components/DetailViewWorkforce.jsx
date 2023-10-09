@@ -4,27 +4,34 @@ import HeaderWithLink from './HeaderWithLink';
 import StatBox from './StatBox';
 import StatWrapper from './StatWrapper';
 
+const DetailViewWorkforce = ({
+  data,
+}) => {
+  const yearSpanText = <>{data.years[0]} to {data.years[data.years.length-1]}</>;
 
-const DetailViewWorkforce = () => {
+  const otherMetricsWorkforceKeys = ['ai_jobs', 'tt1_jobs'];
+
   return (
     <>
       <HeaderWithLink title="Workforce" />
 
       <StatWrapper>
-        <StatBox label="tt1 jobs" value="1536" />
-        <StatBox label="AI jobs" value="3456" />
+        { otherMetricsWorkforceKeys.map((key) => (
+          <StatBox
+            description={
+              <>
+                From {yearSpanText}, {data.name} here is some explanatory text
+                describing how they had NUMBER jobs of the specified type
+                (#{data.other_metrics[key].rank} rank in PARAT
+                {data.in_sandp_500 && <>, #NUMBER in the S&P500</>})
+              </>
+            }
+            key={key}
+            label={data.other_metrics[key].name}
+            value={data.other_metrics[key].total}
+          />
+        ))}
       </StatWrapper>
-      <p>
-        The carbon in our apple pies circumnavigated venture worldlets Orion's
-        sword network of wormholes. Permanence of the stars another world
-        preserve and cherish that pale blue dot kindling the energy hidden in
-        matter muse about vastness is bearable only through love. Hearts of the
-        stars realm of the galaxies birth dispassionate extraterrestrial
-        observer vastness is bearable only through love not a sunrise but a
-        galaxyrise. Encyclopaedia galactica rich in heavy atoms made in the
-        interiors of collapsing stars descended from astronomers the only home
-        we've ever known.
-      </p>
     </>
   );
 };
