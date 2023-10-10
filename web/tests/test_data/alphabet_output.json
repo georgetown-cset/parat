@@ -304,7 +304,7 @@
         159,
         0
       ],
-      "total": 769
+      "total": 768
     },
     "ai_publications": {
       "name": "AI Publications",
@@ -425,7 +425,7 @@
         0,
         0
       ],
-      "total": 1043
+      "total": 968
     },
     "Physical_Sciences_and_Engineering": {
       "name": "Physical Sciences and Engineering Patents",
@@ -442,7 +442,7 @@
         0,
         0
       ],
-      "total": 10
+      "total": 8
     },
     "Life_Sciences": {
       "name": "Life Sciences Patents",
@@ -459,7 +459,7 @@
         0,
         0
       ],
-      "total": 117
+      "total": 112
     },
     "Security__eg_cybersecurity": {
       "name": "Security Patents",
@@ -476,7 +476,7 @@
         0,
         0
       ],
-      "total": 22
+      "total": 17
     },
     "Transportation": {
       "name": "Transportation Patents",
@@ -493,7 +493,7 @@
         0,
         0
       ],
-      "total": 297
+      "total": 267
     },
     "Industrial_and_Manufacturing": {
       "name": "Industry and Manufacturing Patents",
@@ -527,7 +527,7 @@
         0,
         0
       ],
-      "total": 7
+      "total": 6
     },
     "Document_Mgt_and_Publishing": {
       "name": "Document Management and Publishing Patents",
@@ -612,7 +612,7 @@
         0,
         0
       ],
-      "total": 240
+      "total": 203
     },
     "Banking_and_Finance": {
       "name": "Banking and Finance Patents",
@@ -629,7 +629,7 @@
         0,
         0
       ],
-      "total": 14
+      "total": 12
     },
     "Telecommunications": {
       "name": "Telecommunications Patents",
@@ -646,7 +646,7 @@
         0,
         0
       ],
-      "total": 136
+      "total": 114
     },
     "Networks__eg_social_IOT_etc": {
       "name": "Networks Patents",
@@ -680,7 +680,7 @@
         0,
         0
       ],
-      "total": 61
+      "total": 46
     },
     "Energy_Management": {
       "name": "Energy Management Patents",
@@ -697,7 +697,7 @@
         0,
         0
       ],
-      "total": 10
+      "total": 8
     },
     "Entertainment": {
       "name": "Entertainment Patents",
@@ -714,7 +714,7 @@
         0,
         0
       ],
-      "total": 12
+      "total": 10
     },
     "Nanotechnology": {
       "name": "Nanotechnology Patents",

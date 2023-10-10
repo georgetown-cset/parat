@@ -517,7 +517,7 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     year_key = "priority_year" if "priority_year" in counts[0] else "year"
     counts_by_year = {p[year_key]: p[key] for p in counts}
     yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
-    return yearly_counts, sum([v for _, v in counts_by_year.items() if v])
+    return yearly_counts, sum(yearly_counts)
 
 
 def get_market_link_list(market: list) -> dict:

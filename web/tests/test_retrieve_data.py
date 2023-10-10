@@ -148,7 +148,7 @@ class TestMkTabText(unittest.TestCase):
         expected_values = [0 for _ in years]
         expected_values[-2] = 2
         expected_values[0] = 15
-        self.assertEqual(get_yearly_counts(counts, "count", years), (expected_values, 18))
+        self.assertEqual(get_yearly_counts(counts, "count", years), (expected_values, 17))
 
     def test_get_market_link_list(self):
         market_info = [{"link": "foo", "market_key": "BAR:FOO"}, {"market_key": "TEST:BAZ", "link": ""}]
