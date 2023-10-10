@@ -22,7 +22,7 @@ class TestAICounts(unittest.TestCase):
         count_getter.get_identifiers()
         # the dicts are populated
         self.assertGreater(len(count_getter.regex_dict), 0)
-        self.assertGreater(len(count_getter.grid_dict), 0)
+        self.assertGreater(len(count_getter.ror_dict), 0)
         self.assertGreater(len(count_getter.cset_ids), 0)
         self.assertEqual(type(count_getter.cset_ids), list)
         # the values in the dict are the correct type
@@ -30,16 +30,16 @@ class TestAICounts(unittest.TestCase):
             self.assertEqual(type(key_val), int)
             # we allow multiple regexes, so we have a list
             self.assertEqual(type(count_getter.regex_dict[key_val]), list)
-        for key_val in count_getter.grid_dict.keys():
+        for key_val in count_getter.ror_dict.keys():
             self.assertEqual(type(key_val), int)
             # we allow multiple regexes, so we have a list
-            self.assertEqual(type(count_getter.grid_dict[key_val]), list)
+            self.assertEqual(type(count_getter.ror_dict[key_val]), list)
 
     @ignore_warnings
     def test_run_query_papers(self):
         count_getter = CountGetter()
         count_getter.get_identifiers()
-        table_name = "gcp-cset-projects.ai_companies_visualization.ai_publications"
+        table_name = "gcp-cset-projects.staging_ai_companies_visualization.ai_publications"
         test = True
         companies = count_getter.run_query_papers(table_name, "ai_pubs", test=test, by_year=False)
         # Make sure we're setting the AI pubs for every company!
@@ -67,7 +67,7 @@ class TestAICounts(unittest.TestCase):
     def test_run_query_id_papers(self):
         count_getter = CountGetter()
         count_getter.get_identifiers()
-        table_name = "gcp-cset-projects.ai_companies_visualization.ai_publications"
+        table_name = "gcp-cset-projects.staging_ai_companies_visualization.ai_publications"
         test = True
         company_rows = count_getter.run_query_id_papers(table_name, test=test)
         for company_row in company_rows:
@@ -84,7 +84,7 @@ class TestAICounts(unittest.TestCase):
     def test_run_query_id_patents(self):
         count_getter = CountGetter()
         count_getter.get_identifiers()
-        table_name = "gcp-cset-projects.ai_companies_visualization.ai_publications"
+        table_name = "gcp-cset-projects.staging_ai_companies_visualization.ai_publications"
         test = True
         count_getter.run_query_id_papers(table_name, test)
         patent_companies = count_getter.run_query_id_patents()

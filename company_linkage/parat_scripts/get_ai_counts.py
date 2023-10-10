@@ -14,7 +14,7 @@ class CountGetter:
         AI papers in top conferences, etc.) and AI patents (from Dimensions and 1790 jointly).
         """
         self.regex_dict = defaultdict(list)
-        self.grid_dict = defaultdict(list)
+        self.ror_dict = defaultdict(list)
         self.cset_ids = []
         self.company_ids = []
         self.patent_fields = ["Physical_Sciences_and_Engineering",
@@ -58,7 +58,7 @@ class CountGetter:
         Pulling the regular expressions used to find papers and patents through means other than GRID.
         :return:
         """
-        regex_query = """SELECT CSET_id, regex, grid FROM
+        regex_query = """SELECT CSET_id, regex, ror_id FROM
                             `gcp-cset-projects.high_resolution_entities.aggregated_organizations`"""
         client = bigquery.Client()
         query_job = client.query(regex_query)
@@ -67,15 +67,15 @@ class CountGetter:
             if result.regex:
                 for regex in result.regex:
                     self.regex_dict[result.CSET_id].append(regex)
-            if result.grid:
-                for grid_id in result.grid:
-                    self.grid_dict[result.CSET_id].append(grid_id)
+            if result.ror_id:
+                for ror in result.ror_id:
+                    self.ror_dict[result.CSET_id].append(ror)
             self.cset_ids.append(result.CSET_id)
 
     def run_query_papers(self, table_name: str, field_name: str, test: bool = False, by_year: bool = False) -> list:
         """
-        Running a query to find paper counts using regex for papers missing GRID. This query combines
-        this data with preexisting paper counts already identified using SQL for papers that have GRID.
+        Running a query to find paper counts using regex for papers missing ROR. This query combines
+        this data with preexisting paper counts already identified using SQL for papers that have ROR.
         We no longer use this query for AI papers, but it is still used for top conference papers and
         total papers.
         :param table_name: The table to look for papers in
@@ -100,8 +100,8 @@ class CountGetter:
                 if len(regexes) > 1:
                     for regex in regexes[1:]:
                         query += f"""OR regexp_contains(org_name, r'(?i){regex}') """
-                if cset_id in self.grid_dict:
-                    query += f"""OR grid_id IN ({str(self.grid_dict[cset_id])[1:-1]})"""
+                if cset_id in self.ror_dict:
+                    query += f"""OR ror_id IN ({str(self.ror_dict[cset_id])[1:-1]})"""
                 query_job = client.query(query)
                 # query_job is an iterator, so even though we're only returning one row we're going to loop
                 for element in query_job:
@@ -109,7 +109,7 @@ class CountGetter:
                 # if we don't have total data, we won't have by_year either
                 if by_year:
                     row_dict[field_name_by_year] = self.run_query_papers_by_year(table_name, field_name, regexes,
-                                                                                 self.grid_dict[cset_id])
+                                                                                 self.ror_dict[cset_id])
             if not row_dict[field_name]:
                 # if we end up without any papers, set that to be true
                 row_dict[field_name] = 0
@@ -119,7 +119,7 @@ class CountGetter:
             companies.append(row_dict)
         return companies
 
-    def run_query_papers_by_year(self, table_name: str, field_name: str, regexes: list, grids: list) -> list:
+    def run_query_papers_by_year(self, table_name: str, field_name: str, regexes: list, rors: list) -> list:
         """
         Getting the same paper count data, except split by year.
         We no longer use this query for AI papers, but it is still used for top conference papers and
@@ -127,7 +127,7 @@ class CountGetter:
         :param table_name: The table to look for papers in
         :param field_name: The json field name
         :param regexes: The regexes for whichever CSET_id we're searching for
-        :param grids: The grids for whichever CSET_id we're searching for if they exist; otherwise an empty list
+        :param rors: The rors for whichever CSET_id we're searching for if they exist; otherwise an empty list
         :return:
         """
         field_name_by_year = f"{field_name}_by_year"
@@ -143,8 +143,8 @@ class CountGetter:
             for regex in regexes[1:]:
                 # regex_to_use = rf"r'(?i){regex}'"
                 query += f"""OR regexp_contains(org_name, r'(?i){regex}') """
-        if grids:
-            query += f"""OR grid_id IN ({str(grids)[1:-1]}) """
+        if rors:
+            query += f"""OR ror_id IN ({str(rors)[1:-1]}) """
         query += """GROUP BY year ORDER BY year"""
         client = bigquery.Client()
         query_job = client.query(query)
@@ -160,7 +160,7 @@ class CountGetter:
         :param test: False if not running as a unit test
         :return:
         """
-        companies_query = f"""SELECT CSET_id, grid FROM 
+        companies_query = f"""SELECT CSET_id, ror_id FROM 
         `gcp-cset-projects.high_resolution_entities.aggregated_organizations`"""
         if test:
             companies_query += """ LIMIT 25"""
@@ -180,9 +180,9 @@ class CountGetter:
                 if len(regexes) > 1:
                     for regex in regexes[1:]:
                         query += f"""OR regexp_contains(org_name, r'(?i){regex}') """
-                if row["grid"]:
-                    self.grid_dict[row["CSET_id"]] = row["grid"]
-                    query += f"""OR grid_id IN ({str(row["grid"])[1:-1]})"""
+                if row["ror_id"]:
+                    self.ror_dict[row["CSET_id"]] = row["ror_id"]
+                    query += f"""OR ror_id IN ({str(row["ror_id"])[1:-1]})"""
                 query_job = client.query(query)
                 # get all the merged ids
                 for element in query_job:
@@ -192,11 +192,15 @@ class CountGetter:
         return company_rows
 
     def run_query_id_patents(self):
+        """
+        Get patent counts one by one using CSET_ids.
+        :return:
+        """
         patent_companies = []
         for cset_id in self.company_ids:
             if cset_id in self.regex_dict:
                 regexes = self.regex_dict[cset_id]
-                grids = self.grid_dict[cset_id]
+                rors = self.ror_dict[cset_id]
                 query = f"""SELECT DISTINCT 
                               family_id,
                               priority_year,
@@ -236,14 +240,14 @@ class CountGetter:
                               Machine_Learning,
                               Search_Methods
                               FROM
-                            ai_companies_visualization.linked_ai_patents
+                            staging_ai_companies_visualization.linked_ai_patents
                              WHERE regexp_contains(assignee, r'(?i){regexes[0]}') """
                 # if we have more than one regex for an org, include all of them
                 if len(regexes) > 1:
                     for regex in regexes[1:]:
                         query += f"""OR regexp_contains(assignee, r'(?i){regex}') """
-                if grids:
-                    query += f"""OR grid IN ({str(grids)[1:-1]})"""
+                if rors:
+                    query += f"""OR ror_id IN ({str(rors)[1:-1]})"""
                 client = bigquery.Client()
                 query_job = client.query(query)
                 for row in query_job:
@@ -278,7 +282,7 @@ def main() -> None:
     count_getter = CountGetter()
     print("Fetching identifiers")
     count_getter.get_identifiers()
-    table_name = "gcp-cset-projects.ai_companies_visualization.ai_publications"
+    table_name = "gcp-cset-projects.staging_ai_companies_visualization.ai_publications"
     print("Fetching paper data")
     company_rows = count_getter.run_query_id_papers(table_name)
     print("Writing results")
