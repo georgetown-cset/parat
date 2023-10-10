@@ -1,6 +1,4 @@
-  -- Pulling every publication id linked to every author affiliate and all years because we'll want those later for yearly counts
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.all_publications AS
+  -- Pulling every publication id linked to every author affiliate and all years because we'll want those later for yearly count
 WITH
   ror AS (
     -- Adding in org names and country data using ROR

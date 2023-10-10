@@ -27,7 +27,7 @@ SELECT
   ror_id,
   year
 FROM
-  ai_companies_visualization.top_conference_pubs AS top_pubs
+  staging_ai_companies_visualization.top_conference_pubs AS top_pubs
   -- We're inner joining because if there's no affiliate information at all we have no way to even evaluate this data for our purposes
 INNER JOIN
   affils

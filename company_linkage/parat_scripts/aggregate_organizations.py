@@ -23,7 +23,7 @@ class Organization:
         self.market = []
         self.crunchbase = {}
         self.child_crunchbase = []
-        self.grid = []
+        self.ror = []
         self.regex = []
         self.bgov_id = []
         self.comment = None
@@ -130,14 +130,14 @@ class Organization:
             if crunchbase not in self.child_crunchbase and crunchbase != self.crunchbase:
                 self.child_crunchbase.append(crunchbase)
 
-    def add_grid(self, grid):
+    def add_ror(self, ror):
         """
-        Adding GRID (from grid.ac) for aggregation
-        :param grid: grid value
+        Adding ROR for aggregation
+        :param ror: ror value
         :return:
         """
-        if grid and grid not in self.grid:
-            self.grid.append(grid)
+        if ror and ror not in self.ror:
+            self.ror.append(ror)
 
     def add_regex(self, regex):
         """
@@ -369,8 +369,8 @@ class OrganizationAggregator:
             org_info.add_child_crunchbase(org["crunchbase"]["crunchbase_uuid"], org["crunchbase"]["crunchbase_url"])
         else:
             org_info.add_crunchbase(org["crunchbase"]["crunchbase_uuid"], org["crunchbase"]["crunchbase_url"])
-        for grid in org["grid"]:
-            org_info.add_grid(grid)
+        for ror in org["ror_id"]:
+            org_info.add_ror(ror)
         org_info.add_regex(org["regex"])
         org_info.add_linkedin(org["linkedin"])
         org_info.add_bgov_id(org["BGOV_id"])
@@ -408,7 +408,7 @@ class OrganizationAggregator:
                   "aliases": org_info.aliases, "parent": org_info.parent,
                   "permid": org_info.permid, "market": org_info.market,
                   "crunchbase": org_info.crunchbase, "child_crunchbase": org_info.child_crunchbase,
-                  "grid": org_info.grid, "regex": org_info.regex,
+                  "ror_id": org_info.ror, "regex": org_info.regex,
                   "BGOV_id": org_info.bgov_id, "linkedin": org_info.linkedin,
                   "in_sandp_500": org_info.in_sandp_500, "in_fortune_global_500": org_info.in_fortune_global_500,
                   "comment": org_info.comment, "children": org_info.children,
@@ -416,7 +416,7 @@ class OrganizationAggregator:
             out.write(json.dumps(js, ensure_ascii=False) + "\n")
         out.close()
         if not local:
-            subprocess.run(["gsutil", "-m", "cp", "-r", output_file, "gs://parat/"], check=True)
+            subprocess.run(["gsutil", "-m", "cp", "-r", output_file, "gs://airflow-data-exchange/ai_companies_visualization/tmp/"], check=True)
 
 
 def aggregate_organizations(output_file, local=False):

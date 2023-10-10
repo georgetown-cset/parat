@@ -18,7 +18,7 @@ class TestOrganization(unittest.TestCase):
         self.assertEqual(org.market, [])
         self.assertEqual(org.crunchbase, {})
         self.assertEqual(org.child_crunchbase, [])
-        self.assertEqual(org.grid, [])
+        self.assertEqual(org.ror, [])
         self.assertEqual(org.regex, [])
         self.assertEqual(org.bgov_id, [])
         self.assertEqual(org.comment, None)
@@ -116,18 +116,18 @@ class TestOrganization(unittest.TestCase):
                                  "https://www.crunchbase.com/organization/algorithmia")
         self.assertEqual(len(org.child_crunchbase), 2)
 
-    def test_add_grid(self):
+    def test_add_ror(self):
         org = aggregate_organizations.Organization(1, "test")
-        org.add_grid("grid.419660.c")
-        self.assertEqual(org.grid[0], "grid.419660.c")
-        self.assertEqual(len(org.grid), 1)
+        org.add_ror("https://ror.org/05a8p8995")
+        self.assertEqual(org.ror[0], "https://ror.org/05a8p8995")
+        self.assertEqual(len(org.ror), 1)
         # Don't add a duplicate entry!
-        org.add_grid("grid.419660.c")
-        self.assertEqual(len(org.grid), 1)
+        org.add_ror("https://ror.org/05a8p8995")
+        self.assertEqual(len(org.ror), 1)
         # Do add a new one
-        org.add_grid("grid.481863.0")
-        self.assertEqual(org.grid[1], "grid.481863.0")
-        self.assertEqual(len(org.grid), 2)
+        org.add_ror("https://ror.org/00kdbj440")
+        self.assertEqual(org.ror[1], "https://ror.org/00kdbj440")
+        self.assertEqual(len(org.ror), 2)
 
     def test_add_regex(self):
         org = aggregate_organizations.Organization(1, "test")
@@ -157,8 +157,8 @@ class TestOrganization(unittest.TestCase):
 
     def test_add_comment(self):
         org = aggregate_organizations.Organization(1, "test")
-        org.add_comment("grid id not available")
-        self.assertEqual(org.comment, "grid id not available")
+        org.add_comment("crunchbase id not available")
+        self.assertEqual(org.comment, "crunchbase id not available")
         other_org = aggregate_organizations.Organization(2, "test_2")
         other_org.add_comment("")
         self.assertEqual(other_org.comment, None)

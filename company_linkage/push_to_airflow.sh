@@ -15,4 +15,6 @@ gsutil cp sequences/* gs://us-east1-dev2023-cc1-b088c7e1-bucket/dags/sequences/p
 gsutil rm gs://us-east1-dev2023-cc1-b088c7e1-bucket/dags/sql/parat/*
 gsutil cp sql/* gs://us-east1-dev2023-cc1-b088c7e1-bucket/dags/sql/parat/
 gsutil cp schemas/* gs://us-east1-dev2023-cc1-b088c7e1-bucket/dags/schemas/parat/
+gsutil rm -r gs://airflow-data-exchange/parat/schemas/*
+gsutil cp schemas/* gs://airflow-data-exchange/parat/schemas/
 gsutil -m cp -r parat_scripts/* gs://us-east1-dev2023-cc1-b088c7e1-bucket/dags/parat_scripts/

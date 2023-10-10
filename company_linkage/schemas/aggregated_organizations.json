@@ -157,9 +157,9 @@
   },
   {
     "mode": "REPEATED",
-    "name": "grid",
+    "name": "ror_id",
     "type": "STRING",
-    "description": "The company's GRID identifier."
+    "description": "The company's ROR identifier."
   },
   {
     "mode": "REPEATED",

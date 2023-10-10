@@ -29,10 +29,9 @@ bucket = DATA_BUCKET
 initial_dataset = "parat_input"
 intermediate_dataset = "high_resolution_entities"
 production_dataset = "ai_companies_visualization"
-staging_intermediate_dataset = f"staging_{intermediate_dataset}"
 staging_dataset = f"staging_{production_dataset}"
 sql_dir = "sql/parat"
-schema_dir = "schemas/parat"
+schema_dir = "parat/schemas"
 tmp_dir = f"{production_dataset}/tmp"
 
 default_args = get_default_args()
@@ -49,7 +48,6 @@ dag = DAG(
     user_defined_macros={
         "staging_dataset": staging_dataset,
         "production_dataset": production_dataset,
-        "staging_intermediate_dataset": staging_intermediate_dataset,
         "intermediate_dataset": intermediate_dataset,
         "initial_dataset": initial_dataset
     },
@@ -102,16 +100,16 @@ with dag:
     curr = start_initial_tables
     for line in open(seq_path_prefix + initial_query_sequence).readlines():
         dataset, table = line.split(",")
-        staging_table_name = f"staging_{dataset}.{table.strip()}"
-        next = BigQueryInsertJobOperator(
-            task_id="create_"+staging_table_name,
+        table_name = f"{dataset}.{table.strip()}"
+        next_tab = BigQueryInsertJobOperator(
+            task_id=f"create_{table_name}",
             configuration={
                 "query": {
                     "query": "{% include '" + f"{sql_dir}/{table.strip()}.sql" + "' %}",
                     "useLegacySql": False,
                     "destinationTable": {
                         "projectId": PROJECT_ID,
-                        "datasetId": staging_dataset,
+                        "datasetId": dataset,
                         "tableId": table
                     },
                     "allowLargeResults": True,
@@ -120,8 +118,8 @@ with dag:
                 }
             },
         )
-        curr >> next
-        curr = next
+        curr >> next_tab
+        curr = next_tab
     curr >> wait_for_initial_tables
 
     # run aggregate_organizations python and load to GCS
@@ -140,9 +138,9 @@ with dag:
     load_aggregated_orgs = GCSToBigQueryOperator(
         task_id=f"load_{aggregated_table}",
         bucket=DATA_BUCKET,
-        source_objects=[f"{aggregated_table}.jsonl"],
+        source_objects=[f"{tmp_dir}/{aggregated_table}.jsonl"],
         schema_object=f"{schema_dir}/{aggregated_table}.json",
-        destination_project_dataset_table=f"{staging_intermediate_dataset}.{aggregated_table}",
+        destination_project_dataset_table=f"{intermediate_dataset}.{aggregated_table}",
         source_format="NEWLINE_DELIMITED_JSON",
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE"
@@ -189,9 +187,9 @@ with dag:
     load_ai_papers = GCSToBigQueryOperator(
         task_id=f"load_ai_company_papers",
         bucket=DATA_BUCKET,
-        source_objects=["ai_company_papers.jsonl"],
+        source_objects=[f"{tmp_dir}/ai_company_papers.jsonl"],
         schema_object=f"{schema_dir}/ai_papers_schema.json",
-        destination_project_dataset_table=f"{staging_intermediate_dataset}.ai_company_papers",
+        destination_project_dataset_table=f"{staging_dataset}.ai_company_papers",
         source_format="NEWLINE_DELIMITED_JSON",
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE"
@@ -200,9 +198,9 @@ with dag:
     load_ai_patents = GCSToBigQueryOperator(
         task_id=f"load_ai_company_patents",
         bucket=DATA_BUCKET,
-        source_objects=["ai_company_patents.jsonl"],
+        source_objects=[f"{tmp_dir}/ai_company_patents.jsonl"],
         schema_object=f"{schema_dir}/ai_patents_schema.json",
-        destination_project_dataset_table=f"{staging_intermediate_dataset}.ai_company_patents",
+        destination_project_dataset_table=f"{staging_dataset}.ai_company_patents",
         source_format="NEWLINE_DELIMITED_JSON",
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE"
@@ -251,9 +249,9 @@ with dag:
     load_top_papers = GCSToBigQueryOperator(
         task_id=f"load_top_papers",
         bucket=DATA_BUCKET,
-        source_objects=["top_paper_counts.jsonl"],
+        source_objects=[f"{tmp_dir}/top_paper_counts.jsonl"],
         schema_object=f"{schema_dir}/top_papers_schema.json",
-        destination_project_dataset_table=f"{staging_intermediate_dataset}.top_paper_counts",
+        destination_project_dataset_table=f"{staging_dataset}.top_paper_counts",
         source_format="NEWLINE_DELIMITED_JSON",
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE"
@@ -262,9 +260,9 @@ with dag:
     load_all_papers = GCSToBigQueryOperator(
         task_id=f"load_all_papers",
         bucket=DATA_BUCKET,
-        source_objects=["all_paper_counts.jsonl"],
+        source_objects=[f"{tmp_dir}/all_paper_counts.jsonl"],
         schema_object=f"{schema_dir}/all_papers_schema.json",
-        destination_project_dataset_table=f"{staging_intermediate_dataset}.all_paper_counts",
+        destination_project_dataset_table=f"{staging_dataset}.all_paper_counts",
         source_format="NEWLINE_DELIMITED_JSON",
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE"
