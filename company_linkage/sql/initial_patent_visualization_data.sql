@@ -1,5 +1,3 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.patent_visualization_data AS
 WITH
   aipats AS (
     -- Pulling all the patents from any of our companies

@@ -160,7 +160,7 @@ with dag:
         cmds=["/bin/bash"],
         arguments=["-c", (f"echo 'getting AI counts!' ; rm -r ai || true ; "
                           f"mkdir -p ai && "
-                          f"python3 get_ai_counts.py ai/ai_company_papers.jsonl ai/ai_company_patents.jsonl"
+                          f"python3 get_ai_counts.py ai/ai_company_papers.jsonl ai/ai_company_patents.jsonl && "
                           f"gsutil -m cp -r ai gs://{DATA_BUCKET}/{tmp_dir}/ ")],
         namespace="default",
         image=f"us.gcr.io/{PROJECT_ID}/parat",
@@ -218,7 +218,7 @@ with dag:
             cmds=["/bin/bash"],
             arguments=["-c", (f"echo 'getting {paper_type} paper counts!' ; rm -r {paper_type} || true ; "
                               f"mkdir -p {paper_type} && "
-                              f"python3 {paper_type}_papers.py {paper_type}/{paper_type}_paper_counts.jsonl"
+                              f"python3 {paper_type}_papers.py {paper_type}/{paper_type}_paper_counts.jsonl && "
                               f"gsutil -m cp -r {paper_type} gs://{DATA_BUCKET}/{tmp_dir}/ ")],
             namespace="default",
             image=f"us.gcr.io/{PROJECT_ID}/parat",

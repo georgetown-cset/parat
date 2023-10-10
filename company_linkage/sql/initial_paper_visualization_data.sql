@@ -1,5 +1,3 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.paper_visualization_data AS
 WITH
   get_citations AS (
   SELECT
