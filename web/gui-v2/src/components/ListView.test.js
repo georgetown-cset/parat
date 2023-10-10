@@ -8,6 +8,9 @@ import {
 
 import { userEventSetup } from '../util/testing';
 import ListView from './ListView';
+import { exportsForTestingOnly } from './ListViewTable';
+
+const { filterRow } = exportsForTestingOnly;
 
 const INITIAL_COLUMNS = ['Company', 'Country', 'AI publications', 'AI patents', 'Tech Tier 1 jobs'];
 const REMOVED_COLUMN = 'AI publications';
@@ -107,5 +110,28 @@ describe("ListView", () => {
       expect(getByRole(table, 'row', { name: /Apple/ })).toBeVisible();
       expect(getByRole(table, 'row', { name: /3M/ })).toBeVisible();
     }, 60000);
+  });
+
+
+  describe("helper functions", () => {
+    it("filtering rows works as expected", () => {
+      const FILTERS_SP500 = {
+        name: [ "GROUP:sandp_500" ],
+        country: [],
+        continent: [],
+        stage: [],
+      };
+      const DJI = { cset_id: 78, name: "DJI", in_fortune_global_500: false, in_sandp_500: false };
+      const HUAWEI = { cset_id: 112, name: "Huawei", in_fortune_global_500: false, in_sandp_500: true };
+      const MICROSOFT = { cset_id: 163, name: "Microsoft", in_fortune_global_500: true, in_sandp_500: true };
+      const SAMSUNG = { cset_id: 671, name: "Samsung", in_fortune_global_500: false, in_sandp_500: true };
+      const THALES = { cset_id: 2794, name: "Thales SA", in_fortune_global_500: false, in_sandp_500: false };
+
+      expect(filterRow(DJI, FILTERS_SP500)).toEqual(false);
+      expect(filterRow(HUAWEI, FILTERS_SP500)).toEqual(true);
+      expect(filterRow(MICROSOFT, FILTERS_SP500)).toEqual(true);
+      expect(filterRow(SAMSUNG, FILTERS_SP500)).toEqual(true);
+      expect(filterRow(THALES, FILTERS_SP500)).toEqual(false);
+    });
   });
 });

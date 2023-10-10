@@ -108,6 +108,12 @@ const styles = {
 };
 
 
+const GROUPS = [
+  { text: "S&P 500", val: "GROUP:sandp_500" },
+  { text: "Fortune Global 500", val: "GROUP:fortune_global_500" },
+];
+
+
 const DATAKEYS_WITH_SUBKEYS = [
   "articles",
   "patents",
@@ -123,7 +129,7 @@ columnDefinitions.forEach((colDef) => {
   if ( colDef?.initialCol ) {
     DEFAULT_COLUMNS.push(colDef.key);
   }
-  if ( colDef.type === "dropdown" ) {
+  if ( colDef.type === "companyName" || colDef.type === "dropdown" ) {
     DROPDOWN_COLUMNS.push(colDef.key);
   } else if ( colDef.type === "slider" ) {
     SLIDER_COLUMNS.push(colDef.key);
@@ -161,21 +167,18 @@ const AGGREGATE_SUM_COLUMNS = [
   'ai_patents',
 ];
 
-// Determine whether a given row matches the filters and/or selected group
-const filterRow = (row, filters, selectedGroupMembers) => {
+/**
+ * Determine whether a given row matches the filters
+ *
+ * @param {object} row A company detail object
+ * @param {object} filters The currently-active filters
+ * @returns {boolean} `true` if the row matches the filters, `false` otherwise
+ */
+const filterRow = (row, filters) => {
   const filterKeys = Object.keys(filters);
 
-  if ( selectedGroupMembers === null ) {
-    return false;
-  } else if ( Array.isArray(selectedGroupMembers) ) {
-    if ( selectedGroupMembers.length == 0 ) {
-      return false;
-    } else if ( !selectedGroupMembers.includes(row.cset_id) ) {
-      return false;
-    }
-  }
-
   for ( const colDef of columnDefinitions ) {
+    // Ignore columns that are not filterable
     if ( !filterKeys.includes(colDef.key) ) {
       continue;
     }
@@ -189,7 +192,38 @@ const filterRow = (row, filters, selectedGroupMembers) => {
     }
     const rowVal = colDef?.extract?.(rawVal, row) ?? rawVal;
 
-    if ( colDef.type === "dropdown" ) {
+    if ( colDef.type === "companyName" ) {
+      if ( filters?.[colDef.key].length > 0 ) {
+        // We want to include a row (i.e. a company) if either condition is met:
+        //   1) Any "GROUP:*" entry in the filter matches with the row
+        //   2) The company name is in filter array
+        // If **NEITHER** condition is met, the row shouldn't be included, and
+        // therefore we return `false`.  Otherwise, we do nothing and let later
+        // columns do their checks.
+
+        const groups = [];
+        const nonGroups = [];
+        filters?.[colDef.key].forEach((entry) => {
+          if ( entry.startsWith('GROUP:') ) {
+            groups.push(entry.slice(6));
+          } else {
+            nonGroups.push(entry);
+          }
+        });
+
+        let inSelectedGroup = false;
+        for ( const group of groups ) {
+          if ( row[`in_${group}`] ) {
+            inSelectedGroup = true;
+          }
+        }
+        const inFilteredCompanies = nonGroups.includes(rowVal);
+
+        if ( ! (inSelectedGroup || inFilteredCompanies) ) {
+          return false;
+        }
+      }
+    } else if ( colDef.type === "dropdown" ) {
       if ( filters?.[colDef.key].length > 0 ) {
         if ( ! filters?.[colDef.key].includes(rowVal) ) {
           return false;
@@ -206,11 +240,16 @@ const filterRow = (row, filters, selectedGroupMembers) => {
         return false;
       }
     } else {
-      console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
+      console.error(`Invalid column type for key '${colDef.key}': column.type should be either "companyName", "dropdown", or "slider" but is instead "${colDef.type}"`);
     }
   }
 
   return true;
+};
+
+
+export const exportsForTestingOnly = {
+  filterRow,
 };
 
 
@@ -387,6 +426,15 @@ const ListViewTable = ({
             .filter(e => e !== null)
             .sort()
         );
+
+        if ( column === "name" ) {
+          results[column] = [
+            { header: "Groups of companies" },
+            ...GROUPS,
+            { header: "Companies" },
+            ...results[column],
+          ];
+        }
       }
 
       return results;
@@ -403,6 +451,7 @@ const ListViewTable = ({
     .map((colDef) => {
       let display_name;
       switch ( colDef.type ) {
+        case 'companyName':
         case 'dropdown':
           let dropdownWidth;
           if ( colDef?.minWidth ) {
