@@ -19,9 +19,8 @@ const styles = {
 
     & > li {
       align-content: center;
-      border: 1px solid var(--bright-blue-light);
       display: grid;
-      gap: 0.5rem;
+      gap: 1rem;
       grid-template-columns: 80px 1fr;
       max-width: 400px;
       padding: 0.5rem;
@@ -31,7 +30,8 @@ const styles = {
         display: flex;
 
         &:first-of-type {
-          font-size: 150%;
+          font-family: GTZirkonMedium;
+          font-size: 200%;
           justify-content: right;
         }
       }

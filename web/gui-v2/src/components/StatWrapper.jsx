@@ -7,7 +7,7 @@ const styles = {
     flex-direction: column;
     gap: 2rem;
     justify-content: space-around;
-    margin: 1rem auto;
+    margin: 2rem auto;
     max-width: 720px;
   `,
 };

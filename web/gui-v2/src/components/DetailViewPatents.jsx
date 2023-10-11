@@ -17,7 +17,7 @@ const styles = {
     max-width: 808px;
 
     h3 {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
     }
   `,
 };
