@@ -146,11 +146,6 @@ with dag:
         write_disposition="WRITE_TRUNCATE"
     )
 
-    # TODO: somewhere in here we need to decide whether to load directly to the main table
-    # or to add a transfer step to transfer from staging to the main table; if the latter
-    # are there checks we want to add first?
-    # for now, pretend the data is in the main table already
-
     run_get_ai_counts = GKEStartPodOperator(
         task_id="run_get_ai_counts",
         project_id=PROJECT_ID,
@@ -187,7 +182,7 @@ with dag:
     load_ai_papers = GCSToBigQueryOperator(
         task_id=f"load_ai_company_papers",
         bucket=DATA_BUCKET,
-        source_objects=[f"{tmp_dir}/ai_company_papers.jsonl"],
+        source_objects=[f"{tmp_dir}/ai/ai_company_papers.jsonl"],
         schema_object=f"{schema_dir}/ai_papers_schema.json",
         destination_project_dataset_table=f"{staging_dataset}.ai_company_papers",
         source_format="NEWLINE_DELIMITED_JSON",
@@ -198,7 +193,7 @@ with dag:
     load_ai_patents = GCSToBigQueryOperator(
         task_id=f"load_ai_company_patents",
         bucket=DATA_BUCKET,
-        source_objects=[f"{tmp_dir}/ai_company_patents.jsonl"],
+        source_objects=[f"{tmp_dir}/ai/ai_company_patents.jsonl"],
         schema_object=f"{schema_dir}/ai_patents_schema.json",
         destination_project_dataset_table=f"{staging_dataset}.ai_company_patents",
         source_format="NEWLINE_DELIMITED_JSON",
@@ -249,7 +244,7 @@ with dag:
     load_top_papers = GCSToBigQueryOperator(
         task_id=f"load_top_papers",
         bucket=DATA_BUCKET,
-        source_objects=[f"{tmp_dir}/top_paper_counts.jsonl"],
+        source_objects=[f"{tmp_dir}/top/top_paper_counts.jsonl"],
         schema_object=f"{schema_dir}/top_papers_schema.json",
         destination_project_dataset_table=f"{staging_dataset}.top_paper_counts",
         source_format="NEWLINE_DELIMITED_JSON",
@@ -260,7 +255,7 @@ with dag:
     load_all_papers = GCSToBigQueryOperator(
         task_id=f"load_all_papers",
         bucket=DATA_BUCKET,
-        source_objects=[f"{tmp_dir}/all_paper_counts.jsonl"],
+        source_objects=[f"{tmp_dir}/all/all_paper_counts.jsonl"],
         schema_object=f"{schema_dir}/all_papers_schema.json",
         destination_project_dataset_table=f"{staging_dataset}.all_paper_counts",
         source_format="NEWLINE_DELIMITED_JSON",
@@ -268,8 +263,35 @@ with dag:
         write_disposition="WRITE_TRUNCATE"
     )
 
+    start_visualization_tables = DummyOperator(task_id="start_visualization_tables")
+    wait_for_visualization_tables = DummyOperator(task_id="wait_for_visualization_tables")
 
+    visualization_query_sequence = "visualization_data.csv"
 
+    curr = start_visualization_tables
+    for line in open(seq_path_prefix + visualization_query_sequence).readlines():
+        dataset, table = line.split(",")
+        table_name = f"{dataset}.{table.strip()}"
+        next_tab = BigQueryInsertJobOperator(
+            task_id=f"create_{table_name}",
+            configuration={
+                "query": {
+                    "query": "{% include '" + f"{sql_dir}/{table.strip()}.sql" + "' %}",
+                    "useLegacySql": False,
+                    "destinationTable": {
+                        "projectId": PROJECT_ID,
+                        "datasetId": dataset,
+                        "tableId": table
+                    },
+                    "allowLargeResults": True,
+                    "createDisposition": "CREATE_IF_NEEDED",
+                    "writeDisposition": "WRITE_TRUNCATE"
+                }
+            },
+        )
+        curr >> next_tab
+        curr = next_tab
+    curr >> wait_for_visualization_tables
 
 
     (
@@ -288,5 +310,6 @@ with dag:
         >> run_papers
         >> load_top_papers
         >> load_all_papers
+        >> start_visualization_tables
     )
 

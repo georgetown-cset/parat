@@ -1,12 +1,8 @@
 -- This query pulls the initial visualization data for the table that doesn't have to be compiled (as it's already
 -- available in the organizations table) and adds in the AI publication counts.
-
-
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.visualization_data AS
 WITH
   aipubs AS (
-    -- Pulling all the papers with any of the given GRIDs as affiliates
+    -- Pulling all the papers with any of the given RORs as affiliates
   SELECT
     CSET_id,
     merged_id,
@@ -14,8 +10,8 @@ WITH
     nlp,
     robotics
   FROM
-    ai_companies_visualization.ai_company_pubs),
-  gridtable AS (
+    staging_ai_companies_visualization.ai_company_papers),
+  rortable AS (
     -- Getting the count of publications
   SELECT
     CSET_id,
@@ -41,7 +37,7 @@ SELECT
   market,
   crunchbase,
   child_crunchbase,
-  grid,
+  ror_id,
   linkedin,
   in_sandp_500,
   in_fortune_global_500,
@@ -50,8 +46,8 @@ SELECT
   COALESCE(nlp_pubs, 0) as nlp_pubs,
   COALESCE(robotics_pubs, 0) as robotics_pubs
 FROM
-  `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
+  high_resolution_entities.aggregated_organizations
 LEFT JOIN
-  gridtable
+  rortable
 USING
   (CSET_id)

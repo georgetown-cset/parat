@@ -1,6 +1,4 @@
   -- Update the visualization table itself to add total paper data
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.visualization_data AS
   -- Pull in the total paper counts, along with the CSET ids to link them in
 WITH
   count_data AS (
@@ -9,14 +7,13 @@ WITH
     all_pubs,
     all_pubs_by_year,
   FROM
-    `gcp-cset-projects.ai_companies_visualization.total_paper_counts`),
-  -- Pull in the current visualization data. Exclude the all_paper data, since that was included when we built the all paper data, so we don't need it
+    staging_ai_companies_visualization.all_paper_counts),
+  -- Pull in the current visualization data
   viz_data AS (
   SELECT
-    * EXCEPT(all_pubs,
-      all_pubs_by_year)
+    *
   FROM
-    `gcp-cset-projects.ai_companies_visualization.visualization_data`)
+    staging_ai_companies_visualization.visualization_data_with_top_papers)
   -- Join the two together using the CSET id
 SELECT
   viz_data.*,

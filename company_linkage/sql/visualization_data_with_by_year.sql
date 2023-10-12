@@ -1,7 +1,5 @@
 -- Adding AI publication data by year to the visualization table
 -- This uses the same mechanism as adding AI publication counts; we're just doing it on a by-year basis
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.visualization_data AS
 WITH
   aipubs AS (
     -- Pulling all the papers with any of the given GRIDs as affiliates
@@ -13,8 +11,8 @@ WITH
     nlp,
     robotics
   FROM
-    ai_companies_visualization.ai_company_pubs),
-  gridtable AS (
+    staging_ai_companies_visualization.ai_company_papers),
+  rortable AS (
     -- Getting the count of publications
   SELECT
     CSET_id,
@@ -49,23 +47,23 @@ WITH
     ORDER BY
       year) AS robotics_pubs_by_year,
   FROM
-    `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
+    high_resolution_entities.aggregated_organizations
   LEFT JOIN
-    gridtable
+    rortable
   USING
     (CSET_id)
   GROUP BY
     CSET_id)
 SELECT
-  viz.*,
+  initial_visualization_data.*,
   ai_pubs_by_year,
   cv_pubs_by_year,
   nlp_pubs_by_year,
   robotics_pubs_by_year
 FROM
-  `gcp-cset-projects.ai_companies_visualization.visualization_data` AS viz
+  staging_ai_companies_visualization.initial_visualization_data
 LEFT JOIN
   by_year
 ON
-  viz.CSET_id = by_year.CSET_id
+  initial_visualization_data.CSET_id = by_year.CSET_id
 ORDER BY cset_id
