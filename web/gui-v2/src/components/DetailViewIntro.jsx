@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { Table, breakpoints } from '@eto/eto-ui-components';
+import {
+  ButtonStyled,
+  ExternalLink,
+  breakpoints,
+} from '@eto/eto-ui-components';
+
+import MoreMetadataDialog from './DetailViewMoreMetadataDialog';
+import TwoColumnTable from './TwoColumnTable';
 
 const styles = {
   detailIntroWrapper: css`
@@ -37,26 +44,34 @@ const styles = {
       padding: 0.5rem;
     }
   `,
+  buttonWrapper: css`
+    display: flex;
+    margin-top: 1rem !important;
+
+    button {
+      margin-left: auto;
+    }
+  `,
 };
 
 const DetailViewIntro = ({
   companyId,
   data,
 }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
 
-  const metadataColumns = [
-    { display_name: "", key: "title" },
-    { display_name: "", key: "data", align: "right" },
+  const metadata = [
+    { title: "Country", value: data.country },
+    { title: "Sector", value: "--TODO--" },
+    { title: "Website", value: data.website ? <ExternalLink href={data.website}>{data.website}</ExternalLink> : undefined },
   ];
 
-  const metadataData = [
-    { title: "Aliases", data: data.name },
-    { title: "Country", data: data.country },
-    { title: "Region", data: data.continent },
-    { title: "Stage", data: data.stage },
-    // { title: "Groupings", data: "S&P 500" },
-    { title: "Stock tickers", data: data.market_list },
-  ];
+  if ( data.market_filt && data.market_filt.length > 0 ) {
+    metadata.push({
+      title: "Stock tickers",
+      value: data.market_filt.map((e) => <ExternalLink href={e.link}>{e.market_key}</ExternalLink>),
+    });
+  }
 
   return (
     <div css={styles.detailIntroWrapper}>
@@ -72,12 +87,19 @@ const DetailViewIntro = ({
           <div>No description available</div>
         }
       </div>
-      <Table
-        className="metadata-table"
-        columns={metadataColumns}
-        css={styles.metadataTable}
-        data={metadataData}
-        showHeader={false}
+      <div>
+        <TwoColumnTable data={metadata} />
+
+        <div css={styles.buttonWrapper}>
+          <ButtonStyled onClick={() => setDialogOpen(true)}>
+            View more metadata
+          </ButtonStyled>
+        </div>
+      </div>
+      <MoreMetadataDialog
+        data={data}
+        isOpen={dialogOpen}
+        updateIsOpen={setDialogOpen}
       />
     </div>
   );
