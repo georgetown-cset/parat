@@ -6,7 +6,13 @@ import { commas } from '../util';
 const styles = {
   cell: css`
     display: grid;
-    grid-template-columns: 60% 40%;
+    gap: 0.5rem;
+    /*
+     * 3.2em was chosen because it was a touch above the size needed to safely
+     * display a 4-digit company ranking.  If we ever get above 10,000 companies
+     * and things start looking funky, just increase this accordingly.
+     */
+    grid-template-columns: 1fr 3.2em;
     justify-content: center;
 
     & > div {
@@ -15,7 +21,6 @@ const styles = {
 
     .rank {
       color: #a0a0a0;
-      margin-left: 0.5rem;
     }
   `,
 };
