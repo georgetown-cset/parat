@@ -2,14 +2,14 @@ WITH
   get_citations AS (
   SELECT
     DISTINCT CSET_id,
-    refs_merged.merged_id,
+    references.merged_id,
     ref_id
   FROM
-    ai_companies_visualization.ai_company_pubs
+    staging_ai_companies_visualization.ai_company_papers
   LEFT JOIN
-    `gcp-cset-projects.gcp_cset_links_v2.paper_references_merged` refs_merged
+    literature.references
   ON
-    (ai_company_pubs.merged_id = ref_id)),
+    (ai_company_papers.merged_id = ref_id)),
   add_year AS (
   SELECT
     DISTINCT CSET_id,
@@ -19,7 +19,7 @@ WITH
   FROM
     get_citations
   LEFT JOIN
-    gcp_cset_links_v2.corpus_merged
+    literature.papers
   USING
     (merged_id)
   WHERE

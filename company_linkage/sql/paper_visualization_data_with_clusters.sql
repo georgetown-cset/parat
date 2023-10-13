@@ -1,5 +1,3 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.paper_visualization_data AS
 WITH
   company_cluster_assignment AS (
   SELECT
@@ -7,9 +5,9 @@ WITH
     merged_id,
     cluster_id
   FROM
-    ai_companies_visualization.ai_company_pubs
+    staging_ai_companies_visualization.ai_company_papers
   LEFT JOIN
-    `gcp-cset-projects.science_map_v2.dc5_cluster_assignment_stable`
+    map_of_science.cluster_assignment
   USING
     (merged_id)
   WHERE
@@ -36,10 +34,10 @@ WITH
   GROUP BY
     CSET_id)
 SELECT
-  paper_visualization_data.*,
+  paper_visualization_data_with_mag.*,
   clusters
 FROM
-  ai_companies_visualization.paper_visualization_data
+  staging_ai_companies_visualization.paper_visualization_data_with_mag
 LEFT JOIN
   aggregated_clusters
 USING

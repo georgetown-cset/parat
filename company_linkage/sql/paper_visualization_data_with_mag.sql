@@ -1,19 +1,17 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.paper_visualization_data AS
 WITH
   names AS (
   SELECT
     field_id AS child_field_id,
     name
   FROM
-    `gcp-cset-projects.fields_of_study.field_meta`),
+    fields_of_study.field_meta),
   ai_subfields AS (
   SELECT
     field_id,
     child_field_id,
     name AS child_name
   FROM
-    `gcp-cset-projects.fields_of_study.field_children`
+    fields_of_study.field_children
   LEFT JOIN
     names
   USING
@@ -43,7 +41,7 @@ WITH
     field.id AS field_id,
     field.name AS field_name
   FROM
-    `gcp-cset-projects.fields_of_study.top_fields`
+    fields_of_study.top_fields
   CROSS JOIN
     UNNEST(fields) AS field
   INNER JOIN
@@ -59,7 +57,7 @@ WITH
     field_id,
     field_name
   FROM
-    ai_companies_visualization.ai_company_pubs
+    staging_ai_companies_visualization.ai_company_papers
   LEFT JOIN
     articles_with_ai_subfields
   USING
@@ -88,10 +86,10 @@ WITH
   GROUP BY
     CSET_id)
 SELECT
-  paper_visualization_data.*,
+  initial_paper_visualization_data.*,
   fields
 FROM
-  ai_companies_visualization.paper_visualization_data
+  staging_ai_companies_visualization.initial_paper_visualization_data
 LEFT JOIN
   aggregated_fields
 USING

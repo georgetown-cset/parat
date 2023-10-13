@@ -1,5 +1,3 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.paper_visualization_data AS
 -- First get all the articles cited by the AI papers written by our companies
 WITH
   get_references AS (
@@ -8,9 +6,9 @@ WITH
     merged_id,
     ref_id
   FROM
-    ai_companies_visualization.ai_company_pubs
+    staging_ai_companies_visualization.ai_company_papers
   LEFT JOIN
-    `gcp-cset-projects.gcp_cset_links_v2.paper_references_merged`
+    literature.references
   USING
     (merged_id)),
   referenced_companies AS (
@@ -18,13 +16,13 @@ WITH
     DISTINCT get_references.CSET_id,
     get_references.merged_id,
     ref_id,
-    ai_company_pubs.CSET_id AS ref_CSET_id
+    ai_company_papers.CSET_id AS ref_CSET_id
   FROM
     get_references
   INNER JOIN
-    ai_companies_visualization.ai_company_pubs
+    staging_ai_companies_visualization.ai_company_papers
   ON
-    ref_id = ai_company_pubs.merged_id
+    ref_id = ai_company_papers.merged_id
   ORDER BY
     CSET_id),
   count_company_refs AS (
@@ -54,10 +52,10 @@ GROUP BY
 ORDER BY
   CSET_id)
   SELECT
-  paper_visualization_data.*,
+  paper_visualization_data_with_clusters.*,
   company_references
 FROM
-  ai_companies_visualization.paper_visualization_data
+  staging_ai_companies_visualization.paper_visualization_data_with_clusters
 LEFT JOIN
   aggregated_refs
 USING
