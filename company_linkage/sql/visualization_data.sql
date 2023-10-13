@@ -1,14 +1,12 @@
   -- We're adding useful Crunchbase data to the visualization: descriptions, logos, and the company's "stage"
   -- (which we're using as a proxy for its size/growth but is actually based on what funding it has received).
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.visualization_data AS
 WITH
   -- Pull in all the visualization data, most importantly including the crunchbase uuid that will be used to connect to everything else
   visualization AS (
   SELECT
     *
   FROM
-    `gcp-cset-projects.ai_companies_visualization.visualization_data`),
+    staging_ai_companies_visualization.visualization_data_omit_by_rule),
   -- Grab the descriptions and logos from Crunchbase ODM
   odm_data AS (
   SELECT
@@ -16,7 +14,7 @@ WITH
     short_description,
     logo_url
   FROM
-    `gcp-cset-projects.gcp_cset_crunchbase.organizations_odm`),
+    gcp_cset_crunchbase.organizations_odm),
   -- Grab the raw stage data for companies
   -- Since companies have multiple funding rounds they may have multiple rows!
   -- We need to deal with this
@@ -51,7 +49,7 @@ WITH
   END
     AS stage
   FROM
-    `gcp-cset-projects.gcp_cset_crunchbase.funding_rounds`),
+    gcp_cset_crunchbase.funding_rounds),
   -- Now we want only one stage value to come out for any given company
   -- If a company has ever been mature, it's no longer growth or startup, etc.
   -- So there's a clear hierarchy, and we take the max
@@ -78,9 +76,9 @@ WITH
   FROM
     combine_stages
   LEFT JOIN
-    gcp_cset_crunchbase.organizations orgs
+    gcp_cset_crunchbase.organizations
   ON
-    combine_stages.org_uuid = orgs.uuid ),
+    combine_stages.org_uuid = organizations.uuid ),
   stage_name AS (
   SELECT
     org_uuid,
@@ -111,7 +109,7 @@ FROM
 LEFT JOIN
   odm_data
 ON
-  visualization.crunchbase.crunchbase_uuid = odm_data.uuid
+  TRIM(visualization.crunchbase.crunchbase_uuid) = TRIM(odm_data.uuid)
 LEFT JOIN
   stage_name
 ON
