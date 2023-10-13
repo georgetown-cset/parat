@@ -1,17 +1,15 @@
-CREATE OR REPLACE TABLE
-  `gcp-cset-projects.ai_companies_visualization.visualization_data` AS
   -- Selecting the companies we want to leave out
 WITH
   to_omit AS (
   SELECT
     CSET_id
   FROM
-    ai_companies_visualization.visualization_data
+    staging_ai_companies_visualization.visualization_data_with_all_papers
   LEFT JOIN
-    ai_companies_visualization.patent_visualization_data
+    staging_ai_companies_visualization.patent_visualization_data_with_by_year
   USING (cset_id)
   LEFT JOIN
-    ai_companies_visualization.workforce_visualization_data
+    staging_ai_companies_visualization.workforce_visualization_data_with_ai_jobs
   USING
     (cset_id)
   WHERE
@@ -32,7 +30,7 @@ WITH
 SELECT
   *
 FROM
-  `gcp-cset-projects.ai_companies_visualization.visualization_data`
+  staging_ai_companies_visualization.visualization_data_with_all_papers
 WHERE
   CSET_id NOT IN (
   SELECT
