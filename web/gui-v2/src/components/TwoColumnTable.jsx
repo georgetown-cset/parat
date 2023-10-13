@@ -30,6 +30,10 @@ const styles = {
       text-align: right;
     }
   `,
+  notFound: css`
+    color: var(--grey);
+    font-style: italic;
+  `,
 };
 
 const TwoColumnTable = ({
@@ -54,7 +58,7 @@ const TwoColumnTable = ({
         {data.map((row) => (
           <tr>
             <th scope="row">{row.title}</th>
-            <td>{row.value}</td>
+            <td>{row.value ?? <span css={styles.notFound}>None found</span>}</td>
           </tr>
         ))}
       </tbody>
