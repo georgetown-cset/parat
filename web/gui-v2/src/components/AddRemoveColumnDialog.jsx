@@ -19,7 +19,7 @@ const styles = {
   columnDialogContents: css`
     font-family: GTZirkonLight;
     padding: 0 0.5rem 0.5rem;
-    width: 320px;
+    width: 400px;
   `,
   columnDialogTitle: css`
     font-family: GTZirkonRegular;

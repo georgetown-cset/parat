@@ -37,9 +37,10 @@ const HeaderSlider = ({
   );
 
   // Debounce handler for propagating internal changes to the outside
+  const externalHandler = (newVal) => onChange(newVal);
   const handleExternalChange = useMemo(() => {
-    return debounce(onChange, 300);
-  }, [onChange]);
+    return debounce(externalHandler, 300);
+  }, []);
 
   // Trigger external state change
   useEffect(

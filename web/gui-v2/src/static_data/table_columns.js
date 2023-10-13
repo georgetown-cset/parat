@@ -12,12 +12,46 @@ const styles = {
     }
   `,
   sliderColumn: css`
+    min-width: 100px;
     width: 120px;
 
     .MuiButtonBase-root {
       width: 100%;
     }
   `,
+};
+
+/**
+ * Helper function to define the `extract` and `format` functions of slider
+ * fields in a consistent way across all columns.
+ *
+ * @param {string} dataKey
+ * @param {string} dataSubkey
+ * @returns {{
+ *  css: SerializedStyles,
+ *  dataKey: string,
+ *  dataSubkey: string,
+ *  extract: (val: any, row: object) => any,
+ *  format: (val: any, row: object) => ReactNode,
+ *  initialCol: boolean,
+ *  sortable: boolean,
+ *  type: 'dropdown'|'slider',
+ * }}
+ */
+const generateSliderColDef = (dataKey, dataSubkey) => {
+  return {
+    css: styles.sliderColumn,
+    dataKey,
+    dataSubkey,
+    extract: (_val, row) => {
+      const res = row[dataKey][dataSubkey].total;
+      return res === null ? 0 : res;
+    },
+    format: (_val, row) => <CellStat data={row[dataKey][dataSubkey]} />,
+    initialCol: false,
+    sortable: true,
+    type: 'slider',
+  }
 };
 
 export default [
@@ -33,38 +67,155 @@ export default [
   { title: "Country", key: "country", initialCol: true, type: 'dropdown' },
   { title: "Region", key: "continent", initialCol: true, type: 'dropdown' },
   { title: "Stage", key: "stage", initialCol: true, type: 'dropdown' },
+
+  {
+    title: "All publications",
+    key: "all_pubs",
+    ...generateSliderColDef("articles", "all_publications"),
+  },
+  {
+    title: "Citation counts",
+    key: "citations",
+    ...generateSliderColDef("articles", "citation_counts"),
+  },
   {
     title: "AI publications",
     key: "ai_pubs",
-    dataKey: "articles",
-    dataSubkey: "ai_publications",
-    css: styles.sliderColumn,
+    ...generateSliderColDef("articles", "ai_publications"),
     initialCol: true,
-    extract: (_val, row) => row.articles.ai_publications.total,
-    format: (_val, row) => <CellStat data={row.articles.ai_publications} />,
-    sortable: true,
-    type: 'slider',
+  },
+  {
+    title: "AI publications in top conferences",
+    key: "ai_pubs_top_conf",
+    ...generateSliderColDef("articles", "ai_pubs_top_conf"),
   },
   {
     title: "AI patents",
     key: "ai_patents",
-    dataKey: "patents",
-    dataSubkey: "ai_patents",
-    css: styles.sliderColumn,
+    ...generateSliderColDef("patents", "ai_patents"),
     initialCol: true,
-    extract: (_val, row) => row.patents.ai_patents.total,
-    format: (_val, row) => <CellStat data={row.patents.ai_patents} />,
-    sortable: true,
-    type: 'slider',
   },
-  // { title: "AI publication intensity", key: "ai_pubs_int", initialCol: false, type: 'slider' },
-  // { title: "NLP publications", key: "nlp_pubs", initialCol: true },
-  // { title: "NLP patents", key: "nlp_patents", initialCol: true },
-  // { title: "CV publications", key: "cv_pubs", initialCol: false },
-  // { title: "CV patents", key: "cv_patents", initialCol: false },
-  // { title: "Robotics publications", key: "ro_pubs", initialCol: false },
-  // { title: "Robotics patents", key: "ro_patents", initialCol: false },
-  // { title: "tt1 jobs (??)", key: "tt1_jobs", initialCol: false },
-  // { title: "AI jobs", key: "ai_jobs", initialCol: false },
-  // { title: "Stock ticker", key: "market_list", type: "stock" },
+  {
+    title: "CV publications",
+    key: "cv_pubs",
+    ...generateSliderColDef("articles", "cv_pubs"),
+  },
+  {
+    title: "NLP publications",
+    key: "nlp_pubs",
+    ...generateSliderColDef("articles", "nlp_pubs"),
+  },
+  {
+    title: "Robotics publications",
+    key: "ro_pubs",
+    ...generateSliderColDef("articles", "robotics_pubs"),
+  },
+
+  {
+    title: "Agricultural patents",
+    key: "agri_patents",
+    ...generateSliderColDef("patents", "Agricultural"),
+  },
+  {
+    title: "Banking and finance patents",
+    key: "finance_patents",
+    ...generateSliderColDef("patents", "Banking_and_Finance"),
+  },
+  {
+    title: "Business patents",
+    key: "business_patents",
+    ...generateSliderColDef("patents", "Business"),
+  },
+  {
+    title: "Computing in government patents",
+    key: "comp_in_gov_patents",
+    ...generateSliderColDef("patents", "Computing_in_Government"),
+  },
+  {
+    title: "Document management and publishing patents",
+    key: "doc_mgt_patents",
+    ...generateSliderColDef("patents", "Document_Mgt_and_Publishing"),
+  },
+  {
+    title: "Education patents",
+    key: "edu_patents",
+    ...generateSliderColDef("patents", "Education"),
+  },
+  {
+    title: "Energy patents",
+    key: "energy_mgt_patents",
+    ...generateSliderColDef("patents", "Energy_Management"),
+  },
+  {
+    title: "Entertainment patents",
+    key: "entertain_patents",
+    ...generateSliderColDef("patents", "Entertainment"),
+  },
+  {
+    title: "Industrial and manufacturing patents",
+    key: "industry_patents",
+    ...generateSliderColDef("patents", "Industrial_and_Manufacturing"),
+  },
+  {
+    title: "Life sciences patents",
+    key: "life_patents",
+    ...generateSliderColDef("patents", "Life_Sciences"),
+  },
+  {
+    title: "Military patents",
+    key: "mil_patents",
+    ...generateSliderColDef("patents", "Military"),
+  },
+  {
+    title: "Nanotechnology patents",
+    key: "nano_patents",
+    ...generateSliderColDef("patents", "Nanotechnology"),
+  },
+  {
+    title: "Networks patents",
+    key: "network_patents",
+    ...generateSliderColDef("patents", "Networks__eg_social_IOT_etc"),
+  },
+  {
+    title: "Personal devices and computing patents",
+    key: "personal_comp_patents",
+    ...generateSliderColDef("patents", "Personal_Devices_and_Computing"),
+  },
+  {
+    title: "Physical sciences and engineering patents",
+    key: "phys_sci_patents",
+    ...generateSliderColDef("patents", "Physical_Sciences_and_Engineering"),
+  },
+  {
+    title: "Security patents",
+    key: "security_patents",
+    ...generateSliderColDef("patents", "Security__eg_cybersecurity"),
+  },
+  {
+    title: "Semiconductor patents",
+    key: "semiconductor_patents",
+    ...generateSliderColDef("patents", "Semiconductors"),
+  },
+  {
+    title: "Telecommunications patents",
+    key: "telecom_patents",
+    ...generateSliderColDef("patents", "Telecommunications"),
+  },
+  {
+    title: "Transportation patents",
+    key: "transport_patents",
+    ...generateSliderColDef("patents", "Transportation"),
+  },
+
+  {
+    title: "AI jobs",
+    key: "ai_jobs",
+    ...generateSliderColDef("other_metrics", "ai_jobs"),
+    initialCol: true,
+  },
+  {
+    title: "Tech Tier 1 jobs",
+    key: "tt1_jobs",
+    ...generateSliderColDef("other_metrics", "tt1_jobs"),
+  },
 ];

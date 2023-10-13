@@ -111,6 +111,7 @@ const styles = {
 const DATAKEYS_WITH_SUBKEYS = [
   "articles",
   "patents",
+  "other_metrics",
 ];
 
 const DEFAULT_COLUMNS = columnDefinitions
@@ -125,13 +126,14 @@ const SLIDER_COLUMNS = columnDefinitions
   .filter(colDef => colDef.type === "slider")
   .map(colDef => colDef.key);
 
+const ALL_COLUMNS = [
+  ...DROPDOWN_COLUMNS,
+  ...SLIDER_COLUMNS,
+];
+
 const DEFAULT_FILTER_VALUES = {
-  name: [],
-  country: [],
-  continent: [],
-  stage: [],
-  ai_pubs: [0, 100],
-  ai_patents: [0, 100],
+  ...DROPDOWN_COLUMNS.reduce((obj, e) => { obj[e] = []; return obj; }, {}),
+  ...SLIDER_COLUMNS.reduce((obj, e) => { obj[e] = [0, 100]; return obj; }, {}),
 };
 const initialVal = (key) => {
   return DEFAULT_FILTER_VALUES[key]?.join(',') ?? '';
@@ -148,7 +150,6 @@ const AGGREGATE_SUM_COLUMNS = [
   'ai_pubs',
   'ai_patents',
 ];
-
 
 // Determine whether a given row matches the filters and/or selected group
 const filterRow = (row, filters, selectedGroupMembers) => {
@@ -194,10 +195,6 @@ const filterRow = (row, filters, selectedGroupMembers) => {
       if ( rowVal < min || ( max < 100 && max < rowVal) ) {
         return false;
       }
-    } else if ( colDef.type === "stock" ) {
-      // TODO: Figure out how we're filtering the `market_list` column
-      // -- Actually - are we even wanting this column, or did I just make
-      //    it as a placeholder?
     } else {
       console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
     }
@@ -236,17 +233,10 @@ const ListViewTable = ({
   // Store filters via the URL parameters, making the values (and setters)
   // accessible via an object.
   const filters = useMultiState(
-    {
-      name: useQueryParamString('name', initialVal('name')),
-      country: useQueryParamString('country', initialVal('country')),
-      continent: useQueryParamString('continent', initialVal('continent')),
-      stage: useQueryParamString('stage', initialVal('stage')),
-      // ...
-      ai_pubs: useQueryParamString('ai_pubs', initialVal('ai_pubs')),
-      ai_patents: useQueryParamString('ai_patents', initialVal('ai_patents')),
-      // ...
-      // market_list: useQueryParamString('market_list', ''),
-    },
+    ALL_COLUMNS.reduce((obj, e) => {
+      obj[e] = useQueryParamString(e, initialVal(e));
+      return obj;
+    }, {}),
     (key, val) => {
       if ( DROPDOWN_COLUMNS.includes(key) ) {
         let result = val.split(',').filter(e => e !== "");
@@ -420,11 +410,6 @@ const ListViewTable = ({
               onChange={newVal => handleSliderChange(colDef.key, newVal)}
               value={filters?.[colDef.key].get}
             />
-          );
-          break;
-        case 'stock':
-          display_name = (
-            colDef.title
           );
           break;
         default:
