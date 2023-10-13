@@ -4,7 +4,7 @@ WITH
   SELECT
     *
   FROM
-    ai_companies_visualization.ai_company_patents),
+    staging_ai_companies_visualization.ai_company_patents),
   pattable AS (
     -- Getting the count of patents
   SELECT
@@ -90,7 +90,7 @@ SELECT
   COALESCE(Machine_Learning_pats, 0) as Machine_Learning_pats,
   COALESCE(Search_Methods_pats, 0) as Search_Methods_pats,
 FROM
-  `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
+  high_resolution_entities.aggregated_organizations
 LEFT JOIN
   pattable
 USING

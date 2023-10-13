@@ -1,12 +1,10 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.patent_visualization_data AS
 WITH
   aipats AS (
     -- Pulling all the patents from any of our companies
   SELECT
     *
   FROM
-    ai_companies_visualization.ai_company_patents),
+    staging_ai_companies_visualization.ai_company_patents),
   pattable AS (
     -- Getting the count of patents
   SELECT
@@ -202,7 +200,7 @@ WITH
       priority_year) AS Search_Methods_pats_by_year,
 
   FROM
-    `gcp-cset-projects.high_resolution_entities.aggregated_organizations` AS orgs
+    high_resolution_entities.aggregated_organizations
   LEFT JOIN
     pattable
   USING
@@ -215,7 +213,7 @@ SELECT
   viz.*,
   by_year.* EXCEPT (CSET_id)
 FROM
-  `gcp-cset-projects.ai_companies_visualization.patent_visualization_data` AS viz
+  staging_ai_companies_visualization.initial_patent_visualization_data AS viz
 LEFT JOIN
   by_year
 USING
