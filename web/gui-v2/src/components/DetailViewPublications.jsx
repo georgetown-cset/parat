@@ -9,6 +9,7 @@ import StatGrid from './StatGrid';
 import TableSection from './TableSection';
 import TextAndBigStat from './TextAndBigStat';
 import TrendsChart from './TrendsChart';
+import { articleMap } from '../static_data/table_columns';
 import { commas } from '../util';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
 
@@ -22,6 +23,13 @@ const styles = {
 
     h3 {
       margin-bottom: 0.5rem;
+    }
+  `,
+  trendsDropdown: css`
+    .MuiInputBase-input.MuiSelect-select {
+      align-items: center;
+      display: flex;
+      justify-content: center;
     }
   `,
 };
@@ -41,7 +49,15 @@ const DetailViewPublications = ({
 }) => {
   const [aiSubfield, setAiSubfield] = useState("ai_publications");
 
+  const yearSpanNdash = <>{data.years[0]}&ndash;{data.years[data.years.length-1]}</>;
+  const yearSpanAnd = <>{data.years[0]} and {data.years[data.years.length-1]}</>;
+
   const averageCitations = Math.round(10 * data.articles.citation_counts.total / data.articles.all_publications.total) / 10;
+  const aiResearchPercent = Math.round(1000 * data.articles.ai_publications.total / data.articles.all_publications.total) / 10;
+
+  const numYears = data.years.length;
+  const startIx = numYears - 7;
+  const endIx = numYears - 2;
 
   const statGridEntries = [
     {
@@ -58,14 +74,14 @@ const DetailViewPublications = ({
     },
     {
       stat: <>NUM%</>,
-      text: <>growth in {data.name}'s public AI research (YEAR-YEAR)</>,
+      text: <>growth in {data.name}'s public AI research ({yearSpanNdash})</>,
     },
     {
       stat: <>{commas(data.articles.ai_pubs_top_conf.total)}</>,
       text: <>articles at top AI conferences (#{data.articles.ai_pubs_top_conf.rank} in PARAT, #RANK in the S&P 500)</>,
     },
     {
-      stat: <>NUM%</>,
+      stat: <>{aiResearchPercent}%</>,
       text: <>of {data.name}'s total public research was AI-focused</>,
     },
   ];
@@ -74,28 +90,21 @@ const DetailViewPublications = ({
     { display_name: "Subfield", key: "subfield" },
     { display_name: "Articles", key: "articles" },
     { display_name: "Citations per article", key: "citations" },
-    { display_name: <>Growth (YEAR&ndash;YEAR)</>, key: "growth" },
+    { display_name: <>Growth ({data.years[startIx]}&ndash;{data.years[endIx]})</>, key: "growth" },
   ];
-  const topAiResearchTopics = [
-    {
-      subfield: "Computer vision",
-      articles: data.articles.cv_pubs.total,
-      citations: "???",
-      growth: "???",
-    },
-    {
-      subfield: "Natural language processing",
-      articles: data.articles.nlp_pubs.total,
-      citations: "???",
-      growth: "???",
-    },
-    {
-      subfield: "Robotics",
-      articles: data.articles.robotics_pubs.total,
-      citations: "???",
-      growth: "???",
-    },
-  ];
+  const topAiResearchTopics = Object.entries(data.articles)
+    .filter(([key, _val]) => ['cv_pubs', 'nlp_pubs', 'robotics_pubs'].includes(key))
+    .map(([key, val]) => {
+      const startVal = val.counts[startIx];
+      const endVal = val.counts[endIx];
+
+      return {
+        subfield: articleMap[key],
+        articles: val.total,
+        citations: "???",
+        growth: `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`,
+      };
+    });
 
   const aiSubfieldOptions = [
     { text: "AI (all subtopics)", val: "ai_publications" },
@@ -130,7 +139,7 @@ const DetailViewPublications = ({
       <HeaderWithLink css={styles.noTopMargin} title="Publications" />
 
       <TextAndBigStat
-        smallText={<>Between {data.years[0]} and {data.years[data.years.length-1]}, {data.name} researchers released</>}
+        smallText={<>Between {yearSpanAnd}, {data.name} researchers released</>}
         bigText={<>{commas(data.articles.ai_publications.total)} AI research articles</>}
       />
 
@@ -152,6 +161,7 @@ const DetailViewPublications = ({
           <>
             Trends in {data.name}'s research in
             <Dropdown
+              css={styles.trendsDropdown}
               inputLabel="AI subfield"
               options={aiSubfieldOptions}
               selected={aiSubfield}

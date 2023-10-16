@@ -8,6 +8,7 @@ import StatGrid from './StatGrid';
 import TableSection from './TableSection';
 import TextAndBigStat from './TextAndBigStat';
 import TrendsChart from './TrendsChart';
+import { patentMap } from '../static_data/table_columns';
 import { commas } from '../util';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
 
@@ -18,6 +19,13 @@ const styles = {
 
     h3 {
       margin-bottom: 0.5rem;
+    }
+  `,
+  trendsDropdown: css`
+    .MuiInputBase-input.MuiSelect-select {
+      align-items: center;
+      display: flex;
+      justify-content: center;
     }
   `,
 };
@@ -38,6 +46,13 @@ const DetailViewPatents = ({
 }) => {
   const [aiSubfield, setAiSubfield] = useState("ai_patents");
 
+  const numYears = data.years.length;
+  const startIx = numYears - 7;
+  const endIx = numYears - 2;
+
+  const yearSpanNdash = <>{data.years[startIx]}&ndash;{data.years[endIx]}</>;
+  // const yearSpanAnd = <>{data.years[startIx]} and {data.years[endIx]}</>;
+
   const statGridEntries = [
     {
       stat: <>#{commas(data.patents.ai_patents.rank)}</>,
@@ -45,11 +60,11 @@ const DetailViewPatents = ({
     },
     {
       stat: <>NUM%</>,
-      text: <>growth in {data.name}'s AI patenting (YEAR-YEAR)</>,
+      text: <>growth in {data.name}'s AI patenting ({yearSpanNdash})</>,
     },
     {
       stat: <>NUM</>,
-      text: <div>AI patent <strong>applications</strong> were filed by {data.name} (YEAR_YEAR)</div>,
+      text: <div>AI patent <strong>applications</strong> were filed by {data.name} ({yearSpanNdash})</div>,
     },
     {
       stat: <>NUM%</>,
@@ -57,9 +72,6 @@ const DetailViewPatents = ({
     },
   ];
 
-  const numYears = data.years.length;
-  const startIx = numYears - 7;
-  const endIx = numYears - 2;
   const patentTableColumns = [
     { display_name: "Subfield", key: "subfield" },
     { display_name: "Patents granted", key: "patents" },
@@ -92,13 +104,8 @@ const DetailViewPatents = ({
     };
   });
 
-  const aiSubfieldOptions = [
-    { text: "AI (all subtopics)", val: "ai_patents" },
-    // NOTE: Disable the other subtopics for now since the keys aren't in the data.
-    // { text: "Computer vision", val: "cv_patents" },
-    // { text: "Natural language processing", val: "nlp_patents" },
-    // { text: "Robotics", val: "robotics_patents" },
-  ];
+  // Temporarily using just a generic slice of patents
+  const aiSubfieldOptions = patentSubkeys.slice(0, 10).map(k => ({ text: patentMap[k], val: k }));
 
   const aiSubfieldChartData = assemblePlotlyParams(
     "Trends in research....",
@@ -147,6 +154,7 @@ const DetailViewPatents = ({
           <>
             Trends in {data.name}'s patenting in
             <Dropdown
+              css={styles.trendsDropdown}
               inputLabel="patent subfield"
               options={aiSubfieldOptions}
               selected={aiSubfield}
