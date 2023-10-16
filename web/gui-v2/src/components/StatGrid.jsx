@@ -62,7 +62,7 @@ const StatGrid = ({
       {
         entries.map((entry) => {
           return (
-            <li key={entry.text}>
+            <li key={entry.key ?? entry.text}>
               <div>{entry.stat}</div>
               <div>{entry.text}</div>
             </li>

@@ -61,26 +61,32 @@ const DetailViewPublications = ({
 
   const statGridEntries = [
     {
+      key: "ai-papers",
       stat: <>#{data.articles.ai_publications.rank}</>,
       text: <>in PARAT for number of AI research articles</>,
     },
     {
+      key: "average-citations",
       stat: <>{averageCitations}</>,
       text: <>citations per article on average (#RANK in PARAT, #RANK in the S&P 500)</>,
     },
     {
+      key: "highly-cited",
       stat: <>NUMBER</>,
       text: <>highly-cited articles (#RANK in PARAT, #RANK in the S&P 500)</>,
     },
     {
+      key: "ai-research-growth",
       stat: <>NUM%</>,
       text: <>growth in {data.name}'s public AI research ({yearSpanNdash})</>,
     },
     {
+      key: "ai-top-conf",
       stat: <>{commas(data.articles.ai_pubs_top_conf.total)}</>,
       text: <>articles at top AI conferences (#{data.articles.ai_pubs_top_conf.rank} in PARAT, #RANK in the S&P 500)</>,
     },
     {
+      key: "ai-research-percent",
       stat: <>{aiResearchPercent}%</>,
       text: <>of {data.name}'s total public research was AI-focused</>,
     },

@@ -56,7 +56,7 @@ const TwoColumnTable = ({
     >
       <tbody>
         {data.map((row) => (
-          <tr>
+          <tr key={row.title}>
             <th scope="row">{row.title}</th>
             <td>{row.value ?? <span css={styles.notFound}>None found</span>}</td>
           </tr>

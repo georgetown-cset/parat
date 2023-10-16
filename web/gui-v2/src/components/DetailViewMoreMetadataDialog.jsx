@@ -67,13 +67,13 @@ const MoreMetadataDialog = ({
       title: 'Crunchbase',
       value: <div css={styles.linkWrapper}>
         <ExternalLink href={data.crunchbase.crunchbase_url}>{data.crunchbase.crunchbase_url}</ExternalLink>
-        {data.child_crunchbase.map(e => <ExternalLink href={e.crunchbase_url}>{e.crunchbase_url}</ExternalLink>)}
+        {data.child_crunchbase.map(e => <ExternalLink href={e.crunchbase_url} key={e.crunchbase_url}>{e.crunchbase_url}</ExternalLink>)}
       </div>
     },
     {
       title: 'LinkedIn',
       value: <div css={styles.linkWrapper}>
-        {data.linkedin.map(e => <ExternalLink href={e}>{e}</ExternalLink>)}
+        {data.linkedin.map(e => <ExternalLink href={e} key={e}>{e}</ExternalLink>)}
       </div>
     },
     { title: 'In S&P 500?', value: data.in_sandp_500 ? 'Yes' : 'No' },

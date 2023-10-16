@@ -55,18 +55,22 @@ const DetailViewPatents = ({
 
   const statGridEntries = [
     {
+      key: "ai-patents",
       stat: <>#{commas(data.patents.ai_patents.rank)}</>,
       text: <>in PARAT for number of AI-related patents</>,
     },
     {
+      key: "ai-patent-growth",
       stat: <>NUM%</>,
       text: <>growth in {data.name}'s AI patenting ({yearSpanNdash})</>,
     },
     {
+      key: "ai-patent-applications",
       stat: <>NUM</>,
       text: <div>AI patent <strong>applications</strong> were filed by {data.name} ({yearSpanNdash})</div>,
     },
     {
+      key: "ai-focused-percent",
       stat: <>NUM%</>,
       text: <>of {data.name}'s total patenting was AI-focused</>,
     },

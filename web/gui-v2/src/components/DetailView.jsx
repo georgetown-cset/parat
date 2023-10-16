@@ -100,10 +100,10 @@ const DetailView = ({
 
   if ( companyData ) {
     const breadcrumbs = [
-      <GatsbyLink to="/#table">
+      <GatsbyLink to="/#table" key="root">
         ETO PARAT
       </GatsbyLink>,
-      <Typography>
+      <Typography key={companyId}>
         {companyData.name}
       </Typography>
     ];
