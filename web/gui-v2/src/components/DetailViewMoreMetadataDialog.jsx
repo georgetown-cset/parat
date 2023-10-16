@@ -66,8 +66,8 @@ const MoreMetadataDialog = ({
     {
       title: 'Crunchbase',
       value: <div css={styles.linkWrapper}>
-        <ExternalLink href={data.crunchbase.crunchbase_url}>{data.crunchbase.crunchbase_url}</ExternalLink>
-        {data.child_crunchbase.map(e => <ExternalLink href={e.crunchbase_url} key={e.crunchbase_url}>{e.crunchbase_url}</ExternalLink>)}
+        <ExternalLink href={data.crunchbase.url}>{data.crunchbase.url}</ExternalLink>
+        {data.child_crunchbase.map(e => <ExternalLink href={e.url} key={e.url}>{e.url}</ExternalLink>)}
       </div>
     },
     {

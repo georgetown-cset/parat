@@ -3,8 +3,8 @@
   "country": "United States",
   "website": "https://huggingface.co/",
   "crunchbase": {
-    "crunchbase_uuid": "b7947f18-b199-45ac-b7da-66f5c52fcfbc",
-    "crunchbase_url": "https://www.crunchbase.com/organization/hugging-face"
+    "text": "b7947f18-b199-45ac-b7da-66f5c52fcfbc",
+    "url": "https://www.crunchbase.com/organization/hugging-face"
   },
   "child_crunchbase": [],
   "linkedin": [
@@ -18,19 +18,17 @@
   "continent": "North America",
   "local_logo": "hugging_face.png",
   "aliases": "Hugging Face Inc; Hugging Face, Inc",
-  "grid_info": "",
-  "grid_links": {
-    "__html": ""
-  },
-  "permid_info": "5063742076",
-  "permid_links": {
-    "__html": "<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5063742076'>5063742076</a>"
-  },
+  "permid_links": [
+    {
+      "text": 5063742076,
+      "url": "https://permid.org/1-5063742076"
+    }
+  ],
   "parent_info": null,
   "agg_child_info": null,
   "unagg_child_info": null,
   "market_filt": [],
-  "market_list": "",
+  "market_full": [],
   "crunchbase_description": "Hugging Face allows users to build, train, and deploy art models using the reference open source in machine learning.",
   "fields": [
     {

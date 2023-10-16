@@ -57,8 +57,6 @@ CRUNCHBASE_URL_OVERRIDE = {
     ("https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&"
      "utm_campaign=odm_csv"): "https://www.crunchbase.com/organization/covariant"
 }
-# styling to apply to links we generate here - change if main react styling changes
-LINK_CSS = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary'"
 # Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
 FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
 
@@ -259,8 +257,8 @@ def clean_market(market_info: list, market_key_to_link: dict) -> list:
     for m in market_info:
         market_key = f"{m['exchange'].upper()}:{m['ticker'].upper()}"
         ref_market_info.append({
-            "market_key": market_key,
-            "link": market_key_to_link[market_key]
+            "text": market_key,
+            "url": market_key_to_link[market_key]
         })
     return ref_market_info
 
@@ -485,20 +483,14 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     return None if len(aliases) == 0 else f"{'; '.join(sorted_aliases)}"
 
 
-def get_list_and_links(link_text: list, url_prefix: str) -> (str, dict):
+def format_links(link_text: list, url_prefix: str) -> (str, dict):
     """
-    Given a list of text to be added to link urls, generates a comma-separated string from the text,
-     and also generates a list of html links in the format needed
-    for dangerouslySetInnerHTML
-    :param link_text: list of parameters to list
-    :param url_stub: the url prefix
-    :return: a tuple of a comma-separated string of link_text elts and a dict mapping "__html" to a list of <a> elements
+    Generates links from a list of text that should be displayed for each link and a url prefix
+    :param link_text: list of text to show in the UI and also add to the end of `url_prefix`
+    :param url_prefix: a prefix shared by all links from this source
+    :return: a dict containing text and url keys for each element of `link_text`
     """
-    csv_list = ", ".join([str(lt) for lt in link_text])
-    html_list = {"__html": ", ".join([(f"<a class={LINK_CSS} target='blank' rel='noreferrer' "
-                           f"href='{url_prefix}{text}'>{text}</a>")
-                          for text in link_text])}
-    return csv_list, html_list
+    return [{"text": text, "url": f"{url_prefix}{text}"} for text in link_text]
 
 
 def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
@@ -520,24 +512,6 @@ def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
     return yearly_counts, sum(yearly_counts)
 
 
-def get_market_link_list(market: list) -> dict:
-    """
-    Given a list of market information, return a comma-separated list of either html <a> elements if a link
-    is available for that exchange:ticker, or otherwise just an exchange:ticker string
-    :param market: list of dicts of market information containing (possibly) `link` and (definitely) `market_key` keys
-    :return: a dict mapping the __html key expected by dangerouslySetInnerHTML to a list of market key links or market
-    key strings
-    """
-    market_elts = []
-    for m in market:
-        if m["link"]:
-            market_elts.append(f"<a class={LINK_CSS} target='blank' rel='noreferrer' "
-                               f"href='{m['link']}'>{m['market_key']}</a>")
-        else:
-            market_elts.append(m["market_key"])
-    return {"__html": ", ".join(market_elts)}
-
-
 def get_top_n_list(entities: list, count_key: str, n: int = 10) -> list:
     """
     Sort entries by count_key, descending, and return the top n
@@ -548,6 +522,33 @@ def get_top_n_list(entities: list, count_key: str, n: int = 10) -> list:
     """
     entities.sort(key=lambda e: e[count_key], reverse=True)
     return entities[:n]
+
+
+def clean_crunchbase_elt(cb: dict) -> dict:
+    """
+    Cleans up a single element of crunchbase metadata so it matches the format of other lists of links,
+    with `text` mapped to the text to display in the ui and `url` mapped to the text that should be linked
+    :param cb:
+    :return:
+    """
+    url = cb.get("crunchbase_url") if cb.get("crunchbase_url") else None
+    url = CRUNCHBASE_URL_OVERRIDE.get(url, url)
+    return {
+        "text": cb["crunchbase_uuid"],
+        "url": url
+    }
+
+
+def clean_crunchbase(crunchbase_meta) -> list:
+    """
+    Cleans up a single element or a list of crunchbase metadata so it matches the format of other lists of links,
+    with `text` mapped to the text to display in the ui and `url` mapped to the text that should be linked
+    :param cb: list of raw crunchbase metadata, or a dict containing one element of metadata
+    :return: list of cleaned crunchbase metadata, or a dict containing cleaned crunchbase metadata
+    """
+    if type(crunchbase_meta) == dict:
+        return clean_crunchbase_elt(crunchbase_meta)
+    return [clean_crunchbase_elt(cb) for cb in crunchbase_meta]
 
 
 def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> None:
@@ -569,23 +570,18 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
                                   orig_company_name if orig_company_name != js["name"].lower() else None)
     js["stage"] = js["stage"] if js["stage"] else "Unknown"
-    js["grid_info"], js["grid_links"] = get_list_and_links(js.pop("grid"), "https://www.grid.ac/institutes/")
-    js["permid_info"], js["permid_links"] = get_list_and_links(js.pop("permid"), "https://permid.org/1-")
+    js["permid_links"] = format_links(js.pop("permid"), "https://permid.org/1-")
     js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
     js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
     market = clean_market(js.pop("market"), market_key_to_link)
-    js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in FILT_EXCHANGES]
-    if len(market) > 0:
-        js["full_market_links"] = get_market_link_list(market)
-    js["market_list"] = ", ".join([m["market_key"] for m in market])
-
+    js["market_filt"] = [m for m in market if m["text"].split(":")[0] in FILT_EXCHANGES]
+    js["market_full"] = market
     js["website"] = clean_link(js["website"])
     js["crunchbase_description"] = js.pop("short_description")
-    if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
-        url = js["crunchbase"]["crunchbase_url"]
-        if url in CRUNCHBASE_URL_OVERRIDE:
-            js["crunchbase"]["crunchbase_url"] = CRUNCHBASE_URL_OVERRIDE[url]
+    js["crunchbase"] = clean_crunchbase(js["crunchbase"])
+    js["child_crunchbase"] = clean_crunchbase(js["child_crunchbase"])
+    js.pop("grid")
 
 
 def get_top_10_lists(js: dict) -> None:
@@ -722,7 +718,7 @@ def clean(refresh_images: bool) -> None:
     with open(EXCHANGE_LINK_FI) as f:
         for line in f:
             js = json.loads(line)
-            market_key_to_link[js["market_key"].upper()] = js["link"]
+            market_key_to_link[js["market_key"].upper()] = js["link"] if js["link"] else None
     with open(RAW_DATA_FI) as f:
         for row in f:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
