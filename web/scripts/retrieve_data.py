@@ -610,19 +610,17 @@ def get_category_counts(js: dict) -> None:
     articles = {}
 
     ### Reformat publication-related metrics
-    for machine_name, human_name, orig_key, count_key in [
-        ["all_publications", "All Publications", "all_pubs_by_year", "all_pubs"],
-        ["ai_publications", "AI Publications", "ai_pubs_by_year", "ai_pubs"],
-        ["ai_pubs_top_conf", "AI Publications in Top Conferences",
-            "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences"],
-        ["citation_counts", "Yearly Citations", "citation_count_by_year", "citation_count"],
-        ["cv_pubs", "Computer Vision Publications", "cv_pubs_by_year", "cv_pubs"],
-        ["nlp_pubs", "NLP Publications", "nlp_pubs_by_year", "nlp_pubs"],
-        ["robotics_pubs", "Robotics Publications", "robotics_pubs_by_year", "robotics_pubs"],
+    for machine_name, orig_key, count_key in [
+        ["all_publications", "all_pubs_by_year", "all_pubs"],
+        ["ai_publications", "ai_pubs_by_year", "ai_pubs"],
+        ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences"],
+        ["citation_counts", "citation_count_by_year", "citation_count"],
+        ["cv_pubs", "cv_pubs_by_year", "cv_pubs"],
+        ["nlp_pubs", "nlp_pubs_by_year", "nlp_pubs"],
+        ["robotics_pubs", "robotics_pubs_by_year", "robotics_pubs"],
     ]:
         counts, total = get_yearly_counts(js.pop(orig_key), count_key, years)
         articles[machine_name] = {
-            "name": human_name,
             "counts": counts,
             "total": total
         }
@@ -637,7 +635,6 @@ def get_category_counts(js: dict) -> None:
     counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents", years)
     patents = {
         "ai_patents": {
-            "name": "AI Patents",
             "counts": counts,
             "total": total
         }
@@ -653,7 +650,6 @@ def get_category_counts(js: dict) -> None:
         elif k.endswith("_pats_by_year"):
             counts, total = get_yearly_counts(js.pop(k), field_name+"_pats", years)
             patents[field_name] = {
-                "name": PATENT_FIELD_MAPPING[field_name]+" Patents",
                 "counts": counts,
                 "total": total
             }
@@ -663,7 +659,6 @@ def get_category_counts(js: dict) -> None:
     other_metrics = {}
     for metric in ["tt1_jobs", "ai_jobs"]:
         other_metrics[metric] = {
-            "name": "Tech Tier 1 Jobs" if metric == "tt1_jobs" else "AI Jobs",
             "counts": None,
             "total": js.pop(metric)
         }

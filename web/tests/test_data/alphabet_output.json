@@ -350,7 +350,6 @@
   ],
   "articles": {
     "all_publications": {
-      "name": "All Publications",
       "counts": [
         0,
         2,
@@ -367,7 +366,6 @@
       "total": 768
     },
     "ai_publications": {
-      "name": "AI Publications",
       "counts": [
         0,
         1,
@@ -384,7 +382,6 @@
       "total": 136
     },
     "ai_pubs_top_conf": {
-      "name": "AI Publications in Top Conferences",
       "counts": [
         0,
         0,
@@ -401,7 +398,6 @@
       "total": 32
     },
     "citation_counts": {
-      "name": "Yearly Citations",
       "counts": [
         0,
         0,
@@ -418,7 +414,6 @@
       "total": 6087
     },
     "cv_pubs": {
-      "name": "Computer Vision Publications",
       "counts": [
         0,
         1,
@@ -435,7 +430,6 @@
       "total": 68
     },
     "nlp_pubs": {
-      "name": "NLP Publications",
       "counts": [
         0,
         0,
@@ -452,7 +446,6 @@
       "total": 1
     },
     "robotics_pubs": {
-      "name": "Robotics Publications",
       "counts": [
         0,
         1,
@@ -471,7 +464,6 @@
   },
   "patents": {
     "ai_patents": {
-      "name": "AI Patents",
       "counts": [
         22,
         25,
@@ -488,7 +480,6 @@
       "total": 968
     },
     "Physical_Sciences_and_Engineering": {
-      "name": "Physical Sciences and Engineering Patents",
       "counts": [
         1,
         1,
@@ -505,7 +496,6 @@
       "total": 8
     },
     "Life_Sciences": {
-      "name": "Life Sciences Patents",
       "counts": [
         3,
         0,
@@ -522,7 +512,6 @@
       "total": 112
     },
     "Security__eg_cybersecurity": {
-      "name": "Security Patents",
       "counts": [
         1,
         1,
@@ -539,7 +528,6 @@
       "total": 17
     },
     "Transportation": {
-      "name": "Transportation Patents",
       "counts": [
         13,
         15,
@@ -556,7 +544,6 @@
       "total": 267
     },
     "Industrial_and_Manufacturing": {
-      "name": "Industry and Manufacturing Patents",
       "counts": [
         0,
         1,
@@ -573,7 +560,6 @@
       "total": 93
     },
     "Education": {
-      "name": "Education Patents",
       "counts": [
         0,
         0,
@@ -590,7 +576,6 @@
       "total": 6
     },
     "Document_Mgt_and_Publishing": {
-      "name": "Document Management and Publishing Patents",
       "counts": [
         0,
         0,
@@ -607,7 +592,6 @@
       "total": 0
     },
     "Military": {
-      "name": "Military Patents",
       "counts": [
         0,
         0,
@@ -624,7 +608,6 @@
       "total": 2
     },
     "Agricultural": {
-      "name": "Agriculture Patents",
       "counts": [
         0,
         0,
@@ -641,7 +624,6 @@
       "total": 23
     },
     "Computing_in_Government": {
-      "name": "Computing in Government Patents",
       "counts": [
         0,
         0,
@@ -658,7 +640,6 @@
       "total": 1
     },
     "Personal_Devices_and_Computing": {
-      "name": "Personal Devices and Computing Patents",
       "counts": [
         3,
         2,
@@ -675,7 +656,6 @@
       "total": 203
     },
     "Banking_and_Finance": {
-      "name": "Banking and Finance Patents",
       "counts": [
         1,
         1,
@@ -692,7 +672,6 @@
       "total": 12
     },
     "Telecommunications": {
-      "name": "Telecommunications Patents",
       "counts": [
         6,
         3,
@@ -709,7 +688,6 @@
       "total": 114
     },
     "Networks__eg_social_IOT_etc": {
-      "name": "Networks Patents",
       "counts": [
         0,
         0,
@@ -726,7 +704,6 @@
       "total": 0
     },
     "Business": {
-      "name": "Business Patents",
       "counts": [
         0,
         4,
@@ -743,7 +720,6 @@
       "total": 46
     },
     "Energy_Management": {
-      "name": "Energy Management Patents",
       "counts": [
         2,
         0,
@@ -760,7 +736,6 @@
       "total": 8
     },
     "Entertainment": {
-      "name": "Entertainment Patents",
       "counts": [
         1,
         0,
@@ -777,7 +752,6 @@
       "total": 10
     },
     "Nanotechnology": {
-      "name": "Nanotechnology Patents",
       "counts": [
         0,
         0,
@@ -794,7 +768,6 @@
       "total": 1
     },
     "Semiconductors": {
-      "name": "Semiconductors Patents",
       "counts": [
         0,
         0,
@@ -813,12 +786,10 @@
   },
   "other_metrics": {
     "tt1_jobs": {
-      "name": "Tech Tier 1 Jobs",
       "counts": null,
       "total": 2111
     },
     "ai_jobs": {
-      "name": "AI Jobs",
       "counts": null,
       "total": 213
     }
