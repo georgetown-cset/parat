@@ -393,9 +393,18 @@ const ListViewTable = ({
       let display_name;
       switch ( colDef.type ) {
         case 'dropdown':
+          let dropdownWidth;
+          if ( colDef?.minWidth ) {
+            dropdownWidth = css`
+              .MuiPaper-root {
+                min-width: ${colDef.minWidth}px;
+              }
+            `;
+          }
+
           display_name = (
             <HeaderDropdown
-              css={dataForTable.length === 0 && styles.shortDropdown}
+              css={[dataForTable.length === 0 && styles.shortDropdown, dropdownWidth]}
               label={colDef.title}
               options={narrowedFilterOptions?.[colDef.key]}
               selected={filters?.[colDef.key].get}
