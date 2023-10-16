@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { css } from '@emotion/react';
 
-import Chart from './DetailViewChart';
+import { Dropdown } from '@eto/eto-ui-components';
+
 import HeaderWithLink from './HeaderWithLink';
+import StatGrid from './StatGrid';
+import TableSection from './TableSection';
+import TextAndBigStat from './TextAndBigStat';
+import TrendsChart from './TrendsChart';
+import { patentMap } from '../static_data/table_columns';
+import { commas } from '../util';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
 
+const styles = {
+  section: css`
+    margin: 2rem auto 1rem;
+    max-width: 808px;
+
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+  `,
+  trendsDropdown: css`
+    .MuiInputBase-input.MuiSelect-select {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+  `,
+};
 
 const chartLayoutChanges = {
   legend: {
@@ -16,62 +41,133 @@ const chartLayoutChanges = {
   },
 };
 
-const PATENT_CHART_LEGEND_GROUPINGS = {
-  ai_patents: 'col-1',
-  Security__eg_cybersecurity: 'col-1',
-  Education: 'col-1',
-  Networks__eg_social_IOT_etc: 'col-1',
-  Business: 'col-1',
-
-  Military: 'col-2',
-  Agricultural: 'col-2',
-  Life_Sciences: 'col-2',
-  Entertainment: 'col-2',
-  Transportation: 'col-2',
-
-  Semiconductors: 'col-3',
-  Nanotechnology: 'col-3',
-  Energy_Management: 'col-3',
-  Banking_and_Finance: 'col-3',
-  Telecommunications: 'col-3',
-
-  Computing_in_Government: 'col-4',
-  Industrial_and_Manufacturing: 'col-4',
-  Physical_Sciences_and_Engineering: 'col-4',
-  Document_Mgt_and_Publishing: 'col-4',
-  Personal_Devices_and_Computing: 'col-4',
-};
-
 const DetailViewPatents = ({
   data,
 }) => {
-  const patentsData = Object.entries(PATENT_CHART_LEGEND_GROUPINGS)
-    .map(([key, group]) => {
-      const { name, counts } = data.patents[key];
-      return [name.replace(/ patents/i, ''), counts, { legendgroup: group }];
-    });
+  const [aiSubfield, setAiSubfield] = useState("ai_patents");
 
-  const patentsChart = assemblePlotlyParams(
-    "AI patents over time",
+  const numYears = data.years.length;
+  const startIx = numYears - 7;
+  const endIx = numYears - 2;
+
+  const yearSpanNdash = <>{data.years[startIx]}&ndash;{data.years[endIx]}</>;
+  // const yearSpanAnd = <>{data.years[startIx]} and {data.years[endIx]}</>;
+
+  const statGridEntries = [
+    {
+      key: "ai-patents",
+      stat: <>#{commas(data.patents.ai_patents.rank)}</>,
+      text: <>in PARAT for number of AI-related patents</>,
+    },
+    {
+      key: "ai-patent-growth",
+      stat: <>NUM%</>,
+      text: <>growth in {data.name}'s AI patenting ({yearSpanNdash})</>,
+    },
+    {
+      key: "ai-patent-applications",
+      stat: <>NUM</>,
+      text: <div>AI patent <strong>applications</strong> were filed by {data.name} ({yearSpanNdash})</div>,
+    },
+    {
+      key: "ai-focused-percent",
+      stat: <>NUM%</>,
+      text: <>of {data.name}'s total patenting was AI-focused</>,
+    },
+  ];
+
+  const patentTableColumns = [
+    { display_name: "Subfield", key: "subfield" },
+    { display_name: "Patents granted", key: "patents" },
+    { display_name: <>Growth ({data.years[startIx]}&ndash;{data.years[endIx]})</>, key: "growth" },
+  ];
+
+  const patentSubkeys = Object.keys(data.patents);
+
+  // NOTE: for the time being, I'm hardcoding these to get data to display.  The
+  // final implementation will require discussion and coordination.
+  const patentApplicationAreas = patentSubkeys.slice(0, 5).map((key) => {
+    const startVal = data.patents[key].counts[startIx];
+    const endVal = data.patents[key].counts[endIx];
+    const growth = `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`;
+    return {
+      subfield: data.patents[key].name,
+      patents: data.patents[key].total,
+      growth,
+    };
+  });
+
+  const patentIndustryAreas = patentSubkeys.slice(5, 10).map((key) => {
+    const startVal = data.patents[key].counts[startIx];
+    const endVal = data.patents[key].counts[endIx];
+    const growth = `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`;
+    return {
+      subfield: data.patents[key].name,
+      patents: data.patents[key].total,
+      growth,
+    };
+  });
+
+  // Temporarily using just a generic slice of patents
+  const aiSubfieldOptions = patentSubkeys.slice(0, 10).map(k => ({ text: patentMap[k], val: k }));
+
+  const aiSubfieldChartData = assemblePlotlyParams(
+    "Trends in research....",
     data.years,
-    patentsData,
+    [
+      [
+        aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
+        data.patents[aiSubfield].counts
+      ],
+    ],
     chartLayoutChanges,
   );
-
 
   return (
     <>
       <HeaderWithLink title="Patents" />
 
-      <p>
-        Radio telescope light years extraplanetary the sky calls to us billions
-        upon billions cosmic ocean. The only home we've ever known tesseract
-        tesseract dream of the mind's eye Apollonius of Perga take root and
-        flourish? Euclid realm of the galaxies inconspicuous motes of rock and
-        gas great turbulent clouds decipherment network of wormholes.
-      </p>
+      <TextAndBigStat
+        smallText={<>Between {data.years[0]} and {data.years[data.years.length-1]}, {data.name} obtained</>}
+        bigText={<>{commas(data.patents.ai_patents.total)} AI patents</>}
+      />
 
-      <Chart {...patentsChart} />
+      <StatGrid entries={statGridEntries} />
+
+      <TableSection
+        columns={patentTableColumns}
+        css={styles.section}
+        data={patentApplicationAreas}
+        id="top-patent-applications"
+        title={<>Top application areas across {data.name}'s AI patents</>}
+      />
+
+      <TableSection
+        columns={patentTableColumns}
+        css={styles.section}
+        data={patentIndustryAreas}
+        id="top-patent-industries"
+        title={<>Top industry areas across {data.name}'s AI patents</>}
+      />
+
+      <TrendsChart
+        css={styles.section}
+        {...aiSubfieldChartData}
+        id="ai-subfield-patents"
+        title={
+          <>
+            Trends in {data.name}'s patenting in
+            <Dropdown
+              css={styles.trendsDropdown}
+              inputLabel="patent subfield"
+              options={aiSubfieldOptions}
+              selected={aiSubfield}
+              setSelected={setAiSubfield}
+              showLabel={false}
+            />
+          </>
+        }
+      />
     </>
   );
 };

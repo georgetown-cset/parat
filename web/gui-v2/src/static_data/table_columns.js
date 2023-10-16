@@ -54,7 +54,7 @@ const generateSliderColDef = (dataKey, dataSubkey) => {
   }
 };
 
-export default [
+const columnDefinitions = [
   {
     title: "Company",
     key: "name",
@@ -219,3 +219,14 @@ export default [
     ...generateSliderColDef("other_metrics", "tt1_jobs"),
   },
 ];
+export default columnDefinitions;
+
+export const articleMap = Object.fromEntries(columnDefinitions
+  .filter(e => e.dataKey === 'articles')
+  .map(e => ([e.dataSubkey, e.title]))
+);
+
+export const patentMap = Object.fromEntries(columnDefinitions
+  .filter(e => e.dataKey === 'patents')
+  .map(e => ([e.dataSubkey, e.title]))
+);
