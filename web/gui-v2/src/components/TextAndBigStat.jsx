@@ -1,23 +1,22 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { breakpoints } from '@eto/eto-ui-components';
-
 const styles = css`
   align-items: center;
+  column-gap: 0.5rem;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   margin-top: 1rem;
 
-  ${breakpoints.tablet_regular} {
-    flex-direction: row;
+  span {
+    font-size: 120%;
+    text-align: center;
   }
 
   big {
     font-family: GTZirkonRegular;
     font-size: 180%;
-    margin-left: 0.5rem;
   }
 `;
 
@@ -34,7 +33,7 @@ const TextAndBigStat = ({
       css={[styles, appliedCss]}
       id={appliedId}
     >
-      {smallText}
+      <span>{smallText}</span>
       <big>{bigText}</big>
     </div>
   );
