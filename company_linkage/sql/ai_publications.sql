@@ -1,10 +1,7 @@
-  -- Pulling every AI-associated publication id linked to every grid id and every organization name
-  -- We also include years because we'll want those later for yearly counts
-  -- and cv/robotics/nlp so we can filter on these
 WITH
   ai_papers AS (
   SELECT
-    cset_id AS merged_id,
+    merged_id,
     cv_filtered,
     nlp_filtered,
     robotics_filtered
