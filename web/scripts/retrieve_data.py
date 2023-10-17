@@ -63,6 +63,11 @@ FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", 
 APPLICATION_PATENT_CATEGORIES = {"Language_Processing", "Speech_Processing", "Knowledge_Representation", "Planning_and_Scheduling", "Control", "Distributed_AI", "Robotics", "Computer_Vision", "Analytics_and_Algorithms", "Measuring_and_Testing"}
 INDUSTRY_PATENT_CATEGORIES = {"Physical_Sciences_and_Engineering", "Life_Sciences", "Security__eg_cybersecurity", "Transportation", "Industrial_and_Manufacturing", "Education", "Document_Mgt_and_Publishing", "Military", "Agricultural", "Computing_in_Government", "Personal_Devices_and_Computing", "Banking_and_Finance", "Telecommunications", "Networks__eg_social_IOT_etc", "Business", "Energy_Management", "Entertainment", "Nanotechnology", "Semiconductors"}
 
+GROUPS_TO_NAMES = {
+    "sp500": "S&P 500",
+    "global500": "Fortune Global 500"
+}
+
 ARTICLE_METRICS = "articles"
 PATENT_METRICS = "patents"
 OTHER_METRICS = "other_metrics"
@@ -541,6 +546,11 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["crunchbase_description"] = js.pop("short_description")
     js["crunchbase"] = clean_crunchbase(js["crunchbase"])
     js["child_crunchbase"] = clean_crunchbase(js["child_crunchbase"])
+    group_keys_to_names = {
+        "sp500": "in_sandp_500",
+        "global500": "in_fortune_global_500"
+    }
+    js["groups"] = {k: js.pop(v, False) for k, v in group_keys_to_names.items()}
     js.pop("grid")
 
 
@@ -692,7 +702,7 @@ def update_overall_data() -> None:
         "endArticleYear": CURRENT_YEAR - 1,
         "startPatentYear": CURRENT_YEAR - 6,
         "endPatentYear": CURRENT_YEAR - 3,
-        "groups": ["sp500", "global500"]
+        "groups": GROUPS_TO_NAMES
     }
     with open(os.path.join(WEB_SRC_DIR, "static_data", "overall_data.json"), mode="w") as out:
         out.write(json.dumps(overall_data))

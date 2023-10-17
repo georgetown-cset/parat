@@ -31,8 +31,10 @@
     "https://www.linkedin.com/company/vicarious-ai",
     "https://www.linkedin.com/company/verily"
   ],
-  "in_sandp_500": true,
-  "in_fortune_global_500": true,
+  "groups": {
+    "global500": true,
+    "sp500": true
+  },
   "stage": "Mature",
   "name": "Alphabet",
   "patent_name": "alphabet",

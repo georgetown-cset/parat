@@ -10,8 +10,10 @@
   "linkedin": [
     "https://www.linkedin.com/company/huggingface"
   ],
-  "in_sandp_500": false,
-  "in_fortune_global_500": false,
+  "groups": {
+    "global500": false,
+    "sp500": false
+  },
   "stage": "Growth",
   "name": "Hugging Face",
   "patent_name": "hugging face",
