@@ -567,6 +567,26 @@ def get_top_10_lists(js: dict) -> None:
     js["methods"] = get_top_n_list(js.pop("methods"), "method_count")
 
 
+def add_patent_tables(patents: dict) -> None:
+    """
+    Add a key to each patent type's metadata containing the table name if the patent type should be displayed
+    in a table, otherwise None
+    :param patents: dict mapping patents to their metadata
+    :return: None (mutates `patents`)
+    """
+    applications = [k for k in patents if k in APPLICATION_PATENT_CATEGORIES]
+    industries = [k for k in patents if k in INDUSTRY_PATENT_CATEGORIES]
+    top_5_applications = sorted(applications, key=lambda k: patents[k]["total"], reverse=True)[:5]
+    top_5_industries = sorted(industries, key=lambda k: patents[k]["total"], reverse=True)[:5]
+    for patent_key in patents:
+        table = None
+        if patent_key in top_5_applications:
+            table = "application"
+        elif patent_key in top_5_industries:
+            table = "industry"
+        patents[patent_key]["table"] = table
+
+
 def get_category_counts(js: dict) -> None:
     """
     Reformat yearly and count-across-all-years data
@@ -603,7 +623,6 @@ def get_category_counts(js: dict) -> None:
         "ai_patents": {
             "counts": counts,
             "total": total,
-            "type": None
         }
     }
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
@@ -619,8 +638,8 @@ def get_category_counts(js: dict) -> None:
             patents[field_name] = {
                 "counts": counts,
                 "total": total,
-                "type": "application" if field_name in APPLICATION_PATENT_CATEGORIES else "industry"
             }
+    add_patent_tables(patents)
     js[PATENT_METRICS] = patents
 
     ### Reformat other metrics

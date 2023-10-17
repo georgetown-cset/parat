@@ -31,10 +31,6 @@
     "https://www.linkedin.com/company/vicarious-ai",
     "https://www.linkedin.com/company/verily"
   ],
-  "groups": {
-    "global500": true,
-    "sp500": true
-  },
   "stage": "Mature",
   "name": "Alphabet",
   "patent_name": "alphabet",
@@ -127,6 +123,10 @@
     }
   ],
   "crunchbase_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
+  "groups": {
+    "sp500": true,
+    "global500": true
+  },
   "fields": [
     {
       "field_name": "Segmentation",
@@ -474,7 +474,7 @@
         0
       ],
       "total": 968,
-      "type": null
+      "table": null
     },
     "Physical_Sciences_and_Engineering": {
       "counts": [
@@ -491,7 +491,7 @@
         0
       ],
       "total": 8,
-      "type": "industry"
+      "table": null
     },
     "Life_Sciences": {
       "counts": [
@@ -508,7 +508,7 @@
         0
       ],
       "total": 112,
-      "type": "industry"
+      "table": "industry"
     },
     "Security__eg_cybersecurity": {
       "counts": [
@@ -525,7 +525,7 @@
         0
       ],
       "total": 17,
-      "type": "industry"
+      "table": null
     },
     "Transportation": {
       "counts": [
@@ -542,7 +542,7 @@
         0
       ],
       "total": 267,
-      "type": "industry"
+      "table": "industry"
     },
     "Industrial_and_Manufacturing": {
       "counts": [
@@ -559,7 +559,7 @@
         0
       ],
       "total": 93,
-      "type": "industry"
+      "table": "industry"
     },
     "Education": {
       "counts": [
@@ -576,7 +576,7 @@
         0
       ],
       "total": 6,
-      "type": "industry"
+      "table": null
     },
     "Document_Mgt_and_Publishing": {
       "counts": [
@@ -593,7 +593,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Military": {
       "counts": [
@@ -610,7 +610,7 @@
         0
       ],
       "total": 2,
-      "type": "industry"
+      "table": null
     },
     "Agricultural": {
       "counts": [
@@ -627,7 +627,7 @@
         0
       ],
       "total": 23,
-      "type": "industry"
+      "table": null
     },
     "Computing_in_Government": {
       "counts": [
@@ -644,7 +644,7 @@
         0
       ],
       "total": 1,
-      "type": "industry"
+      "table": null
     },
     "Personal_Devices_and_Computing": {
       "counts": [
@@ -661,7 +661,7 @@
         0
       ],
       "total": 203,
-      "type": "industry"
+      "table": "industry"
     },
     "Banking_and_Finance": {
       "counts": [
@@ -678,7 +678,7 @@
         0
       ],
       "total": 12,
-      "type": "industry"
+      "table": null
     },
     "Telecommunications": {
       "counts": [
@@ -695,7 +695,7 @@
         0
       ],
       "total": 114,
-      "type": "industry"
+      "table": "industry"
     },
     "Networks__eg_social_IOT_etc": {
       "counts": [
@@ -712,7 +712,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Business": {
       "counts": [
@@ -729,7 +729,7 @@
         0
       ],
       "total": 46,
-      "type": "industry"
+      "table": null
     },
     "Energy_Management": {
       "counts": [
@@ -746,7 +746,7 @@
         0
       ],
       "total": 8,
-      "type": "industry"
+      "table": null
     },
     "Entertainment": {
       "counts": [
@@ -763,7 +763,7 @@
         0
       ],
       "total": 10,
-      "type": "industry"
+      "table": null
     },
     "Nanotechnology": {
       "counts": [
@@ -780,7 +780,7 @@
         0
       ],
       "total": 1,
-      "type": "industry"
+      "table": null
     },
     "Semiconductors": {
       "counts": [
@@ -797,7 +797,7 @@
         0
       ],
       "total": 4,
-      "type": "industry"
+      "table": null
     },
     "Language_Processing": {
       "counts": [
@@ -814,7 +814,7 @@
         0
       ],
       "total": 11,
-      "type": "application"
+      "table": null
     },
     "Speech_Processing": {
       "counts": [
@@ -831,7 +831,7 @@
         0
       ],
       "total": 29,
-      "type": "application"
+      "table": null
     },
     "Knowledge_Representation": {
       "counts": [
@@ -848,7 +848,7 @@
         0
       ],
       "total": 27,
-      "type": "application"
+      "table": null
     },
     "Planning_and_Scheduling": {
       "counts": [
@@ -865,7 +865,7 @@
         0
       ],
       "total": 37,
-      "type": "application"
+      "table": "application"
     },
     "Control": {
       "counts": [
@@ -882,7 +882,7 @@
         0
       ],
       "total": 317,
-      "type": "application"
+      "table": "application"
     },
     "Distributed_AI": {
       "counts": [
@@ -899,7 +899,7 @@
         0
       ],
       "total": 7,
-      "type": "application"
+      "table": null
     },
     "Robotics": {
       "counts": [
@@ -916,7 +916,7 @@
         0
       ],
       "total": 16,
-      "type": "application"
+      "table": null
     },
     "Computer_Vision": {
       "counts": [
@@ -933,7 +933,7 @@
         0
       ],
       "total": 315,
-      "type": "application"
+      "table": "application"
     },
     "Analytics_and_Algorithms": {
       "counts": [
@@ -950,7 +950,7 @@
         0
       ],
       "total": 78,
-      "type": "application"
+      "table": "application"
     },
     "Measuring_and_Testing": {
       "counts": [
@@ -967,7 +967,7 @@
         0
       ],
       "total": 153,
-      "type": "application"
+      "table": "application"
     }
   },
   "other_metrics": {

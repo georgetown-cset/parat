@@ -10,10 +10,6 @@
   "linkedin": [
     "https://www.linkedin.com/company/huggingface"
   ],
-  "groups": {
-    "global500": false,
-    "sp500": false
-  },
   "stage": "Growth",
   "name": "Hugging Face",
   "patent_name": "hugging face",
@@ -32,6 +28,10 @@
   "market_filt": [],
   "market_full": [],
   "crunchbase_description": "Hugging Face allows users to build, train, and deploy art models using the reference open source in machine learning.",
+  "groups": {
+    "sp500": false,
+    "global500": false
+  },
   "fields": [
     {
       "field_name": "Language model",
@@ -363,7 +363,7 @@
         0
       ],
       "total": 0,
-      "type": null
+      "table": null
     },
     "Physical_Sciences_and_Engineering": {
       "counts": [
@@ -380,7 +380,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": "industry"
     },
     "Life_Sciences": {
       "counts": [
@@ -397,7 +397,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": "industry"
     },
     "Security__eg_cybersecurity": {
       "counts": [
@@ -414,7 +414,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": "industry"
     },
     "Transportation": {
       "counts": [
@@ -431,7 +431,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": "industry"
     },
     "Industrial_and_Manufacturing": {
       "counts": [
@@ -448,7 +448,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": "industry"
     },
     "Education": {
       "counts": [
@@ -465,7 +465,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Document_Mgt_and_Publishing": {
       "counts": [
@@ -482,7 +482,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Military": {
       "counts": [
@@ -499,7 +499,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Agricultural": {
       "counts": [
@@ -516,7 +516,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Computing_in_Government": {
       "counts": [
@@ -533,7 +533,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Personal_Devices_and_Computing": {
       "counts": [
@@ -550,7 +550,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Banking_and_Finance": {
       "counts": [
@@ -567,7 +567,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Telecommunications": {
       "counts": [
@@ -584,7 +584,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Networks__eg_social_IOT_etc": {
       "counts": [
@@ -601,7 +601,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Business": {
       "counts": [
@@ -618,7 +618,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Energy_Management": {
       "counts": [
@@ -635,7 +635,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Entertainment": {
       "counts": [
@@ -652,7 +652,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Nanotechnology": {
       "counts": [
@@ -669,7 +669,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Semiconductors": {
       "counts": [
@@ -686,7 +686,7 @@
         0
       ],
       "total": 0,
-      "type": "industry"
+      "table": null
     },
     "Language_Processing": {
       "counts": [
@@ -703,7 +703,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": "application"
     },
     "Speech_Processing": {
       "counts": [
@@ -720,7 +720,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": "application"
     },
     "Knowledge_Representation": {
       "counts": [
@@ -737,7 +737,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": "application"
     },
     "Planning_and_Scheduling": {
       "counts": [
@@ -754,7 +754,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": "application"
     },
     "Control": {
       "counts": [
@@ -771,7 +771,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": "application"
     },
     "Distributed_AI": {
       "counts": [
@@ -788,7 +788,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": null
     },
     "Robotics": {
       "counts": [
@@ -805,7 +805,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": null
     },
     "Computer_Vision": {
       "counts": [
@@ -822,7 +822,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": null
     },
     "Analytics_and_Algorithms": {
       "counts": [
@@ -839,7 +839,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": null
     },
     "Measuring_and_Testing": {
       "counts": [
@@ -856,7 +856,7 @@
         0
       ],
       "total": 0,
-      "type": "application"
+      "table": null
     }
   },
   "other_metrics": {
