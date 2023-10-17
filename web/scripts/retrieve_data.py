@@ -60,57 +60,17 @@ CRUNCHBASE_URL_OVERRIDE = {
 # Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
 FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
 
-# Copied from CAT
-PATENT_FIELD_MAPPING = {
-    "All": "All",
-    "Physical_Sciences_and_Engineering": "Physical Sciences and Engineering",
-    "Life_Sciences": "Life Sciences",
-    "Security__eg_cybersecurity": "Security",
-    "Transportation": "Transportation",
-    "Industrial_and_Manufacturing": "Industry and Manufacturing",
-    "Education": "Education",
-    "Document_Mgt_and_Publishing": "Document Management and Publishing",
-    "Military": "Military",
-    "Agricultural": "Agriculture",
-    "Computing_in_Government": "Computing in Government",
-    "Personal_Devices_and_Computing": "Personal Devices and Computing",
-    "Banking_and_Finance": "Banking and Finance",
-    "Telecommunications": "Telecommunications",
-    "Networks__eg_social_IOT_etc": "Networks",
-    "Business": "Business",
-    "Energy_Management": "Energy Management",
-    "Entertainment": "Entertainment",
-    "Nanotechnology": "Nanotechnology",
-    "Semiconductors": "Semiconductors",
-    "Language_Processing": "Natural Language Processing",
-    "Speech_Processing": "Speech Processing",
-    "Knowledge_Representation": "Knowledge Representation",
-    "Planning_and_Scheduling": "Planning and Scheduling",
-    "Control": "Control Methods",
-    "Distributed_AI": "Distributed AI",
-    "Robotics": "Robotics",
-    "Computer_Vision": "Computer Vision",
-    "Analytics_and_Algorithms": "Analytics and Algorithms",
-    "Measuring_and_Testing": "Measuring and Testing",
-    "Logic_Programming": "Logic Programming",
-    "Fuzzy_Logic": "Fuzzy Logic",
-    "Probabilistic_Reasoning": "Probabilistic Reasoning",
-    "Ontology_Engineering": "Ontology Engineering",
-    "Machine_Learning": "Machine Learning",
-    "Search_Methods": "Search Methods",
-    "Generic_and_Unspecified": "General",
-}
-
-INDUSTRY_PATENT_CATEGORIES = ["Physical Sciences and Engineering", "Life Sciences", "Security", "Transportation",
-    "Industry and Manufacturing", "Education", "Document Management and Publishing",
-    "Military","Agriculture", "Computing in Government", "Personal Devices and Computing",
-    "Banking and Finance", "Telecommunications", "Networks", "Business", "Energy Management", "Entertainment",
-    "Nanotechnology", "Semiconductors"]
+APPLICATION_PATENT_CATEGORIES = {"Language_Processing", "Speech_Processing", "Knowledge_Representation", "Planning_and_Scheduling", "Control", "Distributed_AI", "Robotics", "Computer_Vision", "Analytics_and_Algorithms", "Measuring_and_Testing"}
+INDUSTRY_PATENT_CATEGORIES = {"Physical_Sciences_and_Engineering", "Life_Sciences", "Security__eg_cybersecurity", "Transportation", "Industrial_and_Manufacturing", "Education", "Document_Mgt_and_Publishing", "Military", "Agricultural", "Computing_in_Government", "Personal_Devices_and_Computing", "Banking_and_Finance", "Telecommunications", "Networks__eg_social_IOT_etc", "Business", "Energy_Management", "Entertainment", "Nanotechnology", "Semiconductors"}
 
 ARTICLE_METRICS = "articles"
 PATENT_METRICS = "patents"
 OTHER_METRICS = "other_metrics"
 METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
+
+_curr_time = datetime.now()
+CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
+YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
 
 ### END CONSTANTS ###
 
@@ -312,7 +272,7 @@ def add_ranks(rows: list) -> None:
                 row[metric_list_name][metric].update({
                     "rank": curr_rank,
                     # used to scale color
-                    "frac_of_max": math.log(metric_value+1, 2)/max_metric
+                    "frac_of_max": round(math.log(metric_value+1, 2)/max_metric, 4)
                 })
 
 
@@ -493,14 +453,14 @@ def format_links(link_text: list, url_prefix: str) -> (str, dict):
     return [{"text": text, "url": f"{url_prefix}{text}"} for text in link_text]
 
 
-def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
+def get_yearly_counts(counts: list, key: str, years: list = YEARS) -> (list, int):
     """
     Given a list of dicts containing year (`year`) and count (`key`) information, the name of the key to use,
     and a list of years to include in order, returns a tuple. The first element is a list of counts for each
     year in years, and the second element is the sum of the counts
     :param counts: a list of dicts containing year (`year`) and count (`key`) information
     :param key: the key in the `counts` dicts that contains the yearly count
-    :param years: a list of years to include
+    :param years: a list of years to write counts for
     :return: a tuple containing a list of counts for each year in years, and the sum of the counts over all years
     (including those outside `years`)
     """
@@ -603,40 +563,37 @@ def get_category_counts(js: dict) -> None:
     :param js: A dict of data corresponding to an individual PARAT record
     :return: None (mutates js)
     """
-    # add pub/patent counts
-    current_year = datetime.now().year
-    years = list(range(current_year-10, current_year + 1))
-    js["years"] = years
     articles = {}
-
     ### Reformat publication-related metrics
-    for machine_name, orig_key, count_key in [
-        ["all_publications", "all_pubs_by_year", "all_pubs"],
-        ["ai_publications", "ai_pubs_by_year", "ai_pubs"],
-        ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences"],
-        ["citation_counts", "citation_count_by_year", "citation_count"],
-        ["cv_pubs", "cv_pubs_by_year", "cv_pubs"],
-        ["nlp_pubs", "nlp_pubs_by_year", "nlp_pubs"],
-        ["robotics_pubs", "robotics_pubs_by_year", "robotics_pubs"],
+    for machine_name, orig_key, count_key, is_top_research in [
+        ["all_publications", "all_pubs_by_year", "all_pubs", False],
+        ["ai_publications", "ai_pubs_by_year", "ai_pubs", False],
+        ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences", False],
+        ["citation_counts", "citation_count_by_year", "citation_count", False],
+        ["cv_pubs", "cv_pubs_by_year", "cv_pubs", True],
+        ["nlp_pubs", "nlp_pubs_by_year", "nlp_pubs", True],
+        ["robotics_pubs", "robotics_pubs_by_year", "robotics_pubs", True],
     ]:
-        counts, total = get_yearly_counts(js.pop(orig_key), count_key, years)
+        counts, total = get_yearly_counts(js.pop(orig_key), count_key)
         articles[machine_name] = {
             "counts": counts,
-            "total": total
+            "total": total,
+            "isTopResearch": is_top_research
         }
 
-    for year_idx in range(len(years)):
+    for year_idx in range(len(YEARS)):
         # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
         if articles["all_publications"]["counts"][year_idx] < articles["ai_publications"]["counts"][year_idx]:
             print(f"Mismatched publication counts for {js['cset_id']}")
     js[ARTICLE_METRICS] = articles
 
     ### Reformat patent-related metrics
-    counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents", years)
+    counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents")
     patents = {
         "ai_patents": {
             "counts": counts,
-            "total": total
+            "total": total,
+            "type": None
         }
     }
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
@@ -645,13 +602,14 @@ def get_category_counts(js: dict) -> None:
         if "_pats" not in k:
             continue
         field_name = k.replace("_pats_by_year", "").replace("_pats", "")
-        if (PATENT_FIELD_MAPPING[field_name] not in INDUSTRY_PATENT_CATEGORIES) or k.endswith("_pats"):
+        if ((field_name not in INDUSTRY_PATENT_CATEGORIES) and (field_name not in APPLICATION_PATENT_CATEGORIES)) or k.endswith("_pats"):
             js.pop(k)
         elif k.endswith("_pats_by_year"):
-            counts, total = get_yearly_counts(js.pop(k), field_name+"_pats", years)
+            counts, total = get_yearly_counts(js.pop(k), field_name+"_pats")
             patents[field_name] = {
                 "counts": counts,
-                "total": total
+                "total": total,
+                "type": "application" if field_name in APPLICATION_PATENT_CATEGORIES else "industry"
             }
     js[PATENT_METRICS] = patents
 
@@ -723,6 +681,23 @@ def clean(refresh_images: bool) -> None:
         out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
 
 
+def update_overall_data() -> None:
+    """
+    Generate top-level data that is not specific to a particular company or metric
+    :return: None
+    """
+    overall_data = {
+        "years": YEARS,
+        "startArticleYear": CURRENT_YEAR - 4,
+        "endArticleYear": CURRENT_YEAR - 1,
+        "startPatentYear": CURRENT_YEAR - 7,
+        "endPatentYear": CURRENT_YEAR - 3,
+        "groups": ["sp500", "global500"]
+    }
+    with open(os.path.join(WEB_SRC_DIR, "static_data", "overall_data.json"), mode="w") as out:
+        out.write(json.dumps(overall_data))
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--refresh_raw", action="store_true", default=False,
@@ -740,3 +715,4 @@ if __name__ == "__main__":
     if args.refresh_raw:
         retrieve_raw(args.refresh_market_links)
     clean(args.refresh_images)
+    update_overall_data()

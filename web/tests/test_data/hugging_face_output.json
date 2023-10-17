@@ -224,19 +224,6 @@
       "method_count": 1
     }
   ],
-  "years": [
-    2013,
-    2014,
-    2015,
-    2016,
-    2017,
-    2018,
-    2019,
-    2020,
-    2021,
-    2022,
-    2023
-  ],
   "articles": {
     "all_publications": {
       "counts": [
@@ -252,7 +239,8 @@
         13,
         0
       ],
-      "total": 23
+      "total": 23,
+      "isTopResearch": false
     },
     "ai_publications": {
       "counts": [
@@ -268,7 +256,8 @@
         8,
         0
       ],
-      "total": 18
+      "total": 18,
+      "isTopResearch": false
     },
     "ai_pubs_top_conf": {
       "counts": [
@@ -284,7 +273,8 @@
         7,
         0
       ],
-      "total": 13
+      "total": 13,
+      "isTopResearch": false
     },
     "citation_counts": {
       "counts": [
@@ -300,7 +290,8 @@
         1086,
         23
       ],
-      "total": 2993
+      "total": 2993,
+      "isTopResearch": false
     },
     "cv_pubs": {
       "counts": [
@@ -316,7 +307,8 @@
         1,
         0
       ],
-      "total": 1
+      "total": 1,
+      "isTopResearch": true
     },
     "nlp_pubs": {
       "counts": [
@@ -332,7 +324,8 @@
         5,
         0
       ],
-      "total": 15
+      "total": 15,
+      "isTopResearch": true
     },
     "robotics_pubs": {
       "counts": [
@@ -348,7 +341,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "isTopResearch": true
     }
   },
   "patents": {
@@ -366,7 +360,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": null
     },
     "Physical_Sciences_and_Engineering": {
       "counts": [
@@ -382,7 +377,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Life_Sciences": {
       "counts": [
@@ -398,7 +394,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Security__eg_cybersecurity": {
       "counts": [
@@ -414,7 +411,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Transportation": {
       "counts": [
@@ -430,7 +428,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Industrial_and_Manufacturing": {
       "counts": [
@@ -446,7 +445,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Education": {
       "counts": [
@@ -462,7 +462,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Document_Mgt_and_Publishing": {
       "counts": [
@@ -478,7 +479,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Military": {
       "counts": [
@@ -494,7 +496,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Agricultural": {
       "counts": [
@@ -510,7 +513,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Computing_in_Government": {
       "counts": [
@@ -526,7 +530,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Personal_Devices_and_Computing": {
       "counts": [
@@ -542,7 +547,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Banking_and_Finance": {
       "counts": [
@@ -558,7 +564,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Telecommunications": {
       "counts": [
@@ -574,7 +581,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Networks__eg_social_IOT_etc": {
       "counts": [
@@ -590,7 +598,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Business": {
       "counts": [
@@ -606,7 +615,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Energy_Management": {
       "counts": [
@@ -622,7 +632,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Entertainment": {
       "counts": [
@@ -638,7 +649,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Nanotechnology": {
       "counts": [
@@ -654,7 +666,8 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
     },
     "Semiconductors": {
       "counts": [
@@ -670,7 +683,178 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "type": "industry"
+    },
+    "Language_Processing": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Speech_Processing": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Knowledge_Representation": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Planning_and_Scheduling": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Control": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Distributed_AI": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Robotics": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Computer_Vision": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Analytics_and_Algorithms": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
+    },
+    "Measuring_and_Testing": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "application"
     }
   },
   "other_metrics": {

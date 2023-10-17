@@ -66,15 +66,15 @@ class TestMkTabText(unittest.TestCase):
         ]
         expected_rows = [
             {"cset_id": 2,
-             ARTICLE_METRICS: {"metric": {"total": 2 ** 4, "rank": 2, "frac_of_max": 0.5105738866634614}},
+             ARTICLE_METRICS: {"metric": {"total": 2 ** 4, "rank": 2, "frac_of_max": 0.5106}},
              PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2, "frac_of_max": 0.0},
                               "another_patent_metric": {"total": 2, "rank": 1, "frac_of_max": 1.0}}},
             {"cset_id": 3,
              ARTICLE_METRICS: {"metric": {"total": 2 ** 8, "rank": 1, "frac_of_max": 1.0}},
              PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2, "frac_of_max": 0.0},
-                              "another_patent_metric": {"total": 1, "rank": 2, "frac_of_max": 0.6309297535714574}}},
+                              "another_patent_metric": {"total": 1, "rank": 2, "frac_of_max": 0.6309}}},
             {"cset_id": 1,
-             ARTICLE_METRICS: {"metric": {"total": 2, "rank": 3, "frac_of_max": 0.1979811182727465}},
+             ARTICLE_METRICS: {"metric": {"total": 2, "rank": 3, "frac_of_max": 0.1980}},
              PATENT_METRICS: {"a_patent_metric": {"total": 1, "rank": 1, "frac_of_max": 1.0},
                               "another_patent_metric": {"total": 0, "rank": 3, "frac_of_max": 0.0}}}
         ]
@@ -167,6 +167,7 @@ class TestMkTabText(unittest.TestCase):
         with open(os.path.join(self.DATA_DIR, f"{company}_output.json")) as f:
             expected_output = json.load(f)
         output = clean_row(input_data, False, {}, market_key_to_link)
+        print(json.dumps(output))
         if output["local_logo"] != expected_output["local_logo"]:
             # then we're probably running on github actions and the images are not available
             assert not output["local_logo"] and not os.path.exists(os.path.join(IMAGE_DIR, f"{company}.png"))
