@@ -690,7 +690,7 @@ def update_overall_data() -> None:
         "years": YEARS,
         "startArticleYear": CURRENT_YEAR - 4,
         "endArticleYear": CURRENT_YEAR - 1,
-        "startPatentYear": CURRENT_YEAR - 7,
+        "startPatentYear": CURRENT_YEAR - 6,
         "endPatentYear": CURRENT_YEAR - 3,
         "groups": ["sp500", "global500"]
     }
