@@ -1,8 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
+import overall from '../static_data/overall_data.json';
 import CellStat from '../components/CellStat';
 import { slugifyCompanyName } from '../util';
+
+const startArticleIx = overall.years.findIndex(e => e === overall.startArticleYear);
+const endArticleIx = overall.years.findIndex(e => e === overall.endArticleYear);
 
 const styles = {
   name: css`
@@ -26,27 +30,29 @@ const styles = {
  *
  * @param {string} dataKey
  * @param {string} dataSubkey
+ * @param {undefined|(val: any, row: object) => any} extractFn
+ * @param {undefined|(val: any, row: object, extract: ExtractFn) => ReactNode} formatFn
  * @returns {{
  *  css: SerializedStyles,
  *  dataKey: string,
  *  dataSubkey: string,
  *  extract: (val: any, row: object) => any,
- *  format: (val: any, row: object) => ReactNode,
+ *  format: (val: any, row: object, extract: ExtractFn) => ReactNode,
  *  initialCol: boolean,
  *  sortable: boolean,
  *  type: 'dropdown'|'slider',
  * }}
  */
-const generateSliderColDef = (dataKey, dataSubkey) => {
+const generateSliderColDef = (dataKey, dataSubkey, extractFn, formatFn) => {
   return {
     css: styles.sliderColumn,
     dataKey,
     dataSubkey,
-    extract: (_val, row) => {
+    extract: extractFn ?? ((_val, row) => {
       const res = row[dataKey][dataSubkey].total;
       return res === null ? 0 : res;
-    },
-    format: (_val, row) => <CellStat data={row[dataKey][dataSubkey]} />,
+    }),
+    format: formatFn ?? ((_val, row) => <CellStat data={row[dataKey][dataSubkey]} />),
     initialCol: false,
     sortable: true,
     type: 'slider',
@@ -81,15 +87,22 @@ const columnDefinitions = [
   {
     title: "Region",
     key: "continent",
-    initialCol: true,
+    initialCol: false,
     minWidth: 170,
     type: 'dropdown',
   },
   {
     title: "Stage",
     key: "stage",
-    initialCol: true,
+    initialCol: false,
     minWidth: 120,
+    type: 'dropdown',
+  },
+  {
+    title: "Sector",
+    key: "sector",
+    initialCol: false,
+    minWidth: 200,
     type: 'dropdown',
   },
 
@@ -97,6 +110,24 @@ const columnDefinitions = [
     title: "All publications",
     key: "all_pubs",
     ...generateSliderColDef("articles", "all_publications"),
+  },
+  {
+    title: "5-year growth in publications",
+    key: "all_pubs_growth",
+    ...generateSliderColDef(
+      "articles",
+      "all_publications",
+      ((_val, row) => {
+        const data = row.articles.all_publications;
+        const startVal = data.counts[startArticleIx];
+        return Math.round((data.counts[endArticleIx] - startVal) / startVal * 1000) / 10;
+      }),
+      (val, row, extract) => {
+        const extractedVal = extract(val, row);
+        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
+        return <CellStat data={{ total }} />;
+      },
+    ),
   },
   {
     title: "Citation counts",
@@ -286,12 +317,12 @@ const columnDefinitions = [
     title: "AI jobs",
     key: "ai_jobs",
     ...generateSliderColDef("other_metrics", "ai_jobs"),
-    initialCol: true,
   },
   {
     title: "Tech Tier 1 jobs",
     key: "tt1_jobs",
     ...generateSliderColDef("other_metrics", "tt1_jobs"),
+    initialCol: true,
   },
 ];
 export default columnDefinitions;

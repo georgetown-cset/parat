@@ -32,7 +32,7 @@ const CellStat = ({data, colKey}) => {
         { data?.total === null ? 'n/a' : commas(data.total) }
       </div>
       <div className="rank">
-        { (data?.total === 0 || data?.total === null) ? '---' : <>#{data.rank}</> }
+        { (data?.total === 0 || data?.total === null) ? '---' : (data?.rank && `#${data.rank}`) }
       </div>
     </div>
   );
