@@ -1,1 +1,981 @@
-{"cset_id": 796, "country": "United States", "website": "https://abc.xyz/", "crunchbase": {"text": "096694c6-bcd2-a975-b95c-fab77c81d915", "url": "https://www.crunchbase.com/organization/alphabet"}, "child_crunchbase": [{"text": "19a9c1dc-6f04-41ca-bd48-77dad98897a0", "url": "https://www.crunchbase.com/organization/intrinsic-97a0"}, {"text": "c1833ca6-85d5-e3b8-08e5-8fcceb76717b", "url": "https://www.crunchbase.com/organization/google-s-self-driving-car-project"}, {"text": "d9f418da-28f5-8b04-97f7-086b4ffbf048", "url": "https://www.crunchbase.com/organization/vicarious-systems-inc"}, {"text": "ceff4e5b-95c2-839a-3150-c340c4b5bc71", "url": "https://www.crunchbase.com/organization/verily-2"}], "linkedin": ["https://www.linkedin.com/company/intrinsic", "https://www.linkedin.com/company/alphabet-inc", "https://www.linkedin.com/company/waymo", "https://www.linkedin.com/company/vicarious-ai", "https://www.linkedin.com/company/verily"], "in_sandp_500": true, "in_fortune_global_500": true, "stage": "Mature", "name": "Alphabet", "patent_name": "alphabet", "continent": "North America", "local_logo": "alphabet.png", "aliases": "Alphabet Inc", "permid_links": [{"text": 5082534760, "url": "https://permid.org/1-5082534760"}, {"text": 5030853586, "url": "https://permid.org/1-5030853586"}, {"text": 5053732847, "url": "https://permid.org/1-5053732847"}, {"text": 5028044072, "url": "https://permid.org/1-5028044072"}, {"text": 5050702354, "url": "https://permid.org/1-5050702354"}], "parent_info": null, "agg_child_info": "Intrinsic, Waymo, Vicarious Ai, Verily Life Sciences", "unagg_child_info": "Google Brain, Deepmind, Google, Fitbit, Nest, Google Robotics", "market_filt": [{"text": "NASDAQ:GOOG", "url": "https://www.google.com/finance/quote/goog:nasdaq"}, {"text": "NASDAQ:GOOGL", "url": "https://www.google.com/finance/quote/googl:nasdaq"}], "market_full": [{"text": "NASDAQ:GOOG", "url": "https://www.google.com/finance/quote/goog:nasdaq"}, {"text": "BMV:GOOGL", "url": "https://www.google.com/finance/quote/bmv:googl"}, {"text": "DUS:ABEA", "url": "https://www.google.com/finance/quote/abea:dus"}, {"text": "MOEX:GOOG-RM", "url": "https://www.google.com/finance/quote/goog-rm:moex"}, {"text": "NEO:GOOG", "url": "https://www.google.com/finance/quote/goog:neo"}, {"text": "MUN:ABEA", "url": "https://www.google.com/finance/quote/abea:mun"}, {"text": "MIL:GOOGL", "url": "https://www.google.com/finance/quote/googl:mil"}, {"text": "XETR:ABEA", "url": "https://www.google.com/finance/quote/abea:xetr"}, {"text": "HAM:ABEA", "url": "https://www.google.com/finance/quote/abea:ham"}, {"text": "LON:0RIH", "url": "https://www.google.com/finance/quote/0rih:lon"}, {"text": "BER:ABEA", "url": "https://www.google.com/finance/quote/abea:ber"}, {"text": "NASDAQ:GOOGL", "url": "https://www.google.com/finance/quote/googl:nasdaq"}], "crunchbase_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.", "fields": [{"field_name": "Segmentation", "field_count": 4}, {"field_name": "Task (computing)", "field_count": 4}, {"field_name": "Convolutional neural network", "field_count": 4}, {"field_name": "Object (computer science)", "field_count": 4}, {"field_name": "Probabilistic logic", "field_count": 4}, {"field_name": "Receiver operating characteristic", "field_count": 4}, {"field_name": "Inference", "field_count": 4}, {"field_name": "Feature (computer vision)", "field_count": 3}, {"field_name": "Deep learning", "field_count": 3}, {"field_name": "Concept learning", "field_count": 3}], "clusters": [{"cluster_id": 23307, "cluster_count": 12}, {"cluster_id": 19977, "cluster_count": 9}, {"cluster_id": 2844, "cluster_count": 4}, {"cluster_id": 56050, "cluster_count": 4}, {"cluster_id": 32715, "cluster_count": 3}, {"cluster_id": 1609, "cluster_count": 3}, {"cluster_id": 52787, "cluster_count": 3}, {"cluster_id": 4455, "cluster_count": 3}, {"cluster_id": 2482, "cluster_count": 3}, {"cluster_id": 3628, "cluster_count": 2}], "company_references": [{"ref_CSET_id": 101, "referenced_count": 506}, {"ref_CSET_id": 87, "referenced_count": 140}, {"ref_CSET_id": 163, "referenced_count": 135}, {"ref_CSET_id": 796, "referenced_count": 103}, {"ref_CSET_id": 184, "referenced_count": 58}, {"ref_CSET_id": 336, "referenced_count": 46}, {"ref_CSET_id": 35, "referenced_count": 42}, {"ref_CSET_id": 23, "referenced_count": 34}, {"ref_CSET_id": 6, "referenced_count": 34}, {"ref_CSET_id": 223, "referenced_count": 33}], "tasks": [{"referent": "classification", "task_count": 18}, {"referent": "autonomous_driving", "task_count": 13}, {"referent": "artificial_intelligence_and_machine_learning", "task_count": 12}, {"referent": "motion_planning", "task_count": 9}, {"referent": "disease_detection", "task_count": 8}, {"referent": "domain_generalization", "task_count": 8}, {"referent": "autonomous_vehicles", "task_count": 7}, {"referent": "inference_attack", "task_count": 7}, {"referent": "object_detection", "task_count": 7}, {"referent": "segmentation", "task_count": 6}], "methods": [{"referent": "convolutional_neural_networks", "method_count": 13}, {"referent": "3d_representations", "method_count": 12}, {"referent": "recurrent_neural_networks", "method_count": 11}, {"referent": "vqa_models", "method_count": 10}, {"referent": "neural_architecture_search", "method_count": 7}, {"referent": "symbolic_deep_learning", "method_count": 6}, {"referent": "chexnet", "method_count": 5}, {"referent": "causal_inference", "method_count": 5}, {"referent": "mad_learning", "method_count": 5}, {"referent": "generative_models", "method_count": 5}], "articles": {"all_publications": {"counts": [0, 2, 6, 24, 61, 105, 120, 157, 134, 159, 0], "total": 768, "isTopResearch": false}, "ai_publications": {"counts": [0, 1, 2, 1, 7, 18, 18, 29, 31, 29, 0], "total": 136, "isTopResearch": false}, "ai_pubs_top_conf": {"counts": [0, 0, 1, 0, 1, 2, 2, 11, 11, 4, 0], "total": 32, "isTopResearch": false}, "citation_counts": {"counts": [0, 0, 1, 15, 45, 230, 541, 1357, 2039, 1820, 39], "total": 6087, "isTopResearch": false}, "cv_pubs": {"counts": [0, 1, 0, 0, 3, 6, 5, 13, 19, 21, 0], "total": 68, "isTopResearch": true}, "nlp_pubs": {"counts": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], "total": 1, "isTopResearch": true}, "robotics_pubs": {"counts": [0, 1, 0, 0, 1, 4, 4, 6, 5, 10, 0], "total": 31, "isTopResearch": true}}, "patents": {"ai_patents": {"counts": [22, 25, 61, 99, 143, 155, 201, 198, 64, 0, 0], "total": 968, "type": null}, "Physical_Sciences_and_Engineering": {"counts": [1, 1, 2, 1, 0, 0, 3, 0, 0, 0, 0], "total": 8, "type": "industry"}, "Life_Sciences": {"counts": [3, 0, 6, 13, 17, 24, 17, 27, 5, 0, 0], "total": 112, "type": "industry"}, "Security__eg_cybersecurity": {"counts": [1, 1, 3, 1, 2, 3, 2, 4, 0, 0, 0], "total": 17, "type": "industry"}, "Transportation": {"counts": [13, 15, 17, 25, 52, 58, 50, 29, 8, 0, 0], "total": 267, "type": "industry"}, "Industrial_and_Manufacturing": {"counts": [0, 1, 6, 10, 17, 12, 23, 21, 3, 0, 0], "total": 93, "type": "industry"}, "Education": {"counts": [0, 0, 0, 0, 1, 3, 1, 1, 0, 0, 0], "total": 6, "type": "industry"}, "Document_Mgt_and_Publishing": {"counts": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 0, "type": "industry"}, "Military": {"counts": [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0], "total": 2, "type": "industry"}, "Agricultural": {"counts": [0, 0, 0, 2, 2, 5, 3, 10, 1, 0, 0], "total": 23, "type": "industry"}, "Computing_in_Government": {"counts": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], "total": 1, "type": "industry"}, "Personal_Devices_and_Computing": {"counts": [3, 2, 17, 25, 30, 37, 40, 43, 6, 0, 0], "total": 203, "type": "industry"}, "Banking_and_Finance": {"counts": [1, 1, 2, 1, 1, 2, 3, 0, 1, 0, 0], "total": 12, "type": "industry"}, "Telecommunications": {"counts": [6, 3, 12, 11, 16, 21, 17, 23, 5, 0, 0], "total": 114, "type": "industry"}, "Networks__eg_social_IOT_etc": {"counts": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 0, "type": "industry"}, "Business": {"counts": [0, 4, 3, 4, 11, 7, 4, 11, 2, 0, 0], "total": 46, "type": "industry"}, "Energy_Management": {"counts": [2, 0, 1, 0, 1, 0, 2, 2, 0, 0, 0], "total": 8, "type": "industry"}, "Entertainment": {"counts": [1, 0, 1, 3, 2, 2, 1, 0, 0, 0, 0], "total": 10, "type": "industry"}, "Nanotechnology": {"counts": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], "total": 1, "type": "industry"}, "Semiconductors": {"counts": [0, 0, 2, 0, 0, 1, 1, 0, 0, 0, 0], "total": 4, "type": "industry"}, "Language_Processing": {"counts": [1, 0, 2, 3, 4, 1, 0, 0, 0, 0, 0], "total": 11, "type": "application"}, "Speech_Processing": {"counts": [0, 0, 4, 5, 3, 4, 5, 6, 2, 0, 0], "total": 29, "type": "application"}, "Knowledge_Representation": {"counts": [2, 2, 2, 1, 4, 5, 7, 3, 1, 0, 0], "total": 27, "type": "application"}, "Planning_and_Scheduling": {"counts": [0, 2, 3, 3, 10, 5, 3, 9, 2, 0, 0], "total": 37, "type": "application"}, "Control": {"counts": [14, 15, 18, 37, 64, 68, 60, 31, 10, 0, 0], "total": 317, "type": "application"}, "Distributed_AI": {"counts": [0, 0, 0, 0, 2, 2, 2, 1, 0, 0, 0], "total": 7, "type": "application"}, "Robotics": {"counts": [0, 2, 2, 2, 8, 2, 0, 0, 0, 0, 0], "total": 16, "type": "application"}, "Computer_Vision": {"counts": [10, 9, 8, 26, 40, 57, 85, 61, 19, 0, 0], "total": 315, "type": "application"}, "Analytics_and_Algorithms": {"counts": [3, 0, 3, 11, 13, 11, 18, 15, 4, 0, 0], "total": 78, "type": "application"}, "Measuring_and_Testing": {"counts": [9, 5, 7, 13, 27, 28, 30, 27, 7, 0, 0], "total": 153, "type": "application"}}, "other_metrics": {"tt1_jobs": {"counts": null, "total": 2111}, "ai_jobs": {"counts": null, "total": 213}}}
+{
+  "cset_id": 796,
+  "country": "United States",
+  "website": "https://abc.xyz/",
+  "crunchbase": {
+    "text": "096694c6-bcd2-a975-b95c-fab77c81d915",
+    "url": "https://www.crunchbase.com/organization/alphabet"
+  },
+  "child_crunchbase": [
+    {
+      "text": "19a9c1dc-6f04-41ca-bd48-77dad98897a0",
+      "url": "https://www.crunchbase.com/organization/intrinsic-97a0"
+    },
+    {
+      "text": "c1833ca6-85d5-e3b8-08e5-8fcceb76717b",
+      "url": "https://www.crunchbase.com/organization/google-s-self-driving-car-project"
+    },
+    {
+      "text": "d9f418da-28f5-8b04-97f7-086b4ffbf048",
+      "url": "https://www.crunchbase.com/organization/vicarious-systems-inc"
+    },
+    {
+      "text": "ceff4e5b-95c2-839a-3150-c340c4b5bc71",
+      "url": "https://www.crunchbase.com/organization/verily-2"
+    }
+  ],
+  "linkedin": [
+    "https://www.linkedin.com/company/intrinsic",
+    "https://www.linkedin.com/company/alphabet-inc",
+    "https://www.linkedin.com/company/waymo",
+    "https://www.linkedin.com/company/vicarious-ai",
+    "https://www.linkedin.com/company/verily"
+  ],
+  "in_sandp_500": true,
+  "in_fortune_global_500": true,
+  "stage": "Mature",
+  "name": "Alphabet",
+  "patent_name": "alphabet",
+  "continent": "North America",
+  "local_logo": "alphabet.png",
+  "aliases": "Alphabet Inc",
+  "permid_links": [
+    {
+      "text": 5082534760,
+      "url": "https://permid.org/1-5082534760"
+    },
+    {
+      "text": 5030853586,
+      "url": "https://permid.org/1-5030853586"
+    },
+    {
+      "text": 5053732847,
+      "url": "https://permid.org/1-5053732847"
+    },
+    {
+      "text": 5028044072,
+      "url": "https://permid.org/1-5028044072"
+    },
+    {
+      "text": 5050702354,
+      "url": "https://permid.org/1-5050702354"
+    }
+  ],
+  "parent_info": null,
+  "agg_child_info": "Intrinsic, Waymo, Vicarious Ai, Verily Life Sciences",
+  "unagg_child_info": "Google Brain, Deepmind, Google, Fitbit, Nest, Google Robotics",
+  "market_filt": [
+    {
+      "text": "NASDAQ:GOOG",
+      "url": "https://www.google.com/finance/quote/goog:nasdaq"
+    },
+    {
+      "text": "NASDAQ:GOOGL",
+      "url": "https://www.google.com/finance/quote/googl:nasdaq"
+    }
+  ],
+  "market_full": [
+    {
+      "text": "NASDAQ:GOOG",
+      "url": "https://www.google.com/finance/quote/goog:nasdaq"
+    },
+    {
+      "text": "BMV:GOOGL",
+      "url": "https://www.google.com/finance/quote/bmv:googl"
+    },
+    {
+      "text": "DUS:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:dus"
+    },
+    {
+      "text": "MOEX:GOOG-RM",
+      "url": "https://www.google.com/finance/quote/goog-rm:moex"
+    },
+    {
+      "text": "NEO:GOOG",
+      "url": "https://www.google.com/finance/quote/goog:neo"
+    },
+    {
+      "text": "MUN:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:mun"
+    },
+    {
+      "text": "MIL:GOOGL",
+      "url": "https://www.google.com/finance/quote/googl:mil"
+    },
+    {
+      "text": "XETR:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:xetr"
+    },
+    {
+      "text": "HAM:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:ham"
+    },
+    {
+      "text": "LON:0RIH",
+      "url": "https://www.google.com/finance/quote/0rih:lon"
+    },
+    {
+      "text": "BER:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:ber"
+    },
+    {
+      "text": "NASDAQ:GOOGL",
+      "url": "https://www.google.com/finance/quote/googl:nasdaq"
+    }
+  ],
+  "crunchbase_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
+  "fields": [
+    {
+      "field_name": "Segmentation",
+      "field_count": 4
+    },
+    {
+      "field_name": "Task (computing)",
+      "field_count": 4
+    },
+    {
+      "field_name": "Convolutional neural network",
+      "field_count": 4
+    },
+    {
+      "field_name": "Object (computer science)",
+      "field_count": 4
+    },
+    {
+      "field_name": "Probabilistic logic",
+      "field_count": 4
+    },
+    {
+      "field_name": "Receiver operating characteristic",
+      "field_count": 4
+    },
+    {
+      "field_name": "Inference",
+      "field_count": 4
+    },
+    {
+      "field_name": "Feature (computer vision)",
+      "field_count": 3
+    },
+    {
+      "field_name": "Deep learning",
+      "field_count": 3
+    },
+    {
+      "field_name": "Concept learning",
+      "field_count": 3
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": 23307,
+      "cluster_count": 12
+    },
+    {
+      "cluster_id": 19977,
+      "cluster_count": 9
+    },
+    {
+      "cluster_id": 2844,
+      "cluster_count": 4
+    },
+    {
+      "cluster_id": 56050,
+      "cluster_count": 4
+    },
+    {
+      "cluster_id": 32715,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 1609,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 52787,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 4455,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 2482,
+      "cluster_count": 3
+    },
+    {
+      "cluster_id": 3628,
+      "cluster_count": 2
+    }
+  ],
+  "company_references": [
+    {
+      "ref_CSET_id": 101,
+      "referenced_count": 506
+    },
+    {
+      "ref_CSET_id": 87,
+      "referenced_count": 140
+    },
+    {
+      "ref_CSET_id": 163,
+      "referenced_count": 135
+    },
+    {
+      "ref_CSET_id": 796,
+      "referenced_count": 103
+    },
+    {
+      "ref_CSET_id": 184,
+      "referenced_count": 58
+    },
+    {
+      "ref_CSET_id": 336,
+      "referenced_count": 46
+    },
+    {
+      "ref_CSET_id": 35,
+      "referenced_count": 42
+    },
+    {
+      "ref_CSET_id": 23,
+      "referenced_count": 34
+    },
+    {
+      "ref_CSET_id": 6,
+      "referenced_count": 34
+    },
+    {
+      "ref_CSET_id": 223,
+      "referenced_count": 33
+    }
+  ],
+  "tasks": [
+    {
+      "referent": "classification",
+      "task_count": 18
+    },
+    {
+      "referent": "autonomous_driving",
+      "task_count": 13
+    },
+    {
+      "referent": "artificial_intelligence_and_machine_learning",
+      "task_count": 12
+    },
+    {
+      "referent": "motion_planning",
+      "task_count": 9
+    },
+    {
+      "referent": "disease_detection",
+      "task_count": 8
+    },
+    {
+      "referent": "domain_generalization",
+      "task_count": 8
+    },
+    {
+      "referent": "autonomous_vehicles",
+      "task_count": 7
+    },
+    {
+      "referent": "inference_attack",
+      "task_count": 7
+    },
+    {
+      "referent": "object_detection",
+      "task_count": 7
+    },
+    {
+      "referent": "segmentation",
+      "task_count": 6
+    }
+  ],
+  "methods": [
+    {
+      "referent": "convolutional_neural_networks",
+      "method_count": 13
+    },
+    {
+      "referent": "3d_representations",
+      "method_count": 12
+    },
+    {
+      "referent": "recurrent_neural_networks",
+      "method_count": 11
+    },
+    {
+      "referent": "vqa_models",
+      "method_count": 10
+    },
+    {
+      "referent": "neural_architecture_search",
+      "method_count": 7
+    },
+    {
+      "referent": "symbolic_deep_learning",
+      "method_count": 6
+    },
+    {
+      "referent": "chexnet",
+      "method_count": 5
+    },
+    {
+      "referent": "causal_inference",
+      "method_count": 5
+    },
+    {
+      "referent": "mad_learning",
+      "method_count": 5
+    },
+    {
+      "referent": "generative_models",
+      "method_count": 5
+    }
+  ],
+  "articles": {
+    "all_publications": {
+      "counts": [
+        0,
+        2,
+        6,
+        24,
+        61,
+        105,
+        120,
+        157,
+        134,
+        159,
+        0
+      ],
+      "total": 768,
+      "isTopResearch": false
+    },
+    "ai_publications": {
+      "counts": [
+        0,
+        1,
+        2,
+        1,
+        7,
+        18,
+        18,
+        29,
+        31,
+        29,
+        0
+      ],
+      "total": 136,
+      "isTopResearch": false
+    },
+    "ai_pubs_top_conf": {
+      "counts": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        2,
+        2,
+        11,
+        11,
+        4,
+        0
+      ],
+      "total": 32,
+      "isTopResearch": false
+    },
+    "citation_counts": {
+      "counts": [
+        0,
+        0,
+        1,
+        15,
+        45,
+        230,
+        541,
+        1357,
+        2039,
+        1820,
+        39
+      ],
+      "total": 6087,
+      "isTopResearch": false
+    },
+    "cv_pubs": {
+      "counts": [
+        0,
+        1,
+        0,
+        0,
+        3,
+        6,
+        5,
+        13,
+        19,
+        21,
+        0
+      ],
+      "total": 68,
+      "isTopResearch": true
+    },
+    "nlp_pubs": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "total": 1,
+      "isTopResearch": true
+    },
+    "robotics_pubs": {
+      "counts": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        4,
+        4,
+        6,
+        5,
+        10,
+        0
+      ],
+      "total": 31,
+      "isTopResearch": true
+    }
+  },
+  "patents": {
+    "ai_patents": {
+      "counts": [
+        22,
+        25,
+        61,
+        99,
+        143,
+        155,
+        201,
+        198,
+        64,
+        0,
+        0
+      ],
+      "total": 968,
+      "type": null
+    },
+    "Physical_Sciences_and_Engineering": {
+      "counts": [
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 8,
+      "type": "industry"
+    },
+    "Life_Sciences": {
+      "counts": [
+        3,
+        0,
+        6,
+        13,
+        17,
+        24,
+        17,
+        27,
+        5,
+        0,
+        0
+      ],
+      "total": 112,
+      "type": "industry"
+    },
+    "Security__eg_cybersecurity": {
+      "counts": [
+        1,
+        1,
+        3,
+        1,
+        2,
+        3,
+        2,
+        4,
+        0,
+        0,
+        0
+      ],
+      "total": 17,
+      "type": "industry"
+    },
+    "Transportation": {
+      "counts": [
+        13,
+        15,
+        17,
+        25,
+        52,
+        58,
+        50,
+        29,
+        8,
+        0,
+        0
+      ],
+      "total": 267,
+      "type": "industry"
+    },
+    "Industrial_and_Manufacturing": {
+      "counts": [
+        0,
+        1,
+        6,
+        10,
+        17,
+        12,
+        23,
+        21,
+        3,
+        0,
+        0
+      ],
+      "total": 93,
+      "type": "industry"
+    },
+    "Education": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        3,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "total": 6,
+      "type": "industry"
+    },
+    "Document_Mgt_and_Publishing": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "industry"
+    },
+    "Military": {
+      "counts": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 2,
+      "type": "industry"
+    },
+    "Agricultural": {
+      "counts": [
+        0,
+        0,
+        0,
+        2,
+        2,
+        5,
+        3,
+        10,
+        1,
+        0,
+        0
+      ],
+      "total": 23,
+      "type": "industry"
+    },
+    "Computing_in_Government": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "total": 1,
+      "type": "industry"
+    },
+    "Personal_Devices_and_Computing": {
+      "counts": [
+        3,
+        2,
+        17,
+        25,
+        30,
+        37,
+        40,
+        43,
+        6,
+        0,
+        0
+      ],
+      "total": 203,
+      "type": "industry"
+    },
+    "Banking_and_Finance": {
+      "counts": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        2,
+        3,
+        0,
+        1,
+        0,
+        0
+      ],
+      "total": 12,
+      "type": "industry"
+    },
+    "Telecommunications": {
+      "counts": [
+        6,
+        3,
+        12,
+        11,
+        16,
+        21,
+        17,
+        23,
+        5,
+        0,
+        0
+      ],
+      "total": 114,
+      "type": "industry"
+    },
+    "Networks__eg_social_IOT_etc": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "type": "industry"
+    },
+    "Business": {
+      "counts": [
+        0,
+        4,
+        3,
+        4,
+        11,
+        7,
+        4,
+        11,
+        2,
+        0,
+        0
+      ],
+      "total": 46,
+      "type": "industry"
+    },
+    "Energy_Management": {
+      "counts": [
+        2,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      "total": 8,
+      "type": "industry"
+    },
+    "Entertainment": {
+      "counts": [
+        1,
+        0,
+        1,
+        3,
+        2,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 10,
+      "type": "industry"
+    },
+    "Nanotechnology": {
+      "counts": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 1,
+      "type": "industry"
+    },
+    "Semiconductors": {
+      "counts": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 4,
+      "type": "industry"
+    },
+    "Language_Processing": {
+      "counts": [
+        1,
+        0,
+        2,
+        3,
+        4,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 11,
+      "type": "application"
+    },
+    "Speech_Processing": {
+      "counts": [
+        0,
+        0,
+        4,
+        5,
+        3,
+        4,
+        5,
+        6,
+        2,
+        0,
+        0
+      ],
+      "total": 29,
+      "type": "application"
+    },
+    "Knowledge_Representation": {
+      "counts": [
+        2,
+        2,
+        2,
+        1,
+        4,
+        5,
+        7,
+        3,
+        1,
+        0,
+        0
+      ],
+      "total": 27,
+      "type": "application"
+    },
+    "Planning_and_Scheduling": {
+      "counts": [
+        0,
+        2,
+        3,
+        3,
+        10,
+        5,
+        3,
+        9,
+        2,
+        0,
+        0
+      ],
+      "total": 37,
+      "type": "application"
+    },
+    "Control": {
+      "counts": [
+        14,
+        15,
+        18,
+        37,
+        64,
+        68,
+        60,
+        31,
+        10,
+        0,
+        0
+      ],
+      "total": 317,
+      "type": "application"
+    },
+    "Distributed_AI": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        2,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "total": 7,
+      "type": "application"
+    },
+    "Robotics": {
+      "counts": [
+        0,
+        2,
+        2,
+        2,
+        8,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 16,
+      "type": "application"
+    },
+    "Computer_Vision": {
+      "counts": [
+        10,
+        9,
+        8,
+        26,
+        40,
+        57,
+        85,
+        61,
+        19,
+        0,
+        0
+      ],
+      "total": 315,
+      "type": "application"
+    },
+    "Analytics_and_Algorithms": {
+      "counts": [
+        3,
+        0,
+        3,
+        11,
+        13,
+        11,
+        18,
+        15,
+        4,
+        0,
+        0
+      ],
+      "total": 78,
+      "type": "application"
+    },
+    "Measuring_and_Testing": {
+      "counts": [
+        9,
+        5,
+        7,
+        13,
+        27,
+        28,
+        30,
+        27,
+        7,
+        0,
+        0
+      ],
+      "total": 153,
+      "type": "application"
+    }
+  },
+  "other_metrics": {
+    "tt1_jobs": {
+      "counts": null,
+      "total": 2111
+    },
+    "ai_jobs": {
+      "counts": null,
+      "total": 213
+    }
+  }
+}
