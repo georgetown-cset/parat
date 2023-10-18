@@ -90,12 +90,6 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "ai_pubs_top_conf"),
   },
   {
-    title: "AI patents",
-    key: "ai_patents",
-    ...generateSliderColDef("patents", "ai_patents"),
-    initialCol: true,
-  },
-  {
     title: "CV publications",
     key: "cv_pubs",
     ...generateSliderColDef("articles", "cv_pubs"),
@@ -112,9 +106,20 @@ const columnDefinitions = [
   },
 
   {
+    title: "AI patents",
+    key: "ai_patents",
+    ...generateSliderColDef("patents", "ai_patents"),
+    initialCol: true,
+  },
+  {
     title: "Agricultural patents",
     key: "agri_patents",
     ...generateSliderColDef("patents", "Agricultural"),
+  },
+  {
+    title: "Analytics and algorithms patents",
+    key: "algorithms",
+    ...generateSliderColDef("patents", "Analytics_and_Algorithms"),
   },
   {
     title: "Banking and finance patents",
@@ -127,9 +132,24 @@ const columnDefinitions = [
     ...generateSliderColDef("patents", "Business"),
   },
   {
+    title: "Computer vision patents",
+    key: "comp_vision",
+    ...generateSliderColDef("patents", "Computer_Vision"),
+  },
+  {
     title: "Computing in government patents",
     key: "comp_in_gov_patents",
     ...generateSliderColDef("patents", "Computing_in_Government"),
+  },
+  {
+    title: "Control patents",
+    key: "control",
+    ...generateSliderColDef("patents", "Control"),
+  },
+  {
+    title: "Distributed AI patents",
+    key: "distributed_ai",
+    ...generateSliderColDef("patents", "Distributed_AI"),
   },
   {
     title: "Document management and publishing patents",
@@ -157,9 +177,24 @@ const columnDefinitions = [
     ...generateSliderColDef("patents", "Industrial_and_Manufacturing"),
   },
   {
+    title: "Knowledge representation patents",
+    key: "knowledge_rep",
+    ...generateSliderColDef("patents", "Knowledge_Representation"),
+  },
+  {
+    title: "Language processing patents",
+    key: "lang_process",
+    ...generateSliderColDef("patents", "Language_Processing"),
+  },
+  {
     title: "Life sciences patents",
     key: "life_patents",
     ...generateSliderColDef("patents", "Life_Sciences"),
+  },
+  {
+    title: "Measuring and testing patents",
+    key: "measure_test",
+    ...generateSliderColDef("patents", "Measuring_and_Testing"),
   },
   {
     title: "Military patents",
@@ -187,6 +222,16 @@ const columnDefinitions = [
     ...generateSliderColDef("patents", "Physical_Sciences_and_Engineering"),
   },
   {
+    title: "Planning and scheduling patents",
+    key: "plan_sched",
+    ...generateSliderColDef("patents", "Planning_and_Scheduling"),
+  },
+  {
+    title: "Robotics patents",
+    key: "robotics",
+    ...generateSliderColDef("patents", "Robotics"),
+  },
+  {
     title: "Security patents",
     key: "security_patents",
     ...generateSliderColDef("patents", "Security__eg_cybersecurity"),
@@ -195,6 +240,11 @@ const columnDefinitions = [
     title: "Semiconductor patents",
     key: "semiconductor_patents",
     ...generateSliderColDef("patents", "Semiconductors"),
+  },
+  {
+    title: "Speech processing patents",
+    key: "speech",
+    ...generateSliderColDef("patents", "Speech_Processing"),
   },
   {
     title: "Telecommunications patents",
@@ -228,5 +278,10 @@ export const articleMap = Object.fromEntries(columnDefinitions
 
 export const patentMap = Object.fromEntries(columnDefinitions
   .filter(e => e.dataKey === 'patents')
+  .map(e => ([e.dataSubkey, e.title]))
+);
+
+export const otherMetricMap = Object.fromEntries(columnDefinitions
+  .filter(e => e.dataKey === 'other_metrics')
   .map(e => ([e.dataSubkey, e.title]))
 );

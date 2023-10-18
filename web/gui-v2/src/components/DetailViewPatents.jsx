@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { Dropdown } from '@eto/eto-ui-components';
+import { Autocomplete, Dropdown } from '@eto/eto-ui-components';
 
 import HeaderWithLink from './HeaderWithLink';
 import StatGrid from './StatGrid';
 import TableSection from './TableSection';
 import TextAndBigStat from './TextAndBigStat';
 import TrendsChart from './TrendsChart';
+import overall from '../static_data/overall_data.json';
 import { patentMap } from '../static_data/table_columns';
 import { commas } from '../util';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
@@ -22,10 +23,13 @@ const styles = {
     }
   `,
   trendsDropdown: css`
-    .MuiInputBase-input.MuiSelect-select {
-      align-items: center;
-      display: flex;
-      justify-content: center;
+    .MuiAutocomplete-root .MuiInput-root.MuiInputBase-sizeSmall .MuiInput-input {
+      padding: 4px;
+      text-align: center;
+    }
+
+    ul > li {
+      text-align: left;
     }
   `,
 };
@@ -41,17 +45,20 @@ const chartLayoutChanges = {
   },
 };
 
+const startIx = overall.years.findIndex(e => e === overall.startPatentYear);
+const endIx = overall.years.findIndex(e => e === overall.endPatentYear);
+
 const DetailViewPatents = ({
   data,
 }) => {
   const [aiSubfield, setAiSubfield] = useState("ai_patents");
 
-  const numYears = data.years.length;
-  const startIx = numYears - 7;
-  const endIx = numYears - 2;
+  const yearSpanNdash = <>{overall.years[startIx]}&ndash;{overall.years[endIx]}</>;
+  // const yearSpanAnd = <>{overall.years[startIx]} and {overall.years[endIx]}</>;
 
-  const yearSpanNdash = <>{data.years[startIx]}&ndash;{data.years[endIx]}</>;
-  // const yearSpanAnd = <>{data.years[startIx]} and {data.years[endIx]}</>;
+  const aiPatentStart = data.patents.ai_patents.counts[startIx];
+  const aiPatentEnd = data.patents.ai_patents.counts[endIx];
+  const aiPatentGrowth = Math.round((aiPatentEnd - aiPatentStart) / aiPatentStart * 1000) / 10
 
   const statGridEntries = [
     {
@@ -61,7 +68,7 @@ const DetailViewPatents = ({
     },
     {
       key: "ai-patent-growth",
-      stat: <>NUM%</>,
+      stat: <>{aiPatentGrowth}%</>,
       text: <>growth in {data.name}'s AI patenting ({yearSpanNdash})</>,
     },
     {
@@ -79,41 +86,46 @@ const DetailViewPatents = ({
   const patentTableColumns = [
     { display_name: "Subfield", key: "subfield" },
     { display_name: "Patents granted", key: "patents" },
-    { display_name: <>Growth ({data.years[startIx]}&ndash;{data.years[endIx]})</>, key: "growth" },
+    { display_name: <>Growth ({overall.startPatentYear}&ndash;{overall.endPatentYear})</>, key: "growth" },
   ];
 
   const patentSubkeys = Object.keys(data.patents);
 
-  // NOTE: for the time being, I'm hardcoding these to get data to display.  The
-  // final implementation will require discussion and coordination.
-  const patentApplicationAreas = patentSubkeys.slice(0, 5).map((key) => {
-    const startVal = data.patents[key].counts[startIx];
-    const endVal = data.patents[key].counts[endIx];
-    const growth = `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`;
-    return {
-      subfield: data.patents[key].name,
-      patents: data.patents[key].total,
-      growth,
-    };
-  });
+  const patentApplicationAreas = patentSubkeys
+    .filter(key => data.patents[key].table === "application")
+    .map((key) => {
+      const startVal = data.patents[key].counts[startIx];
+      const endVal = data.patents[key].counts[endIx];
+      const growth = `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`;
+      return {
+        subfield: patentMap[key],
+        patents: data.patents[key].total,
+        growth,
+      };
+    })
+    .sort((a, b) => b.patents - a.patents);
 
-  const patentIndustryAreas = patentSubkeys.slice(5, 10).map((key) => {
-    const startVal = data.patents[key].counts[startIx];
-    const endVal = data.patents[key].counts[endIx];
-    const growth = `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`;
-    return {
-      subfield: data.patents[key].name,
-      patents: data.patents[key].total,
-      growth,
-    };
-  });
+  const patentIndustryAreas = patentSubkeys
+    .filter(key => data.patents[key].table === "industry")
+    .map((key) => {
+      const startVal = data.patents[key].counts[startIx];
+      const endVal = data.patents[key].counts[endIx];
+      const growth = `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`;
+      return {
+        subfield: patentMap[key],
+        patents: data.patents[key].total,
+        growth,
+      };
+    })
+    .sort((a, b) => b.patents - a.patents);
 
-  // Temporarily using just a generic slice of patents
-  const aiSubfieldOptions = patentSubkeys.slice(0, 10).map(k => ({ text: patentMap[k], val: k }));
+  const aiSubfieldOptions = patentSubkeys
+    .map(k => ({ text: patentMap[k].replace(/ patents/i, ''), val: k }))
+    .sort((a, b) => a.text.localeCompare(b.text, 'en', { sensitivity: 'base' }));
 
   const aiSubfieldChartData = assemblePlotlyParams(
     "Trends in research....",
-    data.years,
+    overall.years,
     [
       [
         aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
@@ -128,7 +140,7 @@ const DetailViewPatents = ({
       <HeaderWithLink title="Patents" />
 
       <TextAndBigStat
-        smallText={<>Between {data.years[0]} and {data.years[data.years.length-1]}, {data.name} obtained</>}
+        smallText={<>Between {overall.years[0]} and {overall.years[overall.years.length-1]}, {data.name} obtained</>}
         bigText={<>{commas(data.patents.ai_patents.total)} AI patents</>}
       />
 
@@ -157,7 +169,7 @@ const DetailViewPatents = ({
         title={
           <>
             Trends in {data.name}'s patenting in
-            <Dropdown
+            <Autocomplete
               css={styles.trendsDropdown}
               inputLabel="patent subfield"
               options={aiSubfieldOptions}

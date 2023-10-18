@@ -44,6 +44,14 @@ const styles = {
       padding: 0.5rem;
     }
   `,
+  linkWrapper: css`
+    list-style: none;
+    padding: 0;
+
+    li + li {
+      margin-top: 0;
+    }
+  `,
   buttonWrapper: css`
     display: flex;
     margin-top: 1rem !important;
@@ -69,7 +77,11 @@ const DetailViewIntro = ({
   if ( data.market_filt && data.market_filt.length > 0 ) {
     metadata.push({
       title: "Stock tickers",
-      value: data.market_filt.map((e) => <ExternalLink href={e.url} key={e.text}>{e.text}</ExternalLink>),
+      value: (
+        <ul css={styles.linkWrapper}>
+          {data.market_filt.map((e) => <li key={e.text}><ExternalLink href={e.url}>{e.text}</ExternalLink></li>)}
+        </ul>
+      ),
     });
   }
 
