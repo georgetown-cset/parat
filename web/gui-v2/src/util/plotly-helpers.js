@@ -17,7 +17,6 @@ const assembleChartData = (name, years, vals, otherParams) => {
 /**
  * Generate the parameters for a given Plotly chart.
  *
- * @param {string} title Overall title for the chart
  * @param {Array<number>} years Array of years corresponding to `data`
  * @param {Array<[string, Array<number>]>} data Array of tuples representing
  *     individual traces in the chart, each consisting of a string for the trace
@@ -25,9 +24,9 @@ const assembleChartData = (name, years, vals, otherParams) => {
  * @param {object} layoutChanges Any changes that should be merged into the
  *     ETO-standard `layout` object provided by `PlotlyDefaults`.
  * @returns {object} An object containing the parameters for this Plotly chart:
- *     `{ config, data, layout, title }`
+ *     `{ config, data, layout }`
  */
-export const assemblePlotlyParams = (title, years, data, layoutChanges) => {
+export const assemblePlotlyParams = (years, data, layoutChanges={}) => {
   const preparedData = data.map(([traceTitle, traceData, otherParams={}]) => {
     return assembleChartData(traceTitle, years, traceData, otherParams);
   });
@@ -41,7 +40,6 @@ export const assemblePlotlyParams = (title, years, data, layoutChanges) => {
     config,
     data: preparedData,
     layout,
-    title,
   };
 };
 
