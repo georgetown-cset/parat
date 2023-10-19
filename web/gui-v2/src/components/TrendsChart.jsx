@@ -41,9 +41,9 @@ const styles = {
  * @param {object} props
  * @param {Array<[string, Array<number>]>} props.data
  * @param {object} props.layoutChanges
- * @param {boolean|undefined} props.partialStartsIndex
+ * @param {boolean|undefined} props.partialStartIndex
+ * @param {string} props.title
  * @param {Array<number>} props.years
- * //
  * @returns {JSX.Element}
  */
 const TrendsChart = ({
@@ -52,13 +52,11 @@ const TrendsChart = ({
   data: dataRaw,
   id: appliedId,
   layoutChanges,
-  partialStartsIndex=undefined,
+  partialStartIndex=undefined,
   title,
   years,
 }) => {
-  console.info("TrendsChart:", {dataRaw, layoutChanges, years}); // DEBUG
-
-  const { config, data, layout } = assemblePlotlyParams(years, dataRaw, layoutChanges);
+  const { config, data, layout } = assemblePlotlyParams(years, dataRaw, layoutChanges, { partialStartIndex });
 
   return (
     <div

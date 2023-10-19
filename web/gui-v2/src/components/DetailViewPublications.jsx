@@ -146,6 +146,7 @@ const DetailViewPublications = ({
         ]}
         id="ai-subfield-research"
         layoutChanges={chartLayoutChanges}
+        partialStartIndex={endIx}
         title={
           <>
             Trends in {data.name}'s research in
@@ -169,6 +170,7 @@ const DetailViewPublications = ({
         ]}
         id="ai-top-conference-pubs-2"
         layoutChanges={chartLayoutChanges}
+        partialStartIndex={endIx}
         title={<>{data.name}'s top AI conference publications</>}
         years={overall.years}
       />

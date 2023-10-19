@@ -159,6 +159,7 @@ const DetailViewPatents = ({
         ]}
         id="ai-subfield-patents"
         layoutChanges={chartLayoutChanges}
+        partialStartIndex={endIx}
         title={
           <>
             Trends in {data.name}'s patenting in
