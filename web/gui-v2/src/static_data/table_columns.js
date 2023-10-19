@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import { css } from '@emotion/react';
 
 import CellStat from '../components/CellStat';
@@ -59,7 +58,14 @@ const columnDefinitions = [
     title: "Company",
     key: "name",
     css: styles.name,
-    format: (name, row) => <Link to={`company/${row.cset_id}-${slugifyCompanyName(name)}`}>{name}</Link>,
+    format: (name, row) => (
+      <a
+        target="_blank"
+        href={`company/${row.cset_id}-${slugifyCompanyName(name)}`}
+      >
+        {name}
+      </a>
+    ),
     initialCol: true,
     minWidth: 240,
     sortable: true,
