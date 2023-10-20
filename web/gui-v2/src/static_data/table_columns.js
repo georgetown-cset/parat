@@ -98,13 +98,14 @@ const columnDefinitions = [
     minWidth: 120,
     type: 'dropdown',
   },
-  {
-    title: "Sector",
-    key: "sector",
-    initialCol: false,
-    minWidth: 200,
-    type: 'dropdown',
-  },
+  // TODO, pending #120 adding `sector` data
+  // {
+  //   title: "Sector",
+  //   key: "sector",
+  //   initialCol: false,
+  //   minWidth: 200,
+  //   type: 'dropdown',
+  // },
 
   {
     title: "All publications",
@@ -140,10 +141,26 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "ai_publications"),
     initialCol: true,
   },
+  // TODO, pending clarification of intent
+  // {
+  //   title: "Citations per AI paper",
+  //   key: "citations_per_ai_pub",
+  //   ...generateSliderColDef("articles", "??????"),
+  // },
   {
     title: "AI publications in top conferences",
     key: "ai_pubs_top_conf",
     ...generateSliderColDef("articles", "ai_pubs_top_conf"),
+  },
+  {
+    title: `AI papers in last complete year (${overall.endArticleYear})`,
+    key: "ai_pubs_last_full_year",
+    ...generateSliderColDef(
+      "articles",
+      "ai_publications",
+      ((_val, row) => row.articles.ai_publications.counts[endArticleIx]),
+      (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
+    ),
   },
   {
     title: "CV publications",
@@ -161,6 +178,17 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "robotics_pubs"),
   },
 
+  // TODO, pending #125 adding the `all_patents` data
+  // {
+  //   title: "5-year growth in patents",
+  //   key: "all_patents_growth",
+  //   ...generateSliderColDef(
+  //     "patents",
+  //     "all_patents",
+  //     ((_val, row) => 1234), // TODO
+  //     (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
+  //   ),
+  // },
   {
     title: "AI patents",
     key: "ai_patents",
