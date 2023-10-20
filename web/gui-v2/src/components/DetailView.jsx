@@ -21,6 +21,7 @@ import DetailViewPublications from './DetailViewPublications';
 import DetailViewPatents from './DetailViewPatents';
 import DetailViewWorkforce from './DetailViewWorkforce';
 import tableOfContentsData from '../static_data/detail-toc.json';
+import overallData from '../static_data/overall_data.json';
 import { useWindowSize } from '../util';
 import { plausibleEvent } from '../util/analytics';
 

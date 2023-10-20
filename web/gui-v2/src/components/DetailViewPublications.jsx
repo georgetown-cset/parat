@@ -9,6 +9,7 @@ import StatGrid from './StatGrid';
 import TableSection from './TableSection';
 import TextAndBigStat from './TextAndBigStat';
 import TrendsChart from './TrendsChart';
+import overall from '../static_data/overall_data.json';
 import { articleMap } from '../static_data/table_columns';
 import { commas } from '../util';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
@@ -44,20 +45,19 @@ const chartLayoutChanges = {
   },
 };
 
+const startIx = overall.years.findIndex(e => e === overall.startArticleYear);
+const endIx = overall.years.findIndex(e => e === overall.endArticleYear);
+
 const DetailViewPublications = ({
   data,
 }) => {
   const [aiSubfield, setAiSubfield] = useState("ai_publications");
 
-  const yearSpanNdash = <>{data.years[0]}&ndash;{data.years[data.years.length-1]}</>;
-  const yearSpanAnd = <>{data.years[0]} and {data.years[data.years.length-1]}</>;
+  const yearSpanNdash = <>{overall.years[0]}&ndash;{overall.years[overall.years.length-1]}</>;
+  const yearSpanAnd = <>{overall.years[0]} and {overall.years[overall.years.length-1]}</>;
 
   const averageCitations = Math.round(10 * data.articles.citation_counts.total / data.articles.all_publications.total) / 10;
   const aiResearchPercent = Math.round(1000 * data.articles.ai_publications.total / data.articles.all_publications.total) / 10;
-
-  const numYears = data.years.length;
-  const startIx = numYears - 7;
-  const endIx = numYears - 2;
 
   const statGridEntries = [
     {
@@ -96,10 +96,10 @@ const DetailViewPublications = ({
     { display_name: "Subfield", key: "subfield" },
     { display_name: "Articles", key: "articles" },
     { display_name: "Citations per article", key: "citations" },
-    { display_name: <>Growth ({data.years[startIx]}&ndash;{data.years[endIx]})</>, key: "growth" },
+    { display_name: <>Growth ({overall.startArticleYear}&ndash;{overall.endArticleYear})</>, key: "growth" },
   ];
   const topAiResearchTopics = Object.entries(data.articles)
-    .filter(([key, _val]) => ['cv_pubs', 'nlp_pubs', 'robotics_pubs'].includes(key))
+    .filter(([_key, val]) => val.isTopResearch)
     .map(([key, val]) => {
       const startVal = val.counts[startIx];
       const endVal = val.counts[endIx];
@@ -121,7 +121,7 @@ const DetailViewPublications = ({
 
   const aiSubfieldChartData = assemblePlotlyParams(
     "Trends in research....",
-    data.years,
+    overall.years,
     [
       [
         aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
@@ -133,7 +133,7 @@ const DetailViewPublications = ({
 
   const topConfs = assemblePlotlyParams(
     <>{data.name}'s top AI conference publications</>,
-    data.years,
+    overall.years,
     [
       ["AI top conference publications", data.articles.ai_pubs_top_conf.counts],
     ],

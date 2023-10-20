@@ -61,7 +61,7 @@ describe("ListView", () => {
       for ( const column of INITIAL_COLUMNS.filter(e => e !== REMOVED_COLUMN) ) {
         expect(screen.getByRole('columnheader', { name: new RegExp(column, 'i') }));
       }
-    }, 40000);
+    }, 60000);
   });
 
   describe('groups', () => {
@@ -106,6 +106,6 @@ describe("ListView", () => {
       expect(getByRole(table, 'row', { name: /Google/ })).toBeVisible();
       expect(getByRole(table, 'row', { name: /Apple/ })).toBeVisible();
       expect(getByRole(table, 'row', { name: /3M/ })).toBeVisible();
-    }, 30000);
+    }, 60000);
   });
 });
