@@ -114,17 +114,26 @@ const DATAKEYS_WITH_SUBKEYS = [
   "other_metrics",
 ];
 
-const DEFAULT_COLUMNS = columnDefinitions
-  .filter(colDef => colDef?.initialCol)
-  .map(colDef => colDef.key);
-
-const DROPDOWN_COLUMNS = columnDefinitions
-  .filter(colDef => colDef.type === "dropdown")
-  .map(colDef => colDef.key);
-
-const SLIDER_COLUMNS = columnDefinitions
-  .filter(colDef => colDef.type === "slider")
-  .map(colDef => colDef.key);
+const DEFAULT_COLUMNS = [];
+const DROPDOWN_COLUMNS = [];
+const SLIDER_COLUMNS = [];
+const SLIDER_NATURAL_COLUMNS = [];
+const SLIDER_GROWTH_COLUMNS = [];
+columnDefinitions.forEach((colDef) => {
+  if ( colDef?.initialCol ) {
+    DEFAULT_COLUMNS.push(colDef.key);
+  }
+  if ( colDef.type === "dropdown" ) {
+    DROPDOWN_COLUMNS.push(colDef.key);
+  } else if ( colDef.type === "slider" ) {
+    SLIDER_COLUMNS.push(colDef.key);
+    if ( colDef?.isGrowthStat ) {
+      SLIDER_GROWTH_COLUMNS.push(colDef.key);
+    } else {
+      SLIDER_NATURAL_COLUMNS.push(colDef.key);
+    }
+  }
+});
 
 const ALL_COLUMNS = [
   ...DROPDOWN_COLUMNS,
@@ -133,7 +142,8 @@ const ALL_COLUMNS = [
 
 const DEFAULT_FILTER_VALUES = {
   ...DROPDOWN_COLUMNS.reduce((obj, e) => { obj[e] = []; return obj; }, {}),
-  ...SLIDER_COLUMNS.reduce((obj, e) => { obj[e] = [0, 100]; return obj; }, {}),
+  ...SLIDER_NATURAL_COLUMNS.reduce((obj, e) => { obj[e] = [0, 100]; return obj; }, {}),
+  ...SLIDER_GROWTH_COLUMNS.reduce((obj, e) => { obj[e] = [-100, 100]; return obj; }, {}),
 };
 const initialVal = (key) => {
   return DEFAULT_FILTER_VALUES[key]?.join(',') ?? '';
@@ -387,8 +397,9 @@ const ListViewTable = ({
 
   // Prepare the columns that we will display in the `<Table>`, including
   // adding the appropriate filter mechanisms to the header cells.
+  const columnsParamSplit = columnsParam.split(',');
   const columns = columnDefinitions
-    .filter(colDef => columnsParam.includes(colDef.key))
+    .filter(colDef => columnsParamSplit.includes(colDef.key))
     .map((colDef) => {
       let display_name;
       switch ( colDef.type ) {

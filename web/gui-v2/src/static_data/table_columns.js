@@ -129,6 +129,7 @@ const columnDefinitions = [
         return <CellStat data={{ total }} />;
       },
     ),
+    isGrowthStat: true,
   },
   {
     title: "Citation counts",
@@ -188,6 +189,7 @@ const columnDefinitions = [
   //     ((_val, row) => 1234), // TODO
   //     (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
   //   ),
+  //   isGrowthStat: true,
   // },
   {
     title: "AI patents",

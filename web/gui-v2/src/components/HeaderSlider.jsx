@@ -24,6 +24,7 @@ const styles = {
 
 const HeaderSlider = ({
   label,
+  min=0,
   onChange,
   value,
 }) => {
@@ -54,6 +55,7 @@ const HeaderSlider = ({
       <label>{label}</label>
       <Slider
         css={styles.slider}
+        min={min}
         onChange={(newVal) => setValueInternal(newVal.target.value)}
         onClick={(event) => event.stopPropagation()}
         size="small"
