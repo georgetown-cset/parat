@@ -357,6 +357,14 @@ const columnDefinitions = [
 ];
 export default columnDefinitions;
 
+// Filtering down to the default columns in `ListViewTable.jsx` was causing
+// filters to not persist across page refreshes.  Doing that filtering here
+// seems to be fine, but if there are subsequent issues try hardcoding the
+// array instead.  (see https://github.com/georgetown-cset/parat/issues/144)
+export const DEFAULT_COLUMNS = columnDefinitions
+  .filter(e => e?.initialCol)
+  .map(e => e.key);
+
 export const articleMap = Object.fromEntries(columnDefinitions
   .filter(e => e.dataKey === 'articles')
   .map(e => ([e.dataSubkey, e.title]))

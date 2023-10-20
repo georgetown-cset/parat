@@ -22,7 +22,7 @@ import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
 import GroupSelector, { NO_SELECTED_GROUP, USER_CUSTOM_GROUP } from './ListViewGroupSelector';
 import groupsList from '../static_data/groups';
-import columnDefinitions from '../static_data/table_columns';
+import columnDefinitions, { DEFAULT_COLUMNS } from '../static_data/table_columns';
 import {
   commas,
   useMultiState,
@@ -114,15 +114,11 @@ const DATAKEYS_WITH_SUBKEYS = [
   "other_metrics",
 ];
 
-const DEFAULT_COLUMNS = [];
 const DROPDOWN_COLUMNS = [];
 const SLIDER_COLUMNS = [];
 const SLIDER_NATURAL_COLUMNS = [];
 const SLIDER_GROWTH_COLUMNS = [];
 columnDefinitions.forEach((colDef) => {
-  if ( colDef?.initialCol ) {
-    DEFAULT_COLUMNS.push(colDef.key);
-  }
   if ( colDef.type === "dropdown" ) {
     DROPDOWN_COLUMNS.push(colDef.key);
   } else if ( colDef.type === "slider" ) {
