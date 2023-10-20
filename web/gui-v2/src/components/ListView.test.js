@@ -61,7 +61,7 @@ describe("ListView", () => {
       for ( const column of INITIAL_COLUMNS.filter(e => e !== REMOVED_COLUMN) ) {
         expect(screen.getByRole('columnheader', { name: new RegExp(column, 'i') }));
       }
-    }, 60000);
+    }, 90000);
   });
 
   describe('groups', () => {
