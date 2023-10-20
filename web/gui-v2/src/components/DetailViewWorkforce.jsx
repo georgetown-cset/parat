@@ -3,11 +3,13 @@ import React from 'react';
 import HeaderWithLink from './HeaderWithLink';
 import StatBox from './StatBox';
 import StatWrapper from './StatWrapper';
+import overall from '../static_data/overall_data.json';
+import { otherMetricMap } from '../static_data/table_columns';
 
 const DetailViewWorkforce = ({
   data,
 }) => {
-  const yearSpanText = <>{data.years[0]} to {data.years[data.years.length-1]}</>;
+  const yearSpanText = <>{overall.years[0]} to {overall.years[overall.years.length-1]}</>;
 
   const otherMetricsWorkforceKeys = ['ai_jobs', 'tt1_jobs'];
 
@@ -27,7 +29,7 @@ const DetailViewWorkforce = ({
               </>
             }
             key={key}
-            label={data.other_metrics[key].name}
+            label={otherMetricMap[key]}
             value={data.other_metrics[key].total}
           />
         ))}

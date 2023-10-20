@@ -46,8 +46,8 @@ class TestMkTabText(unittest.TestCase):
             "EX:T2": "https://www.google.com/finance/quote/T2:EX"
         }
         expected_output = [
-            {"market_key": "EX:T1", "link": "https://www.google.com/finance/quote/EX:T1"},
-            {"market_key": "EX:T2", "link": "https://www.google.com/finance/quote/T2:EX"}
+            {"text": "EX:T1", "url": "https://www.google.com/finance/quote/EX:T1"},
+            {"text": "EX:T2", "url": "https://www.google.com/finance/quote/T2:EX"}
         ]
         self.assertEqual(clean_market(market_info, market_key_to_link), expected_output)
         self.assertEqual(clean_market([], market_key_to_link), [])
@@ -66,15 +66,15 @@ class TestMkTabText(unittest.TestCase):
         ]
         expected_rows = [
             {"cset_id": 2,
-             ARTICLE_METRICS: {"metric": {"total": 2 ** 4, "rank": 2, "frac_of_max": 0.5105738866634614}},
+             ARTICLE_METRICS: {"metric": {"total": 2 ** 4, "rank": 2, "frac_of_max": 0.5106}},
              PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2, "frac_of_max": 0.0},
                               "another_patent_metric": {"total": 2, "rank": 1, "frac_of_max": 1.0}}},
             {"cset_id": 3,
              ARTICLE_METRICS: {"metric": {"total": 2 ** 8, "rank": 1, "frac_of_max": 1.0}},
              PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2, "frac_of_max": 0.0},
-                              "another_patent_metric": {"total": 1, "rank": 2, "frac_of_max": 0.6309297535714574}}},
+                              "another_patent_metric": {"total": 1, "rank": 2, "frac_of_max": 0.6309}}},
             {"cset_id": 1,
-             ARTICLE_METRICS: {"metric": {"total": 2, "rank": 3, "frac_of_max": 0.1979811182727465}},
+             ARTICLE_METRICS: {"metric": {"total": 2, "rank": 3, "frac_of_max": 0.1980}},
              PATENT_METRICS: {"a_patent_metric": {"total": 1, "rank": 1, "frac_of_max": 1.0},
                               "another_patent_metric": {"total": 0, "rank": 3, "frac_of_max": 0.0}}}
         ]
@@ -134,13 +134,13 @@ class TestMkTabText(unittest.TestCase):
         }
         self.assertEqual("BAR; Baz; FoO; Fred", clean_aliases(aliases, lowercase_to_orig_cname, "Fred"))
 
-    def test_get_list_and_links(self):
+    def test_format_links(self):
         prefix = "https://my_test_prefix.com/"
         link_suffixes = ["foo", "bar", "baz"]
-        template = f"<a class={LINK_CSS} target='blank' rel='noreferrer' href='{prefix}" + "{}'>{}</a>"
-        expected_links = [template.format(link_text, link_text) for link_text in link_suffixes]
-        self.assertEqual(get_list_and_links(link_suffixes, prefix),
-                         (", ".join(link_suffixes), {"__html": ", ".join(expected_links)}))
+        expected_links = [{"text": "foo", "url": prefix+"foo"},
+                          {"text": "bar", "url": prefix+"bar"},
+                          {"text": "baz", "url": prefix+"baz"}]
+        self.assertEqual(expected_links, format_links(link_suffixes, prefix))
 
     def test_get_yearly_counts(self):
         counts = [{"year": 2002, "count": 1}, {"year": 2021, "count": 2}, {"year": 2015, "count": 15}]
@@ -150,13 +150,10 @@ class TestMkTabText(unittest.TestCase):
         expected_values[0] = 15
         self.assertEqual(get_yearly_counts(counts, "count", years), (expected_values, 17))
 
-    def test_get_market_link_list(self):
-        market_info = [{"link": "foo", "market_key": "BAR:FOO"}, {"market_key": "TEST:BAZ", "link": ""}]
-        expected_outputs = f"<a class={LINK_CSS} target='blank' rel='noreferrer' href='foo'>BAR:FOO</a>, TEST:BAZ"
-        self.assertEqual(get_market_link_list(market_info), {"__html": expected_outputs})
-
-    def test_clean_row(self):
+    def test_alphabet(self):
         self.run_clean_row_test("alphabet")
+
+    def test_hugging_face(self):
         self.run_clean_row_test("hugging_face")
 
     def run_clean_row_test(self, company):

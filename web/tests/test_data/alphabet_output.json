@@ -3,25 +3,25 @@
   "country": "United States",
   "website": "https://abc.xyz/",
   "crunchbase": {
-    "crunchbase_uuid": "096694c6-bcd2-a975-b95c-fab77c81d915",
-    "crunchbase_url": "https://www.crunchbase.com/organization/alphabet"
+    "text": "096694c6-bcd2-a975-b95c-fab77c81d915",
+    "url": "https://www.crunchbase.com/organization/alphabet"
   },
   "child_crunchbase": [
     {
-      "crunchbase_uuid": "19a9c1dc-6f04-41ca-bd48-77dad98897a0",
-      "crunchbase_url": "https://www.crunchbase.com/organization/intrinsic-97a0"
+      "text": "19a9c1dc-6f04-41ca-bd48-77dad98897a0",
+      "url": "https://www.crunchbase.com/organization/intrinsic-97a0"
     },
     {
-      "crunchbase_uuid": "c1833ca6-85d5-e3b8-08e5-8fcceb76717b",
-      "crunchbase_url": "https://www.crunchbase.com/organization/google-s-self-driving-car-project"
+      "text": "c1833ca6-85d5-e3b8-08e5-8fcceb76717b",
+      "url": "https://www.crunchbase.com/organization/google-s-self-driving-car-project"
     },
     {
-      "crunchbase_uuid": "d9f418da-28f5-8b04-97f7-086b4ffbf048",
-      "crunchbase_url": "https://www.crunchbase.com/organization/vicarious-systems-inc"
+      "text": "d9f418da-28f5-8b04-97f7-086b4ffbf048",
+      "url": "https://www.crunchbase.com/organization/vicarious-systems-inc"
     },
     {
-      "crunchbase_uuid": "ceff4e5b-95c2-839a-3150-c340c4b5bc71",
-      "crunchbase_url": "https://www.crunchbase.com/organization/verily-2"
+      "text": "ceff4e5b-95c2-839a-3150-c340c4b5bc71",
+      "url": "https://www.crunchbase.com/organization/verily-2"
     }
   ],
   "linkedin": [
@@ -31,40 +31,102 @@
     "https://www.linkedin.com/company/vicarious-ai",
     "https://www.linkedin.com/company/verily"
   ],
-  "in_sandp_500": true,
-  "in_fortune_global_500": true,
   "stage": "Mature",
   "name": "Alphabet",
   "patent_name": "alphabet",
   "continent": "North America",
   "local_logo": "alphabet.png",
   "aliases": "Alphabet Inc",
-  "grid_info": "grid.497059.6",
-  "grid_links": {
-    "__html": "<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.grid.ac/institutes/grid.497059.6'>grid.497059.6</a>"
-  },
-  "permid_info": "5082534760, 5030853586, 5053732847, 5028044072, 5050702354",
-  "permid_links": {
-    "__html": "<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5082534760'>5082534760</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5030853586'>5030853586</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5053732847'>5053732847</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5028044072'>5028044072</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5050702354'>5050702354</a>"
-  },
+  "permid_links": [
+    {
+      "text": 5082534760,
+      "url": "https://permid.org/1-5082534760"
+    },
+    {
+      "text": 5030853586,
+      "url": "https://permid.org/1-5030853586"
+    },
+    {
+      "text": 5053732847,
+      "url": "https://permid.org/1-5053732847"
+    },
+    {
+      "text": 5028044072,
+      "url": "https://permid.org/1-5028044072"
+    },
+    {
+      "text": 5050702354,
+      "url": "https://permid.org/1-5050702354"
+    }
+  ],
   "parent_info": null,
   "agg_child_info": "Intrinsic, Waymo, Vicarious Ai, Verily Life Sciences",
   "unagg_child_info": "Google Brain, Deepmind, Google, Fitbit, Nest, Google Robotics",
   "market_filt": [
     {
-      "market_key": "NASDAQ:GOOG",
-      "link": "https://www.google.com/finance/quote/goog:nasdaq"
+      "text": "NASDAQ:GOOG",
+      "url": "https://www.google.com/finance/quote/goog:nasdaq"
     },
     {
-      "market_key": "NASDAQ:GOOGL",
-      "link": "https://www.google.com/finance/quote/googl:nasdaq"
+      "text": "NASDAQ:GOOGL",
+      "url": "https://www.google.com/finance/quote/googl:nasdaq"
     }
   ],
-  "full_market_links": {
-    "__html": "<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/goog:nasdaq'>NASDAQ:GOOG</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/bmv:googl'>BMV:GOOGL</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:dus'>DUS:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/goog-rm:moex'>MOEX:GOOG-RM</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/goog:neo'>NEO:GOOG</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:mun'>MUN:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/googl:mil'>MIL:GOOGL</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:xetr'>XETR:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:ham'>HAM:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/0rih:lon'>LON:0RIH</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/abea:ber'>BER:ABEA</a>, <a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://www.google.com/finance/quote/googl:nasdaq'>NASDAQ:GOOGL</a>"
-  },
-  "market_list": "NASDAQ:GOOG, BMV:GOOGL, DUS:ABEA, MOEX:GOOG-RM, NEO:GOOG, MUN:ABEA, MIL:GOOGL, XETR:ABEA, HAM:ABEA, LON:0RIH, BER:ABEA, NASDAQ:GOOGL",
+  "market_full": [
+    {
+      "text": "NASDAQ:GOOG",
+      "url": "https://www.google.com/finance/quote/goog:nasdaq"
+    },
+    {
+      "text": "BMV:GOOGL",
+      "url": "https://www.google.com/finance/quote/bmv:googl"
+    },
+    {
+      "text": "DUS:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:dus"
+    },
+    {
+      "text": "MOEX:GOOG-RM",
+      "url": "https://www.google.com/finance/quote/goog-rm:moex"
+    },
+    {
+      "text": "NEO:GOOG",
+      "url": "https://www.google.com/finance/quote/goog:neo"
+    },
+    {
+      "text": "MUN:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:mun"
+    },
+    {
+      "text": "MIL:GOOGL",
+      "url": "https://www.google.com/finance/quote/googl:mil"
+    },
+    {
+      "text": "XETR:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:xetr"
+    },
+    {
+      "text": "HAM:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:ham"
+    },
+    {
+      "text": "LON:0RIH",
+      "url": "https://www.google.com/finance/quote/0rih:lon"
+    },
+    {
+      "text": "BER:ABEA",
+      "url": "https://www.google.com/finance/quote/abea:ber"
+    },
+    {
+      "text": "NASDAQ:GOOGL",
+      "url": "https://www.google.com/finance/quote/googl:nasdaq"
+    }
+  ],
   "crunchbase_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
+  "groups": {
+    "sp500": true,
+    "global500": true
+  },
   "fields": [
     {
       "field_name": "Segmentation",
@@ -275,22 +337,8 @@
       "method_count": 5
     }
   ],
-  "years": [
-    2013,
-    2014,
-    2015,
-    2016,
-    2017,
-    2018,
-    2019,
-    2020,
-    2021,
-    2022,
-    2023
-  ],
   "articles": {
     "all_publications": {
-      "name": "All Publications",
       "counts": [
         0,
         2,
@@ -304,10 +352,10 @@
         159,
         0
       ],
-      "total": 768
+      "total": 768,
+      "isTopResearch": false
     },
     "ai_publications": {
-      "name": "AI Publications",
       "counts": [
         0,
         1,
@@ -321,10 +369,10 @@
         29,
         0
       ],
-      "total": 136
+      "total": 136,
+      "isTopResearch": false
     },
     "ai_pubs_top_conf": {
-      "name": "AI Publications in Top Conferences",
       "counts": [
         0,
         0,
@@ -338,10 +386,10 @@
         4,
         0
       ],
-      "total": 32
+      "total": 32,
+      "isTopResearch": false
     },
     "citation_counts": {
-      "name": "Yearly Citations",
       "counts": [
         0,
         0,
@@ -355,10 +403,10 @@
         1820,
         39
       ],
-      "total": 6087
+      "total": 6087,
+      "isTopResearch": false
     },
     "cv_pubs": {
-      "name": "Computer Vision Publications",
       "counts": [
         0,
         1,
@@ -372,10 +420,10 @@
         21,
         0
       ],
-      "total": 68
+      "total": 68,
+      "isTopResearch": true
     },
     "nlp_pubs": {
-      "name": "NLP Publications",
       "counts": [
         0,
         0,
@@ -389,10 +437,10 @@
         0,
         0
       ],
-      "total": 1
+      "total": 1,
+      "isTopResearch": true
     },
     "robotics_pubs": {
-      "name": "Robotics Publications",
       "counts": [
         0,
         1,
@@ -406,12 +454,12 @@
         10,
         0
       ],
-      "total": 31
+      "total": 31,
+      "isTopResearch": true
     }
   },
   "patents": {
     "ai_patents": {
-      "name": "AI Patents",
       "counts": [
         22,
         25,
@@ -425,10 +473,10 @@
         0,
         0
       ],
-      "total": 968
+      "total": 968,
+      "table": null
     },
     "Physical_Sciences_and_Engineering": {
-      "name": "Physical Sciences and Engineering Patents",
       "counts": [
         1,
         1,
@@ -442,10 +490,10 @@
         0,
         0
       ],
-      "total": 8
+      "total": 8,
+      "table": null
     },
     "Life_Sciences": {
-      "name": "Life Sciences Patents",
       "counts": [
         3,
         0,
@@ -459,10 +507,10 @@
         0,
         0
       ],
-      "total": 112
+      "total": 112,
+      "table": "industry"
     },
     "Security__eg_cybersecurity": {
-      "name": "Security Patents",
       "counts": [
         1,
         1,
@@ -476,10 +524,10 @@
         0,
         0
       ],
-      "total": 17
+      "total": 17,
+      "table": null
     },
     "Transportation": {
-      "name": "Transportation Patents",
       "counts": [
         13,
         15,
@@ -493,10 +541,10 @@
         0,
         0
       ],
-      "total": 267
+      "total": 267,
+      "table": "industry"
     },
     "Industrial_and_Manufacturing": {
-      "name": "Industry and Manufacturing Patents",
       "counts": [
         0,
         1,
@@ -510,10 +558,10 @@
         0,
         0
       ],
-      "total": 93
+      "total": 93,
+      "table": "industry"
     },
     "Education": {
-      "name": "Education Patents",
       "counts": [
         0,
         0,
@@ -527,10 +575,10 @@
         0,
         0
       ],
-      "total": 6
+      "total": 6,
+      "table": null
     },
     "Document_Mgt_and_Publishing": {
-      "name": "Document Management and Publishing Patents",
       "counts": [
         0,
         0,
@@ -544,10 +592,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Military": {
-      "name": "Military Patents",
       "counts": [
         0,
         0,
@@ -561,10 +609,10 @@
         0,
         0
       ],
-      "total": 2
+      "total": 2,
+      "table": null
     },
     "Agricultural": {
-      "name": "Agriculture Patents",
       "counts": [
         0,
         0,
@@ -578,10 +626,10 @@
         0,
         0
       ],
-      "total": 23
+      "total": 23,
+      "table": null
     },
     "Computing_in_Government": {
-      "name": "Computing in Government Patents",
       "counts": [
         0,
         0,
@@ -595,10 +643,10 @@
         0,
         0
       ],
-      "total": 1
+      "total": 1,
+      "table": null
     },
     "Personal_Devices_and_Computing": {
-      "name": "Personal Devices and Computing Patents",
       "counts": [
         3,
         2,
@@ -612,10 +660,10 @@
         0,
         0
       ],
-      "total": 203
+      "total": 203,
+      "table": "industry"
     },
     "Banking_and_Finance": {
-      "name": "Banking and Finance Patents",
       "counts": [
         1,
         1,
@@ -629,10 +677,10 @@
         0,
         0
       ],
-      "total": 12
+      "total": 12,
+      "table": null
     },
     "Telecommunications": {
-      "name": "Telecommunications Patents",
       "counts": [
         6,
         3,
@@ -646,10 +694,10 @@
         0,
         0
       ],
-      "total": 114
+      "total": 114,
+      "table": "industry"
     },
     "Networks__eg_social_IOT_etc": {
-      "name": "Networks Patents",
       "counts": [
         0,
         0,
@@ -663,10 +711,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Business": {
-      "name": "Business Patents",
       "counts": [
         0,
         4,
@@ -680,10 +728,10 @@
         0,
         0
       ],
-      "total": 46
+      "total": 46,
+      "table": null
     },
     "Energy_Management": {
-      "name": "Energy Management Patents",
       "counts": [
         2,
         0,
@@ -697,10 +745,10 @@
         0,
         0
       ],
-      "total": 8
+      "total": 8,
+      "table": null
     },
     "Entertainment": {
-      "name": "Entertainment Patents",
       "counts": [
         1,
         0,
@@ -714,10 +762,10 @@
         0,
         0
       ],
-      "total": 10
+      "total": 10,
+      "table": null
     },
     "Nanotechnology": {
-      "name": "Nanotechnology Patents",
       "counts": [
         0,
         0,
@@ -731,10 +779,10 @@
         0,
         0
       ],
-      "total": 1
+      "total": 1,
+      "table": null
     },
     "Semiconductors": {
-      "name": "Semiconductors Patents",
       "counts": [
         0,
         0,
@@ -748,17 +796,186 @@
         0,
         0
       ],
-      "total": 4
+      "total": 4,
+      "table": null
+    },
+    "Language_Processing": {
+      "counts": [
+        1,
+        0,
+        2,
+        3,
+        4,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 11,
+      "table": null
+    },
+    "Speech_Processing": {
+      "counts": [
+        0,
+        0,
+        4,
+        5,
+        3,
+        4,
+        5,
+        6,
+        2,
+        0,
+        0
+      ],
+      "total": 29,
+      "table": null
+    },
+    "Knowledge_Representation": {
+      "counts": [
+        2,
+        2,
+        2,
+        1,
+        4,
+        5,
+        7,
+        3,
+        1,
+        0,
+        0
+      ],
+      "total": 27,
+      "table": null
+    },
+    "Planning_and_Scheduling": {
+      "counts": [
+        0,
+        2,
+        3,
+        3,
+        10,
+        5,
+        3,
+        9,
+        2,
+        0,
+        0
+      ],
+      "total": 37,
+      "table": "application"
+    },
+    "Control": {
+      "counts": [
+        14,
+        15,
+        18,
+        37,
+        64,
+        68,
+        60,
+        31,
+        10,
+        0,
+        0
+      ],
+      "total": 317,
+      "table": "application"
+    },
+    "Distributed_AI": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        2,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "total": 7,
+      "table": null
+    },
+    "Robotics": {
+      "counts": [
+        0,
+        2,
+        2,
+        2,
+        8,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 16,
+      "table": null
+    },
+    "Computer_Vision": {
+      "counts": [
+        10,
+        9,
+        8,
+        26,
+        40,
+        57,
+        85,
+        61,
+        19,
+        0,
+        0
+      ],
+      "total": 315,
+      "table": "application"
+    },
+    "Analytics_and_Algorithms": {
+      "counts": [
+        3,
+        0,
+        3,
+        11,
+        13,
+        11,
+        18,
+        15,
+        4,
+        0,
+        0
+      ],
+      "total": 78,
+      "table": "application"
+    },
+    "Measuring_and_Testing": {
+      "counts": [
+        9,
+        5,
+        7,
+        13,
+        27,
+        28,
+        30,
+        27,
+        7,
+        0,
+        0
+      ],
+      "total": 153,
+      "table": "application"
     }
   },
   "other_metrics": {
     "tt1_jobs": {
-      "name": "Tech Tier 1 Jobs",
       "counts": null,
       "total": 2111
     },
     "ai_jobs": {
-      "name": "AI Jobs",
       "counts": null,
       "total": 213
     }

@@ -3,35 +3,35 @@
   "country": "United States",
   "website": "https://huggingface.co/",
   "crunchbase": {
-    "crunchbase_uuid": "b7947f18-b199-45ac-b7da-66f5c52fcfbc",
-    "crunchbase_url": "https://www.crunchbase.com/organization/hugging-face"
+    "text": "b7947f18-b199-45ac-b7da-66f5c52fcfbc",
+    "url": "https://www.crunchbase.com/organization/hugging-face"
   },
   "child_crunchbase": [],
   "linkedin": [
     "https://www.linkedin.com/company/huggingface"
   ],
-  "in_sandp_500": false,
-  "in_fortune_global_500": false,
   "stage": "Growth",
   "name": "Hugging Face",
   "patent_name": "hugging face",
   "continent": "North America",
   "local_logo": "hugging_face.png",
   "aliases": "Hugging Face Inc; Hugging Face, Inc",
-  "grid_info": "",
-  "grid_links": {
-    "__html": ""
-  },
-  "permid_info": "5063742076",
-  "permid_links": {
-    "__html": "<a class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary' target='blank' rel='noreferrer' href='https://permid.org/1-5063742076'>5063742076</a>"
-  },
+  "permid_links": [
+    {
+      "text": 5063742076,
+      "url": "https://permid.org/1-5063742076"
+    }
+  ],
   "parent_info": null,
   "agg_child_info": null,
   "unagg_child_info": null,
   "market_filt": [],
-  "market_list": "",
+  "market_full": [],
   "crunchbase_description": "Hugging Face allows users to build, train, and deploy art models using the reference open source in machine learning.",
+  "groups": {
+    "sp500": false,
+    "global500": false
+  },
   "fields": [
     {
       "field_name": "Language model",
@@ -226,22 +226,8 @@
       "method_count": 1
     }
   ],
-  "years": [
-    2013,
-    2014,
-    2015,
-    2016,
-    2017,
-    2018,
-    2019,
-    2020,
-    2021,
-    2022,
-    2023
-  ],
   "articles": {
     "all_publications": {
-      "name": "All Publications",
       "counts": [
         0,
         0,
@@ -255,10 +241,10 @@
         13,
         0
       ],
-      "total": 23
+      "total": 23,
+      "isTopResearch": false
     },
     "ai_publications": {
-      "name": "AI Publications",
       "counts": [
         0,
         0,
@@ -272,10 +258,10 @@
         8,
         0
       ],
-      "total": 18
+      "total": 18,
+      "isTopResearch": false
     },
     "ai_pubs_top_conf": {
-      "name": "AI Publications in Top Conferences",
       "counts": [
         0,
         0,
@@ -289,10 +275,10 @@
         7,
         0
       ],
-      "total": 13
+      "total": 13,
+      "isTopResearch": false
     },
     "citation_counts": {
-      "name": "Yearly Citations",
       "counts": [
         0,
         0,
@@ -306,10 +292,10 @@
         1086,
         23
       ],
-      "total": 2993
+      "total": 2993,
+      "isTopResearch": false
     },
     "cv_pubs": {
-      "name": "Computer Vision Publications",
       "counts": [
         0,
         0,
@@ -323,10 +309,10 @@
         1,
         0
       ],
-      "total": 1
+      "total": 1,
+      "isTopResearch": true
     },
     "nlp_pubs": {
-      "name": "NLP Publications",
       "counts": [
         0,
         0,
@@ -340,10 +326,10 @@
         5,
         0
       ],
-      "total": 15
+      "total": 15,
+      "isTopResearch": true
     },
     "robotics_pubs": {
-      "name": "Robotics Publications",
       "counts": [
         0,
         0,
@@ -357,12 +343,12 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "isTopResearch": true
     }
   },
   "patents": {
     "ai_patents": {
-      "name": "AI Patents",
       "counts": [
         0,
         0,
@@ -376,10 +362,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Physical_Sciences_and_Engineering": {
-      "name": "Physical Sciences and Engineering Patents",
       "counts": [
         0,
         0,
@@ -393,10 +379,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": "industry"
     },
     "Life_Sciences": {
-      "name": "Life Sciences Patents",
       "counts": [
         0,
         0,
@@ -410,10 +396,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": "industry"
     },
     "Security__eg_cybersecurity": {
-      "name": "Security Patents",
       "counts": [
         0,
         0,
@@ -427,10 +413,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": "industry"
     },
     "Transportation": {
-      "name": "Transportation Patents",
       "counts": [
         0,
         0,
@@ -444,10 +430,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": "industry"
     },
     "Industrial_and_Manufacturing": {
-      "name": "Industry and Manufacturing Patents",
       "counts": [
         0,
         0,
@@ -461,10 +447,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": "industry"
     },
     "Education": {
-      "name": "Education Patents",
       "counts": [
         0,
         0,
@@ -478,10 +464,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Document_Mgt_and_Publishing": {
-      "name": "Document Management and Publishing Patents",
       "counts": [
         0,
         0,
@@ -495,10 +481,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Military": {
-      "name": "Military Patents",
       "counts": [
         0,
         0,
@@ -512,10 +498,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Agricultural": {
-      "name": "Agriculture Patents",
       "counts": [
         0,
         0,
@@ -529,10 +515,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Computing_in_Government": {
-      "name": "Computing in Government Patents",
       "counts": [
         0,
         0,
@@ -546,10 +532,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Personal_Devices_and_Computing": {
-      "name": "Personal Devices and Computing Patents",
       "counts": [
         0,
         0,
@@ -563,10 +549,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Banking_and_Finance": {
-      "name": "Banking and Finance Patents",
       "counts": [
         0,
         0,
@@ -580,10 +566,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Telecommunications": {
-      "name": "Telecommunications Patents",
       "counts": [
         0,
         0,
@@ -597,10 +583,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Networks__eg_social_IOT_etc": {
-      "name": "Networks Patents",
       "counts": [
         0,
         0,
@@ -614,10 +600,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Business": {
-      "name": "Business Patents",
       "counts": [
         0,
         0,
@@ -631,10 +617,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Energy_Management": {
-      "name": "Energy Management Patents",
       "counts": [
         0,
         0,
@@ -648,10 +634,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Entertainment": {
-      "name": "Entertainment Patents",
       "counts": [
         0,
         0,
@@ -665,10 +651,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Nanotechnology": {
-      "name": "Nanotechnology Patents",
       "counts": [
         0,
         0,
@@ -682,10 +668,10 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
     },
     "Semiconductors": {
-      "name": "Semiconductors Patents",
       "counts": [
         0,
         0,
@@ -699,17 +685,186 @@
         0,
         0
       ],
-      "total": 0
+      "total": 0,
+      "table": null
+    },
+    "Language_Processing": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": "application"
+    },
+    "Speech_Processing": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": "application"
+    },
+    "Knowledge_Representation": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": "application"
+    },
+    "Planning_and_Scheduling": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": "application"
+    },
+    "Control": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": "application"
+    },
+    "Distributed_AI": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": null
+    },
+    "Robotics": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": null
+    },
+    "Computer_Vision": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": null
+    },
+    "Analytics_and_Algorithms": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": null
+    },
+    "Measuring_and_Testing": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "table": null
     }
   },
   "other_metrics": {
     "tt1_jobs": {
-      "name": "Tech Tier 1 Jobs",
       "counts": null,
       "total": 72
     },
     "ai_jobs": {
-      "name": "AI Jobs",
       "counts": null,
       "total": 37
     }
