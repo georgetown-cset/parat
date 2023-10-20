@@ -167,7 +167,6 @@ class TestMkTabText(unittest.TestCase):
         with open(os.path.join(self.DATA_DIR, f"{company}_output.json")) as f:
             expected_output = json.load(f)
         output = clean_row(input_data, False, {}, market_key_to_link)
-        print(json.dumps(output))
         if output["local_logo"] != expected_output["local_logo"]:
             # then we're probably running on github actions and the images are not available
             assert not output["local_logo"] and not os.path.exists(os.path.join(IMAGE_DIR, f"{company}.png"))
