@@ -22,6 +22,7 @@ import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
 import GroupSelector, { NO_SELECTED_GROUP, USER_CUSTOM_GROUP } from './ListViewGroupSelector';
 import groupsList from '../static_data/groups';
+import overallData from '../static_data/overall_data.json';
 import columnDefinitions from '../static_data/table_columns';
 import {
   commas,
@@ -108,11 +109,7 @@ const styles = {
 };
 
 
-const GROUPS = [
-  { text: "S&P 500", val: "GROUP:sandp_500" },
-  { text: "Fortune Global 500", val: "GROUP:fortune_global_500" },
-];
-
+const GROUPS_OPTIONS = Object.entries(overallData.groups).map(([k, v]) => ({ text: v, val: `GROUP:${k}` }));
 
 const DATAKEYS_WITH_SUBKEYS = [
   "articles",
@@ -201,23 +198,13 @@ const filterRow = (row, filters) => {
         // therefore we return `false`.  Otherwise, we do nothing and let later
         // columns do their checks.
 
-        const groups = [];
-        const nonGroups = [];
-        filters?.[colDef.key].forEach((entry) => {
-          if ( entry.startsWith('GROUP:') ) {
-            groups.push(entry.slice(6));
-          } else {
-            nonGroups.push(entry);
-          }
-        });
-
         let inSelectedGroup = false;
-        for ( const group of groups ) {
-          if ( row[`in_${group}`] ) {
+        for ( const group of filters._groups ) {
+          if ( row.groups[group] ) {
             inSelectedGroup = true;
           }
         }
-        const inFilteredCompanies = nonGroups.includes(rowVal);
+        const inFilteredCompanies = filters._companies.includes(rowVal);
 
         if ( ! (inSelectedGroup || inFilteredCompanies) ) {
           return false;
@@ -311,7 +298,29 @@ const ListViewTable = ({
   const currentFilters = useMemo(
     () => {
       return Object.fromEntries(
-        Object.entries(filters).map( ([k, { get }]) => ([k, get]) )
+        Object.entries(filters)
+          .flatMap( ([key, { get }]) => {
+            if ( key === 'name' ) {
+              const groups = [];
+              const nonGroups = [];
+              get.forEach((entry) => {
+                if ( entry.startsWith('GROUP:') ) {
+                  groups.push(entry.slice(6));
+                } else {
+                  nonGroups.push(entry);
+                }
+              });
+              return [
+                [key, get],
+                ['_groups', groups],
+                ['_companies', nonGroups],
+              ];
+            } else {
+              return [
+                [key, get],
+              ];
+            }
+          })
       );
     },
     [filters]
@@ -430,7 +439,7 @@ const ListViewTable = ({
         if ( column === "name" ) {
           results[column] = [
             { header: "Groups of companies" },
-            ...GROUPS,
+            ...GROUPS_OPTIONS,
             { header: "Companies" },
             ...results[column],
           ];
@@ -607,6 +616,7 @@ const ListViewTable = ({
           </div>
         }
         footerData={footerData}
+        minHeight={400}
         paginate={true}
         showFooter={selectedGroup !== NO_SELECTED_GROUP && Object.keys(footerData).length > 0}
         sortByDir={sortDir}
