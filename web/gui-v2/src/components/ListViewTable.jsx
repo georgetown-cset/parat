@@ -17,11 +17,8 @@ import {
 } from '@eto/eto-ui-components';
 
 import AddRemoveColumnDialog from './AddRemoveColumnDialog';
-import { splitCustomGroup } from './EditCustomCompanyGroupDialog';
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
-import GroupSelector, { NO_SELECTED_GROUP, USER_CUSTOM_GROUP } from './ListViewGroupSelector';
-import groupsList from '../static_data/groups';
 import overallData from '../static_data/overall_data.json';
 import columnDefinitions from '../static_data/table_columns';
 import {
@@ -250,21 +247,12 @@ const ListViewTable = ({
   const [sortKey, setSortKey] = useState('ai_pubs');
   const isFirstRender = useRef(true);
 
-  const [selectedGroup, setSelectedGroup] = useQueryParamString('group', NO_SELECTED_GROUP);
-
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
   // filters when looking at the URL, so it makes sense that filter params like
   // 'ai_pubs' are at the beginning of the URL, which is more directly visible
   // to users. (`useQueryParamString` appears to order the params alphabetically)
   const [columnsParam, setColumnsParam] = useQueryParamString('zz_columns', DEFAULT_COLUMNS.join(','));
-
-  // Custom, user-defined group of companies.  Again naming the key to keep it
-  // after the filter parameters.  The 'Retained' version is for preserving the
-  // custom group composition when the user is viewing a different group
-  // (see `handleSelectedGroupChange()`).
-  const [customGroup, setCustomGroup] = useQueryParamString('zc_companies', '');
-  const [customGroupRetained, setCustomGroupRetained] = useState('');
 
   // Store filters via the URL parameters, making the values (and setters)
   // accessible via an object.
@@ -326,66 +314,6 @@ const ListViewTable = ({
     [filters]
   );
 
-  /**
-   * When the user switches from a custom group to a pre-defined group, save the
-   * companies that they included in the custom group in a separate state
-   * variable (that is not connected to the displayed URL).  Restore the company
-   * list when they return to custom group view.  This ensures that the custom
-   * group remains available to the user, but that it's only in the shared URL
-   * when the user is specifically in custom group mode.
-   */
-  const handleSelectedGroupChange = (newGroup) => {
-    if ( newGroup !== selectedGroup ) {
-      if ( newGroup === USER_CUSTOM_GROUP ) {
-        if ( customGroupRetained !== '' ) {
-          setCustomGroup(customGroupRetained);
-          setCustomGroupRetained('');
-        }
-      } else {
-        if ( selectedGroup === USER_CUSTOM_GROUP ) {
-          setCustomGroupRetained(customGroup);
-          setCustomGroup('');
-        }
-      }
-    }
-
-    setSelectedGroup(newGroup);
-  };
-
-
-  /**
-   * The list of companies included in the currently-selected group.
-   *
-   * Cases and values:
-   *  - Pre-defined group - an array of cset_id values
-   *  - Custom group - an array of cset_id values
-   *  - No selected group - false
-   *  - Invalid group - null
-   */
-  const selectedGroupMembers = useMemo(
-    () => {
-      if ( selectedGroup === NO_SELECTED_GROUP ) {
-        return false;
-      } else if ( selectedGroup === USER_CUSTOM_GROUP ) {
-        return splitCustomGroup(customGroup);
-      } else if ( selectedGroup in groupsList ) {
-        // Valid pre-defined groups
-        return groupsList[selectedGroup].members;
-      } else {
-        // Invalid group
-        return null;
-      }
-    },
-    [selectedGroup, customGroup]
-  );
-
-  const companyList = useMemo(
-    () => {
-      return data.map(({ cset_id, name, country }) => ({ cset_id, name, country }));
-    },
-    [data]
-  );
-
   const handleDropdownChange = (columnKey, newVal) => {
     if ( ! Array.isArray(newVal) ) {
       newVal = [newVal];
@@ -403,7 +331,7 @@ const ListViewTable = ({
   };
 
   // Filter the data for display.
-  const dataForTable = data.filter(row => filterRow(row, currentFilters, selectedGroupMembers));
+  const dataForTable = data.filter(row => filterRow(row, currentFilters));
   const numRows = dataForTable.length;
   const totalRows = data.length;
 
@@ -426,7 +354,7 @@ const ListViewTable = ({
           // the other active filters.
           return (
             numRows === 0 ||
-            filterRow(row, otherFilters, selectedGroupMembers)
+            filterRow(row, otherFilters)
           );
         });
 
@@ -512,7 +440,6 @@ const ListViewTable = ({
     columnDefinitions.forEach((colDef) => {
       filters[colDef.key]?.set(resetVal(colDef.key));
     });
-    setSelectedGroup(NO_SELECTED_GROUP);
   };
 
   // On the first render we don't want to trigger the Plausible event (since it's
@@ -554,25 +481,8 @@ const ListViewTable = ({
       .map(([key, data]) => [key, <>Total: {commas(data)}</>])
   );
 
-  let fallbackBigText = <big>No results found</big>;
-  let fallbackSmallText = <span>Try adjusting your filters to get more results</span>;
-  if ( selectedGroupMembers === null ) {
-    fallbackSmallText = <span>Invalid group '{selectedGroup}' selected &ndash; try another group</span>;
-  } else if ( selectedGroup === USER_CUSTOM_GROUP && selectedGroupMembers.length === 0 ) {
-    fallbackBigText = <big>No companies selected</big>
-    fallbackSmallText = <span>Click 'Edit custom group' to add companies to this group and get results</span>
-  }
-
   return (
     <div id="table" className="list-view-table" data-testid="list-view-table">
-      <GroupSelector
-        companyList={companyList}
-        customGroup={customGroup}
-        groupsList={groupsList}
-        selectedGroup={selectedGroup}
-        updateCustomGroup={setCustomGroup}
-        updateSelectedGroup={handleSelectedGroupChange}
-      />
       <div css={styles.buttonBar}>
         <div css={styles.buttonBarLeft}>
           <Button
@@ -609,16 +519,10 @@ const ListViewTable = ({
         columns={columns}
         css={styles.table}
         data={dataForTable}
-        fallbackContent={
-          <div css={styles.fallbackContent}>
-            {fallbackBigText}
-            {fallbackSmallText}
-          </div>
-        }
         footerData={footerData}
         minHeight={400}
         paginate={true}
-        showFooter={selectedGroup !== NO_SELECTED_GROUP && Object.keys(footerData).length > 0}
+        // showFooter={ /* TODO */ } // TODO TODO TODO
         sortByDir={sortDir}
         sortByKey={sortKey}
         updateSortByDir={setSortDir}
