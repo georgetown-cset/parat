@@ -105,6 +105,33 @@ const styles = {
   `,
 };
 
+/**
+ * @typedef {string} ColumnKey The `key` property for a defined column
+ * @typedef {Array<string>} FilterDropdownValue The selected element(s) from a dropdown
+ * @typedef {[number, number]} FilterSliderValue The upper and lower bounds of a slider-based filter.
+ */
+
+/**
+ * A read-only version of the currently-applied filters, in a format that is
+ * easier to access.
+ * @typedef {{
+ *    _companies: FilterDropdownValue | FilterSliderValue,
+ *    _groups: FilterDropdownValue | FilterSliderValue,
+ *    [key: ColumnKey]: FilterDropdownValue | FilterSliderValue,
+ * }} CurrentFiltersObject
+ * @readonly
+ */
+
+/**
+ * The current, definitive source for filter values, including access to the
+ * setters for updating filters.
+ * @typedef {{
+ *    [key: ColumnKey]: {
+ *      get get(): FilterDropdownValue | FilterSliderValue;
+ *      set: (newVal: FilterDropdownValue | FilterSliderValue) => void;
+ *    }
+ * }} FilterStateObject
+ */
 
 const GROUPS_OPTIONS = Object.entries(overallData.groups).map(([k, v]) => ({ text: v, val: `GROUP:${k}` }));
 
@@ -232,7 +259,47 @@ const filterRow = (row, filters) => {
 };
 
 
+/**
+ * Extract the current state of the filters and present them in a format that is
+ * easier to understand.
+ *
+ * @param {FilterStateObject} filters A `filters` object, as created by `useMultiState` and `useQueryParamString`.
+ * @returns {CurrentFiltersObject} A read-only version of the current state of the filters
+ * @readonly
+ */
+const extractCurrentFilters = (filters) => {
+  return Object.freeze(
+    Object.fromEntries(
+      Object.entries(filters)
+        .flatMap( ([key, { get }]) => {
+          if ( key === 'name' ) {
+            const groups = [];
+            const nonGroups = [];
+            get.forEach((entry) => {
+              if ( entry.startsWith('GROUP:') ) {
+                groups.push(entry.slice(6));
+              } else {
+                nonGroups.push(entry);
+              }
+            });
+            return [
+              [key, get],
+              ['_groups', groups],
+              ['_companies', nonGroups],
+            ];
+          } else {
+            return [
+              [key, get],
+            ];
+          }
+        })
+    )
+  );
+};
+
+
 export const exportsForTestingOnly = {
+  extractCurrentFilters,
   filterRow,
 };
 
@@ -284,33 +351,7 @@ const ListViewTable = ({
 
   // Read-only object of the currently-set values of the filters
   const currentFilters = useMemo(
-    () => {
-      return Object.fromEntries(
-        Object.entries(filters)
-          .flatMap( ([key, { get }]) => {
-            if ( key === 'name' ) {
-              const groups = [];
-              const nonGroups = [];
-              get.forEach((entry) => {
-                if ( entry.startsWith('GROUP:') ) {
-                  groups.push(entry.slice(6));
-                } else {
-                  nonGroups.push(entry);
-                }
-              });
-              return [
-                [key, get],
-                ['_groups', groups],
-                ['_companies', nonGroups],
-              ];
-            } else {
-              return [
-                [key, get],
-              ];
-            }
-          })
-      );
-    },
+    () => extractCurrentFilters(filters),
     [filters]
   );
 
