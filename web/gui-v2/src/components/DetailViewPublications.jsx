@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 
 import { Dropdown } from '@eto/eto-ui-components';
 
-import Chart from './DetailViewChart';
 import HeaderWithLink from './HeaderWithLink';
 import StatGrid from './StatGrid';
 import TableSection from './TableSection';
@@ -12,7 +11,6 @@ import TrendsChart from './TrendsChart';
 import overall from '../static_data/overall_data.json';
 import { articleMap } from '../static_data/table_columns';
 import { commas } from '../util';
-import { assemblePlotlyParams } from '../util/plotly-helpers';
 
 const styles = {
   noTopMargin: css`
@@ -119,27 +117,6 @@ const DetailViewPublications = ({
     { text: "Robotics", val: "robotics_pubs" },
   ];
 
-  const aiSubfieldChartData = assemblePlotlyParams(
-    "Trends in research....",
-    overall.years,
-    [
-      [
-        aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
-        data.articles[aiSubfield].counts
-      ],
-    ],
-    chartLayoutChanges,
-  );
-
-  const topConfs = assemblePlotlyParams(
-    <>{data.name}'s top AI conference publications</>,
-    overall.years,
-    [
-      ["AI top conference publications", data.articles.ai_pubs_top_conf.counts],
-    ],
-    chartLayoutChanges,
-  );
-
   return (
     <>
       <HeaderWithLink css={styles.noTopMargin} title="Publications" />
@@ -161,8 +138,15 @@ const DetailViewPublications = ({
 
       <TrendsChart
         css={styles.section}
-        {...aiSubfieldChartData}
+        data={[
+          [
+            aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
+            data.articles[aiSubfield].counts
+          ],
+        ]}
         id="ai-subfield-research"
+        layoutChanges={chartLayoutChanges}
+        partialStartIndex={endIx}
         title={
           <>
             Trends in {data.name}'s research in
@@ -176,11 +160,20 @@ const DetailViewPublications = ({
             />
           </>
         }
+        years={overall.years}
       />
 
-      <div css={styles.section}>
-        <Chart {...topConfs} id="ai-top-conference-pubs" />
-      </div>
+      <TrendsChart
+        css={styles.section}
+        data={[
+          ["AI top conference publications", data.articles.ai_pubs_top_conf.counts],
+        ]}
+        id="ai-top-conference-pubs-2"
+        layoutChanges={chartLayoutChanges}
+        partialStartIndex={endIx}
+        title={<>{data.name}'s top AI conference publications</>}
+        years={overall.years}
+      />
     </>
   );
 };

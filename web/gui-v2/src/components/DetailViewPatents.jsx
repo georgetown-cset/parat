@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { Autocomplete, Dropdown } from '@eto/eto-ui-components';
+import { Autocomplete } from '@eto/eto-ui-components';
 
 import HeaderWithLink from './HeaderWithLink';
 import StatGrid from './StatGrid';
@@ -11,7 +11,6 @@ import TrendsChart from './TrendsChart';
 import overall from '../static_data/overall_data.json';
 import { patentMap } from '../static_data/table_columns';
 import { commas } from '../util';
-import { assemblePlotlyParams } from '../util/plotly-helpers';
 
 const styles = {
   section: css`
@@ -123,18 +122,6 @@ const DetailViewPatents = ({
     .map(k => ({ text: patentMap[k].replace(/ patents/i, ''), val: k }))
     .sort((a, b) => a.text.localeCompare(b.text, 'en', { sensitivity: 'base' }));
 
-  const aiSubfieldChartData = assemblePlotlyParams(
-    "Trends in research....",
-    overall.years,
-    [
-      [
-        aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
-        data.patents[aiSubfield].counts
-      ],
-    ],
-    chartLayoutChanges,
-  );
-
   return (
     <>
       <HeaderWithLink title="Patents" />
@@ -164,8 +151,15 @@ const DetailViewPatents = ({
 
       <TrendsChart
         css={styles.section}
-        {...aiSubfieldChartData}
+        data={[
+          [
+            aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
+            data.patents[aiSubfield].counts
+          ],
+        ]}
         id="ai-subfield-patents"
+        layoutChanges={chartLayoutChanges}
+        partialStartIndex={endIx}
         title={
           <>
             Trends in {data.name}'s patenting in
@@ -179,6 +173,7 @@ const DetailViewPatents = ({
             />
           </>
         }
+        years={overall.years}
       />
     </>
   );
