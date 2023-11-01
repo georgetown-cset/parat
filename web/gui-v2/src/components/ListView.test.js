@@ -1,4 +1,5 @@
 import React from 'react';
+import { CacheProvider } from '@emotion/react';
 import {
   getByRole,
   getByText,
@@ -6,7 +7,7 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 
-import { userEventSetup } from '../util/testing';
+import { emotionCache, userEventSetup } from '../util/testing';
 import ListView from './ListView';
 import { exportsForTestingOnly } from './ListViewTable';
 
@@ -18,7 +19,9 @@ const REMOVED_COLUMN = 'AI publications';
 describe("ListView", () => {
   it("adjust filters and reset dropdown filters", async () => {
     const { user } = userEventSetup(
-      <ListView />
+      <CacheProvider value={emotionCache}>
+        <ListView />
+      </CacheProvider>
     );
 
     // Filter by Europe and verify that the count updates
@@ -37,7 +40,9 @@ describe("ListView", () => {
 
   it("selects a group of companies", async () => {
     const { user } = userEventSetup(
-      <ListView />
+      <CacheProvider value={emotionCache}>
+        <ListView />
+      </CacheProvider>
     );
 
     const companyHeader = screen.getByRole('columnheader', { name: /company/i });
@@ -51,7 +56,9 @@ describe("ListView", () => {
   describe("add/remove columns dialog", () => {
     it("opens the dialog and changes columns", async () => {
       const { user } = userEventSetup(
-        <ListView />
+        <CacheProvider value={emotionCache}>
+          <ListView />
+        </CacheProvider>
       );
 
       for ( const column of INITIAL_COLUMNS ) {
