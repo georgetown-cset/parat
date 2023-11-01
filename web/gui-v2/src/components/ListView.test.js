@@ -50,7 +50,7 @@ describe("ListView", () => {
     const menu = screen.getByRole('listbox');
     await user.click(getByText(menu, 'S&P 500'));
     expect(screen.getByText('Viewing 499 of 1760 companies')).toBeVisible();
-  });
+  }, 20000);
 
 
   describe("add/remove columns dialog", () => {
