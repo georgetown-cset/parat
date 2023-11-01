@@ -78,7 +78,7 @@ describe("ListView", () => {
       await user.click(removedCheckbox);
       expect(removedCheckbox.checked).toEqual(false);
       await user.click(getByRole(dialog, 'button', { name: 'Apply' }));
-      await waitForElementToBeRemoved(() => screen.getByRole('dialog'));
+      await waitForElementToBeRemoved(screen.getByRole('dialog'));
       expect(screen.queryByRole('heading', { name: 'Add/remove columns'})).not.toBeInTheDocument();
 
       // Verify that the changes took effect
