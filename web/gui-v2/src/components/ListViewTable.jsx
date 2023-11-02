@@ -184,8 +184,7 @@ const listToDropdownOptions = (list) => {
 }
 
 const AGGREGATE_SUM_COLUMNS = [
-  'ai_pubs',
-  'ai_patents',
+  ...SLIDER_COLUMNS,
 ];
 
 /**
@@ -563,7 +562,7 @@ const ListViewTable = ({
         footerData={footerData}
         minHeight={400}
         paginate={true}
-        // showFooter={ /* TODO */ } // TODO TODO TODO
+        showFooter={currentFilters.name.length > 0}
         sortByDir={sortDir}
         sortByKey={sortKey}
         updateSortByDir={setSortDir}
