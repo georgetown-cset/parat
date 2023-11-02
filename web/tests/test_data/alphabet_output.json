@@ -1,6 +1,7 @@
 {
   "cset_id": 796,
   "country": "United States",
+  "sector": "Sector1",
   "website": "https://abc.xyz/",
   "crunchbase": {
     "text": "096694c6-bcd2-a975-b95c-fab77c81d915",
@@ -406,6 +407,23 @@
       "total": 6087,
       "isTopResearch": false
     },
+    "highly_cited": {
+      "counts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "isTopResearch": false,
+      "total": 22
+    },
     "cv_pubs": {
       "counts": [
         0,
@@ -475,6 +493,27 @@
       ],
       "total": 968,
       "table": null
+    },
+    "ai_patent_applications": {
+      "table": null,
+      "total": 42
+    },
+    "all_patents": {
+      "counts": [
+        220,
+        250,
+        610,
+        990,
+        1430,
+        1550,
+        2010,
+        1980,
+        640,
+        0,
+        0
+      ],
+      "table": null,
+      "total": 9680
     },
     "Physical_Sciences_and_Engineering": {
       "counts": [

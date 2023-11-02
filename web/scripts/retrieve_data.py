@@ -594,7 +594,16 @@ def get_category_counts(js: dict) -> None:
     :param js: A dict of data corresponding to an individual PARAT record
     :return: None (mutates js)
     """
-    articles = {}
+    # Spoof sector https://github.com/georgetown-cset/parat/issues/120
+    js["sector"] = f"Sector{js['cset_id'] % 3}"
+    articles = {
+        # spoof highly cited articles https://github.com/georgetown-cset/parat/issues/135
+        "highly_cited": {
+            "counts": [2 for _ in YEARS],
+            "total": 2*len(YEARS),
+            "isTopResearch": False
+        }
+    }
     ### Reformat publication-related metrics
     for machine_name, orig_key, count_key, is_top_research in [
         ["all_publications", "all_pubs_by_year", "all_pubs", False],
@@ -624,6 +633,15 @@ def get_category_counts(js: dict) -> None:
         "ai_patents": {
             "counts": counts,
             "total": total,
+        },
+        # spoof ai patent applications https://github.com/georgetown-cset/parat/issues/146
+        "ai_patent_applications": {
+            "total": 42,
+        },
+        # spoof all patents https://github.com/georgetown-cset/parat/issues/125
+        "all_patents": {
+            "counts": [10*c for c in counts],
+            "total": 10*total
         }
     }
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
@@ -714,6 +732,7 @@ def clean(refresh_images: bool) -> dict:
         #     group_data[GROUP_NAMES_TO_KEYS[row["name"]]].append(row)
         # else:
         #     company_rows.append(row)
+        # spoof group-level stats - https://github.com/georgetown-cset/parat/issues/123
         company_rows.append(row)
         if row["name"] == "Google":
             sp500 = copy.deepcopy(row)

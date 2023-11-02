@@ -1,6 +1,7 @@
 {
   "cset_id": 1425,
   "country": "United States",
+  "sector": "Sector0",
   "website": "https://huggingface.co/",
   "crunchbase": {
     "text": "b7947f18-b199-45ac-b7da-66f5c52fcfbc",
@@ -295,6 +296,23 @@
       "total": 2993,
       "isTopResearch": false
     },
+    "highly_cited": {
+      "counts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "isTopResearch": false,
+      "total": 22
+    },
     "cv_pubs": {
       "counts": [
         0,
@@ -364,6 +382,27 @@
       ],
       "total": 0,
       "table": null
+    },
+    "ai_patent_applications": {
+      "table": null,
+      "total": 42
+    },
+    "all_patents": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table": null,
+      "total": 0
     },
     "Physical_Sciences_and_Engineering": {
       "counts": [
