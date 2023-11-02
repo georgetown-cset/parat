@@ -75,7 +75,7 @@ const columnDefinitions = [
     initialCol: true,
     minWidth: 240,
     sortable: true,
-    type: 'dropdown',
+    type: 'companyName',
   },
   {
     title: "Country",

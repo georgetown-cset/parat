@@ -17,11 +17,9 @@ import {
 } from '@eto/eto-ui-components';
 
 import AddRemoveColumnDialog from './AddRemoveColumnDialog';
-import { splitCustomGroup } from './EditCustomCompanyGroupDialog';
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
-import GroupSelector, { NO_SELECTED_GROUP, USER_CUSTOM_GROUP } from './ListViewGroupSelector';
-import groupsList from '../static_data/groups';
+import overallData from '../static_data/overall_data.json';
 import columnDefinitions from '../static_data/table_columns';
 import {
   commas,
@@ -107,6 +105,35 @@ const styles = {
   `,
 };
 
+/**
+ * @typedef {string} ColumnKey The `key` property for a defined column
+ * @typedef {Array<string>} FilterDropdownValue The selected element(s) from a dropdown
+ * @typedef {[number, number]} FilterSliderValue The upper and lower bounds of a slider-based filter.
+ */
+
+/**
+ * A read-only version of the currently-applied filters, in a format that is
+ * easier to access.
+ * @typedef {{
+ *    _companies: FilterDropdownValue | FilterSliderValue,
+ *    _groups: FilterDropdownValue | FilterSliderValue,
+ *    [key: ColumnKey]: FilterDropdownValue | FilterSliderValue,
+ * }} CurrentFiltersObject
+ * @readonly
+ */
+
+/**
+ * The current, definitive source for filter values, including access to the
+ * setters for updating filters.
+ * @typedef {{
+ *    [key: ColumnKey]: {
+ *      get get(): FilterDropdownValue | FilterSliderValue;
+ *      set: (newVal: FilterDropdownValue | FilterSliderValue) => void;
+ *    }
+ * }} FilterStateObject
+ */
+
+const GROUPS_OPTIONS = Object.entries(overallData.groups).map(([k, v]) => ({ text: v, val: `GROUP:${k}` }));
 
 const DATAKEYS_WITH_SUBKEYS = [
   "articles",
@@ -123,7 +150,7 @@ columnDefinitions.forEach((colDef) => {
   if ( colDef?.initialCol ) {
     DEFAULT_COLUMNS.push(colDef.key);
   }
-  if ( colDef.type === "dropdown" ) {
+  if ( colDef.type === "companyName" || colDef.type === "dropdown" ) {
     DROPDOWN_COLUMNS.push(colDef.key);
   } else if ( colDef.type === "slider" ) {
     SLIDER_COLUMNS.push(colDef.key);
@@ -161,21 +188,18 @@ const AGGREGATE_SUM_COLUMNS = [
   'ai_patents',
 ];
 
-// Determine whether a given row matches the filters and/or selected group
-const filterRow = (row, filters, selectedGroupMembers) => {
+/**
+ * Determine whether a given row matches the filters
+ *
+ * @param {object} row A company detail object
+ * @param {object} filters The currently-active filters
+ * @returns {boolean} `true` if the row matches the filters, `false` otherwise
+ */
+const filterRow = (row, filters) => {
   const filterKeys = Object.keys(filters);
 
-  if ( selectedGroupMembers === null ) {
-    return false;
-  } else if ( Array.isArray(selectedGroupMembers) ) {
-    if ( selectedGroupMembers.length == 0 ) {
-      return false;
-    } else if ( !selectedGroupMembers.includes(row.cset_id) ) {
-      return false;
-    }
-  }
-
   for ( const colDef of columnDefinitions ) {
+    // Ignore columns that are not filterable
     if ( !filterKeys.includes(colDef.key) ) {
       continue;
     }
@@ -189,7 +213,28 @@ const filterRow = (row, filters, selectedGroupMembers) => {
     }
     const rowVal = colDef?.extract?.(rawVal, row) ?? rawVal;
 
-    if ( colDef.type === "dropdown" ) {
+    if ( colDef.type === "companyName" ) {
+      if ( filters?.[colDef.key].length > 0 ) {
+        // We want to include a row (i.e. a company) if either condition is met:
+        //   1) Any "GROUP:*" entry in the filter matches with the row
+        //   2) The company name is in filter array
+        // If **NEITHER** condition is met, the row shouldn't be included, and
+        // therefore we return `false`.  Otherwise, we do nothing and let later
+        // columns do their checks.
+
+        let inSelectedGroup = false;
+        for ( const group of filters._groups ) {
+          if ( row.groups[group] ) {
+            inSelectedGroup = true;
+          }
+        }
+        const inFilteredCompanies = filters._companies.includes(rowVal);
+
+        if ( ! (inSelectedGroup || inFilteredCompanies) ) {
+          return false;
+        }
+      }
+    } else if ( colDef.type === "dropdown" ) {
       if ( filters?.[colDef.key].length > 0 ) {
         if ( ! filters?.[colDef.key].includes(rowVal) ) {
           return false;
@@ -206,11 +251,56 @@ const filterRow = (row, filters, selectedGroupMembers) => {
         return false;
       }
     } else {
-      console.error(`Invalid column type for key '${colDef.key}': column.type should be either "dropdown" or "slider" but is instead "${colDef.type}"`);
+      console.error(`Invalid column type for key '${colDef.key}': column.type should be either "companyName", "dropdown", or "slider" but is instead "${colDef.type}"`);
     }
   }
 
   return true;
+};
+
+
+/**
+ * Extract the current state of the filters and present them in a format that is
+ * easier to understand.
+ *
+ * @param {FilterStateObject} filters A `filters` object, as created by `useMultiState` and `useQueryParamString`.
+ * @returns {CurrentFiltersObject} A read-only version of the current state of the filters
+ * @readonly
+ */
+const extractCurrentFilters = (filters) => {
+  return Object.freeze(
+    Object.fromEntries(
+      Object.entries(filters)
+        .flatMap( ([key, { get }]) => {
+          if ( key === 'name' ) {
+            const groups = [];
+            const nonGroups = [];
+            get.forEach((entry) => {
+              if ( entry.startsWith('GROUP:') ) {
+                groups.push(entry.slice(6));
+              } else {
+                nonGroups.push(entry);
+              }
+            });
+            return [
+              [key, get],
+              ['_groups', groups],
+              ['_companies', nonGroups],
+            ];
+          } else {
+            return [
+              [key, get],
+            ];
+          }
+        })
+    )
+  );
+};
+
+
+export const exportsForTestingOnly = {
+  extractCurrentFilters,
+  filterRow,
 };
 
 
@@ -224,21 +314,12 @@ const ListViewTable = ({
   const [sortKey, setSortKey] = useState('ai_pubs');
   const isFirstRender = useRef(true);
 
-  const [selectedGroup, setSelectedGroup] = useQueryParamString('group', NO_SELECTED_GROUP);
-
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
   // filters when looking at the URL, so it makes sense that filter params like
   // 'ai_pubs' are at the beginning of the URL, which is more directly visible
   // to users. (`useQueryParamString` appears to order the params alphabetically)
   const [columnsParam, setColumnsParam] = useQueryParamString('zz_columns', DEFAULT_COLUMNS.join(','));
-
-  // Custom, user-defined group of companies.  Again naming the key to keep it
-  // after the filter parameters.  The 'Retained' version is for preserving the
-  // custom group composition when the user is viewing a different group
-  // (see `handleSelectedGroupChange()`).
-  const [customGroup, setCustomGroup] = useQueryParamString('zc_companies', '');
-  const [customGroupRetained, setCustomGroupRetained] = useState('');
 
   // Store filters via the URL parameters, making the values (and setters)
   // accessible via an object.
@@ -270,72 +351,8 @@ const ListViewTable = ({
 
   // Read-only object of the currently-set values of the filters
   const currentFilters = useMemo(
-    () => {
-      return Object.fromEntries(
-        Object.entries(filters).map( ([k, { get }]) => ([k, get]) )
-      );
-    },
+    () => extractCurrentFilters(filters),
     [filters]
-  );
-
-  /**
-   * When the user switches from a custom group to a pre-defined group, save the
-   * companies that they included in the custom group in a separate state
-   * variable (that is not connected to the displayed URL).  Restore the company
-   * list when they return to custom group view.  This ensures that the custom
-   * group remains available to the user, but that it's only in the shared URL
-   * when the user is specifically in custom group mode.
-   */
-  const handleSelectedGroupChange = (newGroup) => {
-    if ( newGroup !== selectedGroup ) {
-      if ( newGroup === USER_CUSTOM_GROUP ) {
-        if ( customGroupRetained !== '' ) {
-          setCustomGroup(customGroupRetained);
-          setCustomGroupRetained('');
-        }
-      } else {
-        if ( selectedGroup === USER_CUSTOM_GROUP ) {
-          setCustomGroupRetained(customGroup);
-          setCustomGroup('');
-        }
-      }
-    }
-
-    setSelectedGroup(newGroup);
-  };
-
-
-  /**
-   * The list of companies included in the currently-selected group.
-   *
-   * Cases and values:
-   *  - Pre-defined group - an array of cset_id values
-   *  - Custom group - an array of cset_id values
-   *  - No selected group - false
-   *  - Invalid group - null
-   */
-  const selectedGroupMembers = useMemo(
-    () => {
-      if ( selectedGroup === NO_SELECTED_GROUP ) {
-        return false;
-      } else if ( selectedGroup === USER_CUSTOM_GROUP ) {
-        return splitCustomGroup(customGroup);
-      } else if ( selectedGroup in groupsList ) {
-        // Valid pre-defined groups
-        return groupsList[selectedGroup].members;
-      } else {
-        // Invalid group
-        return null;
-      }
-    },
-    [selectedGroup, customGroup]
-  );
-
-  const companyList = useMemo(
-    () => {
-      return data.map(({ cset_id, name, country }) => ({ cset_id, name, country }));
-    },
-    [data]
   );
 
   const handleDropdownChange = (columnKey, newVal) => {
@@ -355,7 +372,7 @@ const ListViewTable = ({
   };
 
   // Filter the data for display.
-  const dataForTable = data.filter(row => filterRow(row, currentFilters, selectedGroupMembers));
+  const dataForTable = data.filter(row => filterRow(row, currentFilters));
   const numRows = dataForTable.length;
   const totalRows = data.length;
 
@@ -378,7 +395,7 @@ const ListViewTable = ({
           // the other active filters.
           return (
             numRows === 0 ||
-            filterRow(row, otherFilters, selectedGroupMembers)
+            filterRow(row, otherFilters)
           );
         });
 
@@ -387,6 +404,15 @@ const ListViewTable = ({
             .filter(e => e !== null)
             .sort()
         );
+
+        if ( column === "name" ) {
+          results[column] = [
+            { header: "Groups of companies" },
+            ...GROUPS_OPTIONS,
+            { header: "Companies" },
+            ...results[column],
+          ];
+        }
       }
 
       return results;
@@ -403,6 +429,7 @@ const ListViewTable = ({
     .map((colDef) => {
       let display_name;
       switch ( colDef.type ) {
+        case 'companyName':
         case 'dropdown':
           let dropdownWidth;
           if ( colDef?.minWidth ) {
@@ -454,7 +481,6 @@ const ListViewTable = ({
     columnDefinitions.forEach((colDef) => {
       filters[colDef.key]?.set(resetVal(colDef.key));
     });
-    setSelectedGroup(NO_SELECTED_GROUP);
   };
 
   // On the first render we don't want to trigger the Plausible event (since it's
@@ -496,25 +522,8 @@ const ListViewTable = ({
       .map(([key, data]) => [key, <>Total: {commas(data)}</>])
   );
 
-  let fallbackBigText = <big>No results found</big>;
-  let fallbackSmallText = <span>Try adjusting your filters to get more results</span>;
-  if ( selectedGroupMembers === null ) {
-    fallbackSmallText = <span>Invalid group '{selectedGroup}' selected &ndash; try another group</span>;
-  } else if ( selectedGroup === USER_CUSTOM_GROUP && selectedGroupMembers.length === 0 ) {
-    fallbackBigText = <big>No companies selected</big>
-    fallbackSmallText = <span>Click 'Edit custom group' to add companies to this group and get results</span>
-  }
-
   return (
     <div id="table" className="list-view-table" data-testid="list-view-table">
-      <GroupSelector
-        companyList={companyList}
-        customGroup={customGroup}
-        groupsList={groupsList}
-        selectedGroup={selectedGroup}
-        updateCustomGroup={setCustomGroup}
-        updateSelectedGroup={handleSelectedGroupChange}
-      />
       <div css={styles.buttonBar}>
         <div css={styles.buttonBarLeft}>
           <Button
@@ -551,15 +560,10 @@ const ListViewTable = ({
         columns={columns}
         css={styles.table}
         data={dataForTable}
-        fallbackContent={
-          <div css={styles.fallbackContent}>
-            {fallbackBigText}
-            {fallbackSmallText}
-          </div>
-        }
         footerData={footerData}
+        minHeight={400}
         paginate={true}
-        showFooter={selectedGroup !== NO_SELECTED_GROUP && Object.keys(footerData).length > 0}
+        // showFooter={ /* TODO */ } // TODO TODO TODO
         sortByDir={sortDir}
         sortByKey={sortKey}
         updateSortByDir={setSortDir}
