@@ -1,5 +1,6 @@
 import argparse
 import chardet
+import copy
 import csv
 import json
 import math
@@ -63,11 +64,6 @@ FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", 
 APPLICATION_PATENT_CATEGORIES = {"Language_Processing", "Speech_Processing", "Knowledge_Representation", "Planning_and_Scheduling", "Control", "Distributed_AI", "Robotics", "Computer_Vision", "Analytics_and_Algorithms", "Measuring_and_Testing"}
 INDUSTRY_PATENT_CATEGORIES = {"Physical_Sciences_and_Engineering", "Life_Sciences", "Security__eg_cybersecurity", "Transportation", "Industrial_and_Manufacturing", "Education", "Document_Mgt_and_Publishing", "Military", "Agricultural", "Computing_in_Government", "Personal_Devices_and_Computing", "Banking_and_Finance", "Telecommunications", "Networks__eg_social_IOT_etc", "Business", "Energy_Management", "Entertainment", "Nanotechnology", "Semiconductors"}
 
-GROUPS_TO_NAMES = {
-    "sp500": "S&P 500",
-    "global500": "Fortune Global 500"
-}
-
 ARTICLE_METRICS = "articles"
 PATENT_METRICS = "patents"
 OTHER_METRICS = "other_metrics"
@@ -76,6 +72,11 @@ METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
 _curr_time = datetime.now()
 CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
 YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
+
+GROUP_NAMES_TO_KEYS = {
+    "S&P 500": "sp500",
+    "Fortune Global 500": "global500"
+}
 
 ### END CONSTANTS ###
 
@@ -683,12 +684,12 @@ def clean_link(link: str) -> str:
     return link
 
 
-def clean(refresh_images: bool) -> None:
+def clean(refresh_images: bool) -> dict:
     """
     Reads and cleans the raw data from the local cache
     :param refresh_images: if true, will re-download all the company logos from crunchbase; don't call with true
     unless necessary
-    :return: None
+    :return: Return company-like metadata for groups
     """
     rows = []
     lowercase_to_orig_cname = {}
@@ -706,13 +707,33 @@ def clean(refresh_images: bool) -> None:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
     add_supplemental_descriptions(rows)
     add_ranks(rows)
+    company_rows, group_data = [], {}
+    for row in rows:
+        # The final implementation will be more like the below, but spoofing this for now
+        # if row["name"] in GROUP_NAMES_TO_KEYS:
+        #     group_data[GROUP_NAMES_TO_KEYS[row["name"]]].append(row)
+        # else:
+        #     company_rows.append(row)
+        company_rows.append(row)
+        if row["name"] == "Google":
+            sp500 = copy.deepcopy(row)
+            sp500["name"] = "S&P 500"
+            sp500["cset_id"] = 100500
+            group_data["sp500"] = sp500
+        elif row["name"] == "Microsoft":
+            global500 = copy.deepcopy(row)
+            global500["name"] = "Fortune Global 500"
+            global500["cset_id"] = 100501
+            group_data["global500"] = global500
     with open(os.path.join(WEB_SRC_DIR, "static_data", "data.js"), mode="w") as out:
-        out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
+        out.write(f"const company_data = {json.dumps(company_rows)};\n\nexport {{ company_data }};")
+    return group_data
 
 
-def update_overall_data() -> None:
+def update_overall_data(group_data: dict) -> None:
     """
     Generate top-level data that is not specific to a particular company or metric
+    :param group_data: dict mapping group keys to company-like data for those groups
     :return: None
     """
     overall_data = {
@@ -721,7 +742,7 @@ def update_overall_data() -> None:
         "endArticleYear": CURRENT_YEAR - 1,
         "startPatentYear": CURRENT_YEAR - 6,
         "endPatentYear": CURRENT_YEAR - 3,
-        "groups": GROUPS_TO_NAMES
+        "groups": group_data
     }
     with open(os.path.join(WEB_SRC_DIR, "static_data", "overall_data.json"), mode="w") as out:
         out.write(json.dumps(overall_data))
@@ -743,5 +764,5 @@ if __name__ == "__main__":
 
     if args.refresh_raw:
         retrieve_raw(args.refresh_market_links)
-    clean(args.refresh_images)
-    update_overall_data()
+    group_data = clean(args.refresh_images)
+    update_overall_data(group_data)
