@@ -526,6 +526,12 @@ const ListViewTable = ({
     <div id="table" className="list-view-table" data-testid="list-view-table">
       <div css={styles.buttonBar}>
         <div css={styles.buttonBarLeft}>
+          <Typography>
+            {windowSize >= 430 && <>Viewing </>}
+            {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
+          </Typography>
+        </div>
+        <div css={styles.buttonBarRight}>
           <Button
             css={styles.buttonBarButton}
             onClick={resetFilters}
@@ -535,13 +541,7 @@ const ListViewTable = ({
               Reset filters
             </span>
           </Button>
-          <Typography>
-            {windowSize >= 430 && <>Viewing </>}
-            {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
-          </Typography>
-        </div>
-        <div css={styles.buttonBarRight}>
-          {/* TODO: enable once downloads are possible */}
+          {/* TODO: enable once downloads are possible - see #96 and #166 */}
           <Button css={styles.buttonBarButton} disabled>
             <DownloadIcon />
             <span className={classes([windowSize < 780 && "sr-only"])}>
