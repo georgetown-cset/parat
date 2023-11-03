@@ -7,6 +7,8 @@ import { slugifyCompanyName } from '../util';
 
 const startArticleIx = overall.years.findIndex(e => e === overall.startArticleYear);
 const endArticleIx = overall.years.findIndex(e => e === overall.endArticleYear);
+const startPatentIx = overall.years.findIndex(e => e === overall.startPatentYear);
+const endPatentIx = overall.years.findIndex(e => e === overall.endPatentYear);
 
 const styles = {
   name: css`
@@ -98,14 +100,13 @@ const columnDefinitions = [
     minWidth: 120,
     type: 'dropdown',
   },
-  // TODO, pending #120 adding `sector` data
-  // {
-  //   title: "Sector",
-  //   key: "sector",
-  //   initialCol: false,
-  //   minWidth: 200,
-  //   type: 'dropdown',
-  // },
+  {
+    title: "Sector",
+    key: "sector",
+    initialCol: false,
+    minWidth: 200,
+    type: 'dropdown',
+  },
 
   {
     title: "All publications",
@@ -179,23 +180,40 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "robotics_pubs"),
   },
 
-  // TODO, pending #125 adding the `all_patents` data
-  // {
-  //   title: "5-year growth in patents",
-  //   key: "all_patents_growth",
-  //   ...generateSliderColDef(
-  //     "patents",
-  //     "all_patents",
-  //     ((_val, row) => 1234), // TODO
-  //     (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
-  //   ),
-  //   isGrowthStat: true,
-  // },
+  {
+    title: "All patents",
+    key: "all_patents",
+    ...generateSliderColDef("patents", "all_patents"),
+  },
+  {
+    title: "5-year growth in patents",
+    key: "all_patents_growth",
+    ...generateSliderColDef(
+      "patents",
+      "all_patents",
+      ((_val, row) => {
+        const data = row.patents.all_patents;
+        const startVal = data.counts[startPatentIx];
+        return Math.round((data.counts[endPatentIx] - startVal) / startVal * 1000) / 10;
+      }),
+      (val, row, extract) => {
+        const extractedVal = extract(val, row);
+        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
+        return <CellStat data={{ total }} />
+      },
+    ),
+    isGrowthStat: true,
+  },
   {
     title: "AI patents",
     key: "ai_patents",
     ...generateSliderColDef("patents", "ai_patents"),
     initialCol: true,
+  },
+  {
+    title: "Applications for AI patents",
+    key: "ai_patent_applications",
+    ...generateSliderColDef("patents", "ai_patent_applications"),
   },
   {
     title: "Agricultural patents",
