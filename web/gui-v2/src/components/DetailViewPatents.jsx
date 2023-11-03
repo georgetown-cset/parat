@@ -57,7 +57,8 @@ const DetailViewPatents = ({
 
   const aiPatentStart = data.patents.ai_patents.counts[startIx];
   const aiPatentEnd = data.patents.ai_patents.counts[endIx];
-  const aiPatentGrowth = Math.round((aiPatentEnd - aiPatentStart) / aiPatentStart * 1000) / 10
+  const aiPatentGrowth = Math.round((aiPatentEnd - aiPatentStart) / aiPatentStart * 1000) / 10;
+  const aiPatentPercent = Math.round(data.patents.ai_patents.total / data.patents.all_patents.total * 1000) / 10
 
   const statGridEntries = [
     {
@@ -77,7 +78,7 @@ const DetailViewPatents = ({
     },
     {
       key: "ai-focused-percent",
-      stat: <>NUM%</>,
+      stat: <>{aiPatentPercent}%</>,
       text: <>of {data.name}'s total patenting was AI-focused</>,
     },
   ];

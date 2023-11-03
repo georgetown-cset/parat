@@ -114,6 +114,21 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "all_publications"),
   },
   {
+    title: "5-year total publications",
+    key: "all_pubs_5yr",
+    ...generateSliderColDef(
+      "articles",
+      "all_publications",
+      ((_val, row) => {
+        const data = row.articles.all_publications;
+        return data.counts.slice(startArticleIx, endArticleIx+1).reduce((acc, curr) => acc + curr);
+      }),
+      (val, row, extract) => {
+        return <CellStat data={{ total: extract(val, row) }} />;
+      },
+    ),
+  },
+  {
     title: "5-year growth in publications",
     key: "all_pubs_growth",
     ...generateSliderColDef(
@@ -142,6 +157,22 @@ const columnDefinitions = [
     key: "ai_pubs",
     ...generateSliderColDef("articles", "ai_publications"),
     initialCol: true,
+  },
+  {
+    title: "AI publication percentage",
+    key: "ai_pubs_percent",
+    ...generateSliderColDef(
+      "articles",
+      "ai_pubs",
+      ((_val, row) => {
+        return Math.round(row.articles.ai_publications.total / row.articles.all_publications.total * 1000) / 10;
+      }),
+      (val, row, extract) => {
+        const extractedVal = extract(val, row);
+        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
+        return <CellStat data={{ total }} />
+      },
+    ),
   },
   // TODO, pending clarification of intent
   // {
@@ -186,6 +217,21 @@ const columnDefinitions = [
     ...generateSliderColDef("patents", "all_patents"),
   },
   {
+    title: "5-year total patents",
+    key: "all_patents_5yr",
+    ...generateSliderColDef(
+      "patents",
+      "all_patents",
+      ((_val, row) => {
+        const data = row.patents.all_patents;
+        return data.counts.slice(startPatentIx, endPatentIx+1).reduce((acc, curr) => acc + curr);
+      }),
+      (val, row, extract) => {
+        return <CellStat data={{ total: extract(val, row) }} />;
+      },
+    ),
+  },
+  {
     title: "5-year growth in patents",
     key: "all_patents_growth",
     ...generateSliderColDef(
@@ -209,6 +255,22 @@ const columnDefinitions = [
     key: "ai_patents",
     ...generateSliderColDef("patents", "ai_patents"),
     initialCol: true,
+  },
+  {
+    title: "AI patent percentage",
+    key: "ai_patents_percent",
+    ...generateSliderColDef(
+      "patents",
+      "ai_patents",
+      ((_val, row) => {
+        return Math.round(row.patents.ai_patents.total / row.patents.all_patents.total * 1000) / 10;
+      }),
+      (val, row, extract) => {
+        const extractedVal = extract(val, row);
+        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
+        return <CellStat data={{ total }} />
+      },
+    ),
   },
   {
     title: "Applications for AI patents",
