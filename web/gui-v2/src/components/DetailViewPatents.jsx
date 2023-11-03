@@ -153,8 +153,16 @@ const DetailViewPatents = ({
         css={styles.section}
         data={[
           [
-            aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
+            `${aiSubfieldOptions.find(e => e.val === aiSubfield)?.text} patents at ${data.name}`,
             data.patents[aiSubfield].counts
+          ],
+          data.groups.sp500 && [
+            "S&P 500",
+            overall.groups.sp500.patents[aiSubfield].counts
+          ],
+          data.groups.global500 && [
+            "Fortune Global 500",
+            overall.groups.global500.patents[aiSubfield].counts
           ],
         ]}
         id="ai-subfield-patents"
@@ -165,6 +173,7 @@ const DetailViewPatents = ({
             Trends in {data.name}'s patenting in
             <Autocomplete
               css={styles.trendsDropdown}
+              disableClearable={true}
               inputLabel="patent subfield"
               options={aiSubfieldOptions}
               selected={aiSubfield}

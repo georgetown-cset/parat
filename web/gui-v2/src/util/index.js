@@ -4,6 +4,8 @@ import slugify from 'slugify';
 export { useMultiState } from './useMultiState';
 export { useWindowSize } from './useWindowSize';
 
+export const cleanFalse = (array) => array.filter(e => e !== false);
+
 export const commas = (num) => num?.toLocaleString() ?? "";
 
 export function debounce(callback, wait) {
