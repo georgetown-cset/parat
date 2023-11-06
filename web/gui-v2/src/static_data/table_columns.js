@@ -16,14 +16,23 @@ const styles = {
       width: 100%;
     }
   `,
-  sliderColumn: css`
-    min-width: 100px;
-    width: 120px;
+};
 
-    .MuiButtonBase-root {
-      width: 100%;
-    }
-  `,
+const columnWidth = (width, isSlider=false) => {
+  if ( isSlider ) {
+    return css`
+      min-width: ${width}px;
+      width: ${width}px;
+
+      .MuiButtonBase-root {
+        width: 100%;
+      }
+    `;
+  } else {
+    return css`
+      min-width: ${width}px;
+    `;
+  }
 };
 
 /**
@@ -86,7 +95,7 @@ const styles = {
  */
 const generateSliderColDef = (dataKey, dataSubkey, extractFn, formatFn) => {
   return {
-    css: styles.sliderColumn,
+    css: columnWidth(120, true),
     dataKey,
     dataSubkey,
     extract: extractFn ?? ((_val, row) => {
@@ -105,7 +114,7 @@ const columnDefinitions = [
   {
     title: "Company",
     key: "name",
-    css: styles.name,
+    css: [styles.name, columnWidth(200)],
     format: (name, row) => (
       <a
         target="_blank"
@@ -115,29 +124,32 @@ const columnDefinitions = [
       </a>
     ),
     initialCol: true,
-    minWidth: 240,
+    dropdownWidth: 240,
     sortable: true,
     type: 'companyName',
   },
   {
     title: "Country",
     key: "country",
+    css: columnWidth(120),
     initialCol: true,
-    minWidth: 180,
+    dropdownWidth: 180,
     type: 'dropdown',
   },
   {
     title: "Region",
     key: "continent",
+    css: columnWidth(100),
     initialCol: false,
-    minWidth: 170,
+    dropdownWidth: 170,
     type: 'dropdown',
   },
   {
     title: "Stage",
     key: "stage",
+    css: columnWidth(80),
     initialCol: false,
-    minWidth: 120,
+    dropdownWidth: 120,
     type: 'dropdown',
   },
   {
