@@ -27,6 +27,44 @@ const styles = {
 };
 
 /**
+ * Extract a complex result from the company data for the given column.  Can be
+ * used when a subkey is a more complex object, or in situations where the
+ * desired data is a combination of values from multiple keys/subkeys.
+ * @typedef {(val: any, row: object) => any} ExtractFn
+ */
+
+/**
+ * Format a cell's value, or the result of its `extract` function, for display
+ * in the list view table.
+ * @typedef {(val: any, row: object, extract: ExtractFn) => ReactNode} FormatFn
+ */
+
+/**
+ * The definition for each column of data presented in the list view.
+ *
+ * There are two types of columns - **inherent** and **derived**.  An inherent
+ * column directly uses values as they are within the data, perhaps with some
+ * minor extraction/formatting logic.  A derived column, however, does more
+ * extensive transforms, often including using the same underlying data as an
+ * inherent column but presenting it in a different manner.
+ * @typedef {{
+ *    css: SerializedStyles,
+ *    dataKey: string,
+ *    dataSubkey: string,
+ *    extract: ExtractFn,
+ *    format: FormatFn,
+ *    key: string,
+ *    initialCol: boolean,
+ *    isDerived?: boolean,
+ *    isGrowthStat?: boolean,
+ *    minWidth?: number,
+ *    sortable: boolean,
+ *    title: string,
+ *    type: 'dropdown'|'slider',
+ * }} ColumnDefinition
+ */
+
+/**
  * Helper function to define the `extract` and `format` functions of slider
  * fields in a consistent way across all columns.
  *
@@ -35,14 +73,15 @@ const styles = {
  * @param {undefined|(val: any, row: object) => any} extractFn
  * @param {undefined|(val: any, row: object, extract: ExtractFn) => ReactNode} formatFn
  * @returns {{
- *  css: SerializedStyles,
- *  dataKey: string,
- *  dataSubkey: string,
- *  extract: (val: any, row: object) => any,
- *  format: (val: any, row: object, extract: ExtractFn) => ReactNode,
- *  initialCol: boolean,
- *  sortable: boolean,
- *  type: 'dropdown'|'slider',
+ *    css: SerializedStyles,
+ *    dataKey: string,
+ *    dataSubkey: string,
+ *    extract: ExtractFn,
+ *    format: FormatFn,
+ *    initialCol: boolean,
+ *    isDerived: boolean,
+ *    sortable: boolean,
+ *    type: 'dropdown'|'slider',
  * }}
  */
 const generateSliderColDef = (dataKey, dataSubkey, extractFn, formatFn) => {
@@ -56,6 +95,7 @@ const generateSliderColDef = (dataKey, dataSubkey, extractFn, formatFn) => {
     }),
     format: formatFn ?? ((_val, row) => <CellStat data={row[dataKey][dataSubkey]} />),
     initialCol: false,
+    isDerived: false,
     sortable: true,
     type: 'slider',
   }
@@ -127,6 +167,7 @@ const columnDefinitions = [
         return <CellStat data={{ total: extract(val, row) }} />;
       },
     ),
+    isDerived: true,
   },
   {
     title: "5-year growth in publications",
@@ -145,6 +186,7 @@ const columnDefinitions = [
         return <CellStat data={{ total }} />;
       },
     ),
+    isDerived: true,
     isGrowthStat: true,
   },
   {
@@ -173,6 +215,7 @@ const columnDefinitions = [
         return <CellStat data={{ total }} />
       },
     ),
+    isDerived: true,
   },
   // TODO, pending clarification of intent
   // {
@@ -194,6 +237,7 @@ const columnDefinitions = [
       ((_val, row) => row.articles.ai_publications.counts[endArticleIx]),
       (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
     ),
+    isDerived: true,
   },
   {
     title: "CV publications",
@@ -230,6 +274,7 @@ const columnDefinitions = [
         return <CellStat data={{ total: extract(val, row) }} />;
       },
     ),
+    isDerived: true,
   },
   {
     title: "5-year growth in patents",
@@ -248,6 +293,7 @@ const columnDefinitions = [
         return <CellStat data={{ total }} />
       },
     ),
+    isDerived: true,
     isGrowthStat: true,
   },
   {
@@ -271,6 +317,7 @@ const columnDefinitions = [
         return <CellStat data={{ total }} />
       },
     ),
+    isDerived: true,
   },
   {
     title: "Applications for AI patents",
@@ -437,13 +484,23 @@ const columnDefinitions = [
 ];
 export default columnDefinitions;
 
+/**
+ * Map from the inherent keys present in the data (`data.articles[SOMETHING]`)
+ * to a human-friendly name for the column/data.  Can only be used on inherent,
+ * not derived, columns.
+ */
 export const articleMap = Object.fromEntries(columnDefinitions
   .filter(e => e.dataKey === 'articles')
   .map(e => ([e.dataSubkey, e.title]))
 );
 
+/**
+ * Map from the inherent keys present in the data (`data.patents[SOMETHING]`)
+ * to a human-friendly name for the column/data.  Can only be used on inherent,
+ * not derived, columns.
+ */
 export const patentMap = Object.fromEntries(columnDefinitions
-  .filter(e => e.dataKey === 'patents')
+  .filter(e => !e?.isDerived && e.dataKey === 'patents')
   .map(e => ([e.dataSubkey, e.title]))
 );
 
