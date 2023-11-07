@@ -430,11 +430,12 @@ const ListViewTable = ({
       switch ( colDef.type ) {
         case 'companyName':
         case 'dropdown':
+          // Set a minimum width for the dropdown menu (not the column)
           let dropdownWidth;
-          if ( colDef?.minWidth ) {
+          if ( colDef?.dropdownWidth ) {
             dropdownWidth = css`
               .MuiPaper-root {
-                min-width: ${colDef.minWidth}px;
+                min-width: ${colDef.dropdownWidth}px;
               }
             `;
           }
