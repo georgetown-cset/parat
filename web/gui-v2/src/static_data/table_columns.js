@@ -7,6 +7,8 @@ import { slugifyCompanyName } from '../util';
 
 const startArticleIx = overall.years.findIndex(e => e === overall.startArticleYear);
 const endArticleIx = overall.years.findIndex(e => e === overall.endArticleYear);
+const startPatentIx = overall.years.findIndex(e => e === overall.startPatentYear);
+const endPatentIx = overall.years.findIndex(e => e === overall.endPatentYear);
 
 const styles = {
   name: css`
@@ -25,6 +27,44 @@ const styles = {
 };
 
 /**
+ * Extract a complex result from the company data for the given column.  Can be
+ * used when a subkey is a more complex object, or in situations where the
+ * desired data is a combination of values from multiple keys/subkeys.
+ * @typedef {(val: any, row: object) => any} ExtractFn
+ */
+
+/**
+ * Format a cell's value, or the result of its `extract` function, for display
+ * in the list view table.
+ * @typedef {(val: any, row: object, extract: ExtractFn) => ReactNode} FormatFn
+ */
+
+/**
+ * The definition for each column of data presented in the list view.
+ *
+ * There are two types of columns - **inherent** and **derived**.  An inherent
+ * column directly uses values as they are within the data, perhaps with some
+ * minor extraction/formatting logic.  A derived column, however, does more
+ * extensive transforms, often including using the same underlying data as an
+ * inherent column but presenting it in a different manner.
+ * @typedef {{
+ *    css: SerializedStyles,
+ *    dataKey: string,
+ *    dataSubkey: string,
+ *    extract: ExtractFn,
+ *    format: FormatFn,
+ *    key: string,
+ *    initialCol: boolean,
+ *    isDerived?: boolean,
+ *    isGrowthStat?: boolean,
+ *    minWidth?: number,
+ *    sortable: boolean,
+ *    title: string,
+ *    type: 'dropdown'|'slider',
+ * }} ColumnDefinition
+ */
+
+/**
  * Helper function to define the `extract` and `format` functions of slider
  * fields in a consistent way across all columns.
  *
@@ -33,14 +73,15 @@ const styles = {
  * @param {undefined|(val: any, row: object) => any} extractFn
  * @param {undefined|(val: any, row: object, extract: ExtractFn) => ReactNode} formatFn
  * @returns {{
- *  css: SerializedStyles,
- *  dataKey: string,
- *  dataSubkey: string,
- *  extract: (val: any, row: object) => any,
- *  format: (val: any, row: object, extract: ExtractFn) => ReactNode,
- *  initialCol: boolean,
- *  sortable: boolean,
- *  type: 'dropdown'|'slider',
+ *    css: SerializedStyles,
+ *    dataKey: string,
+ *    dataSubkey: string,
+ *    extract: ExtractFn,
+ *    format: FormatFn,
+ *    initialCol: boolean,
+ *    isDerived: boolean,
+ *    sortable: boolean,
+ *    type: 'dropdown'|'slider',
  * }}
  */
 const generateSliderColDef = (dataKey, dataSubkey, extractFn, formatFn) => {
@@ -54,6 +95,7 @@ const generateSliderColDef = (dataKey, dataSubkey, extractFn, formatFn) => {
     }),
     format: formatFn ?? ((_val, row) => <CellStat data={row[dataKey][dataSubkey]} />),
     initialCol: false,
+    isDerived: false,
     sortable: true,
     type: 'slider',
   }
@@ -98,19 +140,34 @@ const columnDefinitions = [
     minWidth: 120,
     type: 'dropdown',
   },
-  // TODO, pending #120 adding `sector` data
-  // {
-  //   title: "Sector",
-  //   key: "sector",
-  //   initialCol: false,
-  //   minWidth: 200,
-  //   type: 'dropdown',
-  // },
+  {
+    title: "Sector",
+    key: "sector",
+    initialCol: false,
+    minWidth: 200,
+    type: 'dropdown',
+  },
 
   {
     title: "All publications",
     key: "all_pubs",
     ...generateSliderColDef("articles", "all_publications"),
+  },
+  {
+    title: "5-year total publications",
+    key: "all_pubs_5yr",
+    ...generateSliderColDef(
+      "articles",
+      "all_publications",
+      ((_val, row) => {
+        const data = row.articles.all_publications;
+        return data.counts.slice(startArticleIx, endArticleIx+1).reduce((acc, curr) => acc + curr);
+      }),
+      (val, row, extract) => {
+        return <CellStat data={{ total: extract(val, row) }} />;
+      },
+    ),
+    isDerived: true,
   },
   {
     title: "5-year growth in publications",
@@ -129,6 +186,7 @@ const columnDefinitions = [
         return <CellStat data={{ total }} />;
       },
     ),
+    isDerived: true,
     isGrowthStat: true,
   },
   {
@@ -141,6 +199,23 @@ const columnDefinitions = [
     key: "ai_pubs",
     ...generateSliderColDef("articles", "ai_publications"),
     initialCol: true,
+  },
+  {
+    title: "AI publication percentage",
+    key: "ai_pubs_percent",
+    ...generateSliderColDef(
+      "articles",
+      "ai_pubs",
+      ((_val, row) => {
+        return Math.round(row.articles.ai_publications.total / row.articles.all_publications.total * 1000) / 10;
+      }),
+      (val, row, extract) => {
+        const extractedVal = extract(val, row);
+        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
+        return <CellStat data={{ total }} />
+      },
+    ),
+    isDerived: true,
   },
   // TODO, pending clarification of intent
   // {
@@ -162,6 +237,7 @@ const columnDefinitions = [
       ((_val, row) => row.articles.ai_publications.counts[endArticleIx]),
       (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
     ),
+    isDerived: true,
   },
   {
     title: "CV publications",
@@ -179,23 +255,74 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "robotics_pubs"),
   },
 
-  // TODO, pending #125 adding the `all_patents` data
-  // {
-  //   title: "5-year growth in patents",
-  //   key: "all_patents_growth",
-  //   ...generateSliderColDef(
-  //     "patents",
-  //     "all_patents",
-  //     ((_val, row) => 1234), // TODO
-  //     (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
-  //   ),
-  //   isGrowthStat: true,
-  // },
+  {
+    title: "All patents",
+    key: "all_patents",
+    ...generateSliderColDef("patents", "all_patents"),
+  },
+  {
+    title: "5-year total patents",
+    key: "all_patents_5yr",
+    ...generateSliderColDef(
+      "patents",
+      "all_patents",
+      ((_val, row) => {
+        const data = row.patents.all_patents;
+        return data.counts.slice(startPatentIx, endPatentIx+1).reduce((acc, curr) => acc + curr);
+      }),
+      (val, row, extract) => {
+        return <CellStat data={{ total: extract(val, row) }} />;
+      },
+    ),
+    isDerived: true,
+  },
+  {
+    title: "5-year growth in patents",
+    key: "all_patents_growth",
+    ...generateSliderColDef(
+      "patents",
+      "all_patents",
+      ((_val, row) => {
+        const data = row.patents.all_patents;
+        const startVal = data.counts[startPatentIx];
+        return Math.round((data.counts[endPatentIx] - startVal) / startVal * 1000) / 10;
+      }),
+      (val, row, extract) => {
+        const extractedVal = extract(val, row);
+        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
+        return <CellStat data={{ total }} />
+      },
+    ),
+    isDerived: true,
+    isGrowthStat: true,
+  },
   {
     title: "AI patents",
     key: "ai_patents",
     ...generateSliderColDef("patents", "ai_patents"),
     initialCol: true,
+  },
+  {
+    title: "AI patent percentage",
+    key: "ai_patents_percent",
+    ...generateSliderColDef(
+      "patents",
+      "ai_patents",
+      ((_val, row) => {
+        return Math.round(row.patents.ai_patents.total / row.patents.all_patents.total * 1000) / 10;
+      }),
+      (val, row, extract) => {
+        const extractedVal = extract(val, row);
+        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
+        return <CellStat data={{ total }} />
+      },
+    ),
+    isDerived: true,
+  },
+  {
+    title: "Applications for AI patents",
+    key: "ai_patent_applications",
+    ...generateSliderColDef("patents", "ai_patent_applications"),
   },
   {
     title: "Agricultural patents",
@@ -357,13 +484,23 @@ const columnDefinitions = [
 ];
 export default columnDefinitions;
 
+/**
+ * Map from the inherent keys present in the data (`data.articles[SOMETHING]`)
+ * to a human-friendly name for the column/data.  Can only be used on inherent,
+ * not derived, columns.
+ */
 export const articleMap = Object.fromEntries(columnDefinitions
   .filter(e => e.dataKey === 'articles')
   .map(e => ([e.dataSubkey, e.title]))
 );
 
+/**
+ * Map from the inherent keys present in the data (`data.patents[SOMETHING]`)
+ * to a human-friendly name for the column/data.  Can only be used on inherent,
+ * not derived, columns.
+ */
 export const patentMap = Object.fromEntries(columnDefinitions
-  .filter(e => e.dataKey === 'patents')
+  .filter(e => !e?.isDerived && e.dataKey === 'patents')
   .map(e => ([e.dataSubkey, e.title]))
 );
 

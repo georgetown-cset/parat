@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 
 import SectionHeading from './SectionHeading';
 import { fallback } from '../styles/common-styles';
+import { cleanFalse } from '../util';
 import { assemblePlotlyParams } from '../util/plotly-helpers';
 
 const Plot = lazy(() => import('react-plotly.js'));
@@ -56,7 +57,7 @@ const TrendsChart = ({
   title,
   years,
 }) => {
-  const { config, data, layout } = assemblePlotlyParams(years, dataRaw, layoutChanges, { partialStartIndex });
+  const { config, data, layout } = assemblePlotlyParams(years, cleanFalse(dataRaw), layoutChanges, { partialStartIndex });
 
   return (
     <div
