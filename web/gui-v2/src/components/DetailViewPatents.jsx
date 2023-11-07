@@ -120,6 +120,7 @@ const DetailViewPatents = ({
     .sort((a, b) => b.patents - a.patents);
 
   const aiSubfieldOptions = patentSubkeys
+    .filter(k => !!data.patents[k]?.counts)
     .map(k => ({ text: patentMap[k].replace(/ patents/i, ''), val: k }))
     .sort((a, b) => a.text.localeCompare(b.text, 'en', { sensitivity: 'base' }));
 
