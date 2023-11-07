@@ -70,8 +70,8 @@ const DetailViewPublications = ({
     },
     {
       key: "highly-cited",
-      stat: <>NUMBER</>,
-      text: <>highly-cited articles (#RANK in PARAT, #RANK in the S&P 500)</>,
+      stat: <>{commas(data.articles.highly_cited.total)}</>,
+      text: <>highly-cited articles (#{commas(data.articles.highly_cited.rank)} in PARAT, #RANK in the S&P 500)</>,
     },
     {
       key: "ai-research-growth",
@@ -140,8 +140,16 @@ const DetailViewPublications = ({
         css={styles.section}
         data={[
           [
-            aiSubfieldOptions.find(e => e.val === aiSubfield)?.text,
+            `${aiSubfieldOptions.find(e => e.val === aiSubfield)?.text} research at ${data.name}`,
             data.articles[aiSubfield].counts
+          ],
+          data.groups.sp500 && [
+            "S&P 500",
+            overall.groups.sp500.articles[aiSubfield].counts
+          ],
+          data.groups.global500 && [
+            "Fortune Global 500",
+            overall.groups.global500.articles[aiSubfield].counts
           ],
         ]}
         id="ai-subfield-research"
@@ -166,7 +174,18 @@ const DetailViewPublications = ({
       <TrendsChart
         css={styles.section}
         data={[
-          ["AI top conference publications", data.articles.ai_pubs_top_conf.counts],
+          [
+            `AI top conference publications at ${data.name}`,
+            data.articles.ai_pubs_top_conf.counts
+          ],
+          data.groups.sp500 && [
+            "S&P 500",
+            overall.groups.sp500.articles.ai_pubs_top_conf.counts
+          ],
+          data.groups.global500 && [
+            "Fortune Global 500",
+            overall.groups.global500.articles.ai_pubs_top_conf.counts
+          ],
         ]}
         id="ai-top-conference-pubs-2"
         layoutChanges={chartLayoutChanges}

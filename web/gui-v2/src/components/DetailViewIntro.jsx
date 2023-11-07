@@ -70,7 +70,7 @@ const DetailViewIntro = ({
 
   const metadata = [
     { title: "Country", value: data.country },
-    { title: "Sector", value: "--TODO--" },
+    { title: "Sector", value: data.sector },
     { title: "Website", value: data.website ? <ExternalLink href={data.website}>{data.website}</ExternalLink> : undefined },
   ];
 

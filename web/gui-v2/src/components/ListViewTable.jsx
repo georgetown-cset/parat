@@ -133,7 +133,7 @@ const styles = {
  * }} FilterStateObject
  */
 
-const GROUPS_OPTIONS = Object.entries(overallData.groups).map(([k, v]) => ({ text: v, val: `GROUP:${k}` }));
+const GROUPS_OPTIONS = Object.entries(overallData.groups).map(([k, v]) => ({ text: v.name, val: `GROUP:${k}` }));
 
 const DATAKEYS_WITH_SUBKEYS = [
   "articles",
