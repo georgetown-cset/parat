@@ -481,6 +481,7 @@ const ListViewTable = ({
         case 'slider':
           display_name = (
             <HeaderSlider
+              initialValue={initialQueryParams?.[colDef.key]}
               label={colDef.title}
               onChange={newVal => handleSliderChange(colDef.key, newVal)}
               value={filters?.[colDef.key].get}

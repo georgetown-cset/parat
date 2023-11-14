@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { Slider } from '@mui/material';
 
 import { debounce } from '../util';
+import { parseSlider } from '../util/list-filters';
 
 const styles = {
   wrapper: css`
@@ -23,12 +24,17 @@ const styles = {
 };
 
 const HeaderSlider = ({
+  initialValue,
   label,
   min=0,
   onChange,
   value,
 }) => {
-  const [valueInternal, setValueInternal] = useState(value);
+  console.info("[HeaderSlider] initial value:", initialValue, "current value", value); // DEBUG
+
+  // const [valueInternal, setValueInternal] = useState(value);
+  // const [valueInternal, setValueInternal] = useState(() => value);
+  const [valueInternal, setValueInternal] = useState(() => parseSlider(initialValue) ?? value);
 
   // Update internal value based on external changes
   useEffect(
@@ -41,7 +47,10 @@ const HeaderSlider = ({
   );
 
   // Debounce handler for propagating internal changes to the outside
-  const externalHandler = (newVal) => onChange(newVal);
+  const externalHandler = (newVal) => {
+    console.info("[HeaderSlider] trigger external handler:", newVal); // DEBUG
+    onChange(newVal)
+  };
   const handleExternalChange = useMemo(() => {
     return debounce(externalHandler, 300);
   }, []);
