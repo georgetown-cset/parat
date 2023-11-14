@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useQueryParamString } from 'react-use-query-param-string';
+import { getQueryParams, useQueryParamString } from 'react-use-query-param-string';
 import { css } from '@emotion/react';
 import {
   AddCircleOutline as AddCircleOutlineIcon,
@@ -313,6 +313,8 @@ const ListViewTable = ({
   const [sortKey, setSortKey] = useState('ai_pubs');
   const isFirstRender = useRef(true);
 
+  const [initialQueryParams] = useState(() => getQueryParams());
+
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
   // filters when looking at the URL, so it makes sense that filter params like
@@ -453,6 +455,7 @@ const ListViewTable = ({
         case 'slider':
           display_name = (
             <HeaderSlider
+              initialValue={initialQueryParams?.[colDef.key]}
               label={colDef.title}
               onChange={newVal => handleSliderChange(colDef.key, newVal)}
               value={filters?.[colDef.key].get}
