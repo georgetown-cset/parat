@@ -32,7 +32,10 @@ const HeaderSlider = ({
 
   // Update internal value based on external changes
   useEffect(
-    () => setValueInternal(value),
+    () => {
+      console.info("slider updating from external prop change:", value); // DEBUG
+      setValueInternal(value)
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [JSON.stringify(value)]
   );

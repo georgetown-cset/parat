@@ -212,45 +212,45 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "ai_publications"),
     initialCol: true,
   },
-  {
-    title: "AI publication percentage",
-    key: "ai_pubs_percent",
-    ...generateSliderColDef(
-      "articles",
-      "ai_pubs",
-      ((_val, row) => {
-        return Math.round(row.articles.ai_publications.total / row.articles.all_publications.total * 1000) / 10;
-      }),
-      (val, row, extract) => {
-        const extractedVal = extract(val, row);
-        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
-        return <CellStat data={{ total }} />
-      },
-    ),
-    isDerived: true,
-  },
+  // {
+  //   title: "AI publication percentage",
+  //   key: "ai_pubs_percent",
+  //   ...generateSliderColDef(
+  //     "articles",
+  //     "ai_pubs",
+  //     ((_val, row) => {
+  //       return Math.round(row.articles.ai_publications.total / row.articles.all_publications.total * 1000) / 10;
+  //     }),
+  //     (val, row, extract) => {
+  //       const extractedVal = extract(val, row);
+  //       const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
+  //       return <CellStat data={{ total }} />
+  //     },
+  //   ),
+  //   isDerived: true,
+  // },
   // TODO, pending clarification of intent
   // {
   //   title: "Citations per AI paper",
   //   key: "citations_per_ai_pub",
   //   ...generateSliderColDef("articles", "??????"),
   // },
-  {
-    title: "AI publications in top conferences",
-    key: "ai_pubs_top_conf",
-    ...generateSliderColDef("articles", "ai_pubs_top_conf"),
-  },
-  {
-    title: `AI papers in last complete year (${overall.endArticleYear})`,
-    key: "ai_pubs_last_full_year",
-    ...generateSliderColDef(
-      "articles",
-      "ai_publications",
-      ((_val, row) => row.articles.ai_publications.counts[endArticleIx]),
-      (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
-    ),
-    isDerived: true,
-  },
+  // {
+  //   title: "AI publications in top conferences",
+  //   key: "ai_pubs_top_conf",
+  //   ...generateSliderColDef("articles", "ai_pubs_top_conf"),
+  // },
+  // {
+  //   title: `AI papers in last complete year (${overall.endArticleYear})`,
+  //   key: "ai_pubs_last_full_year",
+  //   ...generateSliderColDef(
+  //     "articles",
+  //     "ai_publications",
+  //     ((_val, row) => row.articles.ai_publications.counts[endArticleIx]),
+  //     (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
+  //   ),
+  //   isDerived: true,
+  // },
   {
     title: "CV publications",
     key: "cv_pubs",

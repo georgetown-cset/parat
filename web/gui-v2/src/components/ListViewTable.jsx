@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useQueryParamString } from 'react-use-query-param-string';
+import { getQueryParams, useQueryParamString } from 'react-use-query-param-string';
 import { css } from '@emotion/react';
 import {
   AddCircleOutline as AddCircleOutlineIcon,
@@ -141,15 +141,15 @@ const DATAKEYS_WITH_SUBKEYS = [
   "other_metrics",
 ];
 
-const DEFAULT_COLUMNS = [];
+// const DEFAULT_COLUMNS = [];
 const DROPDOWN_COLUMNS = [];
 const SLIDER_COLUMNS = [];
 const SLIDER_NATURAL_COLUMNS = [];
 const SLIDER_GROWTH_COLUMNS = [];
 columnDefinitions.forEach((colDef) => {
-  if ( colDef?.initialCol ) {
-    DEFAULT_COLUMNS.push(colDef.key);
-  }
+  // if ( colDef?.initialCol ) {
+  //   DEFAULT_COLUMNS.push(colDef.key);
+  // }
   if ( colDef.type === "companyName" || colDef.type === "dropdown" ) {
     DROPDOWN_COLUMNS.push(colDef.key);
   } else if ( colDef.type === "slider" ) {
@@ -161,6 +161,14 @@ columnDefinitions.forEach((colDef) => {
     }
   }
 });
+
+const DEFAULT_COLUMNS = [
+  'name',
+  'country',
+  'ai_pubs',
+  'ai_patents',
+  'tt1_jobs',
+];
 
 const ALL_COLUMNS = [
   ...DROPDOWN_COLUMNS,
@@ -186,6 +194,8 @@ const listToDropdownOptions = (list) => {
 const AGGREGATE_SUM_COLUMNS = [
   ...SLIDER_COLUMNS,
 ];
+
+// console.info("initial values:", initialVal); // DEBUG
 
 /**
  * Determine whether a given row matches the filters
@@ -313,6 +323,9 @@ const ListViewTable = ({
   const [sortKey, setSortKey] = useState('ai_pubs');
   const isFirstRender = useRef(true);
 
+  const [initialQueryParams] = useState(() => getQueryParams());
+  console.info("> initial query params:", initialQueryParams); // DEBUG
+
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
   // filters when looking at the URL, so it makes sense that filter params like
@@ -324,10 +337,15 @@ const ListViewTable = ({
   // accessible via an object.
   const filters = useMultiState(
     ALL_COLUMNS.reduce((obj, e) => {
+      // console.info("param setup: initialValue:", {e, val: initialVal(e)}); // DEBUG
+      // obj[e] = useQueryParamString(e, initialQueryParams?.[e] ?? initialVal(e));
       obj[e] = useQueryParamString(e, initialVal(e));
       return obj;
     }, {}),
     (key, val) => {
+      if ( key === 'ai_pubs' ) {
+        console.info(":  filters.get transform:", key, val); // DEBUG
+      }
       if ( DROPDOWN_COLUMNS.includes(key) ) {
         let result = val.split(',').filter(e => e !== "");
         if ( key === 'name' ) {
@@ -341,30 +359,40 @@ const ListViewTable = ({
       }
     },
     (key, val) => {
+      if ( key === 'ai_pubs' ) {
+        console.info(" + filters.SET transform:", key, val); // DEBUG
+      }
       if ( key === 'name' ) {
         val = val.map(e => e.replace(',', '&comma;'));
       }
       return val?.join(',');
     }
   );
+  console.info("ai_pubs param:", filters.ai_pubs.get); // DEBUG
 
   // Read-only object of the currently-set values of the filters
   const currentFilters = useMemo(
     () => extractCurrentFilters(filters),
     [filters]
   );
+  // console.info("currentFilters:", currentFilters); // DEBUG
 
   const handleDropdownChange = (columnKey, newVal) => {
     if ( ! Array.isArray(newVal) ) {
       newVal = [newVal];
     }
 
+    console.info("dropdown change:", columnKey, newVal); // DEBUG
     if ( filters?.[columnKey] ) {
       filters[columnKey].set(newVal);
     }
   };
 
   const handleSliderChange = (columnKey, newVal) => {
+    if ( columnKey === 'ai_pubs' ) {
+      console.info(); // DEBUG
+      console.info("slider change:", columnKey, newVal); // DEBUG
+    }
     if ( filters?.[columnKey] ) {
       filters[columnKey].set(newVal);
     }
@@ -478,6 +506,7 @@ const ListViewTable = ({
 
 
   const resetFilters = () => {
+    console.info("resetFilters():"); // DEBUG
     columnDefinitions.forEach((colDef) => {
       filters[colDef.key]?.set(resetVal(colDef.key));
     });
