@@ -30,27 +30,17 @@ const HeaderSlider = ({
   onChange,
   value,
 }) => {
-  console.info("[HeaderSlider] initial value:", initialValue, "current value", value); // DEBUG
-
-  // const [valueInternal, setValueInternal] = useState(value);
-  // const [valueInternal, setValueInternal] = useState(() => value);
   const [valueInternal, setValueInternal] = useState(() => parseSlider(initialValue) ?? value);
 
   // Update internal value based on external changes
   useEffect(
-    () => {
-      console.info("slider updating from external prop change:", value); // DEBUG
-      setValueInternal(value)
-    },
+    () => setValueInternal(value),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [JSON.stringify(value)]
   );
 
   // Debounce handler for propagating internal changes to the outside
-  const externalHandler = (newVal) => {
-    console.info("[HeaderSlider] trigger external handler:", newVal); // DEBUG
-    onChange(newVal)
-  };
+  const externalHandler = (newVal) => onChange(newVal);
   const handleExternalChange = useMemo(() => {
     return debounce(externalHandler, 300);
   }, []);
