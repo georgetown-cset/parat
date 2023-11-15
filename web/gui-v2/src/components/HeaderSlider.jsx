@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { Slider } from '@mui/material';
 
 import { debounce } from '../util';
+import { parseSlider } from '../util/list-filters';
 
 const styles = {
   wrapper: css`
@@ -23,12 +24,13 @@ const styles = {
 };
 
 const HeaderSlider = ({
+  initialValue,
   label,
   min=0,
   onChange,
   value,
 }) => {
-  const [valueInternal, setValueInternal] = useState(value);
+  const [valueInternal, setValueInternal] = useState(() => parseSlider(initialValue) ?? value);
 
   // Update internal value based on external changes
   useEffect(
