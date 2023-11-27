@@ -54,7 +54,6 @@ const DetailViewPublications = ({
   const yearSpanNdash = <>{overall.years[0]}&ndash;{overall.years[overall.years.length-1]}</>;
   const yearSpanAnd = <>{overall.years[0]} and {overall.years[overall.years.length-1]}</>;
 
-  const averageCitations = Math.round(10 * data.articles.citation_counts.total / data.articles.all_publications.total) / 10;
   const aiResearchPercent = Math.round(1000 * data.articles.ai_publications.total / data.articles.all_publications.total) / 10;
 
   const statGridEntries = [
@@ -65,13 +64,13 @@ const DetailViewPublications = ({
     },
     {
       key: "average-citations",
-      stat: <>{averageCitations}</>,
-      text: <>citations per article on average (#RANK in PARAT, #RANK in the S&P 500)</>,
+      stat: <>{commas(data.articles.citations_per_article.total)}</>,
+      text: <>citations per AI article on average (#{commas(data.articles.citations_per_article.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.citations_per_article.sp500_rank)} in the S&P 500</>})</>,
     },
     {
       key: "highly-cited",
       stat: <>{commas(data.articles.highly_cited.total)}</>,
-      text: <>highly-cited articles (#{commas(data.articles.highly_cited.rank)} in PARAT, #RANK in the S&P 500)</>,
+      text: <>highly-cited articles (#{commas(data.articles.highly_cited.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.highly_cited.sp500_rank)} in the S&P 500</>})</>,
     },
     {
       key: "ai-research-growth",
@@ -81,7 +80,7 @@ const DetailViewPublications = ({
     {
       key: "ai-top-conf",
       stat: <>{commas(data.articles.ai_pubs_top_conf.total)}</>,
-      text: <>articles at top AI conferences (#{data.articles.ai_pubs_top_conf.rank} in PARAT, #RANK in the S&P 500)</>,
+      text: <>articles at top AI conferences (#{data.articles.ai_pubs_top_conf.rank} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.ai_pubs_top_conf.sp500_rank)} in the S&P 500</>})</>,
     },
     {
       key: "ai-research-percent",

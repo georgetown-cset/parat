@@ -289,26 +289,27 @@ def add_ranks(rows: list) -> None:
     """
     for metric_list_name in METRIC_LISTS:
         all_metrics = set()
-        for row in rows:
-            for metric in row.get(metric_list_name, {}):
-                all_metrics.add(metric)
-        for metric in sorted(list(all_metrics)):
-            curr_rank = 0
-            curr_value = 100000000000
-            rows.sort(key=lambda r: -1*get_metric_value(r, metric_list_name, metric))
-            max_metric = math.log(max([get_metric_value(r, metric_list_name, metric) for r in rows])+1, 2)
-            for idx, row in enumerate(rows):
-                metric_value = get_metric_value(row, metric_list_name, metric)
-                if metric_value < curr_value:
-                    curr_rank = idx+1
-                    curr_value = metric_value
-                if metric not in row[metric_list_name]:
-                    row[metric_list_name][metric] = {"total": metric_value}
-                row[metric_list_name][metric].update({
-                    "rank": curr_rank,
-                    # used to scale color
-                    "frac_of_max": round(math.log(metric_value+1, 2)/max_metric, 4)
-                })
+        row_and_key_groups = [(rows, "rank"),
+                               ([r for r in rows if r.get("groups", {}).get("sp500")], "sp500_rank"),
+                               ([r for r in rows if r.get("groups", {}).get("global500")], "fortune500_rank")]
+        for filtered_rows, rank_key in row_and_key_groups:
+            for row in filtered_rows:
+                for metric in row.get(metric_list_name, {}):
+                    all_metrics.add(metric)
+            for metric in sorted(list(all_metrics)):
+                curr_rank = 0
+                curr_value = 100000000000
+                filtered_rows.sort(key=lambda r: -1*get_metric_value(r, metric_list_name, metric))
+                for idx, row in enumerate(filtered_rows):
+                    metric_value = get_metric_value(row, metric_list_name, metric)
+                    if metric_value < curr_value:
+                        curr_rank = idx+1
+                        curr_value = metric_value
+                    if metric not in row[metric_list_name]:
+                        row[metric_list_name][metric] = {"total": metric_value}
+                    row[metric_list_name][metric].update({
+                        rank_key: curr_rank
+                    })
 
 
 def get_translation(desc: str, client, parent) -> str:
@@ -647,6 +648,14 @@ def get_category_counts(js: dict) -> None:
             "total": total,
             "isTopResearch": is_top_research
         }
+
+    articles["citations_per_article"] = {
+        "counts": [0 if num_art == 0 else num_cit/num_art for num_art, num_cit in
+                    zip(articles["ai_publications"]["counts"], articles["citation_counts"]["counts"])],
+        "total": 0 if articles["ai_publications"]["total"] == 0 else
+                        articles["citation_counts"]["total"]/articles["ai_publications"]["total"],
+        "isTopResearch": False
+    }
 
     for year_idx in range(len(YEARS)):
         # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]

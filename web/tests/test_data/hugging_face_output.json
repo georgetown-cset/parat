@@ -296,6 +296,23 @@
       "total": 2993,
       "isTopResearch": false
     },
+    "citations_per_article": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.0,
+        56.0,
+        180.5,
+        293.4,
+        135.75,
+        0
+      ],
+      "total": 166.27777777777777,
+      "isTopResearch": false
+    },
     "highly_cited": {
       "counts": [
         2,
