@@ -289,26 +289,27 @@ def add_ranks(rows: list) -> None:
     """
     for metric_list_name in METRIC_LISTS:
         all_metrics = set()
-        for row in rows:
-            for metric in row.get(metric_list_name, {}):
-                all_metrics.add(metric)
-        for metric in sorted(list(all_metrics)):
-            curr_rank = 0
-            curr_value = 100000000000
-            rows.sort(key=lambda r: -1*get_metric_value(r, metric_list_name, metric))
-            max_metric = math.log(max([get_metric_value(r, metric_list_name, metric) for r in rows])+1, 2)
-            for idx, row in enumerate(rows):
-                metric_value = get_metric_value(row, metric_list_name, metric)
-                if metric_value < curr_value:
-                    curr_rank = idx+1
-                    curr_value = metric_value
-                if metric not in row[metric_list_name]:
-                    row[metric_list_name][metric] = {"total": metric_value}
-                row[metric_list_name][metric].update({
-                    "rank": curr_rank,
-                    # used to scale color
-                    "frac_of_max": round(math.log(metric_value+1, 2)/max_metric, 4)
-                })
+        row_and_key_groups = [(rows, "rank"),
+                               ([r for r in rows if r["groups"]["sp500"]], "sp500_rank"),
+                               ([r for r in rows if r["groups"]["global500"]], "fortune500_rank")]
+        for filtered_rows, rank_key in row_and_key_groups:
+            for row in filtered_rows:
+                for metric in row.get(metric_list_name, {}):
+                    all_metrics.add(metric)
+            for metric in sorted(list(all_metrics)):
+                curr_rank = 0
+                curr_value = 100000000000
+                filtered_rows.sort(key=lambda r: -1*get_metric_value(r, metric_list_name, metric))
+                for idx, row in enumerate(filtered_rows):
+                    metric_value = get_metric_value(row, metric_list_name, metric)
+                    if metric_value < curr_value:
+                        curr_rank = idx+1
+                        curr_value = metric_value
+                    if metric not in row[metric_list_name]:
+                        row[metric_list_name][metric] = {"total": metric_value}
+                    row[metric_list_name][metric].update({
+                        rank_key: curr_rank
+                    })
 
 
 def get_translation(desc: str, client, parent) -> str:
