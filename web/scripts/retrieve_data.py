@@ -35,6 +35,8 @@ RAW_DATA_FI = os.path.join(RAW_DATA_DIR, "data.jsonl")
 ORIG_NAMES_FI = os.path.join(RAW_DATA_DIR, "company_names.jsonl")
 # Cache of links to Google Finance page
 EXCHANGE_LINK_FI = os.path.join(RAW_DATA_DIR, "exchange_links.jsonl")
+# Cache of PERMID sectors
+SECTOR_FI = os.path.join(RAW_DATA_DIR, "sectors.jsonl")
 # Download of https://docs.google.com/spreadsheets/d/1OpZGUG9y0onZfRfx9aVgRWiYSFWJ-TRsDQwYtcniCB0/edit#gid=468518268
 # containing student-retrieved company descriptions to supplement crunchbase
 SUPPLEMENTAL_DESCRIPTIONS = os.path.join(RAW_DATA_DIR, "supplemental_company_descriptions.csv")
@@ -103,6 +105,33 @@ def get_exchange_link(market_key: str) -> dict:
         return {"market_key": market_key, "link": None if "No results found" in r.text else gf_link}
     else:
         return {"market_key": market_key, "link": gf_link}
+
+
+def get_permid_sector(permids: list) -> tuple:
+    """
+    Get first permid sector available in permids for a PARAT company
+    :param permids: List of permids a company may have
+    :return: First economic and business sector from PERMID, or "Unknown" if we couldn't find one
+    """
+    access_token = os.environ.get("PERMID_API_KEY")
+    economic_sector_key = "Primary Economic Sector"
+    business_sector_key = "Primary Business Sector"
+    if not access_token:
+        raise ValueError("Please specify your permid key using an environment variable called PERMID_API_KEY")
+    for permid in permids:
+        # Sometimes multiple permids are available and it's not obvious to me which to pick. I'll just pick the
+        # first one that has a not-null value for both sectors
+        resp = requests.get(f"https://permid.org/api/mdaas/getEntityById/{permid}?access-token={access_token}")
+        if resp.status_code != 200:
+            print(f"Unexpected status code {resp.status_code} for {permid}")
+        metadata = resp.json()
+        economic_sector = metadata.get(economic_sector_key)
+        business_sector = metadata.get(business_sector_key)
+        if economic_sector and business_sector:
+            return economic_sector[0], business_sector[0]
+        elif economic_sector:
+            print(f"No business sector available for {permid}")
+    return "Unknown", "Unknown"
 
 
 def retrieve_raw(get_links: bool) -> None:
@@ -536,7 +565,7 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
                                   orig_company_name if orig_company_name != js["name"].lower() else None)
     js["stage"] = js["stage"] if js["stage"] else "Unknown"
-    js["permid_links"] = format_links(js.pop("permid"), "https://permid.org/1-")
+    js["permid_links"] = format_links(js.get("permid"), "https://permid.org/1-")
     js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
     js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
@@ -594,8 +623,6 @@ def get_category_counts(js: dict) -> None:
     :param js: A dict of data corresponding to an individual PARAT record
     :return: None (mutates js)
     """
-    # Spoof sector https://github.com/georgetown-cset/parat/issues/120
-    js["sector"] = f"Sector{js['cset_id'] % 3}"
     articles = {
         # spoof highly cited articles https://github.com/georgetown-cset/parat/issues/135
         "highly_cited": {
@@ -675,6 +702,33 @@ def get_category_counts(js: dict) -> None:
         js.pop(redundant_count)
 
 
+def add_sectors(rows: list, refresh: bool) -> None:
+    """
+    Adds sector to each row, updating sectors from PERMID if needed. Removes the "permid" key from the row which
+    is no longer needed after this function runs
+    :param rows: List of rows of company metadata
+    :param refresh: If true, will refresh sectors from PERMID
+    :return: None (mutates rows)
+    """
+    if refresh:
+        sectors = {}
+        for row in rows:
+            econ_sector, business_sector = get_permid_sector(row.pop("permid"))
+            row["sector"] = econ_sector
+            row["business_sector"] = business_sector
+            sectors[row["cset_id"]] = {"economic": econ_sector, "business": business_sector}
+        with open(SECTOR_FI, mode="w") as f:
+            f.write(json.dumps(sectors))
+    else:
+        with open(SECTOR_FI) as f:
+            sectors = json.loads(f.read())
+        for row in rows:
+            cset_id = str(row["cset_id"])
+            row["sector"] = sectors[cset_id]["economic"]
+            row["business_sector"] = sectors[cset_id]["business"]
+            row.pop("permid")
+
+
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
     """
     Given a row from a jsonl, reformat its elements into the form needed by the PARAT javascript
@@ -702,11 +756,12 @@ def clean_link(link: str) -> str:
     return link
 
 
-def clean(refresh_images: bool) -> dict:
+def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
     """
     Reads and cleans the raw data from the local cache
     :param refresh_images: if true, will re-download all the company logos from crunchbase; don't call with true
     unless necessary
+    :param refresh_sectors: if true, will re-query the PERMID api for sector information for each company
     :return: Return company-like metadata for groups
     """
     rows = []
@@ -723,6 +778,7 @@ def clean(refresh_images: bool) -> dict:
     with open(RAW_DATA_FI) as f:
         for row in f:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
+    add_sectors(rows, refresh_sectors)
     add_supplemental_descriptions(rows)
     add_ranks(rows)
     company_rows, group_data = [], {}
@@ -775,13 +831,15 @@ if __name__ == "__main__":
                         help="Re-download the images; if not specified will use local cache")
     parser.add_argument("--refresh_market_links", action="store_true", default=False,
                         help="Re-retrieve the market links (takes ~1.5 hrs); if not specified will use local cache")
+    parser.add_argument("--refresh_sectors", action="store_true", default=False,
+                        help="Retrieve sector information from PERMID API; requires API key available in "
+                             "PERMID_API_KEY environment variable")
     args = parser.parse_args()
 
     if args.refresh_market_links and not args.refresh_raw:
         print("You must specify --refresh_raw if you want to refresh the market links")
         exit(0)
-
     if args.refresh_raw:
         retrieve_raw(args.refresh_market_links)
-    group_data = clean(args.refresh_images)
+    group_data = clean(args.refresh_images, args.refresh_sectors)
     update_overall_data(group_data)
