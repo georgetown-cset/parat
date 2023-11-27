@@ -1,7 +1,6 @@
 {
   "cset_id": 796,
   "country": "United States",
-  "sector": "Sector1",
   "website": "https://abc.xyz/",
   "crunchbase": {
     "text": "096694c6-bcd2-a975-b95c-fab77c81d915",
@@ -38,6 +37,7 @@
   "continent": "North America",
   "local_logo": "alphabet.png",
   "aliases": "Alphabet Inc",
+  "permid": [5082534760, 5030853586, 5053732847, 5028044072, 5050702354],
   "permid_links": [
     {
       "text": 5082534760,

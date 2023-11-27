@@ -1,7 +1,6 @@
 {
   "cset_id": 1425,
   "country": "United States",
-  "sector": "Sector0",
   "website": "https://huggingface.co/",
   "crunchbase": {
     "text": "b7947f18-b199-45ac-b7da-66f5c52fcfbc",
@@ -17,6 +16,7 @@
   "continent": "North America",
   "local_logo": "hugging_face.png",
   "aliases": "Hugging Face Inc; Hugging Face, Inc",
+  "permid": [5063742076],
   "permid_links": [
     {
       "text": 5063742076,
