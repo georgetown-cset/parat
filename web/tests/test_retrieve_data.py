@@ -66,17 +66,17 @@ class TestMkTabText(unittest.TestCase):
         ]
         expected_rows = [
             {"cset_id": 2,
-             ARTICLE_METRICS: {"metric": {"total": 2 ** 4, "rank": 2, "frac_of_max": 0.5106}},
-             PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2, "frac_of_max": 0.0},
-                              "another_patent_metric": {"total": 2, "rank": 1, "frac_of_max": 1.0}}},
+             ARTICLE_METRICS: {"metric": {"total": 2 ** 4, "rank": 2}},
+             PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2},
+                              "another_patent_metric": {"total": 2, "rank": 1}}},
             {"cset_id": 3,
-             ARTICLE_METRICS: {"metric": {"total": 2 ** 8, "rank": 1, "frac_of_max": 1.0}},
-             PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2, "frac_of_max": 0.0},
-                              "another_patent_metric": {"total": 1, "rank": 2, "frac_of_max": 0.6309}}},
+             ARTICLE_METRICS: {"metric": {"total": 2 ** 8, "rank": 1}},
+             PATENT_METRICS: {"a_patent_metric": {"total": 0, "rank": 2},
+                              "another_patent_metric": {"total": 1, "rank": 2}}},
             {"cset_id": 1,
-             ARTICLE_METRICS: {"metric": {"total": 2, "rank": 3, "frac_of_max": 0.1980}},
-             PATENT_METRICS: {"a_patent_metric": {"total": 1, "rank": 1, "frac_of_max": 1.0},
-                              "another_patent_metric": {"total": 0, "rank": 3, "frac_of_max": 0.0}}}
+             ARTICLE_METRICS: {"metric": {"total": 2, "rank": 3}},
+             PATENT_METRICS: {"a_patent_metric": {"total": 1, "rank": 1},
+                              "another_patent_metric": {"total": 0, "rank": 3}}}
         ]
         add_ranks(rows)
         self.assertEqual(rows, expected_rows)
