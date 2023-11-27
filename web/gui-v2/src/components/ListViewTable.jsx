@@ -507,6 +507,9 @@ const ListViewTable = ({
             if ( !AGGREGATE_SUM_COLUMNS.includes(colDef.key) ) {
               continue;
             }
+            if ( colDef?.isGrowthStat ) {
+              continue;
+            }
             const dataKey = colDef.dataKey ?? colDef.key;
             const keyVal = curr[dataKey];
             const keyValExtract = colDef?.extract?.(keyVal, curr) ?? keyVal;
