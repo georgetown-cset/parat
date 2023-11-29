@@ -350,6 +350,18 @@ const ListViewTable = ({
     }
   );
 
+  // Re-establish dropdown filter values that we receive from the URL parameters
+  // but were overwritten by the Autocomplete in HeaderDropdown, causing the
+  // dropdown filters to not persist across page refreshes
+  // (see https://github.com/georgetown-cset/parat/issues/179)
+  useEffect(() => {
+    DROPDOWN_COLUMNS.forEach((key) => {
+      if ( initialQueryParams?.[key] ) {
+        filters[key].set(initialQueryParams[key].split(','));
+      }
+    });
+  }, []);
+
   // Read-only object of the currently-set values of the filters
   const currentFilters = useMemo(
     () => extractCurrentFilters(filters),
