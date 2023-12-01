@@ -1,12 +1,10 @@
-CREATE OR REPLACE TABLE
-  ai_companies_visualization.paper_visualization_data AS
 WITH
   articles_with_ai_tasks AS (
   SELECT
     DISTINCT merged_id,
     referent,
   FROM
-    `gcp-cset-projects.tasks_and_methods.task_referents`
+    tasks_and_methods.task_referents
   CROSS JOIN
     UNNEST(referents) AS referent),
   company_articles_with_tasks AS (
@@ -44,10 +42,10 @@ WITH
   GROUP BY
     CSET_id)
 SELECT
-  paper_visualization_data.*,
+  paper_visualization_data_with_company_references.*,
   tasks
 FROM
-  ai_companies_visualization.paper_visualization_data
+  ai_companies_visualization.paper_visualization_data_with_company_references
 LEFT JOIN
   aggregated_fields
 USING
