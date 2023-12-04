@@ -1,10 +1,9 @@
-create or replace table ai_companies_visualization.workforce_visualization_data as
 WITH
   clean_linkedins AS (
   SELECT
     DISTINCT cset_id,
     name,
-    REPLACE(linkedins, "https://www.", "http://") AS linkedin
+    REPLACE(REPLACE(linkedins, "https://www.", ""), "http://www.", "") AS linkedin
   FROM
     high_resolution_entities.aggregated_organizations
   CROSS JOIN
@@ -12,15 +11,15 @@ WITH
   new_ai_jobs AS (
   SELECT
     DISTINCT cset_id,
-    COUNT(DISTINCT user_id) AS ai_jobs
+    COUNT(DISTINCT individual_position.user_id) AS ai_jobs
   FROM
     clean_linkedins
   INNER JOIN
-    `gcp-cset-projects.gcp_cset_revelio.position` position
+    revelio.individual_position
   ON
-    linkedin = company_li_url
+    linkedin = company_linkedin_url
   INNER JOIN
-    gcp_cset_revelio.role_lookup
+    revelio.role_lookup
   USING
     (mapped_role)
   INNER JOIN
@@ -28,12 +27,16 @@ WITH
   ON
     (k1000 = role_k1000)
   LEFT JOIN
-    gcp_cset_revelio.education
+    revelio.individual_education
   USING
     (user_id)
+  LEFT JOIN
+    revelio.individual_position_descriptions
+  USING
+    (position_id)
   WHERE
-    (position.enddate IS NULL
-      OR position.enddate > CURRENT_DATE())
+    (individual_position.enddate IS NULL
+      OR individual_position.enddate > CURRENT_DATE())
     AND (ba_req IS FALSE
       OR ((degree = "Bachelor"
           OR degree = "Master"
@@ -52,7 +55,7 @@ SELECT
   tt1_jobs,
   COALESCE(ai_jobs, 0) as ai_jobs
 FROM
-  ai_companies_visualization.workforce_visualization_data
+  staging_ai_companies_visualization.initial_workforce_visualization_data
 LEFT JOIN
   new_ai_jobs
 USING

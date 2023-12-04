@@ -1,0 +1,128 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "CSET_id",
+    "type": "INTEGER",
+    "description": "CSET id of PARAT company."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "year",
+        "type": "INTEGER",
+        "description": "Year cited."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "citation_count",
+        "type": "INTEGER",
+        "description": "Count of publications in that year that cite AI papers written by the company."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "citation_count_by_year",
+    "type": "RECORD",
+    "description": "Citations of AI papers by the company by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "field_name",
+        "type": "STRING",
+    "description": "Field of study name."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "field_count",
+        "type": "INTEGER",
+    "description": "Count of AI papers by the company where field of study is in their top fields."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "fields",
+    "type": "RECORD",
+    "description": "Fields of study counts (using MAG-style fields of study for AI-relevant fields)."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "cluster_id",
+        "type": "INTEGER",
+        "description": "Map of Science research cluster ID."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "cluster_count",
+        "type": "INTEGER",
+    "description": "Count of how many AI publications from the company appear in that cluster."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "clusters",
+    "type": "RECORD",
+    "description": "Counts of top publications in research clusters."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "ref_CSET_id",
+        "type": "INTEGER",
+    "description": "CSET id of referenced PARAT company."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "referenced_count",
+        "type": "INTEGER",
+    "description": "Count of how many AI publications by that company the primary PARAT company has referenced in their papers."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "company_references",
+    "type": "RECORD",
+    "description": "Counts of publication references to the publications of other companies in the PARAT dataset."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "referent",
+        "type": "STRING",
+    "description": "The task name referent."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "task_count",
+        "type": "INTEGER",
+    "description": "Count of how many AI publications by the company contain this task."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "tasks",
+    "type": "RECORD",
+    "description": "AI task information."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "referent",
+        "type": "STRING",
+    "description": "The method name referent."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "method_count",
+        "type": "INTEGER",
+    "description": "Count of how many AI publications by the company contain this method."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "methods",
+    "type": "RECORD",
+    "description": "AI method information."
+  }
+]

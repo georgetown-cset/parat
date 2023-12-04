@@ -7,8 +7,9 @@ WITH
   FROM
     high_resolution_entities.aggregated_organizations
   CROSS JOIN
-    UNNEST (linkedin) AS linkedins)
-SELECT
+    UNNEST (linkedin) AS linkedins),
+job_info as
+(SELECT
   DISTINCT cset_id,
   COUNT(DISTINCT user_id) AS tt1_jobs
 FROM
@@ -41,6 +42,16 @@ WHERE
     OR ((degree = "Doctor")
       AND REGEXP_CONTAINS(field_raw, r'(?i)(computer\s+science|computer\s+engineering|electrical\s+engineering)')))
 GROUP BY
-  cset_id
+  cset_id)
+SELECT
+  DISTINCT
+  cset_id,
+  COALESCE(tt1_jobs, 0) as tt1_jobs
+FROM
+  high_resolution_entities.aggregated_organizations
+LEFT JOIN
+  job_info
+USING
+  (cset_id)
 ORDER BY
   cset_id

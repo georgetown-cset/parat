@@ -4,10 +4,11 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
-from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
+from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator, BigQueryCheckOperator
 from airflow.providers.google.cloud.operators.cloud_sql import (
     CloudSQLImportInstanceOperator,
 )
+from airflow.providers.google.cloud.transfers.bigquery_to_bigquery import BigQueryToBigQueryOperator
 from airflow.providers.google.cloud.operators.kubernetes_engine import GKEStartPodOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from airflow.operators.dummy import DummyOperator
@@ -19,10 +20,12 @@ from dataloader.airflow_utils.defaults import (
     DATA_BUCKET,
     PROJECT_ID,
     GCP_ZONE,
+    DAGS_DIR,
     get_default_args,
     get_post_success,
 )
 from dataloader.scripts.populate_documentation import update_table_descriptions
+
 from parat_scripts.aggregate_organizations import aggregate_organizations
 
 bucket = DATA_BUCKET
@@ -30,6 +33,7 @@ initial_dataset = "parat_input"
 intermediate_dataset = "high_resolution_entities"
 production_dataset = "ai_companies_visualization"
 staging_dataset = f"staging_{production_dataset}"
+backups_dataset = f"{production_dataset}_backups"
 sql_dir = "sql/parat"
 schema_dir = "parat/schemas"
 tmp_dir = f"{production_dataset}/tmp"
@@ -49,7 +53,8 @@ dag = DAG(
         "staging_dataset": staging_dataset,
         "production_dataset": production_dataset,
         "intermediate_dataset": intermediate_dataset,
-        "initial_dataset": initial_dataset
+        "initial_dataset": initial_dataset,
+        "backups_dataset": backups_dataset,
     },
 )
 with dag:
@@ -293,6 +298,51 @@ with dag:
         curr = next_tab
     curr >> wait_for_visualization_tables
 
+    checks = []
+    for query in os.listdir(f"{DAGS_DIR}/{sql_dir}"):
+        if not query.startswith("check_"):
+            continue
+        checks.append(BigQueryCheckOperator(
+            task_id=query.replace(".sql", ""),
+            sql=f"{sql_dir}/{query}",
+            use_legacy_sql=False
+        ))
+
+    wait_for_checks = DummyOperator(task_id="wait_for_checks")
+
+    wait_for_copy = DummyOperator(task_id="wait_for_copy")
+
+    curr_date = datetime.now().strftime('%Y%m%d')
+    prod_tables = ["visualization_data", "paper_visualization_data",
+                   "patent_visualization_data", "workforce_visualization_data"]
+    for table in prod_tables:
+        prod_table_name = f"{production_dataset}.{table}"
+        copy_to_production = BigQueryToBigQueryOperator(
+            task_id="copy_" + table + "_to_production",
+            source_project_dataset_tables=[staging_dataset + "." + table],
+            destination_project_dataset_table=prod_table_name,
+            create_disposition="CREATE_IF_NEEDED",
+            write_disposition="WRITE_TRUNCATE"
+        )
+        pop_descriptions = PythonOperator(
+            task_id="populate_column_documentation_for_" + table,
+            op_kwargs={
+                "input_schema": f"{os.environ.get('DAGS_FOLDER')}/schemas/parat/{table}.json",
+                "table_name": prod_table_name
+            },
+            python_callable=update_table_descriptions
+        )
+        table_backup = BigQueryToBigQueryOperator(
+            task_id=f"back_up_{table}",
+            source_project_dataset_tables=[f"{staging_dataset}.{table}"],
+            destination_project_dataset_table=f"{backups_dataset}.{table}_{curr_date}",
+            create_disposition="CREATE_IF_NEEDED",
+            write_disposition="WRITE_TRUNCATE"
+        )
+        wait_for_checks >> copy_to_production >> pop_descriptions >> table_backup >> wait_for_copy
+
+    # post success to slack
+    msg_success = get_post_success("PARAT tables updated!", dag)
 
     (
         clear_tmp_dir
@@ -311,5 +361,14 @@ with dag:
         >> load_top_papers
         >> load_all_papers
         >> start_visualization_tables
+    )
+    (
+        wait_for_visualization_tables
+        >> checks
+        >> wait_for_checks
+    )
+    (
+        wait_for_copy
+        >> msg_success
     )
 

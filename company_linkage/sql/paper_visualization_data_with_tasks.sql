@@ -13,7 +13,7 @@ WITH
     merged_id,
     referent
   FROM
-    ai_companies_visualization.ai_company_pubs
+    staging_ai_companies_visualization.ai_company_papers
   LEFT JOIN
     articles_with_ai_tasks
   USING
@@ -45,7 +45,7 @@ SELECT
   paper_visualization_data_with_company_references.*,
   tasks
 FROM
-  ai_companies_visualization.paper_visualization_data_with_company_references
+  staging_ai_companies_visualization.paper_visualization_data_with_company_references
 LEFT JOIN
   aggregated_fields
 USING

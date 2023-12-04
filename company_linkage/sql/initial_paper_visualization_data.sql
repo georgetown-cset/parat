@@ -33,8 +33,9 @@ WITH
     add_year
   GROUP BY
     CSET_id,
-    year)
-SELECT
+    year),
+all_cited as
+(SELECT
   CSET_id,
   ARRAY_AGG(STRUCT(year,
       citation_count)
@@ -43,6 +44,15 @@ SELECT
 FROM
   by_year
 GROUP BY
-  CSET_id
+  CSET_id)
+SELECT
+  CSET_id,
+  citation_count_by_year
+FROM
+  high_resolution_entities.aggregated_organizations
+LEFT JOIN
+  all_cited
+USING
+  (CSET_id)
 ORDER BY
   CSET_id
