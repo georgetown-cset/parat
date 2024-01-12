@@ -3,19 +3,12 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator, BigQueryCheckOperator
-from airflow.providers.google.cloud.operators.cloud_sql import (
-    CloudSQLImportInstanceOperator,
-)
 from airflow.providers.google.cloud.transfers.bigquery_to_bigquery import BigQueryToBigQueryOperator
 from airflow.providers.google.cloud.operators.kubernetes_engine import GKEStartPodOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from airflow.operators.dummy import DummyOperator
 from airflow.providers.google.cloud.operators.gcs import GCSDeleteObjectsOperator
-from airflow.providers.google.cloud.transfers.bigquery_to_gcs import (
-    BigQueryToGCSOperator,
-)
 from dataloader.airflow_utils.defaults import (
     DATA_BUCKET,
     PROJECT_ID,
@@ -72,7 +65,6 @@ with dag:
     join_tables = []
     for table in ["alias", "grid", "ids", "linkedin", "market", "organizations", "parent", "permid"]:
 
-        # Grab all the data and write it to unseen_en_corpus
         join_table = BigQueryInsertJobOperator(
             task_id=f"join_{table}",
             configuration={
@@ -105,12 +97,13 @@ with dag:
     curr = start_initial_tables
     for line in open(seq_path_prefix + initial_query_sequence).readlines():
         dataset, table = line.split(",")
-        table_name = f"{dataset}.{table.strip()}"
+        table = table.strip()
+        table_name = f"{dataset}.{table}"
         next_tab = BigQueryInsertJobOperator(
             task_id=f"create_{table_name}",
             configuration={
                 "query": {
-                    "query": "{% include '" + f"{sql_dir}/{table.strip()}.sql" + "' %}",
+                    "query": "{% include '" + f"{sql_dir}/{table}.sql" + "' %}",
                     "useLegacySql": False,
                     "destinationTable": {
                         "projectId": PROJECT_ID,
@@ -155,7 +148,7 @@ with dag:
         task_id="run_get_ai_counts",
         project_id=PROJECT_ID,
         location=GCP_ZONE,
-        cluster_name="us-east1-production2023-cc1-01d75926-gke",
+        cluster_name="cc2-task-pool",
         name="run_get_ai_counts",
         cmds=["/bin/bash"],
         arguments=["-c", (f"echo 'getting AI counts!' ; rm -r ai || true ; "
@@ -213,7 +206,7 @@ with dag:
             task_id=f"run_get_{paper_type}_counts",
             project_id=PROJECT_ID,
             location=GCP_ZONE,
-            cluster_name="us-east1-production2023-cc1-01d75926-gke",
+            cluster_name="cc2-task-pool",
             name=f"run_get_{paper_type}_counts",
             cmds=["/bin/bash"],
             arguments=["-c", (f"echo 'getting {paper_type} paper counts!' ; rm -r {paper_type} || true ; "
