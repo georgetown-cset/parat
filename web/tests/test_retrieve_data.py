@@ -172,3 +172,7 @@ class TestMkTabText(unittest.TestCase):
             assert not output["local_logo"] and not os.path.exists(os.path.join(IMAGE_DIR, f"{company}.png"))
             output["local_logo"] = f"{company}.png"
         self.assertEqual(output, expected_output)
+
+    def test_get_growth(self):
+        self.assertEqual(1.0, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9]))
+        self.assertEqual(1.6666666666666667, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9], is_patents=True))
