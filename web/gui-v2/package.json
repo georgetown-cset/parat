@@ -7,9 +7,9 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "NODE_OPTIONS=--max-old-space-size=6144 gatsby develop -p 8550",
-    "start": "NODE_OPTIONS=--max-old-space-size=6144 gatsby develop -p 8550",
-    "build": "NODE_OPTIONS=--max-old-space-size=6144 gatsby build",
+    "develop": "NODE_OPTIONS=--max-old-space-size=8192 gatsby develop -p 8550",
+    "start": "NODE_OPTIONS=--max-old-space-size=8192 gatsby develop -p 8550",
+    "build": "NODE_OPTIONS=--max-old-space-size=8192 gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "jest",

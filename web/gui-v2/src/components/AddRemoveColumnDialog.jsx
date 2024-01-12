@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from '@mui/material';
 
-import { ButtonStyled } from '@eto/eto-ui-components';
+import { ButtonStyled, HelpTooltip } from '@eto/eto-ui-components';
 import { plausibleEvent } from '../util/analytics';
 
 
@@ -43,7 +43,9 @@ const styles = {
     }
   `,
   plainLabel: css`
+    align-items: center;
     color: initial;
+    display: flex;
     font-family: GTZirkonLight;
     font-size: initial;
     text-transform: initial;
@@ -113,6 +115,7 @@ const AddRemoveColumnDialog = ({
                   disabled={colDef.key === "name"}
                 />
                 {colDef.title}
+                {colDef?.tooltip && <HelpTooltip text={colDef.tooltip} />}
               </label>
             ))
           }
