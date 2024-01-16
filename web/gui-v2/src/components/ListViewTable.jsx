@@ -246,7 +246,7 @@ const filterRow = (row, filters) => {
       }
 
       const [min, max] = filters[colDef.key];
-      if ( rowVal < min || ( max < 100 && max < rowVal) ) {
+      if ( ( -100 < min && rowVal < min ) || ( max < 100 && max < rowVal ) ) {
         return false;
       }
     } else {
@@ -469,6 +469,7 @@ const ListViewTable = ({
             <HeaderSlider
               initialValue={initialQueryParams?.[colDef.key]}
               label={colDef.title}
+              min={colDef.isGrowthStat ? -100 : 0}
               onChange={newVal => handleSliderChange(colDef.key, newVal)}
               value={filters?.[colDef.key].get}
             />

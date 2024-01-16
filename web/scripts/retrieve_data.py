@@ -407,6 +407,24 @@ def add_supplemental_descriptions(rows: list) -> None:
             row.update(name_to_desc_info[company_name])
 
 
+def get_growth(yearly_counts: list, is_patents: bool = False) -> float:
+    """
+    Adds growth metrics based on yearly counts
+    :param yearly_counts: list of yearly counts of some metric
+    :param is_patents: true if counts are for patents, false otherwise
+    :return: None; mutates rows
+    """
+    offset = 3 if is_patents else 1
+    interval = 3
+    interval_values = yearly_counts[-(interval+1+offset):-1*offset]
+    num_zero_years = sum([value == 0 for value in interval_values[:-1]])
+    if num_zero_years == interval:
+        return 0
+    total_percentage_changes = sum([100*(interval_values[i+1]-interval_values[i])/interval_values[i]
+                                    for i in range(interval) if interval_values[i] > 0])
+    return total_percentage_changes/(interval-num_zero_years)
+
+
 def clean_country(country: str) -> str:
     """
     Convert country abbreviation to full country name
@@ -648,6 +666,12 @@ def get_category_counts(js: dict) -> None:
             "total": total,
             "isTopResearch": is_top_research
         }
+        if machine_name == "ai_publications":
+            articles[machine_name+"_growth"] = {
+                "counts": [],
+                "total": get_growth(counts),
+                "isTopResearch": is_top_research
+            }
 
     articles["citations_per_article"] = {
         "counts": [0 if num_art == 0 else num_cit/num_art for num_art, num_cit in
@@ -669,6 +693,10 @@ def get_category_counts(js: dict) -> None:
         "ai_patents": {
             "counts": counts,
             "total": total,
+        },
+        "ai_patents_growth": {
+            "counts": [],
+            "total": get_growth(counts, is_patents=True)
         },
         # spoof ai patent applications https://github.com/georgetown-cset/parat/issues/146
         "ai_patent_applications": {

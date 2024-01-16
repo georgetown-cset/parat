@@ -6,7 +6,10 @@ export { useWindowSize } from './useWindowSize';
 
 export const cleanFalse = (array) => array.filter(e => e !== false);
 
-export const commas = (num) => num?.toLocaleString() ?? "";
+export const commas = (
+  num,
+  { maximumFractionDigits } = { maximumFractionDigits: 2 },
+) => num?.toLocaleString("en-US", { maximumFractionDigits }) ?? "";
 
 export function debounce(callback, wait) {
   let timeout;

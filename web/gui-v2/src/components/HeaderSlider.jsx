@@ -26,6 +26,7 @@ const styles = {
 const HeaderSlider = ({
   initialValue,
   label,
+  max=100,
   min=0,
   onChange,
   value,
@@ -58,12 +59,13 @@ const HeaderSlider = ({
       <Slider
         css={styles.slider}
         min={min}
+        max={max}
         onChange={(newVal) => setValueInternal(newVal.target.value)}
         onClick={(event) => event.stopPropagation()}
         size="small"
         value={valueInternal}
         valueLabelDisplay="auto"
-        valueLabelFormat={(val) => val === 100 ? "100+" : val}
+        valueLabelFormat={(val) => val === max ? `≥ ${max}` : (val===min && min < 0 ? `≤ ${min}` : val)}
       />
     </div>
   );

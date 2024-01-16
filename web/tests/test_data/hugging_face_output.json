@@ -262,6 +262,11 @@
       "total": 18,
       "isTopResearch": false
     },
+    "ai_publications_growth": {
+      "counts": [],
+      "total": 103.33333333333333,
+      "isTopResearch": false
+    },
     "ai_pubs_top_conf": {
       "counts": [
         0,
@@ -397,8 +402,13 @@
         0,
         0
       ],
-      "total": 0,
+      "total": 0.0,
       "table": null
+    },
+    "ai_patents_growth": {
+      "counts": [],
+      "table": null,
+      "total": 0.0
     },
     "ai_patent_applications": {
       "table": null,
