@@ -194,21 +194,11 @@ const columnDefinitions = [
     initialCol: true,
   },
   {
-    title: "AI publications recent growth",
-    key: "ai_pubs_growth",
-    ...generateSliderColDef(
-      "articles",
-      "ai_publications_growth",
-      undefined, // Use the default extractFn
-      (_val, row, _extract) => {
-        const rawVal = row.articles.ai_publications_growth;
-        const total = rawVal.total ? `${rawVal.total.toFixed(2)}%` : '---';
-        const rank = rawVal.rank ?? '---';
-        return <CellStat data={{ total, rank }} />
-      },
-    ),
+    title: "AI publications recent change",
+    key: "ai_pubs_change",
+    ...generateSliderColDef("articles", "ai_publications_growth"),
     isGrowthStat: true,
-    tooltip: "Average yearly growth over the past 3 years",
+    tooltip: "Average yearly change over the past 3 years",
   },
   {
     title: "AI publication percentage",
@@ -293,21 +283,11 @@ const columnDefinitions = [
     initialCol: true,
   },
   {
-    title: "AI patents recent growth",
-    key: "ai_patents_growth",
-    ...generateSliderColDef(
-      "patents",
-      "ai_patents_growth",
-      undefined, // Use the default extractFn
-      (_val, row, _extract) => {
-        const rawVal = row.patents.ai_patents_growth;
-        const total = rawVal.total ? `${rawVal.total.toFixed(2)}%` : '---';
-        const rank = rawVal.rank ?? '---';
-        return <CellStat data={{ total, rank }} />
-      },
-    ),
+    title: "AI patents recent change",
+    key: "ai_patents_change",
+    ...generateSliderColDef("patents", "ai_patents_growth"),
     isGrowthStat: true,
-    tooltip: "Average yearly growth over the past 3 years",
+    tooltip: "Average yearly change over the past 3 years",
   },
   {
     title: "AI patent percentage",
