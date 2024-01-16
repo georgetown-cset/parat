@@ -51,6 +51,7 @@ const DetailViewPublications = ({
 }) => {
   const [aiSubfield, setAiSubfield] = useState("ai_publications");
 
+  const articleYearSpanNdash = <>{overall.startArticleYear}&ndash;{overall.endArticleYear}</>;
   const yearSpanNdash = <>{overall.years[0]}&ndash;{overall.years[overall.years.length-1]}</>;
   const yearSpanAnd = <>{overall.years[0]} and {overall.years[overall.years.length-1]}</>;
 
@@ -74,8 +75,8 @@ const DetailViewPublications = ({
     },
     {
       key: "ai-research-growth",
-      stat: <>NUM%</>,
-      text: <>growth in {data.name}'s public AI research ({yearSpanNdash})</>,
+      stat: <>{commas(data.articles.ai_publications_growth.total, { maximumFractionDigits: 1 })}%</>,
+      text: <>growth in {data.name}'s public AI research ({articleYearSpanNdash})</>,
     },
     {
       key: "ai-top-conf",
