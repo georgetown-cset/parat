@@ -416,8 +416,13 @@ def get_growth(yearly_counts: list, is_patents: bool = False) -> float:
     """
     offset = 3 if is_patents else 1
     interval = 3
-    last_four_years = yearly_counts[-(interval+1+offset):-1*offset]
-    return sum([last_four_years[i+1]-last_four_years[i] for i in range(interval)])/interval
+    interval_values = yearly_counts[-(interval+1+offset):-1*offset]
+    num_zero_years = sum([value == 0 for value in interval_values[:-1]])
+    if num_zero_years == interval:
+        return 0
+    total_percentage_changes = sum([100*(interval_values[i+1]-interval_values[i])/interval_values[i]
+                                    for i in range(interval) if interval_values[i] > 0])
+    return total_percentage_changes/(interval-num_zero_years)
 
 
 def clean_country(country: str) -> str:

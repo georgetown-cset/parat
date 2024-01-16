@@ -174,5 +174,5 @@ class TestMkTabText(unittest.TestCase):
         self.assertEqual(output, expected_output)
 
     def test_get_growth(self):
-        self.assertEqual(1.0, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9]))
-        self.assertEqual(1.6666666666666667, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9], is_patents=True))
+        self.assertEqual(16.984126984126984, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9]))
+        self.assertEqual(-40.0, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9], is_patents=True))
