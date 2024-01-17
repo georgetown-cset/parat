@@ -13,10 +13,13 @@ WITH
     -- Adding in org names and country data using ROR
   SELECT
     id,
-    name AS org_name,
-    country.country_name AS country
+    ror.name AS org_name,
+    standard_name AS country
   FROM
-    gcp_cset_ror.ror),
+    gcp_cset_ror.ror
+    LEFT JOIN
+    countries.country_code
+    ON lower(country.country_code) = lower(country_code.raw_alpha_2)),
   merged_rors AS (
     -- Selecting all the merged ids and ror ids from the literature table
   SELECT
