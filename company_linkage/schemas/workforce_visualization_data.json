@@ -1,0 +1,20 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "cset_id",
+    "type": "INTEGER",
+    "description": "CSET id of PARAT company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "tt1_jobs",
+    "type": "INTEGER",
+    "description": "AI jobs as defined under CSET's technical track 1 definition."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "ai_jobs",
+    "type": "INTEGER",
+    "description": "AI jobs as defined under a narrower definition within CSET's technical track 1 definition, focused specifically on research and implementation jobs within technical track 1."
+  }
+]
