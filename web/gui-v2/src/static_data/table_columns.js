@@ -215,7 +215,7 @@ const columnDefinitions = [
     key: "ai_pubs_percent",
     ...generateSliderColDef(
       "articles",
-      "ai_pubs",
+      "ai_publications",
       ((_val, row) => {
         return Math.round(row.articles.ai_publications.total / row.articles.all_publications.total * 1000) / 10;
       }),

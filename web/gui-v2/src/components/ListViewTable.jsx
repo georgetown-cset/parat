@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { CSVLink } from 'react-csv';
 import { getQueryParams, useQueryParamString } from 'react-use-query-param-string';
 import { css } from '@emotion/react';
 import {
@@ -541,6 +542,57 @@ const ListViewTable = ({
       .map(([key, data]) => [key, <>Total: {commas(data)}</>])
   );
 
+
+  const exportHeaders = columns.flatMap((colDef) => {
+    const headers = [ { key: colDef.key, label: colDef.title } ];
+    // Derived columns aren't able to calculate a rank
+    if ( colDef.type === "slider" && !colDef?.isDerived ) {
+      headers.push({ key: `${colDef.key}_rank`, label: `${colDef.title} rank` });
+    }
+    return headers;
+  });
+  const exportData = useMemo(() => {
+    return dataForTable
+      .map((row) => {
+        const entry = {};
+        for ( const colDef of columns ) {
+          if ( Object.hasOwn(colDef, "dataKey") && Object.hasOwn(colDef, "dataSubkey") ) {
+            const value = row[colDef.dataKey][colDef.dataSubkey];
+            if ( colDef.type === "slider" && !colDef?.isDerived ) {
+              entry[colDef.key] = value.total;
+              entry[`${colDef.key}_rank`] = value.rank;
+            } else if ( Object.hasOwn(colDef, "extract") ) {
+              entry[colDef.key] = colDef.extract(value, row);
+            }
+          } else if ( Object.hasOwn(colDef, "dataKey") ) {
+            entry[colDef.key] = row[colDef.dataKey];
+          } else {
+            entry[colDef.key] = row[colDef.key];
+          }
+        }
+        return entry;
+      })
+      .sort((a, b) => {
+        const direction = sortDir ? -1 : 1;
+        if ( Object.hasOwn(a, sortKey) && Object.hasOwn(b, sortKey) ) {
+          if ( SLIDER_COLUMNS.includes(sortKey) ) {
+            if ( a[sortKey] < b[sortKey] ) {
+              return -1 * direction;
+            } else if ( b[sortKey] < a[sortKey] ) {
+              return 1 * direction;
+            } else {
+              return 0;
+            }
+          } else {
+            return a[sortKey].localeCompare(b[sortKey]) * direction;
+          }
+        }
+        // If the sorting column isn't visible, default to sorting by company
+        // name (which is always visible).
+        return a.name.localeCompare(b.name) * direction;
+      });
+  }, [dataForTable]);
+
   return (
     <div id="table" className="list-view-table" data-testid="list-view-table">
       <div css={styles.buttonBar}>
@@ -560,13 +612,17 @@ const ListViewTable = ({
               Reset filters
             </span>
           </Button>
-          {/* TODO: enable once downloads are possible - see #96 and #166 */}
-          <Button css={styles.buttonBarButton} disabled>
-            <DownloadIcon />
-            <span className={classes([windowSize < 780 && "sr-only"])}>
-              Download results
-            </span>
-          </Button>
+          <CSVLink data={exportData} filename="eto-parat-export.csv" headers={exportHeaders}>
+            <Button
+              css={styles.buttonBarButton}
+              title="Download the results as a comma-separated value (CSV) file.  Existing sorts will be retained."
+            >
+              <DownloadIcon />
+              <span className={classes([windowSize < 780 && "sr-only"])}>
+                Download results
+              </span>
+            </Button>
+          </CSVLink>
           <Button css={styles.buttonBarButton} onClick={() => setDialogOpen(true)}>
             <AddCircleOutlineIcon />
             <span className={classes([windowSize < 650 && "sr-only"])}>

@@ -33,6 +33,7 @@
     "luxon": "^3.3.0",
     "plotly.js": "^2.24.3",
     "react": "^18.2.0",
+    "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-plotly.js": "^2.6.0",
     "react-use-query-param-string": "^2.0.10",
