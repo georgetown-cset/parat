@@ -37,11 +37,7 @@ const styles = {
     max-width: 1000px;
 
     .plotly.plot-container {
-      height: 360px;
-
-      ${breakpoints.phone_large} {
-        height: 450px;
-      }
+      height: 450px;
     }
   `,
 };
