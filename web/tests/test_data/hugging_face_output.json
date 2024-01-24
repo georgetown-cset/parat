@@ -402,17 +402,18 @@
         0,
         0
       ],
-      "total": 0.0,
+      "total": 0,
       "table": null
     },
     "ai_patents_growth": {
       "counts": [],
       "table": null,
-      "total": 0.0
+      "total": 0
     },
-    "ai_patent_applications": {
+    "ai_patents_grants": {
+      "counts": [],
       "table": null,
-      "total": 42
+      "total": 0
     },
     "all_patents": {
       "counts": [
