@@ -491,6 +491,14 @@ const columnDefinitions = [
 ];
 export default columnDefinitions;
 
+
+/**
+ * Map from column keys to their displayed titles.
+ */
+export const columnKeyMap = Object.fromEntries(
+  columnDefinitions.map(e => ([e.key, e.title]))
+);
+
 /**
  * Map from the inherent keys present in the data (`data.articles[SOMETHING]`)
  * to a human-friendly name for the column/data.  Can only be used on inherent,
