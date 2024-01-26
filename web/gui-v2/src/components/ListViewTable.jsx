@@ -62,7 +62,6 @@ const styles = {
   viewCount: css`
     align-items: center;
     display: flex;
-    padding: 0 8px;
 
     & > span {
       align-items: center;
