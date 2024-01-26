@@ -194,7 +194,7 @@ const columnDefinitions = [
     initialCol: true,
   },
   {
-    title: "AI publications recent growth",
+    title: "Recent AI pubs growth",
     key: "ai_pubs_growth",
     ...generateSliderColDef(
       "articles",

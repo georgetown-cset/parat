@@ -69,6 +69,16 @@ const styles = {
     }
     th.MuiTableCell-root {
       padding: 0;
+      vertical-align: bottom;
+
+      & > .table--headerCell--withSubheading,
+      & > .MuiTableSortLabel-root {
+        padding: 0.5rem;
+      }
+
+      & > .table--headerCell--sortableWrapper {
+        align-content: end;
+      }
     }
 
     th .MuiButtonBase-root {
@@ -310,6 +320,8 @@ const ListViewTable = ({
   const [dialogOpen, setDialogOpen] = useState(false);
   const windowSize = useWindowSize();
 
+  const tableRef = useRef();
+
   const [sortDir, setSortDir] = useState('desc');
   const [sortKey, setSortKey] = useState('ai_pubs');
   const isFirstRender = useRef(true);
@@ -385,6 +397,11 @@ const ListViewTable = ({
     }
   };
 
+  // Reset the table pagination when the filters are adjusted
+  useEffect(() => {
+    tableRef.current.resetPagination();
+  }, [JSON.stringify(currentFilters)]);
+
   // Filter the data for display.
   const dataForTable = data.filter(row => filterRow(row, currentFilters));
   const numRows = dataForTable.length;
@@ -441,7 +458,7 @@ const ListViewTable = ({
   const columns = columnDefinitions
     .filter(colDef => columnsParamSplit.includes(colDef.key))
     .map((colDef) => {
-      let display_name;
+      let subheading;
       switch ( colDef.type ) {
         case 'companyName':
         case 'dropdown':
@@ -455,7 +472,7 @@ const ListViewTable = ({
             `;
           }
 
-          display_name = (
+          subheading = (
             <HeaderDropdown
               css={[dataForTable.length === 0 && styles.shortDropdown, dropdownWidth]}
               label={colDef.title}
@@ -466,7 +483,7 @@ const ListViewTable = ({
           );
           break;
         case 'slider':
-          display_name = (
+          subheading = (
             <HeaderSlider
               initialValue={initialQueryParams?.[colDef.key]}
               label={colDef.title}
@@ -476,12 +493,11 @@ const ListViewTable = ({
             />
           );
           break;
-        default:
-          display_name = colDef.title;
       }
       const column = {
         ...colDef,
-        display_name,
+        display_name: <label>{colDef.title}</label>,
+        subheading,
       };
       return column;
     });
@@ -638,6 +654,7 @@ const ListViewTable = ({
         footerData={footerData}
         minHeight={400}
         paginate={true}
+        ref={tableRef}
         showFooter={currentFilters.name.length > 0}
         sortByDir={sortDir}
         sortByKey={sortKey}
