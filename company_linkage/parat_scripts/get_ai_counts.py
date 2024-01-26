@@ -117,6 +117,8 @@ class CountGetter:
             if by_year and not field_name_by_year in row_dict:
                 row_dict[field_name_by_year] = []
             companies.append(row_dict)
+            if test and i == 25:
+                break
         return companies
 
     def run_query_papers_by_year(self, table_name: str, field_name: str, regexes: list, rors: list) -> list:
@@ -160,50 +162,57 @@ class CountGetter:
         :param test: False if not running as a unit test
         :return:
         """
-        companies_query = f"""SELECT CSET_id, ror_id FROM 
-        `gcp-cset-projects.high_resolution_entities.aggregated_organizations`"""
-        if test:
-            companies_query += """ LIMIT 25"""
+        companies_query = f"""-- SELECT CSET_id, ror_id FROM 
+        # `gcp-cset-projects.high_resolution_entities.aggregated_organizations`"""
+        # if test:
+        #     companies_query += """ LIMIT 25"""
         client = bigquery.Client()
-        query_job = client.query(companies_query)
+        # query_job = client.query(companies_query)
         company_rows = []
-        for i, row in enumerate(query_job):
-            self.company_ids.append(row["CSET_id"])
-            if row["CSET_id"] not in self.regex_dict:
+        for i, cset_id in enumerate(self.cset_ids):
+            if test and i == 25:
+                break
+            # self.company_ids.append(cset_id)
+            if cset_id not in self.regex_dict:
                 # if it's not in the regex_dict that's bad
-                print(row["CSET_id"])
+                print(cset_id)
             else:
-                regexes = self.regex_dict[row['CSET_id']]
+                regexes = self.regex_dict[cset_id]
                 query = f"""SELECT DISTINCT merged_id, year, cv, nlp, robotics FROM `{table_name}`
                          WHERE regexp_contains(org_name, r'(?i){regexes[0]}') """
                 # if we have more than one regex for an org, include all of them
                 if len(regexes) > 1:
                     for regex in regexes[1:]:
                         query += f"""OR regexp_contains(org_name, r'(?i){regex}') """
-                if row["ror_id"]:
-                    self.ror_dict[row["CSET_id"]] = row["ror_id"]
-                    query += f"""OR ror_id IN ({str(row["ror_id"])[1:-1]})"""
+                if cset_id in self.ror_dict:
+                    # self.ror_dict[row["CSET_id"]] = row["ror_id"]
+                    query += f"""OR ror_id IN ({str(self.ror_dict[cset_id])[1:-1]})"""
                 query_job = client.query(query)
                 # get all the merged ids
                 for element in query_job:
-                    company_rows.append({"CSET_id": row["CSET_id"], "merged_id": element["merged_id"],
+                    company_rows.append({"CSET_id": cset_id, "merged_id": element["merged_id"],
                                 "year": element["year"], "cv": element["cv"],
                                 "nlp": element["nlp"], "robotics": element["robotics"]})
         return company_rows
 
-    def run_query_id_patents(self, table_name: str):
+    def run_query_id_patents(self, table_name: str, ai: bool = True, test: bool = False):
         """
         Get patent counts one by one using CSET_ids.
         :return:
         """
         patent_companies = []
-        for cset_id in self.company_ids:
+        for i, cset_id in enumerate(self.cset_ids):
+            if test and i == 25:
+                break
             if cset_id in self.regex_dict:
                 regexes = self.regex_dict[cset_id]
                 rors = self.ror_dict[cset_id]
                 query = f"""SELECT DISTINCT 
-                              family_id,
+                              family_id, 
                               priority_year,
+                        """
+                if ai:
+                    query += f"""
                               Physical_Sciences_and_Engineering,
                               Life_Sciences,
                               Security__eg_cybersecurity,
@@ -238,7 +247,8 @@ class CountGetter:
                               Probabilistic_Reasoning,
                               Ontology_Engineering,
                               Machine_Learning,
-                              Search_Methods
+                              Search_Methods """
+                query += f"""
                               FROM
                             staging_ai_companies_visualization.{table_name}
                              WHERE regexp_contains(assignee, r'(?i){regexes[0]}') """
@@ -252,8 +262,9 @@ class CountGetter:
                 query_job = client.query(query)
                 for row in query_job:
                     new_patent_row = {"CSET_id": cset_id, "family_id": row["family_id"], "priority_year": row["priority_year"]}
-                    patent_field_data = {i : row[i] for i in self.patent_fields}
-                    new_patent_row.update(patent_field_data)
+                    if ai:
+                        patent_field_data = {i : row[i] for i in self.patent_fields}
+                        new_patent_row.update(patent_field_data)
                     patent_companies.append(new_patent_row)
                 # company["ai_patents_by_year"] = self.run_query_patents_by_year(company["CSET_id"])
             else:

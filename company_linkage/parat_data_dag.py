@@ -212,7 +212,7 @@ with dag:
     )
 
     run_papers = []
-    for paper_type in ["top", "all"]:
+    for paper_type in ["top_paper", "all_paper", "all_patent"]:
 
         run_get_paper_counts = GKEStartPodOperator(
             task_id=f"run_get_{paper_type}_counts",
@@ -221,9 +221,9 @@ with dag:
             cluster_name="cc2-task-pool",
             name=f"run_get_{paper_type}_counts",
             cmds=["/bin/bash"],
-            arguments=["-c", (f"echo 'getting {paper_type} paper counts!' ; rm -r {paper_type} || true ; "
+            arguments=["-c", (f"echo 'getting {paper_type} counts!' ; rm -r {paper_type} || true ; "
                               f"mkdir -p {paper_type} && "
-                              f"python3 {paper_type}_papers.py {paper_type}/{paper_type}_paper_counts.jsonl && "
+                              f"python3 {paper_type}s.py {paper_type}/{paper_type}_counts.jsonl && "
                               f"gsutil -m cp -r {paper_type} gs://{DATA_BUCKET}/{tmp_dir}/ ")],
             namespace="default",
             image=f"us.gcr.io/{PROJECT_ID}/parat",
@@ -254,7 +254,7 @@ with dag:
     load_top_papers = GCSToBigQueryOperator(
         task_id=f"load_top_papers",
         bucket=DATA_BUCKET,
-        source_objects=[f"{tmp_dir}/top/top_paper_counts.jsonl"],
+        source_objects=[f"{tmp_dir}/top_paper/top_paper_counts.jsonl"],
         schema_object=f"{schema_dir}/top_papers_schema.json",
         destination_project_dataset_table=f"{staging_dataset}.top_paper_counts",
         source_format="NEWLINE_DELIMITED_JSON",
@@ -265,9 +265,20 @@ with dag:
     load_all_papers = GCSToBigQueryOperator(
         task_id=f"load_all_papers",
         bucket=DATA_BUCKET,
-        source_objects=[f"{tmp_dir}/all/all_paper_counts.jsonl"],
+        source_objects=[f"{tmp_dir}/all_paper/all_paper_counts.jsonl"],
         schema_object=f"{schema_dir}/all_papers_schema.json",
         destination_project_dataset_table=f"{staging_dataset}.all_paper_counts",
+        source_format="NEWLINE_DELIMITED_JSON",
+        create_disposition="CREATE_IF_NEEDED",
+        write_disposition="WRITE_TRUNCATE"
+    )
+
+    load_all_patents = GCSToBigQueryOperator(
+        task_id=f"load_all_patents",
+        bucket=DATA_BUCKET,
+        source_objects=[f"{tmp_dir}/all_patent/all_patent_counts.jsonl"],
+        schema_object=f"{schema_dir}/all_patents_schema.json",
+        destination_project_dataset_table=f"{staging_dataset}.all_patent_counts",
         source_format="NEWLINE_DELIMITED_JSON",
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE"
@@ -366,6 +377,7 @@ with dag:
         >> run_papers
         >> load_top_papers
         >> load_all_papers
+        >> load_all_patents
         >> start_visualization_tables
     )
     (
