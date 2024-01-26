@@ -1,0 +1,20 @@
+[
+      {
+        "mode": "REQUIRED",
+        "name": "CSET_id",
+        "type": "INTEGER",
+        "description": "The CSET_id for a company."
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "family_id",
+        "type": "STRING",
+        "description": "The family id of a patent family associated to the company."
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "The priority year of the patent family."
+      }
+]

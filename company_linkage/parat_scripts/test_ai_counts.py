@@ -2,7 +2,6 @@ import unittest
 from get_ai_counts import CountGetter
 import warnings
 
-
 def ignore_warnings(test_func):
     def do_test(self, *args, **kwargs):
         with warnings.catch_warnings():
@@ -47,7 +46,7 @@ class TestAICounts(unittest.TestCase):
             self.assertIsNotNone(company["ai_pubs"])
 
     """
-    This is deprecated and can no longer be tested this because 
+    This is deprecated and can no longer be tested this because
     the by-year data  isn't necessarily in the visualization table.
     TODO: Find a new way to test
     """
@@ -86,8 +85,9 @@ class TestAICounts(unittest.TestCase):
         count_getter.get_identifiers()
         table_name = "gcp-cset-projects.staging_ai_companies_visualization.ai_publications"
         test = True
-        count_getter.run_query_id_papers(table_name, test)
-        patent_companies = count_getter.run_query_id_patents()
+        ai = True
+        # count_getter.run_query_id_papers(table_name, test)
+        patent_companies = count_getter.run_query_id_patents("linked_ai_patents", ai, test)
         for company_row in patent_companies:
             self.assertIsNotNone(company_row["CSET_id"])
             self.assertEqual(type(company_row["CSET_id"]), int)
