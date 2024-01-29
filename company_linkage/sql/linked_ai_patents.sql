@@ -1,9 +1,9 @@
--- Pulling every AI-associated patent family id linked to every grid id of any assignee for that patent, and all the assignee names
+-- Pulling every AI-associated patent family id linked to every ror id of any assignee for that patent, and all the assignee names
 -- We also pull in the AI subcategories and the years
 -- We also attempt to add in "fake" families for the patents that are missing patent families
 with patents_orig as (
 SELECT
-  -- Pulling in the current assignee ror ids from dimensions
+  -- Pulling in the current assignee ror ids
   patent_id,
   family_id,
   assignee,

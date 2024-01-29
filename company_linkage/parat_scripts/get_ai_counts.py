@@ -191,7 +191,7 @@ class CountGetter:
                                 "nlp": element["nlp"], "robotics": element["robotics"]})
         return company_rows
 
-    def run_query_id_patents(self):
+    def run_query_id_patents(self, table_name: str):
         """
         Get patent counts one by one using CSET_ids.
         :return:
@@ -240,7 +240,7 @@ class CountGetter:
                               Machine_Learning,
                               Search_Methods
                               FROM
-                            staging_ai_companies_visualization.linked_ai_patents
+                            staging_ai_companies_visualization.{table_name}
                              WHERE regexp_contains(assignee, r'(?i){regexes[0]}') """
                 # if we have more than one regex for an org, include all of them
                 if len(regexes) > 1:
@@ -274,8 +274,12 @@ class CountGetter:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("output_papers", type=str, help="A jsonl file for writing output paper data to create new tables")
-    parser.add_argument("output_patents", type=str, help="A jsonl file for writing output patent data to create new tables")
+    parser.add_argument("output_papers", type=str,
+                        help="A jsonl file for writing output paper data to create new tables")
+    parser.add_argument("output_patents", type=str,
+                        help="A jsonl file for writing output patent data to create new tables")
+    parser.add_argument("output_patent_grants", type=str,
+                        help="A jsonl file for writing output patent grants data to create new tables")
     args = parser.parse_args()
     if "jsonl" not in args.output_papers or "jsonl" not in args.output_patents:
         parser.print_help()
@@ -287,10 +291,14 @@ def main() -> None:
     company_rows = count_getter.run_query_id_papers(table_name)
     print("Writing results")
     count_getter.write_output(company_rows, args.output_papers)
-    print("Fetching patent data")
-    patent_companies = count_getter.run_query_id_patents()
+    print("Fetching patent applications data")
+    patent_companies = count_getter.run_query_id_patents("linked_ai_patents")
     print("Writing results")
     count_getter.write_output(patent_companies, args.output_patents)
+    print("Fetching patent grants data")
+    patent_grant_companies = count_getter.run_query_id_patents("linked_ai_patents_grants")
+    print("Writing results")
+    count_getter.write_output(patent_grant_companies, args.output_patent_grants)
 
 if __name__ == "__main__":
     main()

@@ -10,7 +10,7 @@ google-auth
 google-cloud-bigquery-storage
 google-cloud-bigquery
 google-cloud-core
-google-cloud-translate
+google-cloud-translate==1.6.0
 google-crc32c
 google-resumable-media
 googleapis-common-protos

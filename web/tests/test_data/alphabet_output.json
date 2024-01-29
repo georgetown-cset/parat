@@ -521,9 +521,10 @@
       "table": null,
       "total": 12.192163477671421
     },
-    "ai_patent_applications": {
+    "ai_patents_grants": {
+      "counts": [],
       "table": null,
-      "total": 42
+      "total": 1634
     },
     "all_patents": {
       "counts": [

@@ -72,9 +72,9 @@ const DetailViewPatents = ({
       text: <>growth in {data.name}'s AI patenting ({yearSpanNdash})</>,
     },
     {
-      key: "ai-patent-applications",
-      stat: <>{commas(data.patents.ai_patent_applications.total)}</>,
-      text: <div>AI patent <strong>applications</strong> were filed by {data.name} ({yearSpanNdash})</div>,
+      key: "ai-patent-grants",
+      stat: <>{commas(data.patents.ai_patents_grants.total)}</>,
+      text: <div>AI patents were <strong>granted</strong> to {data.name} ({yearSpanNdash})</div>,
     },
     {
       key: "ai-focused-percent",

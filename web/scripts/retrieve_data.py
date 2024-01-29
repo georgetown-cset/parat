@@ -90,7 +90,7 @@ def get_exchange_link(market_key: str) -> dict:
     :param market_key: exchange:ticker
     :return: A dict mapping market_key to the input market_key and link to the link, if successfully found, else None
     """
-    time.sleep(5)
+    time.sleep(1)
     # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
     first, last = sorted(market_key.strip(":").split(":"))
     gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
@@ -100,7 +100,7 @@ def get_exchange_link(market_key: str) -> dict:
     r = requests.get(gf_link, headers=headers)
     if "No results found" in r.text:
         gf_link = f"https://www.google.com/finance/quote/{last}:{first}"
-        time.sleep(5)
+        time.sleep(1)
         r = requests.get(gf_link, headers=headers)
         return {"market_key": market_key, "link": None if "No results found" in r.text else gf_link}
     else:
@@ -338,12 +338,12 @@ def get_translation(desc: str, client, parent) -> str:
     # Check if desc appears to be in English, and if not, translate it
     if details[0][1].lower() != "en":
         print("Translating "+desc)
-        response = client.translate_text(
-            parent=parent,
-            contents=[desc],
-            mime_type="text/plain",
-            target_language_code="en"
-        )
+        response = client.translate_text(request = {
+            "parent": parent,
+            "contents": [desc],
+            "mime_type": "text/plain",
+            "target_language_code": "en"
+        })
         translation = response.translations[0].translated_text.strip()
         return translation
     return None
@@ -366,7 +366,7 @@ def add_supplemental_descriptions(rows: list) -> None:
     }
     with open(SUPPLEMENTAL_DESCRIPTIONS) as f:
         client = translate.TranslationServiceClient()
-        parent = client.location_path("gcp-cset-projects", "global")
+        parent = "projects/gcp-cset-projects/locations/global"
         for row in csv.DictReader(f):
             company_name = row["company_name"]
             name_to_desc_info[company_name] = {desc_info[k]: row[k].strip() for k in desc_info}
@@ -600,7 +600,6 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
         "global500": "in_fortune_global_500"
     }
     js["groups"] = {k: js.pop(v, False) for k, v in group_keys_to_names.items()}
-    js.pop("grid")
 
 
 def get_top_10_lists(js: dict) -> None:
@@ -698,9 +697,9 @@ def get_category_counts(js: dict) -> None:
             "counts": [],
             "total": get_growth(counts, is_patents=True)
         },
-        # spoof ai patent applications https://github.com/georgetown-cset/parat/issues/146
-        "ai_patent_applications": {
-            "total": 42,
+        "ai_patents_grants": {
+            "counts": [],
+            "total": get_yearly_counts(js.pop("ai_patents_grants_by_year", {}), "ai_patents")[1],
         },
         # spoof all patents https://github.com/georgetown-cset/parat/issues/125
         "all_patents": {

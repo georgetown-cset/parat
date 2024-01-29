@@ -327,9 +327,9 @@ const columnDefinitions = [
     isDerived: true,
   },
   {
-    title: "Applications for AI patents",
-    key: "ai_patent_applications",
-    ...generateSliderColDef("patents", "ai_patent_applications"),
+    title: "Granted AI patents",
+    key: "ai_patents_grants",
+    ...generateSliderColDef("patents", "ai_patents_grants"),
   },
   {
     title: "Agricultural patents",

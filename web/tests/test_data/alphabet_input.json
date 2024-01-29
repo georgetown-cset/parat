@@ -132,9 +132,6 @@
       "crunchbase_url": "https://www.crunchbase.com/organization/verily-2"
     }
   ],
-  "grid": [
-    "grid.497059.6"
-  ],
   "linkedin": [
     "https://www.linkedin.com/company/intrinsic",
     "https://www.linkedin.com/company/alphabet-inc",
@@ -2427,6 +2424,132 @@
     {
       "priority_year": 2021,
       "ai_patents": 64
+    }
+  ],
+  "ai_patents_grants_by_year": [
+    {
+        "priority_year": 1988,
+        "ai_patents": 1
+    },
+    {
+        "priority_year": 1991,
+        "ai_patents": 1
+    },
+    {
+        "priority_year": 1994,
+        "ai_patents": 6
+    },
+    {
+        "priority_year": 1995,
+        "ai_patents": 2
+    },
+    {
+        "priority_year": 1996,
+        "ai_patents": 7
+    },
+    {
+        "priority_year": 1997,
+        "ai_patents": 5
+    },
+    {
+        "priority_year": 1998,
+        "ai_patents": 5
+    },
+    {
+        "priority_year": 1999,
+        "ai_patents": 6
+    },
+    {
+        "priority_year": 2000,
+        "ai_patents": 5
+    },
+    {
+        "priority_year": 2001,
+        "ai_patents": 5
+    },
+    {
+        "priority_year": 2002,
+        "ai_patents": 5
+    },
+    {
+        "priority_year": 2003,
+        "ai_patents": 4
+    },
+    {
+        "priority_year": 2004,
+        "ai_patents": 9
+    },
+    {
+        "priority_year": 2005,
+        "ai_patents": 14
+    },
+    {
+        "priority_year": 2006,
+        "ai_patents": 12
+    },
+    {
+        "priority_year": 2007,
+        "ai_patents": 18
+    },
+    {
+        "priority_year": 2008,
+        "ai_patents": 15
+    },
+    {
+        "priority_year": 2009,
+        "ai_patents": 25
+    },
+    {
+        "priority_year": 2010,
+        "ai_patents": 56
+    },
+    {
+        "priority_year": 2011,
+        "ai_patents": 74
+    },
+    {
+        "priority_year": 2012,
+        "ai_patents": 89
+    },
+    {
+        "priority_year": 2013,
+        "ai_patents": 119
+    },
+    {
+        "priority_year": 2014,
+        "ai_patents": 91
+    },
+    {
+        "priority_year": 2015,
+        "ai_patents": 150
+    },
+    {
+        "priority_year": 2016,
+        "ai_patents": 251
+    },
+    {
+        "priority_year": 2017,
+        "ai_patents": 332
+    },
+    {
+        "priority_year": 2018,
+        "ai_patents": 264
+    },
+    {
+        "priority_year": 2019,
+        "ai_patents": 267
+    },
+    {
+        "priority_year": 2020,
+        "ai_patents": 133
+    },
+    {
+        "priority_year": 2021,
+        "ai_patents": 25
+    },
+    {
+        "priority_year": 2022,
+        "ai_patents": 2
     }
   ],
   "Physical_Sciences_and_Engineering_pats_by_year": [

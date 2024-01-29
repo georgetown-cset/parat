@@ -153,7 +153,8 @@ with dag:
         cmds=["/bin/bash"],
         arguments=["-c", (f"echo 'getting AI counts!' ; rm -r ai || true ; "
                           f"mkdir -p ai && "
-                          f"python3 get_ai_counts.py ai/ai_company_papers.jsonl ai/ai_company_patents.jsonl && "
+                          f"python3 get_ai_counts.py ai/ai_company_papers.jsonl ai/ai_company_patents.jsonl "
+                          f"ai/ai_company_patent_grants.jsonl && "
                           f"gsutil -m cp -r ai gs://{DATA_BUCKET}/{tmp_dir}/ ")],
         namespace="default",
         image=f"us.gcr.io/{PROJECT_ID}/parat",
@@ -194,6 +195,17 @@ with dag:
         source_objects=[f"{tmp_dir}/ai/ai_company_patents.jsonl"],
         schema_object=f"{schema_dir}/ai_patents_schema.json",
         destination_project_dataset_table=f"{staging_dataset}.ai_company_patents",
+        source_format="NEWLINE_DELIMITED_JSON",
+        create_disposition="CREATE_IF_NEEDED",
+        write_disposition="WRITE_TRUNCATE"
+    )
+
+    load_ai_patent_grants = GCSToBigQueryOperator(
+        task_id=f"load_ai_company_patent_grants",
+        bucket=DATA_BUCKET,
+        source_objects=[f"{tmp_dir}/ai/ai_company_patent_grants.jsonl"],
+        schema_object=f"{schema_dir}/ai_patents_schema.json",
+        destination_project_dataset_table=f"{staging_dataset}.ai_company_patent_grants",
         source_format="NEWLINE_DELIMITED_JSON",
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE"
@@ -350,6 +362,7 @@ with dag:
         >> run_get_ai_counts
         >> load_ai_papers
         >> load_ai_patents
+        >> load_ai_patent_grants
         >> run_papers
         >> load_top_papers
         >> load_all_papers
