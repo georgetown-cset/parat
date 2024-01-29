@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { css } from '@emotion/react';
 
+import { breakpoints } from '@eto/eto-ui-components';
+
 import SectionHeading from './SectionHeading';
 import { fallback } from '../styles/common-styles';
 import { cleanFalse } from '../util';
@@ -33,6 +35,10 @@ const styles = {
     flex-direction: column;
     margin: 0.5rem auto 0;
     max-width: 1000px;
+
+    .plotly.plot-container {
+      height: 450px;
+    }
   `,
 };
 
