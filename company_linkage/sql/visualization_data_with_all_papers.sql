@@ -13,7 +13,7 @@ WITH
   SELECT
     *
   FROM
-    staging_ai_companies_visualization.visualization_data_with_top_papers)
+    staging_ai_companies_visualization.visualization_data_with_highly_cited)
   -- Join the two together using the CSET id
 SELECT
   viz_data.*,

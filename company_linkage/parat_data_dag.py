@@ -212,7 +212,7 @@ with dag:
     )
 
     run_papers = []
-    for paper_type in ["top_paper", "all_paper", "all_patent"]:
+    for paper_type in ["top_paper", "highly_cited_paper", "all_paper", "all_patent"]:
 
         run_get_paper_counts = GKEStartPodOperator(
             task_id=f"run_get_{paper_type}_counts",
@@ -257,6 +257,17 @@ with dag:
         source_objects=[f"{tmp_dir}/top_paper/top_paper_counts.jsonl"],
         schema_object=f"{schema_dir}/top_papers_schema.json",
         destination_project_dataset_table=f"{staging_dataset}.top_paper_counts",
+        source_format="NEWLINE_DELIMITED_JSON",
+        create_disposition="CREATE_IF_NEEDED",
+        write_disposition="WRITE_TRUNCATE"
+    )
+
+    load_highly_cited_papers = GCSToBigQueryOperator(
+        task_id=f"load_highly_cited_papers",
+        bucket=DATA_BUCKET,
+        source_objects=[f"{tmp_dir}/highly_cited_paper/highly_cited_paper_counts.jsonl"],
+        schema_object=f"{schema_dir}/highly_cited_papers_schema.json",
+        destination_project_dataset_table=f"{staging_dataset}.highly_cited_paper_counts",
         source_format="NEWLINE_DELIMITED_JSON",
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE"
@@ -376,6 +387,7 @@ with dag:
         >> load_ai_patent_grants
         >> run_papers
         >> load_top_papers
+        >> load_highly_cited_papers
         >> load_all_papers
         >> load_all_patents
         >> start_visualization_tables
