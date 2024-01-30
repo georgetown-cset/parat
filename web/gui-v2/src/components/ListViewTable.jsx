@@ -30,6 +30,7 @@ import {
   useWindowSize,
 } from '../util';
 import { plausibleEvent } from '../util/analytics';
+import { formatActiveSliderFilter } from '../util/format';
 
 const styles = {
   buttonBar: css`
@@ -67,6 +68,15 @@ const styles = {
       align-items: center;
       display: flex;
       margin-left: 0.5rem;
+    }
+  `,
+  activeFilterTooltip: css`
+    .MuiTooltip-tooltip {
+      max-width: 400px;
+
+      li > span {
+        font-family: GTZirkonLight;
+      }
     }
   `,
   activeFiltersList: css`
@@ -640,6 +650,29 @@ const ListViewTable = ({
       });
   }, [dataForTable]);
 
+
+  const activeFiltersTooltip = (
+    <>
+      <label>Active filters:</label>
+      <ul css={styles.activeFiltersList}>
+        {activeFilters.map((filter) => {
+          const [key, values] = filter;
+          const title = columnKeyMap[key];
+          if ( DROPDOWN_COLUMNS.includes(key) ) {
+            return <li>{title}: <span>{values.join(", ")}</span></li>;
+          } else {
+            const formatted = formatActiveSliderFilter(
+              values,
+              DEFAULT_FILTER_VALUES[key],
+              SLIDER_GROWTH_COLUMNS.includes(key)
+            );
+            return <li>{title}: <span>{formatted}</span></li>;
+          }
+        })}
+      </ul>
+    </>
+  );
+
   return (
     <div id="table" className="list-view-table" data-testid="list-view-table">
       <div css={styles.buttonBar}>
@@ -648,36 +681,23 @@ const ListViewTable = ({
             {windowSize >= 430 && <>Viewing </>}
             {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
             {activeFilters.length > 0 &&
-              <HelpTooltip
-                text={<>
-                  <label>Active filters:</label>
-                  <ul css={styles.activeFiltersList}>
-                    {activeFilters.map((filter) => {
-                      const [key, values] = filter;
-                      const title = columnKeyMap[key];
-                      if ( DROPDOWN_COLUMNS.includes(key) ) {
-                        return <li>{title}: {values.join(", ")}</li>;
-                      } else {
-                        return <li>{title}: {JSON.stringify(values)}</li>;
-                      }
-                    })}
-                  </ul>
-                </>}
-              />
+              <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip} />
             }
           </Typography>
         </div>
         <div css={styles.buttonBarRight}>
-          <Button
-            css={styles.buttonBarButton}
-            disabled={activeFilters.length == 0}
-            onClick={resetFilters}
-          >
-            <CloseIcon />
-            <span className={classes([windowSize < 490 && "sr-only"])}>
-              Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
-            </span>
-          </Button>
+          <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip}>
+            <Button
+              css={styles.buttonBarButton}
+              disabled={activeFilters.length == 0}
+              onClick={resetFilters}
+            >
+              <CloseIcon />
+              <span className={classes([windowSize < 490 && "sr-only"])}>
+                Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
+              </span>
+            </Button>
+          </HelpTooltip>
           <CSVLink data={exportData} filename="eto-parat-export.csv" headers={exportHeaders}>
             <Button
               css={styles.buttonBarButton}
