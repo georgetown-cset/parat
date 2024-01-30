@@ -97,6 +97,15 @@ const styles = {
       padding: 2px;
       margin-left: 1rem;
     }
+
+    /*
+     * Fix font in pagination controls - to be resolved upstream by
+     * https://github.com/georgetown-cset/eto-ui-components/issues/361
+     */
+    .MuiTablePagination-selectLabel,
+    .MuiTablePagination-select {
+      font-family: GTZirkonLight;
+    }
   `,
   shortDropdown: css`
     .MuiPaper-root {
@@ -655,6 +664,7 @@ const ListViewTable = ({
         minHeight={400}
         paginate={true}
         ref={tableRef}
+        rowsPerPageOptions={[10, 20, 50, 100]}
         showFooter={currentFilters.name.length > 0}
         sortByDir={sortDir}
         sortByKey={sortKey}
