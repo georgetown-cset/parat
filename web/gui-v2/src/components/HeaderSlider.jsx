@@ -9,7 +9,6 @@ const styles = {
   wrapper: css`
     display: flex;
     flex-direction: column;
-    margin: 0.5rem;
     width: 100%;
   `,
   slider: css`
@@ -55,7 +54,6 @@ const HeaderSlider = ({
 
   return (
     <div css={styles.wrapper}>
-      <label>{label}</label>
       <Slider
         css={styles.slider}
         min={min}

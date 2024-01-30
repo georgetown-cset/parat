@@ -5,7 +5,7 @@ import { Autocomplete } from '@eto/eto-ui-components';
 
 const styles = {
   headerDropdown: css`
-    width: calc(100% - 1rem);
+    margin: 0;
 
     .MuiFormControl-root {
       width: 100%;
@@ -40,6 +40,7 @@ const HeaderDropdown = ({
       options={optionsInternal}
       selected={selected}
       setSelected={setSelected}
+      showLabel={false}
     />
   );
 };
