@@ -354,14 +354,15 @@ const ListViewTable = ({
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const windowSize = useWindowSize();
-
+  const isFirstRender = useRef(true);
   const tableRef = useRef();
 
-  const [sortDir, setSortDir] = useState('desc');
-  const [sortKey, setSortKey] = useState('ai_pubs');
-  const isFirstRender = useRef(true);
-
   const [initialQueryParams] = useState(() => getQueryParams());
+  const initialSortParam = initialQueryParams?.sort;
+
+  const [sortParam, setSortParam] = useQueryParamString('sort', 'ai_pubs-desc');
+  const [sortDir, setSortDir] = useState(() => (initialSortParam ?? sortParam).split('-')[1]);
+  const [sortKey, setSortKey] = useState(() => (initialSortParam ?? sortParam).split('-')[0]);
 
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
@@ -409,6 +410,14 @@ const ListViewTable = ({
       }
     });
   }, []);
+
+  // Update the URL param when we sort the table.  Note that we don't need the
+  // inverse (param -> state) because the page will reload when the users adjusts
+  // the URL param (plus it caused the sort states to bounce between the specified
+  // sort and the default).
+  useEffect(() => {
+    setSortParam(`${sortKey}-${sortDir}`);
+  }, [sortDir, sortKey]);
 
   // Read-only object of the currently-set values of the filters
   const currentFilters = useMemo(
