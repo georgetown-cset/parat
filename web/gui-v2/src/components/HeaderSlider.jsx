@@ -56,6 +56,7 @@ const HeaderSlider = ({
     <div css={styles.wrapper}>
       <Slider
         css={styles.slider}
+        getAriaLabel={(index) => index === 0 ? "Lower bound" : "Upper bound"}
         min={min}
         max={max}
         onChange={(newVal) => setValueInternal(newVal.target.value)}
