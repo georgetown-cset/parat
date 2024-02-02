@@ -6,6 +6,7 @@ import {
   AddCircleOutline as AddCircleOutlineIcon,
   Close as CloseIcon,
   Download as DownloadIcon,
+  FilterList as FilterListIcon,
 } from "@mui/icons-material";
 import {
   Button,
@@ -13,6 +14,7 @@ import {
 } from '@mui/material';
 
 import {
+  HelpTooltip,
   Table,
   classes,
 } from '@eto/eto-ui-components';
@@ -21,13 +23,14 @@ import AddRemoveColumnDialog from './AddRemoveColumnDialog';
 import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
 import overallData from '../static_data/overall_data.json';
-import columnDefinitions from '../static_data/table_columns';
+import columnDefinitions, { columnKeyMap } from '../static_data/table_columns';
 import {
   commas,
   useMultiState,
   useWindowSize,
 } from '../util';
 import { plausibleEvent } from '../util/analytics';
+import { formatActiveSliderFilter } from '../util/format';
 
 const styles = {
   buttonBar: css`
@@ -56,6 +59,29 @@ const styles = {
       margin: 6px 8px;
       text-transform: uppercase;
     }
+  `,
+  viewCount: css`
+    align-items: center;
+    display: flex;
+
+    & > span {
+      align-items: center;
+      display: flex;
+      margin-left: 0.5rem;
+    }
+  `,
+  activeFilterTooltip: css`
+    .MuiTooltip-tooltip {
+      max-width: 400px;
+
+      li > span {
+        font-family: GTZirkonLight;
+      }
+    }
+  `,
+  activeFiltersList: css`
+    margin: 0;
+    padding-left: 1rem;
   `,
   buttonBarRight: css`
     margin-left: auto;
@@ -390,6 +416,12 @@ const ListViewTable = ({
     [filters]
   );
 
+  const activeFilters = useMemo(() => {
+    return Object.entries(currentFilters)
+      .filter(e => !e[0].startsWith('_'))
+      .filter(e => JSON.stringify(DEFAULT_FILTER_VALUES[e[0]]) !== JSON.stringify(e[1]));
+  }, [currentFilters]);
+
   const handleDropdownChange = (columnKey, newVal) => {
     if ( ! Array.isArray(newVal) ) {
       newVal = [newVal];
@@ -618,25 +650,54 @@ const ListViewTable = ({
       });
   }, [dataForTable]);
 
+
+  const activeFiltersTooltip = (
+    <>
+      <label>Active filters:</label>
+      <ul css={styles.activeFiltersList}>
+        {activeFilters.map((filter) => {
+          const [key, values] = filter;
+          const title = columnKeyMap[key];
+          if ( DROPDOWN_COLUMNS.includes(key) ) {
+            return <li>{title}: <span>{values.join(", ")}</span></li>;
+          } else {
+            const formatted = formatActiveSliderFilter(
+              values,
+              DEFAULT_FILTER_VALUES[key],
+              SLIDER_GROWTH_COLUMNS.includes(key)
+            );
+            return <li>{title}: <span>{formatted}</span></li>;
+          }
+        })}
+      </ul>
+    </>
+  );
+
   return (
     <div id="table" className="list-view-table" data-testid="list-view-table">
       <div css={styles.buttonBar}>
         <div css={styles.buttonBarLeft}>
-          <Typography>
+          <Typography css={styles.viewCount}>
             {windowSize >= 430 && <>Viewing </>}
             {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
+            {activeFilters.length > 0 &&
+              <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip} />
+            }
           </Typography>
         </div>
         <div css={styles.buttonBarRight}>
-          <Button
-            css={styles.buttonBarButton}
-            onClick={resetFilters}
-          >
-            <CloseIcon />
-            <span className={classes([windowSize < 490 && "sr-only"])}>
-              Reset filters
-            </span>
-          </Button>
+          <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip}>
+            <Button
+              css={styles.buttonBarButton}
+              disabled={activeFilters.length == 0}
+              onClick={resetFilters}
+            >
+              <CloseIcon />
+              <span className={classes([windowSize < 490 && "sr-only"])}>
+                Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
+              </span>
+            </Button>
+          </HelpTooltip>
           <CSVLink data={exportData} filename="eto-parat-export.csv" headers={exportHeaders}>
             <Button
               css={styles.buttonBarButton}
