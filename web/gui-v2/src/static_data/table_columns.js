@@ -208,7 +208,6 @@ const columnDefinitions = [
       },
     ),
     isGrowthStat: true,
-    tooltip: "Average yearly growth over the past 3 years",
   },
   {
     title: "AI publication percentage",
@@ -307,7 +306,6 @@ const columnDefinitions = [
       },
     ),
     isGrowthStat: true,
-    tooltip: "Average yearly growth over the past 3 years",
   },
   {
     title: "AI patent percentage",

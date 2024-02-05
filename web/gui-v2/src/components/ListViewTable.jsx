@@ -24,6 +24,7 @@ import HeaderDropdown from './HeaderDropdown';
 import HeaderSlider from './HeaderSlider';
 import overallData from '../static_data/overall_data.json';
 import columnDefinitions, { columnKeyMap } from '../static_data/table_columns';
+import { tooltips } from '../static_data/tooltips';
 import {
   commas,
   useMultiState,
@@ -133,6 +134,28 @@ const styles = {
       font-family: GTZirkonLight;
     }
   `,
+  dropdownEntryWithTooltip: css`
+    align-items: center;
+    display: flex;
+  `,
+  groupExplanationTooltip: css`
+    .MuiTooltip-tooltip {
+      max-width: 450px;
+
+      ul {
+        margin: 0.5rem 0;
+        padding-left: 20px;
+
+        li {
+          font-family: GTZirkonLight;
+        }
+
+        li + li {
+          margin-top: 0.5rem;
+        }
+      }
+    }
+  `,
   shortDropdown: css`
     .MuiPaper-root {
       max-height: 192px;
@@ -179,7 +202,18 @@ const styles = {
  * }} FilterStateObject
  */
 
-const GROUPS_OPTIONS = Object.entries(overallData.groups).map(([k, v]) => ({ text: v.name, val: `GROUP:${k}` }));
+const GROUPS_OPTIONS = Object.entries(overallData.groups)
+  .map(([k, v]) => ({
+    text: (
+      tooltips?.groupExplanations?.[k] ?
+        <div css={styles.dropdownEntryWithTooltip}>
+          {v.name} <HelpTooltip css={styles.groupExplanationTooltip} text={tooltips.groupExplanations[k]} />
+        </div>
+      :
+        v.name
+    ),
+    val: `GROUP:${k}`,
+  }));
 
 const DATAKEYS_WITH_SUBKEYS = [
   "articles",
@@ -546,7 +580,14 @@ const ListViewTable = ({
       }
       const column = {
         ...colDef,
-        display_name: <label>{colDef.title}</label>,
+        display_name: (
+          tooltips.columnHeaders?.[colDef.key] ?
+            <HelpTooltip text={tooltips.columnHeaders[colDef.key]}>
+              <label>{colDef.title}</label>
+            </HelpTooltip>
+          :
+            <label>{colDef.title}</label>
+        ),
         subheading,
       };
       return column;
