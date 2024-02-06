@@ -642,18 +642,12 @@ def get_category_counts(js: dict) -> None:
     :param js: A dict of data corresponding to an individual PARAT record
     :return: None (mutates js)
     """
-    articles = {
-        # spoof highly cited articles https://github.com/georgetown-cset/parat/issues/135
-        "highly_cited": {
-            "counts": [2 for _ in YEARS],
-            "total": 2*len(YEARS),
-            "isTopResearch": False
-        }
-    }
+    articles = {}
     ### Reformat publication-related metrics
     for machine_name, orig_key, count_key, is_top_research in [
         ["all_publications", "all_pubs_by_year", "all_pubs", False],
         ["ai_publications", "ai_pubs_by_year", "ai_pubs", False],
+        ["highly_cited_ai_pubs", "highly_cited_ai_pubs_by_year", "highly_cited_ai_pubs", False],
         ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences", False],
         ["citation_counts", "citation_count_by_year", "citation_count", False],
         ["cv_pubs", "cv_pubs_by_year", "cv_pubs", True],
@@ -702,10 +696,9 @@ def get_category_counts(js: dict) -> None:
             "counts": [],
             "total": get_yearly_counts(js.pop("ai_patents_grants_by_year", {}), "ai_patents")[1],
         },
-        # spoof all patents https://github.com/georgetown-cset/parat/issues/125
         "all_patents": {
-            "counts": [10*c for c in counts],
-            "total": 10*total
+            "counts": [],
+            "total": get_yearly_counts(js.pop("all_patents_by_year", {}), "all_patents")[1]
         }
     }
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
