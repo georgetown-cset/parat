@@ -1,0 +1,34 @@
+[
+      {
+        "mode": "REQUIRED",
+        "name": "CSET_id",
+        "type": "INTEGER",
+        "description": "The CSET_id for a company."
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "highly_cited_ai_pubs",
+        "type": "INTEGER",
+        "description": "Count of highly cited AI papers."
+      },
+      {
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "year",
+            "type": "INTEGER",
+            "description": "Publication year of papers."
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "highly_cited_ai_pubs",
+            "type": "INTEGER",
+            "description": "Count of highly cited AI papers published in that year."
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "highly_cited_ai_pubs_by_year",
+        "type": "RECORD",
+        "description": "Highly cited AI papers by year."
+      }
+  ]
