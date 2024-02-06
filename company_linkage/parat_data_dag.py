@@ -341,7 +341,7 @@ with dag:
 
     curr_date = datetime.now().strftime('%Y%m%d')
     prod_tables = ["visualization_data", "paper_visualization_data",
-                   "patent_visualization_data", "workforce_visualization_data"]
+                   "patent_visualization_data", "workforce_visualization_data", "all_visualization_data"]
     for table in prod_tables:
         prod_table_name = f"{production_dataset}.{table}"
         copy_to_production = BigQueryToBigQueryOperator(
