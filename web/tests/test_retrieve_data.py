@@ -176,3 +176,10 @@ class TestMkTabText(unittest.TestCase):
     def test_get_growth(self):
         self.assertEqual(16.984126984126984, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9]))
         self.assertEqual(-40.0, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9], is_patents=True))
+
+    def test_get_average_group_data(self):
+        with open(os.path.join(self.DATA_DIR, "get_average_group_data_input.json")) as f:
+            input_data = json.loads(f.read())
+        with open(os.path.join(self.DATA_DIR, "get_average_group_data_output.json")) as f:
+            output_data = json.loads(f.read())
+        self.assertEqual(output_data, get_average_group_data(input_data))
