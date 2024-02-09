@@ -10,6 +10,10 @@ const endArticleIx = overall.years.findIndex(e => e === overall.endArticleYear);
 const startPatentIx = overall.years.findIndex(e => e === overall.startPatentYear);
 const endPatentIx = overall.years.findIndex(e => e === overall.endPatentYear);
 
+// Start of the fake `cset_id` values used for company groups.
+// TODO: Change this to 1000000 once #212 is merged.
+const GROUP_OFFSET = 100000;
+
 const styles = {
   name: css`
     .MuiTableSortLabel-root {
@@ -116,14 +120,20 @@ const columnDefinitions = [
     title: "Company",
     key: "name",
     css: [styles.name, columnWidth(200)],
-    format: (name, row) => (
-      <a
-        target="_blank"
-        href={`company/${row.cset_id}-${slugifyCompanyName(name)}`}
-      >
-        {name}
-      </a>
-    ),
+    format: (name, row) => {
+      if ( row.cset_id >= GROUP_OFFSET ) {
+        return <>{name} (average)</>;
+      } else {
+        return (
+          <a
+            target="_blank"
+            href={`company/${row.cset_id}-${slugifyCompanyName(name)}`}
+          >
+            {name}
+          </a>
+        )
+      }
+    },
     initialCol: true,
     dropdownWidth: 240,
     sortable: true,
