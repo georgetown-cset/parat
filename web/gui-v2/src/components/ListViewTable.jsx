@@ -487,8 +487,16 @@ const ListViewTable = ({
   }, [JSON.stringify(currentFilters)]);
 
   // Filter the data for display.
-  const dataForTable = data.filter(row => filterRow(row, currentFilters));
-  const numRows = dataForTable.length;
+  const { rows: dataForTable, numCompanies } = useMemo(() => {
+    const companies = data.filter(row => filterRow(row, currentFilters));
+    const groups = currentFilters._groups.map(groupId => overallData.groups[groupId]);
+
+    return {
+      rows: [ ...companies, ...groups ],
+      numCompanies: companies.length,
+      numGroups: groups.length,
+    }
+  }, [currentFilters]);
   const totalRows = data.length;
 
   // The filter options available for each column, given the currently-applied
@@ -509,7 +517,7 @@ const ListViewTable = ({
           // possible filter options.  Otherwise, only show those that match
           // the other active filters.
           return (
-            numRows === 0 ||
+            numCompanies === 0 ||
             filterRow(row, otherFilters)
           );
         });
@@ -729,7 +737,7 @@ const ListViewTable = ({
         <div css={styles.buttonBarLeft}>
           <Typography css={styles.viewCount}>
             {windowSize >= 430 && <>Viewing </>}
-            {numRows !== totalRows ? `${numRows} of ${totalRows}` : totalRows} companies
+            {numCompanies !== totalRows ? `${numCompanies} of ${totalRows}` : totalRows} companies
             {activeFilters.length > 0 &&
               <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip} />
             }
@@ -743,7 +751,7 @@ const ListViewTable = ({
               onClick={resetFilters}
             >
               <CloseIcon />
-              <span className={classes([windowSize < 490 && "sr-only"])}>
+              <span className={classes([windowSize < 540 && "sr-only"])}>
                 Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
               </span>
             </Button>
@@ -754,14 +762,14 @@ const ListViewTable = ({
               title="Download the results as a comma-separated value (CSV) file.  Existing sorts will be retained."
             >
               <DownloadIcon />
-              <span className={classes([windowSize < 780 && "sr-only"])}>
+              <span className={classes([windowSize < 840 && "sr-only"])}>
                 Download results
               </span>
             </Button>
           </CSVLink>
           <Button css={styles.buttonBarButton} onClick={() => setDialogOpen(true)}>
             <AddCircleOutlineIcon />
-            <span className={classes([windowSize < 650 && "sr-only"])}>
+            <span className={classes([windowSize < 700 && "sr-only"])}>
               Add/remove columns
             </span>
           </Button>
