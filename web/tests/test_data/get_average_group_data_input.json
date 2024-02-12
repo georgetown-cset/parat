@@ -1,7 +1,7 @@
 {
   "global500": {
-    "cset_id": 1000500,
-    "name": "S&P 500",
+    "cset_id": 1000501,
+    "name": "Fortune Global 500",
     "rows": [
       {
         "cset_id": 1,
@@ -46,8 +46,8 @@
     ]
   },
   "sp500": {
-    "cset_id": 1000501,
-    "name": "Fortune Global 500",
+    "cset_id": 1000500,
+    "name": "S&P 500",
     "rows": [
       {
         "cset_id": 3,

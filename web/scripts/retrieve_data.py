@@ -1,9 +1,7 @@
 import argparse
 import chardet
-import copy
 import csv
 import json
-import math
 import os
 import pycountry
 import pycountry_convert
@@ -14,6 +12,7 @@ import time
 
 from PIL import Image
 from datetime import datetime
+from decimal import Decimal, ROUND_HALF_UP
 from google.cloud import bigquery
 from google.cloud import translate_v3beta1 as translate
 from io import BytesIO
@@ -841,6 +840,15 @@ def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
     return raw_group_metadata
 
 
+def exp_round(num: float) -> int:
+    """
+    Round numbers the way we learned in school, with .5 rounding up
+    :param num: number to round
+    :return: rounded number
+    """
+    return int(Decimal(str(num)).quantize(Decimal(), rounding=ROUND_HALF_UP))
+
+
 def get_average_group_data(raw_group_metadata: dict) -> dict:
     """
     Averages metrics across a group's companies
@@ -873,8 +881,9 @@ def get_average_group_data(raw_group_metadata: dict) -> dict:
                             for idx, yearly_value in enumerate(row[category][metric]["counts"]):
                                 total_metric_data["counts"][idx] += yearly_value
                 average_group_data[group][category][metric] = {
-                    "total": total_metric_data["total"]/len(rows),
-                    "counts": None if not has_counts else [total/len(rows) for total in total_metric_data["counts"]]
+                    "total": exp_round(total_metric_data["total"]/len(rows)),
+                    "counts": None if not has_counts else [exp_round(total/len(rows))
+                                                           for total in total_metric_data["counts"]]
                 }
     return average_group_data
 
@@ -893,7 +902,8 @@ def update_overall_data(group_data: dict) -> None:
         "endArticleYear": CURRENT_YEAR - 1,
         "startPatentYear": CURRENT_YEAR - 6,
         "endPatentYear": CURRENT_YEAR - 3,
-        "groups": average_group_data
+        "groups": average_group_data,
+        "groupIdOffset": GROUP_OFFSET
     }
     with open(os.path.join(WEB_SRC_DIR, "static_data", "overall_data.json"), mode="w") as out:
         out.write(json.dumps(overall_data))
