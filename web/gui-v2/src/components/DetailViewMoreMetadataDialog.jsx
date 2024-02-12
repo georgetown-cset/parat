@@ -79,7 +79,12 @@ const MoreMetadataDialog = ({
     { title: 'In S&P 500?', value: data.groups.sp500 ? 'Yes' : 'No' },
     { title: 'In Fortune Global 500?', value: data.groups.global500 ? 'Yes' : 'No' },
     { title: 'Stage', value: data.stage },
-    { title: 'Full market links', value: 'TODO - data are currently in an `__html` object' },
+    {
+      title: 'Full market links',
+      value: <div css={styles.linkWrapper}>
+        {data.market_full.map(e => <ExternalLink href={e.url}>{e.text}</ExternalLink>)}
+      </div>
+    },
   ];
 
   const handleClose = () => {
