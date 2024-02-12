@@ -1,0 +1,39 @@
+{
+  "global500": {
+    "cset_id": 1000501,
+    "name": "Fortune Global 500",
+    "articles": {
+      "test_metric": {
+        "total": 15,
+        "counts": [1, 2, 3, 4, 5]
+      },
+      "another_metric": {
+        "total": 20,
+        "counts": [1, 2, 2, 6, 9]
+      }
+    },
+    "patents": {
+      "test_metric": {
+        "total": 16,
+        "counts": [2, 3, 5, 4, 3]
+      }
+    },
+    "other_metrics": {}
+  },
+  "sp500": {
+    "cset_id": 1000500,
+    "name": "S&P 500",
+    "articles": {},
+    "patents": {},
+    "other_metrics": {
+      "test_metric": {
+        "total": 2,
+        "counts": null
+      },
+      "another_metric": {
+        "total": 5,
+        "counts": null
+      }
+    }
+  }
+}

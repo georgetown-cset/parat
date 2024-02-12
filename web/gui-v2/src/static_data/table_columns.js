@@ -11,8 +11,7 @@ const startPatentIx = overall.years.findIndex(e => e === overall.startPatentYear
 const endPatentIx = overall.years.findIndex(e => e === overall.endPatentYear);
 
 // Start of the fake `cset_id` values used for company groups.
-// TODO: Change this to 1000000 once #212 is merged.
-const GROUP_OFFSET = 100000;
+const GROUP_OFFSET = overall.groupIdOffset;
 
 const styles = {
   name: css`

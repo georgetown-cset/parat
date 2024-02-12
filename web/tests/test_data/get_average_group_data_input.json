@@ -1,0 +1,99 @@
+{
+  "global500": {
+    "cset_id": 1000501,
+    "name": "Fortune Global 500",
+    "rows": [
+      {
+        "cset_id": 1,
+        "articles": {
+          "test_metric": {
+            "total": 15,
+            "counts": [1, 2, 3, 4, 5]
+          },
+          "another_metric": {
+            "total": 11,
+            "counts": [0, 0, 1, 4, 6]
+          }
+        },
+        "patents": {
+          "test_metric": {
+            "total": 16,
+            "counts": [2, 2, 3, 4, 5]
+          }
+        },
+        "other_metrics": {}
+      },
+      {
+        "cset_id": 2,
+        "articles": {
+          "test_metric": {
+            "total": 15,
+            "counts": [1, 2, 3, 4, 5]
+          },
+          "another_metric": {
+            "total": 29,
+            "counts": [2, 4, 3, 8, 12]
+          }
+        },
+        "patents": {
+          "test_metric": {
+            "total": 16,
+            "counts": [1, 4, 6, 4, 1]
+          }
+        },
+        "other_metrics": {}
+      }
+    ]
+  },
+  "sp500": {
+    "cset_id": 1000500,
+    "name": "S&P 500",
+    "rows": [
+      {
+        "cset_id": 3,
+        "articles": {},
+        "patents": {},
+        "other_metrics": {
+          "test_metric": {
+            "total": 1,
+            "counts": null
+          },
+          "another_metric": {
+            "total": 2,
+            "counts": null
+          }
+        }
+      },
+      {
+        "cset_id": 4,
+        "articles": {},
+        "patents": {},
+        "other_metrics": {
+          "test_metric": {
+            "total": 2,
+            "counts": null
+          },
+          "another_metric": {
+            "total": 4,
+            "counts": null
+          }
+        }
+      },
+      {
+        "cset_id": 5,
+        "articles": {},
+        "patents": {},
+        "other_metrics": {
+          "test_metric": {
+            "total": 3,
+            "counts": null
+          },
+          "another_metric": {
+            "total": 8,
+            "counts": null
+          }
+        }
+      }
+    ]
+  }
+}

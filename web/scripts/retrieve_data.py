@@ -1,9 +1,7 @@
 import argparse
 import chardet
-import copy
 import csv
 import json
-import math
 import os
 import pycountry
 import pycountry_convert
@@ -14,6 +12,7 @@ import time
 
 from PIL import Image
 from datetime import datetime
+from decimal import Decimal, ROUND_HALF_UP
 from google.cloud import bigquery
 from google.cloud import translate_v3beta1 as translate
 from io import BytesIO
@@ -75,10 +74,9 @@ _curr_time = datetime.now()
 CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
 YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
 
-GROUP_NAMES_TO_KEYS = {
-    "S&P 500": "sp500",
-    "Fortune Global 500": "global500"
-}
+# Used (along with a check that we never actually meet or exceed this number with legitimate CSET ids)
+# when creating fake CSET ids for groups
+GROUP_OFFSET = 1_000_000
 
 ### END CONSTANTS ###
 
@@ -798,7 +796,7 @@ def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
     :param refresh_images: if true, will re-download all the company logos from crunchbase; don't call with true
     unless necessary
     :param refresh_sectors: if true, will re-query the PERMID api for sector information for each company
-    :return: Return company-like metadata for groups
+    :return: Return a dict of metadata and rows needed to compute average metadata for groups
     """
     rows = []
     lowercase_to_orig_cname = {}
@@ -817,43 +815,95 @@ def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
     add_sectors(rows, refresh_sectors)
     add_supplemental_descriptions(rows)
     add_ranks(rows)
-    company_rows, group_data = [], {}
+    company_rows = []
+    raw_group_metadata = {
+        "sp500": {
+            "name": "S&P 500",
+            "cset_id": GROUP_OFFSET+500,
+            "rows": []
+        },
+        "global500": {
+            "name": "Fortune Global 500",
+            "cset_id": GROUP_OFFSET+501,
+            "rows": []
+        }
+    }
     for row in rows:
-        # The final implementation will be more like the below, but spoofing this for now
-        # if row["name"] in GROUP_NAMES_TO_KEYS:
-        #     group_data[GROUP_NAMES_TO_KEYS[row["name"]]].append(row)
-        # else:
-        #     company_rows.append(row)
-        # spoof group-level stats - https://github.com/georgetown-cset/parat/issues/123
         company_rows.append(row)
-        if row["name"] == "Google":
-            sp500 = copy.deepcopy(row)
-            sp500["name"] = "S&P 500"
-            sp500["cset_id"] = 100500
-            group_data["sp500"] = sp500
-        elif row["name"] == "Microsoft":
-            global500 = copy.deepcopy(row)
-            global500["name"] = "Fortune Global 500"
-            global500["cset_id"] = 100501
-            group_data["global500"] = global500
+        assert row["cset_id"] < GROUP_OFFSET, \
+            f"Congratulations! There are more than {GROUP_OFFSET-1} PARAT companies now and you need to update this code."
+        for group_name in row["groups"]:
+            if row["groups"][group_name]:
+                raw_group_metadata[group_name]["rows"].append(row)
     with open(os.path.join(WEB_SRC_DIR, "static_data", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(company_rows)};\n\nexport {{ company_data }};")
-    return group_data
+    return raw_group_metadata
+
+
+def exp_round(num: float) -> int:
+    """
+    Round numbers the way we learned in school, with .5 rounding up
+    :param num: number to round
+    :return: rounded number
+    """
+    return int(Decimal(str(num)).quantize(Decimal(), rounding=ROUND_HALF_UP))
+
+
+def get_average_group_data(raw_group_metadata: dict) -> dict:
+    """
+    Averages metrics across a group's companies
+    :param raw_group_metadata: dict mapping group key to CSET id, name, and all rows belonging to that group
+    :return: Dict mapping group key to CSET id, name, and average metrics across rows in the group
+    """
+    average_group_data = {}
+    for group in raw_group_metadata:
+        average_group_data[group] = {
+            "cset_id": raw_group_metadata[group]["cset_id"],
+            "name": raw_group_metadata[group]["name"],
+            ARTICLE_METRICS: {},
+            PATENT_METRICS: {},
+            OTHER_METRICS: {}
+        }
+        rows = raw_group_metadata[group]["rows"]
+        for category in [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]:
+            has_counts = category != OTHER_METRICS
+            metrics = rows[0][category].keys()
+            for metric in metrics:
+                total_metric_data = {}
+                for row in rows:
+                    if not total_metric_data:
+                        # since we're computing a sum, we can just copy the values of the first row we see for the
+                        # initial values
+                        total_metric_data = row[category][metric]
+                    else:
+                        total_metric_data["total"] += row[category][metric]["total"]
+                        if has_counts:
+                            for idx, yearly_value in enumerate(row[category][metric]["counts"]):
+                                total_metric_data["counts"][idx] += yearly_value
+                average_group_data[group][category][metric] = {
+                    "total": exp_round(total_metric_data["total"]/len(rows)),
+                    "counts": None if not has_counts else [exp_round(total/len(rows))
+                                                           for total in total_metric_data["counts"]]
+                }
+    return average_group_data
 
 
 def update_overall_data(group_data: dict) -> None:
     """
     Generate top-level data that is not specific to a particular company or metric
-    :param group_data: dict mapping group keys to company-like data for those groups
+    :param group_data: dict mapping group keys to data we will use to compute average metadata for those groups
     :return: None
     """
+    print("Calculating average metadata for company groups")
+    average_group_data = get_average_group_data(group_data)
     overall_data = {
         "years": YEARS,
         "startArticleYear": CURRENT_YEAR - 4,
         "endArticleYear": CURRENT_YEAR - 1,
         "startPatentYear": CURRENT_YEAR - 6,
         "endPatentYear": CURRENT_YEAR - 3,
-        "groups": group_data
+        "groups": average_group_data,
+        "groupIdOffset": GROUP_OFFSET
     }
     with open(os.path.join(WEB_SRC_DIR, "static_data", "overall_data.json"), mode="w") as out:
         out.write(json.dumps(overall_data))
