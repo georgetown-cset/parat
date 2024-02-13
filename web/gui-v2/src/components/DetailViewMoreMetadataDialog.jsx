@@ -81,8 +81,13 @@ const MoreMetadataDialog = ({
     { title: 'Stage', value: data.stage },
     {
       title: 'Full market links',
-      value: <div css={styles.linkWrapper}>
-        {data.market_full.map(e => <ExternalLink href={e.url}>{e.text}</ExternalLink>)}
+      value: <div>
+        {data.market_full.map((e, ix) => (
+          <>
+            {ix > 0 && ", "}
+            <ExternalLink href={e.url}>{e.text}</ExternalLink>
+          </>
+        ))}
       </div>
     },
   ];
