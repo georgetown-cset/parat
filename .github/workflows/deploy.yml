@@ -1,7 +1,9 @@
 name: Deployment
 on:
   push:
-    branches: 'version2'
+    branches:
+      - master
+      - version2
 
 jobs:
   build:
