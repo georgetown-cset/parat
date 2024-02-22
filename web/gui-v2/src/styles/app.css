@@ -1,0 +1,13 @@
+:root {
+  --bright-blue-medium: rgb(128, 181, 255); /* hsv(215, 50, 100); */
+  --bright-blue-medium: rgb(153, 195, 255); /* hsv(215, 40, 100); */
+
+  font-family: GTZirkonLight;
+  scroll-behavior: smooth;
+}
+
+@media only percy {
+  .no-percy {
+      visibility: hidden;
+  }
+}

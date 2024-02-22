@@ -1,0 +1,11 @@
+{
+  "airtable_table": "parent",
+  "airtable_base": "appEc1iixuT2D1Ir5",
+  "schema_name": "parent_validate",
+  "merge_query": "parent_merge",
+  "production_table": "parent_validate",
+  "column_map": {
+    "annotator_comment": "comment",
+    "organizations": "EXCLUDE"
+  }
+}

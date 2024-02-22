@@ -1,0 +1,11 @@
+{
+  "airtable_table": "linkedin",
+  "airtable_base": "appxfErHmrB8xH98Y",
+  "schema_name": "linkedin_preannotation",
+  "merge_query": "default_merge",
+  "production_table": "linkedin_preannotation",
+  "column_map": {
+    "organizations": "EXCLUDE",
+    "annotator_comment": "EXCLUDE"
+  }
+}

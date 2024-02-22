@@ -1,0 +1,745 @@
+{
+  "cset_id": 1425,
+  "country": "usa",
+  "aliases": [
+    {
+      "alias_language": "en",
+      "alias": "hugging face, inc."
+    },
+    {
+      "alias_language": "en",
+      "alias": "hugging face inc"
+    }
+  ],
+  "parent": [],
+  "children": [],
+  "non_agg_children": [],
+  "permid": [
+    5063742076
+  ],
+  "website": "https://huggingface.co/",
+  "market": [],
+  "crunchbase": {
+    "crunchbase_uuid": "b7947f18-b199-45ac-b7da-66f5c52fcfbc",
+    "crunchbase_url": "https://www.crunchbase.com/organization/hugging-face"
+  },
+  "child_crunchbase": [],
+  "linkedin": [
+    "https://www.linkedin.com/company/huggingface"
+  ],
+  "in_sandp_500": false,
+  "in_fortune_global_500": false,
+  "ai_pubs": 18,
+  "cv_pubs": 1,
+  "nlp_pubs": 15,
+  "robotics_pubs": 0,
+  "ai_pubs_by_year": [
+    {
+      "year": 2018,
+      "ai_pubs": 2
+    },
+    {
+      "year": 2019,
+      "ai_pubs": 1
+    },
+    {
+      "year": 2020,
+      "ai_pubs": 2
+    },
+    {
+      "year": 2021,
+      "ai_pubs": 5
+    },
+    {
+      "year": 2022,
+      "ai_pubs": 8
+    }
+  ],
+  "cv_pubs_by_year": [
+    {
+      "year": 2018,
+      "cv_pubs": 0
+    },
+    {
+      "year": 2019,
+      "cv_pubs": 0
+    },
+    {
+      "year": 2020,
+      "cv_pubs": 0
+    },
+    {
+      "year": 2021,
+      "cv_pubs": 0
+    },
+    {
+      "year": 2022,
+      "cv_pubs": 1
+    }
+  ],
+  "nlp_pubs_by_year": [
+    {
+      "year": 2018,
+      "nlp_pubs": 2
+    },
+    {
+      "year": 2019,
+      "nlp_pubs": 1
+    },
+    {
+      "year": 2020,
+      "nlp_pubs": 2
+    },
+    {
+      "year": 2021,
+      "nlp_pubs": 5
+    },
+    {
+      "year": 2022,
+      "nlp_pubs": 5
+    }
+  ],
+  "robotics_pubs_by_year": [
+    {
+      "year": 2018,
+      "robotics_pubs": 0
+    },
+    {
+      "year": 2019,
+      "robotics_pubs": 0
+    },
+    {
+      "year": 2020,
+      "robotics_pubs": 0
+    },
+    {
+      "year": 2021,
+      "robotics_pubs": 0
+    },
+    {
+      "year": 2022,
+      "robotics_pubs": 0
+    }
+  ],
+  "ai_pubs_in_top_conferences": 13,
+  "ai_pubs_in_top_conferences_by_year": [
+    {
+      "year": 2018,
+      "ai_pubs_in_top_conferences": 2
+    },
+    {
+      "year": 2019,
+      "ai_pubs_in_top_conferences": 1
+    },
+    {
+      "year": 2021,
+      "ai_pubs_in_top_conferences": 3
+    },
+    {
+      "year": 2022,
+      "ai_pubs_in_top_conferences": 7
+    }
+  ],
+  "all_pubs": 22,
+  "all_pubs_by_year": [
+    {
+      "year": 2018,
+      "all_pubs": 2
+    },
+    {
+      "year": 2019,
+      "all_pubs": 1
+    },
+    {
+      "year": 2020,
+      "all_pubs": 2
+    },
+    {
+      "year": 2021,
+      "all_pubs": 5
+    },
+    {
+      "year": 2022,
+      "all_pubs": 13
+    }
+  ],
+  "short_description": "Hugging Face allows users to build, train, and deploy art models using the reference open source in machine learning.",
+  "logo_url": "https://res.cloudinary.com/crunchbase-production/image/upload/v1505375959/urhmulzddqdfmlzpk2vn.png",
+  "stage": "Growth",
+  "tt1_jobs": 72,
+  "ai_jobs": 37,
+  "citation_count_by_year": [
+    {
+      "year": 2019,
+      "citation_count": 56
+    },
+    {
+      "year": 2020,
+      "citation_count": 361
+    },
+    {
+      "year": 2021,
+      "citation_count": 1467
+    },
+    {
+      "year": 2022,
+      "citation_count": 1086
+    },
+    {
+      "year": 2023,
+      "citation_count": 23
+    }
+  ],
+  "fields": [
+    {
+      "field_name": "Language model",
+      "field_count": 2
+    },
+    {
+      "field_name": "Question answering",
+      "field_count": 1
+    },
+    {
+      "field_name": "Inference",
+      "field_count": 1
+    },
+    {
+      "field_name": "Pruning (morphology)",
+      "field_count": 1
+    },
+    {
+      "field_name": "Artificial neural network",
+      "field_count": 1
+    },
+    {
+      "field_name": "Hierarchical database model",
+      "field_count": 1
+    },
+    {
+      "field_name": "Task (computing)",
+      "field_count": 1
+    },
+    {
+      "field_name": "Natural language",
+      "field_count": 1
+    },
+    {
+      "field_name": "Product of experts",
+      "field_count": 1
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": 1193,
+      "cluster_count": 6
+    },
+    {
+      "cluster_id": 1621,
+      "cluster_count": 2
+    },
+    {
+      "cluster_id": 4358,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 16472,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 62049,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 3527,
+      "cluster_count": 1
+    },
+    {
+      "cluster_id": 11991,
+      "cluster_count": 1
+    }
+  ],
+  "company_references": [
+    {
+      "ref_CSET_id": 101,
+      "referenced_count": 91
+    },
+    {
+      "ref_CSET_id": 87,
+      "referenced_count": 58
+    },
+    {
+      "ref_CSET_id": 163,
+      "referenced_count": 33
+    },
+    {
+      "ref_CSET_id": 184,
+      "referenced_count": 15
+    },
+    {
+      "ref_CSET_id": 319,
+      "referenced_count": 15
+    },
+    {
+      "ref_CSET_id": 115,
+      "referenced_count": 13
+    },
+    {
+      "ref_CSET_id": 127,
+      "referenced_count": 8
+    },
+    {
+      "ref_CSET_id": 23,
+      "referenced_count": 6
+    },
+    {
+      "ref_CSET_id": 1425,
+      "referenced_count": 5
+    },
+    {
+      "ref_CSET_id": 6,
+      "referenced_count": 3
+    },
+    {
+      "ref_CSET_id": 209,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 219,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 1827,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 792,
+      "referenced_count": 2
+    },
+    {
+      "ref_CSET_id": 617,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 734,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 37,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 21,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 506,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 267,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 735,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 795,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 694,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 112,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 805,
+      "referenced_count": 1
+    },
+    {
+      "ref_CSET_id": 1962,
+      "referenced_count": 1
+    }
+  ],
+  "tasks": [
+    {
+      "referent": "natural_language_processing",
+      "task_count": 4
+    },
+    {
+      "referent": "classification_tasks",
+      "task_count": 3
+    },
+    {
+      "referent": "unsupervised_pre_training",
+      "task_count": 2
+    },
+    {
+      "referent": "multi_task_learning",
+      "task_count": 2
+    },
+    {
+      "referent": "language_identification",
+      "task_count": 1
+    },
+    {
+      "referent": "few_shot_learning",
+      "task_count": 1
+    },
+    {
+      "referent": "out_of_distribution_detection",
+      "task_count": 1
+    },
+    {
+      "referent": "continuous_object_recognition",
+      "task_count": 1
+    },
+    {
+      "referent": "inference_attack",
+      "task_count": 1
+    },
+    {
+      "referent": "classification",
+      "task_count": 1
+    },
+    {
+      "referent": "document_classification",
+      "task_count": 1
+    },
+    {
+      "referent": "document_dating",
+      "task_count": 1
+    },
+    {
+      "referent": "identity_recognition",
+      "task_count": 1
+    },
+    {
+      "referent": "relation_classification",
+      "task_count": 1
+    },
+    {
+      "referent": "named_entity_recognition",
+      "task_count": 1
+    },
+    {
+      "referent": "learning_word_embeddings",
+      "task_count": 1
+    },
+    {
+      "referent": "developmental_learning",
+      "task_count": 1
+    }
+  ],
+  "methods": [
+    {
+      "referent": "language_models",
+      "method_count": 4
+    },
+    {
+      "referent": "albert",
+      "method_count": 1
+    },
+    {
+      "referent": "bert",
+      "method_count": 1
+    },
+    {
+      "referent": "hierarchical_vae",
+      "method_count": 1
+    },
+    {
+      "referent": "3d_representations",
+      "method_count": 1
+    },
+    {
+      "referent": "recurrent_neural_networks",
+      "method_count": 1
+    },
+    {
+      "referent": "amsbound",
+      "method_count": 1
+    },
+    {
+      "referent": "vqa_models",
+      "method_count": 1
+    },
+    {
+      "referent": "l1_regularization",
+      "method_count": 1
+    },
+    {
+      "referent": "fine_tuning",
+      "method_count": 1
+    },
+    {
+      "referent": "procan",
+      "method_count": 1
+    },
+    {
+      "referent": "statistical_inference",
+      "method_count": 1
+    },
+    {
+      "referent": "natural_language_processing",
+      "method_count": 1
+    }
+  ],
+  "ai_patents": 0,
+  "Physical_Sciences_and_Engineering_pats": 0,
+  "Life_Sciences_pats": 0,
+  "Security__eg_cybersecurity_pats": 0,
+  "Transportation_pats": 0,
+  "Industrial_and_Manufacturing_pats": 0,
+  "Education_pats": 0,
+  "Document_Mgt_and_Publishing_pats": 0,
+  "Military_pats": 0,
+  "Agricultural_pats": 0,
+  "Computing_in_Government_pats": 0,
+  "Personal_Devices_and_Computing_pats": 0,
+  "Banking_and_Finance_pats": 0,
+  "Telecommunications_pats": 0,
+  "Networks__eg_social_IOT_etc_pats": 0,
+  "Business_pats": 0,
+  "Energy_Management_pats": 0,
+  "Entertainment_pats": 0,
+  "Nanotechnology_pats": 0,
+  "Semiconductors_pats": 0,
+  "Language_Processing_pats": 0,
+  "Speech_Processing_pats": 0,
+  "Knowledge_Representation_pats": 0,
+  "Planning_and_Scheduling_pats": 0,
+  "Control_pats": 0,
+  "Distributed_AI_pats": 0,
+  "Robotics_pats": 0,
+  "Computer_Vision_pats": 0,
+  "Analytics_and_Algorithms_pats": 0,
+  "Measuring_and_Testing_pats": 0,
+  "Logic_Programming_pats": 0,
+  "Fuzzy_Logic_pats": 0,
+  "Probabilistic_Reasoning_pats": 0,
+  "Ontology_Engineering_pats": 0,
+  "Machine_Learning_pats": 0,
+  "Search_Methods_pats": 0,
+  "ai_patents_by_year": [
+    {
+      "priority_year": null,
+      "ai_patents": null
+    }
+  ],
+  "Physical_Sciences_and_Engineering_pats_by_year": [
+    {
+      "priority_year": null,
+      "Physical_Sciences_and_Engineering_pats": null
+    }
+  ],
+  "Life_Sciences_pats_by_year": [
+    {
+      "priority_year": null,
+      "Life_Sciences_pats": null
+    }
+  ],
+  "Security__eg_cybersecurity_pats_by_year": [
+    {
+      "priority_year": null,
+      "Security__eg_cybersecurity_pats": null
+    }
+  ],
+  "Transportation_pats_by_year": [
+    {
+      "priority_year": null,
+      "Transportation_pats": null
+    }
+  ],
+  "Industrial_and_Manufacturing_pats_by_year": [
+    {
+      "priority_year": null,
+      "Industrial_and_Manufacturing_pats": null
+    }
+  ],
+  "Education_pats_by_year": [
+    {
+      "priority_year": null,
+      "Education_pats": null
+    }
+  ],
+  "Document_Mgt_and_Publishing_pats_by_year": [
+    {
+      "priority_year": null,
+      "Document_Mgt_and_Publishing_pats": null
+    }
+  ],
+  "Military_pats_by_year": [
+    {
+      "priority_year": null,
+      "Military_pats": null
+    }
+  ],
+  "Agricultural_pats_by_year": [
+    {
+      "priority_year": null,
+      "Agricultural_pats": null
+    }
+  ],
+  "Computing_in_Government_pats_by_year": [
+    {
+      "priority_year": null,
+      "Computing_in_Government_pats": null
+    }
+  ],
+  "Personal_Devices_and_Computing_pats_by_year": [
+    {
+      "priority_year": null,
+      "Personal_Devices_and_Computing_pats": null
+    }
+  ],
+  "Banking_and_Finance_pats_by_year": [
+    {
+      "priority_year": null,
+      "Banking_and_Finance_pats": null
+    }
+  ],
+  "Telecommunications_pats_by_year": [
+    {
+      "priority_year": null,
+      "Telecommunications_pats": null
+    }
+  ],
+  "Networks__eg_social_IOT_etc_pats_by_year": [
+    {
+      "priority_year": null,
+      "Networks__eg_social_IOT_etc_pats": null
+    }
+  ],
+  "Business_pats_by_year": [
+    {
+      "priority_year": null,
+      "Business_pats": null
+    }
+  ],
+  "Energy_Management_pats_by_year": [
+    {
+      "priority_year": null,
+      "Energy_Management_pats": null
+    }
+  ],
+  "Entertainment_pats_by_year": [
+    {
+      "priority_year": null,
+      "Entertainment_pats": null
+    }
+  ],
+  "Nanotechnology_pats_by_year": [
+    {
+      "priority_year": null,
+      "Nanotechnology_pats": null
+    }
+  ],
+  "Semiconductors_pats_by_year": [
+    {
+      "priority_year": null,
+      "Semiconductors_pats": null
+    }
+  ],
+  "Language_Processing_pats_by_year": [
+    {
+      "priority_year": null,
+      "Language_Processing_pats": null
+    }
+  ],
+  "Speech_Processing_pats_by_year": [
+    {
+      "priority_year": null,
+      "Speech_Processing_pats": null
+    }
+  ],
+  "Knowledge_Representation_pats_by_year": [
+    {
+      "priority_year": null,
+      "Knowledge_Representation_pats": null
+    }
+  ],
+  "Planning_and_Scheduling_pats_by_year": [
+    {
+      "priority_year": null,
+      "Planning_and_Scheduling_pats": null
+    }
+  ],
+  "Control_pats_by_year": [
+    {
+      "priority_year": null,
+      "Control_pats": null
+    }
+  ],
+  "Distributed_AI_pats_by_year": [
+    {
+      "priority_year": null,
+      "Distributed_AI_pats": null
+    }
+  ],
+  "Robotics_pats_by_year": [
+    {
+      "priority_year": null,
+      "Robotics_pats": null
+    }
+  ],
+  "Computer_Vision_pats_by_year": [
+    {
+      "priority_year": null,
+      "Computer_Vision_pats": null
+    }
+  ],
+  "Analytics_and_Algorithms_pats_by_year": [
+    {
+      "priority_year": null,
+      "Analytics_and_Algorithms_pats": null
+    }
+  ],
+  "Measuring_and_Testing_pats_by_year": [
+    {
+      "priority_year": null,
+      "Measuring_and_Testing_pats": null
+    }
+  ],
+  "Logic_Programming_pats_by_year": [
+    {
+      "priority_year": null,
+      "Logic_Programming_pats": null
+    }
+  ],
+  "Fuzzy_Logic_pats_by_year": [
+    {
+      "priority_year": null,
+      "Fuzzy_Logic_pats": null
+    }
+  ],
+  "Probabilistic_Reasoning_pats_by_year": [
+    {
+      "priority_year": null,
+      "Probabilistic_Reasoning_pats": null
+    }
+  ],
+  "Ontology_Engineering_pats_by_year": [
+    {
+      "priority_year": null,
+      "Ontology_Engineering_pats": null
+    }
+  ],
+  "Machine_Learning_pats_by_year": [
+    {
+      "priority_year": null,
+      "Machine_Learning_pats": null
+    }
+  ],
+  "Search_Methods_pats_by_year": [
+    {
+      "priority_year": null,
+      "Search_Methods_pats": null
+    }
+  ],
+  "name": "hugging face",
+  "patent_name": "hugging face"
+}

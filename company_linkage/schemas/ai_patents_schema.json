@@ -1,0 +1,230 @@
+[
+        {
+        "mode": "REQUIRED",
+        "name": "CSET_id",
+        "type": "INTEGER",
+        "description": "The CSET_id for a company."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "family_id",
+        "type": "STRING",
+        "description": "The patent family ID."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "The date associated with the first patent document filed in the patent family. This is the date used to associate a patent family with a given calendar year."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Physical_Sciences_and_Engineering",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the physical sciences and engineering application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Life_Sciences",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the life sciences application field."
+        },
+        {
+        "mode": "NULLABLE",
+        "name": "Security__eg_cybersecurity",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the security (e.g. cybersecurity) application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Transportation",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the transportation application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Industrial_and_Manufacturing",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the industrial and manufacturing application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Education",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the education application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Document_Mgt_and_Publishing",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the document management/publishing application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Military",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the military application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Agricultural",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the agriculture application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Computing_in_Government",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the computing in government application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Personal_Devices_and_Computing",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the personal devices/computing application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Banking_and_Finance",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the banking/finance application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Telecommunications",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the telecommunications application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Networks__eg_social_IOT_etc",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the networks (e.g. social, IOT, etc.) application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Business",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the business application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Energy_Management",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the energy management application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Entertainment",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the entertainment application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Nanotechnology",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the nanotechnology application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Semiconductors",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the semiconductors application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Language_Processing",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the language processing functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Speech_Processing",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the speech processing functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Knowledge_Representation",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the knowledge representation functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Planning_and_Scheduling",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the planning/scheduling functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Control",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the control functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Distributed_AI",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the distributed AI functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Robotics",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the robotics functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Computer_Vision",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the computer vision/imaging functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Analytics_and_Algorithms",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the analytics/algorithms functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Measuring_and_Testing",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the measuring/testing functional application field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Logic_Programming",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the logic programming AI techniques field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Fuzzy_Logic",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the fuzzy logic AI techniques field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Probabilistic_Reasoning",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the probabilistic reasoning AI techniques field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Ontology_Engineering",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the ontology engineering AI techniques field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Machine_Learning",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the machine learning AI techniques field."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "Search_Methods",
+        "type": "BOOLEAN",
+        "description": "Binary classification based on whether a patent family is a member of the search methods AI techniques field."
+        }
+]

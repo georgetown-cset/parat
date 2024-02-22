@@ -1,0 +1,376 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "CSET_id",
+    "type": "INTEGER",
+    "description": "CSET id of PARAT company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "name",
+    "type": "STRING",
+    "description": "Name of PARAT company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "country",
+    "type": "STRING",
+    "description": "Country of PARAT company. If company is located in multiple countries, country of headquarters."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "alias_language",
+        "type": "STRING",
+        "description": "Language alias is written in."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "alias",
+        "type": "STRING",
+        "description": "Alias of company."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "aliases",
+    "type": "RECORD",
+    "description": "List of company aliases."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "parent_acquisition",
+        "type": "BOOLEAN",
+        "description": "Boolean indicating whether the company was acquired by its parent company."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "parent_name",
+        "type": "STRING",
+        "description": "Name of parent company."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "parent_id",
+        "type": "INTEGER",
+        "description": "CSET id of parent company."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "parent",
+    "type": "RECORD",
+    "description": "List of parent companies."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "child_name",
+        "type": "STRING",
+        "description": "Name of child company."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "child_id",
+        "type": "INTEGER",
+        "description": "CSET id of child company."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "children",
+    "type": "RECORD",
+    "description": "List of child companies."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "child_name",
+        "type": "STRING",
+        "description": "Name of child company."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "child_id",
+        "type": "INTEGER",
+        "description": "CSET id of child companies."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "non_agg_children",
+    "type": "RECORD",
+    "description": "Name of child company whose data has not been aggregated into the records of the parent company."
+  },
+  {
+    "mode": "REPEATED",
+    "name": "permid",
+    "type": "INTEGER",
+    "description": "Refinitiv Permid."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "website",
+    "type": "STRING",
+    "description": "Company website."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "exchange",
+        "type": "STRING",
+        "description": "Exchange on which the company is listed."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "ticker",
+        "type": "STRING",
+        "description": "Company ticker."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "market",
+    "type": "RECORD",
+    "description": "Company exchange and ticker data."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "crunchbase_uuid",
+        "type": "STRING",
+        "description": "UUID in Crunchbase."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "crunchbase_url",
+        "type": "STRING",
+        "description": "URL on Crunchbase website."
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "crunchbase",
+    "type": "RECORD",
+    "description": "Crunchbase unique identifier."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "crunchbase_uuid",
+        "type": "STRING",
+        "description": "UUID in Crunchbase."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "crunchbase_url",
+        "type": "STRING",
+        "description": "URL on Crunchbase website."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "child_crunchbase",
+    "type": "RECORD",
+    "description": "Crunchbase unique identifiers for any child companies of the aggregated company."
+  },
+  {
+    "mode": "REPEATED",
+    "name": "ror_id",
+    "type": "STRING",
+    "description": "ROR id for the company."
+  },
+  {
+    "mode": "REPEATED",
+    "name": "linkedin",
+    "type": "STRING",
+    "description": "LinkedIn website for the company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "in_sandp_500",
+    "type": "BOOLEAN",
+    "description": "Indicator of whether the company was in the S&P 500 at some point during 2020."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "in_fortune_global_500",
+    "type": "BOOLEAN",
+    "description": "Indicator of whether the company was on the 2021 Fortune Global 500 list."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "ai_pubs",
+    "type": "INTEGER",
+    "description": "Count of total AI publications by the company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "cv_pubs",
+    "type": "INTEGER",
+    "description": "Count of total computer vision publications by the company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "nlp_pubs",
+    "type": "INTEGER",
+    "description": "Count of total natural language processing publications by the company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "robotics_pubs",
+    "type": "INTEGER",
+    "description": "Count of total robotics publications by the company."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "year",
+        "type": "INTEGER",
+        "description": "Year published."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "ai_pubs",
+        "type": "INTEGER",
+        "description": "Count of total AI publications by the company in that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "ai_pubs_by_year",
+    "type": "RECORD",
+    "description": "Counts of AI publications by the company by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "year",
+        "type": "INTEGER",
+        "description": "Year published."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "cv_pubs",
+        "type": "INTEGER",
+        "description": "Count of total computer vision publications by the company in that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "cv_pubs_by_year",
+    "type": "RECORD",
+    "description": "Counts of computer vision publications by the company by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "year",
+        "type": "INTEGER",
+        "description": "Year published."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "nlp_pubs",
+        "type": "INTEGER",
+        "description": "Count of total natural language processing publications by the company in that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "nlp_pubs_by_year",
+    "type": "RECORD",
+    "description": "Counts of natural language processing publications by the company by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "year",
+        "type": "INTEGER",
+        "description": "Year published."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "robotics_pubs",
+        "type": "INTEGER",
+        "description": "Count of total robotics publications by the company in that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "robotics_pubs_by_year",
+    "type": "RECORD",
+    "description": "Counts of robotics publications by the company by year."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "ai_pubs_in_top_conferences",
+    "type": "INTEGER",
+    "description": "Counts of total AI publications by the company that were published in top AI conferences."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "year",
+        "type": "INTEGER",
+        "description": "Year published."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "ai_pubs_in_top_conferences",
+        "type": "INTEGER",
+        "description": "Count of total AI publications by the company that were published in top AI conferences in that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "ai_pubs_in_top_conferences_by_year",
+    "type": "RECORD",
+    "description": "Counts of AI publications in top conferences by the company by year."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "all_pubs",
+    "type": "INTEGER",
+    "description": "Count of total publications by the company."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "year",
+        "type": "INTEGER",
+        "description": "Year published."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "all_pubs",
+        "type": "INTEGER",
+        "description": "Counts of total publications by the company in that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "all_pubs_by_year",
+    "type": "RECORD",
+    "description": "Counts of publications by the company by year."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "short_description",
+    "type": "STRING",
+    "description": "Short description of the company, as drawn from Crunchbase's free interface."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "logo_url",
+    "type": "STRING",
+    "description": "URL linking to a picture of the logo of the company, as drawn from Crunchbase's free interface."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "stage",
+    "type": "STRING",
+    "description": "Maturity stage of a company."
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Organization unique id",
+    "mode": "REQUIRED",
+    "name": "CSET_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Organization name",
+    "mode": "REQUIRED",
+    "name": "name",
+    "type": "STRING"
+  },
+  {
+    "description": "Organization Bloomberg Government ID",
+    "mode": "NULLABLE",
+    "name": "bgov_id",
+    "type": "STRING"
+  }
+]

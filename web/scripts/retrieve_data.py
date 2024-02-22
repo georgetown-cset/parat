@@ -2,7 +2,6 @@ import argparse
 import chardet
 import csv
 import json
-import math
 import os
 import pycountry
 import pycountry_convert
@@ -13,6 +12,7 @@ import time
 
 from PIL import Image
 from datetime import datetime
+from decimal import Decimal, ROUND_HALF_UP
 from google.cloud import bigquery
 from google.cloud import translate_v3beta1 as translate
 from io import BytesIO
@@ -24,7 +24,7 @@ Retrieves and reformats raw data for consumption by javascript
 ### CONSTANTS ###
 
 RAW_DATA_DIR = "raw_data"
-WEB_SRC_DIR = os.path.join("parat", "src")
+WEB_SRC_DIR = os.path.join("gui-v2", "src")
 IMAGE_DIR = os.path.join(WEB_SRC_DIR, "images")
 
 # Local cache of raw data (ai_companies_visualization.visualization_data)
@@ -34,6 +34,8 @@ RAW_DATA_FI = os.path.join(RAW_DATA_DIR, "data.jsonl")
 ORIG_NAMES_FI = os.path.join(RAW_DATA_DIR, "company_names.jsonl")
 # Cache of links to Google Finance page
 EXCHANGE_LINK_FI = os.path.join(RAW_DATA_DIR, "exchange_links.jsonl")
+# Cache of PERMID sectors
+SECTOR_FI = os.path.join(RAW_DATA_DIR, "sectors.jsonl")
 # Download of https://docs.google.com/spreadsheets/d/1OpZGUG9y0onZfRfx9aVgRWiYSFWJ-TRsDQwYtcniCB0/edit#gid=468518268
 # containing student-retrieved company descriptions to supplement crunchbase
 SUPPLEMENTAL_DESCRIPTIONS = os.path.join(RAW_DATA_DIR, "supplemental_company_descriptions.csv")
@@ -57,10 +59,24 @@ CRUNCHBASE_URL_OVERRIDE = {
     ("https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&"
      "utm_campaign=odm_csv"): "https://www.crunchbase.com/organization/covariant"
 }
-# styling to apply to links we generate here - change if main react styling changes
-LINK_CSS = "'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary'"
 # Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
 FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
+
+APPLICATION_PATENT_CATEGORIES = {"Language_Processing", "Speech_Processing", "Knowledge_Representation", "Planning_and_Scheduling", "Control", "Distributed_AI", "Robotics", "Computer_Vision", "Analytics_and_Algorithms", "Measuring_and_Testing"}
+INDUSTRY_PATENT_CATEGORIES = {"Physical_Sciences_and_Engineering", "Life_Sciences", "Security__eg_cybersecurity", "Transportation", "Industrial_and_Manufacturing", "Education", "Document_Mgt_and_Publishing", "Military", "Agricultural", "Computing_in_Government", "Personal_Devices_and_Computing", "Banking_and_Finance", "Telecommunications", "Networks__eg_social_IOT_etc", "Business", "Energy_Management", "Entertainment", "Nanotechnology", "Semiconductors"}
+
+ARTICLE_METRICS = "articles"
+PATENT_METRICS = "patents"
+OTHER_METRICS = "other_metrics"
+METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
+
+_curr_time = datetime.now()
+CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
+YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
+
+# Used (along with a check that we never actually meet or exceed this number with legitimate CSET ids)
+# when creating fake CSET ids for groups
+GROUP_OFFSET = 1_000_000
 
 ### END CONSTANTS ###
 
@@ -72,9 +88,9 @@ def get_exchange_link(market_key: str) -> dict:
     :param market_key: exchange:ticker
     :return: A dict mapping market_key to the input market_key and link to the link, if successfully found, else None
     """
-    time.sleep(5)
+    time.sleep(1)
     # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
-    first, last = sorted(market_key.split(":"))
+    first, last = sorted(market_key.strip(":").split(":"))
     gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:87.0) Gecko/20100101 Firefox/87.0"
@@ -82,11 +98,38 @@ def get_exchange_link(market_key: str) -> dict:
     r = requests.get(gf_link, headers=headers)
     if "No results found" in r.text:
         gf_link = f"https://www.google.com/finance/quote/{last}:{first}"
-        time.sleep(5)
+        time.sleep(1)
         r = requests.get(gf_link, headers=headers)
         return {"market_key": market_key, "link": None if "No results found" in r.text else gf_link}
     else:
         return {"market_key": market_key, "link": gf_link}
+
+
+def get_permid_sector(permids: list) -> tuple:
+    """
+    Get first permid sector available in permids for a PARAT company
+    :param permids: List of permids a company may have
+    :return: First economic and business sector from PERMID, or "Unknown" if we couldn't find one
+    """
+    access_token = os.environ.get("PERMID_API_KEY")
+    economic_sector_key = "Primary Economic Sector"
+    business_sector_key = "Primary Business Sector"
+    if not access_token:
+        raise ValueError("Please specify your permid key using an environment variable called PERMID_API_KEY")
+    for permid in permids:
+        # Sometimes multiple permids are available and it's not obvious to me which to pick. I'll just pick the
+        # first one that has a not-null value for both sectors
+        resp = requests.get(f"https://permid.org/api/mdaas/getEntityById/{permid}?access-token={access_token}")
+        if resp.status_code != 200:
+            print(f"Unexpected status code {resp.status_code} for {permid}")
+        metadata = resp.json()
+        economic_sector = metadata.get(economic_sector_key)
+        business_sector = metadata.get(business_sector_key)
+        if economic_sector and business_sector:
+            return economic_sector[0], business_sector[0]
+        elif economic_sector:
+            print(f"No business sector available for {permid}")
+    return "Unknown", "Unknown"
 
 
 def retrieve_raw(get_links: bool) -> None:
@@ -100,7 +143,7 @@ def retrieve_raw(get_links: bool) -> None:
     market_info = set()
     print("retrieving metadata")
     with open(RAW_DATA_FI, mode="w") as out:
-        for row in client.list_rows("ai_companies_visualization.visualization_data"):
+        for row in client.list_rows("ai_companies_visualization.all_visualization_data"):
             dict_row = {col: row[col] for col in row.keys()}
             out.write(json.dumps(dict_row)+"\n")
             market_info = market_info.union([m["exchange"]+":"+m["ticker"] for m in dict_row["market"]])
@@ -210,8 +253,8 @@ def clean_market(market_info: list, market_key_to_link: dict) -> list:
     for m in market_info:
         market_key = f"{m['exchange'].upper()}:{m['ticker'].upper()}"
         ref_market_info.append({
-            "market_key": market_key,
-            "link": market_key_to_link[market_key]
+            "text": market_key,
+            "url": market_key_to_link[market_key]
         })
     return ref_market_info
 
@@ -227,28 +270,47 @@ def clean_wiki_description(wiki_desc: str) -> str:
     return clean_wiki_desc
 
 
-def add_ranks(rows: list, metrics: list) -> None:
+def get_metric_value(row: dict, metric_list_name: str, metric_name: str) -> float:
     """
-    Mutates `rows`
-    :param rows:
-    :param metrics:
+    Extract the "total" value of a metric from a row
+    :param row: Row of data
+    :param metric_list_name: Metric list containing `metric_name`
+    :param metric_name: Name of metric to retrieve a total value for
+    :return: Total value of `metric` in row
+    """
+    total = row[metric_list_name].get(metric_name, {}).get("total", 0)
+    return total if total else 0
+
+
+def add_ranks(rows: list) -> None:
+    """
+    Add row ranks to all metrics in our metric lists
+    :param rows: PARAT data rows
     :return: None (mutates `rows`)
     """
-    for metric in metrics:
-        curr_rank = 0
-        curr_value = 100000000000
-        rows.sort(key=lambda r: -1*r[metric])
-        max_metric = math.log(max([r[metric] for r in rows])+1, 2)
-        for idx, row in enumerate(rows):
-            if row[metric] < curr_value:
-                curr_rank = idx+1
-                curr_value = row[metric]
-            row[metric] = {
-                "value": row[metric],
-                "rank": curr_rank,
-                # used to scale color
-                "frac_of_max": math.log(row[metric]+1, 2)/max_metric
-            }
+    for metric_list_name in METRIC_LISTS:
+        all_metrics = set()
+        row_and_key_groups = [(rows, "rank"),
+                               ([r for r in rows if r.get("groups", {}).get("sp500")], "sp500_rank"),
+                               ([r for r in rows if r.get("groups", {}).get("global500")], "fortune500_rank")]
+        for filtered_rows, rank_key in row_and_key_groups:
+            for row in filtered_rows:
+                for metric in row.get(metric_list_name, {}):
+                    all_metrics.add(metric)
+            for metric in sorted(list(all_metrics)):
+                curr_rank = 0
+                curr_value = 100000000000
+                filtered_rows.sort(key=lambda r: -1*get_metric_value(r, metric_list_name, metric))
+                for idx, row in enumerate(filtered_rows):
+                    metric_value = get_metric_value(row, metric_list_name, metric)
+                    if metric_value < curr_value:
+                        curr_rank = idx+1
+                        curr_value = metric_value
+                    if metric not in row[metric_list_name]:
+                        row[metric_list_name][metric] = {"total": metric_value}
+                    row[metric_list_name][metric].update({
+                        rank_key: curr_rank
+                    })
 
 
 def get_translation(desc: str, client, parent) -> str:
@@ -277,12 +339,12 @@ def get_translation(desc: str, client, parent) -> str:
     # Check if desc appears to be in English, and if not, translate it
     if details[0][1].lower() != "en":
         print("Translating "+desc)
-        response = client.translate_text(
-            parent=parent,
-            contents=[desc],
-            mime_type="text/plain",
-            target_language_code="en"
-        )
+        response = client.translate_text(request = {
+            "parent": parent,
+            "contents": [desc],
+            "mime_type": "text/plain",
+            "target_language_code": "en"
+        })
         translation = response.translations[0].translated_text.strip()
         return translation
     return None
@@ -305,7 +367,7 @@ def add_supplemental_descriptions(rows: list) -> None:
     }
     with open(SUPPLEMENTAL_DESCRIPTIONS) as f:
         client = translate.TranslationServiceClient()
-        parent = client.location_path("gcp-cset-projects", "global")
+        parent = "projects/gcp-cset-projects/locations/global"
         for row in csv.DictReader(f):
             company_name = row["company_name"]
             name_to_desc_info[company_name] = {desc_info[k]: row[k].strip() for k in desc_info}
@@ -346,6 +408,24 @@ def add_supplemental_descriptions(rows: list) -> None:
             row.update(name_to_desc_info[company_name])
 
 
+def get_growth(yearly_counts: list, is_patents: bool = False) -> float:
+    """
+    Adds growth metrics based on yearly counts
+    :param yearly_counts: list of yearly counts of some metric
+    :param is_patents: true if counts are for patents, false otherwise
+    :return: None; mutates rows
+    """
+    offset = 3 if is_patents else 1
+    interval = 3
+    interval_values = yearly_counts[-(interval+1+offset):-1*offset]
+    num_zero_years = sum([value == 0 for value in interval_values[:-1]])
+    if num_zero_years == interval:
+        return 0
+    total_percentage_changes = sum([100*(interval_values[i+1]-interval_values[i])/interval_values[i]
+                                    for i in range(interval) if interval_values[i] > 0])
+    return total_percentage_changes/(interval-num_zero_years)
+
+
 def clean_country(country: str) -> str:
     """
     Convert country abbreviation to full country name
@@ -357,6 +437,9 @@ def clean_country(country: str) -> str:
     country_obj = pycountry.countries.get(alpha_2=country)
     if not country_obj:
         country_obj = pycountry.countries.get(alpha_3=country)
+    if not country_obj:
+        print(f"{country} not found")
+        return None
     if country_obj.name in COUNTRY_NAME_MAP:
         return COUNTRY_NAME_MAP[country_obj.name]
     return country_obj.name
@@ -384,6 +467,8 @@ def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     :param lowercase_to_orig_cname: dict mapping lowercase to original-cased company names
     :return: cleaned company name
     """
+    if not name:
+        return None
     clean_name = name.strip()
     if clean_name in COMPANY_NAME_MAP:
         return COMPANY_NAME_MAP[clean_name]
@@ -400,60 +485,285 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     :param orig_name: if not None, then a variant of the company name we should include as an alias
     :return: A semicolon-separated string of aliases
     """
-    unique_aliases = {clean_company_name(a["alias"], lowercase_to_orig_cname).strip('.') for a in aliases}
+    unique_aliases = set()
+    for alias in aliases:
+        cleaned_alias = clean_company_name(alias["alias"], lowercase_to_orig_cname)
+        if not cleaned_alias:
+            print(f"Null alias: {alias}")
+            continue
+        unique_aliases.add(cleaned_alias.strip("."))
     if orig_name is not None:
         unique_aliases.add(orig_name)
     sorted_aliases = sorted(list(unique_aliases))
     return None if len(aliases) == 0 else f"{'; '.join(sorted_aliases)}"
 
 
-def get_list_and_links(link_text: list, url_prefix: str) -> (str, dict):
+def format_links(link_text: list, url_prefix: str) -> (str, dict):
     """
-    Given a list of text to be added to link urls, generates a comma-separated string from the text,
-     and also generates a list of html links in the format needed
-    for dangerouslySetInnerHTML
-    :param link_text: list of parameters to list
-    :param url_stub: the url prefix
-    :return: a tuple of a comma-separated string of link_text elts and a dict mapping "__html" to a list of <a> elements
+    Generates links from a list of text that should be displayed for each link and a url prefix
+    :param link_text: list of text to show in the UI and also add to the end of `url_prefix`
+    :param url_prefix: a prefix shared by all links from this source
+    :return: a dict containing text and url keys for each element of `link_text`
     """
-    csv_list = ", ".join([str(lt) for lt in link_text])
-    html_list = {"__html": ", ".join([(f"<a class={LINK_CSS} target='blank' rel='noreferrer' "
-                           f"href='{url_prefix}{text}'>{text}</a>")
-                          for text in link_text])}
-    return csv_list, html_list
+    return [{"text": text, "url": f"{url_prefix}{text}"} for text in link_text]
 
 
-def get_yearly_counts(counts: list, key: str, years: list) -> (list, int):
+def get_yearly_counts(counts: list, key: str, years: list = YEARS) -> (list, int):
     """
     Given a list of dicts containing year (`year`) and count (`key`) information, the name of the key to use,
     and a list of years to include in order, returns a tuple. The first element is a list of counts for each
     year in years, and the second element is the sum of the counts
     :param counts: a list of dicts containing year (`year`) and count (`key`) information
     :param key: the key in the `counts` dicts that contains the yearly count
-    :param years: a list of years to include
-    :return: a tuple containing a list of counts for each year in years, and the sum of the counts
+    :param years: a list of years to write counts for
+    :return: a tuple containing a list of counts for each year in years, and the sum of the counts over all years
+    (including those outside `years`)
     """
-    counts_by_year = {p["year" if not key == "ai_patents" else "priority_year"]: p[key] for p in counts}
+    if not counts:
+        return [0 for _ in years], 0
+    year_key = "priority_year" if "priority_year" in counts[0] else "year"
+    counts_by_year = {p[year_key]: p[key] for p in counts}
     yearly_counts = [0 if y not in counts_by_year else counts_by_year[y] for y in years]
     return yearly_counts, sum(yearly_counts)
 
 
-def get_market_link_list(market: list) -> dict:
+def get_top_n_list(entities: list, count_key: str, n: int = 10) -> list:
     """
-    Given a list of market information, return a comma-separated list of either html <a> elements if a link
-    is available for that exchange:ticker, or otherwise just an exchange:ticker string
-    :param market: list of dicts of market information containing (possibly) `link` and (definitely) `market_key` keys
-    :return: a dict mapping the __html key expected by dangerouslySetInnerHTML to a list of market key links or market
-    key strings
+    Sort entries by count_key, descending, and return the top n
+    :param entities: List of dicts corresponding to counts of some entity
+    :param count_key: Key within entity elements containing field that should be used to sort
+    :param n: Number of entities to return
+    :return: Top ten entities
     """
-    market_elts = []
-    for m in market:
-        if m["link"]:
-            market_elts.append(f"<a class={LINK_CSS} target='blank' rel='noreferrer' "
-                               f"href='{m['link']}'>{m['market_key']}</a>")
-        else:
-            market_elts.append(m["market_key"])
-    return {"__html": ", ".join(market_elts)}
+    entities.sort(key=lambda e: e[count_key], reverse=True)
+    return entities[:n]
+
+
+def clean_crunchbase_elt(cb: dict) -> dict:
+    """
+    Cleans up a single element of crunchbase metadata so it matches the format of other lists of links,
+    with `text` mapped to the text to display in the ui and `url` mapped to the text that should be linked
+    :param cb:
+    :return:
+    """
+    url = cb.get("crunchbase_url") if cb.get("crunchbase_url") else None
+    url = CRUNCHBASE_URL_OVERRIDE.get(url, url)
+    return {
+        "text": cb["crunchbase_uuid"],
+        "url": url
+    }
+
+
+def clean_crunchbase(crunchbase_meta) -> list:
+    """
+    Cleans up a single element or a list of crunchbase metadata so it matches the format of other lists of links,
+    with `text` mapped to the text to display in the ui and `url` mapped to the text that should be linked
+    :param cb: list of raw crunchbase metadata, or a dict containing one element of metadata
+    :return: list of cleaned crunchbase metadata, or a dict containing cleaned crunchbase metadata
+    """
+    if type(crunchbase_meta) == dict:
+        return clean_crunchbase_elt(crunchbase_meta)
+    return [clean_crunchbase_elt(cb) for cb in crunchbase_meta]
+
+
+def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> None:
+    """
+    Clean various PARAT fields that don't fit into another category
+    :param js: A dict of data corresponding to an individual PARAT record
+    :param refresh_images: if true, will re-download images from crunchbase
+    :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
+    :param market_key_to_link: dict mapping exchange:ticker to google finance link
+    :return: None (mutates js)
+    """
+    orig_company_name = js["name"]
+    js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
+    if not js["name"]:
+        print(f"No name for {js['cset_id']}")
+    js["country"] = clean_country(js["country"])
+    js["continent"] = get_continent(js["country"])
+    js["local_logo"] = retrieve_image(js.pop("logo_url"), orig_company_name, refresh_images)
+    js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
+                                  orig_company_name if orig_company_name != js["name"].lower() else None)
+    js["stage"] = js["stage"] if js["stage"] else "Unknown"
+    js["permid_links"] = format_links(js.get("permid"), "https://permid.org/1-")
+    js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
+    js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
+    js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
+    market = clean_market(js.pop("market"), market_key_to_link)
+    js["market_filt"] = [m for m in market if m["text"].split(":")[0] in FILT_EXCHANGES]
+    js["market_full"] = market
+    js["website"] = clean_link(js["website"])
+    js["crunchbase_description"] = js.pop("short_description")
+    js["crunchbase"] = clean_crunchbase(js["crunchbase"])
+    js["child_crunchbase"] = clean_crunchbase(js["child_crunchbase"])
+    group_keys_to_names = {
+        "sp500": "in_sandp_500",
+        "global500": "in_fortune_global_500"
+    }
+    js["groups"] = {k: js.pop(v, False) for k, v in group_keys_to_names.items()}
+
+
+def get_top_10_lists(js: dict) -> None:
+    """
+    Filter count lists to top 10 elements
+    :param js: A dict of data corresponding to an individual PARAT record
+    :return: None (mutates js)
+    """
+    js["fields"] = get_top_n_list(js.pop("fields"), "field_count")
+    js["clusters"] = get_top_n_list(js.pop("clusters"), "cluster_count")
+    js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count")
+    js["tasks"] = get_top_n_list(js.pop("tasks"), "task_count")
+    js["methods"] = get_top_n_list(js.pop("methods"), "method_count")
+
+
+def add_patent_tables(patents: dict) -> None:
+    """
+    Add a key to each patent type's metadata containing the table name if the patent type should be displayed
+    in a table, otherwise None
+    :param patents: dict mapping patents to their metadata
+    :return: None (mutates `patents`)
+    """
+    applications = [k for k in patents if k in APPLICATION_PATENT_CATEGORIES]
+    industries = [k for k in patents if k in INDUSTRY_PATENT_CATEGORIES]
+    top_5_applications = sorted(applications, key=lambda k: patents[k]["total"], reverse=True)[:5]
+    top_5_industries = sorted(industries, key=lambda k: patents[k]["total"], reverse=True)[:5]
+    for patent_key in patents:
+        table = None
+        if patent_key in top_5_applications:
+            table = "application"
+        elif patent_key in top_5_industries:
+            table = "industry"
+        patents[patent_key]["table"] = table
+
+
+def get_category_counts(js: dict) -> None:
+    """
+    Reformat yearly and count-across-all-years data
+    :param js: A dict of data corresponding to an individual PARAT record
+    :return: None (mutates js)
+    """
+    articles = {
+        # spoof highly cited articles https://github.com/georgetown-cset/parat/issues/135
+        "highly_cited": {
+            "counts": [2 for _ in YEARS],
+            "total": 2*len(YEARS),
+            "isTopResearch": False
+        }
+    }
+    ### Reformat publication-related metrics
+    for machine_name, orig_key, count_key, is_top_research in [
+        ["all_publications", "all_pubs_by_year", "all_pubs", False],
+        ["ai_publications", "ai_pubs_by_year", "ai_pubs", False],
+        ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences", False],
+        ["citation_counts", "citation_count_by_year", "citation_count", False],
+        ["cv_pubs", "cv_pubs_by_year", "cv_pubs", True],
+        ["nlp_pubs", "nlp_pubs_by_year", "nlp_pubs", True],
+        ["robotics_pubs", "robotics_pubs_by_year", "robotics_pubs", True],
+    ]:
+        counts, total = get_yearly_counts(js.pop(orig_key), count_key)
+        articles[machine_name] = {
+            "counts": counts,
+            "total": total,
+            "isTopResearch": is_top_research
+        }
+        if machine_name == "ai_publications":
+            articles[machine_name+"_growth"] = {
+                "counts": [],
+                "total": get_growth(counts),
+                "isTopResearch": is_top_research
+            }
+
+    articles["citations_per_article"] = {
+        "counts": [0 if num_art == 0 else num_cit/num_art for num_art, num_cit in
+                    zip(articles["ai_publications"]["counts"], articles["citation_counts"]["counts"])],
+        "total": 0 if articles["ai_publications"]["total"] == 0 else
+                        articles["citation_counts"]["total"]/articles["ai_publications"]["total"],
+        "isTopResearch": False
+    }
+
+    for year_idx in range(len(YEARS)):
+        # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
+        if articles["all_publications"]["counts"][year_idx] < articles["ai_publications"]["counts"][year_idx]:
+            print(f"Mismatched publication counts for {js['cset_id']}")
+    js[ARTICLE_METRICS] = articles
+
+    ### Reformat patent-related metrics
+    counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents")
+    patents = {
+        "ai_patents": {
+            "counts": counts,
+            "total": total,
+        },
+        "ai_patents_growth": {
+            "counts": [],
+            "total": get_growth(counts, is_patents=True)
+        },
+        "ai_patents_grants": {
+            "counts": [],
+            "total": get_yearly_counts(js.pop("ai_patents_grants_by_year", {}), "ai_patents")[1],
+        },
+        # spoof all patents https://github.com/georgetown-cset/parat/issues/125
+        "all_patents": {
+            "counts": [10*c for c in counts],
+            "total": 10*total
+        }
+    }
+    # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
+    keys = list(js.keys())
+    for k in keys:
+        if "_pats" not in k:
+            continue
+        field_name = k.replace("_pats_by_year", "").replace("_pats", "")
+        if ((field_name not in INDUSTRY_PATENT_CATEGORIES) and (field_name not in APPLICATION_PATENT_CATEGORIES)) or k.endswith("_pats"):
+            js.pop(k)
+        elif k.endswith("_pats_by_year"):
+            counts, total = get_yearly_counts(js.pop(k), field_name+"_pats")
+            patents[field_name] = {
+                "counts": counts,
+                "total": total,
+            }
+    add_patent_tables(patents)
+    js[PATENT_METRICS] = patents
+
+    ### Reformat other metrics
+    other_metrics = {}
+    for metric in ["tt1_jobs", "ai_jobs"]:
+        other_metrics[metric] = {
+            "counts": None,
+            "total": js.pop(metric)
+        }
+    js[OTHER_METRICS] = other_metrics
+
+    for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_pubs_in_top_conferences",
+                            "all_pubs", "ai_patents"]:
+        js.pop(redundant_count)
+
+
+def add_sectors(rows: list, refresh: bool) -> None:
+    """
+    Adds sector to each row, updating sectors from PERMID if needed. Removes the "permid" key from the row which
+    is no longer needed after this function runs
+    :param rows: List of rows of company metadata
+    :param refresh: If true, will refresh sectors from PERMID
+    :return: None (mutates rows)
+    """
+    if refresh:
+        sectors = {}
+        for row in rows:
+            econ_sector, business_sector = get_permid_sector(row.pop("permid"))
+            row["sector"] = econ_sector
+            row["business_sector"] = business_sector
+            sectors[row["cset_id"]] = {"economic": econ_sector, "business": business_sector}
+        with open(SECTOR_FI, mode="w") as f:
+            f.write(json.dumps(sectors))
+    else:
+        with open(SECTOR_FI) as f:
+            sectors = json.loads(f.read())
+        for row in rows:
+            cset_id = str(row["cset_id"])
+            row["sector"] = sectors[cset_id]["economic"]
+            row["business_sector"] = sectors[cset_id]["business"]
+            row.pop("permid")
 
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
@@ -466,44 +776,9 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     :return: dict of company metadata
     """
     js = json.loads(row)
-    orig_company_name = js["name"]
-    js["name"] = clean_company_name(orig_company_name, lowercase_to_orig_cname)
-    js["country"] = clean_country(js["country"])
-    js["continent"] = get_continent(js["country"])
-    js["local_logo"] = retrieve_image(js.pop("logo_url"), orig_company_name, refresh_images)
-    js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
-                                  orig_company_name if orig_company_name != js["name"].lower() else None)
-    js["stage"] = js["stage"] if js["stage"] else "Unknown"
-    js["grid_info"], js["grid_links"] = get_list_and_links(js.pop("grid"), "https://www.grid.ac/institutes/")
-    js["permid_info"], js["permid_links"] = get_list_and_links(js.pop("permid"), "https://permid.org/1-")
-    js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
-    js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
-    js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
-
-    # add pub/patent counts
-    js["years"] = list(range(2010, datetime.now().year + 1))
-    js["yearly_all_publications"], _ = get_yearly_counts(js.pop("all_pubs_by_year"), "all_pubs", js["years"])
-    js["yearly_ai_publications"], js["ai_pubs"] = get_yearly_counts(js.pop("ai_pubs_by_year"), "ai_pubs", js["years"])
-    js["yearly_ai_patents"], js["ai_patents"] = get_yearly_counts(js.pop("ai_patents_by_year"),
-                                                                  "ai_patents", js["years"])
-    js["yearly_ai_pubs_top_conf"], js["ai_pubs_in_top_conferences"] = get_yearly_counts(
-        js.pop("ai_pubs_in_top_conferences_by_year"), "ai_pubs_in_top_conferences", js["years"]
-    )
-    for year_idx in range(len(js["years"])):
-        assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
-
-    market = clean_market(js.pop("market"), market_key_to_link)
-    js["market_filt"] = [m for m in market if m["market_key"].split(":")[0] in FILT_EXCHANGES]
-    if len(market) > 0:
-        js["full_market_links"] = get_market_link_list(market)
-    js["market_list"] = ", ".join([m["market_key"] for m in market])
-
-    js["website"] = clean_link(js["website"])
-    js["crunchbase_description"] = js.pop("short_description")
-    if ("crunchbase" in js) and ("crunchbase_url" in js["crunchbase"]):
-        url = js["crunchbase"]["crunchbase_url"]
-        if url in CRUNCHBASE_URL_OVERRIDE:
-            js["crunchbase"]["crunchbase_url"] = CRUNCHBASE_URL_OVERRIDE[url]
+    clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
+    get_top_10_lists(js)
+    get_category_counts(js)
     return js
 
 
@@ -518,12 +793,13 @@ def clean_link(link: str) -> str:
     return link
 
 
-def clean(refresh_images: bool) -> None:
+def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
     """
     Reads and cleans the raw data from the local cache
     :param refresh_images: if true, will re-download all the company logos from crunchbase; don't call with true
     unless necessary
-    :return: None
+    :param refresh_sectors: if true, will re-query the PERMID api for sector information for each company
+    :return: Return a dict of metadata and rows needed to compute average metadata for groups
     """
     rows = []
     lowercase_to_orig_cname = {}
@@ -535,14 +811,105 @@ def clean(refresh_images: bool) -> None:
     with open(EXCHANGE_LINK_FI) as f:
         for line in f:
             js = json.loads(line)
-            market_key_to_link[js["market_key"].upper()] = js["link"]
+            market_key_to_link[js["market_key"].upper()] = js["link"] if js["link"] else None
     with open(RAW_DATA_FI) as f:
         for row in f:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
-    add_ranks(rows, ["ai_patents", "ai_pubs", "ai_pubs_in_top_conferences"])
+    add_sectors(rows, refresh_sectors)
     add_supplemental_descriptions(rows)
+    add_ranks(rows)
+    company_rows = []
+    raw_group_metadata = {
+        "sp500": {
+            "name": "S&P 500",
+            "cset_id": GROUP_OFFSET+500,
+            "rows": []
+        },
+        "global500": {
+            "name": "Fortune Global 500",
+            "cset_id": GROUP_OFFSET+501,
+            "rows": []
+        }
+    }
+    for row in rows:
+        company_rows.append(row)
+        assert row["cset_id"] < GROUP_OFFSET, \
+            f"Congratulations! There are more than {GROUP_OFFSET-1} PARAT companies now and you need to update this code."
+        for group_name in row["groups"]:
+            if row["groups"][group_name]:
+                raw_group_metadata[group_name]["rows"].append(row)
     with open(os.path.join(WEB_SRC_DIR, "static_data", "data.js"), mode="w") as out:
-        out.write(f"const company_data = {json.dumps(rows)};\n\nexport {{ company_data }};")
+        out.write(f"const company_data = {json.dumps(company_rows)};\n\nexport {{ company_data }};")
+    return raw_group_metadata
+
+
+def exp_round(num: float) -> int:
+    """
+    Round numbers the way we learned in school, with .5 rounding up
+    :param num: number to round
+    :return: rounded number
+    """
+    return int(Decimal(str(num)).quantize(Decimal(), rounding=ROUND_HALF_UP))
+
+
+def get_average_group_data(raw_group_metadata: dict) -> dict:
+    """
+    Averages metrics across a group's companies
+    :param raw_group_metadata: dict mapping group key to CSET id, name, and all rows belonging to that group
+    :return: Dict mapping group key to CSET id, name, and average metrics across rows in the group
+    """
+    average_group_data = {}
+    for group in raw_group_metadata:
+        average_group_data[group] = {
+            "cset_id": raw_group_metadata[group]["cset_id"],
+            "name": raw_group_metadata[group]["name"],
+            ARTICLE_METRICS: {},
+            PATENT_METRICS: {},
+            OTHER_METRICS: {}
+        }
+        rows = raw_group_metadata[group]["rows"]
+        for category in [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]:
+            has_counts = category != OTHER_METRICS
+            metrics = rows[0][category].keys()
+            for metric in metrics:
+                total_metric_data = {}
+                for row in rows:
+                    if not total_metric_data:
+                        # since we're computing a sum, we can just copy the values of the first row we see for the
+                        # initial values
+                        total_metric_data = row[category][metric]
+                    else:
+                        total_metric_data["total"] += row[category][metric]["total"]
+                        if has_counts:
+                            for idx, yearly_value in enumerate(row[category][metric]["counts"]):
+                                total_metric_data["counts"][idx] += yearly_value
+                average_group_data[group][category][metric] = {
+                    "total": exp_round(total_metric_data["total"]/len(rows)),
+                    "counts": None if not has_counts else [exp_round(total/len(rows))
+                                                           for total in total_metric_data["counts"]]
+                }
+    return average_group_data
+
+
+def update_overall_data(group_data: dict) -> None:
+    """
+    Generate top-level data that is not specific to a particular company or metric
+    :param group_data: dict mapping group keys to data we will use to compute average metadata for those groups
+    :return: None
+    """
+    print("Calculating average metadata for company groups")
+    average_group_data = get_average_group_data(group_data)
+    overall_data = {
+        "years": YEARS,
+        "startArticleYear": CURRENT_YEAR - 4,
+        "endArticleYear": CURRENT_YEAR - 1,
+        "startPatentYear": CURRENT_YEAR - 6,
+        "endPatentYear": CURRENT_YEAR - 3,
+        "groups": average_group_data,
+        "groupIdOffset": GROUP_OFFSET
+    }
+    with open(os.path.join(WEB_SRC_DIR, "static_data", "overall_data.json"), mode="w") as out:
+        out.write(json.dumps(overall_data))
 
 
 if __name__ == "__main__":
@@ -553,12 +920,15 @@ if __name__ == "__main__":
                         help="Re-download the images; if not specified will use local cache")
     parser.add_argument("--refresh_market_links", action="store_true", default=False,
                         help="Re-retrieve the market links (takes ~1.5 hrs); if not specified will use local cache")
+    parser.add_argument("--refresh_sectors", action="store_true", default=False,
+                        help="Retrieve sector information from PERMID API; requires API key available in "
+                             "PERMID_API_KEY environment variable")
     args = parser.parse_args()
 
     if args.refresh_market_links and not args.refresh_raw:
         print("You must specify --refresh_raw if you want to refresh the market links")
         exit(0)
-
     if args.refresh_raw:
         retrieve_raw(args.refresh_market_links)
-    clean(args.refresh_images)
+    group_data = clean(args.refresh_images, args.refresh_sectors)
+    update_overall_data(group_data)

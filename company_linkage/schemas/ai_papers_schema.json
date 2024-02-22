@@ -1,0 +1,39 @@
+[
+        {
+        "mode": "REQUIRED",
+        "name": "CSET_id",
+        "type": "INTEGER",
+        "description": "The CSET_id for a company."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "merged_id",
+        "type": "STRING",
+        "description": "CSET merged id of a set of articles judged to be the same"
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "year",
+        "type": "INTEGER",
+        "description": "The year a paper was published."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "cv",
+        "type": "BOOLEAN",
+        "description": "CV relevance prediction from the arXiv classifier using cv_filtered."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "nlp",
+        "type": "BOOLEAN",
+        "description": "NLP relevance prediction from the arXiv classifier using nlp_filtered."
+        },
+        {
+        "mode": "REQUIRED",
+        "name": "robotics",
+        "type": "BOOLEAN",
+        "description": "Robotics relevance prediction from the arXiv classifier using robotics_filtered."
+        }
+
+]

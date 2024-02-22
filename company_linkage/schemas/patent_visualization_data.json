@@ -1,0 +1,950 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "CSET_id",
+    "type": "INTEGER",
+    "description": "CSET id of PARAT company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "name",
+    "type": "STRING",
+    "description": "Name of PARAT company."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "ai_patents",
+    "type": "INTEGER",
+    "description": "Total AI patent families."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Physical_Sciences_and_Engineering_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in physical science and engineering application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Life_Sciences_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in life sciences application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Security__eg_cybersecurity_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in security (e.g. cybersecurity) application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Transportation_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in transportation application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Industrial_and_Manufacturing_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in industrial and manufacturing application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Education_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in education application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Document_Mgt_and_Publishing_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in document management and publishing application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Military_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in military application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Agricultural_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in agricultural application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Computing_in_Government_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in computing in government application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Personal_Devices_and_Computing_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in personal devices and computing application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Banking_and_Finance_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in banking and finance application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Telecommunications_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in telecommunications application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Networks__eg_social_IOT_etc_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in networks (e.g. social, IOT, etc.) application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Business_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in business application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Energy_Management_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in energy management application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Entertainment_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in entertainment application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Nanotechnology_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in nanotechnology application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Semiconductors_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in semiconductors application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Language_Processing_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in language processing functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Speech_Processing_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in speech processing functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Knowledge_Representation_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in knowledge representation functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Planning_and_Scheduling_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in planning and scheduling functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Control_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in control functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Distributed_AI_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in distributed AI functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Robotics_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in robotics functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Computer_Vision_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in computer vision functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Analytics_and_Algorithms_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in analytics and algorithms functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Measuring_and_Testing_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in measuring and testing functional application category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Logic_Programming_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in logic programming AI techniques category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Fuzzy_Logic_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in fuzzy logic AI techniques category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Probabilistic_Reasoning_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in probabilistic reasoning AI techniques category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Ontology_Engineering_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in ontology engineering AI techniques category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Machine_Learning_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in machine learning AI techniques category."
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Search_Methods_pats",
+    "type": "INTEGER",
+    "description": "AI patent families in search methods AI techniques category."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+    "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "ai_patents",
+        "type": "INTEGER",
+    "description": "AI patent families count for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "ai_patents_by_year",
+    "type": "RECORD",
+    "description": "Count of total AI patent families by priority year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Physical_Sciences_and_Engineering_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the physical science and engineering application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Physical_Sciences_and_Engineering_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the physical science and engineering application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Life_Sciences_pats",
+        "type": "INTEGER",
+    "description": "Count of AI patent families in the life sciences application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Life_Sciences_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the life sciences application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Security__eg_cybersecurity_pats",
+        "type": "INTEGER",
+    "description": "Count of AI patent families in the security (e.g. cybersecurity) application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Security__eg_cybersecurity_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the security (e.g. cybersecurity) application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Transportation_pats",
+        "type": "INTEGER",
+    "description": "Count of AI patent families in the transportation application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Transportation_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the transportation application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Industrial_and_Manufacturing_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the industrial and manufacturing application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Industrial_and_Manufacturing_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the industrial and manufacturing application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Education_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the education application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Education_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the education application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Document_Mgt_and_Publishing_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the document management and publishing application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Document_Mgt_and_Publishing_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the document management and publishing application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Military_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the military application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Military_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the military application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Agricultural_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the agricultural application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Agricultural_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the agricultural application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Computing_in_Government_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the computing in government application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Computing_in_Government_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the computing in government application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Personal_Devices_and_Computing_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the personal devices and computing application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Personal_Devices_and_Computing_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the personal devices and computing application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Banking_and_Finance_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the banking and finance application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Banking_and_Finance_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the banking and finance application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Telecommunications_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the telecommunications application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Telecommunications_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the telecommunications application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Networks__eg_social_IOT_etc_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the networks (e.g. social, IOT, etc.) application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Networks__eg_social_IOT_etc_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the networks (e.g. social, IOT, etc.) application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Business_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the business application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Business_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the business application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Energy_Management_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the energy management application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Energy_Management_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the energy management application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Entertainment_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the entertainment application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Entertainment_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the entertainment application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Nanotechnology_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the nanotechnology application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Nanotechnology_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the nanotechnology application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Semiconductors_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the semiconductors application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Semiconductors_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the semiconductors application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Language_Processing_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the language processing functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Language_Processing_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the language processing functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Speech_Processing_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the speech processing functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Speech_Processing_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the speech processing functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Knowledge_Representation_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the knowledge representation functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Knowledge_Representation_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the knowledge representation functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Planning_and_Scheduling_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the planning and scheduling functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Planning_and_Scheduling_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the planning and scheduling functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Control_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the control functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Control_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the control functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Distributed_AI_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the distributed AI functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Distributed_AI_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the distributed AI functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Robotics_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the robotics functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Robotics_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the robotics functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Computer_Vision_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the computer vision functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Computer_Vision_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the computer vision functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Analytics_and_Algorithms_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the analytics and algorithms functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Analytics_and_Algorithms_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the analytics and engineering functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Measuring_and_Testing_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the measuring and testing functional application category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Measuring_and_Testing_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the measuring and testing functional application category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Logic_Programming_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the logic programming AI techniques category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Logic_Programming_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the logic programming AI techniques category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Fuzzy_Logic_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the fuzzy logic AI techniques category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Fuzzy_Logic_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the fuzzy logic AI techniques category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Probabilistic_Reasoning_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the probabilistic reasoning AI techniques category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Probabilistic_Reasoning_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the probabilistic reasoning AI techniques category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Ontology_Engineering_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the ontology engineering AI techniques category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Ontology_Engineering_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the ontology engineering AI techniques category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Machine_Learning_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the machine learning AI techniques category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Machine_Learning_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the machine learning AI techniques category by year."
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "priority_year",
+        "type": "INTEGER",
+        "description": "Priority year of AI patent family."
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Search_Methods_pats",
+        "type": "INTEGER",
+        "description": "Count of AI patent families in the search methods AI techniques category for that year."
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Search_Methods_pats_by_year",
+    "type": "RECORD",
+    "description": "Count of AI patents in the search methods AI techniques category by year."
+  }
+]
