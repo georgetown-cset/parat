@@ -54,7 +54,7 @@ jobs:
         cd web/gui-v2
         find public -name "*.js" -exec grep -Eo "(http|https):\/\/[^]\{\}\"'\\\(\)\> ]+" {} \; | sort -u > linklist.txt
         printf '%s\n%s\n%s\n' "# LinkChecker URL list" "# <meta charset=\"UTF-8\">" "$(cat linklist.txt)" > linklist.txt
-        linkchecker linklist.txt --check-extern --config=.linkcheckerrc --ignore-url="https://.*\.fastly\.net/.*" --ignore-url="https://.*\.mapbox\..*" --ignore-url=".*//a\W.*" --ignore-url="http://(a|x|тест)" --ignore-url="https://en.wikipedia.org/.*" --ignore-url="https://permid.org/.*" --ignore-url="https://www.crunchbase.com/.*" --ignore-url="https://www.google.com/.*" --ignore-url="https://www.grid.ac/.*" --ignore-url="https://www.linkedin.com/.*" -o failures > output.txt || true
+        linkchecker linklist.txt --check-extern --config=.linkcheckerrc --ignore-url="https://.*\.fastly\.net/.*" --ignore-url="https://.*\.mapbox\..*" --ignore-url=".*//a\W.*" --ignore-url="http://(a|x|тест)" --ignore-url="https://en.wikipedia.org/.*" --ignore-url="https://permid.org/.*" --ignore-url="https://www.crunchbase.com/.*" --ignore-url="https://www.google.com/.*" --ignore-url="https://www.grid.ac/.*" --ignore-url="https://www.linkedin.com/.*" --ignore-url="https://docs.google.com/forms/d/e/.*" -o failures > output.txt || true
         cat output.txt
         echo "num_links=$(wc -l < output.txt | sed 's/^ *//g')" >> $GITHUB_OUTPUT
         echo "links<<EOFdelimiter" >> $GITHUB_OUTPUT
