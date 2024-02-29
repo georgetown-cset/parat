@@ -45,9 +45,11 @@ const styles = {
     padding: 1rem;
   `,
   infocard: css`
+    margin-bottom: 0;
     margin-top: 1rem;
 
     ${breakpoints.tablet_regular} {
+      margin-bottom: 0;
       margin-top: 1rem;
     }
 

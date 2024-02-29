@@ -2,7 +2,12 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { AppWrapper, InfoCard, breakpoints } from '@eto/eto-ui-components';
+import {
+  AppWrapper,
+  InfoCard,
+  UsageDisclaimer,
+  breakpoints,
+} from '@eto/eto-ui-components';
 
 import ListView from '../components/ListView';
 
@@ -18,10 +23,10 @@ const styles = {
     color: var(--grey);
   `,
   listView: css`
-    margin: 35px 15px;
+    margin: 35px 15px 0;
 
     ${breakpoints.tablet_regular} {
-      margin: 50px 65px;
+      margin: 50px 65px 0;
     }
   `,
 };
@@ -54,6 +59,9 @@ const IndexPage = () => {
         </div>
       </InfoCard>
       <ListView css={styles.listView} />
+      <UsageDisclaimer
+        toolName="PARAT"
+      />
     </AppWrapper>
   );
 }

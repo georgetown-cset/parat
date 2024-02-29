@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { AppWrapper } from '@eto/eto-ui-components';
+import { AppWrapper, UsageDisclaimer } from '@eto/eto-ui-components';
 
 import DetailView from '../../components/DetailView';
 import { company_data as allCompanies } from '../../static_data/data';
@@ -16,6 +16,9 @@ const CompanyPage = ({ data }) => {
       <DetailView
         companyData={companyData}
         companyId={companyId}
+      />
+      <UsageDisclaimer
+        toolName="PARAT"
       />
     </AppWrapper>
   );
