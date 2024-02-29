@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       app-dir: ./web/gui-v2
+    if: github.triggering_actor != 'dependabot[bot]'
 
     permissions:
       contents: 'read'
