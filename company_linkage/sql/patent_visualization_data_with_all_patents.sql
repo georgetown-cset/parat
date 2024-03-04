@@ -15,11 +15,18 @@ WITH
   GROUP BY
     CSET_id,
     priority_year),
+  aggregated as (
+    SELECT
+      CSET_id,
+      COUNT(DISTINCT family_id) AS all_patents,
+    FROM allpats
+    GROUP BY
+      CSET_id
+  ),
   by_year as (
     -- Get the counts by year
   SELECT
     CSET_id,
-    all_patents,
     ARRAY_AGG(STRUCT(priority_year,
         all_patents)
     ORDER BY
@@ -31,15 +38,19 @@ WITH
   USING
     (CSET_id)
   GROUP BY
-    CSET_id,
-    all_patents
+    CSET_id
 )
   -- Pulling CSET_id and name, plus all patents
 SELECT
   viz.*,
+  all_patents,
   by_year.* EXCEPT (CSET_id)
 FROM
   staging_ai_companies_visualization.patent_visualization_data_with_grants_by_year AS viz
+LEFT JOIN
+  aggregated
+USING
+  (CSET_id)
 LEFT JOIN
   by_year
 USING
