@@ -682,23 +682,24 @@ def get_category_counts(js: dict) -> None:
     js[ARTICLE_METRICS] = articles
 
     ### Reformat patent-related metrics
-    counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents")
+    ai_counts, ai_total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents")
+    all_counts, all_total = get_yearly_counts(js.pop("all_patents_by_year"), "all_patents")
     patents = {
         "ai_patents": {
-            "counts": counts,
-            "total": total,
+            "counts": ai_counts,
+            "total": ai_total,
         },
         "ai_patents_growth": {
             "counts": [],
-            "total": get_growth(counts, is_patents=True)
+            "total": get_growth(ai_counts, is_patents=True)
         },
         "ai_patents_grants": {
             "counts": [],
             "total": get_yearly_counts(js.pop("ai_patents_grants_by_year", {}), "ai_patents")[1],
         },
         "all_patents": {
-            "counts": [],
-            "total": get_yearly_counts(js.pop("all_patents_by_year", {}), "all_patents")[1]
+            "counts": all_counts,
+            "total": all_total
         }
     }
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
@@ -728,7 +729,7 @@ def get_category_counts(js: dict) -> None:
     js[OTHER_METRICS] = other_metrics
 
     for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_pubs_in_top_conferences",
-                            "all_pubs", "ai_patents"]:
+                            "all_pubs", "ai_patents", "all_patents"]:
         js.pop(redundant_count)
 
 
