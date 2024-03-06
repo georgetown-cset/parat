@@ -68,7 +68,10 @@ GROUP BY
   CSET_id)
 SELECT
   CSET_id,
-  ai_citation_count_by_year
+  ai_citation_count_by_year,
+  cv_citation_count_by_year,
+  nlp_citation_count_by_year,
+  robotics_citation_count_by_year
 FROM
   high_resolution_entities.aggregated_organizations
 LEFT JOIN

@@ -351,14 +351,6 @@ with dag:
             create_disposition="CREATE_IF_NEEDED",
             write_disposition="WRITE_TRUNCATE"
         )
-        pop_descriptions = PythonOperator(
-            task_id="populate_column_documentation_for_" + table,
-            op_kwargs={
-                "input_schema": f"{os.environ.get('DAGS_FOLDER')}/schemas/parat/{table}.json",
-                "table_name": prod_table_name
-            },
-            python_callable=update_table_descriptions
-        )
         table_backup = BigQueryToBigQueryOperator(
             task_id=f"back_up_{table}",
             source_project_dataset_tables=[f"{staging_dataset}.{table}"],
@@ -366,7 +358,18 @@ with dag:
             create_disposition="CREATE_IF_NEEDED",
             write_disposition="WRITE_TRUNCATE"
         )
-        wait_for_checks >> copy_to_production >> pop_descriptions >> table_backup >> wait_for_copy
+        if table != "all_visualization_data":
+            pop_descriptions = PythonOperator(
+                task_id="populate_column_documentation_for_" + table,
+                op_kwargs={
+                    "input_schema": f"{os.environ.get('DAGS_FOLDER')}/schemas/parat/{table}.json",
+                    "table_name": prod_table_name
+                },
+                python_callable=update_table_descriptions
+            )
+            wait_for_checks >> copy_to_production >> pop_descriptions >> table_backup >> wait_for_copy
+        else:
+            wait_for_checks >> copy_to_production >> table_backup >> wait_for_copy
 
     # post success to slack
     msg_success = get_post_success("PARAT tables updated!", dag)
