@@ -670,15 +670,22 @@ def get_category_counts(js: dict) -> None:
                 "isTopResearch": is_top_research
             }
 
-    for classifier in ["ai", "cv", "nlp", "robotics"]:
-        articles[f"{classifier}_citations_per_article"] = {
-            "counts": [0 if num_art == 0 else num_cit/num_art for num_art, num_cit in
-                        zip(articles[f"{classifier}_publications"]["counts"],
-                            articles[f"{classifier}_citation_counts"]["counts"])],
-            "total": 0 if articles[f"{classifier}_publications"]["total"] == 0 else
-                            articles[f"{classifier}_citation_counts"]["total"]/articles[f"{classifier}_publications"]["total"],
-            "isTopResearch": False
-        }
+    ai_publications = articles["ai_publications"]
+    ai_citations = articles["ai_citation_counts"]
+    articles["ai_citations_per_article"] = {
+        "counts": [0 if num_art == 0 else num_cit/num_art for num_art, num_cit in
+                    zip(ai_publications["counts"], ai_citations["counts"])],
+        "total": 0 if ai_publications["total"] == 0 else
+                        ai_citations["total"]/ai_publications["total"],
+        "isTopResearch": False
+    }
+    for classifier in ["cv", "nlp", "robotics"]:
+        citations_per_article = 0
+        if articles[f"{classifier}_publications"]["total"] != 0:
+            total_citations = articles[f"{classifier}_citation_counts"]["total"]
+            total_publications = articles[f"{classifier}_publications"]["total"]
+            citations_per_article = total_citations/total_publications
+        articles[f"{classifier}_publications"]["citations_per_article"] = citations_per_article
 
     for year_idx in range(len(YEARS)):
         # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]

@@ -105,7 +105,7 @@ const DetailViewPublications = ({
       return {
         subfield: articleMap[key],
         articles: val.total,
-        citations: "???",
+        citations: Math.round(val.citations_per_article*10)/10,
         growth: `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`,
       };
     });
