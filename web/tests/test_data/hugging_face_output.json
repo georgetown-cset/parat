@@ -284,7 +284,7 @@
       "total": 13,
       "isTopResearch": false
     },
-    "citation_counts": {
+    "ai_citation_counts": {
       "counts": [
         0,
         0,
@@ -301,7 +301,58 @@
       "total": 2993,
       "isTopResearch": false
     },
-    "citations_per_article": {
+    "cv_citation_counts": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        56,
+        361,
+        1467,
+        1086,
+        23
+      ],
+      "total": 2993,
+      "isTopResearch": false
+    },
+    "nlp_citation_counts": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        56,
+        361,
+        1467,
+        1086,
+        23
+      ],
+      "total": 2993,
+      "isTopResearch": false
+    },
+    "robotics_citation_counts": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        56,
+        361,
+        1467,
+        1086,
+        23
+      ],
+      "total": 2993,
+      "isTopResearch": false
+    },
+    "ai_citations_per_article": {
       "counts": [
         0,
         0,
@@ -318,24 +369,24 @@
       "total": 166.27777777777777,
       "isTopResearch": false
     },
-    "highly_cited": {
+    "highly_cited_ai_pubs": {
       "counts": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2
+        0,
+        1,
+        0,
+        0,
+        1,
+        4,
+        4,
+        6,
+        5,
+        10,
+        0
       ],
       "isTopResearch": false,
-      "total": 22
+      "total": 31
     },
-    "cv_pubs": {
+    "cv_publications": {
       "counts": [
         0,
         0,
@@ -350,9 +401,10 @@
         0
       ],
       "total": 1,
+      "citations_per_article": 2993.0,
       "isTopResearch": true
     },
-    "nlp_pubs": {
+    "nlp_publications": {
       "counts": [
         0,
         0,
@@ -367,9 +419,10 @@
         0
       ],
       "total": 15,
+      "citations_per_article": 199.53333333333333,
       "isTopResearch": true
     },
-    "robotics_pubs": {
+    "robotics_publications": {
       "counts": [
         0,
         0,
@@ -384,6 +437,7 @@
         0
       ],
       "total": 0,
+      "citations_per_article": 0,
       "isTopResearch": true
     }
   },

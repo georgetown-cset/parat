@@ -297,6 +297,44 @@
       "robotics_pubs": 10
     }
   ],
+  "highly_cited_ai_pubs_by_year": [
+    {
+      "year": 2014,
+      "highly_cited_ai_pubs": 1
+    },
+    {
+      "year": 2015,
+      "highly_cited_ai_pubs": 0
+    },
+    {
+      "year": 2016,
+      "highly_cited_ai_pubs": 0
+    },
+    {
+      "year": 2017,
+      "highly_cited_ai_pubs": 1
+    },
+    {
+      "year": 2018,
+      "highly_cited_ai_pubs": 4
+    },
+    {
+      "year": 2019,
+      "highly_cited_ai_pubs": 4
+    },
+    {
+      "year": 2020,
+      "highly_cited_ai_pubs": 6
+    },
+    {
+      "year": 2021,
+      "highly_cited_ai_pubs": 5
+    },
+    {
+      "year": 2022,
+      "highly_cited_ai_pubs": 10
+    }
+  ],
   "ai_pubs_in_top_conferences": 32,
   "ai_pubs_in_top_conferences_by_year": [
     {
@@ -376,42 +414,156 @@
   "stage": "Mature",
   "tt1_jobs": 2111,
   "ai_jobs": 213,
-  "citation_count_by_year": [
+  "ai_citation_count_by_year": [
     {
       "year": 2015,
-      "citation_count": 1
+      "ai_citation_count": 1
     },
     {
       "year": 2016,
-      "citation_count": 15
+      "ai_citation_count": 15
     },
     {
       "year": 2017,
-      "citation_count": 45
+      "ai_citation_count": 45
     },
     {
       "year": 2018,
-      "citation_count": 230
+      "ai_citation_count": 230
     },
     {
       "year": 2019,
-      "citation_count": 541
+      "ai_citation_count": 541
     },
     {
       "year": 2020,
-      "citation_count": 1357
+      "ai_citation_count": 1357
     },
     {
       "year": 2021,
-      "citation_count": 2039
+      "ai_citation_count": 2039
     },
     {
       "year": 2022,
-      "citation_count": 1820
+      "ai_citation_count": 1820
     },
     {
       "year": 2023,
-      "citation_count": 39
+      "ai_citation_count": 39
+    }
+  ],
+  "cv_citation_count_by_year": [
+    {
+      "year": 2015,
+      "cv_citation_count": 1
+    },
+    {
+      "year": 2016,
+      "cv_citation_count": 15
+    },
+    {
+      "year": 2017,
+      "cv_citation_count": 45
+    },
+    {
+      "year": 2018,
+      "cv_citation_count": 230
+    },
+    {
+      "year": 2019,
+      "cv_citation_count": 541
+    },
+    {
+      "year": 2020,
+      "cv_citation_count": 1357
+    },
+    {
+      "year": 2021,
+      "cv_citation_count": 2039
+    },
+    {
+      "year": 2022,
+      "cv_citation_count": 1820
+    },
+    {
+      "year": 2023,
+      "cv_citation_count": 39
+    }
+  ],
+  "nlp_citation_count_by_year": [
+    {
+      "year": 2015,
+      "nlp_citation_count": 1
+    },
+    {
+      "year": 2016,
+      "nlp_citation_count": 15
+    },
+    {
+      "year": 2017,
+      "nlp_citation_count": 45
+    },
+    {
+      "year": 2018,
+      "nlp_citation_count": 230
+    },
+    {
+      "year": 2019,
+      "nlp_citation_count": 541
+    },
+    {
+      "year": 2020,
+      "nlp_citation_count": 1357
+    },
+    {
+      "year": 2021,
+      "nlp_citation_count": 2039
+    },
+    {
+      "year": 2022,
+      "nlp_citation_count": 1820
+    },
+    {
+      "year": 2023,
+      "nlp_citation_count": 39
+    }
+  ],
+  "robotics_citation_count_by_year": [
+    {
+      "year": 2015,
+      "robotics_citation_count": 1
+    },
+    {
+      "year": 2016,
+      "robotics_citation_count": 15
+    },
+    {
+      "year": 2017,
+      "robotics_citation_count": 45
+    },
+    {
+      "year": 2018,
+      "robotics_citation_count": 230
+    },
+    {
+      "year": 2019,
+      "robotics_citation_count": 541
+    },
+    {
+      "year": 2020,
+      "robotics_citation_count": 1357
+    },
+    {
+      "year": 2021,
+      "robotics_citation_count": 2039
+    },
+    {
+      "year": 2022,
+      "robotics_citation_count": 1820
+    },
+    {
+      "year": 2023,
+      "robotics_citation_count": 39
     }
   ],
   "fields": [
@@ -2305,6 +2457,7 @@
     }
   ],
   "ai_patents": 1043,
+  "all_patents": 10430,
   "Physical_Sciences_and_Engineering_pats": 10,
   "Life_Sciences_pats": 117,
   "Security__eg_cybersecurity_pats": 22,
@@ -2424,6 +2577,92 @@
     {
       "priority_year": 2021,
       "ai_patents": 64
+    }
+  ],
+  "all_patents_by_year": [
+    {
+      "priority_year": 1995,
+      "all_patents": 10
+    },
+    {
+      "priority_year": 1999,
+      "all_patents": 10
+    },
+    {
+      "priority_year": 2001,
+      "all_patents": 20
+    },
+    {
+      "priority_year": 2004,
+      "all_patents": 10
+    },
+    {
+      "priority_year": 2005,
+      "all_patents": 40
+    },
+    {
+      "priority_year": 2006,
+      "all_patents": 10
+    },
+    {
+      "priority_year": 2007,
+      "all_patents": 70
+    },
+    {
+      "priority_year": 2008,
+      "all_patents": 60
+    },
+    {
+      "priority_year": 2009,
+      "all_patents": 40
+    },
+    {
+      "priority_year": 2010,
+      "all_patents": 60
+    },
+    {
+      "priority_year": 2011,
+      "all_patents": 140
+    },
+    {
+      "priority_year": 2012,
+      "all_patents": 280
+    },
+    {
+      "priority_year": 2013,
+      "all_patents": 220
+    },
+    {
+      "priority_year": 2014,
+      "all_patents": 250
+    },
+    {
+      "priority_year": 2015,
+      "all_patents": 610
+    },
+    {
+      "priority_year": 2016,
+      "all_patents": 990
+    },
+    {
+      "priority_year": 2017,
+      "all_patents": 1430
+    },
+    {
+      "priority_year": 2018,
+      "all_patents": 1550
+    },
+    {
+      "priority_year": 2019,
+      "all_patents": 2010
+    },
+    {
+      "priority_year": 2020,
+      "all_patents": 1980
+    },
+    {
+      "priority_year": 2021,
+      "all_patents": 640
     }
   ],
   "ai_patents_grants_by_year": [

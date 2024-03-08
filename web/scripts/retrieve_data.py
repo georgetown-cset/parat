@@ -642,23 +642,20 @@ def get_category_counts(js: dict) -> None:
     :param js: A dict of data corresponding to an individual PARAT record
     :return: None (mutates js)
     """
-    articles = {
-        # spoof highly cited articles https://github.com/georgetown-cset/parat/issues/135
-        "highly_cited": {
-            "counts": [2 for _ in YEARS],
-            "total": 2*len(YEARS),
-            "isTopResearch": False
-        }
-    }
+    articles = {}
     ### Reformat publication-related metrics
     for machine_name, orig_key, count_key, is_top_research in [
         ["all_publications", "all_pubs_by_year", "all_pubs", False],
         ["ai_publications", "ai_pubs_by_year", "ai_pubs", False],
+        ["highly_cited_ai_pubs", "highly_cited_ai_pubs_by_year", "highly_cited_ai_pubs", False],
         ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences", False],
-        ["citation_counts", "citation_count_by_year", "citation_count", False],
-        ["cv_pubs", "cv_pubs_by_year", "cv_pubs", True],
-        ["nlp_pubs", "nlp_pubs_by_year", "nlp_pubs", True],
-        ["robotics_pubs", "robotics_pubs_by_year", "robotics_pubs", True],
+        ["ai_citation_counts", "ai_citation_count_by_year", "ai_citation_count", False],
+        ["cv_citation_counts", "cv_citation_count_by_year", "cv_citation_count", False],
+        ["nlp_citation_counts", "nlp_citation_count_by_year", "nlp_citation_count", False],
+        ["robotics_citation_counts", "robotics_citation_count_by_year", "robotics_citation_count", False],
+        ["cv_publications", "cv_pubs_by_year", "cv_pubs", True],
+        ["nlp_publications", "nlp_pubs_by_year", "nlp_pubs", True],
+        ["robotics_publications", "robotics_pubs_by_year", "robotics_pubs", True],
     ]:
         counts, total = get_yearly_counts(js.pop(orig_key), count_key)
         articles[machine_name] = {
@@ -673,13 +670,22 @@ def get_category_counts(js: dict) -> None:
                 "isTopResearch": is_top_research
             }
 
-    articles["citations_per_article"] = {
+    ai_publications = articles["ai_publications"]
+    ai_citations = articles["ai_citation_counts"]
+    articles["ai_citations_per_article"] = {
         "counts": [0 if num_art == 0 else num_cit/num_art for num_art, num_cit in
-                    zip(articles["ai_publications"]["counts"], articles["citation_counts"]["counts"])],
-        "total": 0 if articles["ai_publications"]["total"] == 0 else
-                        articles["citation_counts"]["total"]/articles["ai_publications"]["total"],
+                    zip(ai_publications["counts"], ai_citations["counts"])],
+        "total": 0 if ai_publications["total"] == 0 else
+                        ai_citations["total"]/ai_publications["total"],
         "isTopResearch": False
     }
+    for classifier in ["cv", "nlp", "robotics"]:
+        citations_per_article = 0
+        if articles[f"{classifier}_publications"]["total"] != 0:
+            total_citations = articles[f"{classifier}_citation_counts"]["total"]
+            total_publications = articles[f"{classifier}_publications"]["total"]
+            citations_per_article = total_citations/total_publications
+        articles[f"{classifier}_publications"]["citations_per_article"] = citations_per_article
 
     for year_idx in range(len(YEARS)):
         # assert js["yearly_all_publications"][year_idx] >= js["yearly_ai_publications"][year_idx]
@@ -688,24 +694,24 @@ def get_category_counts(js: dict) -> None:
     js[ARTICLE_METRICS] = articles
 
     ### Reformat patent-related metrics
-    counts, total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents")
+    ai_counts, ai_total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents")
+    all_counts, all_total = get_yearly_counts(js.pop("all_patents_by_year"), "all_patents")
     patents = {
         "ai_patents": {
-            "counts": counts,
-            "total": total,
+            "counts": ai_counts,
+            "total": ai_total,
         },
         "ai_patents_growth": {
             "counts": [],
-            "total": get_growth(counts, is_patents=True)
+            "total": get_growth(ai_counts, is_patents=True)
         },
         "ai_patents_grants": {
             "counts": [],
             "total": get_yearly_counts(js.pop("ai_patents_grants_by_year", {}), "ai_patents")[1],
         },
-        # spoof all patents https://github.com/georgetown-cset/parat/issues/125
         "all_patents": {
-            "counts": [10*c for c in counts],
-            "total": 10*total
+            "counts": all_counts,
+            "total": all_total
         }
     }
     # turn the row's keys into a new object to avoid "dictionary changed size during iteration"
@@ -735,7 +741,7 @@ def get_category_counts(js: dict) -> None:
     js[OTHER_METRICS] = other_metrics
 
     for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_pubs_in_top_conferences",
-                            "all_pubs", "ai_patents"]:
+                            "all_pubs", "ai_patents", "all_patents"]:
         js.pop(redundant_count)
 
 

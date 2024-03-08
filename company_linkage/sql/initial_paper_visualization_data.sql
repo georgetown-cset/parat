@@ -3,6 +3,9 @@ WITH
   SELECT
     DISTINCT CSET_id,
     references.merged_id,
+    cv,
+    nlp,
+    robotics,
     ref_id
   FROM
     staging_ai_companies_visualization.ai_company_papers
@@ -14,6 +17,9 @@ WITH
   SELECT
     DISTINCT CSET_id,
     merged_id,
+    cv,
+    nlp,
+    robotics,
     ref_id,
     year
   FROM
@@ -28,7 +34,10 @@ WITH
   SELECT
     CSET_id,
     year,
-    COUNT(DISTINCT merged_id) AS citation_count
+    COUNT(DISTINCT merged_id) AS ai_citation_count,
+    COUNT(DISTINCT IF(cv, merged_id, null)) AS cv_citation_count,
+    COUNT(DISTINCT IF(nlp, merged_id, null)) AS nlp_citation_count,
+    COUNT(DISTINCT IF(robotics, merged_id, null)) AS robotics_citation_count
   FROM
     add_year
   GROUP BY
@@ -38,16 +47,31 @@ all_cited as
 (SELECT
   CSET_id,
   ARRAY_AGG(STRUCT(year,
-      citation_count)
+      ai_citation_count)
   ORDER BY
-    year) AS citation_count_by_year
+    year) AS ai_citation_count_by_year,
+  ARRAY_AGG(STRUCT(year,
+      cv_citation_count)
+  ORDER BY
+    year) AS cv_citation_count_by_year,
+  ARRAY_AGG(STRUCT(year,
+      nlp_citation_count)
+  ORDER BY
+    year) AS nlp_citation_count_by_year,
+  ARRAY_AGG(STRUCT(year,
+      robotics_citation_count)
+  ORDER BY
+    year) AS robotics_citation_count_by_year
 FROM
   by_year
 GROUP BY
   CSET_id)
 SELECT
   CSET_id,
-  citation_count_by_year
+  ai_citation_count_by_year,
+  cv_citation_count_by_year,
+  nlp_citation_count_by_year,
+  robotics_citation_count_by_year
 FROM
   high_resolution_entities.aggregated_organizations
 LEFT JOIN
