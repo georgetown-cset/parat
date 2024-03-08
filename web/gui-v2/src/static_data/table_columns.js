@@ -194,7 +194,7 @@ const columnDefinitions = [
   {
     title: "Citation counts",
     key: "citations",
-    ...generateSliderColDef("articles", "citation_counts"),
+    ...generateSliderColDef("articles", "ai_citation_counts"),
   },
   {
     title: "AI publications",
@@ -259,18 +259,18 @@ const columnDefinitions = [
   },
   {
     title: "CV publications",
-    key: "cv_pubs",
-    ...generateSliderColDef("articles", "cv_pubs"),
+    key: "cv_publications",
+    ...generateSliderColDef("articles", "cv_publications"),
   },
   {
     title: "NLP publications",
-    key: "nlp_pubs",
-    ...generateSliderColDef("articles", "nlp_pubs"),
+    key: "nlp_publications",
+    ...generateSliderColDef("articles", "nlp_publications"),
   },
   {
     title: "Robotics publications",
-    key: "ro_pubs",
-    ...generateSliderColDef("articles", "robotics_pubs"),
+    key: "robotics_publications",
+    ...generateSliderColDef("articles", "robotics_publications"),
   },
 
   {

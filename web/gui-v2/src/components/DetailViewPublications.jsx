@@ -65,8 +65,8 @@ const DetailViewPublications = ({
     },
     {
       key: "average-citations",
-      stat: <>{commas(data.articles.citations_per_article.total)}</>,
-      text: <>citations per AI article on average (#{commas(data.articles.citations_per_article.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.citations_per_article.sp500_rank)} in the S&P 500</>})</>,
+      stat: <>{commas(data.articles.ai_citations_per_article.total)}</>,
+      text: <>citations per AI article on average (#{commas(data.articles.ai_citations_per_article.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.ai_citations_per_article.sp500_rank)} in the S&P 500</>})</>,
     },
     {
       key: "highly-cited",
@@ -105,16 +105,16 @@ const DetailViewPublications = ({
       return {
         subfield: articleMap[key],
         articles: val.total,
-        citations: "???",
+        citations: Math.round(val.citations_per_article*10)/10,
         growth: `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`,
       };
     });
 
   const aiSubfieldOptions = [
     { text: "AI (all subtopics)", val: "ai_publications" },
-    { text: "Computer vision", val: "cv_pubs" },
-    { text: "Natural language processing", val: "nlp_pubs" },
-    { text: "Robotics", val: "robotics_pubs" },
+    { text: "Computer vision", val: "cv_publications" },
+    { text: "Natural language processing", val: "nlp_publications" },
+    { text: "Robotics", val: "robotics_publications" },
   ];
 
   return (
