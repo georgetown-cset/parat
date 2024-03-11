@@ -4,6 +4,17 @@ import slugify from 'slugify';
 export { useMultiState } from './useMultiState';
 export { useWindowSize } from './useWindowSize';
 
+export function calculateMedian(data) {
+  const sorted = [...data].sort((a, b) => a - b);
+  const middle = Math.floor(sorted.length / 2);
+
+  if ( sorted.length % 2 === 0 ) {
+    return (sorted[middle - 1] + sorted[middle]) / 2;
+  } else {
+    return sorted[middle];
+  }
+}
+
 export const cleanFalse = (array) => array.filter(e => e !== false);
 
 export const commas = (

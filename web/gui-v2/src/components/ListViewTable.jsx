@@ -26,6 +26,7 @@ import overallData from '../static_data/overall_data.json';
 import columnDefinitions, { columnKeyMap } from '../static_data/table_columns';
 import { tooltips } from '../static_data/tooltips';
 import {
+  calculateMedian,
   commas,
   useMultiState,
   useWindowSize,
@@ -132,6 +133,16 @@ const styles = {
     .MuiTablePagination-selectLabel,
     .MuiTablePagination-select {
       font-family: GTZirkonLight;
+    }
+
+    tfoot.table-footer > tr {
+      td:first-child {
+        border-left: none;
+      }
+
+      td:last-child {
+        border-right: none;
+      }
     }
   `,
   dropdownEntryWithTooltip: css`
@@ -263,7 +274,7 @@ const listToDropdownOptions = (list) => {
   return list.map(o => ({val: o, text: o}));
 }
 
-const AGGREGATE_SUM_COLUMNS = [
+const AGGREGATE_MEDIAN_COLUMNS = [
   ...SLIDER_COLUMNS,
 ];
 
@@ -633,16 +644,18 @@ const ListViewTable = ({
       const aggregate = dataForTable
         .reduce((acc, curr) => {
           for ( const colDef of columnDefinitions ) {
-            if ( !AGGREGATE_SUM_COLUMNS.includes(colDef.key) ) {
-              continue;
-            }
             if ( colDef?.isGrowthStat ) {
               continue;
+            } else if ( AGGREGATE_MEDIAN_COLUMNS.includes(colDef.key) ) {
+              const dataKey = colDef.dataKey ?? colDef.key;
+              const keyVal = curr[dataKey];
+              const keyValExtract = colDef?.extract?.(keyVal, curr) ?? keyVal;
+              if ( Array.isArray(acc[colDef.key]) ) {
+                acc[colDef.key].push(keyValExtract);
+              } else {
+                acc[colDef.key] = [keyValExtract];
+              }
             }
-            const dataKey = colDef.dataKey ?? colDef.key;
-            const keyVal = curr[dataKey];
-            const keyValExtract = colDef?.extract?.(keyVal, curr) ?? keyVal;
-            acc[colDef.key] = (acc[colDef.key] ?? 0) + keyValExtract;
           }
           return acc;
         }, {});
@@ -654,7 +667,7 @@ const ListViewTable = ({
 
   const footerData = Object.fromEntries(
     Object.entries(aggregateData)
-      .map(([key, data]) => [key, <>Total: {commas(data)}</>])
+      .map(([key, data]) => [key, <>Median: {calculateMedian(data)}</>])
   );
 
 
