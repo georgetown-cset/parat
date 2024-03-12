@@ -64,7 +64,7 @@ jobs:
       run: |
         cd web
         coverage run -m pytest tests
-        coverage xml -o coverage/python.xml
+        coverage xml -o ../coverage/python.xml
     - name: Report python coverage
       uses: orgoro/coverage@v3
       with:
