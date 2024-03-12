@@ -62,16 +62,9 @@ jobs:
     #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pip install pytest
         cd web
-        python3 -m pytest tests
-    #     cd ..
-    #     python3 -m pytest company_linkage/test_aggregate_organizations.py
-    - name: Report python coverage
-      uses: orgoro/coverage@v3
-      with:
-        coverageFile: coverage/python.xml
-        token: ${{ secrets.GITHUB_TOKEN }}
+        coverage run -m pytest tests
+        coverage xml -o coverage/python.xml
     - name: Report javascript coverage
       uses: MishaKav/jest-coverage-comment@v1.0.23
       with:
