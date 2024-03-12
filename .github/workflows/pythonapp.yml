@@ -65,6 +65,11 @@ jobs:
         cd web
         coverage run -m pytest tests
         coverage xml -o coverage/python.xml
+    - name: Report python coverage
+      uses: orgoro/coverage@v3
+      with:
+        coverageFile: coverage/python.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Report javascript coverage
       uses: MishaKav/jest-coverage-comment@v1.0.23
       with:
