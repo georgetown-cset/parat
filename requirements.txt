@@ -42,3 +42,4 @@ pycountry-convert
 pycld2
 pytest
 tqdm
+coverage
