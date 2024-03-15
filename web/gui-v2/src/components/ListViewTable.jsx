@@ -26,6 +26,7 @@ import overallData from '../static_data/overall_data.json';
 import columnDefinitions, { columnKeyMap } from '../static_data/table_columns';
 import { tooltips } from '../static_data/tooltips';
 import {
+  calculateMedian,
   commas,
   useMultiState,
   useWindowSize,
@@ -133,6 +134,16 @@ const styles = {
     .MuiTablePagination-select {
       font-family: GTZirkonLight;
     }
+
+    tfoot.table-footer > tr {
+      td:first-child {
+        border-left: none;
+      }
+
+      td:last-child {
+        border-right: none;
+      }
+    }
   `,
   dropdownEntryWithTooltip: css`
     align-items: center;
@@ -160,6 +171,10 @@ const styles = {
     .MuiPaper-root {
       max-height: 192px;
     }
+  `,
+  aggregateCell: css`
+    display: flex;
+    justify-content: space-between;
   `,
   fallbackContent: css`
     align-items: center;
@@ -226,6 +241,9 @@ const DROPDOWN_COLUMNS = [];
 const SLIDER_COLUMNS = [];
 const SLIDER_NATURAL_COLUMNS = [];
 const SLIDER_GROWTH_COLUMNS = [];
+const SLIDER_PERCENTAGE_COLUMNS = [];
+const AGGREGATE_SUM_COLUMNS = [];
+const AGGREGATE_MEDIAN_COLUMNS = [];
 columnDefinitions.forEach((colDef) => {
   if ( colDef?.initialCol ) {
     DEFAULT_COLUMNS.push(colDef.key);
@@ -238,6 +256,16 @@ columnDefinitions.forEach((colDef) => {
       SLIDER_GROWTH_COLUMNS.push(colDef.key);
     } else {
       SLIDER_NATURAL_COLUMNS.push(colDef.key);
+    }
+
+    if ( colDef?.isGrowthStat || colDef?.isPercent ) {
+      SLIDER_PERCENTAGE_COLUMNS.push(colDef.key);
+    }
+
+    if ( colDef?.aggregateType === 'sum' ) {
+      AGGREGATE_SUM_COLUMNS.push(colDef.key);
+    } else if ( colDef?.aggregateType === 'median' ) {
+      AGGREGATE_MEDIAN_COLUMNS.push(colDef.key);
     }
   }
 });
@@ -263,9 +291,6 @@ const listToDropdownOptions = (list) => {
   return list.map(o => ({val: o, text: o}));
 }
 
-const AGGREGATE_SUM_COLUMNS = [
-  ...SLIDER_COLUMNS,
-];
 
 /**
  * Determine whether a given row matches the filters
@@ -381,6 +406,20 @@ export const exportsForTestingOnly = {
   extractCurrentFilters,
   filterRow,
 };
+
+
+const AggregateCell = ({
+  isPercent = false,
+  label,
+  value,
+}) => {
+  return (
+    <div css={styles.aggregateCell}>
+      <span>{label}:</span>
+      <span>{value}{isPercent && '%'}</span>
+    </div>
+  );
+}
 
 
 const ListViewTable = ({
@@ -633,16 +672,21 @@ const ListViewTable = ({
       const aggregate = dataForTable
         .reduce((acc, curr) => {
           for ( const colDef of columnDefinitions ) {
-            if ( !AGGREGATE_SUM_COLUMNS.includes(colDef.key) ) {
-              continue;
+            if ( AGGREGATE_MEDIAN_COLUMNS.includes(colDef.key) ) {
+              const dataKey = colDef.dataKey ?? colDef.key;
+              const keyVal = curr[dataKey];
+              const keyValExtract = colDef?.extract?.(keyVal, curr) ?? keyVal;
+              if ( Array.isArray(acc[colDef.key]) ) {
+                acc[colDef.key].push(keyValExtract);
+              } else {
+                acc[colDef.key] = [keyValExtract];
+              }
+            } else if ( AGGREGATE_SUM_COLUMNS.includes(colDef.key) ) {
+              const dataKey = colDef.dataKey ?? colDef.key;
+              const keyVal = curr[dataKey];
+              const keyValExtract = colDef?.extract?.(keyVal, curr) ?? keyVal;
+              acc[colDef.key] = (acc[colDef.key] ?? 0) + keyValExtract;
             }
-            if ( colDef?.isGrowthStat ) {
-              continue;
-            }
-            const dataKey = colDef.dataKey ?? colDef.key;
-            const keyVal = curr[dataKey];
-            const keyValExtract = colDef?.extract?.(keyVal, curr) ?? keyVal;
-            acc[colDef.key] = (acc[colDef.key] ?? 0) + keyValExtract;
           }
           return acc;
         }, {});
@@ -654,7 +698,13 @@ const ListViewTable = ({
 
   const footerData = Object.fromEntries(
     Object.entries(aggregateData)
-      .map(([key, data]) => [key, <>Total: {commas(data)}</>])
+      .map(([key, data]) => {
+        if ( AGGREGATE_MEDIAN_COLUMNS.includes(key) ) {
+          return [key, <AggregateCell label="Median" value={calculateMedian(data)} isPercent={SLIDER_PERCENTAGE_COLUMNS.includes(key)} />];
+        } else if ( AGGREGATE_SUM_COLUMNS.includes(key) ) {
+          return [key, <AggregateCell label="Total" value={commas(data)} />];
+        }
+      })
   );
 
 
