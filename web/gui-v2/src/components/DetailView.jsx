@@ -81,7 +81,7 @@ const styles = {
     top: 0px;
   `,
   contentsArea: css`
-    /* grid-area: contents; */
+    max-width: calc(100vw - 51px);
   `,
 };
 
