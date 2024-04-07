@@ -126,6 +126,10 @@ const styles = {
       margin-left: 1rem;
     }
 
+    tr.parat-company-group td {
+      background-color: var(--aqua-lighter);
+    }
+
     /*
      * Fix font in pagination controls - to be resolved upstream by
      * https://github.com/georgetown-cset/eto-ui-components/issues/361
@@ -528,7 +532,12 @@ const ListViewTable = ({
   // Filter the data for display.
   const { rows: dataForTable, numCompanies } = useMemo(() => {
     const companies = data.filter(row => filterRow(row, currentFilters));
-    const groups = currentFilters._groups.map(groupId => overallData.groups[groupId]);
+    const groups = currentFilters._groups
+      .map(groupId => ({
+        ...overallData.groups[groupId],
+        _class: "parat-company-group",
+        _group: true,
+      }));
 
     return {
       rows: [ ...companies, ...groups ],
@@ -832,6 +841,7 @@ const ListViewTable = ({
         footerData={footerData}
         minHeight={400}
         paginate={true}
+        pinRow="_group"
         ref={tableRef}
         rowsPerPageOptions={[10, 20, 50, 100]}
         showFooter={currentFilters.name.length > 0}
