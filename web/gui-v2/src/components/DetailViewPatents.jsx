@@ -83,14 +83,9 @@ const DetailViewPatents = ({
     },
   ];
 
-  const patentApplicationTableColumns = [
+  const patentTableColumns = [
     { display_name: "Subfield", key: "subfield" },
     { display_name: "Patent applications", key: "patents" },
-    { display_name: <>Growth ({overall.startPatentYear}&ndash;{overall.endPatentYear})</>, key: "growth" },
-  ];
-  const patentIndustryTableColumns = [
-    { display_name: "Subfield", key: "subfield" },
-    { display_name: "Patents granted", key: "patents" },
     { display_name: <>Growth ({overall.startPatentYear}&ndash;{overall.endPatentYear})</>, key: "growth" },
   ];
 
@@ -141,7 +136,7 @@ const DetailViewPatents = ({
       <StatGrid entries={statGridEntries} />
 
       <TableSection
-        columns={patentApplicationTableColumns}
+        columns={patentTableColumns}
         css={styles.section}
         data={patentApplicationAreas}
         id="top-patent-applications"
@@ -149,7 +144,7 @@ const DetailViewPatents = ({
       />
 
       <TableSection
-        columns={patentIndustryTableColumns}
+        columns={patentTableColumns}
         css={styles.section}
         data={patentIndustryAreas}
         id="top-patent-industries"
