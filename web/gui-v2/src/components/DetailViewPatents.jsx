@@ -85,7 +85,7 @@ const DetailViewPatents = ({
 
   const patentTableColumns = [
     { display_name: "Subfield", key: "subfield" },
-    { display_name: "Patents granted", key: "patents" },
+    { display_name: "Patent applications", key: "patents" },
     { display_name: <>Growth ({overall.startPatentYear}&ndash;{overall.endPatentYear})</>, key: "growth" },
   ];
 
