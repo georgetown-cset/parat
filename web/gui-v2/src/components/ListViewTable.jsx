@@ -28,6 +28,7 @@ import { tooltips } from '../static_data/tooltips';
 import {
   calculateMedian,
   commas,
+  debounce,
   useMultiState,
   useWindowSize,
 } from '../util';
@@ -240,6 +241,8 @@ const DATAKEYS_WITH_SUBKEYS = [
   "other_metrics",
 ];
 
+const TABLE_SORT_TOGGLE_DEBOUNCE_THRESHOLD = 400;
+
 const DEFAULT_COLUMNS = [];
 const DROPDOWN_COLUMNS = [];
 const SLIDER_COLUMNS = [];
@@ -440,6 +443,9 @@ const ListViewTable = ({
   const [sortParam, setSortParam] = useQueryParamString('sort', 'ai_pubs-desc');
   const [sortDir, setSortDir] = useState(() => (initialSortParam ?? sortParam).split('-')[1]);
   const [sortKey, setSortKey] = useState(() => (initialSortParam ?? sortParam).split('-')[0]);
+
+  const setSortDirDebounced = debounce(setSortDir, TABLE_SORT_TOGGLE_DEBOUNCE_THRESHOLD);
+  const setSortKeyDebounced = debounce(setSortKey, TABLE_SORT_TOGGLE_DEBOUNCE_THRESHOLD);
 
   // Using param name 'zz_columns' to keep the columns selection at the end of
   // the URL.  I'm theorizing that users are most likely to care about the other
@@ -847,8 +853,8 @@ const ListViewTable = ({
         showFooter={currentFilters.name.length > 0}
         sortByDir={sortDir}
         sortByKey={sortKey}
-        updateSortByDir={setSortDir}
-        updateSortByKey={setSortKey}
+        updateSortByDir={setSortDirDebounced}
+        updateSortByKey={setSortKeyDebounced}
       />
       <AddRemoveColumnDialog
         columnDefinitions={columnDefinitions}
