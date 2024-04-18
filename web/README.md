@@ -45,3 +45,11 @@ gatsby build
 ```
 
 And copy the files in the resulting `public` directory to the production bucket. 
+
+### Tooltips
+
+Tooltips are defined in [`src/static_data/tooltips.js`](https://github.com/georgetown-cset/parat/blob/master/web/gui-v2/src/static_data/tooltips.js),
+and can include React fragments and Emotion styles for design and layout.
+
+Tooltips use the same keys as their associated data elements (example: S&P 500
+data uses the `sp500` key, as does the S&P 500 explainer tooltip).

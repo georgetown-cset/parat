@@ -79,6 +79,11 @@ const tooltips = {
         For more information, review <ExternalLink href="https://eto.tech/tool-docs/parat#SOME_METHODOLOGY_SECTION">our documentation</ExternalLink>.
       </>
     ),
+    global500: (
+      <>
+        Zach_tooltip_tktktk
+      </>
+    ),
   },
 };
 
