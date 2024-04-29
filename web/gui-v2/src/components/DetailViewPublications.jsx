@@ -57,6 +57,9 @@ const DetailViewPublications = ({
 
   const aiResearchPercent = Math.round(1000 * data.articles.ai_publications.total / data.articles.all_publications.total) / 10;
 
+  const aiPubsGrowthTotal = data.articles.ai_publications_growth.total;
+  const aiPubsGrowthSign = (aiPubsGrowthTotal > 0) ? '+' : (aiPubsGrowthTotal < 0) ? '-' : '';
+
   const statGridEntries = [
     {
       key: "ai-papers",
@@ -75,7 +78,7 @@ const DetailViewPublications = ({
     },
     {
       key: "ai-research-growth",
-      stat: <>{commas(data.articles.ai_publications_growth.total, { maximumFractionDigits: 1 })}%</>,
+      stat: <>{aiPubsGrowthSign}{commas(aiPubsGrowthTotal, { maximumFractionDigits: 1 })}%</>,
       text: <>growth in {data.name}'s public AI research ({articleYearSpanNdash})</>,
     },
     {
