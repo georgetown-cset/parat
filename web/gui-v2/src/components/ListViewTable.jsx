@@ -232,6 +232,7 @@ const GROUPS_OPTIONS = Object.entries(overallData.groups)
       :
         v.name
     ),
+    text_str: v.name,
     val: `GROUP:${k}`,
   }));
 
@@ -782,14 +783,14 @@ const ListViewTable = ({
           const [key, values] = filter;
           const title = columnKeyMap[key];
           if ( DROPDOWN_COLUMNS.includes(key) ) {
-            return <li>{title}: <span>{values.join(", ")}</span></li>;
+            return <li key={key}>{title}: <span>{values.join(", ")}</span></li>;
           } else {
             const formatted = formatActiveSliderFilter(
               values,
               DEFAULT_FILTER_VALUES[key],
               SLIDER_GROWTH_COLUMNS.includes(key)
             );
-            return <li>{title}: <span>{formatted}</span></li>;
+            return <li key={key}>{title}: <span>{formatted}</span></li>;
           }
         })}
       </ul>
@@ -809,17 +810,37 @@ const ListViewTable = ({
           </Typography>
         </div>
         <div css={styles.buttonBarRight}>
-          <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip}>
-            <Button
-              css={styles.buttonBarButton}
-              disabled={activeFilters.length == 0}
-              onClick={resetFilters}
-            >
-              <CloseIcon />
-              <span className={classes([windowSize < 540 && "sr-only"])}>
-                Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
-              </span>
-            </Button>
+          <HelpTooltip
+            css={styles.activeFilterTooltip}
+            disableFocusListener={activeFilters.length === 0}
+            disableHoverListener={activeFilters.length === 0}
+            text={activeFiltersTooltip}
+          >
+            {/*
+              This span is needed because otherwise MUI complains that
+              ```
+              You are providing a disabled `button` child to the Tooltip component.
+              A disabled element does not fire events.
+              Tooltip needs to listen to the child element's events to display the title.
+              ```
+              even though that is exactly what we want (for the tooltip to not
+              fire if the button is disabled).  Following MUI's insistence and
+              adding the <span> then requires the `disableFocusListener` and
+              `disableHoverListener` props to be set as well, since otherwise
+              the tooltip will trigger on the disabled button.
+            */}
+            <span>
+              <Button
+                css={styles.buttonBarButton}
+                disabled={activeFilters.length === 0}
+                onClick={resetFilters}
+              >
+                <CloseIcon />
+                <span className={classes([windowSize < 540 && "sr-only"])}>
+                  Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
+                </span>
+              </Button>
+            </span>
           </HelpTooltip>
           <CSVLink data={exportData} filename="eto-parat-export.csv" headers={exportHeaders}>
             <Button

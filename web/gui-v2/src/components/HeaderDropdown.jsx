@@ -34,6 +34,7 @@ const HeaderDropdown = ({
     <Autocomplete
       className={appliedClassName}
       css={[styles.headerDropdown, appliedCss]}
+      getOptionLabel={opt => opt?.text_str ?? opt?.text ?? ""}
       id={appliedId}
       inputLabel={label}
       multiple={multiple}
