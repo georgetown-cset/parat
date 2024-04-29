@@ -78,7 +78,7 @@ const DetailViewPublications = ({
     },
     {
       key: "ai-research-growth",
-      stat: <>{aiPubsGrowthSign}{commas(data.articles.ai_publications_growth.total, { maximumFractionDigits: 1 })}%</>,
+      stat: <>{aiPubsGrowthSign}{commas(aiPubsGrowthTotal, { maximumFractionDigits: 1 })}%</>,
       text: <>growth in {data.name}'s public AI research ({articleYearSpanNdash})</>,
     },
     {
