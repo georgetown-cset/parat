@@ -19,8 +19,6 @@ from dataloader.airflow_utils.defaults import (
 )
 from dataloader.scripts.populate_documentation import update_table_descriptions
 
-from parat_scripts.aggregate_organizations import aggregate_organizations
-
 bucket = DATA_BUCKET
 initial_dataset = "parat_input"
 intermediate_dataset = "high_resolution_entities"
@@ -31,7 +29,7 @@ sql_dir = "sql/parat"
 schema_dir = "parat/schemas"
 tmp_dir = f"{production_dataset}/tmp"
 
-default_args = get_default_args()
+default_args = get_default_args(pocs=["Rebecca"])
 date = datetime.now().strftime("%Y%m%d")
 
 
@@ -123,12 +121,36 @@ with dag:
     # run aggregate_organizations python and load to GCS
     aggregated_table = "aggregated_organizations"
 
-    aggregate_organizations = PythonOperator(
+    aggregate_organizations = GKEStartPodOperator(
         task_id="aggregate_organizations",
-        op_kwargs={
-            "output_file": f"{aggregated_table}.jsonl"
-        },
-        python_callable=aggregate_organizations,
+        project_id=PROJECT_ID,
+        location=GCP_ZONE,
+        cluster_name="cc2-task-pool",
+        name="parat-aggregate-organizations",
+        cmds=["/bin/bash"],
+        arguments=["-c", (f"echo 'aggregating organizations!' ; rm -r ai || true ; "
+                          f"mkdir -p ai && "
+                          f"python3 aggregate_organizations.py --output_file ai/{aggregated_table}.jsonl --from_airflow")],
+        namespace="default",
+        image=f"us.gcr.io/{PROJECT_ID}/parat",
+        get_logs=True,
+        startup_timeout_seconds=300,
+        # see also https://cloud.google.com/composer/docs/how-to/using/using-kubernetes-pod-operator#affinity-config
+        affinity={
+            "nodeAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": {
+                    "nodeSelectorTerms": [{
+                        "matchExpressions": [{
+                            "key": "cloud.google.com/gke-nodepool",
+                            "operator": "In",
+                            "values": [
+                                "default-pool",
+                            ]
+                        }]
+                    }]
+                }
+            }
+        }
     )
 
     # load aggregated_organizations to BigQuery
