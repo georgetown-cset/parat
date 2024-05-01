@@ -1,9 +1,23 @@
--- WARNING: this query generates a table of > 35 B rows/5 TB of results
+-- WARNING: this query generates a table of > 69 B rows/11.9 TB of results as of 2024-05-01
 WITH no_ror_orgs AS (
-  SELECT DISTINCT
+  SELECT
     org_name
   FROM
-    literature.affiliations
+    staging_ai_companies_visualization.all_publications
+  WHERE
+    ror_id IS NULL
+  UNION DISTINCT
+  SELECT
+    assignee as org_name
+  FROM
+    staging_ai_companies_visualization.linked_ai_patents
+  WHERE
+    ror_id IS NULL
+  UNION DISTINCT
+  SELECT
+    assignee as org_name
+  FROM
+    staging_ai_companies_visualization.linked_ai_patents_grants
   WHERE
     ror_id IS NULL
 )
@@ -15,3 +29,4 @@ SELECT
 FROM high_resolution_entities.aggregated_organizations
 CROSS JOIN
 no_ror_orgs
+
