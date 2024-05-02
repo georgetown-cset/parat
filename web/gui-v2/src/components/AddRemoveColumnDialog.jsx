@@ -19,7 +19,7 @@ const styles = {
   columnDialogContents: css`
     font-family: GTZirkonLight;
     padding: 0 0.5rem 0.5rem;
-    width: 400px;
+    width: 420px;
   `,
   columnDialogTitle: css`
     font-family: GTZirkonRegular;
@@ -103,7 +103,7 @@ const AddRemoveColumnDialog = ({
         <div css={styles.columnDialogList}>
           {
             columnDefinitions.map((colDef) => (
-              <label css={styles.plainLabel} key={colDef.key}>
+              <label css={styles.plainLabel} key={colDef.key} aria-label={colDef.title}>
                 <Checkbox
                   checked={columnsInternal[colDef.key]}
                   onChange={(evt) => {
