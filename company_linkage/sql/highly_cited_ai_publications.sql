@@ -1,5 +1,5 @@
 WITH
-  ai_pubs AS (
+ai_pubs AS (
   SELECT
     merged_id,
     ror_id,
@@ -8,9 +8,9 @@ WITH
     year
   FROM
     staging_ai_companies_visualization.ai_publications
-  ),
+),
 
-  citation_counts AS (
+citation_counts AS (
   SELECT
     DISTINCT ref_id AS merged_id,
     COUNT(DISTINCT
@@ -32,9 +32,9 @@ WITH
     org_name,
     country,
     year
-  ),
+),
 
-  get_top_cited AS (
+get_top_cited AS (
   SELECT
     DISTINCT merged_id,
     citation_count,
@@ -46,15 +46,46 @@ WITH
     year
   FROM
     citation_counts
-  )
+),
 
-SELECT
-  DISTINCT merged_id,
-  ror_id,
-  org_name,
-  country,
+unnested_rors AS (
+  SELECT
+    CSET_id,
+    r as ror_id
+  FROM
+    high_resolution_entities.aggregated_organizations
+  CROSS JOIN UNNEST(ror_id) as r
+),
+
+top_cited AS (
+  SELECT
+    DISTINCT merged_id,
+    ror_id,
+    org_name,
+    country,
+    year
+  FROM
+    get_top_cited
+  WHERE
+    top_cited IS true
+)
+
+SELECT DISTINCT
+  CSET_id,
+  merged_id,
   year
 FROM
-  get_top_cited
-WHERE
-  top_cited IS true
+  unnested_rors
+INNER JOIN
+  top_cited
+USING (ror_id)
+UNION DISTINCT
+SELECT
+  CSET_id,
+  merged_id,
+  year
+FROM
+  staging_ai_companies_visualization.org_name_matches
+INNER JOIN
+  top_cited
+USING (org_name)
