@@ -100,7 +100,7 @@ const columnWidth = (width, isSlider=false) => {
  */
 const generateSliderColDef = (dataKey, dataSubkey, extractFn, formatFn) => {
   return {
-    css: columnWidth(120, true),
+    css: columnWidth(135, true),
     dataKey,
     dataSubkey,
     extract: extractFn ?? ((_val, row) => {
