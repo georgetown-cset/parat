@@ -7,4 +7,4 @@ FROM
 LEFT JOIN
   UNNEST(regex) as r
 WHERE
-  REGEXP_CONTAINS(org_name, r)
+  REGEXP_CONTAINS(org_name, CONCAT("(?i)", r))
