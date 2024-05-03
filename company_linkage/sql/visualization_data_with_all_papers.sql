@@ -17,7 +17,7 @@ WITH
   -- Join the two together using the CSET id
 SELECT
   viz_data.*,
-  all_pubs,
+  COALESCE(all_pubs, 0) as all_pubs,
   all_pubs_by_year,
 FROM
   viz_data

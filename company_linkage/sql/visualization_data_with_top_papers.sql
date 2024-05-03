@@ -17,7 +17,7 @@ WITH
   -- Join the two together using the CSET id
 SELECT
   viz_data.*,
-  ai_pubs_in_top_conferences,
+  COALESCE(ai_pubs_in_top_conferences, 0) AS ai_pubs_in_top_conferences,
   ai_pubs_in_top_conferences_by_year,
 FROM
   viz_data

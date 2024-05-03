@@ -4,17 +4,17 @@ WITH
   SELECT
     *
   FROM
-    staging_ai_companies_visualization.all_patent_counts),
+    staging_ai_companies_visualization.linked_all_patents),
   pattable AS (
     -- Getting the count of patents
   SELECT
     CSET_id,
-    priority_year,
+    year,
     COUNT(DISTINCT family_id) AS all_patents,
   FROM allpats
   GROUP BY
     CSET_id,
-    priority_year),
+    year),
   aggregated as (
     SELECT
       CSET_id,
@@ -27,10 +27,10 @@ WITH
     -- Get the counts by year
   SELECT
     CSET_id,
-    ARRAY_AGG(STRUCT(priority_year,
+    ARRAY_AGG(STRUCT(year,
         all_patents)
     ORDER BY
-      priority_year) AS all_patents_by_year,
+      year) AS all_patents_by_year,
   FROM
     high_resolution_entities.aggregated_organizations
   LEFT JOIN

@@ -17,7 +17,7 @@ WITH
   -- Join the two together using the CSET id
 SELECT
   viz_data.*,
-  highly_cited_ai_pubs,
+  COALESCE(highly_cited_ai_pubs, 0) as highly_cited_ai_pubs,
   highly_cited_ai_pubs_by_year,
 FROM
   viz_data

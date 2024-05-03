@@ -10,8 +10,8 @@ WITH year_counts AS (
 
 SELECT
   CSET_id,
-  SUM(year_count) as all_pubs,
-  ARRAY_AGG(STRUCT(year, year_count)) AS all_pubs_by_year
+  SUM(year_count) as ai_pubs_in_top_conferences,
+  ARRAY_AGG(STRUCT(year, year_count)) AS ai_pubs_in_top_conferences_by_year
 FROM
   year_counts
 GROUP BY
