@@ -144,7 +144,7 @@ with dag:
                             "key": "cloud.google.com/gke-nodepool",
                             "operator": "In",
                             "values": [
-                                "default-pool",
+                                "parat-pool",
                             ]
                         }]
                     }]
