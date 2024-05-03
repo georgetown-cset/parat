@@ -812,35 +812,18 @@ const ListViewTable = ({
         <div css={styles.buttonBarRight}>
           <HelpTooltip
             css={styles.activeFilterTooltip}
-            disableFocusListener={activeFilters.length === 0}
-            disableHoverListener={activeFilters.length === 0}
-            text={activeFiltersTooltip}
+            text={activeFilters.length > 0 && activeFiltersTooltip}
           >
-            {/*
-              This span is needed because otherwise MUI complains that
-              ```
-              You are providing a disabled `button` child to the Tooltip component.
-              A disabled element does not fire events.
-              Tooltip needs to listen to the child element's events to display the title.
-              ```
-              even though that is exactly what we want (for the tooltip to not
-              fire if the button is disabled).  Following MUI's insistence and
-              adding the <span> then requires the `disableFocusListener` and
-              `disableHoverListener` props to be set as well, since otherwise
-              the tooltip will trigger on the disabled button.
-            */}
-            <span>
-              <Button
-                css={styles.buttonBarButton}
-                disabled={activeFilters.length === 0}
-                onClick={resetFilters}
-              >
-                <CloseIcon />
-                <span className={classes([windowSize < 540 && "sr-only"])}>
-                  Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
-                </span>
-              </Button>
-            </span>
+            <Button
+              css={styles.buttonBarButton}
+              disabled={activeFilters.length === 0}
+              onClick={resetFilters}
+            >
+              <CloseIcon />
+              <span className={classes([windowSize < 540 && "sr-only"])}>
+                Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
+              </span>
+            </Button>
           </HelpTooltip>
           <CSVLink data={exportData} filename="eto-parat-export.csv" headers={exportHeaders}>
             <Button
