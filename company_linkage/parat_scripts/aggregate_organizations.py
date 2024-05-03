@@ -428,8 +428,8 @@ def aggregate_organizations(output_file, local=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("output_file", type=str, help="A jsonl file for writing output data to create new tables")
-    parser.add_argument("from_airflow", type=bool, default=False, action="store_true",
+    parser.add_argument("--output_file", required=True, type=str, help="A jsonl file for writing output data to create new tables")
+    parser.add_argument("--from_airflow", type=bool, default=False, action="store_true",
                         help="If true, will upload output to GCS")
     args = parser.parse_args()
     if not args.output_file.endswith(".jsonl"):
