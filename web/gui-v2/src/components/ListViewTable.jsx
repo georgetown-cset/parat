@@ -232,6 +232,7 @@ const GROUPS_OPTIONS = Object.entries(overallData.groups)
       :
         v.name
     ),
+    text_str: v.name,
     val: `GROUP:${k}`,
   }));
 
@@ -782,14 +783,14 @@ const ListViewTable = ({
           const [key, values] = filter;
           const title = columnKeyMap[key];
           if ( DROPDOWN_COLUMNS.includes(key) ) {
-            return <li>{title}: <span>{values.join(", ")}</span></li>;
+            return <li key={key}>{title}: <span>{values.join(", ")}</span></li>;
           } else {
             const formatted = formatActiveSliderFilter(
               values,
               DEFAULT_FILTER_VALUES[key],
               SLIDER_GROWTH_COLUMNS.includes(key)
             );
-            return <li>{title}: <span>{formatted}</span></li>;
+            return <li key={key}>{title}: <span>{formatted}</span></li>;
           }
         })}
       </ul>
@@ -809,10 +810,13 @@ const ListViewTable = ({
           </Typography>
         </div>
         <div css={styles.buttonBarRight}>
-          <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip}>
+          <HelpTooltip
+            css={styles.activeFilterTooltip}
+            text={activeFilters.length > 0 && activeFiltersTooltip}
+          >
             <Button
               css={styles.buttonBarButton}
-              disabled={activeFilters.length == 0}
+              disabled={activeFilters.length === 0}
               onClick={resetFilters}
             >
               <CloseIcon />
