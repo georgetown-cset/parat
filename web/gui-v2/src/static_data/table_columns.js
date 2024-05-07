@@ -581,19 +581,40 @@ const columnDefinitions = [
     ...generateSliderColDef("patents", "Transportation"),
     tooltip: "Zach_tktk",
   },
-
   {
     title: "AI jobs",
     key: "ai_jobs",
     aggregateType: "median",
-    ...generateSliderColDef("other_metrics", "ai_jobs"),
-    tooltip: "Zach_tktk",
+    ...generateSliderColDef(
+      "other_metrics",
+      "ai_jobs",
+      undefined, // Use default extract function
+      (_val, row) => {
+        if ( row?._group || row.linkedin.length > 0 ) {
+          return <CellStat data={row.other_metrics.ai_jobs} />;
+        } else {
+          return <CellStat data={{ total: null }} />
+        }
+      },
+    ),
+    tooltip: "Zach_tktk"
   },
   {
     title: "Tech Tier 1 jobs",
     key: "tt1_jobs",
     aggregateType: "median",
-    ...generateSliderColDef("other_metrics", "tt1_jobs"),
+    ...generateSliderColDef(
+      "other_metrics",
+      "tt1_jobs",
+      undefined, // Use default extract function
+      (_val, row) => {
+        if ( row?._group || row.linkedin.length > 0 ) {
+          return <CellStat data={row.other_metrics.tt1_jobs} />;
+        } else {
+          return <CellStat data={{ total: null }} />
+        }
+      },
+    ),
     initialCol: true,
     tooltip: "Zach_tktk",
   },

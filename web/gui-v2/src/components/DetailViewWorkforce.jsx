@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Alert } from '@eto/eto-ui-components';
+
 import HeaderWithLink from './HeaderWithLink';
 import StatBox from './StatBox';
 import StatWrapper from './StatWrapper';
@@ -17,23 +19,29 @@ const DetailViewWorkforce = ({
     <>
       <HeaderWithLink title="Workforce" />
 
-      <StatWrapper>
-        { otherMetricsWorkforceKeys.map((key) => (
-          <StatBox
-            description={
-              <>
-                From {yearSpanText}, {data.name} here is some explanatory text
-                describing how they had NUMBER jobs of the specified type
-                (#{data.other_metrics[key].rank} rank in PARAT
-                {data.in_sandp_500 && <>, #NUMBER in the S&P500</>})
-              </>
-            }
-            key={key}
-            label={otherMetricMap[key]}
-            value={data.other_metrics[key].total}
-          />
-        ))}
-      </StatWrapper>
+      {data.linkedin.length > 0 ?
+        <StatWrapper>
+          { otherMetricsWorkforceKeys.map((key) => (
+            <StatBox
+              description={
+                <>
+                  From {yearSpanText}, {data.name} here is some explanatory text
+                  describing how they had NUMBER jobs of the specified type
+                  (#{data.other_metrics[key].rank} rank in PARAT
+                  {data.in_sandp_500 && <>, #NUMBER in the S&P500</>})
+                </>
+              }
+              key={key}
+              label={otherMetricMap[key]}
+              value={data.other_metrics[key].total}
+            />
+          ))}
+        </StatWrapper>
+      :
+        <Alert>
+          ZACH_TKTK Note about no jobs due to no LinkedIn data
+        </Alert>
+      }
     </>
   );
 };
