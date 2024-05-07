@@ -4,22 +4,16 @@ WITH no_ror_orgs AS (
     org_name
   FROM
     staging_ai_companies_visualization.all_publications
-  WHERE
-    ror_id IS NULL
   UNION DISTINCT
   SELECT
     assignee as org_name
   FROM
     staging_ai_companies_visualization.linked_ai_patents
-  WHERE
-    ror_id IS NULL
   UNION DISTINCT
   SELECT
     assignee as org_name
   FROM
     staging_ai_companies_visualization.linked_ai_patents_grants
-  WHERE
-    ror_id IS NULL
 )
 
 SELECT
