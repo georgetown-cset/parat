@@ -69,17 +69,17 @@ const DetailViewPatents = ({
     {
       key: "ai-patent-growth",
       stat: <>{commas(data.patents.ai_patents_growth.total, { maximumFractionDigits: 1 })}%</>,
-      text: <>growth in {data.name}'s AI patenting ({yearSpanNdash})</>,
+      text: <>growth in {data.name}'s AI-related patenting ({yearSpanNdash})</>,
     },
     {
       key: "ai-patent-grants",
       stat: <>{commas(data.patents.ai_patents_grants.total)}</>,
-      text: <div>AI patents were <strong>granted</strong> to {data.name} ({yearSpanNdash})</div>,
+      text: <div>AI-related patents were <strong>granted</strong> to {data.name} ({yearSpanNdash})</div>,
     },
     {
       key: "ai-focused-percent",
       stat: <>{aiPatentPercent}%</>,
-      text: <>of {data.name}'s total patenting was AI-focused</>,
+      text: <>of {data.name}'s total patenting was AI-related</>,
     },
   ];
 
@@ -130,7 +130,7 @@ const DetailViewPatents = ({
 
       <TextAndBigStat
         smallText={<>Between {overall.years[0]} and {overall.years[overall.years.length-1]}, {data.name} obtained</>}
-        bigText={<>{commas(data.patents.ai_patents.total)} AI patents</>}
+        bigText={<>{commas(data.patents.ai_patents.total)} AI-related patents</>}
       />
 
       <StatGrid entries={statGridEntries} />
