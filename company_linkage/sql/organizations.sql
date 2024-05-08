@@ -106,7 +106,7 @@ FROM (
   LEFT JOIN
     gcp_cset_ror.ror
   ON
-    grid_joined.grid = external_ids.GRID.all
+    TRIM(grid_joined.grid) = external_ids.GRID.all
   GROUP BY
     CSET_id,
     name,

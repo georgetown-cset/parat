@@ -10,7 +10,6 @@ gsutil cp airtable_schemas/parat_preannotation/* gs://airflow-data-exchange-deve
 gsutil cp airtable_schemas/parat_validate/* gs://airflow-data-exchange-development/schemas/airtable_to_bq/parat_validate/
 
 gsutil cp parat_data_dag.py gs://us-east1-production-cc2-202-b42a7a54-bucket/dags/
-gsutil cp aggregate_organizations.py gs://us-east1-production-cc2-202-b42a7a54-bucket/dags/
 gsutil cp sequences/* gs://us-east1-production-cc2-202-b42a7a54-bucket/dags/sequences/parat/
 gsutil rm gs://us-east1-production-cc2-202-b42a7a54-bucket/dags/sql/parat/*
 gsutil cp sql/* gs://us-east1-production-cc2-202-b42a7a54-bucket/dags/sql/parat/
