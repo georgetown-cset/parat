@@ -108,15 +108,14 @@ def get_exchange_link(market_key: str) -> dict:
         return {"market_key": market_key, "link": gf_link}
 
 
-def get_permid_sector(permids: list) -> tuple:
+def get_permid_sector(permids: list) -> str:
     """
     Get first permid sector available in permids for a PARAT company
     :param permids: List of permids a company may have
-    :return: First economic and business sector from PERMID, or "Unknown" if we couldn't find one
+    :return: First business sector from PERMID, or "Unknown" if we couldn't find it
     """
     access_token = os.environ.get("PERMID_API_KEY")
-    economic_sector_key = "Primary Economic Sector"
-    business_sector_key = "Primary Business Sector"
+    sector_key = "Primary Business Sector"
     if not access_token:
         raise ValueError("Please specify your permid key using an environment variable called PERMID_API_KEY")
     for permid in permids:
@@ -126,13 +125,10 @@ def get_permid_sector(permids: list) -> tuple:
         if resp.status_code != 200:
             print(f"Unexpected status code {resp.status_code} for {permid}")
         metadata = resp.json()
-        economic_sector = metadata.get(economic_sector_key)
-        business_sector = metadata.get(business_sector_key)
-        if economic_sector and business_sector:
-            return economic_sector[0], business_sector[0]
-        elif economic_sector:
-            print(f"No business sector available for {permid}")
-    return "Unknown", "Unknown"
+        sector = metadata.get(sector_key)
+        if sector:
+            return sector[0]
+    return "Unknown"
 
 
 def retrieve_raw(get_links: bool) -> None:
@@ -726,10 +722,9 @@ def add_sectors(rows: list, refresh: bool) -> None:
     if refresh:
         sectors = {}
         for row in rows:
-            econ_sector, business_sector = get_permid_sector(row.pop("permid"))
-            row["sector"] = econ_sector
-            row["business_sector"] = business_sector
-            sectors[row["cset_id"]] = {"economic": econ_sector, "business": business_sector}
+            sector = get_permid_sector(row.pop("permid"))
+            row["sector"] = sector
+            sectors[row["cset_id"]] = sector
         with open(SECTOR_FI, mode="w") as f:
             f.write(json.dumps(sectors))
     else:
@@ -737,8 +732,7 @@ def add_sectors(rows: list, refresh: bool) -> None:
             sectors = json.loads(f.read())
         for row in rows:
             cset_id = str(row["cset_id"])
-            row["sector"] = sectors[cset_id]["economic"]
-            row["business_sector"] = sectors[cset_id]["business"]
+            row["sector"] = sectors[cset_id]
             row.pop("permid")
 
 
