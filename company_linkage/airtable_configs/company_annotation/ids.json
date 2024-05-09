@@ -1,0 +1,16 @@
+{
+  "airtable_table": "IDs",
+  "airtable_base": "appqtfVHf5tIRsfkI",
+  "schema_name": "ids",
+  "merge_query": "default_merge",
+  "production_table": "ids",
+  "column_map": {
+    "Organization": "EXCLUDE",
+    "Organization ID": "parat_id",
+    "ID": "external_id",
+    "Type": "source",
+    "[TEMP - 2024 regex review] Validation status (from Organization)": "EXCLUDE",
+    "Include in PARAT (from Organization)": "EXCLUDE",
+    "[TEMP - 2024 regex review] Validator (from Organization)": "EXCLUDE"
+  }
+}

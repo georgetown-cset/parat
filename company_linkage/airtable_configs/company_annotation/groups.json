@@ -1,0 +1,12 @@
+{
+  "airtable_table": "Groups",
+  "airtable_base": "appqtfVHf5tIRsfkI",
+  "schema_name": "groups",
+  "merge_query": "default_merge",
+  "production_table": "parentage",
+  "column_map": {
+    "Group": "name",
+    "Notes": "EXCLUDE",
+    "Main": "parat_ids"
+  }
+}
