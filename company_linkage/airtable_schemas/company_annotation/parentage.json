@@ -21,6 +21,6 @@
     "description": "Parent through acquisition",
     "mode": "NULLABLE",
     "name": "is_acquisition_parent",
-    "type": "STRING"
+    "type": "BOOLEAN"
   }
 ]

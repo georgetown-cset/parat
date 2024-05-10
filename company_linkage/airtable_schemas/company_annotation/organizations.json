@@ -48,12 +48,6 @@
     "type": "STRING"
   },
   {
-    "description": "Status of organization annotation",
-    "mode": "NULLABLE",
-    "name": "compilation_status",
-    "type": "STRING"
-  },
-  {
     "description": "Whether the organization should be included in PARAT",
     "mode": "NULLABLE",
     "name": "include",

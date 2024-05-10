@@ -2,7 +2,7 @@
   "airtable_table": "Main",
   "airtable_base": "appqtfVHf5tIRsfkI",
   "schema_name": "organizations",
-  "merge_query": "default_merge",
+  "merge_query": "organizations_merge",
   "production_table": "organizations",
   "include_airtable_id": true,
   "column_map": {
@@ -20,7 +20,7 @@
     "IDs": "EXCLUDE",
     "Aliases": "EXCLUDE",
     "Legacy CSET ID": "legacy_cset_id",
-    "Compilation status": "compilation_status",
+    "Compilation status": "EXCLUDE",
     "Include in PARAT": "include",
     "[TEMP - 2024 regex review] Validation status": "EXCLUDE",
     "[TEMP - 2024 regex review] Validator": "EXCLUDE",
