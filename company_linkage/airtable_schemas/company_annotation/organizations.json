@@ -1,0 +1,62 @@
+[
+  {
+    "description": "Name of the organization",
+    "mode": "REQUIRED",
+    "name": "name",
+    "type": "STRING"
+  },
+  {
+    "description": "CSET identifier for the organization",
+    "mode": "NULLABLE",
+    "name": "CSET_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Country where the organization is located",
+    "mode": "NULLABLE",
+    "name": "country",
+    "type": "STRING"
+  },
+  {
+    "description": "City where the organization is located",
+    "mode": "NULLABLE",
+    "name": "city",
+    "type": "STRING"
+  },
+  {
+    "description": "State or province where the organization is located",
+    "mode": "NULLABLE",
+    "name": "state_or_province",
+    "type": "STRING"
+  },
+  {
+    "description": "Organization's website",
+    "mode": "NULLABLE",
+    "name": "website",
+    "type": "STRING"
+  },
+  {
+    "description": "Legacy CSET id",
+    "mode": "NULLABLE",
+    "name": "legacy_cset_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Status of organization annotation",
+    "mode": "NULLABLE",
+    "name": "compilation_status",
+    "type": "STRING"
+  },
+  {
+    "description": "Whether the organization should be included in PARAT",
+    "mode": "NULLABLE",
+    "name": "include",
+    "type": "BOOLEAN"
+  },
+  {
+    "description": "Last modified date",
+    "mode": "NULLABLE",
+    "name": "last_modified",
+    "type": "STRING"
+  }
+]

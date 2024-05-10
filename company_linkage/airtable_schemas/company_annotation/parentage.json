@@ -1,0 +1,26 @@
+[
+  {
+    "description": "CSET identifier for the organization",
+    "mode": "REPEATED",
+    "name": "CSET_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "CSET identifier for the parent organization",
+    "mode": "REPEATED",
+    "name": "parent_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Name of the parent organization",
+    "mode": "NULLABLE",
+    "name": "parent_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Parent through acquisition",
+    "mode": "NULLABLE",
+    "name": "is_acquisition_parent",
+    "type": "STRING"
+  }
+]

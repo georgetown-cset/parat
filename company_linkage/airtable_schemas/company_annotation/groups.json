@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Name of the group",
+    "mode": "REQUIRED",
+    "name": "name",
+    "type": "STRING"
+  },
+  {
+    "description": "CSET ids included in the group",
+    "mode": "REPEATED",
+    "name": "CSET_ids",
+    "type": "STRING"
+  }
+]

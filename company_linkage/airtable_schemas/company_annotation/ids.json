@@ -1,0 +1,20 @@
+[
+  {
+    "description": "CSET identifier for the organization",
+    "mode": "REPEATED",
+    "name": "CSET_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "External identifier for the organization",
+    "mode": "NULLABLE",
+    "name": "external_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Source of the external identifier",
+    "mode": "NULLABLE",
+    "name": "source",
+    "type": "STRING"
+  }
+]

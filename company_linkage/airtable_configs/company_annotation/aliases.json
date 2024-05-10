@@ -2,12 +2,12 @@
   "airtable_table": "Aliases",
   "airtable_base": "appqtfVHf5tIRsfkI",
   "schema_name": "aliases",
-  "merge_query": "default_merge",
+  "merge_query": "extract_id_merge",
   "production_table": "aliases",
   "column_map": {
     "Row": "alias",
     "Organization": "EXCLUDE",
-    "Organization ID": "parat_id",
+    "Organization ID": "CSET_id",
     "Alias language": "language"
   }
 }

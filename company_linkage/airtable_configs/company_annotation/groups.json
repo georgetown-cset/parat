@@ -3,10 +3,10 @@
   "airtable_base": "appqtfVHf5tIRsfkI",
   "schema_name": "groups",
   "merge_query": "default_merge",
-  "production_table": "parentage",
+  "production_table": "groups",
   "column_map": {
     "Group": "name",
     "Notes": "EXCLUDE",
-    "Main": "parat_ids"
+    "Main": "CSET_ids"
   }
 }
