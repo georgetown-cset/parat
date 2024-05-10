@@ -12,6 +12,12 @@
     "type": "INTEGER"
   },
   {
+    "description": "Airtable's identifier for the organization",
+    "mode": "NULLABLE",
+    "name": "airtable_id",
+    "type": "STRING"
+  },
+  {
     "description": "Country where the organization is located",
     "mode": "NULLABLE",
     "name": "country",

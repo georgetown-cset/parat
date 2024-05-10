@@ -2,7 +2,7 @@
   "airtable_table": "Groups",
   "airtable_base": "appqtfVHf5tIRsfkI",
   "schema_name": "groups",
-  "merge_query": "default_merge",
+  "merge_query": "groups_merge",
   "production_table": "groups",
   "column_map": {
     "Group": "name",

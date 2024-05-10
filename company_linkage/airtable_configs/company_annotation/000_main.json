@@ -4,6 +4,7 @@
   "schema_name": "organizations",
   "merge_query": "default_merge",
   "production_table": "organizations",
+  "include_airtable_id": true,
   "column_map": {
     "Organization": "EXCLUDE",
     "Name": "name",
