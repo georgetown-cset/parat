@@ -7,6 +7,7 @@ import {
   Close as CloseIcon,
   Download as DownloadIcon,
   FilterList as FilterListIcon,
+  Help as HelpIcon,
 } from "@mui/icons-material";
 import {
   Button,
@@ -85,6 +86,15 @@ const styles = {
   activeFiltersList: css`
     margin: 0;
     padding-left: 1rem;
+  `,
+  activeFiltersText: css`
+    align-items: center;
+    display: flex;
+
+    svg {
+      fill: var(--bright-blue);
+      height: 16px;
+    }
   `,
   buttonBarRight: css`
     margin-left: auto;
@@ -805,7 +815,12 @@ const ListViewTable = ({
             {windowSize >= 430 && <>Viewing </>}
             {numCompanies !== totalRows ? `${numCompanies} of ${totalRows}` : totalRows} companies
             {activeFilters.length > 0 &&
-              <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip} />
+              <HelpTooltip css={styles.activeFilterTooltip} text={activeFiltersTooltip}>
+                <span css={styles.activeFiltersText}>
+                  ({activeFilters.length} filters active)
+                  <HelpIcon />
+                </span>
+              </HelpTooltip>
             }
           </Typography>
         </div>
@@ -821,7 +836,7 @@ const ListViewTable = ({
             >
               <CloseIcon />
               <span className={classes([windowSize < 540 && "sr-only"])}>
-                Reset filters {activeFilters.length > 0 && <span style={{fontFamily: "GTZirkonRegular"}}>({activeFilters.length} active)</span>}
+                Reset filters
               </span>
             </Button>
           </HelpTooltip>
