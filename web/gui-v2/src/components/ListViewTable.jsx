@@ -196,10 +196,11 @@ const styles = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4rem 1rem;
+    padding: 3rem 1rem;
 
     big {
       font-size: 150%;
+      font-weight: bold;
     }
   `,
 };
@@ -863,6 +864,12 @@ const ListViewTable = ({
         columns={columns}
         css={styles.table}
         data={dataForTable}
+        fallbackContent={
+          <div css={styles.fallbackContent}>
+            <big>No results</big>
+            Try adjusting your filters
+          </div>
+        }
         footerData={footerData}
         minHeight={400}
         paginate={true}
