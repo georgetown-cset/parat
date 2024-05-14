@@ -147,11 +147,11 @@ const DetailViewPublications = ({
             data.articles[aiSubfield].counts
           ],
           data.groups.sp500 && [
-            "S&P 500",
+            "S&P 500 (average)",
             overall.groups.sp500.articles[aiSubfield].counts
           ],
           data.groups.global500 && [
-            "Fortune Global 500",
+            "Fortune Global 500 (average)",
             overall.groups.global500.articles[aiSubfield].counts
           ],
         ]}
@@ -182,11 +182,11 @@ const DetailViewPublications = ({
             data.articles.ai_pubs_top_conf.counts
           ],
           data.groups.sp500 && [
-            "S&P 500",
+            "S&P 500 (average)",
             overall.groups.sp500.articles.ai_pubs_top_conf.counts
           ],
           data.groups.global500 && [
-            "Fortune Global 500",
+            "Fortune Global 500 (average)",
             overall.groups.global500.articles.ai_pubs_top_conf.counts
           ],
         ]}
