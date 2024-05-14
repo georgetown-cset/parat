@@ -143,7 +143,7 @@ const DetailViewPublications = ({
         css={styles.section}
         data={[
           [
-            `${aiSubfieldOptions.find(e => e.val === aiSubfield)?.text} research at ${data.name}`,
+            `AI research at ${data.name}: ${aiSubfieldOptions.find(e => e.val === aiSubfield)?.text}`,
             data.articles[aiSubfield].counts
           ],
           data.groups.sp500 && [
