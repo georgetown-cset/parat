@@ -187,16 +187,8 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef(
       "articles",
-      "all_publications",
-      ((_val, row) => {
-        const data = row.articles.all_publications;
-        return data.counts.slice(startArticleIx, endArticleIx+1).reduce((acc, curr) => acc + curr);
-      }),
-      (val, row, extract) => {
-        return <CellStat data={{ total: extract(val, row) }} />;
-      },
+      "all_pubs_5yr"
     ),
-    isDerived: true,
     tooltip: "Zach_tktk",
   },
   {
@@ -313,16 +305,8 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef(
       "patents",
-      "all_patents",
-      ((_val, row) => {
-        const data = row.patents.all_patents;
-        return data.counts.slice(startPatentIx, endPatentIx+1).reduce((acc, curr) => acc + curr);
-      }),
-      (val, row, extract) => {
-        return <CellStat data={{ total: extract(val, row) }} />;
-      },
+      "all_patents_5yr"
     ),
-    isDerived: true,
     tooltip: "Zach_tktk",
   },
   {
