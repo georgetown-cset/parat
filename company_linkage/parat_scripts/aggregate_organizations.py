@@ -366,9 +366,9 @@ class OrganizationAggregator:
             org_info.add_permid(permid)
         # We add crunchbase as a child if it's a child org; otherwise we add it as a primary crunchbase
         if org["CSET_id"] in self.child_to_parent:
-            org_info.add_child_crunchbase(org["crunchbase"]["crunchbase_uuid"], org["crunchbase"]["crunchbase_url"])
+            org_info.add_child_crunchbase(org["crunchbase_uuid"], org["crunchbase_url"])
         else:
-            org_info.add_crunchbase(org["crunchbase"]["crunchbase_uuid"], org["crunchbase"]["crunchbase_url"])
+            org_info.add_crunchbase(org["crunchbase_uuid"], org["crunchbase_url"])
         for ror in org["ror_id"]:
             org_info.add_ror(ror)
         org_info.add_regex(org["regex"])
