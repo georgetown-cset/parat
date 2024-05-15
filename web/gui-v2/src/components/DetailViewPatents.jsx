@@ -129,7 +129,7 @@ const DetailViewPatents = ({
       <HeaderWithLink title="Patents" />
 
       <TextAndBigStat
-        smallText={<>Between {overall.years[0]} and {overall.years[overall.years.length-1]}, {data.name} obtained</>}
+        smallText={<>Between {overall.years[0]} and {overall.years[overall.years.length-1]}, {data.name} filed</>}
         bigText={<>{commas(data.patents.ai_patents.total)} AI-related patents</>}
       />
 
