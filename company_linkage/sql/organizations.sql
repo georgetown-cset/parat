@@ -2,7 +2,7 @@ WITH sp_500 AS (
   SELECT DISTINCT
     CSET_id
   FROM
-    parat_input_test.groups
+    parat_input.groups
   where
     name = "S&P 500"
 ),
@@ -10,7 +10,7 @@ global_500 AS (
   SELECT DISTINCT
     CSET_id
   FROM
-    parat_input_test.groups
+    parat_input.groups
   where
     name = "Global 500"
 )
@@ -75,21 +75,21 @@ FROM (
     sp_500.CSET_id IS NOT NULL AS in_sandp_500,
     global_500.CSET_id IS NOT NULL AS in_fortune_global_500
   FROM
-    parat_input_test.organizations
+    parat_input.organizations
   LEFT JOIN
-    parat_input_test.aliases
+    parat_input.aliases
   USING
     (CSET_id)
   LEFT JOIN
-    parat_input_test.parentage
+    parat_input.parentage
   USING
     (CSET_id)
   LEFT JOIN
-    parat_input_test.ids
+    parat_input.ids
   USING
     (CSET_id)
   LEFT JOIN
-    parat_input_test.tickers
+    parat_input.tickers
   USING
     (CSET_id)
   LEFT JOIN
