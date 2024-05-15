@@ -10,7 +10,7 @@
     "Parent": "EXCLUDE",
     "Parent ID": "parent_id",
     "Parent (text)": "parent_name",
-    "Parent through acquisition": "is_acquisition_parent",
+    "Parent through acquisition": "parent_acquisition",
     "Annotator comments": "EXCLUDE"
   }
 }

@@ -11,7 +11,7 @@
     "ID": "CSET_id",
     "Country": "country",
     "City": "city",
-    "State/province": "state_or_province",
+    "State/province": "province_state",
     "Website": "website",
     "Groups": "EXCLUDE",
     "Ticker": "EXCLUDE",

@@ -32,7 +32,7 @@
   {
     "description": "State or province where the organization is located",
     "mode": "NULLABLE",
-    "name": "state_or_province",
+    "name": "province_state",
     "type": "STRING"
   },
   {

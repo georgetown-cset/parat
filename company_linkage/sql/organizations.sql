@@ -50,13 +50,13 @@ FROM (
     CSET_id,
     organizations.name,
     STRUCT(city,
-      state_or_province,
+      province_state,
       organizations.country) AS location,
     website,
     ARRAY_AGG(STRUCT(aliases.language,
         alias)) AS aliases,
     ARRAY_AGG(STRUCT(CASE
-          WHEN parentage.is_acquisition_parent IS TRUE THEN TRUE
+          WHEN parentage.parent_acquisition IS TRUE THEN TRUE
         ELSE
         FALSE
       END
@@ -108,7 +108,7 @@ FROM (
     CSET_id,
     name,
     city,
-    state_or_province,
+    province_state,
     organizations.country,
     website,
     in_sandp_500,
