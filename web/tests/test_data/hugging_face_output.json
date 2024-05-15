@@ -284,6 +284,21 @@
       "total": 13,
       "isTopResearch": false
     },
+    "ai_pubs_last_full_year": {
+      "counts": [],
+      "total": 8,
+      "isTopResearch": false
+    },
+    "ai_pubs_percent": {
+      "counts": [],
+      "total": 78.3,
+      "isTopResearch": false
+    },
+    "all_pubs_5yr": {
+      "counts": [],
+      "total": 23,
+      "isTopResearch": false
+    },
     "ai_citation_counts": {
       "counts": [
         0,
@@ -978,6 +993,16 @@
       ],
       "total": 0,
       "table": null
+    },
+    "all_patents_5yr": {
+      "counts": [],
+      "table": null,
+      "total": 0
+    },
+    "ai_patents_percent": {
+      "counts": [],
+      "table": null,
+      "total": 0
     }
   },
   "other_metrics": {
