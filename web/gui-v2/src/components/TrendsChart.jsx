@@ -27,6 +27,11 @@ const styles = {
         margin-left: 0.5rem;
       }
     }
+
+    p {
+      color: var(--grey);
+      margin-left: 40px;
+    }
   `,
   chartContainer: css`
     /* aspect-ratio: 4 / 3; */
@@ -68,7 +73,7 @@ const TrendsChart = ({
   return (
     <div
       className={appliedClassName}
-      css={[styles.sectionMargin, styles.sectionWithHeading, styles.chartWrapper, appliedCss]}
+      css={[styles.chartWrapper, appliedCss]}
       id={appliedId}
     >
       {!isSSR &&
@@ -83,6 +88,9 @@ const TrendsChart = ({
               config={config}
             />
           </div>
+          {partialStartIndex &&
+            <p>Data incomplete after {years[partialStartIndex]}.</p>
+          }
         </Suspense>
       }
     </div>
