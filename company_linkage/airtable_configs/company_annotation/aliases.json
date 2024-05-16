@@ -8,6 +8,6 @@
     "Row": "alias",
     "Organization": "EXCLUDE",
     "Organization ID": "CSET_id",
-    "Alias language": "language"
+    "Alias language": "alias_language"
   }
 }

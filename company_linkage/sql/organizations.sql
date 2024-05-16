@@ -17,11 +17,11 @@ global_500 AS (
 SELECT
   * REPLACE( (
     SELECT
-      ARRAY_AGG(STRUCT(language,
+      ARRAY_AGG(STRUCT(alias_language,
           alias))
     FROM (
       SELECT
-        DISTINCT language,
+        DISTINCT alias_language,
         alias
       FROM
         UNNEST(aliases) a )) AS aliases, (
@@ -53,7 +53,7 @@ FROM (
       province_state,
       organizations.country) AS location,
     website,
-    ARRAY_AGG(STRUCT(aliases.language,
+    ARRAY_AGG(STRUCT(aliases.alias_language,
         alias)) AS aliases,
     ARRAY_AGG(STRUCT(CASE
           WHEN parentage.parent_acquisition IS TRUE THEN TRUE
@@ -66,8 +66,8 @@ FROM (
     ARRAY_AGG(DISTINCT IF(source = "PermID", external_id, null) IGNORE NULLS) AS permid,
     ARRAY_AGG(STRUCT(market as exchange,
         ticker)) AS market,
-    ARRAY_AGG(DISTINCT IF(source = "Crunchbase UUID", external_id, null) IGNORE NULLS) AS crunchbase_uuid,
-    ARRAY_AGG(DISTINCT IF(source = "Crunchbase URL", external_id, null) IGNORE NULLS) AS crunchbase_url,
+    ARRAY_AGG(DISTINCT IF(source = "Crunchbase UUID", external_id, null) IGNORE NULLS)[0] AS crunchbase_uuid,
+    ARRAY_AGG(DISTINCT IF(source = "Crunchbase URL", external_id, null) IGNORE NULLS)[0] AS crunchbase_url,
     ARRAY_AGG(DISTINCT ror.id IGNORE NULLS) AS ror_id,
     ARRAY_AGG(DISTINCT IF(source = "Regex", external_id, null) IGNORE NULLS) AS regex,
     ARRAY_AGG(DISTINCT IF(source = "BGOV", external_id, null) IGNORE NULLS) AS BGOV_id,

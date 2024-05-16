@@ -26,7 +26,6 @@ class Organization:
         self.ror = []
         self.regex = []
         self.bgov_id = []
-        self.comment = None
         self.children = []
         self.non_agg_children = []
         self.parent = []
@@ -157,15 +156,6 @@ class Organization:
         for bgov_val in bgov:
             if bgov_val and bgov_val not in self.bgov_id:
                 self.bgov_id.append(bgov_val)
-
-    def add_comment(self, comment):
-        """
-        Adding comment from annotation for aggregation
-        :param comment:
-        :return:
-        """
-        if comment:
-            self.comment = comment
 
     def add_child(self, child_id, child_name):
         """
@@ -371,8 +361,10 @@ class OrganizationAggregator:
             org_info.add_crunchbase(org["crunchbase_uuid"], org["crunchbase_url"])
         for ror in org["ror_id"]:
             org_info.add_ror(ror)
-        org_info.add_regex(org["regex"])
-        org_info.add_linkedin(org["linkedin"])
+        for regex in org["regex"]:
+            org_info.add_regex(regex)
+        for linkedin in org["linkedin"]:
+            org_info.add_linkedin(linkedin)
         org_info.add_bgov_id(org["BGOV_id"])
 
     def update_organization_data(self, org, org_id):
@@ -391,7 +383,6 @@ class OrganizationAggregator:
             org_info.add_market(market["exchange"], market["ticker"])
         for parent in org["parent"]:
             org_info.add_parent(parent["parent_acquisition"], parent["parent_name"], parent["parent_id"])
-        org_info.add_comment(org["comment"])
         org_info.add_sandp(org["in_sandp_500"])
         org_info.add_fortune(org["in_fortune_global_500"])
 
@@ -411,7 +402,7 @@ class OrganizationAggregator:
                   "ror_id": org_info.ror, "regex": org_info.regex,
                   "BGOV_id": org_info.bgov_id, "linkedin": org_info.linkedin,
                   "in_sandp_500": org_info.in_sandp_500, "in_fortune_global_500": org_info.in_fortune_global_500,
-                  "comment": org_info.comment, "children": org_info.children,
+                  "children": org_info.children,
                   "non_agg_children": org_info.non_agg_children}
             out.write(json.dumps(js, ensure_ascii=False) + "\n")
         out.close()

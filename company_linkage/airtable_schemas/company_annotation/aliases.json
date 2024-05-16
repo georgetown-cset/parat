@@ -8,7 +8,7 @@
   {
     "description": "Two-letter code for alias language of an organization's alias",
     "mode": "NULLABLE",
-    "name": "language",
+    "name": "alias_language",
     "type": "STRING"
   },
   {

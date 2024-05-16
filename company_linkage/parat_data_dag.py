@@ -56,43 +56,14 @@ with dag:
         prefix=tmp_dir
     )
 
-    # combine all the airtable tables into joined tables
-
-    start = DummyOperator(task_id="starting")
-
-    join_tables = []
-    for table in ["alias", "grid", "ids", "linkedin", "market", "organizations", "parent", "permid"]:
-
-        join_table = BigQueryInsertJobOperator(
-            task_id=f"join_{table}",
-            configuration={
-                "query": {
-                    "query": f"select distinct * from {initial_dataset}.{table}_preannotation UNION DISTINCT "
-                             f"select distinct * from {initial_dataset}.{table}_validate",
-                    "useLegacySql": False,
-                    "destinationTable": {
-                        "projectId": PROJECT_ID,
-                        "datasetId": initial_dataset,
-                        "tableId": f"{table}_joined"
-                    },
-                    "allowLargeResults": True,
-                    "createDisposition": "CREATE_IF_NEEDED",
-                    "writeDisposition": "WRITE_TRUNCATE"
-                }
-            }
-        )
-        join_tables.append(join_table)
-
     # Do initial query sequence
-
-    start_initial_tables = DummyOperator(task_id="start_initial_tables")
 
     wait_for_initial_tables = DummyOperator(task_id="wait_for_initial_tables")
 
     seq_path_prefix = f"{os.environ.get('DAGS_FOLDER')}/sequences/parat/"
     initial_query_sequence = "initial_data.csv"
 
-    curr = start_initial_tables
+    curr = clear_tmp_dir
     for line in open(seq_path_prefix + initial_query_sequence).readlines():
         dataset, table = line.split(",")
         table = table.strip()
@@ -244,12 +215,6 @@ with dag:
     # post success to slack
     msg_success = get_post_success("PARAT tables updated!", dag)
 
-    (
-        clear_tmp_dir
-        >> start
-        >> join_tables
-        >> start_initial_tables
-    )
     (
         wait_for_initial_tables
         >> aggregate_organizations
