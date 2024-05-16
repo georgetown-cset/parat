@@ -64,7 +64,7 @@ WITH
   -- Now we convert numbers to stage names!
   add_employees AS (
   SELECT
-    org_uuid,
+    organizations.uuid as org_uuid,
     CASE
       WHEN employee_count = "10000+" THEN 2
       WHEN employee_count = "5001-10000" THEN 2
@@ -74,9 +74,9 @@ WITH
   END
     AS stage_num
   FROM
-    combine_stages
-  LEFT JOIN
     gcp_cset_crunchbase.organizations
+  LEFT JOIN
+    combine_stages
   ON
     combine_stages.org_uuid = organizations.uuid ),
   stage_name AS (
