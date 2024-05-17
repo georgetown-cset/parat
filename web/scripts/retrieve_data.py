@@ -72,6 +72,9 @@ METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
 
 _curr_time = datetime.now()
 CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
+LAST_COMPLETE_YEAR = CURRENT_YEAR - 1
+END_ARTICLE_YEAR = CURRENT_YEAR - 1
+END_PATENT_YEAR = CURRENT_YEAR - 3
 YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
 
 # Used (along with a check that we never actually meet or exceed this number with legitimate CSET ids)
@@ -772,19 +775,72 @@ def add_sectors(rows: list, refresh: bool) -> None:
             row.pop("permid")
 
 
-def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict) -> dict:
+def get_field_percentage(js: dict, parent_key: str, background_key: str, field_key: str) -> float:
+    """
+    Add percentage of publications/patenting in AI vs background
+    :param js: Row we want to add percentage to
+    :param parent_key: Overall category (article, patent)
+    :param background_key: Key containing total to be used in denominator of percentage calculation
+    :param field_key: Key containing total to be used in numerator of percentage calculation
+    :return: Percentage of `field_key` in background
+    """
+    background_total = js[parent_key][background_key]["total"]
+    field_total = js[parent_key][field_key]["total"]
+    pct = 0 if not background_total else round(100*field_total/background_total, 1)
+    return pct
+
+
+def add_derived_metrics(js: dict, end_article_year: int, end_patent_year: int) -> None:
+    """
+    Add derived metrics
+    :param js: Row we want to augment with more metrics
+    :param end_article_year: End year to use for article metrics
+    :param end_patent_year: End year to use for patent metrics
+    :return: None (mutates js)
+    """
+    # 5-year publication counts
+    article_end_idx = YEARS.index(end_article_year)
+    article_yearly_counts = js["articles"]["all_publications"]["counts"]
+    five_year_articles = sum(article_yearly_counts[article_end_idx-4:article_end_idx+1])
+    js["articles"]["all_pubs_5yr"] = {"counts": [], "total": five_year_articles, "isTopResearch": False}
+
+    # 5-year patent counts
+    patent_end_idx = YEARS.index(end_patent_year)
+    patent_yearly_counts = js["patents"]["all_patents"]["counts"]
+    five_year_patents = sum(patent_yearly_counts[patent_end_idx-4:patent_end_idx+1])
+    js["patents"]["all_patents_5yr"] = {"counts": [], "total": five_year_patents, "table": None}
+
+    # AI publication percentage
+    ai_pubs_pct = get_field_percentage(js, "articles", "all_publications", "ai_publications")
+    js["articles"]["ai_pubs_percent"] = {"counts": [], "total": ai_pubs_pct, "isTopResearch": False}
+
+    # AI patenting percentage
+    ai_patents_pct = get_field_percentage(js, "patents", "all_patents", "ai_patents")
+    js["patents"]["ai_patents_percent"] = {"counts": [], "total": ai_patents_pct, "table": None}
+
+    # AI pubs in last complete year
+    ai_yearly_counts = js["articles"]["ai_publications"]["counts"]
+    ai_last_complete_year = ai_yearly_counts[article_end_idx]
+    js["articles"]["ai_pubs_last_full_year"] = {"counts": [], "total": ai_last_complete_year, "isTopResearch": False}
+
+
+def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict,
+              end_article_year: int = END_ARTICLE_YEAR, end_patent_year: int = END_PATENT_YEAR) -> dict:
     """
     Given a row from a jsonl, reformat its elements into the form needed by the PARAT javascript
     :param row: jsonl line containing company metadata
     :param refresh_images: if true, will re-download images from crunchbase
     :param lowercase_to_orig_cname: dict mapping lowercase company name to original case
     :param market_key_to_link: dict mapping exchange:ticker to google finance link
+    :param end_article_year: End year to use for derived article metrics
+    :param end_patent_year: End year to use for derived patent metrics
     :return: dict of company metadata
     """
     js = json.loads(row)
     clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
     get_top_10_lists(js)
     get_category_counts(js)
+    add_derived_metrics(js, end_article_year, end_patent_year)
     return js
 
 
@@ -908,9 +964,9 @@ def update_overall_data(group_data: dict) -> None:
     overall_data = {
         "years": YEARS,
         "startArticleYear": CURRENT_YEAR - 4,
-        "endArticleYear": CURRENT_YEAR - 1,
+        "endArticleYear": END_ARTICLE_YEAR,
         "startPatentYear": CURRENT_YEAR - 6,
-        "endPatentYear": CURRENT_YEAR - 3,
+        "endPatentYear": END_PATENT_YEAR,
         "groups": average_group_data,
         "groupIdOffset": GROUP_OFFSET
     }

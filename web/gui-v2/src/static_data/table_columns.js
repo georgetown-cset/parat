@@ -187,16 +187,8 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef(
       "articles",
-      "all_publications",
-      ((_val, row) => {
-        const data = row.articles.all_publications;
-        return data.counts.slice(startArticleIx, endArticleIx+1).reduce((acc, curr) => acc + curr);
-      }),
-      (val, row, extract) => {
-        return <CellStat data={{ total: extract(val, row) }} />;
-      },
+      "all_pubs_5yr"
     ),
-    isDerived: true,
     tooltip: "Zach_tktk",
   },
   {
@@ -238,17 +230,14 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef(
       "articles",
-      "ai_publications",
-      ((_val, row) => {
-        return Math.round(row.articles.ai_publications.total / row.articles.all_publications.total * 1000) / 10;
-      }),
+      "ai_pubs_percent",
+      null,
       (val, row, extract) => {
         const extractedVal = extract(val, row);
         const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
         return <CellStat data={{ total }} />
       },
     ),
-    isDerived: true,
     isPercent: true,
     tooltip: "Zach_tktk",
   },
@@ -271,11 +260,8 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef(
       "articles",
-      "ai_publications",
-      ((_val, row) => row.articles.ai_publications.counts[endArticleIx]),
-      (val, row, extract) => <CellStat data={{ total: extract(val, row) }} />,
+      "ai_pubs_last_full_year",
     ),
-    isDerived: true,
     tooltip: "Zach_tktk",
   },
   {
@@ -313,16 +299,8 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef(
       "patents",
-      "all_patents",
-      ((_val, row) => {
-        const data = row.patents.all_patents;
-        return data.counts.slice(startPatentIx, endPatentIx+1).reduce((acc, curr) => acc + curr);
-      }),
-      (val, row, extract) => {
-        return <CellStat data={{ total: extract(val, row) }} />;
-      },
+      "all_patents_5yr"
     ),
-    isDerived: true,
     tooltip: "Zach_tktk",
   },
   {
@@ -357,17 +335,14 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef(
       "patents",
-      "ai_patents",
-      ((_val, row) => {
-        return Math.round(row.patents.ai_patents.total / row.patents.all_patents.total * 1000) / 10;
-      }),
+      "ai_patents_percent",
+      null,
       (val, row, extract) => {
         const extractedVal = extract(val, row);
         const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
         return <CellStat data={{ total }} />
       },
     ),
-    isDerived: true,
     isPercent: true,
     tooltip: "Zach_tktk",
   },
