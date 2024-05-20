@@ -221,7 +221,7 @@ const columnDefinitions = [
       (_val, row, _extract) => {
         const rawVal = row.articles.ai_publications_growth;
         const total = rawVal.total ? `${rawVal.total.toFixed(2)}%` : '---';
-        const rank = rawVal.rank ?? '---';
+        const rank = rawVal.rank;
         return <CellStat data={{ total, rank }} />;
       },
     ),
@@ -235,11 +235,12 @@ const columnDefinitions = [
     ...generateSliderColDef(
       "articles",
       "ai_pubs_percent",
-      null,
-      (val, row, extract) => {
-        const extractedVal = extract(val, row);
-        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
-        return <CellStat data={{ total }} />
+      undefined, // Use the default extractFn
+      (_val, row, _extract) => {
+        const rawVal = row.articles.ai_pubs_percent;
+        const total = rawVal.total ? `${rawVal.total.toFixed(1)}%` : '---';
+        const rank = rawVal.rank;
+        return <CellStat data={{ total, rank }} />
       },
     ),
     isPercent: true,
@@ -326,7 +327,7 @@ const columnDefinitions = [
       (_val, row, _extract) => {
         const rawVal = row.patents.ai_patents_growth;
         const total = rawVal.total ? `${rawVal.total.toFixed(2)}%` : '---';
-        const rank = rawVal.rank ?? '---';
+        const rank = rawVal.rank;
         return <CellStat data={{ total, rank }} />;
       },
     ),
@@ -340,11 +341,12 @@ const columnDefinitions = [
     ...generateSliderColDef(
       "patents",
       "ai_patents_percent",
-      null,
-      (val, row, extract) => {
-        const extractedVal = extract(val, row);
-        const total = extractedVal ? `${extractedVal.toFixed(1)}%` : '---';
-        return <CellStat data={{ total }} />
+      undefined, // Use the default extractFn
+      (_val, row, _extract) => {
+        const rawVal = row.patents.ai_patents_percent;
+        const total = rawVal.total ? `${rawVal.total.toFixed(1)}%` : '---';
+        const rank = rawVal.rank;
+        return <CellStat data={{ total, rank }} />
       },
     ),
     isPercent: true,
