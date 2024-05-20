@@ -300,113 +300,113 @@
   "highly_cited_ai_pubs_by_year": [
     {
       "year": 2014,
-      "highly_cited_ai_pubs": 1
+      "year_count": 1
     },
     {
       "year": 2015,
-      "highly_cited_ai_pubs": 0
+      "year_count": 0
     },
     {
       "year": 2016,
-      "highly_cited_ai_pubs": 0
+      "year_count": 0
     },
     {
       "year": 2017,
-      "highly_cited_ai_pubs": 1
+      "year_count": 1
     },
     {
       "year": 2018,
-      "highly_cited_ai_pubs": 4
+      "year_count": 4
     },
     {
       "year": 2019,
-      "highly_cited_ai_pubs": 4
+      "year_count": 4
     },
     {
       "year": 2020,
-      "highly_cited_ai_pubs": 6
+      "year_count": 6
     },
     {
       "year": 2021,
-      "highly_cited_ai_pubs": 5
+      "year_count": 5
     },
     {
       "year": 2022,
-      "highly_cited_ai_pubs": 10
+      "year_count": 10
     }
   ],
   "ai_pubs_in_top_conferences": 32,
   "ai_pubs_in_top_conferences_by_year": [
     {
       "year": 2015,
-      "ai_pubs_in_top_conferences": 1
+      "year_count": 1
     },
     {
       "year": 2017,
-      "ai_pubs_in_top_conferences": 1
+      "year_count": 1
     },
     {
       "year": 2018,
-      "ai_pubs_in_top_conferences": 2
+      "year_count": 2
     },
     {
       "year": 2019,
-      "ai_pubs_in_top_conferences": 2
+      "year_count": 2
     },
     {
       "year": 2020,
-      "ai_pubs_in_top_conferences": 11
+      "year_count": 11
     },
     {
       "year": 2021,
-      "ai_pubs_in_top_conferences": 11
+      "year_count": 11
     },
     {
       "year": 2022,
-      "ai_pubs_in_top_conferences": 4
+      "year_count": 4
     }
   ],
   "all_pubs": 745,
   "all_pubs_by_year": [
     {
       "year": 2009,
-      "all_pubs": 1
+      "year_count": 1
     },
     {
       "year": 2014,
-      "all_pubs": 2
+      "year_count": 2
     },
     {
       "year": 2015,
-      "all_pubs": 6
+      "year_count": 6
     },
     {
       "year": 2016,
-      "all_pubs": 24
+      "year_count": 24
     },
     {
       "year": 2017,
-      "all_pubs": 61
+      "year_count": 61
     },
     {
       "year": 2018,
-      "all_pubs": 105
+      "year_count": 105
     },
     {
       "year": 2019,
-      "all_pubs": 120
+      "year_count": 120
     },
     {
       "year": 2020,
-      "all_pubs": 157
+      "year_count": 157
     },
     {
       "year": 2021,
-      "all_pubs": 134
+      "year_count": 134
     },
     {
       "year": 2022,
-      "all_pubs": 159
+      "year_count": 159
     }
   ],
   "short_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",

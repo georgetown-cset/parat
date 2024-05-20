@@ -66,61 +66,61 @@
   "market_filt": [
     {
       "text": "NASDAQ:GOOG",
-      "url": "https://www.google.com/finance/quote/goog:nasdaq"
+      "url": "https://www.google.com/finance/quote/GOOG:NASDAQ"
     },
     {
       "text": "NASDAQ:GOOGL",
-      "url": "https://www.google.com/finance/quote/googl:nasdaq"
+      "url": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
     }
   ],
   "market_full": [
     {
       "text": "NASDAQ:GOOG",
-      "url": "https://www.google.com/finance/quote/goog:nasdaq"
+      "url": "https://www.google.com/finance/quote/GOOG:NASDAQ"
     },
     {
       "text": "BMV:GOOGL",
-      "url": "https://www.google.com/finance/quote/bmv:googl"
+      "url": "https://www.google.com/finance/quote/BMV:GOOGL"
     },
     {
       "text": "DUS:ABEA",
-      "url": "https://www.google.com/finance/quote/abea:dus"
+      "url": "https://www.google.com/finance/quote/ABEA:DUS"
     },
     {
       "text": "MOEX:GOOG-RM",
-      "url": "https://www.google.com/finance/quote/goog-rm:moex"
+      "url": "https://www.google.com/finance/quote/GOOG-RM:MOEX"
     },
     {
       "text": "NEO:GOOG",
-      "url": "https://www.google.com/finance/quote/goog:neo"
+      "url": "https://www.google.com/finance/quote/GOOG:NEO"
     },
     {
       "text": "MUN:ABEA",
-      "url": "https://www.google.com/finance/quote/abea:mun"
+      "url": "https://www.google.com/finance/quote/ABEA:MUN"
     },
     {
       "text": "MIL:GOOGL",
-      "url": "https://www.google.com/finance/quote/googl:mil"
+      "url": "https://www.google.com/finance/quote/GOOGL:MIL"
     },
     {
       "text": "XETR:ABEA",
-      "url": "https://www.google.com/finance/quote/abea:xetr"
+      "url": "https://www.google.com/finance/quote/ABEA:XETR"
     },
     {
       "text": "HAM:ABEA",
-      "url": "https://www.google.com/finance/quote/abea:ham"
+      "url": "https://www.google.com/finance/quote/ABEA:HAM"
     },
     {
       "text": "LON:0RIH",
-      "url": "https://www.google.com/finance/quote/0rih:lon"
+      "url": "https://www.google.com/finance/quote/0RIH:LON"
     },
     {
       "text": "BER:ABEA",
-      "url": "https://www.google.com/finance/quote/abea:ber"
+      "url": "https://www.google.com/finance/quote/ABEA:BER"
     },
     {
       "text": "NASDAQ:GOOGL",
-      "url": "https://www.google.com/finance/quote/googl:nasdaq"
+      "url": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
     }
   ],
   "crunchbase_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
