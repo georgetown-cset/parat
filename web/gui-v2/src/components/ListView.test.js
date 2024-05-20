@@ -27,7 +27,7 @@ describe("ListView", () => {
     // Filter by China and verify that the count updates
     expect(screen.getByText('Viewing 632 companies')).toBeVisible();
     const regionHeader = screen.getByRole('columnheader', { name: /country/i });
-    await user.click(getByRole(regionHeader, 'button'));
+    await user.click(getByRole(regionHeader, 'button', { name: /open/i }));
     const menu = screen.getByRole('listbox');
     await user.click(getByText(menu, 'China'));
     expect(screen.getByText('Viewing 43 of 632 companies')).toBeVisible();

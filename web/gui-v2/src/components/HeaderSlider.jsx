@@ -19,6 +19,10 @@ const styles = {
       height: 10px;
       width: 10px;
     }
+
+    .MuiSlider-valueLabel {
+      font-family: GTZirkonLight;
+    }
   `,
 };
 

@@ -775,6 +775,8 @@ const ListViewTable = ({
             } else {
               return 0;
             }
+          } else if ( a?.[sortKey] === null || b?.[sortKey] === null ) {
+            return 0; // Workaround in case no country/region/etc is available
           } else {
             return a[sortKey].localeCompare(b[sortKey]) * direction;
           }
