@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { Autocomplete } from '@eto/eto-ui-components';
+import { Dropdown } from '@eto/eto-ui-components';
 
 import HeaderWithLink from './HeaderWithLink';
 import StatGrid from './StatGrid';
@@ -22,13 +22,10 @@ const styles = {
     }
   `,
   trendsDropdown: css`
-    .MuiAutocomplete-root .MuiInput-root.MuiInputBase-sizeSmall .MuiInput-input {
-      padding: 4px;
-      text-align: center;
-    }
-
-    ul > li {
-      text-align: left;
+    .MuiInputBase-input.MuiSelect-select {
+      align-items: center;
+      display: flex;
+      justify-content: center;
     }
   `,
 };
@@ -173,7 +170,7 @@ const DetailViewPatents = ({
         title={
           <>
             Trends in {data.name}'s patenting in
-            <Autocomplete
+            <Dropdown
               css={styles.trendsDropdown}
               disableClearable={true}
               inputLabel="patent subfield"
