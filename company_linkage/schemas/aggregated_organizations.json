@@ -92,7 +92,7 @@
   {
     "mode": "REPEATED",
     "name": "permid",
-    "type": "INTEGER",
+    "type": "STRING",
     "description": "The Refinitiv PermIDs for the company."
   },
   {

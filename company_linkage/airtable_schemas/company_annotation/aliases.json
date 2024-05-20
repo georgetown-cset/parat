@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Organization unique id",
+    "mode": "REPEATED",
+    "name": "CSET_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Two-letter code for alias language of an organization's alias",
+    "mode": "NULLABLE",
+    "name": "alias_language",
+    "type": "STRING"
+  },
+  {
+    "description": "An alias for the organization",
+    "mode": "NULLABLE",
+    "name": "alias",
+    "type": "STRING"
+  }
+]

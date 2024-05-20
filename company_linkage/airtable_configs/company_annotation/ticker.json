@@ -1,0 +1,13 @@
+{
+  "airtable_table": "Ticker",
+  "airtable_base": "appqtfVHf5tIRsfkI",
+  "schema_name": "tickers",
+  "merge_query": "extract_id_merge",
+  "production_table": "tickers",
+  "column_map": {
+    "Organization": "EXCLUDE",
+    "Organization ID": "CSET_id",
+    "Market": "market",
+    "Ticker": "ticker"
+  }
+}

@@ -24,17 +24,17 @@ describe("ListView", () => {
       </CacheProvider>
     );
 
-    // Filter by Europe and verify that the count updates
-    expect(screen.getByText('Viewing 1778 companies')).toBeVisible();
+    // Filter by China and verify that the count updates
+    expect(screen.getByText('Viewing 632 companies')).toBeVisible();
     const regionHeader = screen.getByRole('columnheader', { name: /country/i });
     await user.click(getByRole(regionHeader, 'button'));
     const menu = screen.getByRole('listbox');
     await user.click(getByText(menu, 'China'));
-    expect(screen.getByText('Viewing 269 of 1778 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 43 of 632 companies')).toBeVisible();
 
     // Reset the filters and verify that the count updates
     await user.click(screen.getByRole('button', { name: /reset filters/i }));
-    expect(screen.getByText('Viewing 1778 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 632 companies')).toBeVisible();
   }, 20000);
 
 
@@ -49,7 +49,7 @@ describe("ListView", () => {
     await user.click(getByRole(companyHeader, 'combobox'));
     const menu = screen.getByRole('listbox');
     await user.click(getByText(menu, 'S&P 500'));
-    expect(screen.getByText('Viewing 503 of 1778 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 442 of 632 companies')).toBeVisible();
   }, 20000);
 
 
@@ -94,7 +94,7 @@ describe("ListView", () => {
     it("filtering rows works as expected", () => {
       const FILTERS_RAW = {
         name: {
-          get: [ "GROUP:sp500", "Sierra Nevada Corp" ],
+          get: [ "GROUP:sp500", "Affectiva" ],
         },
       };
 
@@ -102,21 +102,21 @@ describe("ListView", () => {
 
       expect(FILTERS_TRANSFORMED).toEqual({
         _groups: [ "sp500" ],
-        _companies: [ "Sierra Nevada Corp" ],
-        name: [ "GROUP:sp500", "Sierra Nevada Corp" ],
+        _companies: [ "Affectiva" ],
+        name: [ "GROUP:sp500", "Affectiva" ],
       });
 
-      const MICROSOFT = { cset_id: 163, name: "Microsoft", groups: { sp500: true, global500: true } };
-      const SAMSUNG = { cset_id: 671, name: "Samsung", groups: { sp500: true, global500: false } };
-      const THALES = { cset_id: 2794, name: "Thales SA", groups: { sp500: false, global500: false } };
-      const QUALCOMM = { cset_id: 209, name: "Qualcomm", groups: { sp500: false, global500: true } };
-      const SIERRA_NEVADA = { cset_id: 2753, name: "Sierra Nevada Corp", groups: { sp500: false, global500: false } };
+      const MICROSOFT = { cset_id: 916, name: "Microsoft", groups: { sp500: true, global500: true } };
+      const SAMSUNG = { cset_id: 1202, name: "Samsung", groups: { sp500: true, global500: false } };
+      const YASKAWA = { cset_id: 1525, name: "Yaskawa", groups: { sp500: false, global500: false } };
+      const QUALCOMM = { cset_id: 1132, name: "Qualcomm", groups: { sp500: false, global500: true } };
+      const AFFECTIVA = { cset_id: 45, name: "Affectiva", groups: { sp500: false, global500: false } };
 
       expect(filterRow(MICROSOFT, FILTERS_TRANSFORMED)).toEqual(true);
       expect(filterRow(SAMSUNG, FILTERS_TRANSFORMED)).toEqual(true);
-      expect(filterRow(THALES, FILTERS_TRANSFORMED)).toEqual(false);
+      expect(filterRow(YASKAWA, FILTERS_TRANSFORMED)).toEqual(false);
       expect(filterRow(QUALCOMM, FILTERS_TRANSFORMED)).toEqual(false);
-      expect(filterRow(SIERRA_NEVADA, FILTERS_TRANSFORMED)).toEqual(true);
+      expect(filterRow(AFFECTIVA, FILTERS_TRANSFORMED)).toEqual(true);
     });
   });
 });

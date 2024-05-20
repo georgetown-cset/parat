@@ -124,81 +124,81 @@
   "highly_cited_ai_pubs_by_year": [
     {
       "year": 2014,
-      "highly_cited_ai_pubs": 1
+      "year_count": 1
     },
     {
       "year": 2015,
-      "highly_cited_ai_pubs": 0
+      "year_count": 0
     },
     {
       "year": 2016,
-      "highly_cited_ai_pubs": 0
+      "year_count": 0
     },
     {
       "year": 2017,
-      "highly_cited_ai_pubs": 1
+      "year_count": 1
     },
     {
       "year": 2018,
-      "highly_cited_ai_pubs": 4
+      "year_count": 4
     },
     {
       "year": 2019,
-      "highly_cited_ai_pubs": 4
+      "year_count": 4
     },
     {
       "year": 2020,
-      "highly_cited_ai_pubs": 6
+      "year_count": 6
     },
     {
       "year": 2021,
-      "highly_cited_ai_pubs": 5
+      "year_count": 5
     },
     {
       "year": 2022,
-      "highly_cited_ai_pubs": 10
+      "year_count": 10
     }
   ],
   "ai_pubs_in_top_conferences": 13,
   "ai_pubs_in_top_conferences_by_year": [
     {
       "year": 2018,
-      "ai_pubs_in_top_conferences": 2
+      "year_count": 2
     },
     {
       "year": 2019,
-      "ai_pubs_in_top_conferences": 1
+      "year_count": 1
     },
     {
       "year": 2021,
-      "ai_pubs_in_top_conferences": 3
+      "year_count": 3
     },
     {
       "year": 2022,
-      "ai_pubs_in_top_conferences": 7
+      "year_count": 7
     }
   ],
   "all_pubs": 22,
   "all_pubs_by_year": [
     {
       "year": 2018,
-      "all_pubs": 2
+      "year_count": 2
     },
     {
       "year": 2019,
-      "all_pubs": 1
+      "year_count": 1
     },
     {
       "year": 2020,
-      "all_pubs": 2
+      "year_count": 2
     },
     {
       "year": 2021,
-      "all_pubs": 5
+      "year_count": 5
     },
     {
       "year": 2022,
-      "all_pubs": 13
+      "year_count": 13
     }
   ],
   "short_description": "Hugging Face allows users to build, train, and deploy art models using the reference open source in machine learning.",

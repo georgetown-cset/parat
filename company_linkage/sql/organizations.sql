@@ -1,3 +1,19 @@
+WITH sp_500 AS (
+  SELECT DISTINCT
+    CSET_id
+  FROM
+    parat_input.groups
+  where
+    name = "S&P 500"
+),
+global_500 AS (
+  SELECT DISTINCT
+    CSET_id
+  FROM
+    parat_input.groups
+  where
+    name = "Global 500"
+)
 SELECT
   * REPLACE( (
     SELECT
@@ -32,92 +48,68 @@ SELECT
 FROM (
   SELECT
     CSET_id,
-    organizations_joined.name,
+    organizations.name,
     STRUCT(city,
       province_state,
-      organizations_joined.country) AS location,
+      organizations.country) AS location,
     website,
-    ARRAY_AGG(STRUCT(alias_language,
+    ARRAY_AGG(STRUCT(aliases.alias_language,
         alias)) AS aliases,
     ARRAY_AGG(STRUCT(CASE
-          WHEN parent_acquisition IS TRUE THEN TRUE
+          WHEN parentage.parent_acquisition IS TRUE THEN TRUE
         ELSE
         FALSE
       END
         AS parent_acquisition,
         parent_name,
         parent_id)) AS parent,
-    ARRAY_AGG(DISTINCT permid IGNORE NULLS) AS permid,
-    ARRAY_AGG(STRUCT(exchange,
+    ARRAY_AGG(DISTINCT IF(source = "PermID", external_id, null) IGNORE NULLS) AS permid,
+    ARRAY_AGG(STRUCT(market as exchange,
         ticker)) AS market,
-    STRUCT(crunchbase_uuid,
-      crunchbase_url) AS crunchbase,
+    ARRAY_AGG(DISTINCT IF(source = "Crunchbase UUID", external_id, null) IGNORE NULLS)[0] AS crunchbase_uuid,
+    ARRAY_AGG(DISTINCT IF(source = "Crunchbase URL", external_id, null) IGNORE NULLS)[0] AS crunchbase_url,
     ARRAY_AGG(DISTINCT ror.id IGNORE NULLS) AS ror_id,
-    regex,
-    ARRAY_AGG(DISTINCT bgov_id IGNORE NULLS) AS BGOV_id,
-    linkedin,
-    CASE
-      WHEN in_sandp_500 IS TRUE THEN TRUE
-    ELSE
-    FALSE
-  END
-    AS in_sandp_500,
-    CASE
-      WHEN in_fortune_global_500 IS TRUE THEN TRUE
-    ELSE
-    FALSE
-  END
-    AS in_fortune_global_500,
-    ids_joined.comment
+    ARRAY_AGG(DISTINCT IF(source = "Regex", external_id, null) IGNORE NULLS) AS regex,
+    ARRAY_AGG(DISTINCT IF(source = "BGOV", external_id, null) IGNORE NULLS) AS BGOV_id,
+    ARRAY_AGG(DISTINCT IF(source = "LinkedIn", external_id, null) IGNORE NULLS) AS linkedin,
+    sp_500.CSET_id IS NOT NULL AS in_sandp_500,
+    global_500.CSET_id IS NOT NULL AS in_fortune_global_500
   FROM
-    parat_input.organizations_joined
+    parat_input.organizations
   LEFT JOIN
-    parat_input.alias_joined
+    parat_input.aliases
   USING
     (CSET_id)
   LEFT JOIN
-    parat_input.parent_joined
+    parat_input.parentage
   USING
     (CSET_id)
   LEFT JOIN
-    parat_input.permid_joined
+    parat_input.ids
   USING
     (CSET_id)
   LEFT JOIN
-    parat_input.market_joined
-  USING
-    (CSET_id)
-  LEFT JOIN
-    parat_input.ids_joined
-  USING
-    (CSET_id)
-  LEFT JOIN
-    parat_input.grid_joined
-  USING
-    (CSET_id)
-  LEFT JOIN
-    parat_input.bgov_validate
-  USING
-    (CSET_id)
-  LEFT JOIN
-    parat_input.linkedin_joined
+    parat_input.tickers
   USING
     (CSET_id)
   LEFT JOIN
     gcp_cset_ror.ror
   ON
-    TRIM(grid_joined.grid) = external_ids.GRID.all
+    TRIM(ids.external_id) = external_ids.GRID.all and ids.source = "GRID"
+  LEFT JOIN
+    sp_500
+  USING
+    (CSET_id)
+  LEFT JOIN
+    global_500
+  USING
+    (CSET_id)
   GROUP BY
     CSET_id,
     name,
     city,
     province_state,
-    organizations_joined.country,
+    organizations.country,
     website,
-    crunchbase_uuid,
-    crunchbase_url,
-    regex,
-    linkedin,
     in_sandp_500,
-    in_fortune_global_500,
-    comment)
+    in_fortune_global_500)

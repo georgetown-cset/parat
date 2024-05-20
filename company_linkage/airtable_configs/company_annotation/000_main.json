@@ -1,0 +1,30 @@
+{
+  "airtable_table": "Main",
+  "airtable_base": "appqtfVHf5tIRsfkI",
+  "schema_name": "organizations",
+  "merge_query": "organizations_merge",
+  "production_table": "organizations",
+  "include_airtable_id": true,
+  "column_map": {
+    "Organization": "EXCLUDE",
+    "Name": "name",
+    "ID": "CSET_id",
+    "Country": "country",
+    "City": "city",
+    "State/province": "province_state",
+    "Website": "website",
+    "Groups": "EXCLUDE",
+    "Ticker": "EXCLUDE",
+    "Parent organization": "EXCLUDE",
+    "Child organizations": "EXCLUDE",
+    "IDs": "EXCLUDE",
+    "Aliases": "EXCLUDE",
+    "Legacy CSET ID": "legacy_cset_id",
+    "Compilation status": "EXCLUDE",
+    "Include in PARAT": "include",
+    "[TEMP - 2024 regex review] Validation status": "EXCLUDE",
+    "[TEMP - 2024 regex review] Validator": "EXCLUDE",
+    "[TEMP - 2024 regex review] Validator notes": "EXCLUDE",
+    "Last Modified": "last_modified"
+  }
+}
