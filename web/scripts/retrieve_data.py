@@ -145,12 +145,18 @@ def retrieve_raw(get_links: bool) -> None:
     client = bigquery.Client()
     market_info = set()
     print("retrieving metadata")
+    lower_name_to_id = {}
     with open(RAW_DATA_FI, mode="w") as out:
         for row in client.list_rows("ai_companies_visualization.all_visualization_data"):
             dict_row = {col: row[col] for col in row.keys()}
+            if not row["name"]:
+                print(f"{row['cset_id']} missing name")
+                continue
             out.write(json.dumps(dict_row)+"\n")
             market_info = market_info.union([m["exchange"]+":"+m["ticker"] for m in dict_row["market"]])
+            lower_name_to_id[dict_row["name"].lower()] = dict_row["cset_id"]
     print("retrieving original company names")
+    id_and_orig_name = []
     with open(ORIG_NAMES_FI, mode="w") as out:
         for row in client.list_rows("ai_companies_visualization.original_company_names"):
             name = row["name"]
@@ -158,6 +164,10 @@ def retrieve_raw(get_links: bool) -> None:
                 continue
             row = {"orig_name": name, "lowercase_name": name.lower()}
             out.write(json.dumps(row)+"\n")
+            if name.lower() in lower_name_to_id:
+                id_and_orig_name.append({"cset_id": lower_name_to_id[name.lower()], "name": name})
+    with open(os.path.join(WEB_SRC_DIR, "data", "companies.json"), mode="w") as web_out:
+        web_out.write(json.dumps(id_and_orig_name))
     if get_links:
         print("retrieving market links")
         with open(EXCHANGE_LINK_FI, mode="w") as out:
@@ -648,10 +658,10 @@ def get_category_counts(js: dict) -> None:
     articles = {}
     ### Reformat publication-related metrics
     for machine_name, orig_key, count_key, is_top_research in [
-        ["all_publications", "all_pubs_by_year", "all_pubs", False],
+        ["all_publications", "all_pubs_by_year", "year_count", False],
         ["ai_publications", "ai_pubs_by_year", "ai_pubs", False],
-        ["highly_cited_ai_pubs", "highly_cited_ai_pubs_by_year", "highly_cited_ai_pubs", False],
-        ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "ai_pubs_in_top_conferences", False],
+        ["highly_cited_ai_pubs", "highly_cited_ai_pubs_by_year", "year_count", False],
+        ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "year_count", False],
         ["ai_citation_counts", "ai_citation_count_by_year", "ai_citation_count", False],
         ["cv_citation_counts", "cv_citation_count_by_year", "cv_citation_count", False],
         ["nlp_citation_counts", "nlp_citation_count_by_year", "nlp_citation_count", False],
