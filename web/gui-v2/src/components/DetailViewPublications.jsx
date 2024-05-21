@@ -136,7 +136,7 @@ const DetailViewPublications = ({
         css={styles.section}
         data={topAiResearchTopics}
         id="top-research-topics"
-        title={<>{data.name}'s top AI research topics</>}
+        title={<>{data.name}'s research across AI subfields</>}
       />
 
       <TrendsChart
