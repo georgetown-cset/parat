@@ -80,7 +80,7 @@ const MoreMetadataDialog = ({
     { title: 'In Fortune Global 500?', value: data.groups.global500 ? 'Yes' : 'No' },
     { title: 'Stage', value: data.stage },
     {
-      title: 'Full market links',
+      title: 'Additional tickers',
       value: <div>
         {data.market_full.map((e, ix) => (
           <>
