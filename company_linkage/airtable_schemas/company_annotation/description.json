@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Organization unique id in airtable. There should only be one, the repeated type is an artifact of airtable",
+    "mode": "REPEATED",
+    "name": "airtable_ids",
+    "type": "STRING"
+  },
+  {
+    "description": "Description of the company",
+    "mode": "NULLABLE",
+    "name": "description",
+    "type": "STRING"
+  },
+  {
+    "description": "Where we got the description from - one of crunchbase, wikipedia, or company",
+    "mode": "NULLABLE",
+    "name": "description_source",
+    "type": "STRING"
+  },
+  {
+    "description": "Link to the description",
+    "mode": "NULLABLE",
+    "name": "description_link",
+    "type": "STRING"
+  },
+  {
+    "description": "Date the description was retrieved",
+    "mode": "NULLABLE",
+    "name": "retrieval_date",
+    "type": "DATE"
+  }
+]

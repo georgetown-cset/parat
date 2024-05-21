@@ -1,0 +1,12 @@
+{
+  "airtable_table": "Description",
+  "airtable_base": "appqtfVHf5tIRsfkI",
+  "schema_name": "description",
+  "merge_query": "airtable_id_merge",
+  "production_table": "description",
+  "column_map": {
+    "Organization": "airtable_ids",
+    "Website": "EXCLUDE",
+    "Include in PARAT (from Organization)": "EXCLUDE"
+  }
+}

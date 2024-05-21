@@ -18,6 +18,10 @@ class Organization:
         self.name = name
         self.location = {}
         self.website = None
+        self.description = None
+        self.description_source = None
+        self.description_link = None
+        self.description_retrieval_date = None
         self.aliases = []
         self.permid = []
         self.market = []
@@ -58,6 +62,21 @@ class Organization:
         """
         if website is not None and website != "":
             self.website = website
+
+    def add_description_metadata(self, org):
+        """
+        Adding description metadata for aggregation
+        :param org: Org containing description metadata
+        :return: None
+        """
+        if org["description"]:
+            self.description = org["description"]
+        if org["description_link"]:
+            self.description_link = org["description_link"]
+        if org["description_source"]:
+            self.description_source = org["description_source"]
+        if org["description_retrieval_date"]:
+            self.description_retrieval_date = org["description_retrieval_date"]
 
     def add_alias(self, alias_language, alias):
         """
@@ -377,6 +396,7 @@ class OrganizationAggregator:
         org_info = self.organization_dict[org_id]
         org_info.add_location(org["location"]["city"], org["location"]["province_state"], org["location"]["country"])
         org_info.add_website(org["website"])
+        org_info.add_description_metadata(org)
         for alias in org["aliases"]:
             org_info.add_alias(alias["alias_language"], alias["alias"])
         for market in org["market"]:
