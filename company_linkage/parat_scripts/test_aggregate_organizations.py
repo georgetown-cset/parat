@@ -14,14 +14,14 @@ class TestOrganization(unittest.TestCase):
         self.assertEqual(org.location, {})
         self.assertEqual(org.website, None)
         self.assertEqual(org.aliases, [])
-        self.assertEqual(org.permid, [])
+        self.assertEqual(org.permid, None)
+        self.assertEqual(org.child_permid, [])
         self.assertEqual(org.market, [])
         self.assertEqual(org.crunchbase, {})
         self.assertEqual(org.child_crunchbase, [])
         self.assertEqual(org.ror, [])
         self.assertEqual(org.regex, [])
         self.assertEqual(org.bgov_id, [])
-        self.assertEqual(org.comment, None)
         self.assertEqual(org.children, [])
         self.assertEqual(org.non_agg_children, [])
         self.assertEqual(org.parent, [])
@@ -60,14 +60,22 @@ class TestOrganization(unittest.TestCase):
     def test_add_permid(self):
         org = aggregate_organizations.Organization(1, "test")
         org.add_permid(5035900246)
-        self.assertEqual(org.permid[0], 5035900246)
-        self.assertEqual(len(org.permid), 1)
-        org.add_permid(4295903333)
-        self.assertEqual(org.permid[1], 4295903333)
-        self.assertEqual(len(org.permid), 2)
+        self.assertEqual(org.permid, 5035900246)
+        other_org = aggregate_organizations.Organization(2, "test_2")
+        other_org.add_permid("")
+        self.assertEqual(other_org.permid, None)
+
+    def test_add_child_permid(self):
+        org = aggregate_organizations.Organization(1, "test")
+        org.add_child_permid(5035900246)
+        self.assertEqual(org.child_permid[0], 5035900246)
+        self.assertEqual(len(org.child_permid), 1)
+        org.add_child_permid(4295903333)
+        self.assertEqual(org.child_permid[1], 4295903333)
+        self.assertEqual(len(org.child_permid), 2)
         # Don't add a duplicate entry!
-        org.add_permid(4295903333)
-        self.assertEqual(len(org.permid), 2)
+        org.add_child_permid(4295903333)
+        self.assertEqual(len(org.child_permid), 2)
 
     def test_add_market(self):
         org = aggregate_organizations.Organization(1, "test")
@@ -154,14 +162,6 @@ class TestOrganization(unittest.TestCase):
         org.add_bgov_id(["773795"])
         self.assertEqual(org.bgov_id[1], "773795")
         self.assertEqual(len(org.bgov_id), 2)
-
-    def test_add_comment(self):
-        org = aggregate_organizations.Organization(1, "test")
-        org.add_comment("crunchbase id not available")
-        self.assertEqual(org.comment, "crunchbase id not available")
-        other_org = aggregate_organizations.Organization(2, "test_2")
-        other_org.add_comment("")
-        self.assertEqual(other_org.comment, None)
 
     def test_add_parent(self):
         org = aggregate_organizations.Organization(1, "test")

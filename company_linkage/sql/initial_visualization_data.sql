@@ -37,6 +37,7 @@ SELECT
   description_source,
   description_link,
   description_retrieval_date,
+  child_permid,
   website,
   market,
   crunchbase,
