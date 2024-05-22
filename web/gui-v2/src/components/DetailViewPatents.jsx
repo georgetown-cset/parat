@@ -64,12 +64,12 @@ const DetailViewPatents = ({
     {
       key: "ai-patents",
       stat: <>#{commas(data.patents.ai_patents.rank)}</>,
-      text: <>in PARAT for number of AI-related patents</>,
+      text: <>in PARAT for number of AI-related patents filed</>,
     },
     {
       key: "ai-patent-growth",
       stat: <>{commas(data.patents.ai_patents_growth.total, { maximumFractionDigits: 1 })}%</>,
-      text: <>growth in {data.name}'s AI-related patenting ({yearSpanNdash})</>,
+      text: <>growth in {data.name}'s AI-related patent filing ({yearSpanNdash})</>,
     },
     {
       key: "ai-patent-grants",
@@ -79,7 +79,7 @@ const DetailViewPatents = ({
     {
       key: "ai-focused-percent",
       stat: <>{aiPatentPercent}%</>,
-      text: <>of {data.name}'s total patenting was AI-related</>,
+      text: <>of {data.name}'s total patents filed were AI-related</>,
     },
   ];
 
@@ -129,7 +129,7 @@ const DetailViewPatents = ({
       <HeaderWithLink title="Patents" />
 
       <TextAndBigStat
-        smallText={<>Between {overall.years[0]} and {overall.years[overall.years.length-1]}, {data.name} obtained</>}
+        smallText={<>Between {overall.years[0]} and {overall.years[overall.years.length-1]}, {data.name} filed</>}
         bigText={<>{commas(data.patents.ai_patents.total)} AI-related patents</>}
       />
 
@@ -140,7 +140,7 @@ const DetailViewPatents = ({
         css={styles.section}
         data={patentApplicationAreas}
         id="top-patent-applications"
-        title={<>Top application areas across {data.name}'s AI patents</>}
+        title={<>Top application areas across {data.name}'s AI filed patents</>}
       />
 
       <TableSection
@@ -148,7 +148,7 @@ const DetailViewPatents = ({
         css={styles.section}
         data={patentIndustryAreas}
         id="top-patent-industries"
-        title={<>Top industry areas across {data.name}'s AI patents</>}
+        title={<>Top industry areas across {data.name}'s AI filed patents</>}
       />
 
       <TrendsChart
