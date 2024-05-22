@@ -23,15 +23,7 @@ describe("Plotly helpers", () => {
     });
     expect(data).toEqual([
       {
-        hovertemplate: "%{y}",
-        legendgroup: TITLE,
-        mode: "lines+markers",
-        name: TITLE,
-        type: "scatter",
-        x: [ 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022 ],
-        y: [ 850, 928, 845, 843, 838, 1040, 1357, 1551, 1507, 461 ],
-      },
-      {
+        _isBackground: true,
         fill: "tozeroy",
         hovertemplate: "%{y}",
         legendgroup: TITLE,
@@ -43,6 +35,17 @@ describe("Plotly helpers", () => {
         type: "scatter",
         x: [ 2022, 2023 ],
         y: [ 461, 2 ],
+      },
+      {
+        _isBackground: false,
+        hovertemplate: "%{y}",
+        legendgroup: TITLE,
+        line: { color: "rgb(31, 119, 180)" },
+        mode: "lines+markers",
+        name: TITLE,
+        type: "scatter",
+        x: [ 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022 ],
+        y: [ 850, 928, 845, 843, 838, 1040, 1357, 1551, 1507, 461 ],
       },
     ]);
     expect(layout).toEqual({

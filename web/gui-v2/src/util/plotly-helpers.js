@@ -1,9 +1,19 @@
 import merge from 'lodash/merge';
 import { PlotlyDefaults } from '@eto/eto-ui-components';
 
+export const CHART_COLORS = {
+  COMPANY: "rgb(31, 119, 180)",
+  SP500: "rgb(44, 160, 44)",
+  GLOBAL500: "rgb(148, 103, 189)",
+};
+
+const GROUP_COLOR_MAP = {
+  "S&P 500 (average)": CHART_COLORS.SP500,
+  "Fortune Global 500 (average)": CHART_COLORS.GLOBAL500,
+};
 
 const assembleChartData = (name, years, vals, otherParams, options={}) => {
-  const { partialStartIndex } = options;
+  const { partialStartIndex, color = "auto" } = options;
 
   const common = {
     hovertemplate: "%{y}",
@@ -21,8 +31,10 @@ const assembleChartData = (name, years, vals, otherParams, options={}) => {
     {
       ...common,
       ...otherParams,
+      line: { color },
       x: years.slice(0, endSolidIx),
       y: vals.slice(0, endSolidIx),
+      _isBackground: false,
     }
   ];
 
@@ -36,6 +48,7 @@ const assembleChartData = (name, years, vals, otherParams, options={}) => {
       showlegend: false,
       x: years.slice(partialStartIndex),
       y: vals.slice(partialStartIndex),
+      _isBackground: true,
     });
   }
 
@@ -62,9 +75,26 @@ export const assemblePlotlyParams = (
   layoutChanges={},
   options={},
 ) => {
-  const preparedData = data.flatMap(([traceTitle, traceData, otherParams={}]) => {
-    return assembleChartData(traceTitle, years, traceData, otherParams, options);
-  });
+  const preparedData = data
+    .flatMap(([traceTitle, traceData, otherParams={}], index) => {
+      // Use consistent colors for groups, and blue for the company in question.
+      // After that, let Plotly choose its own colors.
+      if ( Object.hasOwn(GROUP_COLOR_MAP, traceTitle) ) {
+        options.color = GROUP_COLOR_MAP[traceTitle];
+      } else if ( index === 0 ) {
+        options.color = CHART_COLORS.COMPANY;
+      }
+      return assembleChartData(traceTitle, years, traceData, otherParams, options);
+    })
+    .sort((a, b) => {
+      if ( a._isBackground && !b._isBackground ) {
+        return -1;
+      } else if ( !a._isBackground && b._isBackground ) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   const maxY = Math.max(
     ...data.map(e => Math.max(...e[1]))
   );
