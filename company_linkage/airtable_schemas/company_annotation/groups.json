@@ -6,9 +6,9 @@
     "type": "STRING"
   },
   {
-    "description": "CSET ids included in the group",
+    "description": "Airtable ids of organizations included in the group",
     "mode": "REPEATED",
-    "name": "CSET_ids",
+    "name": "airtable_ids",
     "type": "STRING"
   }
 ]

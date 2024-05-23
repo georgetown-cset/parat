@@ -18,6 +18,10 @@ class Organization:
         self.name = name
         self.location = {}
         self.website = None
+        self.description = None
+        self.description_source = None
+        self.description_link = None
+        self.description_retrieval_date = None
         self.aliases = []
         self.permid = []
         self.market = []
@@ -58,6 +62,21 @@ class Organization:
         """
         if website is not None and website != "":
             self.website = website
+
+    def add_description_metadata(self, org):
+        """
+        Adding description metadata for aggregation
+        :param org: Org containing description metadata
+        :return: None
+        """
+        if org["description"]:
+            self.description = org["description"]
+        if org["description_link"]:
+            self.description_link = org["description_link"]
+        if org["description_source"]:
+            self.description_source = org["description_source"]
+        if org["description_retrieval_date"]:
+            self.description_retrieval_date = org["description_retrieval_date"]
 
     def add_alias(self, alias_language, alias):
         """
@@ -377,6 +396,7 @@ class OrganizationAggregator:
         org_info = self.organization_dict[org_id]
         org_info.add_location(org["location"]["city"], org["location"]["province_state"], org["location"]["country"])
         org_info.add_website(org["website"])
+        org_info.add_description_metadata(org)
         for alias in org["aliases"]:
             org_info.add_alias(alias["alias_language"], alias["alias"])
         for market in org["market"]:
@@ -394,8 +414,13 @@ class OrganizationAggregator:
         """
         out = open(output_file, "w")
         for org_id, org_info in self.organization_dict.items():
+            desc_date = org_info.description_retrieval_date
+            fmt_desc_date = None if not desc_date else desc_date.strftime("%Y-%m-%d")
             js = {"CSET_id": org_info.cset_id, "name": org_info.name,
                   "location": org_info.location, "website": org_info.website,
+                  "description": org_info.description, "description_source": org_info.description_source,
+                  "description_link": org_info.description_link,
+                  "description_retrieval_date": fmt_desc_date,
                   "aliases": org_info.aliases, "parent": org_info.parent,
                   "permid": org_info.permid, "market": org_info.market,
                   "crunchbase": org_info.crunchbase, "child_crunchbase": org_info.child_crunchbase,

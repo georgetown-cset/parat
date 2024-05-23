@@ -38,6 +38,30 @@
     "description": "This is the location of a) the company’s headquarters b) failing that, where the company was founded. c) failing that, the most important location for the company."
   },
   {
+    "description": "Description of the company",
+    "mode": "NULLABLE",
+    "name": "description",
+    "type": "STRING"
+  },
+  {
+    "description": "Where we got the description from - one of crunchbase, wikipedia, or company",
+    "mode": "NULLABLE",
+    "name": "description_source",
+    "type": "STRING"
+  },
+  {
+    "description": "Link to the description",
+    "mode": "NULLABLE",
+    "name": "description_link",
+    "type": "STRING"
+  },
+  {
+    "description": "Date the description was retrieved",
+    "mode": "NULLABLE",
+    "name": "description_retrieval_date",
+    "type": "DATE"
+  },
+  {
     "mode": "NULLABLE",
     "name": "website",
     "type": "STRING",
@@ -190,12 +214,6 @@
     "name": "in_fortune_global_500",
     "type": "BOOLEAN",
     "description": "Boolean identifying whether the company was on the 2021 Fortune Global 500 list."
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "comment",
-    "type": "STRING",
-    "description": "Additional notes about the company or data collection."
   },
   {
     "fields": [

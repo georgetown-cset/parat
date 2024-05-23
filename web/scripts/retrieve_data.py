@@ -26,6 +26,7 @@ Retrieves and reformats raw data for consumption by javascript
 RAW_DATA_DIR = "raw_data"
 WEB_SRC_DIR = os.path.join("gui-v2", "src")
 IMAGE_DIR = os.path.join(WEB_SRC_DIR, "images")
+TRANSLATION_CLIENT = translate.TranslationServiceClient()
 
 # Local cache of raw data (ai_companies_visualization.visualization_data)
 RAW_DATA_FI = os.path.join(RAW_DATA_DIR, "data.jsonl")
@@ -72,7 +73,6 @@ METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
 
 _curr_time = datetime.now()
 CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
-LAST_COMPLETE_YEAR = CURRENT_YEAR - 1
 END_ARTICLE_YEAR = CURRENT_YEAR - 1
 END_PATENT_YEAR = CURRENT_YEAR - 3
 YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
@@ -152,6 +152,8 @@ def retrieve_raw(get_links: bool) -> None:
             if not row["name"]:
                 print(f"{row['cset_id']} missing name")
                 continue
+            desc_date = dict_row.get("description_retrieval_date")
+            dict_row["description_retrieval_date"] = None if not desc_date else desc_date.strftime("%Y-%m-%d")
             out.write(json.dumps(dict_row)+"\n")
             market_info = market_info.union([m["exchange"]+":"+m["ticker"] for m in dict_row["market"]])
             lower_name_to_id[dict_row["name"].lower()] = dict_row["cset_id"]
@@ -326,15 +328,14 @@ def add_ranks(rows: list) -> None:
                     })
 
 
-def get_translation(desc: str, client, parent) -> str:
+def get_translation(desc: str) -> str:
     """
     Get translation of non-english company descriptions. Returns None if `desc` cannot be translated or if it is
     English already according to pycld2
     :param desc: Description form any language.
-    :param client: Google Translation Client
-    :param parent: Parent project
     :return: translation of `desc` or None
     """
+    parent = "projects/gcp-cset-projects/locations/global"
     if desc is None or len(desc.strip()) == 0:
         return None
     try:
@@ -352,7 +353,7 @@ def get_translation(desc: str, client, parent) -> str:
     # Check if desc appears to be in English, and if not, translate it
     if details[0][1].lower() != "en":
         print("Translating "+desc)
-        response = client.translate_text(request = {
+        response = TRANSLATION_CLIENT.translate_text(request = {
             "parent": parent,
             "contents": [desc],
             "mime_type": "text/plain",
@@ -360,65 +361,21 @@ def get_translation(desc: str, client, parent) -> str:
         })
         translation = response.translations[0].translated_text.strip()
         return translation
-    return None
+    return desc
 
 
-def add_supplemental_descriptions(rows: list) -> None:
+def clean_descriptions(row: dict) -> None:
     """
-    Adds student-retrieved descriptions of companies to `rows`
-    :param rows: list of dicts of company metadata
-    :return: None; mutates rows
+    Clean and translate descriptions of companies
+    :param row: row of company metadata
+    :return: None; mutates `row`
     """
-    name_to_desc_info = {}
-    # map keys from csv to keys for javascript
-    desc_info = {
-        "wikipedia_description": "wikipedia_description",
-        "wikipedia_description_link": "wikipedia_link",
-        "company_description": "company_site_description",
-        "company_description_link": "company_site_link",
-        "retrieval_date": "description_retrieval_date"
-    }
-    with open(SUPPLEMENTAL_DESCRIPTIONS) as f:
-        client = translate.TranslationServiceClient()
-        parent = "projects/gcp-cset-projects/locations/global"
-        for row in csv.DictReader(f):
-            company_name = row["company_name"]
-            name_to_desc_info[company_name] = {desc_info[k]: row[k].strip() for k in desc_info}
-            wiki_description = name_to_desc_info[company_name]["wikipedia_description"]
-            name_to_desc_info[company_name]["wikipedia_description"] = clean_wiki_description(wiki_description)
-            wiki_link = name_to_desc_info[company_name]["wikipedia_link"]
-            if not (wiki_link and ("http" in wiki_link or ".org" in wiki_link)):
-                if wiki_description:
-                    print(f"{company_name} missing wiki link")
-                name_to_desc_info[company_name]["wikipedia_link"] = None
-                name_to_desc_info[company_name]["wikipedia_description"] = None
-            source_description = name_to_desc_info[company_name]["company_site_description"]
-            translation = get_translation(source_description, client, parent)
-            name_to_desc_info[company_name]["company_site_description_translation"] = translation
-            source_link = clean_link(name_to_desc_info[company_name]["company_site_link"])
-            name_to_desc_info[company_name]["company_site_link"] = source_link
-            if row["company_homepage"]:
-                name_to_desc_info[company_name]["website"] = row["company_homepage"]
-            if not (source_link and ("http" in source_link or ".com" in source_link)):
-                if source_description:
-                    print(f"{company_name} missing source link")
-                    print(source_description)
-                name_to_desc_info[company_name]["company_site_description"] = None
-                name_to_desc_info[company_name]["company_site_link"] = None
-                name_to_desc_info[company_name]["company_site_description_translation"] = None
-    for row in rows:
-        company_name = row["name"].strip().lower()
-        if row["name"] in REVERSE_COMPANY_NAME_MAP:
-            company_name = REVERSE_COMPANY_NAME_MAP[row["name"]]
-        if company_name in name_to_desc_info:
-            curr_website = "" if "website" not in row else row["website"]
-            new_website = "" if "website" not in name_to_desc_info[company_name] else \
-                            name_to_desc_info[company_name]["website"]
-            if new_website and new_website.startswith("http") and curr_website != new_website:
-                print(f'Website mismatch from crunchbase ({curr_website}) and '
-                      f'from manual entry ({new_website}); using '
-                      f'manual entry!')
-            row.update(name_to_desc_info[company_name])
+    original_description = row["description"]
+    if row["description_source"] == "wikipedia":
+        row["description"] = clean_wiki_description(original_description)
+    elif row["description_source"] == "company":
+        row["description"] = get_translation(original_description)
+    row["description_link"] = clean_link(row["description_link"])
 
 
 def get_growth(yearly_counts: list, is_patents: bool = False) -> float:
@@ -851,6 +808,7 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     get_top_10_lists(js)
     get_category_counts(js)
     add_derived_metrics(js, end_article_year, end_patent_year)
+    clean_descriptions(js)
     return js
 
 
@@ -888,7 +846,6 @@ def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
         for row in f:
             rows.append(clean_row(row, refresh_images, lowercase_to_orig_cname, market_key_to_link))
     add_sectors(rows, refresh_sectors)
-    add_supplemental_descriptions(rows)
     add_ranks(rows)
     company_rows = []
     raw_group_metadata = {

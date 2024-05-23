@@ -52,6 +52,10 @@ FROM (
     STRUCT(city,
       province_state,
       organizations.country) AS location,
+    description.description,
+    description_source,
+    description_link,
+    description.retrieval_date as description_retrieval_date,
     website,
     ARRAY_AGG(STRUCT(aliases.alias_language,
         alias)) AS aliases,
@@ -93,6 +97,10 @@ FROM (
   USING
     (CSET_id)
   LEFT JOIN
+    parat_input.description
+  USING
+    (CSET_id)
+  LEFT JOIN
     gcp_cset_ror.ror
   ON
     TRIM(ids.external_id) = external_ids.GRID.all and ids.source = "GRID"
@@ -110,6 +118,10 @@ FROM (
     city,
     province_state,
     organizations.country,
+    description,
+    description_source,
+    description_link,
+    description_retrieval_date,
     website,
     in_sandp_500,
     in_fortune_global_500)

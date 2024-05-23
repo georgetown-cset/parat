@@ -2,11 +2,11 @@
   "airtable_table": "Groups",
   "airtable_base": "appqtfVHf5tIRsfkI",
   "schema_name": "groups",
-  "merge_query": "groups_merge",
+  "merge_query": "airtable_id_merge",
   "production_table": "groups",
   "column_map": {
     "Group": "name",
     "Notes": "EXCLUDE",
-    "Main": "CSET_ids"
+    "Main": "airtable_ids"
   }
 }

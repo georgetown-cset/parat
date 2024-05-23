@@ -1,6 +1,10 @@
 {
   "cset_id": 1425,
   "country": "United States",
+  "description": "Hugging Face, Inc. is a French-American company based in New York City that develops computation tools for building applications using machine learning. It is most notable for its transformers library built for natural language processing applications and its platform that allows users to share machine learning models and datasets and showcase their work.",
+  "description_source": "wikipedia",
+  "description_link": "https://en.wikipedia.org/wiki/Hugging_Face",
+  "description_retrieval_date": "2024-05-23",
   "website": "https://huggingface.co/",
   "crunchbase": {
     "text": "b7947f18-b199-45ac-b7da-66f5c52fcfbc",
