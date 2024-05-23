@@ -25,6 +25,8 @@ const styles = {
   `,
 };
 
+const EMPTY_VALUES = [null, '---'];
+
 const CellStat = ({data, colKey}) => {
   return (
     <div css={styles.cell}>
@@ -32,7 +34,7 @@ const CellStat = ({data, colKey}) => {
         { data?.total === null ? 'n/a' : commas(data.total) }
       </div>
       <div className="rank">
-        { (data?.total === 0 || data?.total === null) ? '---' : (data?.rank && `#${data.rank}`) }
+        { (EMPTY_VALUES.includes(data?.total)) ? '---' : (data?.rank && `#${data.rank}`) }
       </div>
     </div>
   );
