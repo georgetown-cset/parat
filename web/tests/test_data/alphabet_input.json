@@ -60,6 +60,10 @@
     5050702354
   ],
   "website": "https://abc.xyz/",
+  "description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
+  "description_source": "crunchbase",
+  "description_link": "https://www.crunchbase.com/organization/alphabet",
+  "description_retrieval_date": "2024-05-16",
   "market": [
     {
       "exchange": "nasdaq",
