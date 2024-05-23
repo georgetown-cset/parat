@@ -85,14 +85,18 @@ const DetailViewIntro = ({
     });
   }
 
+  const titleCaseSource = (source) => {
+    return source.charAt(0).toUpperCase()+source.substr(1);
+  }
+
   return (
     <div css={styles.detailIntroWrapper}>
       <div css={styles.descriptionBlurbs}>
-        {data?.wikipedia_description ?
+        {data?.description ?
           <>
-            <div>{data.wikipedia_description}</div>
+            <div>{data.description}</div>
             <small>
-              <a href={data.wikipedia_link}>Wikipedia</a>, retrieved {data.description_retrieval_date}
+              <a href={data.description_link}>{titleCaseSource(data.description_source)}</a>, retrieved {data.description_retrieval_date}
             </small>
           </>
         :

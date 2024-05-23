@@ -73,7 +73,6 @@ METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
 
 _curr_time = datetime.now()
 CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
-LAST_COMPLETE_YEAR = CURRENT_YEAR - 1
 END_ARTICLE_YEAR = CURRENT_YEAR - 1
 END_PATENT_YEAR = CURRENT_YEAR - 3
 YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
@@ -153,6 +152,8 @@ def retrieve_raw(get_links: bool) -> None:
             if not row["name"]:
                 print(f"{row['cset_id']} missing name")
                 continue
+            desc_date = dict_row.get("description_retrieval_date")
+            dict_row["description_retrieval_date"] = None if not desc_date else desc_date.strftime("%Y-%m-%d")
             out.write(json.dumps(dict_row)+"\n")
             market_info = market_info.union([m["exchange"]+":"+m["ticker"] for m in dict_row["market"]])
             lower_name_to_id[dict_row["name"].lower()] = dict_row["cset_id"]
@@ -360,7 +361,7 @@ def get_translation(desc: str) -> str:
         })
         translation = response.translations[0].translated_text.strip()
         return translation
-    return None
+    return desc
 
 
 def clean_descriptions(row: dict) -> None:

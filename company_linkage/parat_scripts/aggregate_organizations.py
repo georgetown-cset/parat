@@ -414,8 +414,13 @@ class OrganizationAggregator:
         """
         out = open(output_file, "w")
         for org_id, org_info in self.organization_dict.items():
+            desc_date = org_info.description_retrieval_date
+            fmt_desc_date = None if not desc_date else desc_date.strftime("%Y-%m-%d")
             js = {"CSET_id": org_info.cset_id, "name": org_info.name,
                   "location": org_info.location, "website": org_info.website,
+                  "description": org_info.description, "description_source": org_info.description_source,
+                  "description_link": org_info.description_link,
+                  "description_retrieval_date": fmt_desc_date,
                   "aliases": org_info.aliases, "parent": org_info.parent,
                   "permid": org_info.permid, "market": org_info.market,
                   "crunchbase": org_info.crunchbase, "child_crunchbase": org_info.child_crunchbase,
