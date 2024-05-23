@@ -25,7 +25,7 @@ const styles = {
   `,
 };
 
-const EMPTY_VALUES = [0, null, '---'];
+const EMPTY_VALUES = [null, '---'];
 
 const CellStat = ({data, colKey}) => {
   return (
