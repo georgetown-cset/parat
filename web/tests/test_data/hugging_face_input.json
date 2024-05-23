@@ -14,9 +14,8 @@
   "parent": [],
   "children": [],
   "non_agg_children": [],
-  "permid": [
-    5063742076
-  ],
+  "permid": "5063742076",
+  "child_permid": [],
   "description": "Hugging Face, Inc. is a French-American company based in New York City that develops computation tools for building applications using machine learning. It is most notable for its transformers library built for natural language processing applications and its platform that allows users to share machine learning models and datasets and showcase their work.",
   "description_source": "wikipedia",
   "description_link": "https://en.wikipedia.org/wiki/Hugging_Face",

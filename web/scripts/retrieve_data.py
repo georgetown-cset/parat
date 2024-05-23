@@ -464,17 +464,21 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     return None if len(aliases) == 0 else f"{'; '.join(sorted_aliases)}"
 
 
-def format_link(suffix: list, prefix: str) -> str:
+def get_permid_links(top_permid: str, child_permids: list) -> list:
     """
-    Adds a url prefix to a link if it needs it
-    :param suffix: url suffix that should follow `prefix` in the output link
-    :param prefix: a prefix shared by all links from this source
-    :return: formatted link
+    Genrerate list of permid links from a row's permid data
+    :param row: row of data
+    :return: None (mutates row)
     """
-    if not suffix:
+    if not top_permid:
         return None
-    prefix = prefix.strip("/")+"/"
-    return f"{prefix}{suffix}" if prefix not in suffix else suffix
+    permids = [top_permid]+child_permids
+    permid_links = []
+    prefix = "https://permid.org/1-"
+    for permid in permids:
+        link = f"{prefix}{permid}" if prefix not in permid else permid
+        permid_links.append({"text": permid.replace(prefix, ""), "url": link})
+    return permid_links
 
 
 def get_yearly_counts(counts: list, key: str, years: list = YEARS) -> (list, int):
@@ -554,7 +558,7 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
                                   orig_company_name if orig_company_name != js["name"].lower() else None)
     js["stage"] = js["stage"] if js["stage"] else "Unknown"
-    js["permid_links"] = format_link(js.get("permid"), "https://permid.org/1-")
+    js["permid_links"] = get_permid_links(js.get("permid"), js.pop("child_permid", []))
     js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
     js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)

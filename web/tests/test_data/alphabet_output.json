@@ -41,26 +41,26 @@
   "continent": "North America",
   "local_logo": "alphabet.png",
   "aliases": "Alphabet Inc",
-  "permid": [5082534760, 5030853586, 5053732847, 5028044072, 5050702354],
+  "permid": "5030853586",
   "permid_links": [
     {
-      "text": 5082534760,
-      "url": "https://permid.org/1-5082534760"
-    },
-    {
-      "text": 5030853586,
+      "text": "5030853586",
       "url": "https://permid.org/1-5030853586"
     },
     {
-      "text": 5053732847,
+      "text": "5082534760",
+      "url": "https://permid.org/1-5082534760"
+    },
+    {
+      "text": "5053732847",
       "url": "https://permid.org/1-5053732847"
     },
     {
-      "text": 5028044072,
+      "text": "5028044072",
       "url": "https://permid.org/1-5028044072"
     },
     {
-      "text": 5050702354,
+      "text": "5050702354",
       "url": "https://permid.org/1-5050702354"
     }
   ],

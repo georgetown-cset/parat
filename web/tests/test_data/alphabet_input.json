@@ -52,12 +52,12 @@
       "child_id": 474
     }
   ],
-  "permid": [
-    5082534760,
-    5030853586,
-    5053732847,
-    5028044072,
-    5050702354
+  "permid": "5030853586",
+  "child_permid": [
+    "5082534760",
+    "5053732847",
+    "5028044072",
+    "5050702354"
   ],
   "website": "https://abc.xyz/",
   "description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",

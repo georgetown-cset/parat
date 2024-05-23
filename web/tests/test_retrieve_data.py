@@ -134,13 +134,13 @@ class TestMkTabText(unittest.TestCase):
         }
         self.assertEqual("BAR; Baz; FoO; Fred", clean_aliases(aliases, lowercase_to_orig_cname, "Fred"))
 
-    def test_format_links(self):
-        prefix = "https://my_test_prefix.com/"
-        link_suffixes = ["foo", "bar", "baz"]
-        expected_links = [{"text": "foo", "url": prefix+"foo"},
-                          {"text": "bar", "url": prefix+"bar"},
-                          {"text": "baz", "url": prefix+"baz"}]
-        self.assertEqual(expected_links, format_links(link_suffixes, prefix))
+    def test_get_permid_links(self):
+        permid = "1"
+        child_permids = ["https://permid.org/1-2", "3"]
+        expected_links = [{"text": "1", "url":"https://permid.org/1-1"},
+                          {"text": "2", "url":"https://permid.org/1-2"},
+                          {"text": "3", "url":"https://permid.org/1-3"}]
+        self.assertEqual(expected_links, get_permid_links(permid, child_permids))
 
     def test_get_yearly_counts(self):
         counts = [{"year": 2002, "count": 1}, {"year": 2021, "count": 2}, {"year": 2015, "count": 15}]
