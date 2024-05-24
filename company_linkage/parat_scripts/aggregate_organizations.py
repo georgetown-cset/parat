@@ -23,7 +23,8 @@ class Organization:
         self.description_link = None
         self.description_retrieval_date = None
         self.aliases = []
-        self.permid = []
+        self.permid = None
+        self.child_permid = []
         self.market = []
         self.crunchbase = {}
         self.child_crunchbase = []
@@ -96,12 +97,21 @@ class Organization:
 
     def add_permid(self, permid):
         """
-        Adding permid (from Refinitiv/Eikon) for aggregation
+        Adding permid (from Refinitiv/Eikon) from parent org. There should only be one.
         :param permid: permid
         :return:
         """
-        if permid and permid != "" and permid not in self.permid:
-            self.permid.append(permid)
+        if permid and permid != "" and permid:
+            self.permid = permid
+
+    def add_child_permid(self, permid):
+        """
+        Adding permid (from Refinitiv/Eikon) from child organization for aggregation
+        :param permid:
+        :return:
+        """
+        if permid and permid != "" and permid not in self.child_permid:
+            self.child_permid.append(permid)
 
     def add_market(self, exchange, ticker):
         """
@@ -371,13 +381,13 @@ class OrganizationAggregator:
         :return:
         """
         org_info = self.organization_dict[org_id]
-        for permid in org["permid"]:
-            org_info.add_permid(permid)
-        # We add crunchbase as a child if it's a child org; otherwise we add it as a primary crunchbase
+        # We add crunchbase and permid as children if it's a child org; otherwise we add as primary crunchbase/permid
         if org["CSET_id"] in self.child_to_parent:
             org_info.add_child_crunchbase(org["crunchbase_uuid"], org["crunchbase_url"])
+            org_info.add_child_permid(org["permid"])
         else:
             org_info.add_crunchbase(org["crunchbase_uuid"], org["crunchbase_url"])
+            org_info.add_permid(org["permid"])
         for ror in org["ror_id"]:
             org_info.add_ror(ror)
         for regex in org["regex"]:
@@ -422,7 +432,7 @@ class OrganizationAggregator:
                   "description_link": org_info.description_link,
                   "description_retrieval_date": fmt_desc_date,
                   "aliases": org_info.aliases, "parent": org_info.parent,
-                  "permid": org_info.permid, "market": org_info.market,
+                  "permid": org_info.permid, "child_permid": org_info.child_permid, "market": org_info.market,
                   "crunchbase": org_info.crunchbase, "child_crunchbase": org_info.child_crunchbase,
                   "ror_id": org_info.ror, "regex": org_info.regex,
                   "BGOV_id": org_info.bgov_id, "linkedin": org_info.linkedin,

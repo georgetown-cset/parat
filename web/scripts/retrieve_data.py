@@ -108,31 +108,27 @@ def get_exchange_link(market_key: str) -> dict:
         return {"market_key": market_key, "link": gf_link}
 
 
-def get_permid_sector(permids: list) -> tuple:
+def get_permid_sector(permid: str) -> str:
     """
     Get first permid sector available in permids for a PARAT company
-    :param permids: List of permids a company may have
-    :return: First economic and business sector from PERMID, or "Unknown" if we couldn't find one
+    :param permid: Company's permid
+    :return: First business sector from PERMID, or "Unknown" if we couldn't find it
     """
+    null_result = "Unknown"
+    if not permid:
+        return null_result
     access_token = os.environ.get("PERMID_API_KEY")
-    economic_sector_key = "Primary Economic Sector"
-    business_sector_key = "Primary Business Sector"
+    sector_key = "Primary Business Sector"
     if not access_token:
         raise ValueError("Please specify your permid key using an environment variable called PERMID_API_KEY")
-    for permid in permids:
-        # Sometimes multiple permids are available and it's not obvious to me which to pick. I'll just pick the
-        # first one that has a not-null value for both sectors
-        resp = requests.get(f"https://permid.org/api/mdaas/getEntityById/{permid}?access-token={access_token}")
-        if resp.status_code != 200:
-            print(f"Unexpected status code {resp.status_code} for {permid}")
-        metadata = resp.json()
-        economic_sector = metadata.get(economic_sector_key)
-        business_sector = metadata.get(business_sector_key)
-        if economic_sector and business_sector:
-            return economic_sector[0], business_sector[0]
-        elif economic_sector:
-            print(f"No business sector available for {permid}")
-    return "Unknown", "Unknown"
+    resp = requests.get(f"https://permid.org/api/mdaas/getEntityById/{permid}?access-token={access_token}")
+    if resp.status_code != 200:
+        print(f"Unexpected status code {resp.status_code} for {permid}")
+    metadata = resp.json()
+    sector = metadata.get(sector_key)
+    if sector:
+        return sector[0]
+    return null_result
 
 
 def retrieve_raw(get_links: bool) -> None:
@@ -468,14 +464,21 @@ def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str =
     return None if len(aliases) == 0 else f"{'; '.join(sorted_aliases)}"
 
 
-def format_links(link_text: list, url_prefix: str) -> (str, dict):
+def get_permid_links(top_permid: str, child_permids: list) -> list:
     """
-    Generates links from a list of text that should be displayed for each link and a url prefix
-    :param link_text: list of text to show in the UI and also add to the end of `url_prefix`
-    :param url_prefix: a prefix shared by all links from this source
-    :return: a dict containing text and url keys for each element of `link_text`
+    Genrerate list of permid links from a row's permid data
+    :param row: row of data
+    :return: None (mutates row)
     """
-    return [{"text": text, "url": f"{url_prefix}{text}"} for text in link_text]
+    if not top_permid:
+        return None
+    permids = [top_permid]+child_permids
+    permid_links = []
+    prefix = "https://permid.org/1-"
+    for permid in permids:
+        link = f"{prefix}{permid}" if prefix not in permid else permid
+        permid_links.append({"text": permid.replace(prefix, ""), "url": link})
+    return permid_links
 
 
 def get_yearly_counts(counts: list, key: str, years: list = YEARS) -> (list, int):
@@ -555,7 +558,7 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["aliases"] = clean_aliases(js.pop("aliases"), lowercase_to_orig_cname,
                                   orig_company_name if orig_company_name != js["name"].lower() else None)
     js["stage"] = js["stage"] if js["stage"] else "Unknown"
-    js["permid_links"] = format_links(js.get("permid"), "https://permid.org/1-")
+    js["permid_links"] = get_permid_links(js.get("permid"), js.pop("child_permid", []))
     js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
     js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
@@ -726,10 +729,9 @@ def add_sectors(rows: list, refresh: bool) -> None:
     if refresh:
         sectors = {}
         for row in rows:
-            econ_sector, business_sector = get_permid_sector(row.pop("permid"))
-            row["sector"] = econ_sector
-            row["business_sector"] = business_sector
-            sectors[row["cset_id"]] = {"economic": econ_sector, "business": business_sector}
+            sector = get_permid_sector(row.pop("permid"))
+            row["sector"] = sector
+            sectors[row["cset_id"]] = sector
         with open(SECTOR_FI, mode="w") as f:
             f.write(json.dumps(sectors))
     else:
@@ -737,8 +739,7 @@ def add_sectors(rows: list, refresh: bool) -> None:
             sectors = json.loads(f.read())
         for row in rows:
             cset_id = str(row["cset_id"])
-            row["sector"] = sectors[cset_id]["economic"]
-            row["business_sector"] = sectors[cset_id]["business"]
+            row["sector"] = sectors[cset_id]
             row.pop("permid")
 
 

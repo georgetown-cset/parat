@@ -114,10 +114,16 @@
     "description": "Parent companies and relationship in the case the company is a direct or indirect wholly owned subsidiary of any other companies."
   },
   {
-    "mode": "REPEATED",
+    "mode": "NULLABLE",
     "name": "permid",
     "type": "STRING",
-    "description": "The Refinitiv PermIDs for the company."
+    "description": "The Refinitiv PermID for the company."
+  },
+  {
+    "mode": "REPEATED",
+    "name": "child_permid",
+    "type": "STRING",
+    "description": "The child Refinitiv PermIDs for the company; that is, the permids of any of the company's children."
   },
   {
     "fields": [

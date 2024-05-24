@@ -67,7 +67,7 @@ FROM (
         AS parent_acquisition,
         parent_name,
         parent_id)) AS parent,
-    ARRAY_AGG(DISTINCT IF(source = "PermID", external_id, null) IGNORE NULLS) AS permid,
+    ARRAY_AGG(DISTINCT IF(source = "PermID", external_id, null) IGNORE NULLS)[0] AS permid,
     ARRAY_AGG(STRUCT(market as exchange,
         ticker)) AS market,
     ARRAY_AGG(DISTINCT IF(source = "Crunchbase UUID", external_id, null) IGNORE NULLS)[0] AS crunchbase_uuid,
