@@ -6,7 +6,7 @@
   "production_table": "parentage",
   "column_map": {
     "Organization": "EXCLUDE",
-    "Organization ID": "CSET_id",
+    "Organization ID": "new_cset_id",
     "Parent": "EXCLUDE",
     "Parent ID": "parent_id",
     "Parent (text)": "parent_name",

@@ -1,6 +1,6 @@
 WITH sp_500 AS (
   SELECT DISTINCT
-    CSET_id
+    new_cset_id
   FROM
     parat_input.groups
   where
@@ -8,7 +8,7 @@ WITH sp_500 AS (
 ),
 global_500 AS (
   SELECT DISTINCT
-    CSET_id
+    new_cset_id
   FROM
     parat_input.groups
   where
@@ -47,7 +47,7 @@ SELECT
         UNNEST(market) m )) AS market )
 FROM (
   SELECT
-    CSET_id,
+    COALESCE(legacy_cset_id, 4000+new_cset_id) AS CSET_id,
     organizations.name,
     STRUCT(city,
       province_state,
@@ -76,30 +76,30 @@ FROM (
     ARRAY_AGG(DISTINCT IF(source = "Regex", external_id, null) IGNORE NULLS) AS regex,
     ARRAY_AGG(DISTINCT IF(source = "BGOV", external_id, null) IGNORE NULLS) AS BGOV_id,
     ARRAY_AGG(DISTINCT IF(source = "LinkedIn", external_id, null) IGNORE NULLS) AS linkedin,
-    sp_500.CSET_id IS NOT NULL AS in_sandp_500,
-    global_500.CSET_id IS NOT NULL AS in_fortune_global_500
+    sp_500.new_cset_id IS NOT NULL AS in_sandp_500,
+    global_500.new_cset_id IS NOT NULL AS in_fortune_global_500
   FROM
     parat_input.organizations
   LEFT JOIN
     parat_input.aliases
   USING
-    (CSET_id)
+    (new_cset_id)
   LEFT JOIN
     parat_input.parentage
   USING
-    (CSET_id)
+    (new_cset_id)
   LEFT JOIN
     parat_input.ids
   USING
-    (CSET_id)
+    (new_cset_id)
   LEFT JOIN
     parat_input.tickers
   USING
-    (CSET_id)
+    (new_cset_id)
   LEFT JOIN
     parat_input.description
   USING
-    (CSET_id)
+    (new_cset_id)
   LEFT JOIN
     gcp_cset_ror.ror
   ON
@@ -107,13 +107,13 @@ FROM (
   LEFT JOIN
     sp_500
   USING
-    (CSET_id)
+    (new_cset_id)
   LEFT JOIN
     global_500
   USING
-    (CSET_id)
+    (new_cset_id)
   GROUP BY
-    CSET_id,
+    new_cset_id,
     name,
     city,
     province_state,
@@ -124,4 +124,5 @@ FROM (
     description_retrieval_date,
     website,
     in_sandp_500,
-    in_fortune_global_500)
+    in_fortune_global_500,
+    COALESCE(legacy_cset_id, 4000+new_cset_id))

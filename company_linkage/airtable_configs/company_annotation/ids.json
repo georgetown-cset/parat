@@ -6,7 +6,7 @@
   "production_table": "ids",
   "column_map": {
     "Organization": "EXCLUDE",
-    "Organization ID": "CSET_id",
+    "Organization ID": "new_cset_id",
     "ID": "external_id",
     "Type": "source",
     "[TEMP - 2024 regex review] Validation status (from Organization)": "EXCLUDE",
