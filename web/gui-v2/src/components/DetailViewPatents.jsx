@@ -149,13 +149,13 @@ const DetailViewPatents = ({
     {
       key: "ai-focused-percent",
       stat: <>{aiPatentPercent}{totalPatents > 0 && "%"}</>,
-      text: <>of {data.name}'s total patents filed were AI-related</>,
+      text: <>of {data.name}'s filed patents were AI-related</>,
     },
   ];
 
   const patentTableColumns = [
     { display_name: "Subfield", key: "subfield" },
-    { display_name: "Patent applications", key: "patents" },
+    { display_name: "Patents filed", key: "patents" },
     {
       display_name: (
         <>
@@ -207,7 +207,7 @@ const DetailViewPatents = ({
         css={styles.section}
         data={patentApplicationAreas}
         id="top-patent-applications"
-        title={<>Top application areas across {data.name}'s AI filed patents</>}
+        title={<>Top AI application areas across {data.name}'s filed patents</>}
       />
 
       <TableSection
@@ -215,14 +215,14 @@ const DetailViewPatents = ({
         css={styles.section}
         data={patentIndustryAreas}
         id="top-patent-industries"
-        title={<>Top industry areas across {data.name}'s AI filed patents</>}
+        title={<>Top industries and use cases across {data.name}'s filed AI patents</>}
       />
 
       <TrendsChart
         css={styles.section}
         data={[
           [
-            `${PATENT_DROPDOWN_OPTIONS.find(e => e.val === aiSubfield)?.text} patents at ${data.name}`,
+            `${PATENT_DROPDOWN_OPTIONS.find(e => e.val === aiSubfield)?.text} patents filed by ${data.name}`,
             data.patents[aiSubfield].counts
           ],
           data.groups.sp500 && [

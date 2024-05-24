@@ -148,7 +148,7 @@ const DetailViewPublications = ({
         css={styles.section}
         data={[
           [
-            `AI research at ${data.name}: ${aiSubfieldOptions.find(e => e.val === aiSubfield)?.text}`,
+            `Research publications by ${data.name}: ${aiSubfieldOptions.find(e => e.val === aiSubfield)?.text}`,
             data.articles[aiSubfield].counts
           ],
           data.groups.sp500 && [
@@ -183,7 +183,7 @@ const DetailViewPublications = ({
         css={styles.section}
         data={[
           [
-            `AI top conference publications at ${data.name}`,
+            `${data.name} publications at top AI research conferences`,
             data.articles.ai_pubs_top_conf.counts
           ],
           data.groups.sp500 && [
