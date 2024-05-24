@@ -74,7 +74,7 @@ const DetailViewPublications = ({
     {
       key: "highly-cited",
       stat: <>{commas(data.articles.highly_cited_ai_pubs.total)}</>,
-      text: <>highly-cited articles (#{commas(data.articles.highly_cited_ai_pubs.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.highly_cited_ai_pubs.sp500_rank)} in the S&P 500</>})</>,
+      text: <>highly cited articles (#{commas(data.articles.highly_cited_ai_pubs.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.highly_cited_ai_pubs.sp500_rank)} in the S&P 500</>})</>,
     },
     {
       key: "ai-research-growth",
