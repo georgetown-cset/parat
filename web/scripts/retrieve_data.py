@@ -390,7 +390,7 @@ def get_growth(yearly_counts: list, is_patents: bool = False) -> float:
     interval_values = yearly_counts[-(interval+1+offset):-1*offset]
     num_zero_years = sum([value == 0 for value in interval_values[:-1]])
     if num_zero_years == interval:
-        return 0
+        return None
     total_percentage_changes = sum([100*(interval_values[i+1]-interval_values[i])/interval_values[i]
                                     for i in range(interval) if interval_values[i] > 0])
     return total_percentage_changes/(interval-num_zero_years)
@@ -646,6 +646,9 @@ def get_category_counts(js: dict) -> None:
                 "total": get_growth(counts),
                 "isTopResearch": is_top_research
             }
+        elif machine_name in ["cv_publications", "nlp_publications", "robotics_publications"]:
+            growth = get_growth(counts, False)
+            articles[machine_name]["growth"] = None if not growth else round(growth, 2)
 
     ai_publications = articles["ai_publications"]
     ai_citations = articles["ai_citation_counts"]
@@ -701,9 +704,11 @@ def get_category_counts(js: dict) -> None:
             js.pop(k)
         elif k.endswith("_pats_by_year"):
             counts, total = get_yearly_counts(js.pop(k), field_name+"_pats")
+            growth = get_growth(counts, True)
             patents[field_name] = {
                 "counts": counts,
                 "total": total,
+                "growth": None if not growth else round(growth, 2)
             }
     add_patent_tables(patents)
     js[PATENT_METRICS] = patents
@@ -907,18 +912,23 @@ def get_average_group_data(raw_group_metadata: dict) -> dict:
             metrics = rows[0][category].keys()
             for metric in metrics:
                 total_metric_data = {}
+                num_valid_totals = 0
                 for row in rows:
                     if not total_metric_data:
                         # since we're computing a sum, we can just copy the values of the first row we see for the
                         # initial values
                         total_metric_data = row[category][metric]
+                        num_valid_totals += 1
                     else:
-                        total_metric_data["total"] += row[category][metric]["total"]
+                        total = row[category][metric]["total"]
+                        if total is not None:
+                            num_valid_totals += 1
+                        total_metric_data["total"] += total if total else 0
                         if has_counts:
                             for idx, yearly_value in enumerate(row[category][metric]["counts"]):
                                 total_metric_data["counts"][idx] += yearly_value
                 average_group_data[group][category][metric] = {
-                    "total": exp_round(total_metric_data["total"]/len(rows)),
+                    "total": exp_round(total_metric_data["total"]/num_valid_totals),
                     "counts": None if not has_counts else [exp_round(total/len(rows))
                                                            for total in total_metric_data["counts"]]
                 }
