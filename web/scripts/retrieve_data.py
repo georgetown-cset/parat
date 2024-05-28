@@ -648,7 +648,7 @@ def get_category_counts(js: dict) -> None:
             }
         elif machine_name in ["cv_publications", "nlp_publications", "robotics_publications"]:
             growth = get_growth(counts, False)
-            articles[machine_name]["growth"] = None if not growth else round(growth, 2)
+            articles[machine_name]["growth"] = None if growth is None else round(growth, 2)
 
     ai_publications = articles["ai_publications"]
     ai_citations = articles["ai_citation_counts"]
@@ -708,7 +708,7 @@ def get_category_counts(js: dict) -> None:
             patents[field_name] = {
                 "counts": counts,
                 "total": total,
-                "growth": None if not growth else round(growth, 2)
+                "growth": None if growth is None else round(growth, 2)
             }
     add_patent_tables(patents)
     js[PATENT_METRICS] = patents
@@ -921,9 +921,10 @@ def get_average_group_data(raw_group_metadata: dict) -> dict:
                         num_valid_totals += 1
                     else:
                         total = row[category][metric]["total"]
-                        if total is not None:
-                            num_valid_totals += 1
-                        total_metric_data["total"] += total if total else 0
+                        if total is None:
+                            continue
+                        num_valid_totals += 1
+                        total_metric_data["total"] += total
                         if has_counts:
                             for idx, yearly_value in enumerate(row[category][metric]["counts"]):
                                 total_metric_data["counts"][idx] += yearly_value
