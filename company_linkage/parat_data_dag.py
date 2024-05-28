@@ -29,7 +29,7 @@ sql_dir = "sql/parat"
 schema_dir = "parat/schemas"
 tmp_dir = f"{production_dataset}/tmp"
 
-default_args = get_default_args()#pocs=["Rebecca"])
+default_args = get_default_args(pocs=["Rebecca"])
 date = datetime.now().strftime("%Y%m%d")
 
 

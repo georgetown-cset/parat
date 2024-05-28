@@ -13,6 +13,18 @@ global_500 AS (
     parat_input.groups
   where
     name = "Global 500"
+),
+mapped_parents AS (
+  SELECT
+    parentage.new_cset_id,
+    COALESCE(legacy_cset_id, 4000+parent_id) AS parent_id,
+    parent_name,
+    parent_acquisition
+  FROM
+    parat_input.parentage
+  LEFT JOIN
+    parat_input.organizations
+  ON parent_id = organizations.new_cset_id
 )
 SELECT
   * REPLACE( (
@@ -47,7 +59,7 @@ SELECT
         UNNEST(market) m )) AS market )
 FROM (
   SELECT
-    COALESCE(legacy_cset_id, 4000+new_cset_id) AS CSET_id,
+    COALESCE(MAX(legacy_cset_id), 4000+new_cset_id) AS CSET_id,
     organizations.name,
     STRUCT(city,
       province_state,
@@ -60,7 +72,7 @@ FROM (
     ARRAY_AGG(STRUCT(aliases.alias_language,
         alias)) AS aliases,
     ARRAY_AGG(STRUCT(CASE
-          WHEN parentage.parent_acquisition IS TRUE THEN TRUE
+          WHEN mapped_parents.parent_acquisition IS TRUE THEN TRUE
         ELSE
         FALSE
       END
@@ -85,7 +97,7 @@ FROM (
   USING
     (new_cset_id)
   LEFT JOIN
-    parat_input.parentage
+    mapped_parents
   USING
     (new_cset_id)
   LEFT JOIN
@@ -125,4 +137,4 @@ FROM (
     website,
     in_sandp_500,
     in_fortune_global_500,
-    COALESCE(legacy_cset_id, 4000+new_cset_id))
+    new_cset_id)
