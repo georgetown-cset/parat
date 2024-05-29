@@ -79,17 +79,6 @@ const MoreMetadataDialog = ({
     { title: 'In S&P 500?', value: data.groups.sp500 ? 'Yes' : 'No' },
     { title: 'In Global Big Tech?', value: data.groups.globalBigTech ? 'Yes' : 'No' },
     { title: 'Stage', value: data.stage },
-    {
-      title: 'Full market links',
-      value: <div>
-        {data.market_full.map((e, ix) => (
-          <>
-            {ix > 0 && ", "}
-            <ExternalLink href={e.url}>{e.text}</ExternalLink>
-          </>
-        ))}
-      </div>
-    },
   ];
 
   const handleClose = () => {
