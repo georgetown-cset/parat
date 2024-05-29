@@ -8,7 +8,7 @@ import subprocess
 # note: check https://docs.google.com/spreadsheets/d/1Tq28O8qIA6T3AJ5oTHKCcscaNZsY_E4OPOUm6JaiwWA/edit#gid=0
 # to ensure list is complete
 # we might switch this to a query or something instead of hard-coding it but this is easier for now
-no_roll_up = [101, 550, 1826, 313, 327, 2343]
+no_roll_up = [550, 1826, 313, 327, 2343]
 
 
 class Organization:

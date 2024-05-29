@@ -8,7 +8,7 @@
   "column_map": {
     "Organization": "EXCLUDE",
     "Name": "name",
-    "ID": "CSET_id",
+    "ID": "new_cset_id",
     "Country": "country",
     "City": "city",
     "State/province": "province_state",

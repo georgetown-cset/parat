@@ -1,6 +1,6 @@
 SELECT
   {{ params.staging_table_name }}.* EXCEPT(airtable_ids),
-  organizations.CSET_id
+  organizations.new_cset_id
 FROM
   {{ params.staging_dataset }}.{{ params.staging_table_name }}
 LEFT JOIN

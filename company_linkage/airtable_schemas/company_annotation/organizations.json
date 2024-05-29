@@ -8,7 +8,7 @@
   {
     "description": "CSET identifier for the organization",
     "mode": "NULLABLE",
-    "name": "CSET_id",
+    "name": "new_cset_id",
     "type": "INTEGER"
   },
   {
@@ -45,7 +45,7 @@
     "description": "Legacy CSET id",
     "mode": "NULLABLE",
     "name": "legacy_cset_id",
-    "type": "STRING"
+    "type": "INTEGER"
   },
   {
     "description": "Whether the organization should be included in PARAT",

@@ -2,7 +2,7 @@
   {
     "description": "CSET identifier for the organization",
     "mode": "REPEATED",
-    "name": "CSET_id",
+    "name": "new_cset_id",
     "type": "INTEGER"
   },
   {

@@ -52,7 +52,8 @@ COMPANY_NAME_MAP = {
     "江行智能": "Jiangxing Intelligence",
     "智易科技": "Zhiyi Tech",
     "创新奇智": "AInnovation",
-    "captricity": "Vidado"
+    "captricity": "Vidado",
+    "Alphabet": "Alphabet (including Google)"
 }
 REVERSE_COMPANY_NAME_MAP = {v: k for k, v in COMPANY_NAME_MAP.items()}
 # Maps broken links from crunchbase to correct ones
@@ -163,7 +164,10 @@ def retrieve_raw(get_links: bool) -> None:
             row = {"orig_name": name, "lowercase_name": name.lower()}
             out.write(json.dumps(row)+"\n")
             if name.lower() in lower_name_to_id:
-                id_and_orig_name.append({"cset_id": lower_name_to_id[name.lower()], "name": name})
+                id_and_orig_name.append({
+                    "cset_id": lower_name_to_id[name.lower()],
+                    "name": COMPANY_NAME_MAP.get(name, name)
+                })
     with open(os.path.join(WEB_SRC_DIR, "data", "companies.json"), mode="w") as web_out:
         web_out.write(json.dumps(id_and_orig_name))
     if get_links:
@@ -265,7 +269,7 @@ def clean_market(market_info: list, market_key_to_link: dict) -> list:
         market_key = f"{m['exchange'].upper()}:{m['ticker'].upper()}"
         ref_market_info.append({
             "text": market_key,
-            "url": market_key_to_link[market_key]
+            "url": market_key_to_link.get(market_key)
         })
     return ref_market_info
 

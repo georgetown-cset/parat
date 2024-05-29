@@ -6,7 +6,7 @@
   "production_table": "tickers",
   "column_map": {
     "Organization": "EXCLUDE",
-    "Organization ID": "CSET_id",
+    "Organization ID": "new_cset_id",
     "Market": "market",
     "Ticker": "ticker"
   }

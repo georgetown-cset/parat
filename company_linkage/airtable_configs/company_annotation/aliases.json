@@ -7,7 +7,7 @@
   "column_map": {
     "Row": "alias",
     "Organization": "EXCLUDE",
-    "Organization ID": "CSET_id",
+    "Organization ID": "new_cset_id",
     "Alias language": "alias_language"
   }
 }
