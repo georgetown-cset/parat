@@ -61,8 +61,8 @@ CRUNCHBASE_URL_OVERRIDE = {
     ("https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&"
      "utm_campaign=odm_csv"): "https://www.crunchbase.com/organization/covariant"
 }
-# Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
-FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
+# Exchanges to display in the UI, selected by Zach
+FILT_EXCHANGES = {"NYSE", "NASDAQ", "HKG", "SSH", "SSE", "SZSE"}
 
 APPLICATION_PATENT_CATEGORIES = {"Language_Processing", "Speech_Processing", "Knowledge_Representation", "Planning_and_Scheduling", "Control", "Distributed_AI", "Robotics", "Computer_Vision", "Analytics_and_Algorithms", "Measuring_and_Testing"}
 INDUSTRY_PATENT_CATEGORIES = {"Physical_Sciences_and_Engineering", "Life_Sciences", "Security__eg_cybersecurity", "Transportation", "Industrial_and_Manufacturing", "Education", "Document_Mgt_and_Publishing", "Military", "Agricultural", "Computing_in_Government", "Personal_Devices_and_Computing", "Banking_and_Finance", "Telecommunications", "Networks__eg_social_IOT_etc", "Business", "Energy_Management", "Entertainment", "Nanotechnology", "Semiconductors"}
@@ -95,6 +95,8 @@ def get_exchange_link(market_key: str) -> dict:
     time.sleep(1)
     # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
     first, last = sorted(market_key.strip(":").split(":"))
+    if first.upper() not in FILT_EXCHANGES:
+        return None
     gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:87.0) Gecko/20100101 Firefox/87.0"
@@ -175,7 +177,8 @@ def retrieve_raw(get_links: bool) -> None:
         with open(EXCHANGE_LINK_FI, mode="w") as out:
             for mi in market_info:
                 mi_row = get_exchange_link(mi)
-                out.write(json.dumps(mi_row)+"\n")
+                if mi_row:
+                    out.write(json.dumps(mi_row)+"\n")
 
 
 def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
@@ -266,6 +269,8 @@ def clean_market(market_info: list, market_key_to_link: dict) -> list:
         return []
     ref_market_info = []
     for m in market_info:
+        if not m["exchange"].upper() in FILT_EXCHANGES:
+            continue
         market_key = f"{m['exchange'].upper()}:{m['ticker'].upper()}"
         ref_market_info.append({
             "text": market_key,
@@ -566,9 +571,7 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
     js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
-    market = clean_market(js.pop("market"), market_key_to_link)
-    js["market_filt"] = [m for m in market if m["text"].split(":")[0] in FILT_EXCHANGES]
-    js["market_full"] = market
+    js["market"] = clean_market(js.pop("market"), market_key_to_link)
     js["website"] = clean_link(js["website"])
     js["crunchbase_description"] = js.pop("short_description")
     js["crunchbase"] = clean_crunchbase(js["crunchbase"])
