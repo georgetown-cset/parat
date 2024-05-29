@@ -1,6 +1,5 @@
 import argparse
 import chardet
-import csv
 import json
 import os
 import pycountry
@@ -16,6 +15,7 @@ from decimal import Decimal, ROUND_HALF_UP
 from google.cloud import bigquery
 from google.cloud import translate_v3beta1 as translate
 from io import BytesIO
+from tqdm import tqdm
 
 """
 Retrieves and reformats raw data for consumption by javascript
@@ -87,28 +87,21 @@ GROUP_OFFSET = 1_000_000
 
 def get_exchange_link(market_key: str) -> dict:
     """
-    Given a exchange:ticker market key, check google finance links for both exchange:ticker and ticker:exchange
-    (ordering is not consistent and at most one variant leads to a valid url).
+    Given a exchange:ticker market key, check google finance links for ticker:exchange link
     :param market_key: exchange:ticker
     :return: A dict mapping market_key to the input market_key and link to the link, if successfully found, else None
     """
-    time.sleep(1)
     # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
-    first, last = sorted(market_key.strip(":").split(":"))
-    if first.upper() not in FILT_EXCHANGES:
+    exchange, ticker = [e.strip() for e in market_key.strip(":").split(":")]
+    if exchange not in FILT_EXCHANGES:
         return None
-    gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
+    gf_link = f"https://www.google.com/finance/quote/{ticker}:{exchange}"
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:87.0) Gecko/20100101 Firefox/87.0"
     }
+    time.sleep(1)
     r = requests.get(gf_link, headers=headers)
-    if "No results found" in r.text:
-        gf_link = f"https://www.google.com/finance/quote/{last}:{first}"
-        time.sleep(1)
-        r = requests.get(gf_link, headers=headers)
-        return {"market_key": market_key, "link": None if "No results found" in r.text else gf_link}
-    else:
-        return {"market_key": market_key, "link": gf_link}
+    return {"market_key": market_key, "link": None if "No results found" in r.text else gf_link}
 
 
 def get_permid_sector(permid: str) -> str:
@@ -175,7 +168,7 @@ def retrieve_raw(get_links: bool) -> None:
     if get_links:
         print("retrieving market links")
         with open(EXCHANGE_LINK_FI, mode="w") as out:
-            for mi in market_info:
+            for mi in tqdm(market_info):
                 mi_row = get_exchange_link(mi)
                 if mi_row:
                     out.write(json.dumps(mi_row)+"\n")
