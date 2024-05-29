@@ -307,7 +307,8 @@ def add_ranks(rows: list) -> None:
         all_metrics = set()
         row_and_key_groups = [(rows, "rank"),
                                ([r for r in rows if r.get("groups", {}).get("sp500")], "sp500_rank"),
-                               ([r for r in rows if r.get("groups", {}).get("global500")], "fortune500_rank")]
+                               ([r for r in rows if r.get("groups", {}).get("global500")], "fortune500_rank"),
+                               ([r for r in rows if r.get("groups", {}).get("globalBigTech")], "globalBigTech_rank")]
         for filtered_rows, rank_key in row_and_key_groups:
             for row in filtered_rows:
                 for metric in row.get(metric_list_name, {}):
@@ -575,7 +576,8 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["child_crunchbase"] = clean_crunchbase(js["child_crunchbase"])
     group_keys_to_names = {
         "sp500": "in_sandp_500",
-        "global500": "in_fortune_global_500"
+        "global500": "in_fortune_global_500",
+        "globalBigTech": "in_global_big_tech"
     }
     js["groups"] = {k: js.pop(v, False) for k, v in group_keys_to_names.items()}
 
@@ -868,7 +870,12 @@ def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
             "name": "Fortune Global 500",
             "cset_id": GROUP_OFFSET+501,
             "rows": []
-        }
+        },
+        "globalBigTech": {
+            "name": "Global Big Tech",
+            "cset_id": GROUP_OFFSET+502,
+            "rows": []
+        },
     }
     for row in rows:
         company_rows.append(row)

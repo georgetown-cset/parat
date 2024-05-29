@@ -146,9 +146,9 @@ const DetailViewPublications = ({
             "S&P 500 (average)",
             overall.groups.sp500.articles[aiSubfield].counts
           ],
-          data.groups.global500 && [
-            "Fortune Global 500 (average)",
-            overall.groups.global500.articles[aiSubfield].counts
+          data.groups.globalBigTech && [
+            "Global Big Tech (average)",
+            overall.groups.globalBigTech.articles[aiSubfield].counts
           ],
         ]}
         id="ai-subfield-research"
@@ -181,9 +181,9 @@ const DetailViewPublications = ({
             "S&P 500 (average)",
             overall.groups.sp500.articles.ai_pubs_top_conf.counts
           ],
-          data.groups.global500 && [
-            "Fortune Global 500 (average)",
-            overall.groups.global500.articles.ai_pubs_top_conf.counts
+          data.groups.globalBigTech && [
+            "Global Big Tech (average)",
+            overall.groups.globalBigTech.articles.ai_pubs_top_conf.counts
           ],
         ]}
         id="ai-top-conference-pubs-2"

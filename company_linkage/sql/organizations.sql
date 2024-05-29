@@ -14,6 +14,14 @@ global_500 AS (
   where
     name = "Global 500"
 ),
+global_big_tech AS (
+  SELECT DISTINCT
+    new_cset_id
+  FROM
+    parat_input.groups
+  where
+    name = "Global Big Tech"
+),
 mapped_parents AS (
   SELECT
     parentage.new_cset_id,
@@ -89,7 +97,8 @@ FROM (
     ARRAY_AGG(DISTINCT IF(source = "BGOV", external_id, null) IGNORE NULLS) AS BGOV_id,
     ARRAY_AGG(DISTINCT IF(source = "LinkedIn", external_id, null) IGNORE NULLS) AS linkedin,
     sp_500.new_cset_id IS NOT NULL AS in_sandp_500,
-    global_500.new_cset_id IS NOT NULL AS in_fortune_global_500
+    global_500.new_cset_id IS NOT NULL AS in_fortune_global_500,
+    global_big_tech.new_cset_id IS NOT NULL AS in_global_big_tech
   FROM
     parat_input.organizations
   LEFT JOIN
@@ -124,6 +133,10 @@ FROM (
     global_500
   USING
     (new_cset_id)
+  LEFT JOIN
+    global_big_tech
+  USING
+    (new_cset_id)
   GROUP BY
     new_cset_id,
     name,
@@ -137,4 +150,5 @@ FROM (
     website,
     in_sandp_500,
     in_fortune_global_500,
+    in_global_big_tech,
     new_cset_id)

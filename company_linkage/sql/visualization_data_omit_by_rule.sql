@@ -26,7 +26,8 @@ WITH
     AND (tt1_jobs = 0 or tt1_jobs IS NULL)
     AND ARRAY_LENGTH(market) = 0
     and in_fortune_global_500 IS FALSE
-    and in_sandp_500 IS FALSE)
+    and in_sandp_500 IS FALSE
+    and in_global_big_tech IS FALSE)
 SELECT
   *
 FROM
