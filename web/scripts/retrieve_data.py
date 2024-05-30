@@ -82,6 +82,11 @@ YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
 # when creating fake CSET ids for groups
 GROUP_OFFSET = 1_000_000
 
+_middle_east = ["Egypt", "Iran", "Turkey", "Iraq", "Saudi Arabia", "Yemen", "Syria", "Jordan",
+               "United Arab Emirates", "Israel", "Lebanon", "Palestine", "Oman", "Kuwait", "Qatar", "Bahrain"]
+A2_MIDDLE_EAST = [pycountry_convert.country_name_to_country_alpha2(c).lower() for c in _middle_east]
+assert not any([c is None for c in A2_MIDDLE_EAST]), f"Null country in {A2_MIDDLE_EAST}"
+
 ### END CONSTANTS ###
 
 
@@ -421,10 +426,14 @@ def get_continent(country: str) -> str:
     """
     if country is None:
         return None
+    # Converting everything to alpha2 as a hacky way of normalizing input countries
     alpha2 = pycountry_convert.country_name_to_country_alpha2(country)
-    continent_code = pycountry_convert.country_alpha2_to_continent_code(alpha2)
-    continent = pycountry_convert.convert_continent_code_to_continent_name(continent_code)
-    return continent
+    if alpha2.lower() in A2_MIDDLE_EAST:
+        return "Middle East"
+    else:
+        continent_code = pycountry_convert.country_alpha2_to_continent_code(alpha2)
+        continent = pycountry_convert.convert_continent_code_to_continent_name(continent_code)
+        return continent
 
 
 def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:

@@ -117,6 +117,7 @@ class TestMkTabText(unittest.TestCase):
         self.assertEqual("Asia", get_continent("Taiwan"))
         self.assertEqual("Oceania", get_continent("Australia"))
         self.assertEqual("Africa", get_continent("Ethiopia"))
+        self.assertEqual("Middle East", get_continent("Iran"))
 
     def test_clean_company_name(self):
         self.assertEqual(clean_company_name("captricity", {}), "Vidado")
