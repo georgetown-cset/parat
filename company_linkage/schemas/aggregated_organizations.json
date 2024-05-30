@@ -222,6 +222,12 @@
     "description": "Boolean identifying whether the company was on the 2021 Fortune Global 500 list."
   },
   {
+    "mode": "REQUIRED",
+    "name": "in_global_big_tech",
+    "type": "BOOLEAN",
+    "description": "Boolean identifying whether the company is a big tech company."
+  },
+  {
     "fields": [
       {
         "mode": "NULLABLE",

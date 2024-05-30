@@ -77,7 +77,7 @@ const MoreMetadataDialog = ({
       </div>
     },
     { title: 'In S&P 500?', value: data.groups.sp500 ? 'Yes' : 'No' },
-    { title: 'In Fortune Global 500?', value: data.groups.global500 ? 'Yes' : 'No' },
+    { title: 'In Global Big Tech?', value: data.groups.globalBigTech ? 'Yes' : 'No' },
     { title: 'Stage', value: data.stage },
     {
       title: 'Full market links',

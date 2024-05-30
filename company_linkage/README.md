@@ -25,3 +25,22 @@ docker build -t parat .
 docker tag parat us.gcr.io/gcp-cset-projects/parat
 docker push us.gcr.io/gcp-cset-projects/parat
 ```
+
+# Adding a new company group
+
+At the moment, you need to take the following steps:
+
+1. Edit `sql/organizations.sql`, following the example of "S&P 500"
+1. Edit `sql/initial_visualization_data.sql`, adding a new column for your new group 
+1. Edit `sql/visualization_data_omit_by_rule.sql`, adding a new case for your new group
+1. Edit `schemas/aggregated_organizations.json`, adding a new column for your new group
+1. Edit `parat_scripts/aggregate_organizations.py`, following the example of S&P 500. Also update the docker container as described above
+1. Edit `../web/retrieve_data.py`'s `clean` function, adding an object containing the new company group's metadata
+1. Edit `../web/retrieve_data.py`'s `add_ranks` function, adding a new object to the `row_and_key_groups` array
+1. Edit `../web/retrieve_data.py`'s `clean_misc_groups` function, adding a new object to the `group_keys_to_names` object
+1. Edit these gui files following the example of the S&P 500 group:
+```
+../web/gui-v2/src/components/DetailViewMoreMetadataDialog.jsx
+../web/gui-v2/src/components/DetailViewPatents.jsx
+../web/gui-v2/src/components/DetailViewPublications.jsx <-- do not edit the stat grid entries, these only reference S&P 500
+```

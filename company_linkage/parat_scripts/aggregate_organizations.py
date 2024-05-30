@@ -37,6 +37,7 @@ class Organization:
         self.linkedin = []
         self.in_fortune_global_500 = False
         self.in_sandp_500 = False
+        self.in_global_big_tech = False
 
     def add_location(self, city, province_state, country):
         """
@@ -245,6 +246,9 @@ class Organization:
         if in_fortune_global_500:
             self.in_fortune_global_500 = True
 
+    def add_in_global_big_tech(self, in_global_big_tech):
+        self.in_global_big_tech = in_global_big_tech
+
 
 class OrganizationAggregator:
 
@@ -415,6 +419,7 @@ class OrganizationAggregator:
             org_info.add_parent(parent["parent_acquisition"], parent["parent_name"], parent["parent_id"])
         org_info.add_sandp(org["in_sandp_500"])
         org_info.add_fortune(org["in_fortune_global_500"])
+        org_info.add_in_global_big_tech(org["in_global_big_tech"])
 
     def print_output(self, output_file, local):
         """
@@ -437,6 +442,7 @@ class OrganizationAggregator:
                   "ror_id": org_info.ror, "regex": org_info.regex,
                   "BGOV_id": org_info.bgov_id, "linkedin": org_info.linkedin,
                   "in_sandp_500": org_info.in_sandp_500, "in_fortune_global_500": org_info.in_fortune_global_500,
+                  "in_global_big_tech": org_info.in_global_big_tech,
                   "children": org_info.children,
                   "non_agg_children": org_info.non_agg_children}
             out.write(json.dumps(js, ensure_ascii=False) + "\n")
