@@ -30,8 +30,7 @@
   "parent_info": null,
   "agg_child_info": null,
   "unagg_child_info": null,
-  "market_filt": [],
-  "market_full": [],
+  "market": [],
   "crunchbase_description": "Hugging Face allows users to build, train, and deploy art models using the reference open source in machine learning.",
   "groups": {
     "sp500": false,
