@@ -52,12 +52,11 @@ const DetailViewPublications = ({
   const [aiSubfield, setAiSubfield] = useState("ai_publications");
 
   const articleYearSpanNdash = <>{overall.startArticleYear}&ndash;{overall.endArticleYear}</>;
-  const yearSpanNdash = <>{overall.years[0]}&ndash;{overall.years[overall.years.length-1]}</>;
   const yearSpanAnd = <>{overall.years[0]} and {overall.years[overall.years.length-1]}</>;
 
   const aiResearchPercent = Math.round(1000 * data.articles.ai_publications.total / data.articles.all_publications.total) / 10;
 
-  const aiPubsGrowthTotal = data.articles.ai_publications_growth.total;
+  const aiPubsGrowthTotal = commas(data.articles.ai_publications_growth.total, { maximumFractionDigits: 1 });
   const aiPubsGrowthSign = (aiPubsGrowthTotal > 0) ? '+' : '';
 
   const statGridEntries = [
@@ -78,7 +77,7 @@ const DetailViewPublications = ({
     },
     {
       key: "ai-research-growth",
-      stat: <>{aiPubsGrowthSign}{commas(aiPubsGrowthTotal, { maximumFractionDigits: 1 })}%</>,
+      stat: <>{aiPubsGrowthSign}{aiPubsGrowthTotal ? aiPubsGrowthTotal : "N/A"}{aiPubsGrowthTotal && "%"}</>,
       text: <>growth in {data.name}'s public AI research ({articleYearSpanNdash})</>,
     },
     {
@@ -102,14 +101,11 @@ const DetailViewPublications = ({
   const topAiResearchTopics = Object.entries(data.articles)
     .filter(([_key, val]) => val.isTopResearch)
     .map(([key, val]) => {
-      const startVal = val.counts[startIx];
-      const endVal = val.counts[endIx];
-
       return {
         subfield: articleMap[key],
         articles: val.total,
         citations: Math.round(val.citations_per_article*10)/10,
-        growth: `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`,
+        growth: val.growth ? val.growth : "N/A",
       };
     });
 

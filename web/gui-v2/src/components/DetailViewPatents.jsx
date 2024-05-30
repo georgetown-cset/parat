@@ -52,10 +52,10 @@ const DetailViewPatents = ({
   const yearSpanNdash = <>{overall.years[startIx]}&ndash;{overall.years[endIx]}</>;
   // const yearSpanAnd = <>{overall.years[startIx]} and {overall.years[endIx]}</>;
 
-  const aiPatentStart = data.patents.ai_patents.counts[startIx];
-  const aiPatentEnd = data.patents.ai_patents.counts[endIx];
-  const aiPatentGrowth = Math.round((aiPatentEnd - aiPatentStart) / aiPatentStart * 1000) / 10;
-  const aiPatentPercent = Math.round(data.patents.ai_patents.total / data.patents.all_patents.total * 1000) / 10
+  const aiPatents = data.patents.ai_patents.total;
+  const totalPatents = data.patents.all_patents.total;
+  const aiPatentPercent = totalPatents ? Math.round( aiPatents / totalPatents * 1000) / 10 : "N/A";
+  const aiPatentGrowth = commas(data.patents.ai_patents_growth.total, { maximumFractionDigits: 1 });
 
   const statGridEntries = [
     {
@@ -65,7 +65,7 @@ const DetailViewPatents = ({
     },
     {
       key: "ai-patent-growth",
-      stat: <>{commas(data.patents.ai_patents_growth.total, { maximumFractionDigits: 1 })}%</>,
+      stat: <>{aiPatentGrowth ? aiPatentGrowth : "N/A"}{aiPatentGrowth && "%"}</>,
       text: <>growth in {data.name}'s AI-related patent filing ({yearSpanNdash})</>,
     },
     {
@@ -75,7 +75,7 @@ const DetailViewPatents = ({
     },
     {
       key: "ai-focused-percent",
-      stat: <>{aiPatentPercent}%</>,
+      stat: <>{aiPatentPercent}{totalPatents > 0 && "%"}</>,
       text: <>of {data.name}'s total patents filed were AI-related</>,
     },
   ];
@@ -93,11 +93,10 @@ const DetailViewPatents = ({
     .map((key) => {
       const startVal = data.patents[key].counts[startIx];
       const endVal = data.patents[key].counts[endIx];
-      const growth = `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`;
       return {
         subfield: patentMap[key],
         patents: data.patents[key].total,
-        growth,
+        growth: data.patents[key].growth ? data.patents[key].growth : "N/A",
       };
     })
     .sort((a, b) => b.patents - a.patents);
@@ -107,11 +106,10 @@ const DetailViewPatents = ({
     .map((key) => {
       const startVal = data.patents[key].counts[startIx];
       const endVal = data.patents[key].counts[endIx];
-      const growth = `${Math.round((endVal - startVal) / startVal * 1000) / 10}%`;
       return {
         subfield: patentMap[key],
         patents: data.patents[key].total,
-        growth,
+        growth: data.patents[key].growth ? data.patents[key].growth : "N/A",
       };
     })
     .sort((a, b) => b.patents - a.patents);

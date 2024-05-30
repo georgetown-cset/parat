@@ -518,6 +518,7 @@
     },
     "cv_publications": {
       "citations_per_article": 89.51470588235294,
+      "growth": 72.23,
       "counts": [
         0,
         1,
@@ -536,6 +537,7 @@
     },
     "nlp_publications": {
       "citations_per_article": 6087.0,
+      "growth": -100.0,
       "counts": [
         0,
         0,
@@ -554,6 +556,7 @@
     },
     "robotics_publications": {
       "citations_per_article": 196.3548387096774,
+      "growth": 44.44,
       "counts": [
         0,
         1,
@@ -630,6 +633,7 @@
         0,
         0
       ],
+      "growth": -100.0,
       "total": 8,
       "table": null
     },
@@ -647,6 +651,7 @@
         0,
         0
       ],
+      "growth": 23.61,
       "total": 112,
       "table": "industry"
     },
@@ -664,6 +669,7 @@
         0,
         0
       ],
+      "growth": 38.89,
       "total": 17,
       "table": null
     },
@@ -681,6 +687,7 @@
         0,
         0
       ],
+      "growth": -14.75,
       "total": 267,
       "table": "industry"
     },
@@ -698,6 +705,7 @@
         0,
         0
       ],
+      "growth": 17.85,
       "total": 93,
       "table": "industry"
     },
@@ -715,6 +723,7 @@
         0,
         0
       ],
+      "growth": 44.44,
       "total": 6,
       "table": null
     },
@@ -732,6 +741,7 @@
         0,
         0
       ],
+      "growth": null,
       "total": 0,
       "table": null
     },
@@ -749,6 +759,7 @@
         0,
         0
       ],
+      "growth": -100.0,
       "total": 2,
       "table": null
     },
@@ -766,6 +777,7 @@
         0,
         0
       ],
+      "growth": 114.44,
       "total": 23,
       "table": null
     },
@@ -783,6 +795,7 @@
         0,
         0
       ],
+      "growth": null,
       "total": 1,
       "table": null
     },
@@ -800,6 +813,7 @@
         0,
         0
       ],
+      "growth": 12.98,
       "total": 203,
       "table": "industry"
     },
@@ -817,6 +831,7 @@
         0,
         0
       ],
+      "growth": 16.67,
       "total": 12,
       "table": null
     },
@@ -834,6 +849,7 @@
         0,
         0
       ],
+      "growth": 15.83,
       "total": 114,
       "table": "industry"
     },
@@ -851,6 +867,7 @@
         0,
         0
       ],
+      "growth": null,
       "total": 0,
       "table": null
     },
@@ -868,6 +885,7 @@
         0,
         0
       ],
+      "growth": 31.93,
       "total": 46,
       "table": null
     },
@@ -885,6 +903,7 @@
         0,
         0
       ],
+      "growth": -50.0,
       "total": 8,
       "table": null
     },
@@ -902,6 +921,7 @@
         0,
         0
       ],
+      "growth": -50.0,
       "total": 10,
       "table": null
     },
@@ -919,6 +939,7 @@
         0,
         0
       ],
+      "growth": null,
       "total": 1,
       "table": null
     },
@@ -936,6 +957,7 @@
         0,
         0
       ],
+      "growth": -50.0,
       "total": 4,
       "table": null
     },
@@ -953,6 +975,7 @@
         0,
         0
       ],
+      "growth": -87.5,
       "total": 11,
       "table": null
     },
@@ -970,6 +993,7 @@
         0,
         0
       ],
+      "growth": 26.11,
       "total": 29,
       "table": null
     },
@@ -987,6 +1011,7 @@
         0,
         0
       ],
+      "growth": 2.62,
       "total": 27,
       "table": null
     },
@@ -1004,6 +1029,7 @@
         0,
         0
       ],
+      "growth": 36.67,
       "total": 37,
       "table": "application"
     },
@@ -1021,6 +1047,7 @@
         0,
         0
       ],
+      "growth": -17.95,
       "total": 317,
       "table": "application"
     },
@@ -1038,6 +1065,7 @@
         0,
         0
       ],
+      "growth": -16.67,
       "total": 7,
       "table": null
     },
@@ -1055,6 +1083,7 @@
         0,
         0
       ],
+      "growth": -87.5,
       "total": 16,
       "table": null
     },
@@ -1072,6 +1101,7 @@
         0,
         0
       ],
+      "growth": 21.13,
       "total": 315,
       "table": "application"
     },
@@ -1089,6 +1119,7 @@
         0,
         0
       ],
+      "growth": 10.53,
       "total": 78,
       "table": "application"
     },
@@ -1106,6 +1137,7 @@
         0,
         0
       ],
+      "growth": 0.28,
       "total": 153,
       "table": "application"
     },
