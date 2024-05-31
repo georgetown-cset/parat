@@ -76,8 +76,6 @@ const MoreMetadataDialog = ({
         {data.linkedin.map(e => <ExternalLink href={e} key={e}>{e}</ExternalLink>)}
       </div>
     },
-    { title: 'In S&P 500?', value: data.groups.sp500 ? 'Yes' : 'No' },
-    { title: 'In Global Big Tech?', value: data.groups.globalBigTech ? 'Yes' : 'No' },
     { title: 'Stage', value: data.stage },
   ];
 

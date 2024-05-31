@@ -44,14 +44,6 @@ const styles = {
       padding: 0.5rem;
     }
   `,
-  linkWrapper: css`
-    list-style: none;
-    padding: 0;
-
-    li + li {
-      margin-top: 0;
-    }
-  `,
   buttonWrapper: css`
     display: flex;
     margin-top: 1rem !important;
@@ -73,17 +65,6 @@ const DetailViewIntro = ({
     { title: "Sector", value: data.sector },
     { title: "Website", value: data.website ? <ExternalLink href={data.website}>{data.website}</ExternalLink> : undefined },
   ];
-
-  if ( data.market && data.market.length > 0 ) {
-    metadata.push({
-      title: "Stock tickers",
-      value: (
-        <ul css={styles.linkWrapper}>
-          {data.market.map((e) => <li key={e.text}><ExternalLink href={e.url}>{e.text}</ExternalLink></li>)}
-        </ul>
-      ),
-    });
-  }
 
   const titleCaseSource = (source) => {
     return source.charAt(0).toUpperCase()+source.substr(1);

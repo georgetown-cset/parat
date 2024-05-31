@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { Dropdown } from '@eto/eto-ui-components';
+import { Dropdown, HelpTooltip } from '@eto/eto-ui-components';
 
 import HeaderWithLink from './HeaderWithLink';
 import StatGrid from './StatGrid';
@@ -10,6 +10,7 @@ import TextAndBigStat from './TextAndBigStat';
 import TrendsChart from './TrendsChart';
 import overall from '../static_data/overall_data.json';
 import { patentMap } from '../static_data/table_columns';
+import { tooltips } from '../static_data/tooltips';
 import { commas } from '../util';
 
 const styles = {
@@ -83,7 +84,15 @@ const DetailViewPatents = ({
   const patentTableColumns = [
     { display_name: "Subfield", key: "subfield" },
     { display_name: "Patent applications", key: "patents" },
-    { display_name: <>Growth ({overall.startPatentYear}&ndash;{overall.endPatentYear})</>, key: "growth" },
+    {
+      display_name: (
+        <>
+          Growth ({overall.startPatentYear}&ndash;{overall.endPatentYear})
+          <HelpTooltip smallIcon={true} text={tooltips.detailView.growthColumnExplanation} />
+        </>
+      ),
+      key: "growth",
+    },
   ];
 
   const patentSubkeys = Object.keys(data.patents);

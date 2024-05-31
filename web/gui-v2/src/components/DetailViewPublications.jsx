@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { Dropdown } from '@eto/eto-ui-components';
+import { Dropdown, HelpTooltip } from '@eto/eto-ui-components';
 
 import HeaderWithLink from './HeaderWithLink';
 import StatGrid from './StatGrid';
@@ -10,6 +10,7 @@ import TextAndBigStat from './TextAndBigStat';
 import TrendsChart from './TrendsChart';
 import overall from '../static_data/overall_data.json';
 import { articleMap } from '../static_data/table_columns';
+import { tooltips } from '../static_data/tooltips';
 import { commas } from '../util';
 
 const styles = {
@@ -96,7 +97,15 @@ const DetailViewPublications = ({
     { display_name: "Subfield", key: "subfield" },
     { display_name: "Articles", key: "articles" },
     { display_name: "Citations per article", key: "citations" },
-    { display_name: <>Growth ({overall.startArticleYear}&ndash;{overall.endArticleYear})</>, key: "growth" },
+    {
+      display_name: (
+        <>
+          Growth ({overall.startArticleYear}&ndash;{overall.endArticleYear})
+          <HelpTooltip smallIcon={true} text={tooltips.detailView.growthColumnExplanation} />
+        </>
+      ),
+      key: "growth",
+    },
   ];
   const topAiResearchTopics = Object.entries(data.articles)
     .filter(([_key, val]) => val.isTopResearch)

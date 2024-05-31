@@ -60,6 +60,9 @@ const tooltips = {
     ai_jobs: "",
     tt1_jobs: "",
   },
+  detailView: {
+    growthColumnExplanation: "Average year-to-year percentage change for years with non-zero starting values over this interval",
+  },
   groupExplanations: {
     sp500: (
       <>
