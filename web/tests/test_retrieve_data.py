@@ -38,16 +38,14 @@ class TestMkTabText(unittest.TestCase):
 
     def test_clean_market(self):
         market_info = [
-            {"exchange": "EX", "ticker": "T1"},
-            {"exchange": "EX", "ticker": "T2"},
+            {"exchange": "NYSE", "ticker": "T1"},
+            {"exchange": "FOO", "ticker": "T2"},
         ]
         market_key_to_link = {
-            "EX:T1": "https://www.google.com/finance/quote/EX:T1",
-            "EX:T2": "https://www.google.com/finance/quote/T2:EX"
+            "NYSE:T1": "https://www.google.com/finance/quote/T1:NYSE",
         }
         expected_output = [
-            {"text": "EX:T1", "url": "https://www.google.com/finance/quote/EX:T1"},
-            {"text": "EX:T2", "url": "https://www.google.com/finance/quote/T2:EX"}
+            {"text": "NYSE:T1", "url": "https://www.google.com/finance/quote/T1:NYSE"},
         ]
         self.assertEqual(clean_market(market_info, market_key_to_link), expected_output)
         self.assertEqual(clean_market([], market_key_to_link), [])
@@ -119,6 +117,7 @@ class TestMkTabText(unittest.TestCase):
         self.assertEqual("Asia", get_continent("Taiwan"))
         self.assertEqual("Oceania", get_continent("Australia"))
         self.assertEqual("Africa", get_continent("Ethiopia"))
+        self.assertEqual("Middle East", get_continent("Iran"))
 
     def test_clean_company_name(self):
         self.assertEqual(clean_company_name("captricity", {}), "Vidado")

@@ -67,60 +67,10 @@
   "parent_info": null,
   "agg_child_info": "Intrinsic, Waymo, Vicarious Ai, Verily Life Sciences",
   "unagg_child_info": "Google Brain, Deepmind, Google, Fitbit, Nest, Google Robotics",
-  "market_filt": [
+  "market": [
     {
       "text": "NASDAQ:GOOG",
       "url": "https://www.google.com/finance/quote/GOOG:NASDAQ"
-    },
-    {
-      "text": "NASDAQ:GOOGL",
-      "url": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
-    }
-  ],
-  "market_full": [
-    {
-      "text": "NASDAQ:GOOG",
-      "url": "https://www.google.com/finance/quote/GOOG:NASDAQ"
-    },
-    {
-      "text": "BMV:GOOGL",
-      "url": "https://www.google.com/finance/quote/BMV:GOOGL"
-    },
-    {
-      "text": "DUS:ABEA",
-      "url": "https://www.google.com/finance/quote/ABEA:DUS"
-    },
-    {
-      "text": "MOEX:GOOG-RM",
-      "url": "https://www.google.com/finance/quote/GOOG-RM:MOEX"
-    },
-    {
-      "text": "NEO:GOOG",
-      "url": "https://www.google.com/finance/quote/GOOG:NEO"
-    },
-    {
-      "text": "MUN:ABEA",
-      "url": "https://www.google.com/finance/quote/ABEA:MUN"
-    },
-    {
-      "text": "MIL:GOOGL",
-      "url": "https://www.google.com/finance/quote/GOOGL:MIL"
-    },
-    {
-      "text": "XETR:ABEA",
-      "url": "https://www.google.com/finance/quote/ABEA:XETR"
-    },
-    {
-      "text": "HAM:ABEA",
-      "url": "https://www.google.com/finance/quote/ABEA:HAM"
-    },
-    {
-      "text": "LON:0RIH",
-      "url": "https://www.google.com/finance/quote/0RIH:LON"
-    },
-    {
-      "text": "BER:ABEA",
-      "url": "https://www.google.com/finance/quote/ABEA:BER"
     },
     {
       "text": "NASDAQ:GOOGL",

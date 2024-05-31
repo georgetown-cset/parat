@@ -74,12 +74,12 @@ const DetailViewIntro = ({
     { title: "Website", value: data.website ? <ExternalLink href={data.website}>{data.website}</ExternalLink> : undefined },
   ];
 
-  if ( data.market_filt && data.market_filt.length > 0 ) {
+  if ( data.market && data.market.length > 0 ) {
     metadata.push({
       title: "Stock tickers",
       value: (
         <ul css={styles.linkWrapper}>
-          {data.market_filt.map((e) => <li key={e.text}><ExternalLink href={e.url}>{e.text}</ExternalLink></li>)}
+          {data.market.map((e) => <li key={e.text}><ExternalLink href={e.url}>{e.text}</ExternalLink></li>)}
         </ul>
       ),
     });

@@ -1,6 +1,5 @@
 import argparse
 import chardet
-import csv
 import json
 import os
 import pycountry
@@ -16,6 +15,7 @@ from decimal import Decimal, ROUND_HALF_UP
 from google.cloud import bigquery
 from google.cloud import translate_v3beta1 as translate
 from io import BytesIO
+from tqdm import tqdm
 
 """
 Retrieves and reformats raw data for consumption by javascript
@@ -61,8 +61,8 @@ CRUNCHBASE_URL_OVERRIDE = {
     ("https://www.crunchbase.com/organization/embodied-intelligence?utm_source=crunchbase&utm_medium=export&"
      "utm_campaign=odm_csv"): "https://www.crunchbase.com/organization/covariant"
 }
-# Exchanges to show in the "main metadata" (as opposed to expanded metadata) view; selected by Zach
-FILT_EXCHANGES = {"NYSE", "NASDAQ", "SSE", "SZSE", "SEHK", "HKG", "TPE", "TYO", "KRX"}
+# Exchanges to display in the UI, selected by Zach
+FILT_EXCHANGES = {"NYSE", "NASDAQ", "HKG", "SSH", "SSE", "SZSE"}
 
 APPLICATION_PATENT_CATEGORIES = {"Language_Processing", "Speech_Processing", "Knowledge_Representation", "Planning_and_Scheduling", "Control", "Distributed_AI", "Robotics", "Computer_Vision", "Analytics_and_Algorithms", "Measuring_and_Testing"}
 INDUSTRY_PATENT_CATEGORIES = {"Physical_Sciences_and_Engineering", "Life_Sciences", "Security__eg_cybersecurity", "Transportation", "Industrial_and_Manufacturing", "Education", "Document_Mgt_and_Publishing", "Military", "Agricultural", "Computing_in_Government", "Personal_Devices_and_Computing", "Banking_and_Finance", "Telecommunications", "Networks__eg_social_IOT_etc", "Business", "Energy_Management", "Entertainment", "Nanotechnology", "Semiconductors"}
@@ -82,31 +82,30 @@ YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
 # when creating fake CSET ids for groups
 GROUP_OFFSET = 1_000_000
 
+_middle_east = ["Egypt", "Iran", "Turkey", "Iraq", "Saudi Arabia", "Yemen", "Syria", "Jordan",
+               "United Arab Emirates", "Israel", "Lebanon", "Palestine", "Oman", "Kuwait", "Qatar", "Bahrain"]
+A2_MIDDLE_EAST = [pycountry_convert.country_name_to_country_alpha2(c).lower() for c in _middle_east]
+assert not any([c is None for c in A2_MIDDLE_EAST]), f"Null country in {A2_MIDDLE_EAST}"
+
 ### END CONSTANTS ###
 
 
 def get_exchange_link(market_key: str) -> dict:
     """
-    Given a exchange:ticker market key, check google finance links for both exchange:ticker and ticker:exchange
-    (ordering is not consistent and at most one variant leads to a valid url).
+    Given a exchange:ticker market key, check google finance links for ticker:exchange link
     :param market_key: exchange:ticker
     :return: A dict mapping market_key to the input market_key and link to the link, if successfully found, else None
     """
-    time.sleep(1)
-    # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
-    first, last = sorted(market_key.strip(":").split(":"))
-    gf_link = f"https://www.google.com/finance/quote/{first}:{last}"
+    exchange, ticker = [e.strip() for e in market_key.strip(":").split(":")]
+    if exchange not in FILT_EXCHANGES:
+        return None
+    gf_link = f"https://www.google.com/finance/quote/{ticker}:{exchange}"
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:87.0) Gecko/20100101 Firefox/87.0"
     }
+    time.sleep(1)
     r = requests.get(gf_link, headers=headers)
-    if "No results found" in r.text:
-        gf_link = f"https://www.google.com/finance/quote/{last}:{first}"
-        time.sleep(1)
-        r = requests.get(gf_link, headers=headers)
-        return {"market_key": market_key, "link": None if "No results found" in r.text else gf_link}
-    else:
-        return {"market_key": market_key, "link": gf_link}
+    return {"market_key": market_key, "link": None if "No results found" in r.text else gf_link}
 
 
 def get_permid_sector(permid: str) -> str:
@@ -173,9 +172,10 @@ def retrieve_raw(get_links: bool) -> None:
     if get_links:
         print("retrieving market links")
         with open(EXCHANGE_LINK_FI, mode="w") as out:
-            for mi in market_info:
+            for mi in tqdm(market_info):
                 mi_row = get_exchange_link(mi)
-                out.write(json.dumps(mi_row)+"\n")
+                if mi_row:
+                    out.write(json.dumps(mi_row)+"\n")
 
 
 def retrieve_image(url: str, company_name: str, refresh_images: bool) -> str:
@@ -266,6 +266,8 @@ def clean_market(market_info: list, market_key_to_link: dict) -> list:
         return []
     ref_market_info = []
     for m in market_info:
+        if not m["exchange"].upper() in FILT_EXCHANGES:
+            continue
         market_key = f"{m['exchange'].upper()}:{m['ticker'].upper()}"
         ref_market_info.append({
             "text": market_key,
@@ -423,10 +425,14 @@ def get_continent(country: str) -> str:
     """
     if country is None:
         return None
+    # Converting everything to alpha2 as a hacky way of normalizing input countries
     alpha2 = pycountry_convert.country_name_to_country_alpha2(country)
-    continent_code = pycountry_convert.country_alpha2_to_continent_code(alpha2)
-    continent = pycountry_convert.convert_continent_code_to_continent_name(continent_code)
-    return continent
+    if alpha2.lower() in A2_MIDDLE_EAST:
+        return "Middle East"
+    else:
+        continent_code = pycountry_convert.country_alpha2_to_continent_code(alpha2)
+        continent = pycountry_convert.convert_continent_code_to_continent_name(continent_code)
+        return continent
 
 
 def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
@@ -566,9 +572,7 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["parent_info"] = clean_parent(js.pop("parent"), lowercase_to_orig_cname)
     js["agg_child_info"] = clean_children(js.pop("children"), lowercase_to_orig_cname)
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
-    market = clean_market(js.pop("market"), market_key_to_link)
-    js["market_filt"] = [m for m in market if m["text"].split(":")[0] in FILT_EXCHANGES]
-    js["market_full"] = market
+    js["market"] = clean_market(js.pop("market"), market_key_to_link)
     js["website"] = clean_link(js["website"])
     js["crunchbase_description"] = js.pop("short_description")
     js["crunchbase"] = clean_crunchbase(js["crunchbase"])
