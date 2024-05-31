@@ -96,7 +96,6 @@ def get_exchange_link(market_key: str) -> dict:
     :param market_key: exchange:ticker
     :return: A dict mapping market_key to the input market_key and link to the link, if successfully found, else None
     """
-    # for some mysterious reason, the ticker/market ordering is alphabetical in google finance
     exchange, ticker = [e.strip() for e in market_key.strip(":").split(":")]
     if exchange not in FILT_EXCHANGES:
         return None
