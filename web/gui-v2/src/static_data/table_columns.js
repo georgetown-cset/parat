@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
+import { tooltips } from './tooltips';
 import overall from '../static_data/overall_data.json';
 import CellStat from '../components/CellStat';
 import { slugifyCompanyName } from '../util';
@@ -571,11 +572,8 @@ const columnDefinitions = [
       "ai_jobs",
       undefined, // Use default extract function
       (_val, row) => {
-        if ( row?._group || row.linkedin.length > 0 ) {
-          return <CellStat data={row.other_metrics.ai_jobs} />;
-        } else {
-          return <CellStat data={{ total: null }} />
-        }
+        const data = (row?._group || row.linkedin.length > 0) ? row.other_metrics.ai_jobs : {total: null};
+        return <CellStat col="ai_jobs" country={row.country} data={data} />;
       },
     ),
     tooltip: "Zach_tktk"
@@ -589,11 +587,8 @@ const columnDefinitions = [
       "tt1_jobs",
       undefined, // Use default extract function
       (_val, row) => {
-        if ( row?._group || row.linkedin.length > 0 ) {
-          return <CellStat data={row.other_metrics.tt1_jobs} />;
-        } else {
-          return <CellStat data={{ total: null }} />
-        }
+        const data = (row?._group || row.linkedin.length > 0) ? row.other_metrics.tt1_jobs : {total: null};
+        return <CellStat col="tt1_jobs" country={row.country} data={data} />;
       },
     ),
     initialCol: true,

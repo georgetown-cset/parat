@@ -85,6 +85,11 @@ const tooltips = {
       </>
     ),
   },
+  jobsExplanations: {
+    chinaJobs: "zach_tktk_china",
+    otherJobs: "zach_tktk_other",
+    noData: "--zach_tktk_null--",
+  },
 };
 
 export { tooltips };

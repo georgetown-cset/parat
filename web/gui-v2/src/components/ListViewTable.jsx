@@ -97,6 +97,7 @@ const styles = {
     }
   `,
   buttonBarRight: css`
+    display: flex;
     margin-left: auto;
   `,
   buttonBarButton: css`
@@ -238,7 +239,7 @@ const GROUPS_OPTIONS = Object.entries(overallData.groups)
     text: (
       tooltips?.groupExplanations?.[k] ?
         <div css={styles.dropdownEntryWithTooltip}>
-          {v.name} <HelpTooltip css={styles.groupExplanationTooltip} text={tooltips.groupExplanations[k]} />
+          {v.name} <HelpTooltip css={styles.groupExplanationTooltip} smallIcon={true} text={tooltips.groupExplanations[k]} />
         </div>
       :
         v.name

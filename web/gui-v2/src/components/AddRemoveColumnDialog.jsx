@@ -115,7 +115,7 @@ const AddRemoveColumnDialog = ({
                   disabled={colDef.key === "name"}
                 />
                 {colDef.title}
-                {colDef?.tooltip && <HelpTooltip text={colDef.tooltip} />}
+                {colDef?.tooltip && <HelpTooltip smallIcon={true} text={colDef.tooltip} />}
               </label>
             ))
           }
