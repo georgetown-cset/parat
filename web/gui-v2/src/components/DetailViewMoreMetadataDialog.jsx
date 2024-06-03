@@ -36,6 +36,10 @@ const styles = {
     display: flex;
     flex-direction: column;
   `,
+  stockList: css`
+    list-style: none;
+    margin: 0;
+  `,
   dialogBottom: css`
     display: flex;
     justify-content: center;
@@ -76,10 +80,19 @@ const MoreMetadataDialog = ({
         {data.linkedin.map(e => <ExternalLink href={e} key={e}>{e}</ExternalLink>)}
       </div>
     },
-    { title: 'In S&P 500?', value: data.groups.sp500 ? 'Yes' : 'No' },
-    { title: 'In Global Big Tech?', value: data.groups.globalBigTech ? 'Yes' : 'No' },
     { title: 'Stage', value: data.stage },
   ];
+
+  if ( data.market && data.market.length > 0 ) {
+    metadata.push({
+      title: "Stock tickers",
+      value: (
+        <ul css={styles.stockList}>
+          {data.market.map((e) => <li key={e.text}><ExternalLink href={e.url}>{e.text}</ExternalLink></li>)}
+        </ul>
+      ),
+    });
+  }
 
   const handleClose = () => {
     updateIsOpen(false);

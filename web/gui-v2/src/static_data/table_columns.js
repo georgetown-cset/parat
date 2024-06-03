@@ -576,6 +576,7 @@ const columnDefinitions = [
         return <CellStat col="ai_jobs" country={row.country} data={data} />;
       },
     ),
+    initialCol: true,
     tooltip: "Zach_tktk"
   },
   {
@@ -591,7 +592,6 @@ const columnDefinitions = [
         return <CellStat col="tt1_jobs" country={row.country} data={data} />;
       },
     ),
-    initialCol: true,
     tooltip: "Zach_tktk",
   },
 ];

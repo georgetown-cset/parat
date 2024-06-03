@@ -40,7 +40,6 @@ At the moment, you need to take the following steps:
 1. Edit `../web/retrieve_data.py`'s `clean_misc_groups` function, adding a new object to the `group_keys_to_names` object
 1. Edit these gui files following the example of the S&P 500 group:
 ```
-../web/gui-v2/src/components/DetailViewMoreMetadataDialog.jsx
 ../web/gui-v2/src/components/DetailViewPatents.jsx
 ../web/gui-v2/src/components/DetailViewPublications.jsx <-- do not edit the stat grid entries, these only reference S&P 500
 ```
