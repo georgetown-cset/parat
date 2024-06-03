@@ -64,7 +64,7 @@ const DetailViewPublications = ({
     {
       key: "ai-papers",
       stat: <>#{data.articles.ai_publications.rank}</>,
-      text: <>in PARAT for number of AI research articles</>,
+      text: <span>in PARAT for number of AI research articles <HelpTooltip smallIcon={true} text={tooltips.detailView.publications.aiResearchArticles} /></span>,
     },
     {
       key: "average-citations",
@@ -74,7 +74,7 @@ const DetailViewPublications = ({
     {
       key: "highly-cited",
       stat: <>{commas(data.articles.highly_cited_ai_pubs.total)}</>,
-      text: <>highly cited articles (#{commas(data.articles.highly_cited_ai_pubs.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.highly_cited_ai_pubs.sp500_rank)} in the S&P 500</>})</>,
+      text: <span>highly-cited articles (#{commas(data.articles.highly_cited_ai_pubs.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.highly_cited_ai_pubs.sp500_rank)} in the S&P 500</>}) <HelpTooltip smallIcon={true} text={tooltips.detailView.publications.highlyCitedArticles} /></span>,
     },
     {
       key: "ai-research-growth",
@@ -134,14 +134,14 @@ const DetailViewPublications = ({
         bigText={<>{commas(data.articles.ai_publications.total)} AI research articles</>}
       />
 
-      <StatGrid css={styles.sectionMargin} entries={statGridEntries} />
+      <StatGrid entries={statGridEntries} />
 
       <TableSection
         columns={topAiResearchTopicsColumns}
         css={styles.section}
         data={topAiResearchTopics}
         id="top-research-topics"
-        title={<>{data.name}'s top AI research topics</>}
+        title={<>{data.name}'s top AI research topics <HelpTooltip text={tooltips.detailView.publications.topResearchTopicsTable} /></>}
       />
 
       <TrendsChart
@@ -198,7 +198,7 @@ const DetailViewPublications = ({
         id="ai-top-conference-pubs-2"
         layoutChanges={chartLayoutChanges}
         partialStartIndex={endIx}
-        title={<>{data.name}'s top AI conference publications</>}
+        title={<>{data.name}'s top AI conference publications <HelpTooltip text={tooltips.detailView.publications.topConferencePubsChart} /></>}
         years={overall.years}
       />
     </>

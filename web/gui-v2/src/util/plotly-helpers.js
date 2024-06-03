@@ -1,15 +1,25 @@
 import merge from 'lodash/merge';
 import { PlotlyDefaults } from '@eto/eto-ui-components';
 
+// Derived from the Plotly default colors: https://community.plotly.com/t/plotly-colours-list/11730/3
 export const CHART_COLORS = {
-  COMPANY: "rgb(31, 119, 180)",
-  SP500: "rgb(44, 160, 44)",
-  GLOBAL500: "rgb(148, 103, 189)",
+  COMPANY: "rgb(31, 119, 180)", // "muted blue"
+  SP500: "rgb(44, 160, 44)", // "cooked asparagus green"
+  GLOBAL500: "rgb(148, 103, 189)", // "muted purple"
+  GLOBALBIGTECH: "rgb(214, 39, 40)", // "brick red"
+
+  // Colors available for future groups
+  __NEXT_0: "#ff7f0e", // "safety orange"
+  __NEXT_1: "#8c564b", // "chestnut brown"
+  __NEXT_2: "#e377c2", // "raspberry yogurt pink"
+  __NEXT_3: "#bcbd22", // "curry yellow-green"
+  __NEXT_4: "#17becf", // "blue-teal"
 };
 
 const GROUP_COLOR_MAP = {
   "S&P 500 (average)": CHART_COLORS.SP500,
   "Fortune Global 500 (average)": CHART_COLORS.GLOBAL500,
+  "Global Big Tech (average)": CHART_COLORS.GLOBALBIGTECH,
 };
 
 const assembleChartData = (name, years, vals, otherParams, options={}) => {
