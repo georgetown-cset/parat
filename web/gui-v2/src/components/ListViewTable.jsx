@@ -793,18 +793,36 @@ const ListViewTable = ({
     <>
       <label>Active filters:</label>
       <ul css={styles.activeFiltersList}>
-        {activeFilters.map((filter) => {
+        {activeFilters.flatMap((filter) => {
           const [key, values] = filter;
           const title = columnKeyMap[key];
-          if ( DROPDOWN_COLUMNS.includes(key) ) {
-            return <li key={key}>{title}: <span>{values.join(", ")}</span></li>;
+          if ( key === 'name' ) {
+            const groups = []
+            const companies = [];
+            values.forEach((entry) => {
+              if ( entry.startsWith("GROUP:") ) {
+                groups.push(overallData.groups[entry.split(":")[1]].name);
+              } else {
+                companies.push(entry);
+              }
+            });
+            return [
+              groups.length > 0 && (
+                <li key="groups">Group: <span>{groups.join(", ")}</span></li>
+              ),
+              companies.length > 0 && (
+                <li key="companies">{title}: <span>{companies.join(", ")}</span></li>
+              ),
+            ];
+          } else if ( DROPDOWN_COLUMNS.includes(key) ) {
+            return [<li key={key}>{title}: <span>{values.join(", ")}</span></li>];
           } else {
             const formatted = formatActiveSliderFilter(
               values,
               DEFAULT_FILTER_VALUES[key],
               SLIDER_GROWTH_COLUMNS.includes(key)
             );
-            return <li key={key}>{title}: <span>{formatted}</span></li>;
+            return [<li key={key}>{title}: <span>{formatted}</span></li>];
           }
         })}
       </ul>
