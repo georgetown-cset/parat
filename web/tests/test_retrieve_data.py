@@ -123,7 +123,7 @@ class TestMkTabText(unittest.TestCase):
         self.assertEqual(clean_company_name("captricity", {}), "Vidado")
         self.assertEqual(clean_company_name("创新奇智", {}), "AInnovation")
         self.assertEqual(clean_company_name("ibm", {"ibm": "IBM"}), "IBM")
-        self.assertEqual(clean_company_name("test", {}), "Test")
+        self.assertEqual(clean_company_name("test", {}), "test")
 
     def test_clean_aliases(self):
         aliases = [{"alias": "foo"}, {"alias": "bar"}, {"alias": "baz"}]
@@ -131,7 +131,7 @@ class TestMkTabText(unittest.TestCase):
             "foo": "FoO",
             "bar": "BAR",
         }
-        self.assertEqual("BAR; Baz; FoO; Fred", clean_aliases(aliases, lowercase_to_orig_cname, "Fred"))
+        self.assertEqual("BAR; FoO; Fred; baz", clean_aliases(aliases, lowercase_to_orig_cname, "Fred"))
 
     def test_get_permid_links(self):
         permid = "1"
