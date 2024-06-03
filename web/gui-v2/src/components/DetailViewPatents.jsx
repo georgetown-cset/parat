@@ -45,6 +45,78 @@ const chartLayoutChanges = {
 const startIx = overall.years.findIndex(e => e === overall.startPatentYear);
 const endIx = overall.years.findIndex(e => e === overall.endPatentYear);
 
+const PATENT_DROPDOWN_CATEGORIES = [
+  { text: "AI (all)", key: "ai_patents" },
+  {
+    header: "Applications",
+    subentry_keys: [
+      "Analytics_and_Algorithms",
+      "Computer_Vision",
+      "Control",
+      "Distributed_AI",
+      "Knowledge_Representation",
+      "Language_Processing",
+      "Measuring_and_Testing",
+      "Planning_and_Scheduling",
+      "Robotics",
+      "Speech_Processing",
+    ],
+  },
+  {
+    header: "Industry areas",
+    subentry_keys: [
+      "Agricultural",
+      "Banking_and_Finance",
+      "Business",
+      "Computing_in_Government",
+      "Document_Mgt_and_Publishing",
+      "Education",
+      "Energy_Management",
+      "Entertainment",
+      "Industrial_and_Manufacturing",
+      "Life_Sciences",
+      "Military",
+      "Nanotechnology",
+      "Networks__eg_social_IOT_etc",
+      "Personal_Devices_and_Computing",
+      "Physical_Sciences_and_Engineering",
+      "Security__eg_cybersecurity",
+      "Semiconductors",
+      "Telecommunications",
+      "Transportation",
+    ],
+  },
+];
+
+const PATENT_DROPDOWN_OPTIONS = PATENT_DROPDOWN_CATEGORIES
+  .flatMap((entry) => {
+    const { key, text, header, subentry_keys } = entry;
+    if ( key && text ) {
+      // Top-level dropdown option, not categorized into a group.
+      // (returned as a single-element array b/c flatMap and the other case)
+      return [{
+        val: key,
+        text,
+      }];
+    } else if ( header && subentry_keys ) {
+      // Options that are grouped under a common header.
+      const subentryOptions = subentry_keys
+        .map((key) => ({
+          val: key,
+          text: patentMap[key].replace(/ patents/i, ''),
+        }))
+        .sort((a, b) => a.text.localeCompare(b.text, 'en', { sensitivity: 'base' }));
+
+      return [
+        { header },
+        ...subentryOptions,
+      ]
+    } else {
+      console.warn("Warning: shape of patent dropdown category entry does not match expectations and has been skipped:", entry);
+      return [];
+    }
+  });
+
 const DetailViewPatents = ({
   data,
 }) => {
@@ -100,8 +172,6 @@ const DetailViewPatents = ({
   const patentApplicationAreas = patentSubkeys
     .filter(key => data.patents[key].table === "application")
     .map((key) => {
-      const startVal = data.patents[key].counts[startIx];
-      const endVal = data.patents[key].counts[endIx];
       return {
         subfield: patentMap[key],
         patents: data.patents[key].total,
@@ -113,8 +183,6 @@ const DetailViewPatents = ({
   const patentIndustryAreas = patentSubkeys
     .filter(key => data.patents[key].table === "industry")
     .map((key) => {
-      const startVal = data.patents[key].counts[startIx];
-      const endVal = data.patents[key].counts[endIx];
       return {
         subfield: patentMap[key],
         patents: data.patents[key].total,
@@ -122,11 +190,6 @@ const DetailViewPatents = ({
       };
     })
     .sort((a, b) => b.patents - a.patents);
-
-  const aiSubfieldOptions = patentSubkeys
-    .filter(k => !!data.patents[k]?.counts)
-    .map(k => ({ text: patentMap[k].replace(/ patents/i, ''), val: k }))
-    .sort((a, b) => a.text.localeCompare(b.text, 'en', { sensitivity: 'base' }));
 
   return (
     <>
@@ -159,7 +222,7 @@ const DetailViewPatents = ({
         css={styles.section}
         data={[
           [
-            `${aiSubfieldOptions.find(e => e.val === aiSubfield)?.text} patents at ${data.name}`,
+            `${PATENT_DROPDOWN_OPTIONS.find(e => e.val === aiSubfield)?.text} patents at ${data.name}`,
             data.patents[aiSubfield].counts
           ],
           data.groups.sp500 && [
@@ -179,9 +242,8 @@ const DetailViewPatents = ({
             Trends in {data.name}'s patenting in
             <Dropdown
               css={styles.trendsDropdown}
-              disableClearable={true}
               inputLabel="patent subfield"
-              options={aiSubfieldOptions}
+              options={PATENT_DROPDOWN_OPTIONS}
               selected={aiSubfield}
               setSelected={setAiSubfield}
               showLabel={false}
