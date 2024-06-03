@@ -36,6 +36,10 @@ const styles = {
     display: flex;
     flex-direction: column;
   `,
+  stockList: css`
+    list-style: none;
+    margin: 0;
+  `,
   dialogBottom: css`
     display: flex;
     justify-content: center;
@@ -78,6 +82,17 @@ const MoreMetadataDialog = ({
     },
     { title: 'Stage', value: data.stage },
   ];
+
+  if ( data.market && data.market.length > 0 ) {
+    metadata.push({
+      title: "Stock tickers",
+      value: (
+        <ul css={styles.stockList}>
+          {data.market.map((e) => <li key={e.text}><ExternalLink href={e.url}>{e.text}</ExternalLink></li>)}
+        </ul>
+      ),
+    });
+  }
 
   const handleClose = () => {
     updateIsOpen(false);
