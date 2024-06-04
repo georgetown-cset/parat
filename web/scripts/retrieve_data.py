@@ -438,7 +438,7 @@ def get_continent(country: str) -> str:
 def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     """
     Clean the company name. First try to find it in the map containing one-off mappings, then try to find it
-    in the mapping of lowercase to original company names, and if both those fail, title case it
+    in the mapping of lowercase to original company names, and if both those fail, return the original name
     :param name: lowercased company name
     :param lowercase_to_orig_cname: dict mapping lowercase to original-cased company names
     :return: cleaned company name
@@ -448,9 +448,9 @@ def clean_company_name(name: str, lowercase_to_orig_cname: dict) -> str:
     clean_name = name.strip()
     if clean_name in COMPANY_NAME_MAP:
         return COMPANY_NAME_MAP[clean_name]
-    if clean_name in lowercase_to_orig_cname:
-        return lowercase_to_orig_cname[clean_name]
-    return clean_name.title()
+    if clean_name.lower() in lowercase_to_orig_cname:
+        return lowercase_to_orig_cname[clean_name.lower()]
+    return clean_name
 
 
 def clean_aliases(aliases: list, lowercase_to_orig_cname: dict, orig_name: str = None) -> str:

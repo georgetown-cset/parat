@@ -4,51 +4,51 @@
   "aliases": [
     {
       "alias_language": "en",
-      "alias": "alphabet inc"
+      "alias": "Alphabet Inc"
     }
   ],
   "parent": [],
   "children": [
     {
-      "child_name": "intrinsic",
+      "child_name": "Intrinsic",
       "child_id": 3163
     },
     {
-      "child_name": "waymo",
+      "child_name": "Waymo",
       "child_id": 762
     },
     {
-      "child_name": "vicarious ai",
+      "child_name": "Vicarious Ai",
       "child_id": 750
     },
     {
-      "child_name": "verily life sciences",
+      "child_name": "Verily Life Sciences",
       "child_id": 745
     }
   ],
   "non_agg_children": [
     {
-      "child_name": "google brain",
+      "child_name": "Google Brain",
       "child_id": 473
     },
     {
-      "child_name": "deepmind",
+      "child_name": "Deepmind",
       "child_id": 414
     },
     {
-      "child_name": "google",
+      "child_name": "Google",
       "child_id": 101
     },
     {
-      "child_name": "fitbit",
+      "child_name": "Fitbit",
       "child_id": 451
     },
     {
-      "child_name": "nest",
+      "child_name": "Nest",
       "child_id": 594
     },
     {
-      "child_name": "google robotics",
+      "child_name": "Google Robotics",
       "child_id": 474
     }
   ],
@@ -5805,6 +5805,6 @@
       "Search_Methods_pats": 2
     }
   ],
-  "name": "alphabet",
+  "name": "Alphabet",
   "patent_name": "alphabet"
 }

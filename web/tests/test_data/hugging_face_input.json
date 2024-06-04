@@ -4,11 +4,11 @@
   "aliases": [
     {
       "alias_language": "en",
-      "alias": "hugging face, inc."
+      "alias": "Hugging Face, Inc."
     },
     {
       "alias_language": "en",
-      "alias": "hugging face inc"
+      "alias": "Hugging Face Inc"
     }
   ],
   "parent": [],
@@ -854,6 +854,6 @@
       "Search_Methods_pats": null
     }
   ],
-  "name": "hugging face",
+  "name": "Hugging Face",
   "patent_name": "hugging face"
 }
