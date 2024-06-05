@@ -6,5 +6,5 @@ it("slugifies company names as expected", () => {
   expect(slugifyCompanyName("China Mobile Communications")).toEqual("china-mobile-communications");
   expect(slugifyCompanyName("Ap Moller - Maersk A/S")).toEqual("ap-moller-maersk-as");
   expect(slugifyCompanyName("Stryker Corp.")).toEqual("stryker-corp");
-  expect(slugifyCompanyName("Jd.Com")).toEqual("jdcom");
+  expect(slugifyCompanyName("Jd.Com")).toEqual("jd-com");
 });

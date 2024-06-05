@@ -1,3 +1,6 @@
+
+const { SLUGIFY_OPTIONS } = require('./src/util/constants.cjs');
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -7,6 +10,13 @@ module.exports = {
     siteUrl: `https://parat.eto.tech`
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-page-creator',
+      options: {
+        path: `${__dirname}/src/pages`,
+        slugify: SLUGIFY_OPTIONS,
+      },
+    },
     "gatsby-plugin-emotion",
     {
       resolve: 'gatsby-plugin-google-gtag',

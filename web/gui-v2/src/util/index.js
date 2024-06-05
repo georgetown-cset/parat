@@ -1,5 +1,7 @@
 
-import slugify from 'slugify';
+import slugify from '@sindresorhus/slugify';
+
+import { SLUGIFY_OPTIONS } from './constants.cjs';
 
 export { useMultiState } from './useMultiState';
 export { useWindowSize } from './useWindowSize';
@@ -56,6 +58,5 @@ export function isSerializedStyles(obj) {
  * @returns A slugified form of the name, using the standard format in PARAT
  */
 export function slugifyCompanyName(name) {
-  const INVALID_CHARS = /[()'"/.]/g;
-  return name ? slugify(name, { lower: true, remove: INVALID_CHARS }) : "";
+  return name ? slugify(name, SLUGIFY_OPTIONS) : "";
 }
