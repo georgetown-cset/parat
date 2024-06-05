@@ -31,19 +31,19 @@ WITH
   SELECT
     CSET_id,
     ARRAY_AGG(STRUCT(year,
-        ai_pubs)
+        ai_pubs as num_papers)
     ORDER BY
       year) AS ai_pubs_by_year,
    ARRAY_AGG(STRUCT(year,
-        cv_pubs)
+        cv_pubs as num_papers)
     ORDER BY
       year) AS cv_pubs_by_year,
    ARRAY_AGG(STRUCT(year,
-        nlp_pubs)
+        nlp_pubs as num_papers)
     ORDER BY
       year) AS nlp_pubs_by_year,
    ARRAY_AGG(STRUCT(year,
-        robotics_pubs)
+        robotics_pubs as num_papers)
     ORDER BY
       year) AS robotics_pubs_by_year,
   FROM
