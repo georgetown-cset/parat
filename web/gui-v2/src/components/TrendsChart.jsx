@@ -1,8 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { css } from '@emotion/react';
 
-import { breakpoints } from '@eto/eto-ui-components';
-
 import SectionHeading from './SectionHeading';
 import { fallback } from '../styles/common-styles';
 import { cleanFalse } from '../util';
@@ -15,10 +13,6 @@ const isSSR = typeof window === "undefined";
 const styles = {
   chartWrapper: css`
     h3 {
-      align-items: center;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       margin: 0 auto;
       width: fit-content;
 

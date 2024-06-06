@@ -3,12 +3,16 @@ import { css } from '@emotion/react';
 
 const styles = {
   chartTitle: css`
-    display: flex;
+    flex-wrap: nowrap;
     font-family: GTZirkonMedium;
     font-size: 24px;
-    gap: 0.25em;
-    justify-content: center;
     margin-bottom: 0;
+    text-align: center;
+
+    .helptooltip {
+      margin-top: -4px;
+      vertical-align: middle;
+    }
   `,
 };
 

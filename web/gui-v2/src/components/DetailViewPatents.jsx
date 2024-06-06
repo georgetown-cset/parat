@@ -23,6 +23,8 @@ const styles = {
     }
   `,
   trendsDropdown: css`
+    display: inline-block;
+
     .MuiInputBase-input.MuiSelect-select {
       align-items: center;
       display: flex;
