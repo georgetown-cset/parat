@@ -28,7 +28,7 @@ WITH
   SELECT
     CSET_id,
     ARRAY_AGG(STRUCT(year,
-        all_patents)
+        all_patents as num_patents)
     ORDER BY
       year) AS all_patents_by_year,
   FROM

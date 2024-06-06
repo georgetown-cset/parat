@@ -47,19 +47,19 @@ all_cited as
 (SELECT
   CSET_id,
   ARRAY_AGG(STRUCT(year,
-      ai_citation_count)
+      ai_citation_count as num_papers)
   ORDER BY
     year) AS ai_citation_count_by_year,
   ARRAY_AGG(STRUCT(year,
-      cv_citation_count)
+      cv_citation_count as num_papers)
   ORDER BY
     year) AS cv_citation_count_by_year,
   ARRAY_AGG(STRUCT(year,
-      nlp_citation_count)
+      nlp_citation_count as num_papers)
   ORDER BY
     year) AS nlp_citation_count_by_year,
   ARRAY_AGG(STRUCT(year,
-      robotics_citation_count)
+      robotics_citation_count as num_papers)
   ORDER BY
     year) AS robotics_citation_count_by_year
 FROM

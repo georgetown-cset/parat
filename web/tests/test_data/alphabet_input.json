@@ -152,265 +152,265 @@
   "ai_pubs_by_year": [
     {
       "year": 2014,
-      "ai_pubs": 1
+      "num_papers": 1
     },
     {
       "year": 2015,
-      "ai_pubs": 2
+      "num_papers": 2
     },
     {
       "year": 2016,
-      "ai_pubs": 1
+      "num_papers": 1
     },
     {
       "year": 2017,
-      "ai_pubs": 7
+      "num_papers": 7
     },
     {
       "year": 2018,
-      "ai_pubs": 18
+      "num_papers": 18
     },
     {
       "year": 2019,
-      "ai_pubs": 18
+      "num_papers": 18
     },
     {
       "year": 2020,
-      "ai_pubs": 29
+      "num_papers": 29
     },
     {
       "year": 2021,
-      "ai_pubs": 31
+      "num_papers": 31
     },
     {
       "year": 2022,
-      "ai_pubs": 29
+      "num_papers": 29
     }
   ],
   "cv_pubs_by_year": [
     {
       "year": 2014,
-      "cv_pubs": 1
+      "num_papers": 1
     },
     {
       "year": 2015,
-      "cv_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2016,
-      "cv_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2017,
-      "cv_pubs": 3
+      "num_papers": 3
     },
     {
       "year": 2018,
-      "cv_pubs": 6
+      "num_papers": 6
     },
     {
       "year": 2019,
-      "cv_pubs": 5
+      "num_papers": 5
     },
     {
       "year": 2020,
-      "cv_pubs": 13
+      "num_papers": 13
     },
     {
       "year": 2021,
-      "cv_pubs": 19
+      "num_papers": 19
     },
     {
       "year": 2022,
-      "cv_pubs": 21
+      "num_papers": 21
     }
   ],
   "nlp_pubs_by_year": [
     {
       "year": 2014,
-      "nlp_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2015,
-      "nlp_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2016,
-      "nlp_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2017,
-      "nlp_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2018,
-      "nlp_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2019,
-      "nlp_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2020,
-      "nlp_pubs": 1
+      "num_papers": 1
     },
     {
       "year": 2021,
-      "nlp_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2022,
-      "nlp_pubs": 0
+      "num_papers": 0
     }
   ],
   "robotics_pubs_by_year": [
     {
       "year": 2014,
-      "robotics_pubs": 1
+      "num_papers": 1
     },
     {
       "year": 2015,
-      "robotics_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2016,
-      "robotics_pubs": 0
+      "num_papers": 0
     },
     {
       "year": 2017,
-      "robotics_pubs": 1
+      "num_papers": 1
     },
     {
       "year": 2018,
-      "robotics_pubs": 4
+      "num_papers": 4
     },
     {
       "year": 2019,
-      "robotics_pubs": 4
+      "num_papers": 4
     },
     {
       "year": 2020,
-      "robotics_pubs": 6
+      "num_papers": 6
     },
     {
       "year": 2021,
-      "robotics_pubs": 5
+      "num_papers": 5
     },
     {
       "year": 2022,
-      "robotics_pubs": 10
+      "num_papers": 10
     }
   ],
   "highly_cited_ai_pubs_by_year": [
     {
       "year": 2014,
-      "year_count": 1
+      "num_papers": 1
     },
     {
       "year": 2015,
-      "year_count": 0
+      "num_papers": 0
     },
     {
       "year": 2016,
-      "year_count": 0
+      "num_papers": 0
     },
     {
       "year": 2017,
-      "year_count": 1
+      "num_papers": 1
     },
     {
       "year": 2018,
-      "year_count": 4
+      "num_papers": 4
     },
     {
       "year": 2019,
-      "year_count": 4
+      "num_papers": 4
     },
     {
       "year": 2020,
-      "year_count": 6
+      "num_papers": 6
     },
     {
       "year": 2021,
-      "year_count": 5
+      "num_papers": 5
     },
     {
       "year": 2022,
-      "year_count": 10
+      "num_papers": 10
     }
   ],
   "ai_pubs_in_top_conferences": 32,
   "ai_pubs_in_top_conferences_by_year": [
     {
       "year": 2015,
-      "year_count": 1
+      "num_papers": 1
     },
     {
       "year": 2017,
-      "year_count": 1
+      "num_papers": 1
     },
     {
       "year": 2018,
-      "year_count": 2
+      "num_papers": 2
     },
     {
       "year": 2019,
-      "year_count": 2
+      "num_papers": 2
     },
     {
       "year": 2020,
-      "year_count": 11
+      "num_papers": 11
     },
     {
       "year": 2021,
-      "year_count": 11
+      "num_papers": 11
     },
     {
       "year": 2022,
-      "year_count": 4
+      "num_papers": 4
     }
   ],
   "all_pubs": 745,
   "all_pubs_by_year": [
     {
       "year": 2009,
-      "year_count": 1
+      "num_papers": 1
     },
     {
       "year": 2014,
-      "year_count": 2
+      "num_papers": 2
     },
     {
       "year": 2015,
-      "year_count": 6
+      "num_papers": 6
     },
     {
       "year": 2016,
-      "year_count": 24
+      "num_papers": 24
     },
     {
       "year": 2017,
-      "year_count": 61
+      "num_papers": 61
     },
     {
       "year": 2018,
-      "year_count": 105
+      "num_papers": 105
     },
     {
       "year": 2019,
-      "year_count": 120
+      "num_papers": 120
     },
     {
       "year": 2020,
-      "year_count": 157
+      "num_papers": 157
     },
     {
       "year": 2021,
-      "year_count": 134
+      "num_papers": 134
     },
     {
       "year": 2022,
-      "year_count": 159
+      "num_papers": 159
     }
   ],
   "short_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
@@ -421,153 +421,153 @@
   "ai_citation_count_by_year": [
     {
       "year": 2015,
-      "ai_citation_count": 1
+      "num_papers": 1
     },
     {
       "year": 2016,
-      "ai_citation_count": 15
+      "num_papers": 15
     },
     {
       "year": 2017,
-      "ai_citation_count": 45
+      "num_papers": 45
     },
     {
       "year": 2018,
-      "ai_citation_count": 230
+      "num_papers": 230
     },
     {
       "year": 2019,
-      "ai_citation_count": 541
+      "num_papers": 541
     },
     {
       "year": 2020,
-      "ai_citation_count": 1357
+      "num_papers": 1357
     },
     {
       "year": 2021,
-      "ai_citation_count": 2039
+      "num_papers": 2039
     },
     {
       "year": 2022,
-      "ai_citation_count": 1820
+      "num_papers": 1820
     },
     {
       "year": 2023,
-      "ai_citation_count": 39
+      "num_papers": 39
     }
   ],
   "cv_citation_count_by_year": [
     {
       "year": 2015,
-      "cv_citation_count": 1
+      "num_papers": 1
     },
     {
       "year": 2016,
-      "cv_citation_count": 15
+      "num_papers": 15
     },
     {
       "year": 2017,
-      "cv_citation_count": 45
+      "num_papers": 45
     },
     {
       "year": 2018,
-      "cv_citation_count": 230
+      "num_papers": 230
     },
     {
       "year": 2019,
-      "cv_citation_count": 541
+      "num_papers": 541
     },
     {
       "year": 2020,
-      "cv_citation_count": 1357
+      "num_papers": 1357
     },
     {
       "year": 2021,
-      "cv_citation_count": 2039
+      "num_papers": 2039
     },
     {
       "year": 2022,
-      "cv_citation_count": 1820
+      "num_papers": 1820
     },
     {
       "year": 2023,
-      "cv_citation_count": 39
+      "num_papers": 39
     }
   ],
   "nlp_citation_count_by_year": [
     {
       "year": 2015,
-      "nlp_citation_count": 1
+      "num_papers": 1
     },
     {
       "year": 2016,
-      "nlp_citation_count": 15
+      "num_papers": 15
     },
     {
       "year": 2017,
-      "nlp_citation_count": 45
+      "num_papers": 45
     },
     {
       "year": 2018,
-      "nlp_citation_count": 230
+      "num_papers": 230
     },
     {
       "year": 2019,
-      "nlp_citation_count": 541
+      "num_papers": 541
     },
     {
       "year": 2020,
-      "nlp_citation_count": 1357
+      "num_papers": 1357
     },
     {
       "year": 2021,
-      "nlp_citation_count": 2039
+      "num_papers": 2039
     },
     {
       "year": 2022,
-      "nlp_citation_count": 1820
+      "num_papers": 1820
     },
     {
       "year": 2023,
-      "nlp_citation_count": 39
+      "num_papers": 39
     }
   ],
   "robotics_citation_count_by_year": [
     {
       "year": 2015,
-      "robotics_citation_count": 1
+      "num_papers": 1
     },
     {
       "year": 2016,
-      "robotics_citation_count": 15
+      "num_papers": 15
     },
     {
       "year": 2017,
-      "robotics_citation_count": 45
+      "num_papers": 45
     },
     {
       "year": 2018,
-      "robotics_citation_count": 230
+      "num_papers": 230
     },
     {
       "year": 2019,
-      "robotics_citation_count": 541
+      "num_papers": 541
     },
     {
       "year": 2020,
-      "robotics_citation_count": 1357
+      "num_papers": 1357
     },
     {
       "year": 2021,
-      "robotics_citation_count": 2039
+      "num_papers": 2039
     },
     {
       "year": 2022,
-      "robotics_citation_count": 1820
+      "num_papers": 1820
     },
     {
       "year": 2023,
-      "robotics_citation_count": 39
+      "num_papers": 39
     }
   ],
   "fields": [
@@ -2500,3309 +2500,3309 @@
   "ai_patents_by_year": [
     {
       "priority_year": 1995,
-      "ai_patents": 1
+      "num_patents": 1
     },
     {
       "priority_year": 1999,
-      "ai_patents": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2001,
-      "ai_patents": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2004,
-      "ai_patents": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2005,
-      "ai_patents": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2006,
-      "ai_patents": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2007,
-      "ai_patents": 7
+      "num_patents": 7
     },
     {
       "priority_year": 2008,
-      "ai_patents": 6
+      "num_patents": 6
     },
     {
       "priority_year": 2009,
-      "ai_patents": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2010,
-      "ai_patents": 6
+      "num_patents": 6
     },
     {
       "priority_year": 2011,
-      "ai_patents": 14
+      "num_patents": 14
     },
     {
       "priority_year": 2012,
-      "ai_patents": 28
+      "num_patents": 28
     },
     {
       "priority_year": 2013,
-      "ai_patents": 22
+      "num_patents": 22
     },
     {
       "priority_year": 2014,
-      "ai_patents": 25
+      "num_patents": 25
     },
     {
       "priority_year": 2015,
-      "ai_patents": 61
+      "num_patents": 61
     },
     {
       "priority_year": 2016,
-      "ai_patents": 99
+      "num_patents": 99
     },
     {
       "priority_year": 2017,
-      "ai_patents": 143
+      "num_patents": 143
     },
     {
       "priority_year": 2018,
-      "ai_patents": 155
+      "num_patents": 155
     },
     {
       "priority_year": 2019,
-      "ai_patents": 201
+      "num_patents": 201
     },
     {
       "priority_year": 2020,
-      "ai_patents": 198
+      "num_patents": 198
     },
     {
       "priority_year": 2021,
-      "ai_patents": 64
+      "num_patents": 64
     }
   ],
   "all_patents_by_year": [
     {
       "priority_year": 1995,
-      "all_patents": 10
+      "num_patents": 10
     },
     {
       "priority_year": 1999,
-      "all_patents": 10
+      "num_patents": 10
     },
     {
       "priority_year": 2001,
-      "all_patents": 20
+      "num_patents": 20
     },
     {
       "priority_year": 2004,
-      "all_patents": 10
+      "num_patents": 10
     },
     {
       "priority_year": 2005,
-      "all_patents": 40
+      "num_patents": 40
     },
     {
       "priority_year": 2006,
-      "all_patents": 10
+      "num_patents": 10
     },
     {
       "priority_year": 2007,
-      "all_patents": 70
+      "num_patents": 70
     },
     {
       "priority_year": 2008,
-      "all_patents": 60
+      "num_patents": 60
     },
     {
       "priority_year": 2009,
-      "all_patents": 40
+      "num_patents": 40
     },
     {
       "priority_year": 2010,
-      "all_patents": 60
+      "num_patents": 60
     },
     {
       "priority_year": 2011,
-      "all_patents": 140
+      "num_patents": 140
     },
     {
       "priority_year": 2012,
-      "all_patents": 280
+      "num_patents": 280
     },
     {
       "priority_year": 2013,
-      "all_patents": 220
+      "num_patents": 220
     },
     {
       "priority_year": 2014,
-      "all_patents": 250
+      "num_patents": 250
     },
     {
       "priority_year": 2015,
-      "all_patents": 610
+      "num_patents": 610
     },
     {
       "priority_year": 2016,
-      "all_patents": 990
+      "num_patents": 990
     },
     {
       "priority_year": 2017,
-      "all_patents": 1430
+      "num_patents": 1430
     },
     {
       "priority_year": 2018,
-      "all_patents": 1550
+      "num_patents": 1550
     },
     {
       "priority_year": 2019,
-      "all_patents": 2010
+      "num_patents": 2010
     },
     {
       "priority_year": 2020,
-      "all_patents": 1980
+      "num_patents": 1980
     },
     {
       "priority_year": 2021,
-      "all_patents": 640
+      "num_patents": 640
     }
   ],
   "ai_patents_grants_by_year": [
     {
         "priority_year": 1988,
-        "ai_patents": 1
+        "num_patents": 1
     },
     {
         "priority_year": 1991,
-        "ai_patents": 1
+        "num_patents": 1
     },
     {
         "priority_year": 1994,
-        "ai_patents": 6
+        "num_patents": 6
     },
     {
         "priority_year": 1995,
-        "ai_patents": 2
+        "num_patents": 2
     },
     {
         "priority_year": 1996,
-        "ai_patents": 7
+        "num_patents": 7
     },
     {
         "priority_year": 1997,
-        "ai_patents": 5
+        "num_patents": 5
     },
     {
         "priority_year": 1998,
-        "ai_patents": 5
+        "num_patents": 5
     },
     {
         "priority_year": 1999,
-        "ai_patents": 6
+        "num_patents": 6
     },
     {
         "priority_year": 2000,
-        "ai_patents": 5
+        "num_patents": 5
     },
     {
         "priority_year": 2001,
-        "ai_patents": 5
+        "num_patents": 5
     },
     {
         "priority_year": 2002,
-        "ai_patents": 5
+        "num_patents": 5
     },
     {
         "priority_year": 2003,
-        "ai_patents": 4
+        "num_patents": 4
     },
     {
         "priority_year": 2004,
-        "ai_patents": 9
+        "num_patents": 9
     },
     {
         "priority_year": 2005,
-        "ai_patents": 14
+        "num_patents": 14
     },
     {
         "priority_year": 2006,
-        "ai_patents": 12
+        "num_patents": 12
     },
     {
         "priority_year": 2007,
-        "ai_patents": 18
+        "num_patents": 18
     },
     {
         "priority_year": 2008,
-        "ai_patents": 15
+        "num_patents": 15
     },
     {
         "priority_year": 2009,
-        "ai_patents": 25
+        "num_patents": 25
     },
     {
         "priority_year": 2010,
-        "ai_patents": 56
+        "num_patents": 56
     },
     {
         "priority_year": 2011,
-        "ai_patents": 74
+        "num_patents": 74
     },
     {
         "priority_year": 2012,
-        "ai_patents": 89
+        "num_patents": 89
     },
     {
         "priority_year": 2013,
-        "ai_patents": 119
+        "num_patents": 119
     },
     {
         "priority_year": 2014,
-        "ai_patents": 91
+        "num_patents": 91
     },
     {
         "priority_year": 2015,
-        "ai_patents": 150
+        "num_patents": 150
     },
     {
         "priority_year": 2016,
-        "ai_patents": 251
+        "num_patents": 251
     },
     {
         "priority_year": 2017,
-        "ai_patents": 332
+        "num_patents": 332
     },
     {
         "priority_year": 2018,
-        "ai_patents": 264
+        "num_patents": 264
     },
     {
         "priority_year": 2019,
-        "ai_patents": 267
+        "num_patents": 267
     },
     {
         "priority_year": 2020,
-        "ai_patents": 133
+        "num_patents": 133
     },
     {
         "priority_year": 2021,
-        "ai_patents": 25
+        "num_patents": 25
     },
     {
         "priority_year": 2022,
-        "ai_patents": 2
+        "num_patents": 2
     }
   ],
   "Physical_Sciences_and_Engineering_pats_by_year": [
     {
       "priority_year": 1995,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Physical_Sciences_and_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2011,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Physical_Sciences_and_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2013,
-      "Physical_Sciences_and_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2014,
-      "Physical_Sciences_and_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2015,
-      "Physical_Sciences_and_Engineering_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2016,
-      "Physical_Sciences_and_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2017,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2018,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2019,
-      "Physical_Sciences_and_Engineering_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2020,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Physical_Sciences_and_Engineering_pats": 0
+      "num_patents": 0
     }
   ],
   "Life_Sciences_pats_by_year": [
     {
       "priority_year": 1995,
-      "Life_Sciences_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Life_Sciences_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Life_Sciences_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Life_Sciences_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Life_Sciences_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Life_Sciences_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2007,
-      "Life_Sciences_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2008,
-      "Life_Sciences_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2009,
-      "Life_Sciences_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Life_Sciences_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2011,
-      "Life_Sciences_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2012,
-      "Life_Sciences_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Life_Sciences_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2014,
-      "Life_Sciences_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Life_Sciences_pats": 6
+      "num_patents": 6
     },
     {
       "priority_year": 2016,
-      "Life_Sciences_pats": 13
+      "num_patents": 13
     },
     {
       "priority_year": 2017,
-      "Life_Sciences_pats": 17
+      "num_patents": 17
     },
     {
       "priority_year": 2018,
-      "Life_Sciences_pats": 24
+      "num_patents": 24
     },
     {
       "priority_year": 2019,
-      "Life_Sciences_pats": 17
+      "num_patents": 17
     },
     {
       "priority_year": 2020,
-      "Life_Sciences_pats": 27
+      "num_patents": 27
     },
     {
       "priority_year": 2021,
-      "Life_Sciences_pats": 5
+      "num_patents": 5
     }
   ],
   "Security__eg_cybersecurity_pats_by_year": [
     {
       "priority_year": 1995,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Security__eg_cybersecurity_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2004,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Security__eg_cybersecurity_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2006,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Security__eg_cybersecurity_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2008,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Security__eg_cybersecurity_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2011,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Security__eg_cybersecurity_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2014,
-      "Security__eg_cybersecurity_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2015,
-      "Security__eg_cybersecurity_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2016,
-      "Security__eg_cybersecurity_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2017,
-      "Security__eg_cybersecurity_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2018,
-      "Security__eg_cybersecurity_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2019,
-      "Security__eg_cybersecurity_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2020,
-      "Security__eg_cybersecurity_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2021,
-      "Security__eg_cybersecurity_pats": 0
+      "num_patents": 0
     }
   ],
   "Transportation_pats_by_year": [
     {
       "priority_year": 1995,
-      "Transportation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Transportation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Transportation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Transportation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Transportation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Transportation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Transportation_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2008,
-      "Transportation_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2009,
-      "Transportation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Transportation_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2011,
-      "Transportation_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2012,
-      "Transportation_pats": 23
+      "num_patents": 23
     },
     {
       "priority_year": 2013,
-      "Transportation_pats": 13
+      "num_patents": 13
     },
     {
       "priority_year": 2014,
-      "Transportation_pats": 15
+      "num_patents": 15
     },
     {
       "priority_year": 2015,
-      "Transportation_pats": 17
+      "num_patents": 17
     },
     {
       "priority_year": 2016,
-      "Transportation_pats": 25
+      "num_patents": 25
     },
     {
       "priority_year": 2017,
-      "Transportation_pats": 52
+      "num_patents": 52
     },
     {
       "priority_year": 2018,
-      "Transportation_pats": 58
+      "num_patents": 58
     },
     {
       "priority_year": 2019,
-      "Transportation_pats": 50
+      "num_patents": 50
     },
     {
       "priority_year": 2020,
-      "Transportation_pats": 29
+      "num_patents": 29
     },
     {
       "priority_year": 2021,
-      "Transportation_pats": 8
+      "num_patents": 8
     }
   ],
   "Industrial_and_Manufacturing_pats_by_year": [
     {
       "priority_year": 1995,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Industrial_and_Manufacturing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Industrial_and_Manufacturing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2015,
-      "Industrial_and_Manufacturing_pats": 6
+      "num_patents": 6
     },
     {
       "priority_year": 2016,
-      "Industrial_and_Manufacturing_pats": 10
+      "num_patents": 10
     },
     {
       "priority_year": 2017,
-      "Industrial_and_Manufacturing_pats": 17
+      "num_patents": 17
     },
     {
       "priority_year": 2018,
-      "Industrial_and_Manufacturing_pats": 12
+      "num_patents": 12
     },
     {
       "priority_year": 2019,
-      "Industrial_and_Manufacturing_pats": 23
+      "num_patents": 23
     },
     {
       "priority_year": 2020,
-      "Industrial_and_Manufacturing_pats": 21
+      "num_patents": 21
     },
     {
       "priority_year": 2021,
-      "Industrial_and_Manufacturing_pats": 3
+      "num_patents": 3
     }
   ],
   "Education_pats_by_year": [
     {
       "priority_year": 1995,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Education_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2004,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2016,
-      "Education_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Education_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2018,
-      "Education_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2019,
-      "Education_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2020,
-      "Education_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2021,
-      "Education_pats": 0
+      "num_patents": 0
     }
   ],
   "Document_Mgt_and_Publishing_pats_by_year": [
     {
       "priority_year": 1995,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2016,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2018,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2019,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2020,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Document_Mgt_and_Publishing_pats": 0
+      "num_patents": 0
     }
   ],
   "Military_pats_by_year": [
     {
       "priority_year": 1995,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Military_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2016,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2018,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2019,
-      "Military_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2020,
-      "Military_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Military_pats": 0
+      "num_patents": 0
     }
   ],
   "Agricultural_pats_by_year": [
     {
       "priority_year": 1995,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Agricultural_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2016,
-      "Agricultural_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2017,
-      "Agricultural_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2018,
-      "Agricultural_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2019,
-      "Agricultural_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2020,
-      "Agricultural_pats": 10
+      "num_patents": 10
     },
     {
       "priority_year": 2021,
-      "Agricultural_pats": 1
+      "num_patents": 1
     }
   ],
   "Computing_in_Government_pats_by_year": [
     {
       "priority_year": 1995,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2016,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2018,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2019,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2020,
-      "Computing_in_Government_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Computing_in_Government_pats": 1
+      "num_patents": 1
     }
   ],
   "Personal_Devices_and_Computing_pats_by_year": [
     {
       "priority_year": 1995,
-      "Personal_Devices_and_Computing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Personal_Devices_and_Computing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2001,
-      "Personal_Devices_and_Computing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2004,
-      "Personal_Devices_and_Computing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2005,
-      "Personal_Devices_and_Computing_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2006,
-      "Personal_Devices_and_Computing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2007,
-      "Personal_Devices_and_Computing_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2008,
-      "Personal_Devices_and_Computing_pats": 6
+      "num_patents": 6
     },
     {
       "priority_year": 2009,
-      "Personal_Devices_and_Computing_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2010,
-      "Personal_Devices_and_Computing_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2011,
-      "Personal_Devices_and_Computing_pats": 9
+      "num_patents": 9
     },
     {
       "priority_year": 2012,
-      "Personal_Devices_and_Computing_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2013,
-      "Personal_Devices_and_Computing_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2014,
-      "Personal_Devices_and_Computing_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2015,
-      "Personal_Devices_and_Computing_pats": 17
+      "num_patents": 17
     },
     {
       "priority_year": 2016,
-      "Personal_Devices_and_Computing_pats": 25
+      "num_patents": 25
     },
     {
       "priority_year": 2017,
-      "Personal_Devices_and_Computing_pats": 30
+      "num_patents": 30
     },
     {
       "priority_year": 2018,
-      "Personal_Devices_and_Computing_pats": 37
+      "num_patents": 37
     },
     {
       "priority_year": 2019,
-      "Personal_Devices_and_Computing_pats": 40
+      "num_patents": 40
     },
     {
       "priority_year": 2020,
-      "Personal_Devices_and_Computing_pats": 43
+      "num_patents": 43
     },
     {
       "priority_year": 2021,
-      "Personal_Devices_and_Computing_pats": 6
+      "num_patents": 6
     }
   ],
   "Banking_and_Finance_pats_by_year": [
     {
       "priority_year": 1995,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Banking_and_Finance_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2007,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Banking_and_Finance_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2011,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Banking_and_Finance_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2014,
-      "Banking_and_Finance_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2015,
-      "Banking_and_Finance_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2016,
-      "Banking_and_Finance_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2017,
-      "Banking_and_Finance_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2018,
-      "Banking_and_Finance_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2019,
-      "Banking_and_Finance_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2020,
-      "Banking_and_Finance_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Banking_and_Finance_pats": 1
+      "num_patents": 1
     }
   ],
   "Telecommunications_pats_by_year": [
     {
       "priority_year": 1995,
-      "Telecommunications_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 1999,
-      "Telecommunications_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Telecommunications_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Telecommunications_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2005,
-      "Telecommunications_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2006,
-      "Telecommunications_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Telecommunications_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2008,
-      "Telecommunications_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2009,
-      "Telecommunications_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2010,
-      "Telecommunications_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2011,
-      "Telecommunications_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2012,
-      "Telecommunications_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2013,
-      "Telecommunications_pats": 6
+      "num_patents": 6
     },
     {
       "priority_year": 2014,
-      "Telecommunications_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2015,
-      "Telecommunications_pats": 12
+      "num_patents": 12
     },
     {
       "priority_year": 2016,
-      "Telecommunications_pats": 11
+      "num_patents": 11
     },
     {
       "priority_year": 2017,
-      "Telecommunications_pats": 16
+      "num_patents": 16
     },
     {
       "priority_year": 2018,
-      "Telecommunications_pats": 21
+      "num_patents": 21
     },
     {
       "priority_year": 2019,
-      "Telecommunications_pats": 17
+      "num_patents": 17
     },
     {
       "priority_year": 2020,
-      "Telecommunications_pats": 23
+      "num_patents": 23
     },
     {
       "priority_year": 2021,
-      "Telecommunications_pats": 5
+      "num_patents": 5
     }
   ],
   "Networks__eg_social_IOT_etc_pats_by_year": [
     {
       "priority_year": 1995,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2016,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2018,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2019,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2020,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Networks__eg_social_IOT_etc_pats": 0
+      "num_patents": 0
     }
   ],
   "Business_pats_by_year": [
     {
       "priority_year": 1995,
-      "Business_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Business_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2001,
-      "Business_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Business_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Business_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2006,
-      "Business_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2007,
-      "Business_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2008,
-      "Business_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2009,
-      "Business_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2010,
-      "Business_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2011,
-      "Business_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2012,
-      "Business_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2013,
-      "Business_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Business_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2015,
-      "Business_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2016,
-      "Business_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2017,
-      "Business_pats": 11
+      "num_patents": 11
     },
     {
       "priority_year": 2018,
-      "Business_pats": 7
+      "num_patents": 7
     },
     {
       "priority_year": 2019,
-      "Business_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2020,
-      "Business_pats": 11
+      "num_patents": 11
     },
     {
       "priority_year": 2021,
-      "Business_pats": 2
+      "num_patents": 2
     }
   ],
   "Energy_Management_pats_by_year": [
     {
       "priority_year": 1995,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Energy_Management_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2011,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Energy_Management_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2014,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Energy_Management_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2016,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Energy_Management_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2018,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2019,
-      "Energy_Management_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2020,
-      "Energy_Management_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2021,
-      "Energy_Management_pats": 0
+      "num_patents": 0
     }
   ],
   "Entertainment_pats_by_year": [
     {
       "priority_year": 1995,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Entertainment_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2007,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Entertainment_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2011,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Entertainment_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2014,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Entertainment_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2016,
-      "Entertainment_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2017,
-      "Entertainment_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2018,
-      "Entertainment_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2019,
-      "Entertainment_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2020,
-      "Entertainment_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Entertainment_pats": 0
+      "num_patents": 0
     }
   ],
   "Nanotechnology_pats_by_year": [
     {
       "priority_year": 1995,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Nanotechnology_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2016,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2018,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2019,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2020,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Nanotechnology_pats": 0
+      "num_patents": 0
     }
   ],
   "Semiconductors_pats_by_year": [
     {
       "priority_year": 1995,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Semiconductors_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2016,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2018,
-      "Semiconductors_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2019,
-      "Semiconductors_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2020,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Semiconductors_pats": 0
+      "num_patents": 0
     }
   ],
   "Language_Processing_pats_by_year": [
     {
       "priority_year": 1995,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Language_Processing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2005,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Language_Processing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2008,
-      "Language_Processing_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2009,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Language_Processing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2012,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Language_Processing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2014,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Language_Processing_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2016,
-      "Language_Processing_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2017,
-      "Language_Processing_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2018,
-      "Language_Processing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2019,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2020,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Language_Processing_pats": 0
+      "num_patents": 0
     }
   ],
   "Speech_Processing_pats_by_year": [
     {
       "priority_year": 1995,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Speech_Processing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Speech_Processing_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2016,
-      "Speech_Processing_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2017,
-      "Speech_Processing_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2018,
-      "Speech_Processing_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2019,
-      "Speech_Processing_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2020,
-      "Speech_Processing_pats": 6
+      "num_patents": 6
     },
     {
       "priority_year": 2021,
-      "Speech_Processing_pats": 2
+      "num_patents": 2
     }
   ],
   "Knowledge_Representation_pats_by_year": [
     {
       "priority_year": 1995,
-      "Knowledge_Representation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Knowledge_Representation_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2001,
-      "Knowledge_Representation_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2004,
-      "Knowledge_Representation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Knowledge_Representation_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2006,
-      "Knowledge_Representation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Knowledge_Representation_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2008,
-      "Knowledge_Representation_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2009,
-      "Knowledge_Representation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Knowledge_Representation_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Knowledge_Representation_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2012,
-      "Knowledge_Representation_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2013,
-      "Knowledge_Representation_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2014,
-      "Knowledge_Representation_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2015,
-      "Knowledge_Representation_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2016,
-      "Knowledge_Representation_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2017,
-      "Knowledge_Representation_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2018,
-      "Knowledge_Representation_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2019,
-      "Knowledge_Representation_pats": 7
+      "num_patents": 7
     },
     {
       "priority_year": 2020,
-      "Knowledge_Representation_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2021,
-      "Knowledge_Representation_pats": 1
+      "num_patents": 1
     }
   ],
   "Planning_and_Scheduling_pats_by_year": [
     {
       "priority_year": 1995,
-      "Planning_and_Scheduling_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Planning_and_Scheduling_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Planning_and_Scheduling_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Planning_and_Scheduling_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Planning_and_Scheduling_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2006,
-      "Planning_and_Scheduling_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Planning_and_Scheduling_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2008,
-      "Planning_and_Scheduling_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Planning_and_Scheduling_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2010,
-      "Planning_and_Scheduling_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2011,
-      "Planning_and_Scheduling_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2012,
-      "Planning_and_Scheduling_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2013,
-      "Planning_and_Scheduling_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Planning_and_Scheduling_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2015,
-      "Planning_and_Scheduling_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2016,
-      "Planning_and_Scheduling_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2017,
-      "Planning_and_Scheduling_pats": 10
+      "num_patents": 10
     },
     {
       "priority_year": 2018,
-      "Planning_and_Scheduling_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2019,
-      "Planning_and_Scheduling_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2020,
-      "Planning_and_Scheduling_pats": 9
+      "num_patents": 9
     },
     {
       "priority_year": 2021,
-      "Planning_and_Scheduling_pats": 2
+      "num_patents": 2
     }
   ],
   "Control_pats_by_year": [
     {
       "priority_year": 1995,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Control_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Control_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2011,
-      "Control_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2012,
-      "Control_pats": 23
+      "num_patents": 23
     },
     {
       "priority_year": 2013,
-      "Control_pats": 14
+      "num_patents": 14
     },
     {
       "priority_year": 2014,
-      "Control_pats": 15
+      "num_patents": 15
     },
     {
       "priority_year": 2015,
-      "Control_pats": 18
+      "num_patents": 18
     },
     {
       "priority_year": 2016,
-      "Control_pats": 37
+      "num_patents": 37
     },
     {
       "priority_year": 2017,
-      "Control_pats": 64
+      "num_patents": 64
     },
     {
       "priority_year": 2018,
-      "Control_pats": 68
+      "num_patents": 68
     },
     {
       "priority_year": 2019,
-      "Control_pats": 60
+      "num_patents": 60
     },
     {
       "priority_year": 2020,
-      "Control_pats": 31
+      "num_patents": 31
     },
     {
       "priority_year": 2021,
-      "Control_pats": 10
+      "num_patents": 10
     }
   ],
   "Distributed_AI_pats_by_year": [
     {
       "priority_year": 1995,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Distributed_AI_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2006,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2016,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2017,
-      "Distributed_AI_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2018,
-      "Distributed_AI_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2019,
-      "Distributed_AI_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2020,
-      "Distributed_AI_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2021,
-      "Distributed_AI_pats": 0
+      "num_patents": 0
     }
   ],
   "Robotics_pats_by_year": [
     {
       "priority_year": 1995,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Robotics_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2015,
-      "Robotics_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2016,
-      "Robotics_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2017,
-      "Robotics_pats": 8
+      "num_patents": 8
     },
     {
       "priority_year": 2018,
-      "Robotics_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2019,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2020,
-      "Robotics_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Robotics_pats": 0
+      "num_patents": 0
     }
   ],
   "Computer_Vision_pats_by_year": [
     {
       "priority_year": 1995,
-      "Computer_Vision_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Computer_Vision_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Computer_Vision_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Computer_Vision_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Computer_Vision_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2006,
-      "Computer_Vision_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Computer_Vision_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Computer_Vision_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Computer_Vision_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2010,
-      "Computer_Vision_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2011,
-      "Computer_Vision_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Computer_Vision_pats": 9
+      "num_patents": 9
     },
     {
       "priority_year": 2013,
-      "Computer_Vision_pats": 10
+      "num_patents": 10
     },
     {
       "priority_year": 2014,
-      "Computer_Vision_pats": 9
+      "num_patents": 9
     },
     {
       "priority_year": 2015,
-      "Computer_Vision_pats": 8
+      "num_patents": 8
     },
     {
       "priority_year": 2016,
-      "Computer_Vision_pats": 26
+      "num_patents": 26
     },
     {
       "priority_year": 2017,
-      "Computer_Vision_pats": 40
+      "num_patents": 40
     },
     {
       "priority_year": 2018,
-      "Computer_Vision_pats": 57
+      "num_patents": 57
     },
     {
       "priority_year": 2019,
-      "Computer_Vision_pats": 85
+      "num_patents": 85
     },
     {
       "priority_year": 2020,
-      "Computer_Vision_pats": 61
+      "num_patents": 61
     },
     {
       "priority_year": 2021,
-      "Computer_Vision_pats": 19
+      "num_patents": 19
     }
   ],
   "Analytics_and_Algorithms_pats_by_year": [
     {
       "priority_year": 1995,
-      "Analytics_and_Algorithms_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 1999,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Analytics_and_Algorithms_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2007,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Analytics_and_Algorithms_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2011,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Analytics_and_Algorithms_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2014,
-      "Analytics_and_Algorithms_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Analytics_and_Algorithms_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2016,
-      "Analytics_and_Algorithms_pats": 11
+      "num_patents": 11
     },
     {
       "priority_year": 2017,
-      "Analytics_and_Algorithms_pats": 13
+      "num_patents": 13
     },
     {
       "priority_year": 2018,
-      "Analytics_and_Algorithms_pats": 11
+      "num_patents": 11
     },
     {
       "priority_year": 2019,
-      "Analytics_and_Algorithms_pats": 18
+      "num_patents": 18
     },
     {
       "priority_year": 2020,
-      "Analytics_and_Algorithms_pats": 15
+      "num_patents": 15
     },
     {
       "priority_year": 2021,
-      "Analytics_and_Algorithms_pats": 4
+      "num_patents": 4
     }
   ],
   "Measuring_and_Testing_pats_by_year": [
     {
       "priority_year": 1995,
-      "Measuring_and_Testing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Measuring_and_Testing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Measuring_and_Testing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Measuring_and_Testing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Measuring_and_Testing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Measuring_and_Testing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Measuring_and_Testing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2008,
-      "Measuring_and_Testing_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2009,
-      "Measuring_and_Testing_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Measuring_and_Testing_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2011,
-      "Measuring_and_Testing_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2012,
-      "Measuring_and_Testing_pats": 14
+      "num_patents": 14
     },
     {
       "priority_year": 2013,
-      "Measuring_and_Testing_pats": 9
+      "num_patents": 9
     },
     {
       "priority_year": 2014,
-      "Measuring_and_Testing_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2015,
-      "Measuring_and_Testing_pats": 7
+      "num_patents": 7
     },
     {
       "priority_year": 2016,
-      "Measuring_and_Testing_pats": 13
+      "num_patents": 13
     },
     {
       "priority_year": 2017,
-      "Measuring_and_Testing_pats": 27
+      "num_patents": 27
     },
     {
       "priority_year": 2018,
-      "Measuring_and_Testing_pats": 28
+      "num_patents": 28
     },
     {
       "priority_year": 2019,
-      "Measuring_and_Testing_pats": 30
+      "num_patents": 30
     },
     {
       "priority_year": 2020,
-      "Measuring_and_Testing_pats": 27
+      "num_patents": 27
     },
     {
       "priority_year": 2021,
-      "Measuring_and_Testing_pats": 7
+      "num_patents": 7
     }
   ],
   "Logic_Programming_pats_by_year": [
     {
       "priority_year": 1995,
-      "Logic_Programming_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Logic_Programming_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2001,
-      "Logic_Programming_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2004,
-      "Logic_Programming_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Logic_Programming_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2006,
-      "Logic_Programming_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Logic_Programming_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2008,
-      "Logic_Programming_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2009,
-      "Logic_Programming_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Logic_Programming_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2011,
-      "Logic_Programming_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2012,
-      "Logic_Programming_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2013,
-      "Logic_Programming_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2014,
-      "Logic_Programming_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2015,
-      "Logic_Programming_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2016,
-      "Logic_Programming_pats": 4
+      "num_patents": 4
     },
     {
       "priority_year": 2017,
-      "Logic_Programming_pats": 10
+      "num_patents": 10
     },
     {
       "priority_year": 2018,
-      "Logic_Programming_pats": 13
+      "num_patents": 13
     },
     {
       "priority_year": 2019,
-      "Logic_Programming_pats": 15
+      "num_patents": 15
     },
     {
       "priority_year": 2020,
-      "Logic_Programming_pats": 11
+      "num_patents": 11
     },
     {
       "priority_year": 2021,
-      "Logic_Programming_pats": 5
+      "num_patents": 5
     }
   ],
   "Fuzzy_Logic_pats_by_year": [
     {
       "priority_year": 1995,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Fuzzy_Logic_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2010,
-      "Fuzzy_Logic_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2011,
-      "Fuzzy_Logic_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2012,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Fuzzy_Logic_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2014,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Fuzzy_Logic_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2016,
-      "Fuzzy_Logic_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2017,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2018,
-      "Fuzzy_Logic_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2019,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2020,
-      "Fuzzy_Logic_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2021,
-      "Fuzzy_Logic_pats": 1
+      "num_patents": 1
     }
   ],
   "Probabilistic_Reasoning_pats_by_year": [
     {
       "priority_year": 1995,
-      "Probabilistic_Reasoning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Probabilistic_Reasoning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Probabilistic_Reasoning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Probabilistic_Reasoning_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2005,
-      "Probabilistic_Reasoning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Probabilistic_Reasoning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Probabilistic_Reasoning_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2008,
-      "Probabilistic_Reasoning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Probabilistic_Reasoning_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2010,
-      "Probabilistic_Reasoning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Probabilistic_Reasoning_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2012,
-      "Probabilistic_Reasoning_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2013,
-      "Probabilistic_Reasoning_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2014,
-      "Probabilistic_Reasoning_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2015,
-      "Probabilistic_Reasoning_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2016,
-      "Probabilistic_Reasoning_pats": 16
+      "num_patents": 16
     },
     {
       "priority_year": 2017,
-      "Probabilistic_Reasoning_pats": 11
+      "num_patents": 11
     },
     {
       "priority_year": 2018,
-      "Probabilistic_Reasoning_pats": 23
+      "num_patents": 23
     },
     {
       "priority_year": 2019,
-      "Probabilistic_Reasoning_pats": 26
+      "num_patents": 26
     },
     {
       "priority_year": 2020,
-      "Probabilistic_Reasoning_pats": 21
+      "num_patents": 21
     },
     {
       "priority_year": 2021,
-      "Probabilistic_Reasoning_pats": 7
+      "num_patents": 7
     }
   ],
   "Ontology_Engineering_pats_by_year": [
     {
       "priority_year": 1995,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Ontology_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2001,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2014,
-      "Ontology_Engineering_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2015,
-      "Ontology_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2016,
-      "Ontology_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2017,
-      "Ontology_Engineering_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2018,
-      "Ontology_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2019,
-      "Ontology_Engineering_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2020,
-      "Ontology_Engineering_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2021,
-      "Ontology_Engineering_pats": 1
+      "num_patents": 1
     }
   ],
   "Machine_Learning_pats_by_year": [
     {
       "priority_year": 1995,
-      "Machine_Learning_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 1999,
-      "Machine_Learning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Machine_Learning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Machine_Learning_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Machine_Learning_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2006,
-      "Machine_Learning_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2007,
-      "Machine_Learning_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2008,
-      "Machine_Learning_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2009,
-      "Machine_Learning_pats": 2
+      "num_patents": 2
     },
     {
       "priority_year": 2010,
-      "Machine_Learning_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2011,
-      "Machine_Learning_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2012,
-      "Machine_Learning_pats": 25
+      "num_patents": 25
     },
     {
       "priority_year": 2013,
-      "Machine_Learning_pats": 18
+      "num_patents": 18
     },
     {
       "priority_year": 2014,
-      "Machine_Learning_pats": 22
+      "num_patents": 22
     },
     {
       "priority_year": 2015,
-      "Machine_Learning_pats": 54
+      "num_patents": 54
     },
     {
       "priority_year": 2016,
-      "Machine_Learning_pats": 97
+      "num_patents": 97
     },
     {
       "priority_year": 2017,
-      "Machine_Learning_pats": 139
+      "num_patents": 139
     },
     {
       "priority_year": 2018,
-      "Machine_Learning_pats": 148
+      "num_patents": 148
     },
     {
       "priority_year": 2019,
-      "Machine_Learning_pats": 193
+      "num_patents": 193
     },
     {
       "priority_year": 2020,
-      "Machine_Learning_pats": 184
+      "num_patents": 184
     },
     {
       "priority_year": 2021,
-      "Machine_Learning_pats": 57
+      "num_patents": 57
     }
   ],
   "Search_Methods_pats_by_year": [
     {
       "priority_year": 1995,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 1999,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2001,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2004,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2005,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2006,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2007,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2008,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2009,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2010,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2011,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2012,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2013,
-      "Search_Methods_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2014,
-      "Search_Methods_pats": 1
+      "num_patents": 1
     },
     {
       "priority_year": 2015,
-      "Search_Methods_pats": 0
+      "num_patents": 0
     },
     {
       "priority_year": 2016,
-      "Search_Methods_pats": 3
+      "num_patents": 3
     },
     {
       "priority_year": 2017,
-      "Search_Methods_pats": 5
+      "num_patents": 5
     },
     {
       "priority_year": 2018,
-      "Search_Methods_pats": 9
+      "num_patents": 9
     },
     {
       "priority_year": 2019,
-      "Search_Methods_pats": 12
+      "num_patents": 12
     },
     {
       "priority_year": 2020,
-      "Search_Methods_pats": 8
+      "num_patents": 8
     },
     {
       "priority_year": 2021,
-      "Search_Methods_pats": 2
+      "num_patents": 2
     }
   ],
   "name": "Alphabet",

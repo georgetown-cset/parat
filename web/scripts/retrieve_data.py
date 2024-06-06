@@ -625,20 +625,20 @@ def get_category_counts(js: dict) -> None:
     """
     articles = {}
     ### Reformat publication-related metrics
-    for machine_name, orig_key, count_key, is_top_research in [
-        ["all_publications", "all_pubs_by_year", "year_count", False],
-        ["ai_publications", "ai_pubs_by_year", "ai_pubs", False],
-        ["highly_cited_ai_pubs", "highly_cited_ai_pubs_by_year", "year_count", False],
-        ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", "year_count", False],
-        ["ai_citation_counts", "ai_citation_count_by_year", "ai_citation_count", False],
-        ["cv_citation_counts", "cv_citation_count_by_year", "cv_citation_count", False],
-        ["nlp_citation_counts", "nlp_citation_count_by_year", "nlp_citation_count", False],
-        ["robotics_citation_counts", "robotics_citation_count_by_year", "robotics_citation_count", False],
-        ["cv_publications", "cv_pubs_by_year", "cv_pubs", True],
-        ["nlp_publications", "nlp_pubs_by_year", "nlp_pubs", True],
-        ["robotics_publications", "robotics_pubs_by_year", "robotics_pubs", True],
+    for machine_name, orig_key, is_top_research in [
+        ["all_publications", "all_pubs_by_year", False],
+        ["ai_publications", "ai_pubs_by_year", False],
+        ["highly_cited_ai_pubs", "highly_cited_ai_pubs_by_year", False],
+        ["ai_pubs_top_conf", "ai_pubs_in_top_conferences_by_year", False],
+        ["ai_citation_counts", "ai_citation_count_by_year", False],
+        ["cv_citation_counts", "cv_citation_count_by_year", False],
+        ["nlp_citation_counts", "nlp_citation_count_by_year", False],
+        ["robotics_citation_counts", "robotics_citation_count_by_year", False],
+        ["cv_publications", "cv_pubs_by_year", True],
+        ["nlp_publications", "nlp_pubs_by_year", True],
+        ["robotics_publications", "robotics_pubs_by_year", True],
     ]:
-        counts, total = get_yearly_counts(js.pop(orig_key), count_key)
+        counts, total = get_yearly_counts(js.pop(orig_key), "num_papers")
         articles[machine_name] = {
             "counts": counts,
             "total": total,
@@ -678,8 +678,9 @@ def get_category_counts(js: dict) -> None:
     js[ARTICLE_METRICS] = articles
 
     ### Reformat patent-related metrics
-    ai_counts, ai_total = get_yearly_counts(js.pop("ai_patents_by_year"), "ai_patents")
-    all_counts, all_total = get_yearly_counts(js.pop("all_patents_by_year"), "all_patents")
+    patent_count_key = "num_patents"
+    ai_counts, ai_total = get_yearly_counts(js.pop("ai_patents_by_year"), patent_count_key)
+    all_counts, all_total = get_yearly_counts(js.pop("all_patents_by_year"), patent_count_key)
     patents = {
         "ai_patents": {
             "counts": ai_counts,
@@ -691,7 +692,7 @@ def get_category_counts(js: dict) -> None:
         },
         "ai_patents_grants": {
             "counts": [],
-            "total": get_yearly_counts(js.pop("ai_patents_grants_by_year", {}), "ai_patents")[1],
+            "total": get_yearly_counts(js.pop("ai_patents_grants_by_year", {}), patent_count_key)[1],
         },
         "all_patents": {
             "counts": all_counts,
@@ -707,7 +708,7 @@ def get_category_counts(js: dict) -> None:
         if ((field_name not in INDUSTRY_PATENT_CATEGORIES) and (field_name not in APPLICATION_PATENT_CATEGORIES)) or k.endswith("_pats"):
             js.pop(k)
         elif k.endswith("_pats_by_year"):
-            counts, total = get_yearly_counts(js.pop(k), field_name+"_pats")
+            counts, total = get_yearly_counts(js.pop(k), patent_count_key)
             growth = get_growth(counts, True)
             patents[field_name] = {
                 "counts": counts,

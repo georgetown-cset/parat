@@ -55,147 +55,147 @@ WITH
   SELECT
     CSET_id,
     ARRAY_AGG(STRUCT(priority_year,
-        ai_patents)
+        ai_patents as num_patents)
     ORDER BY
       priority_year) AS ai_patents_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Physical_Sciences_and_Engineering_pats_grants)
+        Physical_Sciences_and_Engineering_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Physical_Sciences_and_Engineering_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Life_Sciences_pats_grants)
+        Life_Sciences_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Life_Sciences_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Security__eg_cybersecurity_pats_grants)
+        Security__eg_cybersecurity_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Security__eg_cybersecurity_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Transportation_pats_grants)
+        Transportation_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Transportation_pats_grants_by_year,
       ARRAY_AGG(STRUCT(priority_year,
-        Industrial_and_Manufacturing_pats_grants)
+        Industrial_and_Manufacturing_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Industrial_and_Manufacturing_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Education_pats_grants)
+        Education_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Education_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Document_Mgt_and_Publishing_pats_grants)
+        Document_Mgt_and_Publishing_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Document_Mgt_and_Publishing_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Military_pats_grants)
+        Military_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Military_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Agricultural_pats_grants)
+        Agricultural_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Agricultural_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Computing_in_Government_pats_grants)
+        Computing_in_Government_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Computing_in_Government_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Personal_Devices_and_Computing_pats_grants)
+        Personal_Devices_and_Computing_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Personal_Devices_and_Computing_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Banking_and_Finance_pats_grants)
+        Banking_and_Finance_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Banking_and_Finance_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Telecommunications_pats_grants)
+        Telecommunications_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Telecommunications_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Networks__eg_social_IOT_etc_pats_grants)
+        Networks__eg_social_IOT_etc_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Networks__eg_social_IOT_etc_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Business_pats_grants)
+        Business_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Business_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Energy_Management_pats_grants)
+        Energy_Management_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Energy_Management_pats_grants_by_year,
       ARRAY_AGG(STRUCT(priority_year,
-        Entertainment_pats_grants)
+        Entertainment_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Entertainment_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Nanotechnology_pats_grants)
+        Nanotechnology_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Nanotechnology_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Semiconductors_pats_grants)
+        Semiconductors_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Semiconductors_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Language_Processing_pats_grants)
+        Language_Processing_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Language_Processing_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Speech_Processing_pats_grants)
+        Speech_Processing_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Speech_Processing_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Knowledge_Representation_pats_grants)
+        Knowledge_Representation_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Knowledge_Representation_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Planning_and_Scheduling_pats_grants)
+        Planning_and_Scheduling_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Planning_and_Scheduling_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Control_pats_grants)
+        Control_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Control_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Distributed_AI_pats_grants)
+        Distributed_AI_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Distributed_AI_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Robotics_pats_grants)
+        Robotics_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Robotics_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Computer_Vision_pats_grants)
+        Computer_Vision_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Computer_Vision_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Analytics_and_Algorithms_pats_grants)
+        Analytics_and_Algorithms_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Analytics_and_Algorithms_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Measuring_and_Testing_pats_grants)
+        Measuring_and_Testing_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Measuring_and_Testing_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Logic_Programming_pats_grants)
+        Logic_Programming_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Logic_Programming_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Fuzzy_Logic_pats_grants)
+        Fuzzy_Logic_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Fuzzy_Logic_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Probabilistic_Reasoning_pats_grants)
+        Probabilistic_Reasoning_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Probabilistic_Reasoning_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Ontology_Engineering_pats_grants)
+        Ontology_Engineering_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Ontology_Engineering_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Machine_Learning_pats_grants)
+        Machine_Learning_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Machine_Learning_pats_grants_by_year,
     ARRAY_AGG(STRUCT(priority_year,
-        Search_Methods_pats_grants)
+        Search_Methods_pats_grants as num_patents)
     ORDER BY
       priority_year) AS Search_Methods_pats_grants_by_year,
 
