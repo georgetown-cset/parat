@@ -46,6 +46,11 @@ const styles = {
     display: flex;
     text-align: center;
 
+    span.helptooltip {
+      margin-top: -3px;
+      vertical-align: middle;
+    }
+
     ${breakpoints.phone_large} {
       text-align: start;
     }

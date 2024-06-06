@@ -23,6 +23,8 @@ const styles = {
     }
   `,
   trendsDropdown: css`
+    display: inline-block;
+
     .MuiInputBase-input.MuiSelect-select {
       align-items: center;
       display: flex;
@@ -134,7 +136,7 @@ const DetailViewPatents = ({
     {
       key: "ai-patents",
       stat: <>#{commas(data.patents.ai_patents.rank)}</>,
-      text: <>in PARAT for number of AI-related patents filed</>,
+      text: <span>in PARAT for number of AI-related patents filed <HelpTooltip smallIcon={true} text={tooltips.detailView.patents.aiRelatedPatents} /></span>,
     },
     {
       key: "ai-patent-growth",
@@ -160,7 +162,7 @@ const DetailViewPatents = ({
       display_name: (
         <>
           Growth ({overall.startPatentYear}&ndash;{overall.endPatentYear})
-          <HelpTooltip smallIcon={true} text={tooltips.detailView.growthColumnExplanation} />
+          <HelpTooltip smallIcon={true} text={tooltips.detailView.patents.growthColumnExplanation} />
         </>
       ),
       key: "growth",
@@ -207,7 +209,7 @@ const DetailViewPatents = ({
         css={styles.section}
         data={patentApplicationAreas}
         id="top-patent-applications"
-        title={<>Top AI application areas across {data.name}'s filed patents</>}
+        title={<>Top AI application areas across {data.name}'s filed patents <HelpTooltip text={tooltips.detailView.patents.topApplicationAreasTable} /></>}
       />
 
       <TableSection
@@ -215,7 +217,7 @@ const DetailViewPatents = ({
         css={styles.section}
         data={patentIndustryAreas}
         id="top-patent-industries"
-        title={<>Top industries and use cases across {data.name}'s filed AI patents</>}
+        title={<>Top industries and use cases across {data.name}'s filed AI patents <HelpTooltip text={tooltips.detailView.patents.topIndustryAreasTable} /></>}
       />
 
       <TrendsChart

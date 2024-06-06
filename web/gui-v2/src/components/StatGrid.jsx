@@ -36,6 +36,11 @@ const styles = {
         }
       }
     }
+
+    span.helptooltip {
+      margin-top: -3px;
+      vertical-align: middle;
+    }
   `,
 };
 

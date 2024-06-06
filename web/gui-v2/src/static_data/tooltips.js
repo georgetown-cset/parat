@@ -60,9 +60,6 @@ const tooltips = {
     ai_jobs: "",
     tt1_jobs: "",
   },
-  detailView: {
-    growthColumnExplanation: "Average year-to-year percentage change for years with non-zero starting values over this interval",
-  },
   groupExplanations: {
     sp500: (
       <>
@@ -92,6 +89,24 @@ const tooltips = {
     chinaJobs: "zach_tktk_china",
     otherJobs: "zach_tktk_other",
     noData: "--zach_tktk_null--",
+  },
+  detailView: {
+    publications: {
+      aiResearchArticles: "Zach_tktk",
+      highlyCitedArticles: "Zach_tktk",
+      topResearchTopicsTable: "Zach_tktk",
+      topConferencePubsChart: "Zach_tktk",
+    },
+    patents: {
+      aiRelatedPatents: "Zach_tktk",
+      topApplicationAreasTable: "Zach_tktk",
+      topIndustryAreasTable: "Zach_tktk",
+      growthColumnExplanation: "Average year-to-year percentage change for years with non-zero starting values over this interval",
+    },
+    workforce: {
+      aiJobs: "Zach_tktk",
+      tt1Jobs: "Zach_tktk",
+    },
   },
 };
 

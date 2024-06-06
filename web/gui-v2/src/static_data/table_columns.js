@@ -148,7 +148,6 @@ const columnDefinitions = [
     dropdownWidth: 180,
     sortable: true,
     type: 'dropdown',
-    tooltip: "Zach_tktk",
   },
   {
     title: "Region",
@@ -158,7 +157,6 @@ const columnDefinitions = [
     dropdownWidth: 170,
     sortable: true,
     type: 'dropdown',
-    tooltip: "Zach_tktk",
   },
   {
     title: "Stage",
@@ -168,7 +166,6 @@ const columnDefinitions = [
     dropdownWidth: 120,
     sortable: true,
     type: 'dropdown',
-    tooltip: "Zach_tktk",
   },
   {
     title: "Sector",
@@ -176,7 +173,6 @@ const columnDefinitions = [
     initialCol: false,
     sortable: true,
     type: 'dropdown',
-    tooltip: "Zach_tktk",
   },
 
   {
@@ -184,7 +180,6 @@ const columnDefinitions = [
     key: "all_pubs",
     aggregateType: "median",
     ...generateSliderColDef("articles", "all_publications"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "5-year total publications",
@@ -194,14 +189,12 @@ const columnDefinitions = [
       "articles",
       "all_pubs_5yr"
     ),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Citation counts",
     key: "citations",
     aggregateType: "median",
     ...generateSliderColDef("articles", "ai_citation_counts"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "AI publications",
@@ -209,7 +202,6 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef("articles", "ai_publications"),
     initialCol: true,
-    tooltip: "Zach_tktk",
   },
   {
     title: "Recent AI pubs growth",
@@ -227,7 +219,6 @@ const columnDefinitions = [
       },
     ),
     isGrowthStat: true,
-    tooltip: "Zach_tktk",
   },
   {
     title: "AI publication percentage",
@@ -245,7 +236,6 @@ const columnDefinitions = [
       },
     ),
     isPercent: true,
-    tooltip: "Zach_tktk",
   },
   // TODO, pending clarification of intent
   // {
@@ -258,7 +248,6 @@ const columnDefinitions = [
     key: "ai_pubs_top_conf",
     aggregateType: "median",
     ...generateSliderColDef("articles", "ai_pubs_top_conf"),
-    tooltip: "Zach_tktk",
   },
   {
     title: `AI papers in last complete year (${overall.endArticleYear})`,
@@ -268,28 +257,24 @@ const columnDefinitions = [
       "articles",
       "ai_pubs_last_full_year",
     ),
-    tooltip: "Zach_tktk",
   },
   {
     title: "CV publications",
     key: "cv_publications",
     aggregateType: "median",
     ...generateSliderColDef("articles", "cv_publications"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "NLP publications",
     key: "nlp_publications",
     aggregateType: "median",
     ...generateSliderColDef("articles", "nlp_publications"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Robotics publications",
     key: "robotics_publications",
     aggregateType: "median",
     ...generateSliderColDef("articles", "robotics_publications"),
-    tooltip: "Zach_tktk",
   },
 
   {
@@ -297,7 +282,6 @@ const columnDefinitions = [
     key: "all_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "all_patents"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "5-year total patents",
@@ -307,7 +291,6 @@ const columnDefinitions = [
       "patents",
       "all_patents_5yr"
     ),
-    tooltip: "Zach_tktk",
   },
   {
     title: "AI patents",
@@ -315,7 +298,6 @@ const columnDefinitions = [
     aggregateType: "median",
     ...generateSliderColDef("patents", "ai_patents"),
     initialCol: true,
-    tooltip: "Zach_tktk",
   },
   {
     title: "AI patents recent growth",
@@ -333,7 +315,6 @@ const columnDefinitions = [
       },
     ),
     isGrowthStat: true,
-    tooltip: "Zach_tktk",
   },
   {
     title: "AI patent percentage",
@@ -351,217 +332,186 @@ const columnDefinitions = [
       },
     ),
     isPercent: true,
-    tooltip: "Zach_tktk",
   },
   {
     title: "Granted AI patents",
     key: "ai_patents_grants",
     aggregateType: "median",
     ...generateSliderColDef("patents", "ai_patents_grants"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Agricultural patents",
     key: "agri_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Agricultural"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Analytics and algorithms patents",
     key: "algorithms",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Analytics_and_Algorithms"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Banking and finance patents",
     key: "finance_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Banking_and_Finance"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Business patents",
     key: "business_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Business"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Computer vision patents",
     key: "comp_vision",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Computer_Vision"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Computing in government patents",
     key: "comp_in_gov_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Computing_in_Government"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Control patents",
     key: "control",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Control"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Distributed AI patents",
     key: "distributed_ai",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Distributed_AI"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Document management and publishing patents",
     key: "doc_mgt_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Document_Mgt_and_Publishing"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Education patents",
     key: "edu_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Education"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Energy patents",
     key: "energy_mgt_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Energy_Management"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Entertainment patents",
     key: "entertain_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Entertainment"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Industrial and manufacturing patents",
     key: "industry_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Industrial_and_Manufacturing"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Knowledge representation patents",
     key: "knowledge_rep",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Knowledge_Representation"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Language processing patents",
     key: "lang_process",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Language_Processing"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Life sciences patents",
     key: "life_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Life_Sciences"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Measuring and testing patents",
     key: "measure_test",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Measuring_and_Testing"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Military patents",
     key: "mil_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Military"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Nanotechnology patents",
     key: "nano_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Nanotechnology"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Networks patents",
     key: "network_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Networks__eg_social_IOT_etc"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Personal devices and computing patents",
     key: "personal_comp_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Personal_Devices_and_Computing"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Physical sciences and engineering patents",
     key: "phys_sci_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Physical_Sciences_and_Engineering"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Planning and scheduling patents",
     key: "plan_sched",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Planning_and_Scheduling"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Robotics patents",
     key: "robotics",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Robotics"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Security patents",
     key: "security_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Security__eg_cybersecurity"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Semiconductor patents",
     key: "semiconductor_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Semiconductors"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Speech processing patents",
     key: "speech",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Speech_Processing"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Telecommunications patents",
     key: "telecom_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Telecommunications"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "Transportation patents",
     key: "transport_patents",
     aggregateType: "median",
     ...generateSliderColDef("patents", "Transportation"),
-    tooltip: "Zach_tktk",
   },
   {
     title: "AI jobs",
@@ -577,7 +527,6 @@ const columnDefinitions = [
       },
     ),
     initialCol: true,
-    tooltip: "Zach_tktk"
   },
   {
     title: "Tech Tier 1 jobs",
@@ -592,9 +541,9 @@ const columnDefinitions = [
         return <CellStat col="tt1_jobs" country={row.country} data={data} />;
       },
     ),
-    tooltip: "Zach_tktk",
   },
-];
+// Apply tooltips to the column definition entries
+].map((entry) => ({ ...entry, tooltip: tooltips.columnHeaders[entry.key] }));
 export default columnDefinitions;
 
 
