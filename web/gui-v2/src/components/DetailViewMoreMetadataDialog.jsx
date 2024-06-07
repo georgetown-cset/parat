@@ -66,7 +66,6 @@ const MoreMetadataDialog = ({
 }) => {
   const metadata = [
     { title: 'Name', value: data.name },
-    { title: 'Aliases', value: data.aliases },
     { title: 'Country', value: data.country },
     { title: 'Website', value: data.website ? <ExternalLink href={data.website}>{data.website}</ExternalLink> : undefined },
     { title: 'Stage', value: data.stage },
@@ -84,10 +83,10 @@ const MoreMetadataDialog = ({
   }
 
   const groups = [];
-  if ( data.in_sandp_500 ) {
+  if ( data.groups.sp500 ) {
     groups.push("S&P 500");
   }
-  if ( data.in_global_big_tech ) {
+  if ( data.groups.globalBigTech ) {
     groups.push("Global Big Tech");
   }
   if ( groups.length > 0 ) {
