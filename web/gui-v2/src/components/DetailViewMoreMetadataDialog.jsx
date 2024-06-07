@@ -45,6 +45,9 @@ const styles = {
     justify-content: center;
     margin-top: 0.5rem;
   `,
+  detailsNote: css`
+    padding: 10px 0px;
+  `
 };
 
 /**
@@ -65,32 +68,32 @@ const MoreMetadataDialog = ({
     { title: 'Name', value: data.name },
     { title: 'Aliases', value: data.aliases },
     { title: 'Country', value: data.country },
-    { title: 'Continent', value: data.continent },
     { title: 'Website', value: data.website ? <ExternalLink href={data.website}>{data.website}</ExternalLink> : undefined },
-    {
-      title: 'Crunchbase',
-      value: <div css={styles.linkWrapper}>
-        <ExternalLink href={data.crunchbase.url}>{data.crunchbase.url}</ExternalLink>
-        {data.child_crunchbase.map(e => <ExternalLink href={e.url} key={e.url}>{e.url}</ExternalLink>)}
-      </div>
-    },
-    {
-      title: 'LinkedIn',
-      value: <div css={styles.linkWrapper}>
-        {data.linkedin.map(e => <ExternalLink href={e} key={e}>{e}</ExternalLink>)}
-      </div>
-    },
     { title: 'Stage', value: data.stage },
   ];
 
   if ( data.market && data.market.length > 0 ) {
     metadata.push({
-      title: "Stock tickers",
+      title: "Tickers",
       value: (
         <ul css={styles.stockList}>
           {data.market.map((e) => <li key={e.text}><ExternalLink href={e.url}>{e.text}</ExternalLink></li>)}
         </ul>
       ),
+    });
+  }
+
+  const groups = [];
+  if ( data.in_sandp_500 ) {
+    groups.push("S&P 500");
+  }
+  if ( data.in_global_big_tech ) {
+    groups.push("Global Big Tech");
+  }
+  if ( groups.length > 0 ) {
+    metadata.push({
+      title: "Groups",
+      value: groups.join(", ")
     });
   }
 
@@ -113,6 +116,10 @@ const MoreMetadataDialog = ({
             css={styles.table}
             data={metadata}
           />
+          <div css={styles.detailsNote}>
+            Additional metadata about this company, including aliases, parent-subsidiary relations, and unique
+            identifiers in PARAT's <ExternalLink href={"zach_tktk"}>source datasets</ExternalLink>, are available in the <ExternalLink href={"zach_tktk"}>Private-Sector AI Indicators dataset</ExternalLink>.
+          </div>
         </div>
         <div css={styles.dialogBottom}>
           <ButtonStyled onClick={handleClose} variant="contained">
