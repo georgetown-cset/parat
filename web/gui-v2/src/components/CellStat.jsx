@@ -57,6 +57,7 @@ const CellStat = ({
   col,
   country = undefined,
   data,
+  isPercent = false,
 }) => {
   const tooltipType = (country === "United States") ? undefined : (
     (country === "China") ? "China" : (
@@ -72,7 +73,7 @@ const CellStat = ({
         <HelpTooltip smallIcon={true} {...tooltipTypes[tooltipType]} />
       }
       <div className="val">
-        { data?.total === null ? 'n/a' : commas(data.total) }
+        { data?.total === null ? 'n/a' : commas(data.total, { maximumFractionDigits: 0 }) }{ (data?.total !== null && data?.total !== undefined) && isPercent && "%" }
       </div>
       <div className="rank">
         { (EMPTY_VALUES.includes(data?.total)) ? '---' : (data?.rank && `#${data.rank}`) }

@@ -231,10 +231,6 @@ const DetailViewPatents = ({
             "S&P 500 (average)",
             overall.groups.sp500.patents[aiSubfield].counts
           ],
-          data.groups.globalBigTech && [
-            "Global Big Tech (average)",
-            overall.groups.globalBigTech.patents[aiSubfield].counts
-          ],
         ]}
         id="ai-subfield-patents"
         layoutChanges={chartLayoutChanges}
