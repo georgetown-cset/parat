@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 
 import { ButtonStyled, HelpTooltip } from '@eto/eto-ui-components';
+import columnDefinitions, { columnsByCategory } from '../static_data/table_columns';
 import { plausibleEvent } from '../util/analytics';
 
 
@@ -32,6 +33,12 @@ const styles = {
     height: calc(100vh - 300px);
     overflow-y: auto;
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    h3, h4 {
+      color: var(--bright-blue);
+      margin-bottom: 0;
+      margin-left: 0.5rem;
+    }
   `,
   columnDialogBottom: css`
     display: flex;
@@ -57,8 +64,44 @@ const generateColumnState = (selected, defs) => {
   return Object.fromEntries(defs.map(e => [e.key, split.includes(e.key)]));
 }
 
+const COLUMN_GROUPINGS = [
+  { heading: "Basic info", entries: columnsByCategory.basic },
+  { heading: "Publications", entries: columnsByCategory.publications },
+  {
+    heading: "Patents",
+    entries: columnsByCategory.patents,
+    subgroups: [
+      { heading: "Patents: AI use cases", entries: columnsByCategory["patents:use-cases"] },
+      { heading: "Patents: AI applications and techniques", entries: columnsByCategory["patents:applications"] },
+    ],
+  },
+  { heading: "Workforce", entries: columnsByCategory.workforce },
+];
+
+
+const ColumnSelectionListEntry = ({
+  colDef,
+  columnsInternal,
+  setColumnsInternal,
+}) => (
+  <label css={styles.plainLabel} key={colDef.key} aria-label={colDef.title}>
+    <Checkbox
+      checked={columnsInternal[colDef.key]}
+      onChange={(evt) => {
+        setColumnsInternal({
+          ...columnsInternal,
+          [colDef.key]: evt.target.checked,
+        })
+      }}
+      disabled={colDef.key === "name"}
+    />
+    {colDef.title}
+    {colDef?.tooltip && <HelpTooltip smallIcon={true} text={colDef.tooltip} />}
+  </label>
+);
+
+
 const AddRemoveColumnDialog = ({
-  columnDefinitions,
   isOpen,
   selectedColumns,
   updateIsOpen,
@@ -72,7 +115,7 @@ const AddRemoveColumnDialog = ({
     () => {
       setColumnsInternal(generateColumnState(selectedColumns, columnDefinitions));
     },
-    [columnDefinitions, selectedColumns]
+    [selectedColumns]
   );
 
   const handleCancel = () => {
@@ -102,21 +145,33 @@ const AddRemoveColumnDialog = ({
       <div css={styles.columnDialogContents}>
         <div css={styles.columnDialogList}>
           {
-            columnDefinitions.map((colDef) => (
-              <label css={styles.plainLabel} key={colDef.key} aria-label={colDef.title}>
-                <Checkbox
-                  checked={columnsInternal[colDef.key]}
-                  onChange={(evt) => {
-                    setColumnsInternal({
-                      ...columnsInternal,
-                      [colDef.key]: evt.target.checked,
-                    })
-                  }}
-                  disabled={colDef.key === "name"}
-                />
-                {colDef.title}
-                {colDef?.tooltip && <HelpTooltip smallIcon={true} text={colDef.tooltip} />}
-              </label>
+            COLUMN_GROUPINGS.map((colGroup) => (
+              <>
+                <h3>{colGroup.heading}</h3>
+                {colGroup.entries &&
+                  colGroup.entries.map((entry) => (
+                    <ColumnSelectionListEntry
+                      colDef={entry}
+                      columnsInternal={columnsInternal}
+                      setColumnsInternal={setColumnsInternal}
+                    />
+                  ))
+                }
+                {colGroup.subgroups &&
+                  colGroup.subgroups.map((subgroup) => (
+                    <>
+                      <h4>{subgroup.heading}</h4>
+                      {subgroup.entries.map((entry) => (
+                        <ColumnSelectionListEntry
+                          colDef={entry}
+                          columnsInternal={columnsInternal}
+                          setColumnsInternal={setColumnsInternal}
+                        />
+                      ))}
+                    </>
+                  ))
+                }
+              </>
             ))
           }
         </div>
