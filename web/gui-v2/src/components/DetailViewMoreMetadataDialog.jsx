@@ -46,8 +46,8 @@ const styles = {
     margin-top: 0.5rem;
   `,
   detailsNote: css`
-    padding: 10px 0px;
-  `
+    line-height: 1.4;
+  `,
 };
 
 /**
@@ -115,10 +115,10 @@ const MoreMetadataDialog = ({
             css={styles.table}
             data={metadata}
           />
-          <div css={styles.detailsNote}>
+          <p css={styles.detailsNote}>
             Additional metadata about this company, including aliases, parent-subsidiary relations, and unique
             identifiers in PARAT's <ExternalLink href={"zach_tktk"}>source datasets</ExternalLink>, are available in the <ExternalLink href={"zach_tktk"}>Private-Sector AI Indicators dataset</ExternalLink>.
-          </div>
+          </p>
         </div>
         <div css={styles.dialogBottom}>
           <ButtonStyled onClick={handleClose} variant="contained">
