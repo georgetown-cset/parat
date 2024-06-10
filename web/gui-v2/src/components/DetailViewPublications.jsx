@@ -76,7 +76,7 @@ const DetailViewPublications = ({
     {
       key: "highly-cited",
       stat: <>{commas(data.articles.highly_cited_ai_pubs.total)}</>,
-      text: <span>highly-cited articles (#{commas(data.articles.highly_cited_ai_pubs.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.highly_cited_ai_pubs.sp500_rank)} in the S&P 500</>}) <HelpTooltip smallIcon={true} text={tooltips.detailView.publications.highlyCitedArticles} /></span>,
+      text: <span>highly cited articles (#{commas(data.articles.highly_cited_ai_pubs.rank)} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.highly_cited_ai_pubs.sp500_rank)} in the S&P 500</>}) <HelpTooltip smallIcon={true} text={tooltips.detailView.publications.highlyCitedArticles} /></span>,
     },
     {
       key: "ai-research-growth",

@@ -217,7 +217,7 @@ const DetailViewPatents = ({
         css={styles.section}
         data={patentIndustryAreas}
         id="top-patent-industries"
-        title={<>Top industries and use cases across {data.name}'s filed AI patents <HelpTooltip text={tooltips.detailView.patents.topIndustryAreasTable} /></>}
+        title={<>Top use cases across {data.name}'s filed AI patents <HelpTooltip text={tooltips.detailView.patents.topIndustryAreasTable} /></>}
       />
 
       <TrendsChart
