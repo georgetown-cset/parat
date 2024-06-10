@@ -25,11 +25,9 @@ const DetailViewWorkforce = ({
   const otherMetricsWorkforce = [
     {
       key: 'ai_jobs',
-      tooltip: tooltips.detailView.workforce.aiJobs,
     },
     {
       key: 'tt1_jobs',
-      tooltip: tooltips.detailView.workforce.tt1Jobs,
     },
   ];
 
@@ -40,23 +38,22 @@ const DetailViewWorkforce = ({
       {data.country !== "United States" &&
         <Alert css={styles.nonUScountryAlert}>
           {data.country === "China" ? (
-            <>PARAT workforce data for this Chinese company are unreliable. Use with extreme caution. <a href="zach_tktk" target="_blank" rel="noopener">Read more >></a></>
+            <>PARAT workforce data for this Chinese company are unreliable. Use with extreme caution. <a href="zach_tktk" target="_blank" rel="noopener">Read more &gt;&gt;</a></>
           ) : (
-            <>PARAT workforce data for this non-U.S. company may be unreliable. Use with caution. <a href="zach_tktk" target="_blank" rel="noopener">Read more >></a></>
+            <>PARAT workforce data for this non-U.S. company may be unreliable. Use with caution. <a href="zach_tktk" target="_blank" rel="noopener">Read more &gt;&gt;</a></>
           )}
         </Alert>
       }
 
       {data.linkedin.length > 0 ?
         <StatWrapper>
-          { otherMetricsWorkforce.map(({ key, tooltip }) => (
+          { otherMetricsWorkforce.map(({ key }) => (
             <StatBox
               description={
                 <span>
                   From {yearSpanText}, {data.name} employed about NUMBER individuals with jobs of this type 
                   (#{data.other_metrics[key].rank} rank in PARAT
                   {data.in_sandp_500 && <>, #NUMBER in the S&P500</>}). [Revisions tktk]
-                  <HelpTooltip smallIcon={true} text={tooltip} />
                 </span>
               }
               key={key}

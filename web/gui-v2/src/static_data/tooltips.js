@@ -71,12 +71,12 @@ const tooltips = {
         tooltip_tktktk
       </>
     ),
-      globalBigTech: (
+    globalBigTech: (
       <>
        Major multinational technology companies selected by ETO analysts.
       </>
     ),
-      genAI: (
+    genAI: (
       <>
        Companies especially active in generative AI and large language model technologies, as identified by ETO analysts.
       </>
@@ -89,10 +89,10 @@ const tooltips = {
   },
   detailView: {
     publications: {
-      aiResearchArticles: <>For details on how we identify and count AI research articles, <ExternalLink href="tktk">read the PARAT documentation</ExternalLink></>.
-      highlyCitedArticles: <>Highly cited articles are defined as the tktk% of articles in each publication year with the most citations.</>",
+      aiResearchArticles: <>For details on how we identify and count AI research articles, <ExternalLink href="tktk">read the PARAT documentation</ExternalLink></>,
+      highlyCitedArticles: <>Highly cited articles are defined as the tktk% of articles in each publication year with the most citations.</>,
       topResearchTopicsTable: <>Articles are assigned to AI subtopics using ETO classifiers. <ExternalLink href="tktk">Read more &gt;&gt;</ExternalLink></>,
-      topConferencePubsChart: <>Includes publications accepted at selected prominent AI research conferences around the world. <ExternalLink href="tktk">Read more &gt;&gt;</ExternalLink></></>,
+      topConferencePubsChart: <>Includes publications accepted at selected prominent AI research conferences around the world. <ExternalLink href="tktk">Read more &gt;&gt;</ExternalLink></>,
     },
     patents: {
       aiRelatedPatents: <>For details on how we identify and count AI patent filings, <ExternalLink href="tktk">read the PARAT documentation</ExternalLink></>,
