@@ -98,7 +98,7 @@ const tooltips = {
       aiRelatedPatents: <>For details on how we identify and count AI patent filings, <ExternalLink href="tktk">read the PARAT documentation</ExternalLink></>,
       topApplicationAreasTable: <>For details on how we identify application areas in AI patents, <ExternalLink href="tktk">read the PARAT documentation</ExternalLink></>,
       topIndustryAreasTable: <>For details on how we identify use cases in AI patents, <ExternalLink href="tktk">read the PARAT documentation</ExternalLink></>,
-      growthColumnExplanation: "Average year-to-year percentage change for years with non-zero starting values over this interval",
+      growthColumnExplanation: "Average year-to-year percentage change for years with non-zero starting values over this interval.",
     },
   },
 };
