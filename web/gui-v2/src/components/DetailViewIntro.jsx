@@ -77,7 +77,7 @@ const DetailViewIntro = ({
           <>
             <div>{data.description}</div>
             <small>
-              <a href={data.description_link}>{titleCaseSource(data.description_source)}</a>, retrieved {data.description_retrieval_date}
+              <ExternalLink href={data.description_link}>{titleCaseSource(data.description_source)}</ExternalLink>, retrieved {data.description_retrieval_date}
             </small>
           </>
         :
