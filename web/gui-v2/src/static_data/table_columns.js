@@ -198,10 +198,8 @@ const columnDefinitions = [
       "ai_publications_growth",
       undefined, // Use the default extractFn
       (_val, row, _extract) => {
-        const rawVal = row.articles.ai_publications_growth;
-        const total = rawVal.total ? `${rawVal.total.toFixed(2)}%` : '---';
-        const rank = rawVal.rank;
-        return <CellStat data={{ total, rank }} />;
+        const { total, rank } = row.articles.ai_publications_growth;
+        return <CellStat data={{ total, rank }} isPercent={true} />;
       },
     ),
     isGrowthStat: true,
@@ -216,10 +214,8 @@ const columnDefinitions = [
       "ai_pubs_percent",
       undefined, // Use the default extractFn
       (_val, row, _extract) => {
-        const rawVal = row.articles.ai_pubs_percent;
-        const total = rawVal.total ? `${rawVal.total.toFixed(1)}%` : '---';
-        const rank = rawVal.rank;
-        return <CellStat data={{ total, rank }} />
+        const { total, rank } = row.articles.ai_pubs_percent;
+        return <CellStat data={{ total, rank }} isPercent={true} />
       },
     ),
     isPercent: true,
@@ -311,10 +307,8 @@ const columnDefinitions = [
       "ai_patents_growth",
       undefined, // Use the default extractFn
       (_val, row, _extract) => {
-        const rawVal = row.patents.ai_patents_growth;
-        const total = rawVal.total ? `${rawVal.total.toFixed(2)}%` : '---';
-        const rank = rawVal.rank;
-        return <CellStat data={{ total, rank }} />;
+        const { total, rank } = row.patents.ai_patents_growth;
+        return <CellStat data={{ total, rank }} isPercent={true} />;
       },
     ),
     isGrowthStat: true,
@@ -329,10 +323,8 @@ const columnDefinitions = [
       "ai_patents_percent",
       undefined, // Use the default extractFn
       (_val, row, _extract) => {
-        const rawVal = row.patents.ai_patents_percent;
-        const total = rawVal.total ? `${rawVal.total.toFixed(1)}%` : '---';
-        const rank = rawVal.rank;
-        return <CellStat data={{ total, rank }} />
+        const { total, rank } = row.patents.ai_patents_percent;
+        return <CellStat data={{ total, rank }} isPercent={true} />
       },
     ),
     isPercent: true,
