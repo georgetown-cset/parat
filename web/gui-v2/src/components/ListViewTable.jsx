@@ -904,7 +904,6 @@ const ListViewTable = ({
         updateSortByKey={setSortKeyDebounced}
       />
       <AddRemoveColumnDialog
-        columnDefinitions={columnDefinitions}
         isOpen={dialogOpen}
         selectedColumns={columnsParam}
         updateIsOpen={setDialogOpen}

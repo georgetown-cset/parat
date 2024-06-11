@@ -120,6 +120,7 @@ const columnDefinitions = [
   {
     title: "Company",
     key: "name",
+    category: "basic",
     css: [styles.name, columnWidth(200)],
     format: (name, row) => {
       if ( row.cset_id >= GROUP_OFFSET ) {
@@ -143,6 +144,7 @@ const columnDefinitions = [
   {
     title: "Country",
     key: "country",
+    category: "basic",
     css: columnWidth(120),
     initialCol: true,
     dropdownWidth: 180,
@@ -152,6 +154,7 @@ const columnDefinitions = [
   {
     title: "Region",
     key: "continent",
+    category: "basic",
     css: columnWidth(100),
     initialCol: false,
     dropdownWidth: 170,
@@ -161,6 +164,7 @@ const columnDefinitions = [
   {
     title: "Stage",
     key: "stage",
+    category: "basic",
     css: columnWidth(80),
     initialCol: false,
     dropdownWidth: 120,
@@ -170,36 +174,17 @@ const columnDefinitions = [
   {
     title: "Sector",
     key: "sector",
+    category: "basic",
     initialCol: false,
     sortable: true,
     type: 'dropdown',
   },
 
   {
-    title: "All publications",
-    key: "all_pubs",
-    aggregateType: "median",
-    ...generateSliderColDef("articles", "all_publications"),
-  },
-  {
-    title: "5-year total publications",
-    key: "all_pubs_5yr",
-    aggregateType: "median",
-    ...generateSliderColDef(
-      "articles",
-      "all_pubs_5yr"
-    ),
-  },
-  {
-    title: "Citation counts",
-    key: "citations",
-    aggregateType: "median",
-    ...generateSliderColDef("articles", "ai_citation_counts"),
-  },
-  {
     title: "AI publications",
     key: "ai_pubs",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef("articles", "ai_publications"),
     initialCol: true,
   },
@@ -207,6 +192,7 @@ const columnDefinitions = [
     title: "Recent AI pubs growth",
     key: "ai_pubs_growth",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef(
       "articles",
       "ai_publications_growth",
@@ -224,6 +210,7 @@ const columnDefinitions = [
     title: "AI publication percentage",
     key: "ai_pubs_percent",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef(
       "articles",
       "ai_pubs_percent",
@@ -247,12 +234,14 @@ const columnDefinitions = [
     title: "AI publications in top conferences",
     key: "ai_pubs_top_conf",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef("articles", "ai_pubs_top_conf"),
   },
   {
     title: `AI papers in last complete year (${overall.endArticleYear})`,
     key: "ai_pubs_last_full_year",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef(
       "articles",
       "ai_pubs_last_full_year",
@@ -262,40 +251,53 @@ const columnDefinitions = [
     title: "CV publications",
     key: "cv_publications",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef("articles", "cv_publications"),
   },
   {
     title: "NLP publications",
     key: "nlp_publications",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef("articles", "nlp_publications"),
   },
   {
     title: "Robotics publications",
     key: "robotics_publications",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef("articles", "robotics_publications"),
   },
-
   {
-    title: "All patents",
-    key: "all_patents",
+    title: "All publications",
+    key: "all_pubs",
     aggregateType: "median",
-    ...generateSliderColDef("patents", "all_patents"),
+    category: "publications",
+    ...generateSliderColDef("articles", "all_publications"),
   },
   {
-    title: "5-year total patents",
-    key: "all_patents_5yr",
+    title: "5-year total publications",
+    key: "all_pubs_5yr",
     aggregateType: "median",
+    category: "publications",
     ...generateSliderColDef(
-      "patents",
-      "all_patents_5yr"
+      "articles",
+      "all_pubs_5yr"
     ),
   },
+  {
+    title: "Citation counts",
+    key: "citations",
+    aggregateType: "median",
+    category: "publications",
+    ...generateSliderColDef("articles", "ai_citation_counts"),
+  },
+
   {
     title: "AI patents",
     key: "ai_patents",
     aggregateType: "median",
+    category: "patents",
     ...generateSliderColDef("patents", "ai_patents"),
     initialCol: true,
   },
@@ -303,6 +305,7 @@ const columnDefinitions = [
     title: "AI patents recent growth",
     key: "ai_patents_growth",
     aggregateType: "median",
+    category: "patents",
     ...generateSliderColDef(
       "patents",
       "ai_patents_growth",
@@ -320,6 +323,7 @@ const columnDefinitions = [
     title: "AI patent percentage",
     key: "ai_patents_percent",
     aggregateType: "median",
+    category: "patents",
     ...generateSliderColDef(
       "patents",
       "ai_patents_percent",
@@ -337,186 +341,234 @@ const columnDefinitions = [
     title: "Granted AI patents",
     key: "ai_patents_grants",
     aggregateType: "median",
+    category: "patents",
     ...generateSliderColDef("patents", "ai_patents_grants"),
+  },
+  {
+    title: "All patents",
+    key: "all_patents",
+    aggregateType: "median",
+    category: "patents",
+    ...generateSliderColDef("patents", "all_patents"),
+  },
+  {
+    title: "5-year total patents",
+    key: "all_patents_5yr",
+    aggregateType: "median",
+    category: "patents",
+    ...generateSliderColDef(
+      "patents",
+      "all_patents_5yr"
+    ),
   },
   {
     title: "Agricultural patents",
     key: "agri_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Agricultural"),
   },
   {
     title: "Analytics and algorithms patents",
     key: "algorithms",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Analytics_and_Algorithms"),
   },
   {
     title: "Banking and finance patents",
     key: "finance_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Banking_and_Finance"),
   },
   {
     title: "Business patents",
     key: "business_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Business"),
   },
   {
     title: "Computer vision patents",
     key: "comp_vision",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Computer_Vision"),
   },
   {
     title: "Computing in government patents",
     key: "comp_in_gov_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Computing_in_Government"),
   },
   {
     title: "Control patents",
     key: "control",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Control"),
   },
   {
     title: "Distributed AI patents",
     key: "distributed_ai",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Distributed_AI"),
   },
   {
     title: "Document management and publishing patents",
     key: "doc_mgt_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Document_Mgt_and_Publishing"),
   },
   {
     title: "Education patents",
     key: "edu_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Education"),
   },
   {
     title: "Energy patents",
     key: "energy_mgt_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Energy_Management"),
   },
   {
     title: "Entertainment patents",
     key: "entertain_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Entertainment"),
   },
   {
     title: "Industrial and manufacturing patents",
     key: "industry_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Industrial_and_Manufacturing"),
   },
   {
     title: "Knowledge representation patents",
     key: "knowledge_rep",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Knowledge_Representation"),
   },
   {
     title: "Language processing patents",
     key: "lang_process",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Language_Processing"),
   },
   {
     title: "Life sciences patents",
     key: "life_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Life_Sciences"),
   },
   {
     title: "Measuring and testing patents",
     key: "measure_test",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Measuring_and_Testing"),
   },
   {
     title: "Military patents",
     key: "mil_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Military"),
   },
   {
     title: "Nanotechnology patents",
     key: "nano_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Nanotechnology"),
   },
   {
     title: "Networks patents",
     key: "network_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Networks__eg_social_IOT_etc"),
   },
   {
     title: "Personal devices and computing patents",
     key: "personal_comp_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Personal_Devices_and_Computing"),
   },
   {
     title: "Physical sciences and engineering patents",
     key: "phys_sci_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Physical_Sciences_and_Engineering"),
   },
   {
     title: "Planning and scheduling patents",
     key: "plan_sched",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Planning_and_Scheduling"),
   },
   {
     title: "Robotics patents",
     key: "robotics",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Robotics"),
   },
   {
     title: "Security patents",
     key: "security_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Security__eg_cybersecurity"),
   },
   {
     title: "Semiconductor patents",
     key: "semiconductor_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Semiconductors"),
   },
   {
     title: "Speech processing patents",
     key: "speech",
     aggregateType: "median",
+    category: "patents:applications",
     ...generateSliderColDef("patents", "Speech_Processing"),
   },
   {
     title: "Telecommunications patents",
     key: "telecom_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Telecommunications"),
   },
   {
     title: "Transportation patents",
     key: "transport_patents",
     aggregateType: "median",
+    category: "patents:use-cases",
     ...generateSliderColDef("patents", "Transportation"),
   },
   {
     title: "AI jobs",
     key: "ai_jobs",
     aggregateType: "median",
+    category: "workforce",
     ...generateSliderColDef(
       "other_metrics",
       "ai_jobs",
@@ -532,6 +584,7 @@ const columnDefinitions = [
     title: "Tech Tier 1 jobs",
     key: "tt1_jobs",
     aggregateType: "median",
+    category: "workforce",
     ...generateSliderColDef(
       "other_metrics",
       "tt1_jobs",
@@ -578,3 +631,19 @@ export const otherMetricMap = Object.fromEntries(columnDefinitions
   .filter(e => e.dataKey === 'other_metrics')
   .map(e => ([e.dataSubkey, e.title]))
 );
+
+/**
+ * Group the columns by the category under which they are displayed in the
+ * column selection modal.  For simplicity, there is only one level - the patent
+ * subgroups are at the same level as the top-level patents.
+ */
+export const columnsByCategory = columnDefinitions
+  .map(def => ([def.category, def]))
+  .reduce((acc, [cat, def]) => {
+    if ( Object.hasOwn(acc, cat) ) {
+      acc[cat].push(def);
+    } else {
+      acc[cat] = [ def ];
+    }
+    return acc;
+  }, {});
