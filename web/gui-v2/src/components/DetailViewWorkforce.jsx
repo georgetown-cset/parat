@@ -25,9 +25,25 @@ const DetailViewWorkforce = ({
   const otherMetricsWorkforce = [
     {
       key: 'ai_jobs',
+      description: (
+        <span>
+          From {yearSpanText}, {data.name} employed about NUMBER individuals with jobs of this type
+          (#{data.other_metrics.ai_jobs.rank} rank in PARAT
+          {data.groups.sp500 && <>, #{data.other_metrics.ai_jobs.sp500_rank} in the S&P500</>}).
+          [Revisions tktk - ai_jobs]
+        </span>
+      ),
     },
     {
       key: 'tt1_jobs',
+      description: (
+        <span>
+          From {yearSpanText}, {data.name} employed about NUMBER individuals with jobs of this type
+          (#{data.other_metrics.tt1_jobs.rank} rank in PARAT
+          {data.groups.sp500 && <>, #{data.other_metrics.tt1_jobs.sp500_rank} in the S&P500</>}).
+          [Revisions tktk - tt1_jobs]
+        </span>
+      ),
     },
   ];
 
@@ -47,15 +63,9 @@ const DetailViewWorkforce = ({
 
       {data.linkedin.length > 0 ?
         <StatWrapper>
-          { otherMetricsWorkforce.map(({ key }) => (
+          { otherMetricsWorkforce.map(({ description, key }) => (
             <StatBox
-              description={
-                <span>
-                  From {yearSpanText}, {data.name} employed about NUMBER individuals with jobs of this type 
-                  (#{data.other_metrics[key].rank} rank in PARAT
-                  {data.in_sandp_500 && <>, #NUMBER in the S&P500</>}). [Revisions tktk]
-                </span>
-              }
+              description={description}
               key={key}
               label={otherMetricMap[key]}
               value={data.other_metrics[key].total}

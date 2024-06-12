@@ -86,7 +86,7 @@ const DetailViewPublications = ({
     {
       key: "ai-top-conf",
       stat: <>{commas(data.articles.ai_pubs_top_conf.total)}</>,
-      text: <>articles at top AI conferences (#{data.articles.ai_pubs_top_conf.rank} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.ai_pubs_top_conf.sp500_rank)} in the S&P 500</>})</>,
+      text: <span>articles at top AI conferences (#{data.articles.ai_pubs_top_conf.rank} in PARAT{data.groups.sp500 && <>, #{commas(data.articles.ai_pubs_top_conf.sp500_rank)} in the S&P 500</>}) <HelpTooltip smallIcon={true} text={tooltips.detailView.publications.topConferencePubsChart} /></span>,
     },
     {
       key: "ai-research-percent",
