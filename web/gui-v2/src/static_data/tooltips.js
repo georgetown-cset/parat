@@ -90,7 +90,7 @@ const tooltips = {
   detailView: {
     publications: {
       aiResearchArticles: <>For details on how we identify and count AI research articles, <ExternalLink href="tktk">read the PARAT documentation</ExternalLink></>,
-      highlyCitedArticles: <>Highly cited articles are defined as the tktk% of articles in each publication year with the most citations.</>,
+      highlyCitedArticles: <>Highly cited articles are defined as the 10% of articles in each publication year with the most citations.</>,
       topResearchTopicsTable: <>Articles are assigned to AI subtopics using ETO classifiers. <ExternalLink href="tktk">Read more &gt;&gt;</ExternalLink></>,
       topConferencePubsChart: <>Includes publications accepted at selected prominent AI research conferences around the world. <ExternalLink href="tktk">Read more &gt;&gt;</ExternalLink></>,
     },
