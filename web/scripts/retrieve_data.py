@@ -74,8 +74,11 @@ METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
 
 _curr_time = datetime.now()
 CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
-END_ARTICLE_YEAR = CURRENT_YEAR - 1
-END_PATENT_YEAR = CURRENT_YEAR - 3
+ARTICLE_OFFSET = 2
+PATENT_OFFSET = 3
+GROWTH_INTERVAL = 3
+END_ARTICLE_YEAR = CURRENT_YEAR - ARTICLE_OFFSET
+END_PATENT_YEAR = CURRENT_YEAR - PATENT_OFFSET
 YEARS = list(range(CURRENT_YEAR - 10, CURRENT_YEAR + 1))
 
 # Used (along with a check that we never actually meet or exceed this number with legitimate CSET ids)
@@ -387,15 +390,14 @@ def get_growth(yearly_counts: list, is_patents: bool = False) -> float:
     :param is_patents: true if counts are for patents, false otherwise
     :return: None; mutates rows
     """
-    offset = 3 if is_patents else 1
-    interval = 3
-    interval_values = yearly_counts[-(interval+1+offset):-1*offset]
+    offset = PATENT_OFFSET if is_patents else ARTICLE_OFFSET
+    interval_values = yearly_counts[-(GROWTH_INTERVAL+1+offset):-1*offset]
     num_zero_years = sum([value == 0 for value in interval_values[:-1]])
-    if num_zero_years == interval:
+    if num_zero_years == GROWTH_INTERVAL:
         return None
     total_percentage_changes = sum([100*(interval_values[i+1]-interval_values[i])/interval_values[i]
-                                    for i in range(interval) if interval_values[i] > 0])
-    return total_percentage_changes/(interval-num_zero_years)
+                                    for i in range(GROWTH_INTERVAL) if interval_values[i] > 0])
+    return total_percentage_changes/(GROWTH_INTERVAL-num_zero_years)
 
 
 def clean_country(country: str) -> str:
@@ -951,9 +953,9 @@ def update_overall_data(group_data: dict) -> None:
     average_group_data = get_average_group_data(group_data)
     overall_data = {
         "years": YEARS,
-        "startArticleYear": CURRENT_YEAR - 4,
+        "startArticleYear": CURRENT_YEAR - ARTICLE_OFFSET - GROWTH_INTERVAL,
         "endArticleYear": END_ARTICLE_YEAR,
-        "startPatentYear": CURRENT_YEAR - 6,
+        "startPatentYear": CURRENT_YEAR - PATENT_OFFSET - GROWTH_INTERVAL,
         "endPatentYear": END_PATENT_YEAR,
         "groups": average_group_data,
         "groupIdOffset": GROUP_OFFSET
