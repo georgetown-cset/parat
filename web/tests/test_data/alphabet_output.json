@@ -330,7 +330,7 @@
     "ai_publications_growth": {
       "counts": [],
       "isTopResearch": false,
-      "total": 20.518683310674415
+      "total": 22.669220945083016
     },
     "ai_pubs_top_conf": {
       "counts": [
@@ -468,7 +468,7 @@
     },
     "cv_publications": {
       "citations_per_article": 89.51470588235294,
-      "growth": 72.23,
+      "growth": 63.16,
       "counts": [
         0,
         1,
@@ -506,7 +506,7 @@
     },
     "robotics_publications": {
       "citations_per_article": 196.3548387096774,
-      "growth": 44.44,
+      "growth": 11.11,
       "counts": [
         0,
         1,
