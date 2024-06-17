@@ -52,7 +52,7 @@ const IndexPage = () => {
         </>}
         documentationLink="https://eto.tech/tool-docs/parat/"
         headingComponent="h1"
-        title="ETO Private-sector AI-Related Activity Tracker"
+        title="🦜 Private-sector AI-Related Activity Tracker"
       >
         <div css={styles.lastUpdated}>
           Site last updated <span className="no-percy">{data.site.buildTime}</span>
