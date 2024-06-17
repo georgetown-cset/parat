@@ -205,6 +205,13 @@ const columnDefinitions = [
     isGrowthStat: true,
   },
   {
+    title: "Highly-cited AI articles",
+    key: "highly_cited_ai_pubs",
+    aggregateType: "median",
+    category: "publications",
+    ...generateSliderColDef("articles", "highly_cited_ai_pubs"),
+  },
+  {
     title: "AI publication percentage",
     key: "ai_pubs_percent",
     aggregateType: "median",
