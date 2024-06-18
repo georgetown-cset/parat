@@ -181,7 +181,7 @@ with dag:
     wait_for_copy = DummyOperator(task_id="wait_for_copy")
 
     curr_date = datetime.now().strftime('%Y%m%d')
-    prod_tables = ["visualization_data", "paper_visualization_data",
+    prod_tables = ["visualization_data", "paper_visualization_data", "original_company_names",
                    "patent_visualization_data", "workforce_visualization_data", "all_visualization_data"]
     for table in prod_tables:
         prod_table_name = f"{production_dataset}.{table}"
