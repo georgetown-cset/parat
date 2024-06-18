@@ -27,7 +27,8 @@ WITH
     AND ARRAY_LENGTH(market) = 0
     and in_fortune_global_500 IS FALSE
     and in_sandp_500 IS FALSE
-    and in_global_big_tech IS FALSE)
+    and in_global_big_tech IS FALSE
+    and in_gen_ai IS FALSE)
 SELECT
   *
 FROM

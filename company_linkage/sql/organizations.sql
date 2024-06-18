@@ -22,6 +22,14 @@ global_big_tech AS (
   where
     name = "Global Big Tech"
 ),
+gen_ai AS (
+  SELECT DISTINCT
+    new_cset_id
+  FROM
+    parat_input.groups
+  where
+    name = "GenAI Contenders"
+),
 mapped_parents AS (
   SELECT
     parentage.new_cset_id,
@@ -98,7 +106,8 @@ FROM (
     ARRAY_AGG(DISTINCT IF(source = "LinkedIn", external_id, null) IGNORE NULLS) AS linkedin,
     sp_500.new_cset_id IS NOT NULL AS in_sandp_500,
     global_500.new_cset_id IS NOT NULL AS in_fortune_global_500,
-    global_big_tech.new_cset_id IS NOT NULL AS in_global_big_tech
+    global_big_tech.new_cset_id IS NOT NULL AS in_global_big_tech,
+    gen_ai.new_cset_id IS NOT NULL AS in_gen_ai
   FROM
     parat_input.organizations
   LEFT JOIN
@@ -137,6 +146,10 @@ FROM (
     global_big_tech
   USING
     (new_cset_id)
+  LEFT JOIN
+    gen_ai
+  USING
+    (new_cset_id)
   GROUP BY
     new_cset_id,
     name,
@@ -151,4 +164,5 @@ FROM (
     in_sandp_500,
     in_fortune_global_500,
     in_global_big_tech,
+    in_gen_ai,
     new_cset_id)

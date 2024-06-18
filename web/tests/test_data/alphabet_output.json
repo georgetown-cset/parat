@@ -80,7 +80,8 @@
   "crunchbase_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
   "groups": {
     "sp500": true,
-    "globalBigTech": true
+    "globalBigTech": true,
+    "genAI": true
   },
   "fields": [
     {

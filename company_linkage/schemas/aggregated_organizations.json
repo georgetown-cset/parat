@@ -228,6 +228,12 @@
     "description": "Boolean identifying whether the company is a big tech company."
   },
   {
+    "mode": "REQUIRED",
+    "name": "in_gen_ai",
+    "type": "BOOLEAN",
+    "description": "Boolean identifying whether the company is active in GenAI and LLMs."
+  },
+  {
     "fields": [
       {
         "mode": "NULLABLE",

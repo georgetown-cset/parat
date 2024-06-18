@@ -36,6 +36,7 @@ class Organization:
         self.in_fortune_global_500 = False
         self.in_sandp_500 = False
         self.in_global_big_tech = False
+        self.in_gen_ai = False
 
     def add_location(self, city, province_state, country):
         """
@@ -237,15 +238,16 @@ class Organization:
             self.linkedin.append(linkedin)
 
     def add_sandp(self, in_sandp_500):
-        if in_sandp_500:
-            self.in_sandp_500 = True
+        self.in_sandp_500 = bool(in_sandp_500)
 
     def add_fortune(self, in_fortune_global_500):
-        if in_fortune_global_500:
-            self.in_fortune_global_500 = True
+        self.in_fortune_global_500 = bool(in_fortune_global_500)
 
     def add_in_global_big_tech(self, in_global_big_tech):
-        self.in_global_big_tech = in_global_big_tech
+        self.in_global_big_tech = bool(in_global_big_tech)
+
+    def add_in_gen_ai(self, in_gen_ai):
+        self.in_gen_ai = bool(in_gen_ai)
 
 
 class OrganizationAggregator:
@@ -418,6 +420,7 @@ class OrganizationAggregator:
         org_info.add_sandp(org["in_sandp_500"])
         org_info.add_fortune(org["in_fortune_global_500"])
         org_info.add_in_global_big_tech(org["in_global_big_tech"])
+        org_info.add_in_gen_ai(org["in_gen_ai"])
 
     def print_output(self, output_file, local):
         """
@@ -440,7 +443,7 @@ class OrganizationAggregator:
                   "ror_id": org_info.ror, "regex": org_info.regex,
                   "BGOV_id": org_info.bgov_id, "linkedin": org_info.linkedin,
                   "in_sandp_500": org_info.in_sandp_500, "in_fortune_global_500": org_info.in_fortune_global_500,
-                  "in_global_big_tech": org_info.in_global_big_tech,
+                  "in_global_big_tech": org_info.in_global_big_tech, "in_gen_ai": org_info.in_gen_ai,
                   "children": org_info.children,
                   "non_agg_children": org_info.non_agg_children}
             out.write(json.dumps(js, ensure_ascii=False) + "\n")

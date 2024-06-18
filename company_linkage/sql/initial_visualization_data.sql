@@ -47,6 +47,7 @@ SELECT
   in_sandp_500,
   in_fortune_global_500,
   in_global_big_tech,
+  in_gen_ai,
   COALESCE(ai_pubs, 0) as ai_pubs,
   COALESCE(cv_pubs, 0) as cv_pubs,
   COALESCE(nlp_pubs, 0) as nlp_pubs,
