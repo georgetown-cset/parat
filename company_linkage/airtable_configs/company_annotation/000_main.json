@@ -17,6 +17,7 @@
     "Ticker": "EXCLUDE",
     "Parent organization": "EXCLUDE",
     "Child organizations": "EXCLUDE",
+    "Description": "EXCLUDE",
     "IDs": "EXCLUDE",
     "Aliases": "EXCLUDE",
     "Legacy CSET ID": "legacy_cset_id",

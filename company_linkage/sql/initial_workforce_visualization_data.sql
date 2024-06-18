@@ -3,7 +3,7 @@ WITH
   SELECT
     DISTINCT cset_id,
     name,
-    REPLACE(REPLACE(linkedins, "https://www.", ""), "http://www.", "") AS linkedin
+    TRIM(REPLACE(REPLACE(linkedins, "https://www.", ""), "http://www.", ""), "/") AS linkedin
   FROM
     high_resolution_entities.aggregated_organizations
   CROSS JOIN
@@ -17,7 +17,7 @@ FROM
 LEFT JOIN
   revelio.individual_position
 ON
-  linkedin = company_linkedin_url
+  linkedin = TRIM(company_linkedin_url, "/")
 INNER JOIN
   revelio.role_lookup
 USING
