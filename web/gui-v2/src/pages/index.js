@@ -5,11 +5,11 @@ import { graphql, useStaticQuery } from 'gatsby';
 import {
   AppWrapper,
   InfoCard,
-  UsageDisclaimer,
   breakpoints,
 } from '@eto/eto-ui-components';
 
 import ListView from '../components/ListView';
+import ParatUsageDisclaimer from '../components/ParatUsageDisclaimer';
 
 const styles = {
   introBox: css`
@@ -59,9 +59,7 @@ const IndexPage = () => {
         </div>
       </InfoCard>
       <ListView css={styles.listView} />
-      <UsageDisclaimer
-        toolName="PARAT"
-      />
+      <ParatUsageDisclaimer/>
     </AppWrapper>
   );
 }
