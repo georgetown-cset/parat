@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Alert, HelpTooltip } from '@eto/eto-ui-components';
+import { Alert, HelpTooltip, ExternalLink } from '@eto/eto-ui-components';
 
 import HeaderWithLink from './HeaderWithLink';
 import StatBox from './StatBox';
@@ -27,10 +27,10 @@ const DetailViewWorkforce = ({
       key: 'ai_jobs',
       description: (
         <span>
-          From {yearSpanText}, {data.name} employed about NUMBER individuals with jobs of this type
+          From {yearSpanText}, {data.name} employed about NUMBER AI workers
           (#{data.other_metrics.ai_jobs.rank} rank in PARAT
           {data.groups.sp500 && <>, #{data.other_metrics.ai_jobs.sp500_rank} in the S&P500</>}).
-          [Revisions tktk - ai_jobs]
+          AI workers in PARAT include anyone a high probability of working with AI. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink>
         </span>
       ),
     },
@@ -38,10 +38,10 @@ const DetailViewWorkforce = ({
       key: 'tt1_jobs',
       description: (
         <span>
-          From {yearSpanText}, {data.name} employed about NUMBER individuals with jobs of this type
+          From {yearSpanText}, {data.name} employed about NUMBER Tech Tier 1 workers
           (#{data.other_metrics.tt1_jobs.rank} rank in PARAT
           {data.groups.sp500 && <>, #{data.other_metrics.tt1_jobs.sp500_rank} in the S&P500</>}).
-          [Revisions tktk - tt1_jobs]
+          Tech Tier 1 workers include anyone with technical skills and a reasonable probability of working with AI.<ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink>
         </span>
       ),
     },
@@ -54,9 +54,9 @@ const DetailViewWorkforce = ({
       {data.country !== "United States" &&
         <Alert css={styles.nonUScountryAlert}>
           {data.country === "China" ? (
-            <>PARAT workforce data for this Chinese company are unreliable. Use with extreme caution. <a href="zach_tktk" target="_blank" rel="noopener">Read more &gt;&gt;</a></>
+            <>PARAT workforce data for this Chinese company are unreliable. Use with extreme caution. <a href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-4" target="_blank" rel="noopener">Read more &gt;&gt;</a></>
           ) : (
-            <>PARAT workforce data for this non-U.S. company may be unreliable. Use with caution. <a href="zach_tktk" target="_blank" rel="noopener">Read more &gt;&gt;</a></>
+            <>PARAT workforce data for this non-U.S. company may be unreliable. Use with caution. <a href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-4" target="_blank" rel="noopener">Read more &gt;&gt;</a></>
           )}
         </Alert>
       }

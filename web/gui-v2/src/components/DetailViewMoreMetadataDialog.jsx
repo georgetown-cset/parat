@@ -117,7 +117,7 @@ const MoreMetadataDialog = ({
           />
           <p css={styles.detailsNote}>
             Additional metadata about this company, including aliases, parent-subsidiary relations, and unique
-            identifiers in PARAT's data sources, are available in the <ExternalLink href={"zach_tktk"}>Private-Sector AI Indicators dataset</ExternalLink>.
+            identifiers in PARAT's data sources, are available in the <ExternalLink href={"https://eto.tech/dataset-docs/private-sector-ai-indicators"}>Private-Sector AI Indicators dataset</ExternalLink>.
           </p>
         </div>
         <div css={styles.dialogBottom}>

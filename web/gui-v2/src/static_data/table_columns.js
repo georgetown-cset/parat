@@ -282,7 +282,7 @@ const columnDefinitions = [
     ),
   },
   {
-    title: "Citation counts",
+    title: "Citations to AI pubs",
     key: "citations",
     aggregateType: "median",
     category: "publications",
