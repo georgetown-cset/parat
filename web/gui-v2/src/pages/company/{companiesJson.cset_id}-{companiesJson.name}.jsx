@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { AppWrapper, UsageDisclaimer } from '@eto/eto-ui-components';
+import { AppWrapper } from '@eto/eto-ui-components';
 
 import DetailView from '../../components/DetailView';
+import ParatUsageDisclaimer from '../../components/ParatUsageDisclaimer';
 import { company_data as allCompanies } from '../../static_data/data';
 
 const CompanyPage = ({ data }) => {
@@ -17,9 +18,7 @@ const CompanyPage = ({ data }) => {
         companyData={companyData}
         companyId={companyId}
       />
-      <UsageDisclaimer
-        toolName="PARAT"
-      />
+      <ParatUsageDisclaimer/>
     </AppWrapper>
   );
 };

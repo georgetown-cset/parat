@@ -41,7 +41,7 @@ const DetailViewWorkforce = ({
           From {yearSpanText}, {data.name} employed about NUMBER Tech Tier 1 workers
           (#{data.other_metrics.tt1_jobs.rank} rank in PARAT
           {data.groups.sp500 && <>, #{data.other_metrics.tt1_jobs.sp500_rank} in the S&P500</>}).
-          Tech Tier 1 workers include anyone with technical skills and a reasonable probability of working with AI.<ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink>
+          Tech Tier 1 workers include anyone with technical skills and a reasonable probability of working with AI. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink>
         </span>
       ),
     },
