@@ -58,7 +58,7 @@ const tooltips = {
     transport_patents: <>The number of AI-related patents the company filed over the past 10 years that were relevant to the listed use case. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#patents">Read more &gt;&gt;</ExternalLink> Some recent patents <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink> </>,
 
     ai_jobs: <>The number of AI workers employed by the company as of the most recent data update. AI workers in PARAT include anyone a high probability of working with AI. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink></>,
-    tt1_jobs: <>The number of known Tech Tier 1 workers employed by the company as of the most recent data update. Tech Tier 1 workers include anyone with technical skills and a reasonable probability of working with AI.<ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink></>,
+    tt1_jobs: <>The number of known Tech Tier 1 workers employed by the company as of the most recent data update. Tech Tier 1 workers include anyone with technical skills and a reasonable probability of working with AI. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink></>,
   },
   groupExplanations: {
     sp500: (
@@ -97,8 +97,8 @@ const tooltips = {
     patents: {
       aiRelatedPatents: <>For details on how we identify and count AI patent filings, <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#patents">read the dataset documentation</ExternalLink>. Some recent patents <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
       topApplicationAreasTable: <>For details on how we identify application areas in AI patents, <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#patents">read the dataset documentation</ExternalLink>. Some recent patents <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
-      topIndustryAreasTable: <>For details on how we identify use cases in AI patents, <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#patents">read the dataset documentation</ExternalLink></>. Some recent patents <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink>,
-      growthColumnExplanation: "Average year-to-year percentage change for years with non-zero starting values over this interval.",
+      topIndustryAreasTable: <>For details on how we identify use cases in AI patents, <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#patents">read the dataset documentation</ExternalLink>. Some recent patents <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
+      growthColumnExplanation: "Average year-to-year percentage change for years with non-zero starting values over this interval."
     },
   },
 };
