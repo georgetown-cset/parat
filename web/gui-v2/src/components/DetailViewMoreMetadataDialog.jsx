@@ -89,6 +89,9 @@ const MoreMetadataDialog = ({
   if ( data.groups.globalBigTech ) {
     groups.push("Global Big Tech");
   }
+  if ( data.groups.genAI ) {
+    groups.push("GenAI Contenders");
+  }
   if ( groups.length > 0 ) {
     metadata.push({
       title: "Groups",
