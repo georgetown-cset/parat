@@ -58,6 +58,7 @@ const DetailViewPublications = ({
   const yearSpanAnd = <>{overall.years[0]} and {overall.years[overall.years.length-1]}</>;
 
   const aiResearchPercent = Math.round(1000 * data.articles.ai_publications.total / data.articles.all_publications.total) / 10;
+  const aiResearchPercentText = Number.isNaN(aiResearchPercent) ? "N/A" : `${aiResearchPercent}%`;
 
   const aiPubsGrowthTotal = commas(data.articles.ai_publications_growth.total, { maximumFractionDigits: 1 });
   const aiPubsGrowthSign = (aiPubsGrowthTotal > 0) ? '+' : '';
@@ -90,7 +91,7 @@ const DetailViewPublications = ({
     },
     {
       key: "ai-research-percent",
-      stat: <>{aiResearchPercent}%</>,
+      stat: <>{aiResearchPercentText}</>,
       text: <>of {data.name}'s total public research was AI-focused</>,
     },
   ];
