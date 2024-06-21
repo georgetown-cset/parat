@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import {
   Checkbox,
@@ -145,33 +145,35 @@ const AddRemoveColumnDialog = ({
       <div css={styles.columnDialogContents}>
         <div css={styles.columnDialogList}>
           {
-            COLUMN_GROUPINGS.map((colGroup) => (
-              <>
+            COLUMN_GROUPINGS.map((colGroup, ix) => (
+              <Fragment key={ix}>
                 <h3>{colGroup.heading}</h3>
                 {colGroup.entries &&
-                  colGroup.entries.map((entry) => (
+                  colGroup.entries.map((entry, ix) => (
                     <ColumnSelectionListEntry
                       colDef={entry}
                       columnsInternal={columnsInternal}
+                      key={ix}
                       setColumnsInternal={setColumnsInternal}
                     />
                   ))
                 }
                 {colGroup.subgroups &&
-                  colGroup.subgroups.map((subgroup) => (
-                    <>
+                  colGroup.subgroups.map((subgroup, ix) => (
+                    <Fragment key={ix}>
                       <h4>{subgroup.heading}</h4>
-                      {subgroup.entries.map((entry) => (
+                      {subgroup.entries.map((entry, ix) => (
                         <ColumnSelectionListEntry
                           colDef={entry}
                           columnsInternal={columnsInternal}
+                          key={ix}
                           setColumnsInternal={setColumnsInternal}
                         />
                       ))}
-                    </>
+                    </Fragment>
                   ))
                 }
-              </>
+              </Fragment>
             ))
           }
         </div>
