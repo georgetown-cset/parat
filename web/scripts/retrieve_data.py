@@ -1,5 +1,6 @@
 import argparse
 import chardet
+import csv
 import json
 import os
 import pycountry
@@ -7,9 +8,12 @@ import pycountry_convert
 import pycld2
 import re
 import requests
+import tempfile
 import time
+import zipfile
 
 from PIL import Image
+from collections import OrderedDict
 from datetime import datetime
 from decimal import Decimal, ROUND_HALF_UP
 from google.cloud import bigquery
@@ -89,6 +93,71 @@ _middle_east = ["Egypt", "Iran", "Turkey", "Iraq", "Saudi Arabia", "Yemen", "Syr
                "United Arab Emirates", "Israel", "Lebanon", "Palestine", "Oman", "Kuwait", "Qatar", "Bahrain"]
 A2_MIDDLE_EAST = [pycountry_convert.country_name_to_country_alpha2(c).lower() for c in _middle_east]
 assert not any([c is None for c in A2_MIDDLE_EAST]), f"Null country in {A2_MIDDLE_EAST}"
+
+GROUP_ID_TO_NAME = {
+    "sp500": "S&P 500",
+    "globalBigTech": "Global Big Tech",
+    "genAI": "GenAI Contenders"
+}
+
+CORE_COLUMN_MAPPING = OrderedDict([
+    ("Name", lambda row: row["name"]),
+    ("ID", lambda row: row["cset_id"]),
+    ("Country", lambda row: row["country"]),
+    ("Website", lambda row: row["website"]),
+    ("Groups", lambda row: ", ".join([GROUP_ID_TO_NAME[group_name] for group_name, in_group in row["groups"].items() if in_group])),
+    ("Stage", lambda row: row["stage"]),
+    ("Sector", lambda row: row["sector"]),
+    ("Description", lambda row: row["description"]),
+    ("Description source", lambda row: row["description_source"]),
+    ("Description link", lambda row: row["description_link"]),
+    ("Description date", lambda row: row["description_retrieval_date"]),
+    ("Publications: AI publications", lambda row: row["articles"]["ai_publications"]["total"]),
+    ("Publications: Recent AI publication growth", lambda row: row["articles"]["ai_publications_growth"]["total"]),
+    ("Publications: AI publication percentage", lambda row: row["articles"]["ai_pubs_percent"]["total"]),
+    ("Publications: AI publications in top conferences", lambda row: row["articles"]["ai_pubs_top_conf"]["total"]),
+    ("Publications: Citations to AI research", lambda row: row["articles"]["ai_citation_counts"]["total"]),
+    ("Publications: CV publications", lambda row: row["articles"]["cv_publications"]["total"]),
+    ("Publications: NLP publications", lambda row: row["articles"]["nlp_publications"]["total"]),
+    ("Publications: Robotics publications", lambda row: row["articles"]["robotics_publications"]["total"]),
+    ("Publications: Total publications", lambda row: row["articles"]["all_publications"]["total"]),
+    ("Patents: AI patents", lambda row: row["patents"]["ai_patents"]["total"]),
+    ("Patents: AI patents: recent growth", lambda row: row["patents"]["ai_patents_growth"]["total"]),
+    ("Patents: AI patent percentage", lambda row: row["patents"]["ai_patents_percent"]["total"]),
+    ("Patents: Granted AI patents", lambda row: row["patents"]["ai_patents_grants"]["total"]),
+    ("Patents: Total patents", lambda row: row["patents"]["all_patents"]["total"]),
+    ("Patents: AI use cases: Agriculture", lambda row: row["patents"]["Agricultural"]["total"]),
+    ("Patents: AI use cases: Banking and finance", lambda row: row["patents"]["Banking_and_Finance"]["total"]),
+    ("Patents: AI use cases: Business", lambda row: row["patents"]["Business"]["total"]),
+    ("Patents: AI use cases: Computing in government", lambda row: row["patents"]["Computing_in_Government"]["total"]),
+    ("Patents: AI use cases: Document management and publishing", lambda row: row["patents"]["Document_Mgt_and_Publishing"]["total"]),
+    ("Patents: AI use cases: Education", lambda row: row["patents"]["Education"]["total"]),
+    ("Patents: AI use cases: Energy", lambda row: row["patents"]["Energy_Management"]["total"]),
+    ("Patents: AI use cases: Entertainment", lambda row: row["patents"]["Entertainment"]["total"]),
+    ("Patents: AI use cases: Industry and manufacturing", lambda row: row["patents"]["Industrial_and_Manufacturing"]["total"]),
+    ("Patents: AI use cases: Life sciences", lambda row: row["patents"]["Life_Sciences"]["total"]),
+    ("Patents: AI use cases: Military", lambda row: row["patents"]["Military"]["total"]),
+    ("Patents: AI use cases: Nanotechnology", lambda row: row["patents"]["Nanotechnology"]["total"]),
+    ("Patents: AI use cases: Networking", lambda row: row["patents"]["Networks__eg_social_IOT_etc"]["total"]),
+    ("Patents: AI use cases: Personal devices and computing", lambda row: row["patents"]["Personal_Devices_and_Computing"]["total"]),
+    ("Patents: AI use cases: Physical sciences and engineering", lambda row: row["patents"]["Physical_Sciences_and_Engineering"]["total"]),
+    ("Patents: AI use cases: Security", lambda row: row["patents"]["Security__eg_cybersecurity"]["total"]),
+    ("Patents: AI use cases: Semiconductors", lambda row: row["patents"]["Semiconductors"]["total"]),
+    ("Patents: AI use cases: Telecommunications", lambda row: row["patents"]["Telecommunications"]["total"]),
+    ("Patents: AI use cases: Transportation", lambda row: row["patents"]["Transportation"]["total"]),
+    ("Patents: AI applications and techniques: Analytics and algorithms", lambda row: row["patents"]["Analytics_and_Algorithms"]["total"]),
+    ("Patents: AI applications and techniques: Computer vision", lambda row: row["patents"]["Computer_Vision"]["total"]),
+    ("Patents: AI applications and techniques: Control", lambda row: row["patents"]["Control"]["total"]),
+    ("Patents: AI applications and techniques: Distributed AI", lambda row: row["patents"]["Distributed_AI"]["total"]),
+    ("Patents: AI applications and techniques: Knowledge representation", lambda row: row["patents"]["Knowledge_Representation"]["total"]),
+    ("Patents: AI applications and techniques: Language processing", lambda row: row["patents"]["Language_Processing"]["total"]),
+    ("Patents: AI applications and techniques: Measuring and testing", lambda row: row["patents"]["Measuring_and_Testing"]["total"]),
+    ("Patents: AI applications and techniques: Planning and scheduling", lambda row: row["patents"]["Planning_and_Scheduling"]["total"]),
+    ("Patents: AI applications and techniques: Robotics", lambda row: row["patents"]["Robotics"]["total"]),
+    ("Patents: AI applications and techniques: Speech processing", lambda row: row["patents"]["Speech_Processing"]["total"]),
+    ("Workforce: AI workers", lambda row: row["other_metrics"]["ai_jobs"]["total"]),
+    ("Workforce: Tech Tier 1 workers", lambda row: row["other_metrics"]["tt1_jobs"]["total"]),
+])
 
 ### END CONSTANTS ###
 
@@ -577,7 +646,7 @@ def clean_misc_fields(js: dict, refresh_images: bool, lowercase_to_orig_cname: d
     js["unagg_child_info"] = clean_children(js.pop("non_agg_children"), lowercase_to_orig_cname)
     js["market"] = clean_market(js.pop("market"), market_key_to_link)
     js["website"] = clean_link(js["website"])
-    js["crunchbase_description"] = js.pop("short_description")
+    js.pop("short_description")
     js["crunchbase"] = clean_crunchbase(js["crunchbase"])
     js["child_crunchbase"] = clean_crunchbase(js["child_crunchbase"])
     group_keys_to_names = {
@@ -597,8 +666,6 @@ def get_top_10_lists(js: dict) -> None:
     js["fields"] = get_top_n_list(js.pop("fields"), "field_count")
     js["clusters"] = get_top_n_list(js.pop("clusters"), "cluster_count")
     js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count")
-    js["tasks"] = get_top_n_list(js.pop("tasks"), "task_count")
-    js["methods"] = get_top_n_list(js.pop("methods"), "method_count")
 
 
 def add_patent_tables(patents: dict) -> None:
@@ -824,6 +891,8 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     """
     js = json.loads(row)
     clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
+    js.pop("tasks")
+    js.pop("methods")
     get_top_10_lists(js)
     get_category_counts(js)
     add_derived_metrics(js, end_article_year, end_patent_year)
@@ -848,7 +917,8 @@ def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
     :param refresh_images: if true, will re-download all the company logos from crunchbase; don't call with true
     unless necessary
     :param refresh_sectors: if true, will re-query the PERMID api for sector information for each company
-    :return: Return a dict of metadata and rows needed to compute average metadata for groups
+    :return: Return a dict of metadata and rows needed to compute average metadata for groups and a list of metadata
+    for each company
     """
     rows = []
     lowercase_to_orig_cname = {}
@@ -869,21 +939,20 @@ def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
     company_rows = []
     raw_group_metadata = {
         "sp500": {
-            "name": "S&P 500",
             "cset_id": GROUP_OFFSET+500,
             "rows": []
         },
         "globalBigTech": {
-            "name": "Global Big Tech",
             "cset_id": GROUP_OFFSET+502,
             "rows": []
         },
         "genAI": {
-            "name": "GenAI Contenders",
             "cset_id": GROUP_OFFSET + 503,
             "rows": []
         },
     }
+    for group_id in raw_group_metadata:
+        raw_group_metadata[group_id]["name"] = GROUP_ID_TO_NAME[group_id]
     for row in rows:
         company_rows.append(row)
         assert row["cset_id"] < GROUP_OFFSET, \
@@ -893,7 +962,7 @@ def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
                 raw_group_metadata[group_name]["rows"].append(row)
     with open(os.path.join(WEB_SRC_DIR, "static_data", "data.js"), mode="w") as out:
         out.write(f"const company_data = {json.dumps(company_rows)};\n\nexport {{ company_data }};")
-    return raw_group_metadata
+    return raw_group_metadata, company_rows
 
 
 def exp_round(num: float) -> int:
@@ -971,6 +1040,31 @@ def update_overall_data(group_data: dict) -> None:
         out.write(json.dumps(overall_data))
 
 
+def update_data_delivery(clean_company_rows: dict) -> None:
+    """
+    Updates data delivery for Zenodo
+    :param group_data: list of clean metadata for each row
+    :return: None
+    """
+#    "PARAT link"
+#    "City"
+#    "State/province" <-- organizations
+#    "Groups"
+#    "Parent company name": "",
+#    "Parent company ID": "",
+#    "Region"
+    with tempfile.TemporaryDirectory() as td:
+        core_file = "core.csv"
+        with open(os.path.join(td, core_file), mode="w") as out:
+            writer = csv.DictWriter(out, fieldnames=CORE_COLUMN_MAPPING.keys())
+            writer.writeheader()
+            for row in clean_company_rows:
+                reformatted_row = {new_name: get(row) for new_name, get in CORE_COLUMN_MAPPING.items()}
+                writer.writerow(reformatted_row)
+        with zipfile.ZipFile(f"parat_data_{datetime.now().strftime('%Y%m%d')}.zip", "w") as zip:
+            zip.write(os.path.join(td, core_file), core_file)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--refresh_raw", action="store_true", default=False,
@@ -989,5 +1083,6 @@ if __name__ == "__main__":
         exit(0)
     if args.refresh_raw:
         retrieve_raw(args.refresh_market_links)
-    group_data = clean(args.refresh_images, args.refresh_sectors)
+    group_data, clean_company_rows = clean(args.refresh_images, args.refresh_sectors)
     update_overall_data(group_data)
+    update_data_delivery(clean_company_rows)
