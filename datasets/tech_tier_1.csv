@@ -1,0 +1,112 @@
+job_title,ba_required,phd_required,is_data_science,is_research
+.NET Developer,false,false,false,false
+Analyst Programmer,false,false,false,false
+Android Developer,false,false,false,false
+Application Development Analyst,false,false,false,false
+Application Development Associate,false,false,false,false
+Cloud Architect,false,false,false,false
+Computer Engineer,false,false,false,false
+Cyber Security Specialist,false,false,false,false
+Data Architect,false,false,false,false
+Data Center Operator,false,false,false,false
+Database Administrator,false,false,false,false
+Database Analyst,false,false,false,false
+Database Developer,false,false,false,false
+Database Specialist,false,false,false,false
+DBA,false,false,false,false
+Developer,false,false,false,false
+DevOps Engineer,false,false,false,false
+Digital Product Manager,false,false,false,false
+Embedded Software Engineer,false,false,false,false
+ETL Developer,false,false,false,false
+Frontend Developer,false,false,false,false
+Full Stack Developer,false,false,false,false
+I.T. Analyst,false,false,false,false
+Information Analyst,false,false,false,false
+Information Security,false,false,false,false
+Information Systems Specialist,false,false,false,false
+Information Technology Project Manager,false,false,false,false
+Infrastructure Analyst,false,false,false,false
+Infrastructure Architect,false,false,false,false
+Infrastructure Engineer,false,false,false,false
+IT Analyst,false,false,false,false
+IT Architect,false,false,false,false
+IT Engineer,false,false,false,false
+IT Operations,false,false,false,false
+IT Project Manager,false,false,false,false
+IT Specialist,false,false,false,false
+Java Developer,false,false,false,false
+Linux System Administrator,false,false,false,false
+Network Analyst,false,false,false,false
+Network Architect,false,false,false,false
+Network Consulting Engineer,false,false,false,false
+Network Engineer,false,false,false,false
+Network Engineering,false,false,false,false
+Network Operations,false,false,false,false
+Network Specialist,false,false,false,false
+Network Support Engineer,false,false,false,false
+Network Technician,false,false,false,false
+Oracle Developer,false,false,false,false
+Professor,false,true,false,true
+Programmer,false,false,false,false
+Programmer Analyst,false,false,false,false
+Researcher,false,true,false,true
+RPA Developer,false,false,false,false
+Salesforce Developer,false,false,false,false
+Scientist,false,true,false,true
+SDE,false,false,false,false
+Security Architect,false,false,false,false
+Security Engineer,false,false,false,false
+Sharepoint Developer,false,false,false,false
+Software Designer,false,false,false,false
+Software Developer,false,false,false,false
+Software Development Engineer in Test,false,false,false,false
+Software Engineer,false,false,false,false
+Software Engineer I,false,false,false,false
+Software Engineering,false,false,false,false
+Software Project Manager,false,false,false,false
+Software Test Engineer,false,false,false,false
+Software Tester,false,false,false,false
+Storage Engineer,false,false,false,false
+System Admin,false,false,false,false
+System Administrator,false,false,false,false
+Systems Administrator,false,false,false,false
+Technical Product Manager,false,false,false,false
+Technical Project Manager,false,false,false,false
+Technical Test Specialist,false,false,false,false
+Test Automation Engineer,false,false,false,false
+UI Developer,false,false,false,false
+Unix System Administrator,false,false,false,false
+User Experience Researcher,false,false,false,false
+UX Designer,false,false,false,false
+Advisory Software Engineer,true,false,false,false
+Development Engineer,true,false,false,false
+Development Manager,true,false,false,false
+Hardware Engineer,true,false,false,false
+Integration Engineer,true,false,false,false
+R&D Engineer,true,false,false,true
+R&D Specialist,true,false,false,true
+Research and Development Intern,true,false,false,true
+Security Analyst,true,false,false,false
+Software Consultant,true,false,false,false
+Solutions Architect,true,false,false,false
+Solutions Engineer,true,false,false,false
+System Architect,true,false,false,false
+System Developer,true,false,false,false
+System Engineer,true,false,false,false
+Systems Analyst,true,false,false,false
+Systems Architect,true,false,false,false
+Systems Engineer,true,false,false,false
+Systems Engineering,true,false,false,false
+Systems Programmer,true,false,false,false
+Technical Architect,true,false,false,false
+Technical Lead,true,false,false,false
+Technology Lead,true,false,false,false
+Analytics Specialist,false,false,true,false
+Data Analyst,false,false,true,false
+Data Analytics,false,false,true,false
+Data Engineer,false,false,true,false
+Data Scientist,false,false,true,false
+Machine Learning Engineer,false,false,true,false
+Operations Analyst,false,false,true,false
+Statistician,false,false,true,false
