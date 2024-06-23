@@ -1040,6 +1040,24 @@ def update_overall_data(group_data: dict) -> None:
         out.write(json.dumps(overall_data))
 
 
+def write_query_to_csv(query: str, output_file: str, fieldnames: list) -> None:
+    """
+    Write results of a query to a csv
+    :param query: BQ query to execute
+    :param output_file: File where outputs should be written
+    :param fieldnames: List of columns
+    :return:
+    """
+    client = bigquery.Client()
+    with open(output_file, mode="w") as out:
+        writer = csv.DictWriter(out, fieldnames=fieldnames)
+        writer.writeheader()
+        rows = client.query_and_wait(query)
+        for row in rows:
+            dict_row = {col: row[col] for col in row.keys()}
+            writer.writerow(dict_row)
+
+
 def update_data_delivery(clean_company_rows: dict) -> None:
     """
     Updates data delivery for Zenodo
@@ -1053,16 +1071,65 @@ def update_data_delivery(clean_company_rows: dict) -> None:
 #    "Parent company name": "",
 #    "Parent company ID": "",
 #    "Region"
+    print("retrieving metadata")
     with tempfile.TemporaryDirectory() as td:
         core_file = "core.csv"
+        ids_file = "id.csv"
+        aliases_file = "alias.csv"
+        ticker_file = "ticker.csv"
         with open(os.path.join(td, core_file), mode="w") as out:
             writer = csv.DictWriter(out, fieldnames=CORE_COLUMN_MAPPING.keys())
             writer.writeheader()
             for row in clean_company_rows:
                 reformatted_row = {new_name: get(row) for new_name, get in CORE_COLUMN_MAPPING.items()}
                 writer.writerow(reformatted_row)
+        write_query_to_csv(
+            """
+            SELECT
+              organizations.name as Name,
+              COALESCE(legacy_cset_id, 4000+new_cset_id) as ID,
+              external_id as Identifier,
+              source as Type
+            FROM parat_input.organizations 
+            left join parat_input.ids
+            using(new_cset_id)
+            """,
+            os.path.join(td, ids_file),
+            ["Name", "ID", "Identifier", "Type"]
+        )
+        write_query_to_csv(
+            """
+            SELECT
+              organizations.name as Name,
+              COALESCE(legacy_cset_id, 4000+new_cset_id) as ID,
+              alias as Alias,
+              alias_language as Language
+            FROM parat_input.organizations 
+            left join parat_input.aliases
+            using(new_cset_id)
+            """,
+            os.path.join(td, aliases_file),
+            ["Name", "ID", "Alias", "Language"]
+        )
+        write_query_to_csv(
+            """
+            SELECT
+              organizations.name as Name,
+              COALESCE(legacy_cset_id, 4000+new_cset_id) as ID,
+              ticker as Ticker,
+              market as Exchange
+            FROM parat_input.organizations 
+            left join parat_input.tickers
+            using(new_cset_id)
+            """,
+            os.path.join(td, ticker_file),
+            ["Name", "ID", "Ticker", "Exchange"]
+        )
         with zipfile.ZipFile(f"parat_data_{datetime.now().strftime('%Y%m%d')}.zip", "w") as zip:
             zip.write(os.path.join(td, core_file), core_file)
+            zip.write(os.path.join(td, ids_file), ids_file)
+            zip.write(os.path.join(td, aliases_file), aliases_file)
+            zip.write(os.path.join(td, ticker_file), ticker_file)
 
 
 if __name__ == "__main__":
