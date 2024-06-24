@@ -129,7 +129,7 @@ const columnDefinitions = [
         return (
           <a
             target="_blank"
-            href={`company/${row.cset_id}-${slugifyCompanyName(name)}`}
+            href={`company/${row.cset_id}-${slugifyCompanyName(name)}/`}
           >
             {name}
           </a>
