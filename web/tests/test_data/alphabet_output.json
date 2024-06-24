@@ -77,96 +77,11 @@
       "url": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
     }
   ],
-  "crunchbase_description": "Alphabet is a holding company that provides projects with resources, freedom, and focus to make their ideas happen.",
   "groups": {
     "sp500": true,
     "globalBigTech": true,
     "genAI": true
   },
-  "fields": [
-    {
-      "field_name": "Segmentation",
-      "field_count": 4
-    },
-    {
-      "field_name": "Task (computing)",
-      "field_count": 4
-    },
-    {
-      "field_name": "Convolutional neural network",
-      "field_count": 4
-    },
-    {
-      "field_name": "Object (computer science)",
-      "field_count": 4
-    },
-    {
-      "field_name": "Probabilistic logic",
-      "field_count": 4
-    },
-    {
-      "field_name": "Receiver operating characteristic",
-      "field_count": 4
-    },
-    {
-      "field_name": "Inference",
-      "field_count": 4
-    },
-    {
-      "field_name": "Feature (computer vision)",
-      "field_count": 3
-    },
-    {
-      "field_name": "Deep learning",
-      "field_count": 3
-    },
-    {
-      "field_name": "Concept learning",
-      "field_count": 3
-    }
-  ],
-  "clusters": [
-    {
-      "cluster_id": 23307,
-      "cluster_count": 12
-    },
-    {
-      "cluster_id": 19977,
-      "cluster_count": 9
-    },
-    {
-      "cluster_id": 2844,
-      "cluster_count": 4
-    },
-    {
-      "cluster_id": 56050,
-      "cluster_count": 4
-    },
-    {
-      "cluster_id": 32715,
-      "cluster_count": 3
-    },
-    {
-      "cluster_id": 1609,
-      "cluster_count": 3
-    },
-    {
-      "cluster_id": 52787,
-      "cluster_count": 3
-    },
-    {
-      "cluster_id": 4455,
-      "cluster_count": 3
-    },
-    {
-      "cluster_id": 2482,
-      "cluster_count": 3
-    },
-    {
-      "cluster_id": 3628,
-      "cluster_count": 2
-    }
-  ],
   "company_references": [
     {
       "ref_CSET_id": 101,
@@ -207,90 +122,6 @@
     {
       "ref_CSET_id": 223,
       "referenced_count": 33
-    }
-  ],
-  "tasks": [
-    {
-      "referent": "classification",
-      "task_count": 18
-    },
-    {
-      "referent": "autonomous_driving",
-      "task_count": 13
-    },
-    {
-      "referent": "artificial_intelligence_and_machine_learning",
-      "task_count": 12
-    },
-    {
-      "referent": "motion_planning",
-      "task_count": 9
-    },
-    {
-      "referent": "disease_detection",
-      "task_count": 8
-    },
-    {
-      "referent": "domain_generalization",
-      "task_count": 8
-    },
-    {
-      "referent": "autonomous_vehicles",
-      "task_count": 7
-    },
-    {
-      "referent": "inference_attack",
-      "task_count": 7
-    },
-    {
-      "referent": "object_detection",
-      "task_count": 7
-    },
-    {
-      "referent": "segmentation",
-      "task_count": 6
-    }
-  ],
-  "methods": [
-    {
-      "referent": "convolutional_neural_networks",
-      "method_count": 13
-    },
-    {
-      "referent": "3d_representations",
-      "method_count": 12
-    },
-    {
-      "referent": "recurrent_neural_networks",
-      "method_count": 11
-    },
-    {
-      "referent": "vqa_models",
-      "method_count": 10
-    },
-    {
-      "referent": "neural_architecture_search",
-      "method_count": 7
-    },
-    {
-      "referent": "symbolic_deep_learning",
-      "method_count": 6
-    },
-    {
-      "referent": "chexnet",
-      "method_count": 5
-    },
-    {
-      "referent": "causal_inference",
-      "method_count": 5
-    },
-    {
-      "referent": "mad_learning",
-      "method_count": 5
-    },
-    {
-      "referent": "generative_models",
-      "method_count": 5
     }
   ],
   "articles": {

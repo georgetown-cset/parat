@@ -31,80 +31,11 @@
   "agg_child_info": null,
   "unagg_child_info": null,
   "market": [],
-  "crunchbase_description": "Hugging Face allows users to build, train, and deploy art models using the reference open source in machine learning.",
   "groups": {
     "sp500": false,
     "globalBigTech": false,
     "genAI": false
   },
-  "fields": [
-    {
-      "field_name": "Language model",
-      "field_count": 2
-    },
-    {
-      "field_name": "Question answering",
-      "field_count": 1
-    },
-    {
-      "field_name": "Inference",
-      "field_count": 1
-    },
-    {
-      "field_name": "Pruning (morphology)",
-      "field_count": 1
-    },
-    {
-      "field_name": "Artificial neural network",
-      "field_count": 1
-    },
-    {
-      "field_name": "Hierarchical database model",
-      "field_count": 1
-    },
-    {
-      "field_name": "Task (computing)",
-      "field_count": 1
-    },
-    {
-      "field_name": "Natural language",
-      "field_count": 1
-    },
-    {
-      "field_name": "Product of experts",
-      "field_count": 1
-    }
-  ],
-  "clusters": [
-    {
-      "cluster_id": 1193,
-      "cluster_count": 6
-    },
-    {
-      "cluster_id": 1621,
-      "cluster_count": 2
-    },
-    {
-      "cluster_id": 4358,
-      "cluster_count": 1
-    },
-    {
-      "cluster_id": 16472,
-      "cluster_count": 1
-    },
-    {
-      "cluster_id": 62049,
-      "cluster_count": 1
-    },
-    {
-      "cluster_id": 3527,
-      "cluster_count": 1
-    },
-    {
-      "cluster_id": 11991,
-      "cluster_count": 1
-    }
-  ],
   "company_references": [
     {
       "ref_CSET_id": 101,
@@ -145,90 +76,6 @@
     {
       "ref_CSET_id": 6,
       "referenced_count": 3
-    }
-  ],
-  "tasks": [
-    {
-      "referent": "natural_language_processing",
-      "task_count": 4
-    },
-    {
-      "referent": "classification_tasks",
-      "task_count": 3
-    },
-    {
-      "referent": "unsupervised_pre_training",
-      "task_count": 2
-    },
-    {
-      "referent": "multi_task_learning",
-      "task_count": 2
-    },
-    {
-      "referent": "language_identification",
-      "task_count": 1
-    },
-    {
-      "referent": "few_shot_learning",
-      "task_count": 1
-    },
-    {
-      "referent": "out_of_distribution_detection",
-      "task_count": 1
-    },
-    {
-      "referent": "continuous_object_recognition",
-      "task_count": 1
-    },
-    {
-      "referent": "inference_attack",
-      "task_count": 1
-    },
-    {
-      "referent": "classification",
-      "task_count": 1
-    }
-  ],
-  "methods": [
-    {
-      "referent": "language_models",
-      "method_count": 4
-    },
-    {
-      "referent": "albert",
-      "method_count": 1
-    },
-    {
-      "referent": "bert",
-      "method_count": 1
-    },
-    {
-      "referent": "hierarchical_vae",
-      "method_count": 1
-    },
-    {
-      "referent": "3d_representations",
-      "method_count": 1
-    },
-    {
-      "referent": "recurrent_neural_networks",
-      "method_count": 1
-    },
-    {
-      "referent": "amsbound",
-      "method_count": 1
-    },
-    {
-      "referent": "vqa_models",
-      "method_count": 1
-    },
-    {
-      "referent": "l1_regularization",
-      "method_count": 1
-    },
-    {
-      "referent": "fine_tuning",
-      "method_count": 1
     }
   ],
   "articles": {
