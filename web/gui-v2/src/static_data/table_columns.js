@@ -241,16 +241,6 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "ai_pubs_top_conf"),
   },
   {
-    title: `AI papers in last complete year (${overall.endArticleYear})`,
-    key: "ai_pubs_last_full_year",
-    aggregateType: "median",
-    category: "publications",
-    ...generateSliderColDef(
-      "articles",
-      "ai_pubs_last_full_year",
-    ),
-  },
-  {
     title: "CV publications",
     key: "cv_publications",
     aggregateType: "median",
@@ -277,16 +267,6 @@ const columnDefinitions = [
     aggregateType: "median",
     category: "publications",
     ...generateSliderColDef("articles", "all_publications"),
-  },
-  {
-    title: "5-year total publications",
-    key: "all_pubs_5yr",
-    aggregateType: "median",
-    category: "publications",
-    ...generateSliderColDef(
-      "articles",
-      "all_pubs_5yr"
-    ),
   },
   {
     title: "Citations to AI pubs",
@@ -349,16 +329,6 @@ const columnDefinitions = [
     aggregateType: "median",
     category: "patents",
     ...generateSliderColDef("patents", "all_patents"),
-  },
-  {
-    title: "5-year total patents",
-    key: "all_patents_5yr",
-    aggregateType: "median",
-    category: "patents",
-    ...generateSliderColDef(
-      "patents",
-      "all_patents_5yr"
-    ),
   },
   {
     title: "Agricultural patents",

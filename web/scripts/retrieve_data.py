@@ -852,18 +852,6 @@ def add_derived_metrics(js: dict, end_article_year: int, end_patent_year: int) -
     :param end_patent_year: End year to use for patent metrics
     :return: None (mutates js)
     """
-    # 5-year publication counts
-    article_end_idx = YEARS.index(end_article_year)
-    article_yearly_counts = js["articles"]["all_publications"]["counts"]
-    five_year_articles = sum(article_yearly_counts[article_end_idx-4:article_end_idx+1])
-    js["articles"]["all_pubs_5yr"] = {"counts": [], "total": five_year_articles, "isTopResearch": False}
-
-    # 5-year patent counts
-    patent_end_idx = YEARS.index(end_patent_year)
-    patent_yearly_counts = js["patents"]["all_patents"]["counts"]
-    five_year_patents = sum(patent_yearly_counts[patent_end_idx-4:patent_end_idx+1])
-    js["patents"]["all_patents_5yr"] = {"counts": [], "total": five_year_patents, "table": None}
-
     # AI publication percentage
     ai_pubs_pct = get_field_percentage(js, "articles", "all_publications", "ai_publications")
     js["articles"]["ai_pubs_percent"] = {"counts": [], "total": ai_pubs_pct, "isTopResearch": False}
@@ -871,11 +859,6 @@ def add_derived_metrics(js: dict, end_article_year: int, end_patent_year: int) -
     # AI patenting percentage
     ai_patents_pct = get_field_percentage(js, "patents", "all_patents", "ai_patents")
     js["patents"]["ai_patents_percent"] = {"counts": [], "total": ai_patents_pct, "table": None}
-
-    # AI pubs in last complete year
-    ai_yearly_counts = js["articles"]["ai_publications"]["counts"]
-    ai_last_complete_year = ai_yearly_counts[article_end_idx]
-    js["articles"]["ai_pubs_last_full_year"] = {"counts": [], "total": ai_last_complete_year, "isTopResearch": False}
 
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict,
