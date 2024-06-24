@@ -106,6 +106,7 @@ CORE_COLUMN_MAPPING = OrderedDict([
     ("Country", lambda row: row["country"]),
     ("Website", lambda row: row["website"]),
     ("Groups", lambda row: ", ".join([GROUP_ID_TO_NAME[group_name] for group_name, in_group in row["groups"].items() if in_group])),
+    ("Region", lambda row: row["continent"]),
     ("Stage", lambda row: row["stage"]),
     ("Sector", lambda row: row["sector"]),
     ("Description", lambda row: row["description"]),
@@ -1058,6 +1059,29 @@ def write_query_to_csv(query: str, output_file: str, fieldnames: list) -> None:
             writer.writerow(dict_row)
 
 
+def get_extra_org_meta() -> dict:
+    """
+    Retrieve "extra" metadata about an org that doesn't cleanly fit into another part of the data pull
+    :return: dict mapping parat id to extra metadata
+    """
+    client = bigquery.Client()
+    extra_meta = {}
+    rows = client.query_and_wait("""
+        SELECT
+          COALESCE(legacy_cset_id, 4000+new_cset_id) as id,
+          city,
+          province_state
+        FROM 
+          parat_input.organizations
+    """)
+    for row in rows:
+        extra_meta[row["id"]] = {
+            "City": row["city"],
+            "State/province": row["province_state"],
+        }
+    return extra_meta
+
+
 def update_data_delivery(clean_company_rows: dict) -> None:
     """
     Updates data delivery for Zenodo
@@ -1065,23 +1089,20 @@ def update_data_delivery(clean_company_rows: dict) -> None:
     :return: None
     """
 #    "PARAT link"
-#    "City"
-#    "State/province" <-- organizations
-#    "Groups"
-#    "Parent company name": "",
-#    "Parent company ID": "",
-#    "Region"
     print("retrieving metadata")
     with tempfile.TemporaryDirectory() as td:
         core_file = "core.csv"
         ids_file = "id.csv"
         aliases_file = "alias.csv"
         ticker_file = "ticker.csv"
+        extra_org_meta = get_extra_org_meta()
         with open(os.path.join(td, core_file), mode="w") as out:
-            writer = csv.DictWriter(out, fieldnames=CORE_COLUMN_MAPPING.keys())
+            fieldnames = list(CORE_COLUMN_MAPPING.keys())+list(extra_org_meta[list(extra_org_meta.keys())[0]].keys())
+            writer = csv.DictWriter(out, fieldnames=fieldnames)
             writer.writeheader()
             for row in clean_company_rows:
                 reformatted_row = {new_name: get(row) for new_name, get in CORE_COLUMN_MAPPING.items()}
+                reformatted_row.update(extra_org_meta.get(reformatted_row["ID"], set()))
                 writer.writerow(reformatted_row)
         write_query_to_csv(
             """
