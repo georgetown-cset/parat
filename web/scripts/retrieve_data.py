@@ -1115,7 +1115,7 @@ def update_data_delivery(clean_company_rows: dict) -> None:
               external_id as Identifier,
               source as Type
             FROM parat_input.organizations 
-            left join parat_input.ids
+            inner join parat_input.ids
             using(new_cset_id)
             """,
             os.path.join(td, ids_file),
@@ -1129,7 +1129,7 @@ def update_data_delivery(clean_company_rows: dict) -> None:
               alias as Alias,
               alias_language as Language
             FROM parat_input.organizations 
-            left join parat_input.aliases
+            inner join parat_input.aliases
             using(new_cset_id)
             """,
             os.path.join(td, aliases_file),
@@ -1143,7 +1143,7 @@ def update_data_delivery(clean_company_rows: dict) -> None:
               ticker as Ticker,
               market as Exchange
             FROM parat_input.organizations 
-            left join parat_input.tickers
+            inner join parat_input.tickers
             using(new_cset_id)
             """,
             os.path.join(td, ticker_file),
