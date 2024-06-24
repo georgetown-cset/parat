@@ -269,16 +269,6 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "all_publications"),
   },
   {
-    title: "5-year total publications",
-    key: "all_pubs_5yr",
-    aggregateType: "median",
-    category: "publications",
-    ...generateSliderColDef(
-      "articles",
-      "all_pubs_5yr"
-    ),
-  },
-  {
     title: "Citations to AI pubs",
     key: "citations",
     aggregateType: "median",
@@ -339,16 +329,6 @@ const columnDefinitions = [
     aggregateType: "median",
     category: "patents",
     ...generateSliderColDef("patents", "all_patents"),
-  },
-  {
-    title: "5-year total patents",
-    key: "all_patents_5yr",
-    aggregateType: "median",
-    category: "patents",
-    ...generateSliderColDef(
-      "patents",
-      "all_patents_5yr"
-    ),
   },
   {
     title: "Agricultural patents",
