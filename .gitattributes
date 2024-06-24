@@ -1,0 +1,9 @@
+# Configure which files are generated (linguist-generated=true) and
+# which are not (false).  GitHub was previously considering some
+# non-generated files as generated.
+web/gui-v2/src/static_data/data.js linguist-generated=true
+web/gui-v2/src/static_data/detail-toc.json linguist-generated=false
+web/gui-v2/src/static_data/overall_data.json linguist-generated=true
+web/gui-v2/src/static_data/table_columns.js linguist-generated=false
+web/gui-v2/src/static_data/tooltips.js linguist-generated=false
+
