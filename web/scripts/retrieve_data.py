@@ -19,6 +19,7 @@ from decimal import Decimal, ROUND_HALF_UP
 from google.cloud import bigquery
 from google.cloud import translate_v3beta1 as translate
 from io import BytesIO
+from slugify import slugify
 from tqdm import tqdm
 
 """
@@ -1088,7 +1089,6 @@ def update_data_delivery(clean_company_rows: dict) -> None:
     :param group_data: list of clean metadata for each row
     :return: None
     """
-#    "PARAT link"
     print("retrieving metadata")
     with tempfile.TemporaryDirectory() as td:
         core_file = "core.csv"
@@ -1097,12 +1097,14 @@ def update_data_delivery(clean_company_rows: dict) -> None:
         ticker_file = "ticker.csv"
         extra_org_meta = get_extra_org_meta()
         with open(os.path.join(td, core_file), mode="w") as out:
-            fieldnames = list(CORE_COLUMN_MAPPING.keys())+list(extra_org_meta[list(extra_org_meta.keys())[0]].keys())
+            fieldnames = list(CORE_COLUMN_MAPPING.keys())+list(extra_org_meta[list(extra_org_meta.keys())[0]].keys())+["PARAT link"]
             writer = csv.DictWriter(out, fieldnames=fieldnames)
             writer.writeheader()
             for row in clean_company_rows:
                 reformatted_row = {new_name: get(row) for new_name, get in CORE_COLUMN_MAPPING.items()}
                 reformatted_row.update(extra_org_meta.get(reformatted_row["ID"], set()))
+                slugified_name = slugify(reformatted_row["Name"].replace("/", "").replace("'", ""))
+                reformatted_row["PARAT link"] = f"https://parat.eto.tech/company/{reformatted_row['ID']}-{slugified_name}"
                 writer.writerow(reformatted_row)
         write_query_to_csv(
             """
