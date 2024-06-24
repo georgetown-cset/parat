@@ -241,16 +241,6 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "ai_pubs_top_conf"),
   },
   {
-    title: `AI papers in last complete year (${overall.endArticleYear})`,
-    key: "ai_pubs_last_full_year",
-    aggregateType: "median",
-    category: "publications",
-    ...generateSliderColDef(
-      "articles",
-      "ai_pubs_last_full_year",
-    ),
-  },
-  {
     title: "CV publications",
     key: "cv_publications",
     aggregateType: "median",

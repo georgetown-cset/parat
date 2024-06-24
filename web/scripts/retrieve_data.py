@@ -872,11 +872,6 @@ def add_derived_metrics(js: dict, end_article_year: int, end_patent_year: int) -
     ai_patents_pct = get_field_percentage(js, "patents", "all_patents", "ai_patents")
     js["patents"]["ai_patents_percent"] = {"counts": [], "total": ai_patents_pct, "table": None}
 
-    # AI pubs in last complete year
-    ai_yearly_counts = js["articles"]["ai_publications"]["counts"]
-    ai_last_complete_year = ai_yearly_counts[article_end_idx]
-    js["articles"]["ai_pubs_last_full_year"] = {"counts": [], "total": ai_last_complete_year, "isTopResearch": False}
-
 
 def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, market_key_to_link: dict,
               end_article_year: int = END_ARTICLE_YEAR, end_patent_year: int = END_PATENT_YEAR) -> dict:
