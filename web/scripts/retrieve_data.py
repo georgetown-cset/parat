@@ -107,6 +107,7 @@ CORE_COLUMN_MAPPING = OrderedDict([
     ("Country", lambda row: row["country"]),
     ("Website", lambda row: row["website"]),
     ("Groups", lambda row: ", ".join([GROUP_ID_TO_NAME[group_name] for group_name, in_group in row["groups"].items() if in_group])),
+    ("Aggregated subsidiaries", lambda row: row["agg_child_info"]),
     ("Region", lambda row: row["continent"]),
     ("Stage", lambda row: row["stage"]),
     ("Sector", lambda row: row["sector"]),
@@ -159,7 +160,6 @@ CORE_COLUMN_MAPPING = OrderedDict([
     ("Patents: AI applications and techniques: Speech processing", lambda row: row["patents"]["Speech_Processing"]["total"]),
     ("Workforce: AI workers", lambda row: row["other_metrics"]["ai_jobs"]["total"]),
     ("Workforce: Tech Tier 1 workers", lambda row: row["other_metrics"]["tt1_jobs"]["total"]),
-    ("Aggregated subsidiaries", lambda row: row["agg_child_info"])
 ])
 
 ### END CONSTANTS ###
@@ -1136,7 +1136,7 @@ def update_data_delivery(clean_company_rows: dict) -> None:
             ["Name", "ID", "Alias", "Language"]
         )
         write_query_to_csv(
-            """
+            f"""
             SELECT
               organizations.name as Name,
               COALESCE(legacy_cset_id, 4000+new_cset_id) as ID,
@@ -1145,6 +1145,7 @@ def update_data_delivery(clean_company_rows: dict) -> None:
             FROM parat_input.organizations 
             inner join parat_input.tickers
             using(new_cset_id)
+            where market in ({", ".join([f'"{e}"' for e in FILT_EXCHANGES])})
             """,
             os.path.join(td, ticker_file),
             ["Name", "ID", "Ticker", "Exchange"]
