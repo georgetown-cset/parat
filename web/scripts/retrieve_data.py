@@ -159,6 +159,7 @@ CORE_COLUMN_MAPPING = OrderedDict([
     ("Patents: AI applications and techniques: Speech processing", lambda row: row["patents"]["Speech_Processing"]["total"]),
     ("Workforce: AI workers", lambda row: row["other_metrics"]["ai_jobs"]["total"]),
     ("Workforce: Tech Tier 1 workers", lambda row: row["other_metrics"]["tt1_jobs"]["total"]),
+    ("Aggregated subsidiaries", lambda row: row["agg_child_info"])
 ])
 
 ### END CONSTANTS ###
@@ -665,8 +666,6 @@ def get_top_10_lists(js: dict) -> None:
     :param js: A dict of data corresponding to an individual PARAT record
     :return: None (mutates js)
     """
-    js["fields"] = get_top_n_list(js.pop("fields"), "field_count")
-    js["clusters"] = get_top_n_list(js.pop("clusters"), "cluster_count")
     js["company_references"] = get_top_n_list(js.pop("company_references"), "referenced_count")
 
 
@@ -895,6 +894,8 @@ def clean_row(row: str, refresh_images: bool, lowercase_to_orig_cname: dict, mar
     clean_misc_fields(js, refresh_images, lowercase_to_orig_cname, market_key_to_link)
     js.pop("tasks")
     js.pop("methods")
+    js.pop("fields")
+    js.pop("clusters")
     get_top_10_lists(js)
     get_category_counts(js)
     add_derived_metrics(js, end_article_year, end_patent_year)
@@ -1148,11 +1149,10 @@ def update_data_delivery(clean_company_rows: dict) -> None:
             os.path.join(td, ticker_file),
             ["Name", "ID", "Ticker", "Exchange"]
         )
-        with zipfile.ZipFile(f"parat_data_{datetime.now().strftime('%Y%m%d')}.zip", "w") as zip:
-            zip.write(os.path.join(td, core_file), core_file)
-            zip.write(os.path.join(td, ids_file), ids_file)
-            zip.write(os.path.join(td, aliases_file), aliases_file)
-            zip.write(os.path.join(td, ticker_file), ticker_file)
+        download_name = f"parat_data_{datetime.now().strftime('%Y%m%d')}"
+        with zipfile.ZipFile(f"{download_name}.zip", "w") as zip:
+            for out_csv in [core_file, ids_file, aliases_file, ticker_file]:
+                zip.write(os.path.join(td, out_csv), os.path.join(download_name, out_csv))
 
 
 if __name__ == "__main__":
@@ -1174,5 +1174,5 @@ if __name__ == "__main__":
     if args.refresh_raw:
         retrieve_raw(args.refresh_market_links)
     group_data, clean_company_rows = clean(args.refresh_images, args.refresh_sectors)
-    update_overall_data(group_data)
     update_data_delivery(clean_company_rows)
+    update_overall_data(group_data)
