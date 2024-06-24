@@ -95,9 +95,12 @@ const GenericPage = (props) => {
 }
 
 const FallbackPage = () => {
+  // Route URLs both with and without the `/index.html` on the end to the same
+  // components.  The `/123-FOO/index.html` pages will redirect to `/123-FOO/`.
   return (
     <Router basepath="/">
       <GenericPage path="/company/:slug" />
+      <GenericPage path="/company/:slug/index.html" />
     </Router>
   )
 };
