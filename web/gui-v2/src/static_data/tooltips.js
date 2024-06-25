@@ -81,15 +81,15 @@ const tooltips = {
   },
   jobsExplanations: {
     chinaJobs: <>PARAT workforce data for this Chinese company are unreliable. Use with extreme caution. <a href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-4" target="_blank" rel="noopener">Read more &gt;&gt;</a></>,
-    otherJobs: <>PARAT workforce data for this non-U.S. company may be unreliable. Use with extreme caution. <a href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-4" target="_blank" rel="noopener">Read more &gt;&gt;</a></>,
+    otherJobs: <>PARAT workforce data for this non-U.S. company may be unreliable. Use with caution. <a href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-4" target="_blank" rel="noopener">Read more &gt;&gt;</a></>,
     noData: "This field could not be calculated due to lack of data.",
   },
   detailView: {
     publications: {
-      aiResearchArticles: <>For details on how we identify and count AI research articles, <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#publications">read the dataset documentation</ExternalLink>. Articles from the past several months <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
+      aiResearchArticles: <>For details on how we identify and count AI research articles, <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#publications">read the dataset documentation</ExternalLink>. More recent articles <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
       highlyCitedArticles: <>Highly cited articles are defined as the 10% of articles in each publication year with the most citations.</>,
-      topResearchTopicsTable: <>Articles are assigned to AI subtopics using ETO classifiers. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#publications">Read more &gt;&gt;</ExternalLink> Articles from the past several months <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
-      topConferencePubsChart: <>Includes publications accepted at selected prominent AI research conferences around the world. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#publications">Read more &gt;&gt;</ExternalLink> Articles from the past several months <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
+      topResearchTopicsTable: <>Articles are assigned to AI subtopics using ETO classifiers. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#publications">Read more &gt;&gt;</ExternalLink> More recent articles <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
+      topConferencePubsChart: <>Includes publications accepted at selected prominent AI research conferences around the world. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#publications">Read more &gt;&gt;</ExternalLink> More recent articles <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
     },
     patents: {
       aiRelatedPatents: <>For details on how we identify and count AI patent filings, <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#patents">read the dataset documentation</ExternalLink>. Some recent patents <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-5">may be omitted.</ExternalLink></>,
