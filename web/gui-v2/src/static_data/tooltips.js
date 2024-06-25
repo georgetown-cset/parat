@@ -81,7 +81,7 @@ const tooltips = {
   },
   jobsExplanations: {
     chinaJobs: <>PARAT workforce data for this Chinese company are unreliable. Use with extreme caution. <a href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-4" target="_blank" rel="noopener">Read more &gt;&gt;</a></>,
-    otherJobs: <>PARAT workforce data for this non-U.S. company may be unreliable. Use with extreme caution. <a href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-4" target="_blank" rel="noopener">Read more &gt;&gt;</a></>,
+    otherJobs: <>PARAT workforce data for this non-U.S. company may be unreliable. Use with caution. <a href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#limitations-4" target="_blank" rel="noopener">Read more &gt;&gt;</a></>,
     noData: "This field could not be calculated due to lack of data.",
   },
   detailView: {
