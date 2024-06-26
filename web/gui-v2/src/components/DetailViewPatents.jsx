@@ -177,7 +177,7 @@ const DetailViewPatents = ({
       return {
         subfield: patentMap[key],
         patents: data.patents[key].total,
-        growth: data.patents[key].growth ? data.patents[key].growth : "N/A",
+        growth: data.patents[key].growth ? `${data.patents[key].growth}%` : "N/A",
       };
     })
     .sort((a, b) => b.patents - a.patents);
@@ -188,7 +188,7 @@ const DetailViewPatents = ({
       return {
         subfield: patentMap[key],
         patents: data.patents[key].total,
-        growth: data.patents[key].growth ? data.patents[key].growth : "N/A",
+        growth: data.patents[key].growth ? `${data.patents[key].growth}%` : "N/A",
       };
     })
     .sort((a, b) => b.patents - a.patents);
