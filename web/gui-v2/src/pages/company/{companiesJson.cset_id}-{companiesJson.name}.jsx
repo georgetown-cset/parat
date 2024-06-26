@@ -6,6 +6,7 @@ import { AppWrapper } from '@eto/eto-ui-components';
 import DetailView from '../../components/DetailView';
 import ParatUsageDisclaimer from '../../components/ParatUsageDisclaimer';
 import { company_data as allCompanies } from '../../static_data/data';
+import MetaTagsWrapper from '../../components/MetaTagsWrapper';
 
 const CompanyPage = ({ data }) => {
   const { cset_id: companyId, name: companyName } = data.companiesJson;
@@ -36,9 +37,6 @@ export const query = graphql`
 
 export const Head = ({ pageContext }) => {
   return (
-    <>
-      <html lang="en" />
-      <title>{pageContext.name} &ndash; PARAT &ndash; Emerging Technology Observatory</title>
-    </>
+    <MetaTagsWrapper subtitle={pageContext.name} />
   );
 };

@@ -9,6 +9,7 @@ import {
 } from '@eto/eto-ui-components';
 
 import ListView from '../components/ListView';
+import MetaTagsWrapper from '../components/MetaTagsWrapper';
 import ParatUsageDisclaimer from '../components/ParatUsageDisclaimer';
 
 const styles = {
@@ -65,9 +66,6 @@ export default IndexPage;
 
 export const Head = () => {
   return (
-    <>
-      <html lang="en" />
-      <title>PARAT &ndash; Emerging Technology Observatory</title>
-    </>
+    <MetaTagsWrapper />
   );
 };
