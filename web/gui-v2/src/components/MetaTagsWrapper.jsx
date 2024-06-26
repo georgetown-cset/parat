@@ -16,7 +16,7 @@ const MetaTagsWrapper = ({
       <MetaTags
         title={fullTitle}
         description={description}
-        socialCardUrl={socialCard}
+        socialCardUrl={`https://parat.eto.tech${socialCard}`}
       />
     </>
   );
