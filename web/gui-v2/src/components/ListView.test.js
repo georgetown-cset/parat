@@ -13,7 +13,7 @@ import { exportsForTestingOnly } from './ListViewTable';
 
 const { extractCurrentFilters, filterRow } = exportsForTestingOnly;
 
-const INITIAL_COLUMNS = ['Company', 'Country', 'AI publications', 'AI patents', 'AI jobs'];
+const INITIAL_COLUMNS = ['Company', 'Country', 'AI publications', 'AI patents', 'AI jobs', 'Tech Tier 1 jobs'];
 const REMOVED_COLUMN = 'AI publications';
 
 describe("ListView", () => {

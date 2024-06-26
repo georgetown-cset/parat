@@ -563,6 +563,7 @@ const columnDefinitions = [
         return <CellStat col="tt1_jobs" country={row.country} data={data} />;
       },
     ),
+    initialCol: true,
   },
 // Apply tooltips to the column definition entries
 ].map((entry) => ({ ...entry, tooltip: tooltips.columnHeaders[entry.key] }));
