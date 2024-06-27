@@ -28,7 +28,7 @@ const DetailViewWorkforce = ({
         <span>
           According to our data, {data.name} currently employs about {commas(data.other_metrics.ai_jobs.total)} AI workers
           (#{data.other_metrics.ai_jobs.rank} rank in PARAT
-          {data.groups.sp500 && <>, #{data.other_metrics.ai_jobs.sp500_rank} in the S&P500</>}). <em>AI workers in PARAT include anyone a high probability of working with AI. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink></em>
+          {data.groups.sp500 && <>, #{data.other_metrics.ai_jobs.sp500_rank} in the S&P500</>}). <em>AI workers in PARAT include anyone a high probability of working with AI. Recent hires may be omitted. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink></em>
         </span>
       ),
     },
@@ -39,7 +39,7 @@ const DetailViewWorkforce = ({
           According to our data, {data.name} currently employs about {commas(data.other_metrics.tt1_jobs.total)} Tech Tier 1 workers
           (#{data.other_metrics.tt1_jobs.rank} rank in PARAT
           {data.groups.sp500 && <>, #{data.other_metrics.tt1_jobs.sp500_rank} in the S&P500</>}).
-         <em> Tech Tier 1 workers include anyone with technical skills and a reasonable probability of working with AI. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink></em>
+         <em> Tech Tier 1 workers include anyone with technical skills and a reasonable probability of working with AI. Recent hires may be omitted. <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/#workforce">Read more &gt;&gt;</ExternalLink></em>
         </span>
       ),
     },
