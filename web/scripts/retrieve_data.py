@@ -159,7 +159,7 @@ CORE_COLUMN_MAPPING = OrderedDict([
     ("Patents: AI applications and techniques: Robotics", lambda row: row["patents"]["Robotics"]["total"]),
     ("Patents: AI applications and techniques: Speech processing", lambda row: row["patents"]["Speech_Processing"]["total"]),
     ("Workforce: AI workers", lambda row: row["other_metrics"]["ai_jobs"]["total"]),
-    ("Workforce: Tech Tier 1 workers", lambda row: row["other_metrics"]["tt1_jobs"]["total"]),
+    ("Workforce: Tech Team 1 workers", lambda row: row["other_metrics"]["tt1_jobs"]["total"]),
 ])
 
 ### END CONSTANTS ###
