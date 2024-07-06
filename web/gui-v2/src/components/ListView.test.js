@@ -25,16 +25,16 @@ describe("ListView", () => {
     );
 
     // Filter by China and verify that the count updates
-    expect(screen.getByText('Viewing 683 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 691 companies')).toBeVisible();
     const regionHeader = screen.getByRole('columnheader', { name: /country/i });
     await user.click(getByRole(regionHeader, 'button', { name: /open/i }));
     const menu = screen.getByRole('listbox');
     await user.click(getByText(menu, 'China'));
-    expect(screen.getByText('Viewing 43 of 683 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 43 of 691 companies')).toBeVisible();
 
     // Reset the filters and verify that the count updates
     await user.click(screen.getByRole('button', { name: /reset filters/i }));
-    expect(screen.getByText('Viewing 683 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 691 companies')).toBeVisible();
   }, 20000);
 
 
@@ -49,7 +49,7 @@ describe("ListView", () => {
     await user.click(getByRole(companyHeader, 'combobox'));
     const menu = screen.getByRole('listbox');
     await user.click(getByText(menu, 'S&P 500'));
-    expect(screen.getByText('Viewing 496 of 683 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 500 of 691 companies')).toBeVisible();
   }, 20000);
 
 
