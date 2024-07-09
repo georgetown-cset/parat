@@ -78,7 +78,7 @@ OTHER_METRICS = "other_metrics"
 METRIC_LISTS = [ARTICLE_METRICS, PATENT_METRICS, OTHER_METRICS]
 
 _curr_time = datetime.now()
-CURRENT_YEAR = _curr_time.year if _curr_time.month > 6 else _curr_time.year - 1
+CURRENT_YEAR = _curr_time.year - 1
 ARTICLE_OFFSET = 2
 PATENT_OFFSET = 3
 GROWTH_INTERVAL = 3
@@ -314,7 +314,7 @@ def clean_parent(parents: list, lowercase_to_orig_cname: dict) -> str:
         return None
     cleaned_parents = [clean_company_name(parent["parent_name"], lowercase_to_orig_cname)+
                        (" (Acquired)" if parent["parent_acquisition"] else "")
-                      for parent in parents]
+                      for parent in parents if parent["parent_name"]]
     return ", ".join(cleaned_parents)
 
 

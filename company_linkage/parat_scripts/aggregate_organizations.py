@@ -272,7 +272,8 @@ class OrganizationAggregator:
         organizations = query_job.result()
         for organization in organizations:
             for par in organization.parent:
-                if par["parent_id"] and par["parent_id"] != organization["CSET_id"]:
+                null_parent = not (par["parent_id"] and par["parent_name"])
+                if not null_parent and (par["parent_id"] != organization["CSET_id"]):
                     self.parent_names[par["parent_id"]] = par["parent_name"]
                     self.full_aggregate_child_to_parent[organization["CSET_id"]].append(par["parent_id"])
                     # we don't want to create a child-to-parent link if our child shouldn't be rolled up
