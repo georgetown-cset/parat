@@ -550,7 +550,7 @@ const columnDefinitions = [
     initialCol: true,
   },
   {
-    title: "Tech Tier 1 jobs",
+    title: "Tech Team 1 jobs",
     key: "tt1_jobs",
     aggregateType: "median",
     category: "workforce",
