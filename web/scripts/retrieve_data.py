@@ -162,6 +162,54 @@ CORE_COLUMN_MAPPING = OrderedDict([
     ("Workforce: Tech Team 1 workers", lambda row: row["other_metrics"]["tt1_jobs"]["total"]),
 ])
 
+YEARLY_COUNT_MAPPING = OrderedDict([
+    ("Publications: AI publications", lambda row: row["articles"]["ai_publications"]["counts"]),
+    ("Publications: CV publications", lambda row: row["articles"]["cv_publications"]["counts"]),
+    ("Publications: NLP publications", lambda row: row["articles"]["nlp_publications"]["counts"]),
+    ("Publications: Robotics publications", lambda row: row["articles"]["robotics_publications"]["counts"]),
+    ("Publications: AI publications in top conferences", lambda row: row["articles"]["ai_pubs_top_conf"]["counts"]),
+    ("Patents: AI patents", lambda row: row["patents"]["ai_patents"]["counts"]),
+    ("Patents: AI use cases: Agriculture", lambda row: row["patents"]["Agricultural"]["counts"]),
+    ("Patents: AI use cases: Banking and finance", lambda row: row["patents"]["Banking_and_Finance"]["counts"]),
+    ("Patents: AI use cases: Business", lambda row: row["patents"]["Business"]["counts"]),
+    ("Patents: AI use cases: Computing in government", lambda row: row["patents"]["Computing_in_Government"]["counts"]),
+    ("Patents: AI use cases: Document management and publishing",
+     lambda row: row["patents"]["Document_Mgt_and_Publishing"]["counts"]),
+    ("Patents: AI use cases: Education", lambda row: row["patents"]["Education"]["counts"]),
+    ("Patents: AI use cases: Energy", lambda row: row["patents"]["Energy_Management"]["counts"]),
+    ("Patents: AI use cases: Entertainment", lambda row: row["patents"]["Entertainment"]["counts"]),
+    ("Patents: AI use cases: Industry and manufacturing",
+     lambda row: row["patents"]["Industrial_and_Manufacturing"]["counts"]),
+    ("Patents: AI use cases: Life sciences", lambda row: row["patents"]["Life_Sciences"]["counts"]),
+    ("Patents: AI use cases: Military", lambda row: row["patents"]["Military"]["counts"]),
+    ("Patents: AI use cases: Nanotechnology", lambda row: row["patents"]["Nanotechnology"]["counts"]),
+    ("Patents: AI use cases: Networking", lambda row: row["patents"]["Networks__eg_social_IOT_etc"]["counts"]),
+    ("Patents: AI use cases: Personal devices and computing",
+     lambda row: row["patents"]["Personal_Devices_and_Computing"]["counts"]),
+    ("Patents: AI use cases: Physical sciences and engineering",
+     lambda row: row["patents"]["Physical_Sciences_and_Engineering"]["counts"]),
+    ("Patents: AI use cases: Security", lambda row: row["patents"]["Security__eg_cybersecurity"]["counts"]),
+    ("Patents: AI use cases: Semiconductors", lambda row: row["patents"]["Semiconductors"]["counts"]),
+    ("Patents: AI use cases: Telecommunications", lambda row: row["patents"]["Telecommunications"]["counts"]),
+    ("Patents: AI use cases: Transportation", lambda row: row["patents"]["Transportation"]["counts"]),
+    ("Patents: AI applications and techniques: Analytics and algorithms",
+     lambda row: row["patents"]["Analytics_and_Algorithms"]["counts"]),
+    ("Patents: AI applications and techniques: Computer vision", lambda row: row["patents"]["Computer_Vision"]["counts"]),
+    ("Patents: AI applications and techniques: Control", lambda row: row["patents"]["Control"]["counts"]),
+    ("Patents: AI applications and techniques: Distributed AI", lambda row: row["patents"]["Distributed_AI"]["counts"]),
+    ("Patents: AI applications and techniques: Knowledge representation",
+     lambda row: row["patents"]["Knowledge_Representation"]["counts"]),
+    ("Patents: AI applications and techniques: Language processing",
+     lambda row: row["patents"]["Language_Processing"]["counts"]),
+    ("Patents: AI applications and techniques: Measuring and testing",
+     lambda row: row["patents"]["Measuring_and_Testing"]["counts"]),
+    ("Patents: AI applications and techniques: Planning and scheduling",
+     lambda row: row["patents"]["Planning_and_Scheduling"]["counts"]),
+    ("Patents: AI applications and techniques: Robotics", lambda row: row["patents"]["Robotics"]["counts"]),
+    ("Patents: AI applications and techniques: Speech processing",
+     lambda row: row["patents"]["Speech_Processing"]["counts"]),
+])
+
 ### END CONSTANTS ###
 
 
@@ -897,7 +945,7 @@ def clean_link(link: str) -> str:
     return link
 
 
-def clean(refresh_images: bool, refresh_sectors: bool) -> dict:
+def clean(refresh_images: bool, refresh_sectors: bool) -> tuple:
     """
     Reads and cleans the raw data from the local cache
     :param refresh_images: if true, will re-download all the company logos from crunchbase; don't call with true
@@ -1067,10 +1115,35 @@ def get_extra_org_meta() -> dict:
     return extra_meta
 
 
-def update_data_delivery(clean_company_rows: dict) -> None:
+def write_yearly_counts(rows: list, output_file: str) -> None:
+    """
+    Write csv containing yearly counts of categories of publication and patents
+    :param rows: Company metadata
+    :param output_file: File where the outputs should be written
+    :return: None
+    """
+    with open(output_file, mode="w") as out:
+        fieldnames = ["Name", "ID", "Category", "Year", "Value"]
+        writer = csv.DictWriter(out, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            counts = {new_name: get(row) for new_name, get in YEARLY_COUNT_MAPPING.items()}
+            for category in counts:
+                for year, value in zip(YEARS, counts[category]):
+                    output_row = {
+                        "ID": row["cset_id"],
+                        "Name": row["name"],
+                        "Category": category,
+                        "Year": year,
+                        "Value": value
+                    }
+                    writer.writerow(output_row)
+
+
+def update_data_delivery(clean_company_rows: list) -> None:
     """
     Updates data delivery for Zenodo
-    :param group_data: list of clean metadata for each row
+    :param clean_company_rows: list of clean metadata for each row
     :return: None
     """
     print("retrieving metadata")
@@ -1079,6 +1152,7 @@ def update_data_delivery(clean_company_rows: dict) -> None:
         ids_file = "id.csv"
         aliases_file = "alias.csv"
         ticker_file = "ticker.csv"
+        yearly_counts_file = "yearly_publication_counts.csv"
         extra_org_meta = get_extra_org_meta()
         with open(os.path.join(td, core_file), mode="w") as out:
             fieldnames = list(CORE_COLUMN_MAPPING.keys())+list(extra_org_meta[list(extra_org_meta.keys())[0]].keys())+["PARAT link"]
@@ -1090,6 +1164,7 @@ def update_data_delivery(clean_company_rows: dict) -> None:
                 slugified_name = slugify(reformatted_row["Name"].replace("/", "").replace("'", ""))
                 reformatted_row["PARAT link"] = f"https://parat.eto.tech/company/{reformatted_row['ID']}-{slugified_name}"
                 writer.writerow(reformatted_row)
+        write_yearly_counts(clean_company_rows, os.path.join(td, yearly_counts_file))
         write_query_to_csv(
             """
             SELECT
@@ -1135,7 +1210,7 @@ def update_data_delivery(clean_company_rows: dict) -> None:
         )
         download_name = f"parat_data_{datetime.now().strftime('%Y%m%d')}"
         with zipfile.ZipFile(f"{download_name}.zip", "w") as zip:
-            for out_csv in [core_file, ids_file, aliases_file, ticker_file]:
+            for out_csv in [core_file, ids_file, aliases_file, ticker_file, yearly_counts_file]:
                 zip.write(os.path.join(td, out_csv), os.path.join(download_name, out_csv))
 
 
