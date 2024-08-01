@@ -38,7 +38,7 @@ dag = DAG(
     "parat",
     default_args=default_args,
     description="PARAT data updater",
-    schedule_interval=None,
+    schedule_interval="0 10 5 * *",
     catchup=False,
     user_defined_macros={
         "staging_dataset": staging_dataset,
