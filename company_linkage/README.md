@@ -22,8 +22,8 @@ To refresh the docker container (which you must do if you change any of the pyth
 
 ```
 docker build -t parat .
-docker tag parat us.gcr.io/gcp-cset-projects/parat
-docker push us.gcr.io/gcp-cset-projects/parat
+docker tag parat us-docker.pkg.dev/gcp-cset-projects/us.gcr.io/parat
+docker push us-docker.pkg.dev/gcp-cset-projects/us.gcr.io/parat
 ```
 
 # Adding a new company group
