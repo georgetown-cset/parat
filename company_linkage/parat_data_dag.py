@@ -18,6 +18,7 @@ from dataloader.airflow_utils.defaults import (
     get_post_success,
 )
 from dataloader.scripts.populate_documentation import update_table_descriptions
+from kubernetes.client import models as k8s
 
 bucket = DATA_BUCKET
 initial_dataset = "parat_input"
@@ -106,6 +107,7 @@ with dag:
         image=f"us.gcr.io/{PROJECT_ID}/parat",
         get_logs=True,
         startup_timeout_seconds=300,
+        tolerations=[k8s.V1Toleration(key="parat", operator="Equal", value="true")],
         # see also https://cloud.google.com/composer/docs/how-to/using/using-kubernetes-pod-operator#affinity-config
         affinity={
             "nodeAffinity": {
@@ -121,7 +123,8 @@ with dag:
                     }]
                 }
             }
-        }
+        },
+        annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict": "true"},
     )
 
     # load aggregated_organizations to BigQuery
