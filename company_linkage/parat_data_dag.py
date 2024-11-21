@@ -125,6 +125,7 @@ with dag:
             }
         },
         annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict": "true"},
+        on_finish_action="delete_pod",
     )
 
     # load aggregated_organizations to BigQuery
