@@ -105,7 +105,7 @@ const generateSliderColDef = (dataKey, dataSubkey, extractFn, formatFn) => {
     dataKey,
     dataSubkey,
     extract: extractFn ?? ((_val, row) => {
-      const res = row[dataKey][dataSubkey].total;
+      const res = row?.[dataKey]?.[dataSubkey]?.total;
       return res === null ? 0 : res;
     }),
     format: formatFn ?? ((_val, row) => <CellStat data={row[dataKey][dataSubkey]} />),

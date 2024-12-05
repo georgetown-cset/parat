@@ -7,6 +7,14 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 
+import { MOCK_COMPANIES } from '../test/mock-data';
+jest.mock("../static_data/data", () => {
+  return {
+    __esModule: true,
+    company_data: MOCK_COMPANIES,
+  };
+});
+
 import { emotionCache, userEventSetup } from '../util/testing';
 import ListView from './ListView';
 import { exportsForTestingOnly } from './ListViewTable';
@@ -25,16 +33,16 @@ describe("ListView", () => {
     );
 
     // Filter by China and verify that the count updates
-    expect(screen.getByText('Viewing 691 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 4 companies')).toBeVisible();
     const regionHeader = screen.getByRole('columnheader', { name: /country/i });
     await user.click(getByRole(regionHeader, 'button', { name: /open/i }));
     const menu = screen.getByRole('listbox');
-    await user.click(getByText(menu, 'China'));
-    expect(screen.getByText('Viewing 43 of 691 companies')).toBeVisible();
+    await user.click(getByText(menu, 'United States'));
+    expect(screen.getByText('Viewing 2 of 4 companies')).toBeVisible();
 
     // Reset the filters and verify that the count updates
     await user.click(screen.getByRole('button', { name: /reset filters/i }));
-    expect(screen.getByText('Viewing 691 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 4 companies')).toBeVisible();
   }, 20000);
 
 
@@ -49,7 +57,7 @@ describe("ListView", () => {
     await user.click(getByRole(companyHeader, 'combobox'));
     const menu = screen.getByRole('listbox');
     await user.click(getByText(menu, 'S&P 500'));
-    expect(screen.getByText('Viewing 500 of 691 companies')).toBeVisible();
+    expect(screen.getByText('Viewing 2 of 4 companies')).toBeVisible();
   }, 20000);
 
 
