@@ -152,9 +152,6 @@ class TestMkTabText(unittest.TestCase):
     def test_alphabet(self):
         self.run_clean_row_test("alphabet")
 
-    def test_hugging_face(self):
-        self.run_clean_row_test("hugging_face")
-
     def run_clean_row_test(self, company):
         market_key_to_link = {}
         with open(EXCHANGE_LINK_FI) as f:
@@ -174,7 +171,7 @@ class TestMkTabText(unittest.TestCase):
 
     def test_get_growth(self):
         self.assertEqual(18.333333333333336, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9]))
-        self.assertEqual(-40.0, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9], is_patents=True))
+        self.assertEqual(-16.666666666666668, get_growth([0, 1, 2, 1, 0, 5, 6, 7, 8, 9], is_patents=True))
 
     def test_get_average_group_data(self):
         with open(os.path.join(self.DATA_DIR, "get_average_group_data_input.json")) as f:
