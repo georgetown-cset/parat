@@ -13,7 +13,9 @@ SELECT DISTINCT
   year,
   cv,
   nlp,
-  robotics
+  robotics,
+  ai_safety,
+  llm
 FROM
   unnested_rors
 INNER JOIN
@@ -26,7 +28,9 @@ SELECT
   year,
   cv,
   nlp,
-  robotics
+  robotics,
+  ai_safety,
+  llm
 FROM
   staging_ai_companies_visualization.org_name_matches
 INNER JOIN

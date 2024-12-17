@@ -8,7 +8,9 @@ WITH
     merged_id,
     cv,
     nlp,
-    robotics
+    robotics,
+    ai_safety,
+    llm
   FROM
     staging_ai_companies_visualization.ai_company_papers),
   rortable AS (
@@ -18,8 +20,9 @@ WITH
     COUNT(DISTINCT merged_id) AS ai_pubs,
     COUNT(DISTINCT CASE WHEN cv IS TRUE THEN merged_id END) as cv_pubs,
     COUNT(DISTINCT CASE WHEN nlp IS TRUE THEN merged_id END) as nlp_pubs,
-    COUNT(DISTINCT CASE WHEN robotics IS TRUE THEN merged_id END) as robotics_pubs
-
+    COUNT(DISTINCT CASE WHEN robotics IS TRUE THEN merged_id END) as robotics_pubs,
+    COUNT(DISTINCT CASE WHEN ai_safety IS TRUE THEN merged_id END) as ai_safety_pubs,
+    COUNT(DISTINCT CASE WHEN llm IS TRUE THEN merged_id END) as llm_pubs
   FROM aipubs
   GROUP BY
     CSET_id)
@@ -51,7 +54,9 @@ SELECT
   COALESCE(ai_pubs, 0) as ai_pubs,
   COALESCE(cv_pubs, 0) as cv_pubs,
   COALESCE(nlp_pubs, 0) as nlp_pubs,
-  COALESCE(robotics_pubs, 0) as robotics_pubs
+  COALESCE(robotics_pubs, 0) as robotics_pubs,
+  COALESCE(ai_safety_pubs, 0) as ai_safety_pubs,
+  COALESCE(llm_pubs, 0) as llm_pubs
 FROM
   high_resolution_entities.aggregated_organizations
 LEFT JOIN

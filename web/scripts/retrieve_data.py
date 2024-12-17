@@ -123,6 +123,8 @@ CORE_COLUMN_MAPPING = OrderedDict([
     ("Publications: CV publications", lambda row: row["articles"]["cv_publications"]["total"]),
     ("Publications: NLP publications", lambda row: row["articles"]["nlp_publications"]["total"]),
     ("Publications: Robotics publications", lambda row: row["articles"]["robotics_publications"]["total"]),
+    ("Publications: AI safety publications", lambda row: row["articles"]["ai_safety_publications"]["total"]),
+    ("Publications: Large language model publications", lambda row: row["articles"]["llm_publications"]["total"]),
     ("Publications: Total publications", lambda row: row["articles"]["all_publications"]["total"]),
     ("Patents: AI patents", lambda row: row["patents"]["ai_patents"]["total"]),
     ("Patents: AI patents: recent growth", lambda row: row["patents"]["ai_patents_growth"]["total"]),
@@ -167,6 +169,8 @@ PUBLICATION_YEARLY_COUNT_MAPPING = OrderedDict([
     ("CV publications", lambda row: row["articles"]["cv_publications"]["counts"]),
     ("NLP publications", lambda row: row["articles"]["nlp_publications"]["counts"]),
     ("Robotics publications", lambda row: row["articles"]["robotics_publications"]["counts"]),
+    ("AI safety publications", lambda row: row["articles"]["ai_safety_publications"]["counts"]),
+    ("Large language model publications", lambda row: row["articles"]["llm_publications"]["counts"]),
     ("AI publications in top conferences", lambda row: row["articles"]["ai_pubs_top_conf"]["counts"]),
 ])
 
@@ -757,9 +761,13 @@ def get_category_counts(js: dict) -> None:
         ["cv_citation_counts", "cv_citation_count_by_year", False],
         ["nlp_citation_counts", "nlp_citation_count_by_year", False],
         ["robotics_citation_counts", "robotics_citation_count_by_year", False],
+        ["ai_safety_citation_counts", "ai_safety_citation_count_by_year", False],
+        ["llm_citation_counts", "llm_citation_count_by_year", False],
         ["cv_publications", "cv_pubs_by_year", True],
         ["nlp_publications", "nlp_pubs_by_year", True],
         ["robotics_publications", "robotics_pubs_by_year", True],
+        ["ai_safety_publications", "ai_safety_pubs_by_year", True],
+        ["llm_publications", "llm_pubs_by_year", True],
     ]:
         counts, total = get_yearly_counts(js.pop(orig_key), "num_papers")
         articles[machine_name] = {
@@ -773,7 +781,8 @@ def get_category_counts(js: dict) -> None:
                 "total": get_growth(counts),
                 "isTopResearch": is_top_research
             }
-        elif machine_name in ["cv_publications", "nlp_publications", "robotics_publications"]:
+        elif machine_name in ["cv_publications", "nlp_publications", "robotics_publications", "ai_safety_publications",
+                              "llm_publications"]:
             growth = get_growth(counts, False)
             articles[machine_name]["growth"] = None if growth is None else round(growth, 2)
 
@@ -786,7 +795,7 @@ def get_category_counts(js: dict) -> None:
                         ai_citations["total"]/ai_publications["total"],
         "isTopResearch": False
     }
-    for classifier in ["cv", "nlp", "robotics"]:
+    for classifier in ["cv", "nlp", "robotics", "ai_safety", "llm"]:
         citations_per_article = 0
         if articles[f"{classifier}_publications"]["total"] != 0:
             total_citations = articles[f"{classifier}_citation_counts"]["total"]
@@ -850,8 +859,8 @@ def get_category_counts(js: dict) -> None:
         }
     js[OTHER_METRICS] = other_metrics
 
-    for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_pubs_in_top_conferences",
-                            "all_pubs", "ai_patents", "all_patents"]:
+    for redundant_count in ["ai_pubs", "cv_pubs", "nlp_pubs", "robotics_pubs", "ai_safety_pubs", "llm_pubs",
+                            "ai_pubs_in_top_conferences", "all_pubs", "ai_patents", "all_patents"]:
         js.pop(redundant_count)
 
 

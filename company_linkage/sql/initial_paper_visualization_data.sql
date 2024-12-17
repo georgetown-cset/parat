@@ -6,6 +6,8 @@ WITH
     cv,
     nlp,
     robotics,
+    ai_safety,
+    llm,
     ref_id
   FROM
     staging_ai_companies_visualization.ai_company_papers
@@ -20,6 +22,8 @@ WITH
     cv,
     nlp,
     robotics,
+    ai_safety,
+    llm,
     ref_id,
     year
   FROM
@@ -37,7 +41,9 @@ WITH
     COUNT(DISTINCT merged_id) AS ai_citation_count,
     COUNT(DISTINCT IF(cv, merged_id, null)) AS cv_citation_count,
     COUNT(DISTINCT IF(nlp, merged_id, null)) AS nlp_citation_count,
-    COUNT(DISTINCT IF(robotics, merged_id, null)) AS robotics_citation_count
+    COUNT(DISTINCT IF(robotics, merged_id, null)) AS robotics_citation_count,
+    COUNT(DISTINCT IF(ai_safety, merged_id, null)) AS ai_safety_citation_count,
+    COUNT(DISTINCT IF(llm, merged_id, null)) AS llm_citation_count
   FROM
     add_year
   GROUP BY
@@ -61,7 +67,15 @@ all_cited as
   ARRAY_AGG(STRUCT(year,
       robotics_citation_count as num_papers)
   ORDER BY
-    year) AS robotics_citation_count_by_year
+    year) AS robotics_citation_count_by_year,
+  ARRAY_AGG(STRUCT(year,
+      ai_safety_citation_count as num_papers)
+  ORDER BY
+    year) AS ai_safety_citation_count_by_year,
+  ARRAY_AGG(STRUCT(year,
+      llm_citation_count as num_papers)
+  ORDER BY
+    year) AS llm_citation_count_by_year
 FROM
   by_year
 GROUP BY
@@ -71,7 +85,9 @@ SELECT
   ai_citation_count_by_year,
   cv_citation_count_by_year,
   nlp_citation_count_by_year,
-  robotics_citation_count_by_year
+  robotics_citation_count_by_year,
+  ai_safety_citation_count_by_year,
+  llm_citation_count_by_year
 FROM
   high_resolution_entities.aggregated_organizations
 LEFT JOIN

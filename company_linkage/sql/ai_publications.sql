@@ -4,9 +4,17 @@ WITH
     merged_id,
     cv_filtered,
     nlp_filtered,
-    robotics_filtered
+    robotics_filtered,
+    ai_safety_predictions.preds = 1 AS ai_safety,
+    COALESCE(llm_classifier_predictions.label, FALSE) AS llm
   FROM
-    gcp-cset-projects.article_classification.predictions
+    article_classification.predictions
+  LEFT JOIN
+    almanac_classifiers.llm_classifier_predictions
+  USING (merged_id)
+  LEFT JOIN
+    ai_safety_datasets.ai_safety_predictions
+  USING (merged_id)
   WHERE
     ai_filtered = TRUE OR cv_filtered = TRUE OR nlp_filtered = TRUE OR robotics_filtered = TRUE),
   ror AS (
@@ -29,7 +37,9 @@ WITH
     org_name,
     cv_filtered as cv,
     nlp_filtered as nlp,
-    robotics_filtered as robotics
+    robotics_filtered as robotics,
+    ai_safety,
+    llm
   FROM
     literature.affiliations
     -- if they're AI papers

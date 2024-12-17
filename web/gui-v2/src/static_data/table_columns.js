@@ -262,6 +262,20 @@ const columnDefinitions = [
     ...generateSliderColDef("articles", "robotics_publications"),
   },
   {
+    title: "AI safety publications",
+    key: "ai_safety_publications",
+    aggregateType: "median",
+    category: "publications",
+    ...generateSliderColDef("articles", "ai_safety_publications"),
+  },
+  {
+    title: "Large language model publications",
+    key: "llm_publications",
+    aggregateType: "median",
+    category: "publications",
+    ...generateSliderColDef("articles", "llm_publications"),
+  },
+  {
     title: "All publications",
     key: "all_pubs",
     aggregateType: "median",
