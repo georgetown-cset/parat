@@ -150,6 +150,8 @@
   "cv_pubs": 68,
   "nlp_pubs": 1,
   "robotics_pubs": 31,
+  "ai_safety_pubs": 31,
+  "llm_pubs": 31,
   "ai_pubs_by_year": [
     {
       "year": 2014,
@@ -265,6 +267,82 @@
     }
   ],
   "robotics_pubs_by_year": [
+    {
+      "year": 2014,
+      "num_papers": 1
+    },
+    {
+      "year": 2015,
+      "num_papers": 0
+    },
+    {
+      "year": 2016,
+      "num_papers": 0
+    },
+    {
+      "year": 2017,
+      "num_papers": 1
+    },
+    {
+      "year": 2018,
+      "num_papers": 4
+    },
+    {
+      "year": 2019,
+      "num_papers": 4
+    },
+    {
+      "year": 2020,
+      "num_papers": 6
+    },
+    {
+      "year": 2021,
+      "num_papers": 5
+    },
+    {
+      "year": 2022,
+      "num_papers": 10
+    }
+  ],
+  "ai_safety_pubs_by_year": [
+    {
+      "year": 2014,
+      "num_papers": 1
+    },
+    {
+      "year": 2015,
+      "num_papers": 0
+    },
+    {
+      "year": 2016,
+      "num_papers": 0
+    },
+    {
+      "year": 2017,
+      "num_papers": 1
+    },
+    {
+      "year": 2018,
+      "num_papers": 4
+    },
+    {
+      "year": 2019,
+      "num_papers": 4
+    },
+    {
+      "year": 2020,
+      "num_papers": 6
+    },
+    {
+      "year": 2021,
+      "num_papers": 5
+    },
+    {
+      "year": 2022,
+      "num_papers": 10
+    }
+  ],
+  "llm_pubs_by_year": [
     {
       "year": 2014,
       "num_papers": 1
@@ -534,6 +612,82 @@
     }
   ],
   "robotics_citation_count_by_year": [
+    {
+      "year": 2015,
+      "num_papers": 1
+    },
+    {
+      "year": 2016,
+      "num_papers": 15
+    },
+    {
+      "year": 2017,
+      "num_papers": 45
+    },
+    {
+      "year": 2018,
+      "num_papers": 230
+    },
+    {
+      "year": 2019,
+      "num_papers": 541
+    },
+    {
+      "year": 2020,
+      "num_papers": 1357
+    },
+    {
+      "year": 2021,
+      "num_papers": 2039
+    },
+    {
+      "year": 2022,
+      "num_papers": 1820
+    },
+    {
+      "year": 2023,
+      "num_papers": 39
+    }
+  ],
+  "ai_safety_citation_count_by_year": [
+    {
+      "year": 2015,
+      "num_papers": 1
+    },
+    {
+      "year": 2016,
+      "num_papers": 15
+    },
+    {
+      "year": 2017,
+      "num_papers": 45
+    },
+    {
+      "year": 2018,
+      "num_papers": 230
+    },
+    {
+      "year": 2019,
+      "num_papers": 541
+    },
+    {
+      "year": 2020,
+      "num_papers": 1357
+    },
+    {
+      "year": 2021,
+      "num_papers": 2039
+    },
+    {
+      "year": 2022,
+      "num_papers": 1820
+    },
+    {
+      "year": 2023,
+      "num_papers": 39
+    }
+  ],
+  "llm_citation_count_by_year": [
     {
       "year": 2015,
       "num_papers": 1
