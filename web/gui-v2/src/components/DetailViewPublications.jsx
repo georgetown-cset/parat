@@ -126,6 +126,8 @@ const DetailViewPublications = ({
     { text: "Computer vision", val: "cv_publications" },
     { text: "Natural language processing", val: "nlp_publications" },
     { text: "Robotics", val: "robotics_publications" },
+    { text: "Large language models", val: "llm_publications" },
+    { text: "AI safety", val: "ai_safety_publications" }
   ];
 
   return (

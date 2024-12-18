@@ -266,6 +266,40 @@
       "total": 6087,
       "isTopResearch": false
     },
+    "ai_safety_citation_counts": {
+      "counts": [
+        0,
+        1,
+        15,
+        45,
+        230,
+        541,
+        1357,
+        2039,
+        1820,
+        39,
+        0
+      ],
+      "total": 6087,
+      "isTopResearch": false
+    },
+    "llm_citation_counts": {
+      "counts": [
+        0,
+        1,
+        15,
+        45,
+        230,
+        541,
+        1357,
+        2039,
+        1820,
+        39,
+        0
+      ],
+      "total": 6087,
+      "isTopResearch": false
+    },
     "cv_publications": {
       "counts": [
         1,
@@ -305,6 +339,44 @@
       "citations_per_article": 6087.0
     },
     "robotics_publications": {
+      "counts": [
+        1,
+        0,
+        0,
+        1,
+        4,
+        4,
+        6,
+        5,
+        10,
+        0,
+        0
+      ],
+      "total": 31,
+      "isTopResearch": true,
+      "growth": 44.44,
+      "citations_per_article": 196.3548387096774
+    },
+    "ai_safety_publications": {
+      "counts": [
+        1,
+        0,
+        0,
+        1,
+        4,
+        4,
+        6,
+        5,
+        10,
+        0,
+        0
+      ],
+      "total": 31,
+      "isTopResearch": true,
+      "growth": 44.44,
+      "citations_per_article": 196.3548387096774
+    },
+    "llm_publications": {
       "counts": [
         1,
         0,

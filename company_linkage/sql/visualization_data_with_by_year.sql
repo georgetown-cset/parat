@@ -9,7 +9,9 @@ WITH
     year,
     cv,
     nlp,
-    robotics
+    robotics,
+    ai_safety,
+    llm
   FROM
     staging_ai_companies_visualization.ai_company_papers),
   rortable AS (
@@ -20,7 +22,9 @@ WITH
     COUNT(DISTINCT merged_id) AS ai_pubs,
     COUNT(DISTINCT CASE WHEN cv IS TRUE THEN merged_id END) as cv_pubs,
     COUNT(DISTINCT CASE WHEN nlp IS TRUE THEN merged_id END) as nlp_pubs,
-    COUNT(DISTINCT CASE WHEN robotics IS TRUE THEN merged_id END) as robotics_pubs
+    COUNT(DISTINCT CASE WHEN robotics IS TRUE THEN merged_id END) as robotics_pubs,
+    COUNT(DISTINCT CASE WHEN ai_safety IS TRUE THEN merged_id END) as ai_safety_pubs,
+    COUNT(DISTINCT CASE WHEN llm IS TRUE THEN merged_id END) as llm_pubs
   FROM  aipubs
    WHERE year IS NOT NULL
   GROUP BY
@@ -46,6 +50,14 @@ WITH
         robotics_pubs as num_papers)
     ORDER BY
       year) AS robotics_pubs_by_year,
+   ARRAY_AGG(STRUCT(year,
+        ai_safety_pubs as num_papers)
+    ORDER BY
+      year) AS ai_safety_pubs_by_year,
+   ARRAY_AGG(STRUCT(year,
+        llm_pubs as num_papers)
+    ORDER BY
+      year) AS llm_pubs_by_year
   FROM
     high_resolution_entities.aggregated_organizations
   LEFT JOIN
@@ -59,7 +71,9 @@ SELECT
   ai_pubs_by_year,
   cv_pubs_by_year,
   nlp_pubs_by_year,
-  robotics_pubs_by_year
+  robotics_pubs_by_year,
+  ai_safety_pubs_by_year,
+  llm_pubs_by_year
 FROM
   staging_ai_companies_visualization.initial_visualization_data
 LEFT JOIN
