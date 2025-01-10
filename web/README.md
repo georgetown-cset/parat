@@ -5,20 +5,18 @@ It also contains a Gatsby project that contains the PARAT website generation cod
 
 ## Data updates
 
-To update the text that is used in the various explanatory tabs, edit the markdown files in `raw_data/text/`.
-To update the tooltips, edit `src/static_data/tooltips.js`.
+To update the tooltips, edit `gui-v2/src/static_data/tooltips.js`.
 
-To populate the necessary data from a raw clone of this repository, run:
+To populate the necessary data from a raw clone of this repository:
 
-1. `python3 scripts/mk_tab_text.py`. This will read the markdown text files in `raw_data/text` and output them
-as a javascript object containing html snippets in `src/static_data/text.js`.
-
-2. Grab the raw data and reformat it into a javascript object. You will need a service account with translation
-and BigQuery reader permissions. To fully regenerate everything including images and Google Finance links 
+1. `export GOOGLE_APPLICATION_CREDENTIALS=<path to a service account with translation
+and BigQuery reader permissions>`. 
+1. If you want to refresh sector information, `export PERMID_API_KEY=<api key here>`. You can find an API key in [GCP secret manager](https://console.cloud.google.com/security/secret-manager/secret/permid_api_key/versions?inv=1).
+1. To fully regenerate everything including images and Google Finance links 
 (which take ~1.5 hours to generate), run: 
-`python3 scripts/retrieve_data.py --refresh_raw --refresh_images --refresh_market_links`. Run
+`python3 scripts/retrieve_data.py --refresh_raw --refresh_images --refresh_market_links --refresh_sector`. Run
 `python3 scripts/retrieve_data.py -h` for more detail on what these parameters do.
-
+1. The `retrieve_data.py` script will also generate a new data zipfile for Zenodo. You can add this to [10.5281/zenodo.12520759](https://doi.org/10.5281/zenodo.12520759). Please provide a semantic version string.
 
 ## Web interface
 
@@ -44,7 +42,7 @@ gatsby clean
 gatsby build
 ```
 
-And copy the files in the resulting `public` directory to the production bucket. 
+And check that everything looks like you expect. Then, copy the files in the resulting `public` directory to the production GCS bucket using `bash push_to_production.sh`.
 
 ### Tooltips
 

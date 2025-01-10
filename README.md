@@ -1,11 +1,11 @@
 # 🦜 PARAT: CSET's Private-sector AI-Related Activity Tracker
 
-This repository contains the code that generates [PARAT](https://parat.cset.tech).
+This repository contains the code that generates [PARAT](https://parat.eto.tech).
 
 * [company_linkage](/company_linkage) contains the code that generates the data behind PARAT:
 company resolution across datasets, publication counts, etc.
 
-* [web](/web) contains the code that generates the PARAT website from the company_linkage data.
+* [web/gui-v2](/web/gui-v2) contains the code that generates the PARAT website from the company_linkage data.
 
 
 ## Setup
@@ -25,5 +25,4 @@ least BQ reader permissions, if you are a CSET user. If you are not a CSET user,
 run some of this code as-is, since it depends on our internal BigQuery datasets. Please contact us if you are
 interested in collaborating or spot any issues.
 
-3. [Install and run the web interface](/web/README.md#web-interface)
-
+3. [Do any data updates and install and run the web interface](/web/README.md)
