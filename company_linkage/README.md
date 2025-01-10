@@ -2,7 +2,7 @@
 
 ## What is in the workspace
 
-* SQL (see order to run below)
+* SQL 
 * Schemas for the tables that need to be loaded to BigQuery.
 * A Python script to aggregate our initial organization list into parent organizations. This can be run on any organization list.  
 * Python scripts for getting AI paper/patent counts, top conference paper, and total papers counts
@@ -14,9 +14,9 @@ script to get top conference papers and total papers, these tests will work for 
 This code is dependent on internal CSET BigQuery datasets; without access to these datasets, you will not be able to
 run some of this code as-is.
 
-To view the order of tasks necessary to build visualization data, see the airflow DAG.
+To view the order of tasks necessary to build visualization data, see the airflow DAG, `parat_data_dag.py`, which automates data updates. To update the artifacts used by this DAG, run `bash push_to_airflow.sh`.
 
-# Deployment
+## Updating the Docker container
 
 To refresh the docker container (which you must do if you change any of the python scripts in parat_scripts/), run
 
@@ -26,7 +26,7 @@ docker tag parat us-docker.pkg.dev/gcp-cset-projects/us.gcr.io/parat
 docker push us-docker.pkg.dev/gcp-cset-projects/us.gcr.io/parat
 ```
 
-# Adding a new company group
+## Adding a new company group
 
 At the moment, you need to take the following steps:
 

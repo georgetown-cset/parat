@@ -1,11 +1,8 @@
 # Web artifacts and data preprocessing code for PARAT
 
-This directory contains the code that processes the data generated in [company_linkage](../company_linkage) for use in the PARAT website.
-It also contains a Gatsby project that contains the PARAT website generation code.
+This directory contains the code that processes the data generated in [company_linkage](../company_linkage) for use in the PARAT website. It also contains a Gatsby project (`gui-v2`) that implements the PARAT website.
 
-## Data updates
-
-To update the tooltips, edit `gui-v2/src/static_data/tooltips.js`.
+## Pulling data from BigQuery 
 
 To populate the necessary data from a raw clone of this repository:
 
@@ -20,7 +17,7 @@ and BigQuery reader permissions>`.
 
 ## Web interface
 
-The new (v2) interface for PARAT is in the `gui-v2/` directory.
+The new (v2) interface for PARAT is in the `gui-v2/` directory. To update the tooltips, edit `gui-v2/src/static_data/tooltips.js`.
 
 ### Development server
 To start the development server:
@@ -38,11 +35,12 @@ The PARAT v2 interface will be available at `localhost:8550`.
 When any changes are ready for deployment, do:
 
 ```bash
+npm install
 gatsby clean
 gatsby build
 ```
 
-And check that everything looks like you expect. Then, copy the files in the resulting `public` directory to the production GCS bucket using `bash push_to_production.sh`.
+And check that everything looks like you expect. Then, copy the files in the resulting `public` directory to the production GCS bucket using `bash push_to_production.sh`. This script currently rebuilds the site - you can omit the build steps if you've already run them manually. 
 
 ### Tooltips
 
