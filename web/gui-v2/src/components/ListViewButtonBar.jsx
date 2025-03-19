@@ -48,6 +48,10 @@ const styles = {
     & > span {
       align-items: center;
     }
+
+    .helptooltip svg {
+      margin-left: 0.25rem;
+    }
   `,
   activeFilterTooltip: css`
     .MuiTooltip-tooltip {
@@ -74,7 +78,9 @@ const styles = {
   buttonBarButton: css`
     min-width: 40px;
   `,
-
+  csvDownloadButton: css`
+    height: 100%;
+  `,
 };
 
 const BUTTONBAR_PADDING = 16;
@@ -177,7 +183,7 @@ const ButtonBar = ({
         </HelpTooltip>
         <CSVLink data={exportData} filename="eto-parat-export.csv" headers={exportHeaders}>
           <Button
-            css={styles.buttonBarButton}
+            css={[styles.buttonBarButton, styles.csvDownloadButton]}
             title="Download the results as a comma-separated value (CSV) file.  Existing sorts will be retained."
           >
             <DownloadIcon />

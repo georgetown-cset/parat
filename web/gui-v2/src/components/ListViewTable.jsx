@@ -61,6 +61,14 @@ const styles = {
       }
     }
 
+    th .eto-autocomplete {
+      margin: 0;
+    }
+
+    th .table--headerCell--displayName .helptooltip {
+      margin-left: 0;
+    }
+
     svg.MuiSvgIcon-root.MuiTableSortLabel-icon {
       background-color: var(--bright-blue);
       color: white;
@@ -586,7 +594,10 @@ const ListViewTable = ({
         ...colDef,
         display_name: (
           tooltips.columnHeaders?.[colDef.key] ?
-            <HelpTooltip text={tooltips.columnHeaders[colDef.key]}>
+            <HelpTooltip
+              altText={colDef.title}
+              text={tooltips.columnHeaders[colDef.key]}
+            >
               <label>{colDef.title}</label>
             </HelpTooltip>
           :
