@@ -48,6 +48,10 @@ const styles = {
     & > span {
       align-items: center;
     }
+
+    .helptooltip svg {
+      margin-left: 0.25rem;
+    }
   `,
   activeFilterTooltip: css`
     .MuiTooltip-tooltip {

@@ -70,7 +70,7 @@ const CellStat = ({
   return (
     <div css={[styles.cell, tooltipType && styles.cellWithTooltip]}>
       {tooltipType &&
-        <HelpTooltip smallIcon={true} {...tooltipTypes[tooltipType]} />
+        <HelpTooltip {...tooltipTypes[tooltipType]} />
       }
       <div className="val">
         { data?.total === null ? 'n/a' : commas(data.total, { maximumFractionDigits: 0 }) }{ (data?.total !== null && data?.total !== undefined) && isPercent && "%" }
