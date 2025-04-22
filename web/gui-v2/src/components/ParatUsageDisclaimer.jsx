@@ -21,7 +21,19 @@ const styles = {
 const ParatUsageDisclaimer = () => {
   return (
     <div css={styles.wrapper}>
-      The AI activity metrics in the <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/">Private-Sector AI Indicators dataset</ExternalLink> are derived from data from <ExternalLink href="https://www.reveliolabs.com/">Revelio Labs</ExternalLink>, ETO's <ExternalLink href="https://eto.tech/dataset-docs/mac/">Merged Academic Corpus</ExternalLink>, and other  sources. Additional descriptive metadata in PARAT comes from the <ExternalLink href="https://data.crunchbase.com/v3.1/docs/open-data-map">Crunchbase Open Data Map</ExternalLink> (<ExternalLink href="https://crunchbase.com">powered by Crunchbase</ExternalLink>) and <ExternalLink href="https://permid.org/">PermID</ExternalLink>. Emerging technology topic classifications are based on work supported in part by the Alfred P. Sloan Foundation under Grant No. G-2023-22358. For details on our sourcing, methodology, and limitations, see the <ExternalLink href={"https://eto.tech/tool-docs/parat/"}>tool documentation</ExternalLink>.
+      The AI activity metrics in the {
+        <ExternalLink href="https://eto.tech/dataset-docs/private-sector-ai-indicators/">Private-Sector AI Indicators dataset</ExternalLink>
+      } are derived from data from <ExternalLink href="https://www.reveliolabs.com/">Revelio Labs</ExternalLink>,
+      ETO's <ExternalLink href="https://eto.tech/dataset-docs/mac/">Merged Academic Corpus</ExternalLink>,
+      and other sources. Additional descriptive metadata in PARAT comes from the {
+        <ExternalLink href="https://data.crunchbase.com/v3.1/docs/open-data-map">Crunchbase Open Data Map</ExternalLink>
+      } (<ExternalLink href="https://crunchbase.com">powered by Crunchbase</ExternalLink>) and {
+        <ExternalLink href="https://permid.org/">PermID</ExternalLink>
+      }. Emerging technology topic classifications are based on work supported
+      in part by the Alfred P. Sloan Foundation under Grant No. G-2023-22358.
+      For details on our sourcing, methodology, and limitations, see the {
+        <ExternalLink href={"https://eto.tech/tool-docs/parat/"}>tool documentation</ExternalLink>
+      }.
     </div>
   );
 };
