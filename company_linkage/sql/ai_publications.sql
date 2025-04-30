@@ -6,12 +6,9 @@ WITH
     nlp_filtered,
     robotics_filtered,
     ai_safety_predictions.preds = 1 AS ai_safety,
-    COALESCE(llm_classifier_predictions.label, FALSE) AS llm
+    merged_id IN (select merged_id from almanac_classifiers.llm_predictions) AS llm
   FROM
     article_classification.predictions
-  LEFT JOIN
-    almanac_classifiers.llm_classifier_predictions
-  USING (merged_id)
   LEFT JOIN
     ai_safety_datasets.ai_safety_predictions
   USING (merged_id)
