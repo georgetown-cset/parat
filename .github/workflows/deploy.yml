@@ -69,7 +69,7 @@ jobs:
       id: 'compute-ssh'
       uses: 'google-github-actions/ssh-compute@v0'
       with:
-        instance_name: 'parat-v2-dev'
+        instance_name: 'eto-parat-staging'
         zone: 'us-east1-c'
         project_id: 'gcp-cset-projects'
         user: 'eto-cd-github'
