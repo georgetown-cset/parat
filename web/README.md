@@ -40,7 +40,11 @@ gatsby clean
 gatsby build
 ```
 
-And check that everything looks like you expect. Then, copy the files in the resulting `public` directory to the production GCS bucket using `bash push_to_production.sh`. This script currently rebuilds the site - you can omit the build steps if you've already run them manually. 
+And check that everything looks like you expect. Then, copy the files in the resulting `public` directory to the production GCS bucket using `bash push_to_production.sh`. This script currently rebuilds the site - you can omit the build steps if you've already run them manually.
+
+The script will also update and push the tags for the just-deployed version
+(`deploy/current`) and the previously-deployed version (`deploy/previous`) to
+help track changes.
 
 ### Tooltips
 
