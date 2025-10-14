@@ -4,9 +4,9 @@ import json
 from collections import defaultdict
 import subprocess
 
-# List of company ids that should not be rolled up. At the moment, we've decided to not include anything here, but I'm
-# going to leave the logic in place in case we change our minds later.
-no_roll_up = []
+# List of company ids that should not be rolled up. Right now this is just ARM; we can reconsider whether to roll it up
+# into SoftBank later
+no_roll_up = [338]
 
 
 class Organization:
