@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import {
   AppWrapper,
+  ExternalLink,
   InfoCard,
   breakpoints,
 } from '@eto/eto-ui-components';
@@ -45,9 +46,16 @@ const IndexPage = () => {
     <AppWrapper>
       <InfoCard
         css={styles.introBox}
-        description={<>
-          PARAT is ETO's hub for data on private-sector companies and their AI activities, bringing together diverse data on companies' AI research publications, patents, and hiring. Use PARAT to explore how hundreds of leading companies around the world are engaged in AI, from Big Tech titans and leading generative AI startups to the entire S&P 500.
-        </>}
+        description={
+          <>
+            <ExternalLink href="https://cset.georgetown.edu">CSET</ExternalLink> ETO's
+            PARAT is a hub for data on private-sector companies and their AI activities,
+            bringing together diverse data on companies' AI research publications,
+            patents, and hiring. Use PARAT to explore how hundreds of leading companies
+            around the world are engaged in AI, from Big Tech titans and leading
+            generative AI startups to the entire S&P 500.
+          </>
+        }
         documentationLink="https://eto.tech/tool-docs/parat/"
         headingComponent="h1"
         title="🦜 Private-sector AI-Related Activity Tracker"
