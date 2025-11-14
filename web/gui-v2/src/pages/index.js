@@ -48,17 +48,25 @@ const IndexPage = () => {
         css={styles.introBox}
         description={
           <>
-            <ExternalLink href="https://cset.georgetown.edu">CSET</ExternalLink> ETO's
-            PARAT is a hub for data on private-sector companies and their AI activities,
-            bringing together diverse data on companies' AI research publications,
-            patents, and hiring. Use PARAT to explore how hundreds of leading companies
-            around the world are engaged in AI, from Big Tech titans and leading
-            generative AI startups to the entire S&P 500.
+            <p>
+              ETO's PARAT (Private-sector AI-Related Activity Tracker) is a hub for
+              data on private-sector companies and their AI activities, bringing
+              together diverse data on companies' AI research publications, patents,
+              and hiring. Use PARAT to explore how hundreds of leading companies
+              around the world are engaged in AI, from Big Tech titans and leading
+              generative AI startups to the entire S&P 500.
+            </p>
+            <p>
+              ETO is a project of the {
+                <ExternalLink href="https://cset.georgetown.edu/">Center for Security and Emerging Technology</ExternalLink>
+              } at <ExternalLink href="https://www.georgetown.edu/">Georgetown University</ExternalLink>. PARAT is
+              maintained by CSET’s <ExternalLink href="https://cset.georgetown.edu/research-topic/data/">data team</ExternalLink>.
+            </p>
           </>
         }
         documentationLink="https://eto.tech/tool-docs/parat/"
         headingComponent="h1"
-        title="🦜 Private-sector AI-Related Activity Tracker"
+        title="🦜 PARAT"
       >
         <div css={styles.lastUpdated}>
           Site last updated <span className="no-percy">{data.site.buildTime}</span>
