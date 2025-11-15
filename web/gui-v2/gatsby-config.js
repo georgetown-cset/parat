@@ -24,6 +24,12 @@ module.exports = {
         trackingIds: ['UA-148144643-1'],
       },
     },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        icon: "src/images/favicon.svg"
+      },
+    },
     "gatsby-plugin-mdx",
     {
       resolve: 'gatsby-plugin-plausible',

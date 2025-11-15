@@ -5,13 +5,14 @@ import { breakpoints } from '@eto/eto-ui-components';
 
 const styles = {
   stats: css`
+    column-gap: 1rem;
     display: grid;
-    gap: 0.5rem;
     grid-template-columns: minmax(0, 400px);
     list-style: none;
     margin: 1rem auto;
     max-width: fit-content;
     padding: 0;
+    row-gap: 0.5rem;
 
     ${breakpoints.tablet_regular} {
       grid-template-columns: repeat(2, minmax(0, 400px));
@@ -20,8 +21,8 @@ const styles = {
     & > li {
       align-content: center;
       display: grid;
-      gap: 1rem;
-      grid-template-columns: 80px 1fr;
+      gap: 0.5rem;
+      grid-template-columns: 100px 1fr;
       max-width: 400px;
       padding: 0.5rem;
 
