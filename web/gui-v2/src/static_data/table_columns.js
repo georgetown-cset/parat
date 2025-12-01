@@ -176,6 +176,7 @@ const columnDefinitions = [
     key: "sector",
     category: "basic",
     initialCol: false,
+    dropdownWidth: 240,
     sortable: true,
     type: 'dropdown',
   },
