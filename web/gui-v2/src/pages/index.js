@@ -21,6 +21,9 @@ const styles = {
       margin-bottom: 0;
     }
   `,
+  etoParagraph: css`
+    font-size: 1rem;
+  `,
   lastUpdated: css`
     color: var(--grey);
   `,
@@ -56,7 +59,7 @@ const IndexPage = () => {
               around the world are engaged in AI, from Big Tech titans and leading
               generative AI startups to the entire S&P 500.
             </p>
-            <p>
+            <p css={styles.etoParagraph}>
               ETO is a project of the {
                 <ExternalLink href="https://cset.georgetown.edu/">Center for Security and Emerging Technology</ExternalLink>
               } at <ExternalLink href="https://www.georgetown.edu/">Georgetown University</ExternalLink>. PARAT is
