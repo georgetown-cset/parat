@@ -1,4 +1,4 @@
-####**Note**: The [PARAT](https://parat.eto.tech) tool will be removed from the ETO website in early May. For more details, see [our ETO blog post](link here) on the subject. The underlying data for PARAT will also remain available [here](https://eto.tech/dataset-docs/private-sector-ai-indicators/), although we will no longer be updating it.
+####**Note**: The [PARAT](https://parat.eto.tech) tool will be removed from the ETO website in early May. For more details, see [our ETO blog post](https://eto.tech/blog/saying-goodbye-to-orca-and-parat/) on the subject. The underlying data for PARAT will also remain available [here](https://eto.tech/dataset-docs/private-sector-ai-indicators/), although we will no longer be updating it.
 
 # 🦜 PARAT: CSET's Private-sector AI-Related Activity Tracker
 
