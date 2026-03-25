@@ -12,6 +12,7 @@ import {
 import ListView from '../components/ListView';
 import MetaTagsWrapper from '../components/MetaTagsWrapper';
 import ParatUsageDisclaimer from '../components/ParatUsageDisclaimer';
+import SunsetBanner from '../components/SunsetBanner';
 
 const styles = {
   introBox: css`
@@ -47,6 +48,7 @@ const IndexPage = () => {
 
   return (
     <AppWrapper>
+      <SunsetBanner />
       <InfoCard
         css={styles.introBox}
         description={
