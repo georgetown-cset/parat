@@ -7,6 +7,7 @@ import DetailView from '../../components/DetailView';
 import ParatUsageDisclaimer from '../../components/ParatUsageDisclaimer';
 import { company_data as allCompanies } from '../../static_data/data';
 import MetaTagsWrapper from '../../components/MetaTagsWrapper';
+import SunsetBanner from '../../components/SunsetBanner';
 
 const CompanyPage = ({ data }) => {
   const { cset_id: companyId, name: companyName } = data.companiesJson;
@@ -15,6 +16,7 @@ const CompanyPage = ({ data }) => {
 
   return (
     <AppWrapper>
+      <SunsetBanner />
       <DetailView
         companyData={companyData}
         companyId={companyId}
